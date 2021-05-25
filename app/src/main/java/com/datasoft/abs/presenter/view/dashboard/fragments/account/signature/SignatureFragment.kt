@@ -1,21 +1,23 @@
-package com.datasoft.abs.presenter.view.dashboard.fragments.transaction
+package com.datasoft.abs.presenter.view.dashboard.fragments.account.signature
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import com.datasoft.abs.databinding.FragmentTransactionBinding
+import com.datasoft.abs.databinding.SignatureFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TransactionFragment : Fragment() {
+class SignatureFragment : Fragment() {
 
-    private val viewModel: TransactionViewModel by activityViewModels()
-    private var _binding: FragmentTransactionBinding? = null
+    companion object {
+        fun newInstance() = SignatureFragment()
+    }
+
+    private val viewModel: SignatureViewModel by activityViewModels()
+    private var _binding: SignatureFragmentBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -27,13 +29,14 @@ class TransactionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentTransactionBinding.inflate(inflater, container, false)
+        _binding = SignatureFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textSlideshow
-        viewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+//        val textView: TextView = binding.textHome
+//        viewModel.getDashboardData().observe(viewLifecycleOwner, Observer {
+//            textView.text = it?.totalApplied.toString()
+//        })
+
         return root
     }
 

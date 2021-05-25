@@ -35,9 +35,13 @@ class DashboardFragment : Fragment() {
             textView.text = it?.totalApplied.toString()
         })
 
-        viewModel.requestDashboardData(2271, "2021-04-25", "2021-05-25")
-
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.requestDashboardData(2271, "2021-04-25", "2021-05-25")
     }
 
     override fun onDestroyView() {

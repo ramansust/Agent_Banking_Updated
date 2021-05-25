@@ -5,7 +5,6 @@ import androidx.room.Room
 import com.datasoft.abs.data.source.local.DataManager
 import com.datasoft.abs.data.source.local.db.AppDatabase
 import com.datasoft.abs.data.source.local.db.interfaceDAO.GeneralInfoDao
-import com.datasoft.abs.data.source.local.db.repo.GeneralInfoRepo
 import com.datasoft.abs.data.source.remote.RestRemoteDataSource
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.DATABASE_NAME
@@ -41,9 +40,4 @@ class DataModule {
     @Singleton
     @Provides
     fun providesGeneralInfoDao(appDatabase: AppDatabase): GeneralInfoDao = appDatabase.generalDao()
-
-    @Singleton
-    @Provides
-    fun providesUserRepository(generalInfoDao: GeneralInfoDao) : GeneralInfoRepo
-            = GeneralInfoRepo(generalInfoDao)
 }

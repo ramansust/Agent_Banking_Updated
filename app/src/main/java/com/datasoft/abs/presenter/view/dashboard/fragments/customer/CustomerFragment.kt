@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.FragmentCustomerBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CustomerFragment : Fragment() {
 
-    private lateinit var homeViewModel: CustomerViewModel
+    private val viewModel: CustomerViewModel by activityViewModels()
     private var _binding: FragmentCustomerBinding? = null
 
     // This property is only valid between onCreateView and
@@ -22,14 +24,12 @@ class CustomerFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        homeViewModel =
-            ViewModelProvider(this).get(CustomerViewModel::class.java)
 
         _binding = FragmentCustomerBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
 
-        homeViewModel.text.observe(viewLifecycleOwner, {
+        viewModel.text.observe(viewLifecycleOwner, {
 //            textView.text = it
         })
         return root

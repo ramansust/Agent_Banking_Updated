@@ -1,21 +1,19 @@
-package com.datasoft.abs.presenter.view.dashboard.fragments.transaction
+package com.datasoft.abs.presenter.view.dashboard.fragments.account.general
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import com.datasoft.abs.databinding.FragmentTransactionBinding
+import com.datasoft.abs.databinding.GeneralFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TransactionFragment : Fragment() {
+class GeneralFragment : Fragment() {
 
-    private val viewModel: TransactionViewModel by activityViewModels()
-    private var _binding: FragmentTransactionBinding? = null
+    private val viewModel: GeneralViewModel by activityViewModels()
+    private var _binding: GeneralFragmentBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -27,13 +25,14 @@ class TransactionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentTransactionBinding.inflate(inflater, container, false)
+        _binding = GeneralFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textSlideshow
-        viewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+//        val textView: TextView = binding.textHome
+//        viewModel.getDashboardData().observe(viewLifecycleOwner, Observer {
+//            textView.text = it?.totalApplied.toString()
+//        })
+
         return root
     }
 

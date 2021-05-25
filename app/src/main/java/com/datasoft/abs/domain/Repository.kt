@@ -12,5 +12,4 @@ interface Repository {
         fromDate: String,
         toDate: String
     ): Response<DashboardResponse>
-
 }
