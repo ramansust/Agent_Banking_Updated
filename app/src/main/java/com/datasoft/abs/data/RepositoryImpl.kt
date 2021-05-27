@@ -1,10 +1,17 @@
 package com.datasoft.abs.data
 
 import androidx.lifecycle.LiveData
+import com.datasoft.abs.data.dto.config.ConfigResponse
+import com.datasoft.abs.data.dto.customer.CustomerRequest
+import com.datasoft.abs.data.dto.customer.CustomerResponse
 import com.datasoft.abs.data.dto.dashboard.DashboardRequest
 import com.datasoft.abs.data.dto.dashboard.DashboardResponse
+import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckRequest
+import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckResponse
 import com.datasoft.abs.data.dto.login.LoginRequest
 import com.datasoft.abs.data.dto.login.LoginResponse
+import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
+import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
 import com.datasoft.abs.data.source.local.db.dao.GeneralInfoDao
 import com.datasoft.abs.data.source.remote.JwtHelper
@@ -32,10 +39,26 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getDashboardData(
         branchId: Int,
-        fromDate: String,
-        toDate: String
+        userId: Int,
+        dayNo: Int
     ): Response<DashboardResponse> {
-        return restApiService.getDashboardData(DashboardRequest(branchId, fromDate, toDate))
+        return restApiService.getDashboardData(DashboardRequest(branchId, userId, dayNo))
+    }
+
+    override suspend fun getConfigData(): Response<ConfigResponse> {
+        return restApiService.getConfigData()
+    }
+
+    override suspend fun getCustomerListData(customerRequest: CustomerRequest): Response<List<CustomerResponse>> {
+        return restApiService.getCustomerListData(customerRequest)
+    }
+
+    override suspend fun getSanctionScreeningData(sanctionScreeningRequest: SanctionScreeningRequest): Response<SanctionScreeningResponse> {
+        return restApiService.getSanctionScreeningData(sanctionScreeningRequest)
+    }
+
+    override suspend fun getDedupeCheckData(dedupeCheckRequest: DedupeCheckRequest): Response<DedupeCheckResponse> {
+        return restApiService.getDedupeCheckData(dedupeCheckRequest)
     }
 
     override suspend fun insert(generalInfo: GeneralInfo) {

@@ -94,7 +94,7 @@ class RestRemoteDataSource(
     private fun OkHttpClient.Builder.init(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
-//        addInterceptor(jwtInterceptor)
+//        addInterceptor(JwtInterceptor(JwtHelper()))
         addInterceptor(interceptor)
         return build()
     }

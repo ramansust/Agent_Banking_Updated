@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.login.LoginResponse
-import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.utils.Network
 import com.datasoft.abs.presenter.utils.Resource
@@ -76,18 +75,6 @@ class LoginViewModel @Inject constructor(
             e.printStackTrace()
         }
 
-    }
-
-    fun insert(firstName: String, lastName: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.insert(GeneralInfo(firstName = firstName, lastName = lastName))
-        }
-    }
-
-    fun getAll() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.getAll()
-        }
     }
 
 }
