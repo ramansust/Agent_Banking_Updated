@@ -2,11 +2,14 @@ package com.datasoft.abs.presenter.view.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.datasoft.abs.databinding.ActivityLoginBinding
 import com.datasoft.abs.presenter.base.BaseActivity
+import com.datasoft.abs.presenter.utils.Resource
 import com.datasoft.abs.presenter.view.dashboard.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +18,6 @@ class LoginActivity : BaseActivity() {
 
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var binding: ActivityLoginBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +35,26 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun observeViewModel() {
-        loginViewModel.getLoginStatus().observe(this, Observer {
-            binding.loaderView.visibility = View.GONE
-        })
-
-        loginViewModel.getLoginMessage().observe(this, Observer {
-            if (it == "Successfully Logged in")
-                navigateToMainScreen()
+        loginViewModel.getLoginData().observe(this, Observer { response ->
+            when(response) {
+                is Resource.Success -> {
+                    goneProgressBar()
+                    response.data?.let { loginResponse ->
+                        navigateToMainScreen()
+                        Log.e("TAG", "An error occurred: $loginResponse")
+                    }
+                }
+                is Resource.Error -> {
+                    goneProgressBar()
+                    response.message?.let { message ->
+                        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+                        Log.e("TAG", "An error occurred: $message")
+                    }
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
         })
     }
 
@@ -54,5 +69,13 @@ class LoginActivity : BaseActivity() {
         val nextScreenIntent = Intent(this, MainActivity::class.java)
         startActivity(nextScreenIntent)
         finish()
+    }
+
+    private fun goneProgressBar() {
+        binding.loaderView.visibility = View.GONE
+    }
+
+    private fun showProgressBar() {
+        binding.loaderView.visibility = View.VISIBLE
     }
 }

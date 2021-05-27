@@ -17,6 +17,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "BASE_URL", "\"" + getBaseUrl() + "\""
     }
 
     buildTypes {
@@ -76,9 +77,21 @@ dependencies {
     //room
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt("androidx.room:room-compiler:$room_version")
     implementation "androidx.room:room-ktx:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
 
     // Preference DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0-alpha04"
+}
+
+def getBaseUrl() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    String baseUrl = properties.getProperty("base_url")
+    if (baseUrl == null)
+        throw new GradleException("Add 'base_url' field at local.properties file")
+
+    return baseUrl
 }

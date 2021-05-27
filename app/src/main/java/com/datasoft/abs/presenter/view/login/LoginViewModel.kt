@@ -4,43 +4,89 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.datasoft.abs.data.dto.login.LoginResponse
+import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
 import com.datasoft.abs.domain.Repository
+import com.datasoft.abs.presenter.utils.Network
+import com.datasoft.abs.presenter.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 //class LoginViewModel (repository: Repository) : BaseViewModel(repository) {
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val repository: Repository,
+    private val networkHelper: Network
+) : ViewModel() {
 
-    private val loginSuccess = MutableLiveData<Boolean>()
-    private val message = MutableLiveData<String>()
+    private val login: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
 
-    fun getLoginStatus(): LiveData<Boolean> = loginSuccess
-    fun getLoginMessage(): LiveData<String> = message
+    fun getLoginData(): LiveData<Resource<LoginResponse>> = login
 
     fun requestLogin(username: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response = repository.performLogin(username, password)
 
-                if (response.isSuccessful) {
-                    val result = response.body()
-                    repository.setAuthToken(result?.authToken ?: return@launch)
-                    loginSuccess.postValue(true)
-                    message.postValue("Successfully Logged in")
-                } else {
-                    loginSuccess.postValue(false)
-                    message.postValue("Failed : " + response.code())
-                }
+            login.postValue(Resource.Loading())
 
-
-            } catch (e: Exception) {
-                loginSuccess.postValue(false)
-                message.postValue("Something Went Wrong $e")
-                e.printStackTrace()
+            if (username.isEmpty() || password.isEmpty()) {
+                login.postValue(
+                    Resource.Error(
+                        "The fields must not be empty", null
+                    )
+                )
+                return@launch
             }
+
+            if (networkHelper.isConnected()) {
+                networkRequestForLogin(username, password)
+            } else {
+                login.postValue(
+                    Resource.Error(
+                        "No internet connection", null
+                    )
+                )
+            }
+        }
+    }
+
+    private fun handleLoginResponse(response: Response<LoginResponse>): Resource<LoginResponse> {
+        if (response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+                repository.setAuthToken(resultResponse.authToken ?: "")
+                return Resource.Success(resultResponse)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun networkRequestForLogin(username: String, password: String) = viewModelScope.launch {
+        try {
+            repository.performLogin(username, password)
+            val response = repository.performLogin(username, password)
+            login.postValue(handleLoginResponse(response))
+        } catch (e: Exception) {
+            login.postValue(
+                Resource.Error(
+                    "Something went wrong!", null
+                )
+            )
+            e.printStackTrace()
+        }
+
+    }
+
+    fun insert(firstName: String, lastName: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insert(GeneralInfo(firstName = firstName, lastName = lastName))
+        }
+    }
+
+    fun getAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getAll()
         }
     }
 

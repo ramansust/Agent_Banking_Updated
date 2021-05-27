@@ -16,7 +16,6 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
 class RestRemoteDataSource(
-    remoteUrl: String,
     connectTimeout: Long,
     readTimeout: Long,
     writeTimeout: Long
@@ -38,7 +37,7 @@ class RestRemoteDataSource(
     private val retrofit by lazy {
         Retrofit.Builder()
             .client(provideUnsafeOkHttpClient())
-            .baseUrl(remoteUrl)
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

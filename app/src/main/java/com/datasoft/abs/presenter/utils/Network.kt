@@ -3,13 +3,14 @@ package com.datasoft.abs.presenter.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 /**
  * Created by Raman Karmakar
  */
 
-class Network @Inject constructor(val context: Context) : NetworkConnectivity {
+class Network @Inject constructor(@ApplicationContext val context: Context) : NetworkConnectivity {
 
     override fun isConnected(): Boolean {
         val connectivityManager =
@@ -17,6 +18,7 @@ class Network @Inject constructor(val context: Context) : NetworkConnectivity {
 
         val nw = connectivityManager.activeNetwork ?: return false
         val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
+
         return when {
             actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
             actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
