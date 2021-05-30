@@ -37,9 +37,7 @@ class RepositoryImpl @Inject constructor(
         jwtHelper.jwtToken = token
     }
 
-    override suspend fun getDashboardData(
-        dayNo: Int
-    ): Response<DashboardResponse> {
+    override suspend fun getDashboardData(dayNo: Int): Response<DashboardResponse> {
         return restApiService.getDashboardData(DashboardRequest(dayNo))
     }
 

@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.customer.Row
 import com.datasoft.abs.databinding.CustomerRowBinding
+import javax.inject.Inject
 
-class CustomerAdapter : RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder>() {
+class CustomerAdapter @Inject constructor() :
+    RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder>() {
 
-    inner class CustomerViewHolder(val binding: CustomerRowBinding): RecyclerView.ViewHolder(binding.root)
+    inner class CustomerViewHolder(val binding: CustomerRowBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<Row>() {
         override fun areItemsTheSame(oldItem: Row, newItem: Row): Boolean {

@@ -11,14 +11,13 @@ import javax.inject.Singleton
 class JwtInterceptor @Inject constructor(private val jwtHelper: JwtHelper) : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
-        val jwtToken: String? = jwtHelper.jwtToken
-        Log.e("Value", "$jwtToken")
+        Log.e("jwt_value", "____${jwtHelper.jwtToken}")
+        val jwtToken: String = jwtHelper.jwtToken
         val originalRequest = chain.request()
         val builder = originalRequest.newBuilder()
-        if (jwtToken == null) return chain.proceed(builder.build())
+        if (jwtToken.isEmpty()) return chain.proceed(builder.build())
         builder.addHeader("Authorization", jwtToken)
-        val request = builder.build()
-        val response = chain.proceed(request)
+        val response = chain.proceed(builder.build())
 //        if (response.code == ConstantValues.StatusCodes.TOKEN_EXPIRED_CODE) {
 //            JCHApplication.getInstance().forceLogout()
 //        }

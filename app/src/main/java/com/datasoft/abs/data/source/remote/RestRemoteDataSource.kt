@@ -15,15 +15,12 @@ import javax.net.ssl.SSLSocketFactory
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
-
 class RestRemoteDataSource(
     connectTimeout: Long,
     readTimeout: Long,
     writeTimeout: Long,
     private val jwtInterceptor: JwtInterceptor
 ) {
-
-//    @Inject lateinit var jwtInterceptor: JwtInterceptor
 
     private val okHttpClient by lazy {
         OkHttpClient.Builder()

@@ -54,7 +54,7 @@ class LoginViewModel @Inject constructor(
     private fun handleLoginResponse(response: Response<LoginResponse>): Resource<LoginResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-//                repository.setAuthToken(resultResponse.authToken ?: "")
+                repository.setAuthToken(resultResponse.authToken ?: "")
                 return Resource.Success(resultResponse)
             }
         }

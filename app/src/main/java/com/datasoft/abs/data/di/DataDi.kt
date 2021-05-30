@@ -5,7 +5,6 @@ import androidx.room.Room
 import com.datasoft.abs.data.source.local.DataManager
 import com.datasoft.abs.data.source.local.db.AppDatabase
 import com.datasoft.abs.data.source.local.db.dao.GeneralInfoDao
-import com.datasoft.abs.data.source.remote.JwtHelper
 import com.datasoft.abs.data.source.remote.JwtInterceptor
 import com.datasoft.abs.data.source.remote.RestRemoteDataSource
 import com.datasoft.abs.presenter.utils.Constant
@@ -23,11 +22,11 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun providesRemoteDataSource() = RestRemoteDataSource(
+    fun providesRemoteDataSource(jwtInterceptor: JwtInterceptor) = RestRemoteDataSource(
         Constant.ConnectTimeout,
         Constant.ReadTimeout,
         Constant.WriteTimeout,
-        JwtInterceptor(JwtHelper())
+        jwtInterceptor
     )
 
     @Singleton
