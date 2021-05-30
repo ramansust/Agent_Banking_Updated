@@ -13,13 +13,16 @@ import com.datasoft.abs.databinding.FragmentCustomerBinding
 import com.datasoft.abs.presenter.utils.Resource
 import com.datasoft.abs.presenter.view.dashboard.fragments.customer.adapter.CustomerAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CustomerFragment : Fragment() {
 
     private val viewModel: CustomerViewModel by viewModels()
     private var _binding: FragmentCustomerBinding? = null
-    private lateinit var customerAdapter: CustomerAdapter
+
+    @Inject
+    lateinit var customerAdapter: CustomerAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -42,8 +45,8 @@ class CustomerFragment : Fragment() {
         viewModel.getCustomerData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
-                    response.data?.let { newsResponse ->
-                        customerAdapter.differ.submitList(newsResponse)
+                    response.data?.let { customerResponse ->
+                        customerAdapter.differ.submitList(customerResponse.rows)
                     }
                 }
                 is Resource.Error -> {
@@ -57,7 +60,7 @@ class CustomerFragment : Fragment() {
             }
         })
 
-        viewModel.requestCustomerData(CustomerRequest(1, permittedBranches = "2711"))
+        viewModel.requestCustomerData(CustomerRequest(1, status = "1"))
     }
 
     override fun onDestroyView() {
@@ -66,7 +69,6 @@ class CustomerFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        customerAdapter = CustomerAdapter()
         binding.recycleView.apply {
             adapter = customerAdapter
             layoutManager = LinearLayoutManager(activity)

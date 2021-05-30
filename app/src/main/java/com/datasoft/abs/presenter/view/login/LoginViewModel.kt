@@ -54,7 +54,7 @@ class LoginViewModel @Inject constructor(
     private fun handleLoginResponse(response: Response<LoginResponse>): Resource<LoginResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                repository.setAuthToken(resultResponse.authToken ?: "")
+//                repository.setAuthToken(resultResponse.authToken ?: "")
                 return Resource.Success(resultResponse)
             }
         }
@@ -63,7 +63,6 @@ class LoginViewModel @Inject constructor(
 
     private fun networkRequestForLogin(username: String, password: String) = viewModelScope.launch {
         try {
-            repository.performLogin(username, password)
             val response = repository.performLogin(username, password)
             login.postValue(handleLoginResponse(response))
         } catch (e: Exception) {

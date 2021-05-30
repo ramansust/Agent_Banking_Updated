@@ -17,21 +17,21 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface RestApiService {
-    @POST("api/Auth/login")
+    @POST("api/login")
     suspend fun performLogin(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
     @POST("api/teller-dashboard")
     suspend fun getDashboardData(@Body dashboardRequest: DashboardRequest): Response<DashboardResponse>
 
-    @GET("meghnaapi/others-info")
+    @GET("api/others-info")
     suspend fun getConfigData() : Response<ConfigResponse>
 
-    @POST("meghnaapi/customer-list")
-    suspend fun getCustomerListData(@Body customerRequest: CustomerRequest): Response<List<CustomerResponse>>
+    @POST("api/customer-list")
+    suspend fun getCustomerListData(@Body customerRequest: CustomerRequest): Response<CustomerResponse>
 
-    @POST("meghnaapi/sanction-screening")
+    @POST("api/sanction-screening")
     suspend fun getSanctionScreeningData(@Body sanctionScreeningRequest: SanctionScreeningRequest): Response<SanctionScreeningResponse>
 
-    @POST("/meghnaapi/dedupe-check")
+    @POST("api/dedupe-check")
     suspend fun getDedupeCheckData(@Body dedupeCheckRequest: DedupeCheckRequest): Response<DedupeCheckResponse>
 }

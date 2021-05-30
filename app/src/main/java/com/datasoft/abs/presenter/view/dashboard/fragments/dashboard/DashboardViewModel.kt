@@ -24,11 +24,11 @@ class DashboardViewModel @Inject constructor(
 
     fun getDashboardData(): LiveData<Resource<DashboardResponse>> = dashboardData
 
-    fun requestDashboardData(branchId: Int, userId: Int, dayNo: Int) {
+    fun requestDashboardData(dayNo: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
                 try {
-                    val response = repository.getDashboardData(branchId, userId, dayNo)
+                    val response = repository.getDashboardData(dayNo)
                     dashboardData.postValue(handleDashboardResponse(response))
                 } catch (e: Exception) {
                     dashboardData.postValue(

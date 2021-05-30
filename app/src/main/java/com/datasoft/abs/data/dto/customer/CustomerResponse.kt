@@ -1,9 +1,7 @@
 package com.datasoft.abs.data.dto.customer
 
 data class CustomerResponse(
-    val responseCode: String,
-    val responseData: ResponseData,
-    val responseMessage: String,
-    val serviceId: String,
-    val timeStamp: String
+    val firstItemOnPage: Int,
+    val rows: List<Row>,
+    val total: Int
 )

@@ -20,9 +20,9 @@ class CustomerViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network): ViewModel() {
 
-    private val customerData = MutableLiveData<Resource<List<CustomerResponse>>>()
+    private val customerData = MutableLiveData<Resource<CustomerResponse>>()
 
-    fun getCustomerData(): LiveData<Resource<List<CustomerResponse>>> = customerData
+    fun getCustomerData(): LiveData<Resource<CustomerResponse>> = customerData
 
     fun requestCustomerData(customerRequest: CustomerRequest) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -48,7 +48,7 @@ class CustomerViewModel @Inject constructor(
         }
     }
 
-    private fun handleCustomerResponse(response: Response<List<CustomerResponse>>): Resource<List<CustomerResponse>> {
+    private fun handleCustomerResponse(response: Response<CustomerResponse>): Resource<CustomerResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse)

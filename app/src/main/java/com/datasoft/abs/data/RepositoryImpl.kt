@@ -12,8 +12,8 @@ import com.datasoft.abs.data.dto.login.LoginRequest
 import com.datasoft.abs.data.dto.login.LoginResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
-import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
 import com.datasoft.abs.data.source.local.db.dao.GeneralInfoDao
+import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
 import com.datasoft.abs.data.source.remote.JwtHelper
 import com.datasoft.abs.data.source.remote.RestRemoteDataSource
 import com.datasoft.abs.domain.Repository
@@ -38,18 +38,16 @@ class RepositoryImpl @Inject constructor(
     }
 
     override suspend fun getDashboardData(
-        branchId: Int,
-        userId: Int,
         dayNo: Int
     ): Response<DashboardResponse> {
-        return restApiService.getDashboardData(DashboardRequest(branchId, userId, dayNo))
+        return restApiService.getDashboardData(DashboardRequest(dayNo))
     }
 
     override suspend fun getConfigData(): Response<ConfigResponse> {
         return restApiService.getConfigData()
     }
 
-    override suspend fun getCustomerListData(customerRequest: CustomerRequest): Response<List<CustomerResponse>> {
+    override suspend fun getCustomerListData(customerRequest: CustomerRequest): Response<CustomerResponse> {
         return restApiService.getCustomerListData(customerRequest)
     }
 

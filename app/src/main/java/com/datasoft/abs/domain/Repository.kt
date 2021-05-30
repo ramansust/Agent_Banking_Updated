@@ -16,10 +16,10 @@ import retrofit2.Response
 interface Repository {
     suspend fun performLogin(userName: String, password: String): Response<LoginResponse>
     fun setAuthToken(token: String)
-    suspend fun getDashboardData(branchId: Int, userId: Int, dayNo: Int): Response<DashboardResponse>
+    suspend fun getDashboardData(dayNo: Int): Response<DashboardResponse>
 
     suspend fun getConfigData(): Response<ConfigResponse>
-    suspend fun getCustomerListData(customerRequest: CustomerRequest): Response<List<CustomerResponse>>
+    suspend fun getCustomerListData(customerRequest: CustomerRequest): Response<CustomerResponse>
     suspend fun getSanctionScreeningData(sanctionScreeningRequest: SanctionScreeningRequest): Response<SanctionScreeningResponse>
     suspend fun getDedupeCheckData(dedupeCheckRequest: DedupeCheckRequest): Response<DedupeCheckResponse>
 

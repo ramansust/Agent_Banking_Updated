@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.datasoft.abs.databinding.ActivityLoginBinding
 import com.datasoft.abs.presenter.base.BaseActivity
 import com.datasoft.abs.presenter.utils.Resource
@@ -35,13 +34,12 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun observeViewModel() {
-        loginViewModel.getLoginData().observe(this, Observer { response ->
+        loginViewModel.getLoginData().observe(this, { response ->
             when(response) {
                 is Resource.Success -> {
                     goneProgressBar()
                     response.data?.let { loginResponse ->
                         navigateToMainScreen()
-                        Log.e("TAG", "An error occurred: $loginResponse")
                     }
                 }
                 is Resource.Error -> {

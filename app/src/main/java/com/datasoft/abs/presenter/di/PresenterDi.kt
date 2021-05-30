@@ -1,10 +1,18 @@
 package com.datasoft.abs.presenter.di
 
+import android.content.Context
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.datasoft.abs.R
 import com.datasoft.abs.data.RepositoryImpl
 import com.datasoft.abs.domain.Repository
+import com.datasoft.abs.presenter.view.dashboard.fragments.customer.adapter.CustomerAdapter
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -15,4 +23,23 @@ abstract class PresenterDi {
     @Binds
     @Singleton
     abstract fun provideRepo(repositoryImpl: RepositoryImpl): Repository
+
+    companion object {
+
+        @Singleton
+        @Provides
+        fun provideCustomerAdapter() = CustomerAdapter()
+
+        @Singleton
+        @Provides
+        fun provideGlideInstance(
+            @ApplicationContext context: Context
+        ) = Glide.with(context).setDefaultRequestOptions(
+            RequestOptions()
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+        )
+    }
+
 }

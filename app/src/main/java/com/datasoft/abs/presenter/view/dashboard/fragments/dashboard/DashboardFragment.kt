@@ -59,7 +59,7 @@ class DashboardFragment : Fragment() {
             }
         })
 
-        viewModel.requestDashboardData(2271, 9, 10)
+        viewModel.requestDashboardData(10)
     }
 
     override fun onDestroyView() {

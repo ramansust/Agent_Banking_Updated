@@ -1,5 +1,6 @@
 package com.datasoft.abs.data.source.remote
 
+import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
@@ -11,6 +12,7 @@ class JwtInterceptor @Inject constructor(private val jwtHelper: JwtHelper) : Int
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val jwtToken: String? = jwtHelper.jwtToken
+        Log.e("Value", "$jwtToken")
         val originalRequest = chain.request()
         val builder = originalRequest.newBuilder()
         if (jwtToken == null) return chain.proceed(builder.build())
