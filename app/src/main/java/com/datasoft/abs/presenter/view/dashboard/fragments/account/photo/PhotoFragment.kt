@@ -4,10 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.launch
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.PhotoFragmentBinding
+import com.datasoft.abs.presenter.utils.Photos
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PhotoFragment : Fragment() {
@@ -18,6 +24,9 @@ class PhotoFragment : Fragment() {
 
     private val viewModel: PhotoViewModel by activityViewModels()
     private var _binding: PhotoFragmentBinding? = null
+
+    @Inject
+    lateinit var photos: Photos
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -32,13 +41,28 @@ class PhotoFragment : Fragment() {
         _binding = PhotoFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val textView: TextView = binding.textHome
-//        viewModel.getDashboardData().observe(viewLifecycleOwner, Observer {
-//            textView.text = it?.totalApplied.toString()
-//        })
+        binding.btnTakePhoto.setOnClickListener {
+            takePhoto.launch()
+        }
 
         return root
     }
+
+    private val takePhoto =
+        registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
+            if (it == null)
+                return@registerForActivityResult
+
+            val isSavedSuccessfully =
+                photos.savePhotoToInternalStorage(UUID.randomUUID().toString(), it)
+            if (isSavedSuccessfully) {
+                binding.imgView.setImageBitmap(it)
+                Toast.makeText(requireContext(), "Photo saved successfully", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                Toast.makeText(requireContext(), "Failed to save photo", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     override fun onDestroyView() {
         super.onDestroyView()

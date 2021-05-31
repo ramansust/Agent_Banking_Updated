@@ -7,6 +7,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.datasoft.abs.R
 import com.datasoft.abs.data.RepositoryImpl
 import com.datasoft.abs.domain.Repository
+import com.datasoft.abs.presenter.utils.Photos
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,4 +39,7 @@ object PresenterDi {
             .diskCacheStrategy(DiskCacheStrategy.DATA)
     )
 
+    @Singleton
+    @Provides
+    fun providePhotoInstance(@ApplicationContext context: Context) = Photos(context)
 }
