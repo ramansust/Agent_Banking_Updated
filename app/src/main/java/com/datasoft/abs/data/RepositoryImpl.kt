@@ -1,7 +1,9 @@
 package com.datasoft.abs.data
 
 import androidx.lifecycle.LiveData
+import com.datasoft.abs.data.dto.CommonRequest
 import com.datasoft.abs.data.dto.config.ConfigResponse
+import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
 import com.datasoft.abs.data.dto.customer.CustomerRequest
 import com.datasoft.abs.data.dto.customer.CustomerResponse
 import com.datasoft.abs.data.dto.dashboard.DashboardRequest
@@ -18,6 +20,7 @@ import com.datasoft.abs.data.source.remote.JwtHelper
 import com.datasoft.abs.data.source.remote.RestRemoteDataSource
 import com.datasoft.abs.domain.Repository
 import retrofit2.Response
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -55,6 +58,22 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getDedupeCheckData(dedupeCheckRequest: DedupeCheckRequest): Response<DedupeCheckResponse> {
         return restApiService.getDedupeCheckData(dedupeCheckRequest)
+    }
+
+    override suspend fun createCustomerData(createCustomerRequest: CreateCustomerRequest): Response<Objects> {
+        return restApiService.createCustomerData(createCustomerRequest)
+    }
+
+    override suspend fun getDepositData(commonRequest: CommonRequest): Response<Objects> {
+        return restApiService.getDepositData(commonRequest)
+    }
+
+    override suspend fun getWithdrawData(commonRequest: CommonRequest): Response<Objects> {
+        return restApiService.getWithdrawData(commonRequest)
+    }
+
+    override suspend fun getTransferData(commonRequest: CommonRequest): Response<Objects> {
+        return restApiService.getTransferData(commonRequest)
     }
 
     override suspend fun insert(generalInfo: GeneralInfo) {

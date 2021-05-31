@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.data.dto.customer.CustomerRequest
 import com.datasoft.abs.databinding.FragmentCustomerBinding
 import com.datasoft.abs.presenter.utils.Resource
+import com.datasoft.abs.presenter.utils.Status
 import com.datasoft.abs.presenter.view.dashboard.fragments.customer.adapter.CustomerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -60,7 +61,7 @@ class CustomerFragment : Fragment() {
             }
         })
 
-        viewModel.requestCustomerData(CustomerRequest(1, status = "1"))
+        viewModel.requestCustomerData(CustomerRequest(1, status = "${Status.ACTIVE.type}, ${Status.AWAITING.type}, ${Status.DRAFT.type}"))
     }
 
     override fun onDestroyView() {
