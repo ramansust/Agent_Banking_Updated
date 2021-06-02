@@ -87,6 +87,9 @@ dependencies {
 
     // Preference DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0-alpha04"
+
+    // Imager picker
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
 }
 
 def getBaseUrl() {
