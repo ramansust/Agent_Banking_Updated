@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.datasoft.abs.data.dto.login.LoginResponse
 import com.datasoft.abs.databinding.ActivityLoginBinding
 import com.datasoft.abs.presenter.base.BaseActivity
 import com.datasoft.abs.presenter.utils.Resource
@@ -39,7 +40,7 @@ class LoginActivity : BaseActivity() {
                 is Resource.Success -> {
                     goneProgressBar()
                     response.data?.let { loginResponse ->
-                        navigateToMainScreen()
+                        navigateToMainScreen(loginResponse)
                     }
                 }
                 is Resource.Error -> {
@@ -63,7 +64,7 @@ class LoginActivity : BaseActivity() {
         )
     }
 
-    private fun navigateToMainScreen() {
+    private fun navigateToMainScreen(loginResponse: LoginResponse) {
         val nextScreenIntent = Intent(this, MainActivity::class.java)
         startActivity(nextScreenIntent)
         finish()

@@ -43,9 +43,12 @@ class CustomerAdapter @Inject constructor() :
         val customer = differ.currentList[position]
 
         with(customer) {
-            holder.binding.textView1.text = this.branchName
-            holder.binding.textView2.text = this.customerNo
-            holder.binding.textView3.text = this.customerType
+            holder.binding.txtViewSlNo.text = this.id.toString()
+            holder.binding.txtViewCustomerNo.text = this.customerNo
+            holder.binding.txtViewName.text = this.fullName
+            holder.binding.txtViewCustomerType.text = this.customerType
+            holder.binding.txtViewUnit.text = this.branchName
+            holder.binding.txtViewEntryDate.text = this.entryDate
         }
 
         holder.itemView.setOnClickListener() {

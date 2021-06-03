@@ -28,11 +28,13 @@
         <activity
             android:name=".presenter.view.login.LoginActivity"
             android:label="@string/activity_login"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.AgentBanking.NoActionBar" />
 
         <activity
             android:name=".presenter.view.dashboard.MainActivity"
             android:label="@string/activity_main"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.AgentBanking.NoActionBar" />
 
     </application>
