@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.RequestManager
 import com.datasoft.abs.data.dto.customer.Row
 import com.datasoft.abs.databinding.CustomerRowBinding
 import javax.inject.Inject
 
-class CustomerAdapter @Inject constructor() :
+class CustomerAdapter @Inject constructor(private val glide: RequestManager) :
     RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder>() {
 
     inner class CustomerViewHolder(val binding: CustomerRowBinding) :
@@ -49,6 +50,8 @@ class CustomerAdapter @Inject constructor() :
             holder.binding.txtViewCustomerType.text = this.customerType
             holder.binding.txtViewUnit.text = this.branchName
             holder.binding.txtViewEntryDate.text = this.entryDate
+
+//            glide.load(this.imageUrl).into(holder.binding.ivAutoImageSlider)
         }
 
         holder.itemView.setOnClickListener() {

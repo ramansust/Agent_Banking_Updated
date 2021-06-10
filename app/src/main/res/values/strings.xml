@@ -31,4 +31,8 @@
     <string name="entry_date">Entry Date</string>
     <string name="sl_no">Sl No.</string>
     <string name="login_icon">Login Icon</string>
+    <string name="total_a_c_opened">Total A/C opened</string>
+    <string name="total_deposit">Total Deposit</string>
+    <string name="total_withdraw">Total Withdraw</string>
+    <string name="total_balance">Agent A/C balance</string>
 </resources>

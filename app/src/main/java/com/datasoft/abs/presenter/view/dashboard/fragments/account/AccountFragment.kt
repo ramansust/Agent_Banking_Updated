@@ -24,7 +24,6 @@ class AccountFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentAccountBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -32,7 +31,13 @@ class AccountFragment : Fragment() {
         viewModel.text.observe(viewLifecycleOwner, {
 //            textView.text = it
         })
+
+
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {

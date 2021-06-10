@@ -1,23 +1,26 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.dashboard
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.datasoft.abs.databinding.FragmentDashboardBinding
-import com.datasoft.abs.presenter.utils.Resource
+import androidx.fragment.app.activityViewModels
+import com.datasoft.abs.databinding.FragmentDashboardTransactionBinding
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
 
-    private val viewModel: DashboardViewModel by viewModels()
-    private var _binding: FragmentDashboardBinding? = null
+    private val viewModel: DashboardViewModel by activityViewModels()
+    private var _binding: FragmentDashboardTransactionBinding? = null
+
+    @Inject
+    lateinit var adapter: DashboardAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -29,49 +32,45 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentDashboardTransactionBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val textView: TextView = binding.textHome
-        viewModel.getDashboardData().observe(viewLifecycleOwner, { response ->
+        binding.pager.adapter = adapter
 
-            when(response) {
-                is Resource.Success -> {
-                    goneProgressBar()
-                    response.data?.let { dashBoardResponse ->
-                        textView.text = dashBoardResponse.vmAgentInfos.current_Balance.toString()
-                    }
-                }
-                is Resource.Error -> {
-                    goneProgressBar()
-                    response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-                        Log.e("TAG", "An error occurred: $message")
-                    }
-                }
-                is Resource.Loading -> {
-                    showProgressBar()
-                }
+        TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
+            when(position) {
+                0 -> tab.text = "Transaction"
+                1 -> tab.text = "Loan"
+                else -> tab.text = "Transaction"
             }
-        })
+        }.attach()
 
-        viewModel.requestDashboardData(10)
+        val daysList = getAllDays()
+        binding.spinnerDay.adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, daysList)
+
+        binding.spinnerDay.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                viewModel.setDayCount(daysList.get(position).value.toInt())
+            }
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun goneProgressBar() {
-        binding.loaderView.visibility = View.GONE
-    }
-
-    private fun showProgressBar() {
-        binding.loaderView.visibility = View.VISIBLE
     }
 }
