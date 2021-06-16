@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.datasoft.abs.databinding.GeneralFragmentBinding
-import com.datasoft.abs.presenter.utils.Resource
+import com.datasoft.abs.presenter.states.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

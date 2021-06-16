@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.dashboard.DashboardResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.utils.Network
-import com.datasoft.abs.presenter.utils.Resource
+import com.datasoft.abs.presenter.states.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

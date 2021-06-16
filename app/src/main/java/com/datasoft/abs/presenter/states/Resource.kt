@@ -1,4 +1,4 @@
-package com.datasoft.abs.presenter.utils
+package com.datasoft.abs.presenter.states
 
 sealed class Resource<T>(
     val data: T? = null,

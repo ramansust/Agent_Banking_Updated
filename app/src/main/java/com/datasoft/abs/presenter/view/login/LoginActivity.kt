@@ -4,20 +4,25 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.datasoft.abs.data.dto.login.LoginResponse
 import com.datasoft.abs.databinding.ActivityLoginBinding
 import com.datasoft.abs.presenter.base.BaseActivity
-import com.datasoft.abs.presenter.utils.Resource
+import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity() {
 
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var binding: ActivityLoginBinding
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +40,10 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun observeViewModel() {
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
+
         loginViewModel.getLoginData().observe(this, { response ->
             when(response) {
                 is Resource.Success -> {
@@ -46,7 +55,7 @@ class LoginActivity : BaseActivity() {
                 is Resource.Error -> {
                     goneProgressBar()
                     response.message?.let { message ->
-                        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }

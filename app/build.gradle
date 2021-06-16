@@ -17,15 +17,48 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "BASE_URL", "\"" + getBaseUrl() + "\""
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    signingConfigs {
+        config {
+            keyAlias 'mobioapp'
+            keyPassword 'm0b10app'
+            // update this path to your keystore file path
+            storeFile file('/home/raman/Downloads/Credential/Keystore/MobioApp/bijoyparbone')
+            storePassword 'm0b10app'
         }
     }
+    buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+            versionNameSuffix "-debug"
+
+            buildConfigField "String", "BASE_URL", "\"" + getBaseUrl("DEBUG") + "\""
+        }
+        dev {
+            initWith debug
+            applicationIdSuffix = ".dev"
+            versionNameSuffix "-dev"
+            debuggable true
+
+            buildConfigField "String", "BASE_URL", "\"" + getBaseUrl("DEV") + "\""
+        }
+        staging {
+            initWith debug
+            applicationIdSuffix = ".staging"
+            versionNameSuffix "-staging"
+
+            buildConfigField "String", "BASE_URL", "\"" + getBaseUrl("STAGING") + "\""
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+
+            buildConfigField "String", "BASE_URL", "\"" + getBaseUrl("RELEASE") + "\""
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -64,7 +97,6 @@ dependencies {
     api 'com.squareup.retrofit2:converter-gson:2.9.0'
     api 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
 
-
     //Kotlin
     implementation "androidx.core:core-ktx:1.5.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -90,13 +122,28 @@ dependencies {
 
     // Imager picker
     implementation 'com.github.dhaval2404:imagepicker:2.1'
+
+    // EventEmitter (one-off events)
+    implementation 'com.github.Zhuinden:event-emitter:1.1.0'
+
+    // Shimmer effect
+    implementation 'com.facebook.shimmer:shimmer:0.5.0@aar'
 }
 
-def getBaseUrl() {
+def getBaseUrl(build) {
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-    String baseUrl = properties.getProperty("base_url")
+    String baseUrl
+    if (build.equalsIgnoreCase("DEBUG")) {
+        baseUrl = properties.getProperty("debug_url")
+    } else if (build.equalsIgnoreCase("DEV")) {
+        baseUrl = properties.getProperty("dev_url")
+    } else if (build.equalsIgnoreCase("STAGING")) {
+        baseUrl = properties.getProperty("staging_url")
+    } else if (build.equalsIgnoreCase("RELEASE")) {
+        baseUrl = properties.getProperty("release_url")
+    }
     if (baseUrl == null)
         throw new GradleException("Add 'base_url' field at local.properties file")
 

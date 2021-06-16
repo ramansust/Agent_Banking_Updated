@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.data.dto.customer.CustomerRequest
 import com.datasoft.abs.databinding.FragmentCustomerBinding
-import com.datasoft.abs.presenter.utils.Resource
+import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Status
 import com.datasoft.abs.presenter.view.dashboard.fragments.customer.adapter.CustomerAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,22 +46,33 @@ class CustomerFragment : Fragment() {
         viewModel.getCustomerData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
+                    stopShimmer()
                     response.data?.let { customerResponse ->
                         customerAdapter.differ.submitList(customerResponse.rows)
                     }
                 }
                 is Resource.Error -> {
+                    stopShimmer()
                     response.message?.let { message ->
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
                 }
                 is Resource.Loading -> {
-
+                    startShimmer()
                 }
             }
         })
 
         viewModel.requestCustomerData(CustomerRequest(1, status = "${Status.ACTIVE.type}, ${Status.AWAITING.type}, ${Status.DRAFT.type}"))
+    }
+
+    private fun startShimmer() {
+        binding.shimmerView.startShimmer()
+    }
+
+    private fun stopShimmer() {
+        binding.shimmerView.stopShimmer()
+        binding.shimmerView.visibility = View.GONE
     }
 
     override fun onDestroyView() {

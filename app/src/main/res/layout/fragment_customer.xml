@@ -7,6 +7,55 @@
     android:padding="5dp"
     tools:context=".presenter.view.dashboard.fragments.dashboard.DashboardFragment">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+            <include layout="@layout/customer_shimmer_row" />
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_view"
         android:layout_width="0dp"
@@ -16,14 +65,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_view_customer_type"
-        tools:listitem="@layout/customer_row" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_customer_type" />
 
     <TextView
         android:id="@+id/txt_view_unit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/unit"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/txt_view_entry_date"
@@ -36,6 +85,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/customer_no"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/txt_view_name"
@@ -48,6 +98,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/customer_type"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/txt_view_unit"
@@ -60,6 +111,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/name"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/txt_view_customer_type"
@@ -84,6 +136,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/sl_no"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/txt_view_customer_no"
