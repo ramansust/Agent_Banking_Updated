@@ -46,6 +46,7 @@ class PhotoFragment : Fragment() {
         binding.btnTakePhoto.setOnClickListener {
 //            takePhotoUsingCamera.launch()
             ImagePicker.with(this)
+                .crop()
                 .compress(1024)         //Final image size will be less than 1 MB(Optional)
                 .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
                 .createIntent { intent ->
