@@ -33,11 +33,7 @@ class DashboardFragment : Fragment() {
     ): View {
 
         _binding = FragmentDashboardTransactionBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val root: View = binding.root
 
         binding.pager.adapter = adapter
 
@@ -67,6 +63,8 @@ class DashboardFragment : Fragment() {
                 viewModel.setDayCount(daysList.get(position).value.toInt())
             }
         }
+
+        return root
     }
 
     override fun onDestroyView() {

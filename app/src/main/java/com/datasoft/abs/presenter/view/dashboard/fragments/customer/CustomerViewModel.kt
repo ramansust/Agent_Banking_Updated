@@ -7,11 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.customer.CustomerRequest
 import com.datasoft.abs.data.dto.customer.CustomerResponse
 import com.datasoft.abs.domain.Repository
-import com.datasoft.abs.presenter.utils.Network
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
@@ -30,7 +29,6 @@ class CustomerViewModel @Inject constructor(
             if (network.isConnected()) {
                 try {
                     val response = repository.getCustomerListData(customerRequest)
-                    delay(5000)
                     customerData.postValue(handleCustomerResponse(response))
                 } catch (e: Exception) {
                     customerData.postValue(

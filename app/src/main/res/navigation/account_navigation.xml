@@ -3,90 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/account_navigation"
-    app:startDestination="@id/photoFragment">
+    app:startDestination="@id/signatureFragment">
 
     <fragment
         android:id="@+id/generalFragment"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.account.general.GeneralFragment"
         android:label="general_fragment"
-        tools:layout="@layout/general_fragment" >
-        <action
-            android:id="@+id/action_generalFragment_to_personalFragment"
-            app:destination="@id/personalFragment" />
-    </fragment>
+        tools:layout="@layout/general_fragment" />
 
     <fragment
         android:id="@+id/personalFragment"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.account.perosnal.PersonalFragment"
         android:label="personal_fragment"
-        tools:layout="@layout/personal_fragment" >
-        <action
-            android:id="@+id/action_personalFragment_to_generalFragment"
-            app:destination="@id/generalFragment" />
-        <action
-            android:id="@+id/action_personalFragment_to_photoFragment"
-            app:destination="@id/photoFragment" />
-    </fragment>
+        tools:layout="@layout/personal_fragment" />
 
     <fragment
         android:id="@+id/photoFragment"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.account.photo.PhotoFragment"
         android:label="photo_fragment"
-        tools:layout="@layout/photo_fragment" >
-        <action
-            android:id="@+id/action_photoFragment_to_personalFragment"
-            app:destination="@id/personalFragment" />
-        <action
-            android:id="@+id/action_photoFragment_to_fingerprintFragment"
-            app:destination="@id/fingerprintFragment" />
-    </fragment>
+        tools:layout="@layout/photo_fragment" />
 
     <fragment
         android:id="@+id/signatureFragment"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.account.signature.SignatureFragment"
         android:label="signature_fragment"
-        tools:layout="@layout/signature_fragment" >
-        <action
-            android:id="@+id/action_signatureFragment_to_fingerprintFragment"
-            app:destination="@id/fingerprintFragment" />
-        <action
-            android:id="@+id/action_signatureFragment_to_nomineeFragment"
-            app:destination="@id/nomineeFragment" />
-    </fragment>
+        tools:layout="@layout/signature_fragment" />
 
     <fragment
         android:id="@+id/fingerprintFragment"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.account.fingerprint.FingerprintFragment"
         android:label="fingerprint_fragment"
-        tools:layout="@layout/fingerprint_fragment" >
-        <action
-            android:id="@+id/action_fingerprintFragment_to_photoFragment"
-            app:destination="@id/photoFragment" />
-        <action
-            android:id="@+id/action_fingerprintFragment_to_signatureFragment"
-            app:destination="@id/signatureFragment" />
-    </fragment>
+        tools:layout="@layout/fingerprint_fragment" />
 
     <fragment
         android:id="@+id/nomineeFragment"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.account.nominee.NomineeFragment"
         android:label="nominee_fragment"
-        tools:layout="@layout/nominee_fragment" >
-        <action
-            android:id="@+id/action_nomineeFragment_to_signatureFragment"
-            app:destination="@id/signatureFragment" />
-        <action
-            android:id="@+id/action_nomineeFragment_to_reviewFragment"
-            app:destination="@id/reviewFragment" />
-    </fragment>
+        tools:layout="@layout/nominee_fragment" />
 
     <fragment
         android:id="@+id/reviewFragment"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.account.review.ReviewFragment"
         android:label="review_fragment"
-        tools:layout="@layout/review_fragment" >
-        <action
-            android:id="@+id/action_reviewFragment_to_nomineeFragment"
-            app:destination="@id/nomineeFragment" />
-    </fragment>
+        tools:layout="@layout/review_fragment" />
 </navigation>
