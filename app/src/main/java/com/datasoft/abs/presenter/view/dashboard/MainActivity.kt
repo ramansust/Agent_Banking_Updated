@@ -3,7 +3,6 @@ package com.datasoft.abs.presenter.view.dashboard
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -35,15 +34,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+//        binding.appBarMain.toolbar.setNavigationIcon(R.drawable.ic_menu)
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
+        navView.itemIconTintList = null
+
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_dashboard, R.id.nav_customer, R.id.nav_account, R.id.nav_transaction
+                R.id.nav_profile, R.id.nav_dashboard, R.id.nav_customer, R.id.nav_account, R.id.nav_transaction
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -54,8 +58,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setDataIntoHeader() {
         val headerView: View = binding.navView.getHeaderView(0)
-        headerView.findViewById<TextView>(R.id.txt_view_name).text = "Android"
-        headerView.findViewById<TextView>(R.id.txt_view_email).text = "android.studio@gmail.com"
+//        headerView.findViewById<TextView>(R.id.txt_view_name).text = "Android"
+//        headerView.findViewById<TextView>(R.id.txt_view_email).text = "android.studio@gmail.com"
 
         glide.load("url")
             .into(headerView.findViewById(R.id.img_view_user_profile))

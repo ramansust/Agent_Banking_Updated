@@ -6,6 +6,12 @@
     app:startDestination="@+id/nav_dashboard">
 
     <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transaction.TransactionFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_transaction" />
+
+    <fragment
         android:id="@+id/nav_dashboard"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.dashboard.DashboardFragment"
         android:label="@string/menu_dashboard"

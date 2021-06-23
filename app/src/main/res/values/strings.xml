@@ -35,4 +35,7 @@
     <string name="total_deposit">Total Deposit</string>
     <string name="total_withdraw">Total Withdraw</string>
     <string name="total_balance">Agent A/C balance</string>
+    <string name="action_logout">Logout</string>
+    <string name="menu_profile">Profile</string>
+    <string name="todo">TODO</string>
 </resources>

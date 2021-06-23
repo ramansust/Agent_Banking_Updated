@@ -17,8 +17,10 @@
     <dimen name="image_view_width">100dp</dimen>
     <dimen name="image_view_height">100dp</dimen>
     <dimen name="image_details_height">300dp</dimen>
+    <dimen name="space_32x">32dp</dimen>
     <dimen name="space_48x">48dp</dimen>
     <dimen name="space_64x">64dp</dimen>
     <dimen name="space_96x">96dp</dimen>
     <dimen name="space_150x">150dp</dimen>
+    <dimen name="space_320x">320dp</dimen>
 </resources>

@@ -1,7 +1,13 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.account.photo
 
+import android.R.attr
 import android.app.Activity
+import android.content.ContentResolver
+import android.graphics.ImageDecoder
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +19,11 @@ import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.PhotoFragmentBinding
 import com.datasoft.abs.presenter.utils.Photos
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.pixelcarrot.base64image.Base64Image
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class PhotoFragment : Fragment() {
@@ -69,6 +77,18 @@ class PhotoFragment : Fragment() {
                     val fileUri = data?.data!!
 
                     binding.imgView.setImageURI(fileUri)
+
+                    val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver, fileUri))
+                    } else {
+                        MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, fileUri)
+                    }
+
+                    Base64Image.encode(bitmap) { base64 ->
+                        base64?.let {
+                            Log.e("base64", "_______$it")
+                        }
+                    }
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
