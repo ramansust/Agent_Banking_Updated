@@ -7,27 +7,27 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_1"
-            android:icon="@drawable/ic_account_opened" />
+            android:icon="@drawable/ic_ac_opened" />
         <item
             android:id="@+id/nav_2"
-            android:icon="@drawable/ic_total_deposit" />
+            android:icon="@drawable/ic_deposit" />
         <item
             android:id="@+id/nav_3"
-            android:icon="@drawable/ic_account_opened" />
+            android:icon="@drawable/ic_withdraw" />
         <item
             android:id="@+id/nav_4"
-            android:icon="@drawable/ic_total_deposit" />
+            android:icon="@drawable/ic_balance" />
         <item
             android:id="@+id/nav_dashboard"
-            android:icon="@drawable/ic_account_opened" />
+            android:icon="@drawable/ic_ac_opened" />
         <item
             android:id="@+id/nav_customer"
-            android:icon="@drawable/ic_total_deposit" />
+            android:icon="@drawable/ic_deposit" />
         <item
             android:id="@+id/nav_account"
-            android:icon="@drawable/ic_account_opened" />
+            android:icon="@drawable/ic_withdraw" />
         <item
             android:id="@+id/nav_transaction"
-            android:icon="@drawable/ic_total_deposit" />
+            android:icon="@drawable/ic_balance" />
     </group>
 </menu>

@@ -7,4 +7,5 @@ object Constant {
     const val SPLASH_DELAY = 3000
     const val DATABASE_NAME = "AgentBanking"
     const val PER_PAGE_ITEM = 10
+    const val USER_NAME = "USER_NAME"
 }

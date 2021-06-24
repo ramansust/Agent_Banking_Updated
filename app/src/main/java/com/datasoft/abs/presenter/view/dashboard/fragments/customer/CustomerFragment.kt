@@ -1,12 +1,15 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customer
 
+import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.data.dto.customer.CustomerRequest
 import com.datasoft.abs.databinding.FragmentCustomerBinding
@@ -15,6 +18,7 @@ import com.datasoft.abs.presenter.utils.Status
 import com.datasoft.abs.presenter.view.dashboard.fragments.customer.adapter.CustomerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class CustomerFragment : Fragment() {
@@ -84,6 +88,7 @@ class CustomerFragment : Fragment() {
         binding.recycleView.apply {
             adapter = customerAdapter
             layoutManager = LinearLayoutManager(activity)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
     }
 }

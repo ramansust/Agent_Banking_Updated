@@ -7,12 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="dashboard_bg">#EAEDF3</color>
+    <color name="dashboard_bg">#E5E5E5</color>
     <color name="shimmer_background_color">#b1b1b1</color>
 
     <!-- Here you can add color of your choice  -->
     <color name="ucrop_color_toolbar">#FF6200EE</color>
     <color name="ucrop_color_statusbar">#FFBB86FC</color>
     <color name="ucrop_color_widget_active">#FF03DAC5</color>
+
+    <color name="dashboard_text_title">#606060</color>
+    <color name="dashboard_text">#444444</color>
+    <color name="customer_text">#263238</color>
 
 </resources>

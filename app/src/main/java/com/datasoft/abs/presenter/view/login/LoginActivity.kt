@@ -9,6 +9,7 @@ import com.datasoft.abs.data.dto.login.LoginResponse
 import com.datasoft.abs.databinding.ActivityLoginBinding
 import com.datasoft.abs.presenter.base.BaseActivity
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant.USER_NAME
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.MainActivity
@@ -74,7 +75,7 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun navigateToMainScreen(loginResponse: LoginResponse) {
-        val nextScreenIntent = Intent(this, MainActivity::class.java)
+        val nextScreenIntent = Intent(this, MainActivity::class.java).putExtra(USER_NAME, loginResponse.userName)
         startActivity(nextScreenIntent)
         finish()
     }

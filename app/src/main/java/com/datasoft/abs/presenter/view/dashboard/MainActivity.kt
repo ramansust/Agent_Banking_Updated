@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.RequestManager
 import com.datasoft.abs.R
 import com.datasoft.abs.databinding.ActivityMainBinding
+import com.datasoft.abs.presenter.utils.Constant.USER_NAME
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -53,10 +54,15 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-//        setDataIntoHeader()
+//        setDataIntoNavHeader()
+        setDataIntoToolbar()
     }
 
-    private fun setDataIntoHeader() {
+    private fun setDataIntoToolbar() {
+        binding.appBarMain.txtViewUserName.text = intent.extras?.get(USER_NAME).toString()
+    }
+
+    private fun setDataIntoNavHeader() {
         val headerView: View = binding.navView.getHeaderView(0)
 //        headerView.findViewById<TextView>(R.id.txt_view_name).text = "Android"
 //        headerView.findViewById<TextView>(R.id.txt_view_email).text = "android.studio@gmail.com"

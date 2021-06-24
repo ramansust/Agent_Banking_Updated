@@ -29,15 +29,15 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/oxygen_regular"
                     android:text="TextView"
-                    android:textSize="@dimen/font_16x"
+                    android:textSize="@dimen/font_20x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="@dimen/space_48x"
-                    android:layout_height="wrap_content"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
@@ -50,7 +50,9 @@
                     android:id="@+id/view"
                     android:layout_width="1dp"
                     android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@color/white"
                     android:paddingTop="24dp"
                     android:paddingBottom="24dp"
@@ -60,8 +62,8 @@
 
                 <ImageView
                     android:id="@+id/imageView5"
-                    android:layout_width="@dimen/space_32x"
-                    android:layout_height="@dimen/space_32x"
+                    android:layout_width="26dp"
+                    android:layout_height="37dp"
                     android:layout_marginEnd="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/view"
