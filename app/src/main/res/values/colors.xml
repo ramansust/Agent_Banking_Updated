@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="dashboard_bg">#E5E5E5</color>
+    <color name="splash_login_bg">#CDFFE5</color>
     <color name="shimmer_background_color">#b1b1b1</color>
 
     <!-- Here you can add color of your choice  -->

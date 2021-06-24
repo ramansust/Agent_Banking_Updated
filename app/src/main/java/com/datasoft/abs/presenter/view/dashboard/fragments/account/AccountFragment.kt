@@ -1,6 +1,7 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.account
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,13 +27,6 @@ class AccountFragment : Fragment() {
     ): View {
         _binding = FragmentAccountBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-//        val textView: TextView = binding.textSlideshow
-        viewModel.text.observe(viewLifecycleOwner, {
-//            textView.text = it
-        })
-
-
         return root
     }
 
