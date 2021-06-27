@@ -26,68 +26,71 @@ class CustomerActivity : BaseActivity() {
                     navController?.navigate(R.id.card_view_general_info)
                     previewInvisible()
                     backDisable()
+                    setResource(binding.appBarCustomer.customerContent.generalInfo.cardView, null)
                 }
                 1 -> {
                     navController?.navigate(R.id.card_view_personal_info)
                     backEnable()
+                    setResource(binding.appBarCustomer.customerContent.personalInfo.cardView, null)
                 }
                 2 -> {
                     navController?.navigate(R.id.card_view_address)
                     backEnable()
+                    setResource(binding.appBarCustomer.customerContent.address.cardView, null)
                 }
                 3 -> {
                     navController?.navigate(R.id.card_view_photo_nid)
                     backEnable()
+                    setResource(binding.appBarCustomer.customerContent.photoNid.cardView, null)
                 }
                 4 -> {
                     navController?.navigate(R.id.card_view_signature)
                     backEnable()
+                    setResource(binding.appBarCustomer.customerContent.signature.cardView, null)
                 }
                 5 -> {
                     navController?.navigate(R.id.card_view_fingerprint)
                     backEnable()
+                    setResource(binding.appBarCustomer.customerContent.fingerprint.cardView, null)
                 }
                 6 -> {
                     navController?.navigate(R.id.card_view_nominee)
                     previewVisible()
                     backEnable()
+                    setResource(binding.appBarCustomer.customerContent.nominee.cardView, null)
                 }
             }
 
-            for (i in 0..it) {
-                if (i == it) {
-                    setResource(binding.appBarCustomer.customerContent.generalInfo.cardView, null)
-                } else {
-                    when (i) {
-                        0 -> setResource(
-                            binding.appBarCustomer.customerContent.generalInfo.cardView,
-                            true
-                        )
-                        1 -> setResource(
-                            binding.appBarCustomer.customerContent.personalInfo.cardView,
-                            true
-                        )
-                        2 -> setResource(
-                            binding.appBarCustomer.customerContent.address.cardView,
-                            true
-                        )
-                        3 -> setResource(
-                            binding.appBarCustomer.customerContent.photoNid.cardView,
-                            true
-                        )
-                        4 -> setResource(
-                            binding.appBarCustomer.customerContent.signature.cardView,
-                            true
-                        )
-                        5 -> setResource(
-                            binding.appBarCustomer.customerContent.fingerprint.cardView,
-                            true
-                        )
-                        6 -> setResource(
-                            binding.appBarCustomer.customerContent.nominee.cardView,
-                            true
-                        )
-                    }
+            for (i in 0 until it - 1) {
+                when (i) {
+                    0 -> setResource(
+                        binding.appBarCustomer.customerContent.generalInfo.cardView,
+                        true
+                    )
+                    1 -> setResource(
+                        binding.appBarCustomer.customerContent.personalInfo.cardView,
+                        true
+                    )
+                    2 -> setResource(
+                        binding.appBarCustomer.customerContent.address.cardView,
+                        true
+                    )
+                    3 -> setResource(
+                        binding.appBarCustomer.customerContent.photoNid.cardView,
+                        true
+                    )
+                    4 -> setResource(
+                        binding.appBarCustomer.customerContent.signature.cardView,
+                        true
+                    )
+                    5 -> setResource(
+                        binding.appBarCustomer.customerContent.fingerprint.cardView,
+                        true
+                    )
+                    6 -> setResource(
+                        binding.appBarCustomer.customerContent.nominee.cardView,
+                        true
+                    )
                 }
             }
 
@@ -232,18 +235,19 @@ class CustomerActivity : BaseActivity() {
     }
 
     private fun setResource(cardView: CardView, isActive: Boolean?) {
-        if (isActive!!) {
+
+        if (isActive == null) {
             val img: ImageView = cardView.findViewById(R.id.img_view_completed)
             img.visibility = View.INVISIBLE
             cardView.setBackgroundColor(getColor(R.color.purple_500))
+        } else if (isActive) {
+            val img: ImageView = cardView.findViewById(R.id.img_view_completed)
+            img.visibility = View.VISIBLE
+            cardView.setBackgroundColor(getColor(R.color.completed_step))
         } else if (!isActive) {
             val img: ImageView = cardView.findViewById(R.id.img_view_completed)
             img.visibility = View.INVISIBLE
             cardView.setBackgroundColor(getColor(R.color.purple_200))
-        } else {
-            val img: ImageView = cardView.findViewById(R.id.img_view_completed)
-            img.visibility = View.VISIBLE
-            cardView.setBackgroundColor(getColor(R.color.completed_step))
         }
     }
 }
