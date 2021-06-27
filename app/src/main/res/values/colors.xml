@@ -19,5 +19,6 @@
     <color name="dashboard_text_title">#606060</color>
     <color name="dashboard_text">#444444</color>
     <color name="customer_text">#263238</color>
+    <color name="completed_step">#36E560</color>
 
 </resources>
