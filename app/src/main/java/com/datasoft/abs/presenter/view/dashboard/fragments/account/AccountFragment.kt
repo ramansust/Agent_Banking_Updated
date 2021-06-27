@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AccountFragment : Fragment() {
 
-    private val viewModel: AccountViewModel by activityViewModels()
+//    private val viewModel: AccountViewModel by activityViewModels()
     private var _binding: FragmentAccountBinding? = null
 
     // This property is only valid between onCreateView and
