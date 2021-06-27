@@ -28,7 +28,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/oxygen_regular"
-                    android:text="TextView"
+                    android:text="@string/test_username"
                     android:textSize="@dimen/font_20x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

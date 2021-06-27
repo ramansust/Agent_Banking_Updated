@@ -21,34 +21,29 @@
             android:theme="@style/Theme.AgentBanking.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".presenter.view.login.LoginActivity"
             android:label="@string/activity_login"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AgentBanking.NoActionBar" />
-
         <activity
             android:name=".presenter.view.dashboard.MainActivity"
             android:label="@string/activity_main"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AgentBanking.NoActionBar" />
-
+        <activity
+            android:name=".presenter.view.dashboard.fragments.customer.CustomerActivity"
+            android:label="@string/activity_customer"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AgentBanking.NoActionBar" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:replace="android:screenOrientation" />
-
-        <!--<activity
-            android:name="com.github.dhaval2404.imagepicker.ImagePickerActivity"
-            android:screenOrientation="landscape"
-            tools:replace="android:screenOrientation" />-->
-
     </application>
 
 </manifest>

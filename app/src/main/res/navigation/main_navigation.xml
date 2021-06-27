@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transaction.TransactionFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.profile.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_transaction" />
 
@@ -18,16 +18,16 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/nav_customer"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.CustomerFragment"
-        android:label="@string/menu_customer"
-        tools:layout="@layout/fragment_customer" />
-
-    <fragment
         android:id="@+id/nav_account"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.account.AccountFragment"
         android:label="@string/menu_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_customer" />
+
+    <activity
+        android:id="@+id/nav_customer"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.CustomerActivity"
+        android:label="@string/menu_customer"
+        tools:layout="@layout/activity_customer" />
 
     <fragment
         android:id="@+id/nav_transaction"

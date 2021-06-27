@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customer_navigation"
+    app:startDestination="@id/card_view_general_info">
+
+    <fragment
+        android:id="@+id/card_view_general_info"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.general.GeneralFragment"
+        android:label="general_fragment"
+        tools:layout="@layout/general_fragment" />
+
+    <fragment
+        android:id="@+id/card_view_personal_info"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.personal.PersonalFragment"
+        android:label="personal_fragment"
+        tools:layout="@layout/personal_fragment" />
+
+    <fragment
+        android:id="@+id/card_view_address"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.review.ReviewFragment"
+        android:label="photo_fragment"
+        tools:layout="@layout/photo_fragment" />
+
+    <fragment
+        android:id="@+id/card_view_photo_nid"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.photo.PhotoFragment"
+        android:label="signature_fragment"
+        tools:layout="@layout/signature_fragment" />
+
+    <fragment
+        android:id="@+id/card_view_signature"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.signature.SignatureFragment"
+        android:label="fingerprint_fragment"
+        tools:layout="@layout/fingerprint_fragment" />
+
+    <fragment
+        android:id="@+id/card_view_fingerprint"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.fingerprint.FingerprintFragment"
+        android:label="nominee_fragment"
+        tools:layout="@layout/nominee_fragment" />
+
+    <fragment
+        android:id="@+id/card_view_nominee"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.nominee.NomineeFragment"
+        android:label="review_fragment"
+        tools:layout="@layout/review_fragment" />
+</navigation>

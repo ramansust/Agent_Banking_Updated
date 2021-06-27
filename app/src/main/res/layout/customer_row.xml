@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp"
-    tools:context=".presenter.view.dashboard.fragments.account.AccountFragment">
+    tools:context=".presenter.view.dashboard.fragments.customer.AccountFragment">
 
     <TextView
         android:id="@+id/txt_view_unit"
