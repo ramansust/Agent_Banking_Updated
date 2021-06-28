@@ -144,6 +144,9 @@ dependencies {
 
     // MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // A tool for debugging
+    implementation 'com.gu.android:toolargetool:0.3.0'
 }
 
 def getBaseUrl(build) {

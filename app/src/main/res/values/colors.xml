@@ -12,9 +12,9 @@
     <color name="shimmer_background_color">#b1b1b1</color>
 
     <!-- Here you can add color of your choice  -->
-    <color name="ucrop_color_toolbar">#FF6200EE</color>
+    <color name="ucrop_color_toolbar">@color/purple_500</color>
     <color name="ucrop_color_statusbar">#FFBB86FC</color>
-    <color name="ucrop_color_widget_active">#FF03DAC5</color>
+    <color name="ucrop_color_widget_active">@color/purple_500</color>
 
     <color name="dashboard_text_title">#606060</color>
     <color name="dashboard_text">#444444</color>

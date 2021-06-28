@@ -155,7 +155,7 @@ class CustomerActivity : BaseActivity() {
         }
 
         binding.appBarCustomer.btnCross.setOnClickListener {
-            onBackPressed()
+            finish()
         }
 
         setTitle()
@@ -217,5 +217,10 @@ class CustomerActivity : BaseActivity() {
             img.visibility = View.INVISIBLE
             cardView.setBackgroundColor(getColor(R.color.purple_200))
         }
+    }
+
+    override fun onSaveInstanceState(oldInstanceState: Bundle) {
+        super.onSaveInstanceState(oldInstanceState)
+        oldInstanceState.clear()
     }
 }
