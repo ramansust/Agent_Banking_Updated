@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/space_16x"
+    android:layout_height="match_parent"
     app:layout_constraintBottom_toTopOf="@+id/card_view_personal_info"
     app:layout_constraintEnd_toStartOf="@id/guideline4"
     app:layout_constraintStart_toStartOf="parent"
@@ -12,21 +11,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/img_view_completed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:contentDescription="@string/todo"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_completed" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/txt_view_sl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -51,7 +50,7 @@
             android:textSize="@dimen/font_20x"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/img_view_completed"
-            app:layout_constraintStart_toEndOf="@id/textView1"
+            app:layout_constraintStart_toEndOf="@id/txt_view_sl"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

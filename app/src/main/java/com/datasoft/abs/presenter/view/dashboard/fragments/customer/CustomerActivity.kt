@@ -18,10 +18,12 @@ class CustomerActivity : BaseActivity() {
     private val customerViewModel: CustomerViewModel by viewModels()
     private lateinit var binding: ActivityCustomerBinding
     private var navController: NavController? = null
+    private var currentState = 0
 
     override fun observeViewModel() {
-        customerViewModel.getCurrentStep().observe(this, { it ->
-            when (it) {
+        customerViewModel.getCurrentStep().observe(this, {
+            currentState = it
+            when (currentState) {
                 0 -> {
                     navController?.navigate(R.id.card_view_general_info)
                     previewInvisible()
@@ -31,26 +33,31 @@ class CustomerActivity : BaseActivity() {
                 1 -> {
                     navController?.navigate(R.id.card_view_personal_info)
                     backEnable()
+                    previewInvisible()
                     setResource(binding.appBarCustomer.customerContent.personalInfo.cardView, null)
                 }
                 2 -> {
                     navController?.navigate(R.id.card_view_address)
                     backEnable()
+                    previewInvisible()
                     setResource(binding.appBarCustomer.customerContent.address.cardView, null)
                 }
                 3 -> {
                     navController?.navigate(R.id.card_view_photo_nid)
                     backEnable()
+                    previewInvisible()
                     setResource(binding.appBarCustomer.customerContent.photoNid.cardView, null)
                 }
                 4 -> {
                     navController?.navigate(R.id.card_view_signature)
                     backEnable()
+                    previewInvisible()
                     setResource(binding.appBarCustomer.customerContent.signature.cardView, null)
                 }
                 5 -> {
                     navController?.navigate(R.id.card_view_fingerprint)
                     backEnable()
+                    previewInvisible()
                     setResource(binding.appBarCustomer.customerContent.fingerprint.cardView, null)
                 }
                 6 -> {
@@ -61,7 +68,7 @@ class CustomerActivity : BaseActivity() {
                 }
             }
 
-            for (i in 0 until it - 1) {
+            for (i in 0 until it) {
                 when (i) {
                     0 -> setResource(
                         binding.appBarCustomer.customerContent.generalInfo.cardView,
@@ -133,33 +140,34 @@ class CustomerActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         navController = findNavController(R.id.nav_host_fragment_content_customer)
+        setCurrentState(0)
 
         binding.appBarCustomer.customerContent.generalInfo.cardView.setOnClickListener {
-            customerViewModel.requestCurrentStep(0)
+            setCurrentState(0)
         }
 
         binding.appBarCustomer.customerContent.personalInfo.cardView.setOnClickListener {
-            customerViewModel.requestCurrentStep(1)
+            setCurrentState(1)
         }
 
         binding.appBarCustomer.customerContent.address.cardView.setOnClickListener {
-            customerViewModel.requestCurrentStep(2)
+            setCurrentState(2)
         }
 
         binding.appBarCustomer.customerContent.photoNid.cardView.setOnClickListener {
-            customerViewModel.requestCurrentStep(3)
+            setCurrentState(3)
         }
 
         binding.appBarCustomer.customerContent.signature.cardView.setOnClickListener {
-            customerViewModel.requestCurrentStep(4)
+            setCurrentState(4)
         }
 
         binding.appBarCustomer.customerContent.fingerprint.cardView.setOnClickListener {
-            customerViewModel.requestCurrentStep(5)
+            setCurrentState(5)
         }
 
         binding.appBarCustomer.customerContent.nominee.cardView.setOnClickListener {
-            customerViewModel.requestCurrentStep(6)
+            setCurrentState(6)
         }
 
         binding.appBarCustomer.btnCross.setOnClickListener {
@@ -171,31 +179,56 @@ class CustomerActivity : BaseActivity() {
         }
 
         binding.appBarCustomer.customerContent.btnBack.setOnClickListener {
-
+            setCurrentState(--currentState)
         }
 
         binding.appBarCustomer.customerContent.btnSave.setOnClickListener {
-
+            if(currentState >= 6)
+                setCurrentState(++currentState)
         }
 
         setTitle()
     }
 
+    private fun setCurrentState(index: Int) {
+        customerViewModel.requestCurrentStep(index)
+    }
+
     private fun setTitle() {
         binding.appBarCustomer.customerContent.generalInfo.textViewTitle.text =
             getString(R.string.general_information)
+        binding.appBarCustomer.customerContent.generalInfo.txtViewSl.text =
+            getString(R.string.one)
+
         binding.appBarCustomer.customerContent.personalInfo.textViewTitle.text =
             getString(R.string.personal_information)
+        binding.appBarCustomer.customerContent.personalInfo.txtViewSl.text =
+            getString(R.string.two)
+
         binding.appBarCustomer.customerContent.address.textViewTitle.text =
             getString(R.string.address)
+        binding.appBarCustomer.customerContent.address.txtViewSl.text =
+            getString(R.string.three)
+
         binding.appBarCustomer.customerContent.photoNid.textViewTitle.text =
             getString(R.string.photo_nid)
+        binding.appBarCustomer.customerContent.photoNid.txtViewSl.text =
+            getString(R.string.four)
+
         binding.appBarCustomer.customerContent.signature.textViewTitle.text =
             getString(R.string.signature)
+        binding.appBarCustomer.customerContent.signature.txtViewSl.text =
+            getString(R.string.five)
+
         binding.appBarCustomer.customerContent.fingerprint.textViewTitle.text =
             getString(R.string.fingerprint)
+        binding.appBarCustomer.customerContent.fingerprint.txtViewSl.text =
+            getString(R.string.six)
+
         binding.appBarCustomer.customerContent.nominee.textViewTitle.text =
             getString(R.string.nominee)
+        binding.appBarCustomer.customerContent.nominee.txtViewSl.text =
+            getString(R.string.seven)
     }
 
     override fun onBackPressed() {
