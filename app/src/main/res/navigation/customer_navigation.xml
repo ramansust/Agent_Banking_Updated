@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/card_view_address"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.review.ReviewFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.address.AddressFragment"
         android:label="photo_fragment"
         tools:layout="@layout/photo_fragment" />
 
@@ -45,5 +45,5 @@
         android:id="@+id/card_view_nominee"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.nominee.NomineeFragment"
         android:label="review_fragment"
-        tools:layout="@layout/review_fragment" />
+        tools:layout="@layout/address_fragment" />
 </navigation>

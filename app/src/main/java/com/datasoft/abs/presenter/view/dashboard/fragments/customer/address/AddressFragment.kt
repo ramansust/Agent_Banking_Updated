@@ -1,4 +1,4 @@
-package com.datasoft.abs.presenter.view.dashboard.fragments.customer.personal
+package com.datasoft.abs.presenter.view.dashboard.fragments.customer.address
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,20 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.datasoft.abs.databinding.PersonalFragmentBinding
+import com.datasoft.abs.databinding.AddressFragmentBinding
 import com.datasoft.abs.presenter.view.dashboard.fragments.customer.CustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PersonalFragment : Fragment() {
+class AddressFragment : Fragment() {
 
     companion object {
-        fun newInstance() = PersonalFragment()
+        fun newInstance() = AddressFragment()
     }
 
     private val customerViewModel: CustomerViewModel by activityViewModels()
-    private val viewModel: PersonalViewModel by activityViewModels()
-    private var _binding: PersonalFragmentBinding? = null
+    private val viewModel: AddressViewModel by activityViewModels()
+    private var _binding: AddressFragmentBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -31,7 +31,7 @@ class PersonalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = PersonalFragmentBinding.inflate(inflater, container, false)
+        _binding = AddressFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,11 +39,11 @@ class PersonalFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnNext.setOnClickListener {
-            customerViewModel.requestCurrentStep(2)
+            customerViewModel.requestCurrentStep(3)
         }
 
         binding.btnBack.setOnClickListener {
-            customerViewModel.requestCurrentStep(0)
+            customerViewModel.requestCurrentStep(1)
         }
     }
 

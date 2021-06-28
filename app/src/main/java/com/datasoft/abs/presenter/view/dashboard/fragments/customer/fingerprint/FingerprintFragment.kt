@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.FingerprintFragmentBinding
+import com.datasoft.abs.presenter.view.dashboard.fragments.customer.CustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,6 +17,7 @@ class FingerprintFragment : Fragment() {
         fun newInstance() = FingerprintFragment()
     }
 
+    private val customerViewModel: CustomerViewModel by activityViewModels()
     private val viewModel: FingerprintViewModel by activityViewModels()
     private var _binding: FingerprintFragmentBinding? = null
 
@@ -30,14 +32,20 @@ class FingerprintFragment : Fragment() {
     ): View {
 
         _binding = FingerprintFragmentBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-//        val textView: TextView = binding.textHome
-//        viewModel.getDashboardData().observe(viewLifecycleOwner, Observer {
-//            textView.text = it?.totalApplied.toString()
-//        })
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        return root
+        binding.btnNext.setOnClickListener {
+            customerViewModel.requestCurrentStep(6)
+        }
+
+        binding.btnBack.setOnClickListener {
+            customerViewModel.requestCurrentStep(4)
+        }
+
     }
 
     override fun onDestroyView() {

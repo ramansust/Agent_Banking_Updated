@@ -60,7 +60,7 @@ class DashboardFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                viewModel.setDayCount(daysList.get(position).value.toInt())
+                viewModel.setDayCount(daysList[position].value.toInt())
             }
         }
 

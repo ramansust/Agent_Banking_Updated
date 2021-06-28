@@ -18,52 +18,36 @@ class CustomerActivity : BaseActivity() {
     private val customerViewModel: CustomerViewModel by viewModels()
     private lateinit var binding: ActivityCustomerBinding
     private var navController: NavController? = null
-    private var currentState = 0
 
     override fun observeViewModel() {
         customerViewModel.getCurrentStep().observe(this, {
-            currentState = it
-            when (currentState) {
+            when (it) {
                 0 -> {
                     navController?.navigate(R.id.card_view_general_info)
-                    previewInvisible()
-                    backDisable()
                     setResource(binding.appBarCustomer.customerContent.generalInfo.cardView, null)
                 }
                 1 -> {
                     navController?.navigate(R.id.card_view_personal_info)
-                    backEnable()
-                    previewInvisible()
                     setResource(binding.appBarCustomer.customerContent.personalInfo.cardView, null)
                 }
                 2 -> {
                     navController?.navigate(R.id.card_view_address)
-                    backEnable()
-                    previewInvisible()
                     setResource(binding.appBarCustomer.customerContent.address.cardView, null)
                 }
                 3 -> {
                     navController?.navigate(R.id.card_view_photo_nid)
-                    backEnable()
-                    previewInvisible()
                     setResource(binding.appBarCustomer.customerContent.photoNid.cardView, null)
                 }
                 4 -> {
                     navController?.navigate(R.id.card_view_signature)
-                    backEnable()
-                    previewInvisible()
                     setResource(binding.appBarCustomer.customerContent.signature.cardView, null)
                 }
                 5 -> {
                     navController?.navigate(R.id.card_view_fingerprint)
-                    backEnable()
-                    previewInvisible()
                     setResource(binding.appBarCustomer.customerContent.fingerprint.cardView, null)
                 }
                 6 -> {
                     navController?.navigate(R.id.card_view_nominee)
-                    previewVisible()
-                    backEnable()
                     setResource(binding.appBarCustomer.customerContent.nominee.cardView, null)
                 }
             }
@@ -174,19 +158,6 @@ class CustomerActivity : BaseActivity() {
             onBackPressed()
         }
 
-        binding.appBarCustomer.customerContent.btnPreview.setOnClickListener {
-
-        }
-
-        binding.appBarCustomer.customerContent.btnBack.setOnClickListener {
-            setCurrentState(--currentState)
-        }
-
-        binding.appBarCustomer.customerContent.btnSave.setOnClickListener {
-            if(currentState >= 6)
-                setCurrentState(++currentState)
-        }
-
         setTitle()
     }
 
@@ -229,42 +200,6 @@ class CustomerActivity : BaseActivity() {
             getString(R.string.nominee)
         binding.appBarCustomer.customerContent.nominee.txtViewSl.text =
             getString(R.string.seven)
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
-
-    private fun previewVisible() {
-        binding.appBarCustomer.customerContent.btnPreview.visibility = View.VISIBLE
-    }
-
-    private fun previewInvisible() {
-        binding.appBarCustomer.customerContent.btnPreview.visibility = View.INVISIBLE
-    }
-
-    private fun backVisible() {
-        binding.appBarCustomer.customerContent.btnBack.visibility = View.VISIBLE
-    }
-
-    private fun backInvisible() {
-        binding.appBarCustomer.customerContent.btnBack.visibility = View.INVISIBLE
-    }
-
-    private fun backEnable() {
-        binding.appBarCustomer.customerContent.btnBack.isEnabled = true
-    }
-
-    private fun backDisable() {
-        binding.appBarCustomer.customerContent.btnBack.isEnabled = false
-    }
-
-    private fun nextVisible() {
-        binding.appBarCustomer.customerContent.btnSave.visibility = View.VISIBLE
-    }
-
-    private fun nextInvisible() {
-        binding.appBarCustomer.customerContent.btnSave.visibility = View.INVISIBLE
     }
 
     private fun setResource(cardView: CardView, isActive: Boolean?) {

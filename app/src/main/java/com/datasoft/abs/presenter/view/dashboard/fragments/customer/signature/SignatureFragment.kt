@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.SignatureFragmentBinding
+import com.datasoft.abs.presenter.view.dashboard.fragments.customer.CustomerViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.github.gcacace.signaturepad.views.SignaturePad.OnSignedListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +24,7 @@ class SignatureFragment : Fragment() {
         fun newInstance() = SignatureFragment()
     }
 
+    private val customerViewModel: CustomerViewModel by activityViewModels()
     private val viewModel: SignatureViewModel by activityViewModels()
     private var _binding: SignatureFragmentBinding? = null
 
@@ -50,6 +52,14 @@ class SignatureFragment : Fragment() {
                     startForProfileImageResult.launch(intent)
                 }
 
+        }
+
+        binding.btnNext.setOnClickListener {
+            customerViewModel.requestCurrentStep(5)
+        }
+
+        binding.btnBack.setOnClickListener {
+            customerViewModel.requestCurrentStep(3)
         }
 
         return root

@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.PhotoFragmentBinding
 import com.datasoft.abs.presenter.utils.Photos
+import com.datasoft.abs.presenter.view.dashboard.fragments.customer.CustomerViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.pixelcarrot.base64image.Base64Image
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +31,7 @@ class PhotoFragment : Fragment() {
         fun newInstance() = PhotoFragment()
     }
 
+    private val customerViewModel: CustomerViewModel by activityViewModels()
     private val viewModel: PhotoViewModel by activityViewModels()
     private var _binding: PhotoFragmentBinding? = null
 
@@ -59,6 +61,14 @@ class PhotoFragment : Fragment() {
                     startForProfileImageResult.launch(intent)
                 }
 
+        }
+
+        binding.btnNext.setOnClickListener {
+            customerViewModel.requestCurrentStep(4)
+        }
+
+        binding.btnBack.setOnClickListener {
+            customerViewModel.requestCurrentStep(2)
         }
 
         return root
