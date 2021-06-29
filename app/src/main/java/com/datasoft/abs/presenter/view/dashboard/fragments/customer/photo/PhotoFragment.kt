@@ -23,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class PhotoFragment : Fragment() {
 
@@ -98,6 +97,22 @@ class PhotoFragment : Fragment() {
         return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getSavedPhoto().observe(viewLifecycleOwner, {
+            binding.imgViewPhoto.setImageBitmap(it)
+        })
+
+        viewModel.getSavedNIDFront().observe(viewLifecycleOwner, {
+            binding.imgViewNidFront.setImageBitmap(it)
+        })
+
+        viewModel.getSavedNIDBack().observe(viewLifecycleOwner, {
+            binding.imgViewNidBack.setImageBitmap(it)
+        })
+    }
+
     private val startForProfileImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             val resultCode = result.resultCode
@@ -115,6 +130,8 @@ class PhotoFragment : Fragment() {
                     } else {
                         MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, fileUri)
                     }
+
+                    viewModel.setPhoto(bitmap)
 
                     Base64Image.encode(bitmap) { base64 ->
                         base64?.let {
@@ -149,6 +166,8 @@ class PhotoFragment : Fragment() {
                         MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, fileUri)
                     }
 
+                    viewModel.setNIDFront(bitmap)
+
                     Base64Image.encode(bitmap) { base64 ->
                         base64?.let {
                             Log.e("base64", "_______$it")
@@ -181,6 +200,8 @@ class PhotoFragment : Fragment() {
                     } else {
                         MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, fileUri)
                     }
+
+                    viewModel.setNIDBack(bitmap)
 
                     Base64Image.encode(bitmap) { base64 ->
                         base64?.let {

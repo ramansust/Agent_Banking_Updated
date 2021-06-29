@@ -2,7 +2,10 @@ package com.datasoft.abs.presenter.view.dashboard.fragments.customer.signature
 
 import android.app.Activity
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,6 +71,10 @@ class SignatureFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getSavedSignature().observe(viewLifecycleOwner, {
+            binding.imgView.setImageBitmap(it)
+        })
+
         binding.signaturePad.setOnSignedListener(object : OnSignedListener {
 
             override fun onStartSigning() {
@@ -92,6 +99,7 @@ class SignatureFragment : Fragment() {
         binding.btnTake.setOnClickListener {
             val signatureBitmap: Bitmap = binding.signaturePad.signatureBitmap
             binding.imgView.setImageBitmap(signatureBitmap)
+            viewModel.setSignature(signatureBitmap)
         }
     }
 
@@ -105,6 +113,14 @@ class SignatureFragment : Fragment() {
                     //Image Uri will not be null for RESULT_OK
                     val fileUri = data?.data!!
                     binding.imgView.setImageURI(fileUri)
+
+                    val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver, fileUri))
+                    } else {
+                        MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, fileUri)
+                    }
+
+                    viewModel.setSignature(bitmap)
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
