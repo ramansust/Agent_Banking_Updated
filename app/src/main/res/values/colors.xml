@@ -20,5 +20,6 @@
     <color name="dashboard_text">#444444</color>
     <color name="customer_text">#263238</color>
     <color name="completed_step">#36E560</color>
+    <color name="photo_card_bg">#F2F2F2</color>
 
 </resources>

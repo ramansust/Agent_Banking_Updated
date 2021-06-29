@@ -63,6 +63,30 @@ class PhotoFragment : Fragment() {
 
         }
 
+        binding.btnTakeNidFront.setOnClickListener {
+//            takePhotoUsingCamera.launch()
+            ImagePicker.with(this)
+                .crop()
+                .compress(1024)         //Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+                .createIntent { intent ->
+                    startForNIDFrontResult.launch(intent)
+                }
+
+        }
+
+        binding.btnTakeNidBack.setOnClickListener {
+//            takePhotoUsingCamera.launch()
+            ImagePicker.with(this)
+                .crop()
+                .compress(1024)         //Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+                .createIntent { intent ->
+                    startForNIDBackResult.launch(intent)
+                }
+
+        }
+
         binding.btnNext.setOnClickListener {
             customerViewModel.requestCurrentStep(4)
         }
@@ -84,7 +108,73 @@ class PhotoFragment : Fragment() {
                     //Image Uri will not be null for RESULT_OK
                     val fileUri = data?.data!!
 
-                    binding.imgView.setImageURI(fileUri)
+                    binding.imgViewPhoto.setImageURI(fileUri)
+
+                    val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver, fileUri))
+                    } else {
+                        MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, fileUri)
+                    }
+
+                    Base64Image.encode(bitmap) { base64 ->
+                        base64?.let {
+                            Log.e("base64", "_______$it")
+                        }
+                    }
+                }
+                ImagePicker.RESULT_ERROR -> {
+                    Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    private val startForNIDFrontResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    //Image Uri will not be null for RESULT_OK
+                    val fileUri = data?.data!!
+
+                    binding.imgViewNidFront.setImageURI(fileUri)
+
+                    val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver, fileUri))
+                    } else {
+                        MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, fileUri)
+                    }
+
+                    Base64Image.encode(bitmap) { base64 ->
+                        base64?.let {
+                            Log.e("base64", "_______$it")
+                        }
+                    }
+                }
+                ImagePicker.RESULT_ERROR -> {
+                    Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    private val startForNIDBackResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    //Image Uri will not be null for RESULT_OK
+                    val fileUri = data?.data!!
+
+                    binding.imgViewNidBack.setImageURI(fileUri)
 
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver, fileUri))
@@ -115,7 +205,7 @@ class PhotoFragment : Fragment() {
             val isSavedSuccessfully =
                 photos.savePhotoToInternalStorage(UUID.randomUUID().toString(), it)
             if (isSavedSuccessfully) {
-                binding.imgView.setImageBitmap(it)
+                binding.imgViewPhoto.setImageBitmap(it)
                 Toast.makeText(requireContext(), "Photo saved successfully", Toast.LENGTH_SHORT)
                     .show()
             } else {

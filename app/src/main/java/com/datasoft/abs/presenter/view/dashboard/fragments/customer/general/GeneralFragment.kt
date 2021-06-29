@@ -38,7 +38,7 @@ class GeneralFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val daysList = listOf("Customer type", "1", "2", "3", "4")
+        val daysList = listOf("1", "2", "3", "4")
         binding.spinnerCustomerType.adapter =
             ArrayAdapter(requireContext(), R.layout.simple_spinner_item, daysList)
 

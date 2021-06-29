@@ -61,11 +61,18 @@
     <string name="back">Back</string>
     <string name="next">Next</string>
     <string name="full_name">Full name</string>
-    <string name="date_of_birth">Date of birth</string>
-    <string name="mobile_number">Mobile number</string>
-    <string name="nid">NID</string>
-    <string name="father_name">Father name</string>
+    <string name="date_of_birth">Date of Birth*</string>
+    <string name="mobile_number">Mobile Number*</string>
+    <string name="nid">NID*</string>
+    <string name="father_name">Father\'s Name*</string>
     <string name="take">TAKE</string>
     <string name="clear">CLEAR</string>
     <string name="browse">BROWSE</string>
+    <string name="first_name">First Name*</string>
+    <string name="last_name">Last Name*</string>
+    <string name="type_here">Type here</string>
+    <string name="please_attach_your_photograph">Please attach your photograph</string>
+    <string name="please_attach_your_nid">Please attach your NID</string>
+    <string name="nid_front">Front side NID</string>
+    <string name="nid_back">Back side NID</string>
 </resources>

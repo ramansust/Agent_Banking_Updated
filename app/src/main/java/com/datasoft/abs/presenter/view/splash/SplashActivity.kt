@@ -7,6 +7,7 @@ import android.os.Looper
 import com.datasoft.abs.databinding.ActivitySplashBinding
 import com.datasoft.abs.presenter.base.BaseActivity
 import com.datasoft.abs.presenter.utils.Constant.SPLASH_DELAY
+import com.datasoft.abs.presenter.view.dashboard.fragments.customer.CustomerActivity
 import com.datasoft.abs.presenter.view.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +33,7 @@ class SplashActivity : BaseActivity() {
 
     private fun navigateToLoginScreen() {
         Handler(Looper.getMainLooper()).postDelayed({
-            val nextScreenIntent = Intent(this, LoginActivity::class.java)
+            val nextScreenIntent = Intent(this, CustomerActivity::class.java)
             startActivity(nextScreenIntent)
             finish()
         }, SPLASH_DELAY.toLong())
