@@ -4,12 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.datasoft.abs.data.dto.config.ConfigResponse
 import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckRequest
 import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckResponse
 import com.datasoft.abs.domain.Repository
-import com.datasoft.abs.presenter.utils.Network
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,41 +21,52 @@ class GeneralViewModel @Inject constructor(
     private val network: Network
 ) : ViewModel() {
 
-    private val configData = MutableLiveData<Resource<ConfigResponse>>()
-    fun getConfigData(): LiveData<Resource<ConfigResponse>> = configData
-
     private val dedupeData = MutableLiveData<Resource<DedupeCheckResponse>>()
     fun getDedupeData(): LiveData<Resource<DedupeCheckResponse>> = dedupeData
 
-    fun configData() {
+    private val savedData = MutableLiveData<DedupeCheckRequest>()
+    fun getSavedData(): LiveData<DedupeCheckRequest> = savedData
+
+    fun requestDedupeData(
+        firstName: String,
+        lastName: String,
+        dob: String,
+        nid: String,
+        mobileNumber: String,
+        fatherName: String,
+        customerType: Int
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
-            if (network.isConnected()) {
-                try {
-                    val response = repository.getConfigData()
-                    configData.postValue(handleConfigResponse(response))
-                } catch (e: Exception) {
-                    configData.postValue(
-                        Resource.Error(
-                            "Something went wrong!", null
-                        )
-                    )
-                    e.printStackTrace()
-                }
-            } else {
-                configData.postValue(
+
+            dedupeData.postValue(Resource.Loading())
+
+            val dedupeRequest = DedupeCheckRequest(
+                firstName = firstName,
+                lastName = lastName,
+                birthDate = dob,
+                nationalID13Digit = nid,
+                mobileNumber = mobileNumber,
+                fatherName = fatherName,
+                customerType = customerType
+            )
+
+            if (firstName.isEmpty() || lastName.isEmpty() || dob.isEmpty() || nid.isEmpty() || mobileNumber.isEmpty()
+                || fatherName.isEmpty()) {
+                dedupeData.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        "The fields must not be empty", null
                     )
                 )
+                return@launch
+            } else {
+                savedData.postValue(dedupeRequest)
             }
-        }
-    }
 
-    fun requestDedupeData(dedupeCheckRequest: DedupeCheckRequest) {
-        viewModelScope.launch(Dispatchers.IO) {
-            if (network.isConnected()) {
+            /*if (network.isConnected()) {
                 try {
-                    val response = repository.getDedupeCheckData(dedupeCheckRequest)
+                    val response = repository.getDedupeCheckData(
+                        dedupeRequest
+                    )
                     dedupeData.postValue(handleDedupeResponse(response))
                 } catch (e: Exception) {
                     dedupeData.postValue(
@@ -72,17 +82,8 @@ class GeneralViewModel @Inject constructor(
                         "No internet connection", null
                     )
                 )
-            }
+            }*/
         }
-    }
-
-    private fun handleConfigResponse(response: Response<ConfigResponse>): Resource<ConfigResponse> {
-        if (response.isSuccessful) {
-            response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
-            }
-        }
-        return Resource.Error(response.message())
     }
 
     private fun handleDedupeResponse(response: Response<DedupeCheckResponse>): Resource<DedupeCheckResponse> {

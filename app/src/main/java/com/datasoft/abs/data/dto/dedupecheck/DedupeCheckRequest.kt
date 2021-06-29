@@ -7,7 +7,7 @@ data class DedupeCheckRequest(
     val lastName: String,
     val birthDate: String,
     val mobileNumber: String,
-    val nationalID: String,
+    val nationalID: String = "",
     val nationalID13Digit: String,
-    val smartID: String,
+    val smartID: String = "",
 )
