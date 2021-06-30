@@ -1,18 +1,17 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.account
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.datasoft.abs.data.dto.customer.CustomerRequest
 import com.datasoft.abs.databinding.FragmentCustomerBinding
 import com.datasoft.abs.presenter.states.Resource
-import com.datasoft.abs.presenter.utils.Status
 import com.datasoft.abs.presenter.view.dashboard.fragments.account.adapter.AccountAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -21,14 +20,13 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class AccountFragment : Fragment() {
 
-    private val viewModel: AccountViewModel by viewModels()
+    private val viewModel: AccountViewModel by activityViewModels()
     private var _binding: FragmentCustomerBinding? = null
 
     @Inject
     lateinit var customerAdapter: AccountAdapter
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -65,7 +63,9 @@ class AccountFragment : Fragment() {
             }
         })
 
-        viewModel.requestCustomerData(CustomerRequest(1, status = "${Status.ACTIVE.type}, ${Status.AWAITING.type}, ${Status.DRAFT.type}"))
+        viewModel.getSearchData().observe(viewLifecycleOwner, {
+            Log.e("SearchValue", it)
+        })
     }
 
     private fun startShimmer() {

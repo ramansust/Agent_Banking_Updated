@@ -18,11 +18,18 @@ import javax.inject.Inject
 @HiltViewModel
 class AccountViewModel @Inject constructor(
     private val repository: Repository,
-    private val network: Network): ViewModel() {
+    private val network: Network
+) : ViewModel() {
 
     private val customerData = MutableLiveData<Resource<CustomerResponse>>()
-
     fun getCustomerData(): LiveData<Resource<CustomerResponse>> = customerData
+
+    private val searchData: MutableLiveData<String> = MutableLiveData()
+    fun getSearchData(): LiveData<String> = searchData
+
+    fun setSearchData(search: String) {
+        searchData.postValue(search)
+    }
 
     fun requestCustomerData(customerRequest: CustomerRequest) {
         viewModelScope.launch(Dispatchers.IO) {
