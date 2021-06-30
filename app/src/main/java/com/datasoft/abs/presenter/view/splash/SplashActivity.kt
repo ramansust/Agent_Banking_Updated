@@ -33,7 +33,7 @@ class SplashActivity : BaseActivity() {
 
     private fun navigateToLoginScreen() {
         Handler(Looper.getMainLooper()).postDelayed({
-            val nextScreenIntent = Intent(this, CustomerActivity::class.java)
+            val nextScreenIntent = Intent(this, LoginActivity::class.java)
             startActivity(nextScreenIntent)
             finish()
         }, SPLASH_DELAY.toLong())

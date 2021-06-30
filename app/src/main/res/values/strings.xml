@@ -75,4 +75,6 @@
     <string name="please_attach_your_nid">Please attach your NID</string>
     <string name="nid_front">Front side NID</string>
     <string name="nid_back">Back side NID</string>
+    <string name="add_new">+Add New</string>
+    <string name="search">Search</string>
 </resources>

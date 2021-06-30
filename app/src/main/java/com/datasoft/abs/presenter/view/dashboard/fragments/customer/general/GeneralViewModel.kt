@@ -58,15 +58,11 @@ class GeneralViewModel @Inject constructor(
                     )
                 )
                 return@launch
-            } else {
-                savedData.postValue(dedupeRequest)
             }
 
-            /*if (network.isConnected()) {
+            if (network.isConnected()) {
                 try {
-                    val response = repository.getDedupeCheckData(
-                        dedupeRequest
-                    )
+                    val response = repository.getDedupeCheckData(dedupeRequest)
                     dedupeData.postValue(handleDedupeResponse(response))
                 } catch (e: Exception) {
                     dedupeData.postValue(
@@ -82,14 +78,17 @@ class GeneralViewModel @Inject constructor(
                         "No internet connection", null
                     )
                 )
-            }*/
+            }
         }
     }
 
     private fun handleDedupeResponse(response: Response<DedupeCheckResponse>): Resource<DedupeCheckResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return if(resultResponse.statusCode == 200)
+                    Resource.Success(resultResponse)
+                else
+                    Resource.Error(resultResponse.message)
             }
         }
         return Resource.Error(response.message())

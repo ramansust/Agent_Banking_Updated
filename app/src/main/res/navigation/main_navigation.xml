@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_account"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.account.AccountFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.account.AccountMainFragment"
         android:label="@string/menu_account"
         tools:layout="@layout/fragment_customer" />
 
