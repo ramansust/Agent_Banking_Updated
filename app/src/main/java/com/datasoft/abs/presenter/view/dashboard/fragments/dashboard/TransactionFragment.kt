@@ -165,7 +165,7 @@ class TransactionFragment : Fragment() {
         l.form = LegendForm.LINE
 //        l.typeface = tfLight
         l.textSize = 11f
-        l.textColor = Color.WHITE
+        l.textColor = Color.BLACK
         l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
         l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
         l.orientation = Legend.LegendOrientation.HORIZONTAL
@@ -233,10 +233,10 @@ class TransactionFragment : Fragment() {
             chart.notifyDataSetChanged()
         } else {
             // create a dataset and give it a type
-            set1 = LineDataSet(values1, "DataSet 1")
+            set1 = LineDataSet(values1, "Approved")
             set1.axisDependency = AxisDependency.LEFT
             set1.color = ColorTemplate.getHoloBlue()
-            set1.setCircleColor(Color.WHITE)
+            set1.setCircleColor(Color.BLACK)
             set1.lineWidth = 2f
             set1.circleRadius = 3f
             set1.fillAlpha = 65
@@ -249,10 +249,10 @@ class TransactionFragment : Fragment() {
             //set1.setCircleHoleColor(Color.WHITE);
 
             // create a dataset and give it a type
-            set2 = LineDataSet(values2, "DataSet 2")
+            set2 = LineDataSet(values2, "Pending")
             set2.axisDependency = AxisDependency.RIGHT
             set2.color = Color.RED
-            set2.setCircleColor(Color.WHITE)
+            set2.setCircleColor(Color.BLACK)
             set2.lineWidth = 2f
             set2.circleRadius = 3f
             set2.fillAlpha = 65
@@ -260,10 +260,10 @@ class TransactionFragment : Fragment() {
             set2.setDrawCircleHole(false)
             set2.highLightColor = Color.rgb(244, 117, 117)
             //set2.setFillFormatter(new MyFillFormatter(900f));
-            set3 = LineDataSet(values3, "DataSet 3")
+            set3 = LineDataSet(values3, "On Hold")
             set3.axisDependency = AxisDependency.RIGHT
             set3.color = Color.YELLOW
-            set3.setCircleColor(Color.WHITE)
+            set3.setCircleColor(Color.BLACK)
             set3.lineWidth = 2f
             set3.circleRadius = 3f
             set3.fillAlpha = 65
@@ -273,7 +273,7 @@ class TransactionFragment : Fragment() {
 
             // create a data object with the data sets
             val data = LineData(set1, set2, set3)
-            data.setValueTextColor(Color.WHITE)
+            data.setValueTextColor(Color.BLACK)
             data.setValueTextSize(9f)
 
             // set data
