@@ -16,7 +16,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class AccountViewModel @Inject constructor(
+class AccountMainViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network
 ) : ViewModel() {
@@ -28,7 +28,9 @@ class AccountViewModel @Inject constructor(
     fun getSearchData(): LiveData<String> = searchData
 
     fun setSearchData(search: String) {
-        searchData.postValue(search)
+        viewModelScope.launch(Dispatchers.IO) {
+            searchData.postValue(search)
+        }
     }
 
     fun requestCustomerData(customerRequest: CustomerRequest) {

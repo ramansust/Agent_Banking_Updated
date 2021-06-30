@@ -18,9 +18,9 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class AccountFragment : Fragment() {
+class AllFragment : Fragment() {
 
-    private val viewModel: AccountViewModel by activityViewModels()
+    private val viewModel: AccountMainViewModel by activityViewModels()
     private var _binding: FragmentCustomerBinding? = null
 
     @Inject
@@ -63,8 +63,8 @@ class AccountFragment : Fragment() {
             }
         })
 
-        viewModel.getSearchData().observe(viewLifecycleOwner, {
-            Log.e("SearchValue", it)
+        viewModel.getSearchData().observe(viewLifecycleOwner, { search ->
+            Log.e("SearchValue", search)
         })
     }
 

@@ -21,7 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class AccountMainFragment : Fragment() {
 
-    private val viewModel: AccountViewModel by activityViewModels()
+    private val viewModel: AccountMainViewModel by activityViewModels()
     private var _binding: FragmentAccountMainBinding? = null
 
     @Inject
