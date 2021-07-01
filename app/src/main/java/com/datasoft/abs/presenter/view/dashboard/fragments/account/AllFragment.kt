@@ -43,7 +43,7 @@ class AllFragment : Fragment() {
 
         setupRecyclerView()
 
-        viewModel.getCustomerData().observe(viewLifecycleOwner, { response ->
+        viewModel.getAllAccountData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     stopShimmer()
@@ -64,7 +64,7 @@ class AllFragment : Fragment() {
         })
 
         viewModel.getSearchData().observe(viewLifecycleOwner, { search ->
-            Log.e("SearchValue", search)
+            Toast.makeText(requireContext(), search, Toast.LENGTH_SHORT).show()
         })
     }
 

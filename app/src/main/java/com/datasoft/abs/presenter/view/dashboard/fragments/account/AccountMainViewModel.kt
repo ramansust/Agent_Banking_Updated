@@ -21,8 +21,8 @@ class AccountMainViewModel @Inject constructor(
     private val network: Network
 ) : ViewModel() {
 
-    private val customerData = MutableLiveData<Resource<CustomerResponse>>()
-    fun getCustomerData(): LiveData<Resource<CustomerResponse>> = customerData
+    private val accountData = MutableLiveData<Resource<CustomerResponse>>()
+    fun getAllAccountData(): LiveData<Resource<CustomerResponse>> = accountData
 
     private val searchData: MutableLiveData<String> = MutableLiveData()
     fun getSearchData(): LiveData<String> = searchData
@@ -38,9 +38,9 @@ class AccountMainViewModel @Inject constructor(
             if (network.isConnected()) {
                 try {
                     val response = repository.getCustomerListData(customerRequest)
-                    customerData.postValue(handleCustomerResponse(response))
+                    accountData.postValue(handleCustomerResponse(response))
                 } catch (e: Exception) {
-                    customerData.postValue(
+                    accountData.postValue(
                         Resource.Error(
                             "Something went wrong!", null
                         )
@@ -48,7 +48,7 @@ class AccountMainViewModel @Inject constructor(
                     e.printStackTrace()
                 }
             } else {
-                customerData.postValue(
+                accountData.postValue(
                     Resource.Error(
                         "No internet connection", null
                     )

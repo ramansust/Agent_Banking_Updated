@@ -1,7 +1,6 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.account
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.databinding.FragmentCustomerBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Status
 import com.datasoft.abs.presenter.view.dashboard.fragments.account.adapter.AccountAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -43,12 +43,14 @@ class AwaitingFragment : Fragment() {
 
         setupRecyclerView()
 
-        viewModel.getCustomerData().observe(viewLifecycleOwner, { response ->
+        viewModel.getAllAccountData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     stopShimmer()
                     response.data?.let { customerResponse ->
-                        customerAdapter.differ.submitList(customerResponse.rows)
+                        customerAdapter.differ.submitList(customerResponse.rows.filter {
+                            it.customerStatus == Status.AWAITING.type
+                        })
                     }
                 }
                 is Resource.Error -> {
@@ -64,7 +66,7 @@ class AwaitingFragment : Fragment() {
         })
 
         viewModel.getSearchData().observe(viewLifecycleOwner, { search ->
-            Log.e("SearchValue", search)
+
         })
     }
 
