@@ -8,7 +8,6 @@ import com.datasoft.abs.R
 import com.datasoft.abs.data.RepositoryImpl
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.utils.Photos
-import com.datasoft.abs.presenter.view.dashboard.fragments.dashboard.DashboardAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
