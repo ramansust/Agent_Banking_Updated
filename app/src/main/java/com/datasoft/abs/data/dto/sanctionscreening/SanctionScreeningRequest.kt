@@ -1,34 +1,15 @@
 package com.datasoft.abs.data.dto.sanctionscreening
 
 data class SanctionScreeningRequest(
-    val branchId: Int,
-    val message: String,
-    val nationalityId: Int,
-    val status: Boolean,
-    val userId: Int,
-    val birthCertificateNo: String,
     val branchCode: String,
     val city: String,
     val country: String,
     val customerName: String,
-    val customerNo: String,
-    val customerType: String,
+    val customerType: Int,
     val dateOfBirth: String,
-    val drivingLicenseNo: String,
-    val email: String,
     val fathersName: String,
     val gender: String,
     val mobile: String,
     val mothersName: String,
-    val nidNumber: String,
-    val passportNo: String,
-    val password: String,
-    val permanentAddress: String,
-    val presentAddress: String,
-    val referenceNo: String,
-    val requestId: String,
-    val screeningType: String,
-    val tinNumber: String,
-    val tradeLicenseOrRegNo: String,
-    val userName: String
+    val nidNumber: String
 )

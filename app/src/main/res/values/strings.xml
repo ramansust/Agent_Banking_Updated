@@ -65,6 +65,10 @@
     <string name="mobile_number">Mobile Number*</string>
     <string name="nid">NID*</string>
     <string name="father_name">Father\'s Name*</string>
+    <string name="mother_name">Mother\'s Name*</string>
+    <string name="gender">Gender*</string>
+    <string name="country">Country*</string>
+    <string name="city">City*</string>
     <string name="take">TAKE</string>
     <string name="clear">CLEAR</string>
     <string name="browse">BROWSE</string>

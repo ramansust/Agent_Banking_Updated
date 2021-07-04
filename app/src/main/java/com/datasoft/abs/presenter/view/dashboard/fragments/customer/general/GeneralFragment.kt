@@ -45,18 +45,30 @@ class GeneralFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val genderList = listOf("Male", "Female", "Other")
+        binding.spinnerGender.adapter =
+            ArrayAdapter(requireContext(), R.layout.simple_spinner_item, genderList)
+
         val customerList = listOf(1, 2, 3, 4)
         binding.spinnerCustomerType.adapter =
             ArrayAdapter(requireContext(), R.layout.simple_spinner_item, customerList)
+
+        val countryList = listOf("Bangladesh", "Nepal", "India")
+        binding.spinnerCountry.adapter =
+            ArrayAdapter(requireContext(), R.layout.simple_spinner_item, countryList)
 
         viewModel.getSavedData().observe(viewLifecycleOwner, { response ->
             binding.edTxtFirstName.setText(response.firstName)
             binding.edTxtLastName.setText(response.lastName)
             binding.edTxtDob.setText(response.birthDate)
-            binding.edTxtNid.setText(response.nationalID13Digit)
+            binding.edTxtNid.setText(response.nationalID)
             binding.edTxtMobileNumber.setText(response.mobileNumber)
             binding.edTxtFatherName.setText(response.fatherName)
-            binding.spinnerCustomerType.setSelection(response.customerType - 1)
+            binding.spinnerCustomerType.setSelection(customerList.indexOf(response.customerType))
+            binding.spinnerGender.setSelection(genderList.indexOf(response.gender))
+            binding.spinnerCountry.setSelection(countryList.indexOf(response.country))
+            binding.edTxtMotherName.setText(response.motherName)
+            binding.edTxtCity.setText(response.city)
         })
 
         viewModel.getDedupeData().observe(viewLifecycleOwner, { response ->
@@ -90,14 +102,18 @@ class GeneralFragment : Fragment() {
         }
 
         binding.btnNext.setOnClickListener {
-            viewModel.requestDedupeData(
+            viewModel.requestData(
                 binding.edTxtFirstName.text.trim().toString(),
                 binding.edTxtLastName.text.trim().toString(),
                 binding.edTxtDob.text.trim().toString(),
                 binding.edTxtNid.text.trim().toString(),
                 binding.edTxtMobileNumber.text.trim().toString(),
                 binding.edTxtFatherName.text.trim().toString(),
-                binding.spinnerCustomerType.selectedItem as Int
+                binding.spinnerCustomerType.selectedItem as Int,
+                binding.spinnerGender.selectedItem as String,
+                binding.edTxtMotherName.text.trim().toString(),
+                binding.spinnerCountry.selectedItem as String,
+                binding.edTxtCity.text.trim().toString()
             )
         }
     }
