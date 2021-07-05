@@ -1,7 +1,6 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customer
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
@@ -11,7 +10,6 @@ import androidx.navigation.findNavController
 import com.datasoft.abs.R
 import com.datasoft.abs.databinding.ActivityCustomerBinding
 import com.datasoft.abs.presenter.base.BaseActivity
-import com.datasoft.abs.presenter.states.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,27 +20,6 @@ class CustomerActivity : BaseActivity() {
     private var navController: NavController? = null
 
     override fun observeViewModel() {
-        customerViewModel.getConfigData().observe(this, { response ->
-
-            when (response) {
-                is Resource.Success -> {
-//                    goneProgressBar()
-                    response.data?.let { configResponse ->
-//                        textView.text = configResponse.message
-                    }
-                }
-                is Resource.Error -> {
-//                    goneProgressBar()
-                    response.message?.let { message ->
-                        Log.e("TAG", "An error occurred: $message")
-                    }
-                }
-                is Resource.Loading -> {
-//                    showProgressBar()
-                }
-            }
-        })
-
         customerViewModel.getCurrentStep().observe(this, {
             when (it) {
                 0 -> {
