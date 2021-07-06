@@ -1,10 +1,12 @@
 package com.datasoft.abs.data.source.remote
 
 import com.datasoft.abs.data.dto.CommonRequest
+import com.datasoft.abs.data.dto.accountList.AccountRequest
+import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.config.ConfigResponse
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
-import com.datasoft.abs.data.dto.customer.CustomerRequest
-import com.datasoft.abs.data.dto.customer.CustomerResponse
+import com.datasoft.abs.data.dto.customerList.CustomerRequest
+import com.datasoft.abs.data.dto.customerList.CustomerResponse
 import com.datasoft.abs.data.dto.dashboard.DashboardRequest
 import com.datasoft.abs.data.dto.dashboard.DashboardResponse
 import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckRequest
@@ -31,6 +33,9 @@ interface RestApiService {
 
     @POST("api/customer-list")
     suspend fun getCustomerListData(@Body customerRequest: CustomerRequest): Response<CustomerResponse>
+
+    @POST("api/account-list")
+    suspend fun getAccountListData(@Body accountRequest: AccountRequest): Response<AccountResponse>
 
     @POST("api/sanction-screening")
     suspend fun getSanctionScreeningData(@Body sanctionScreeningRequest: SanctionScreeningRequest): Response<SanctionScreeningResponse>

@@ -2,10 +2,12 @@ package com.datasoft.abs.domain
 
 import androidx.lifecycle.LiveData
 import com.datasoft.abs.data.dto.CommonRequest
+import com.datasoft.abs.data.dto.accountList.AccountRequest
+import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.config.ConfigResponse
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
-import com.datasoft.abs.data.dto.customer.CustomerRequest
-import com.datasoft.abs.data.dto.customer.CustomerResponse
+import com.datasoft.abs.data.dto.customerList.CustomerRequest
+import com.datasoft.abs.data.dto.customerList.CustomerResponse
 import com.datasoft.abs.data.dto.dashboard.DashboardResponse
 import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckRequest
 import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckResponse
@@ -23,6 +25,7 @@ interface Repository {
 
     suspend fun getConfigData(): Response<ConfigResponse>
     suspend fun getCustomerListData(customerRequest: CustomerRequest): Response<CustomerResponse>
+    suspend fun getAccountListData(accountRequest: AccountRequest): Response<AccountResponse>
     suspend fun getSanctionScreeningData(sanctionScreeningRequest: SanctionScreeningRequest): Response<SanctionScreeningResponse>
     suspend fun getDedupeCheckData(dedupeCheckRequest: DedupeCheckRequest): Response<DedupeCheckResponse>
 

@@ -2,10 +2,12 @@ package com.datasoft.abs.data
 
 import androidx.lifecycle.LiveData
 import com.datasoft.abs.data.dto.CommonRequest
+import com.datasoft.abs.data.dto.accountList.AccountRequest
+import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.config.ConfigResponse
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
-import com.datasoft.abs.data.dto.customer.CustomerRequest
-import com.datasoft.abs.data.dto.customer.CustomerResponse
+import com.datasoft.abs.data.dto.customerList.CustomerRequest
+import com.datasoft.abs.data.dto.customerList.CustomerResponse
 import com.datasoft.abs.data.dto.dashboard.DashboardRequest
 import com.datasoft.abs.data.dto.dashboard.DashboardResponse
 import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckRequest
@@ -50,6 +52,10 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getCustomerListData(customerRequest: CustomerRequest): Response<CustomerResponse> {
         return restApiService.getCustomerListData(customerRequest)
+    }
+
+    override suspend fun getAccountListData(accountRequest: AccountRequest): Response<AccountResponse> {
+        return restApiService.getAccountListData(accountRequest)
     }
 
     override suspend fun getSanctionScreeningData(sanctionScreeningRequest: SanctionScreeningRequest): Response<SanctionScreeningResponse> {

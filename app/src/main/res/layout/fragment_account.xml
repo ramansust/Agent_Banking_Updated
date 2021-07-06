@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    tools:context=".presenter.view.dashboard.fragments.dashboard.DashboardFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+                <include layout="@layout/account_shimmer_row" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_1x"
+            android:layout_marginTop="8dp"
+            android:background="@color/dashboard_bg"
+            app:layout_constraintEnd_toEndOf="@+id/txt_view_action"
+            app:layout_constraintStart_toStartOf="@+id/txt_view_sl_no"
+            app:layout_constraintTop_toBottomOf="@+id/txt_view_sl_no" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/txt_view_sl_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/sl_no"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintEnd_toStartOf="@+id/txt_view_account_title"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_view_account_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/account_title"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintEnd_toStartOf="@+id/txt_view_account_number"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/txt_view_sl_no"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_view_account_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/account_number"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintEnd_toStartOf="@+id/txt_view_unit"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/txt_view_account_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_view_unit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/unit"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintEnd_toStartOf="@+id/txt_view_source_of_fund"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/txt_view_account_number"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_view_source_of_fund"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/source_of_fund"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/txt_view_unit"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/txt_view_action"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/actions"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_percent="0.92"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

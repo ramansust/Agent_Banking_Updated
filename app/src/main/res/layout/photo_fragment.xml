@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="@dimen/space_5x"
-    tools:context=".presenter.view.dashboard.fragments.customer.photo.PhotoFragment">
+    tools:context=".presenter.view.dashboard.fragments.customerCreate.photo.TransactionProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

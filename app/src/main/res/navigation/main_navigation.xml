@@ -18,15 +18,27 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/nav_account"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.account.AccountMainFragment"
-        android:label="@string/menu_account"
+        android:id="@+id/nav_customer_list"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerList.CustomerListMainFragment"
+        android:label="@string/menu_customer_list"
         tools:layout="@layout/fragment_customer" />
 
     <activity
         android:id="@+id/nav_customer"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.CustomerActivity"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerActivity"
         android:label="@string/menu_customer"
+        tools:layout="@layout/activity_customer" />
+
+    <fragment
+        android:id="@+id/nav_account_list"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.accountList.AccountMainFragment"
+        android:label="@string/menu_account_list"
+        tools:layout="@layout/fragment_customer" />
+
+    <activity
+        android:id="@+id/nav_account"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountActivity"
+        android:label="@string/menu_account"
         tools:layout="@layout/activity_customer" />
 
     <fragment

@@ -7,43 +7,43 @@
 
     <fragment
         android:id="@+id/card_view_general_info"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.general.GeneralFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.general.GeneralFragment"
         android:label="general_fragment"
         tools:layout="@layout/general_fragment" />
 
     <fragment
         android:id="@+id/card_view_personal_info"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.personal.PersonalFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.personal.PersonalFragment"
         android:label="personal_fragment"
         tools:layout="@layout/personal_fragment" />
 
     <fragment
         android:id="@+id/card_view_address"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.address.AddressFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.address.IntroducerFragment"
         android:label="photo_fragment"
         tools:layout="@layout/photo_fragment" />
 
     <fragment
         android:id="@+id/card_view_photo_nid"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.photo.PhotoFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.photo.TransactionProfileFragment"
         android:label="signature_fragment"
         tools:layout="@layout/signature_fragment" />
 
     <fragment
         android:id="@+id/card_view_signature"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.signature.SignatureFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.signature.SignatureFragment"
         android:label="fingerprint_fragment"
         tools:layout="@layout/fingerprint_fragment" />
 
     <fragment
         android:id="@+id/card_view_fingerprint"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.fingerprint.FingerprintFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.fingerprint.ReviewFragment"
         android:label="nominee_fragment"
         tools:layout="@layout/nominee_fragment" />
 
     <fragment
         android:id="@+id/card_view_nominee"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customer.nominee.NomineeFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.nominee.NomineeFragment"
         android:label="review_fragment"
         tools:layout="@layout/address_fragment" />
 </navigation>

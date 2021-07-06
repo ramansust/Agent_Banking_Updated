@@ -8,8 +8,10 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_dashboard">Dashboard</string>
-    <string name="menu_customer">Customer</string>
-    <string name="menu_account">Account</string>
+    <string name="menu_customer">Customer Creation</string>
+    <string name="menu_customer_list">Customer List</string>
+    <string name="menu_account">Account Opening</string>
+    <string name="menu_account_list">Account List</string>
     <string name="menu_transaction">Transaction</string>
 
     <string name="test_password">Pass@word3</string>
@@ -23,12 +25,16 @@
     <string name="activity_login">Login</string>
     <string name="activity_main">Main</string>
     <string name="activity_customer">Customer</string>
+    <string name="activity_account">Account</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="unit">Unit</string>
     <string name="customer_no">Customer No.</string>
     <string name="customer_type">Customer type</string>
+    <string name="account_title">Account Title</string>
+    <string name="account_number">Account Number</string>
     <string name="name">Name</string>
+    <string name="source_of_fund">Source of Income</string>
     <string name="entry_date">Entry Date</string>
     <string name="sl_no">Sl No.</string>
     <string name="actions">Actions</string>

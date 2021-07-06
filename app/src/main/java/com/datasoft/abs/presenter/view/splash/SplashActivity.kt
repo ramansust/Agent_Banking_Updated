@@ -7,7 +7,6 @@ import android.os.Looper
 import com.datasoft.abs.databinding.ActivitySplashBinding
 import com.datasoft.abs.presenter.base.BaseActivity
 import com.datasoft.abs.presenter.utils.Constant.SPLASH_DELAY
-import com.datasoft.abs.presenter.view.dashboard.fragments.customer.CustomerActivity
 import com.datasoft.abs.presenter.view.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
