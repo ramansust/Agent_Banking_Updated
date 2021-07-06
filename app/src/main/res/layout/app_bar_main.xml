@@ -27,7 +27,7 @@
                     android:id="@+id/txt_view_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/oxygen_bold"
+                    android:fontFamily="@font/oxygen_regular"
                     android:text="@string/menu_profile"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_24x"
@@ -57,7 +57,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/txt_view_user_name"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_user" />
+                    app:srcCompat="@drawable/ic_user"
+                    android:contentDescription="@string/todo" />
 
                 <View
                     android:id="@+id/view"
@@ -81,7 +82,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/view"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_notification" />
+                    app:srcCompat="@drawable/ic_notification"
+                    android:contentDescription="@string/todo" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
 
