@@ -55,6 +55,20 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+
+            binding.appBarMain.txtViewTitle.text = when (destination.id) {
+                R.id.nav_profile -> getString(R.string.menu_profile)
+                R.id.nav_dashboard -> getString(R.string.menu_dashboard)
+                R.id.nav_customer -> getString(R.string.menu_customer)
+                R.id.nav_customer_list -> getString(R.string.menu_customer_list)
+                R.id.nav_account -> getString(R.string.menu_account)
+                R.id.nav_account_list -> getString(R.string.menu_account_list)
+                R.id.nav_transaction -> getString(R.string.menu_transaction)
+                else -> getString(R.string.menu_profile)
+            }
+        }
+
 //        setDataIntoNavHeader()
         setDataIntoToolbar()
     }
