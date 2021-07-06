@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customer_navigation"
+    app:startDestination="@id/card_view_account_info">
+
+    <fragment
+        android:id="@+id/card_view_account_info"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.general.GeneralFragment"
+        tools:layout="@layout/general_fragment" />
+
+    <fragment
+        android:id="@+id/card_view_others_info"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.others.OthersFragment"
+        tools:layout="@layout/personal_fragment" />
+
+    <fragment
+        android:id="@+id/card_view_nominee"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.nominee.NomineeFragment"
+        tools:layout="@layout/photo_fragment" />
+
+    <fragment
+        android:id="@+id/card_view_introducer"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.introducer.IntroducerFragment"
+        tools:layout="@layout/signature_fragment" />
+
+    <fragment
+        android:id="@+id/card_view_transaction_profile"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.transactionProfile.TransactionProfileFragment"
+        tools:layout="@layout/fingerprint_fragment" />
+
+    <fragment
+        android:id="@+id/card_view_review"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.review.ReviewFragment"
+        tools:layout="@layout/nominee_fragment" />
+
+</navigation>

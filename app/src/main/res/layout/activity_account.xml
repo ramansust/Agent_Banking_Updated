@@ -4,8 +4,8 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/app_bar_customer"
-        layout="@layout/app_bar_customer"
+        android:id="@+id/app_bar_account"
+        layout="@layout/app_bar_account"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

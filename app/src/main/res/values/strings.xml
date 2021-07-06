@@ -55,6 +55,12 @@
     <string name="six">6.</string>
     <string name="seven">7.</string>
 
+    <string name="account_information">Account Information</string>
+    <string name="others_customer">Others Facilities and Customer Information</string>
+    <string name="introducer">Introducer</string>
+    <string name="transaction_profile">Transaction Profile</string>
+    <string name="review">Review</string>
+
     <string name="general_information">General Information</string>
     <string name="personal_information">Personal Information</string>
     <string name="address">Address</string>

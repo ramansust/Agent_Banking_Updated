@@ -8,78 +8,70 @@ import androidx.cardview.widget.CardView
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.datasoft.abs.R
-import com.datasoft.abs.databinding.ActivityCustomerBinding
+import com.datasoft.abs.databinding.ActivityAccountBinding
 import com.datasoft.abs.presenter.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AccountActivity : BaseActivity() {
 
-    private val customerViewModel: AccountViewModel by viewModels()
-    private lateinit var binding: ActivityCustomerBinding
+    private val accountViewModel: AccountViewModel by viewModels()
+    private lateinit var binding: ActivityAccountBinding
     private var navController: NavController? = null
 
     override fun observeViewModel() {
-        customerViewModel.getCurrentStep().observe(this, {
+        accountViewModel.getCurrentStep().observe(this, {
             when (it) {
                 0 -> {
-                    navController?.navigate(R.id.card_view_general_info)
-                    setResource(binding.appBarCustomer.customerContent.generalInfo.cardView, null)
+                    navController?.navigate(R.id.card_view_account_info)
+                    setResource(binding.appBarAccount.accountContent.accountInfo.cardView, null)
                 }
                 1 -> {
-                    navController?.navigate(R.id.card_view_personal_info)
-                    setResource(binding.appBarCustomer.customerContent.personalInfo.cardView, null)
+                    navController?.navigate(R.id.card_view_others_info)
+                    setResource(binding.appBarAccount.accountContent.othersInfo.cardView, null)
                 }
                 2 -> {
-                    navController?.navigate(R.id.card_view_address)
-                    setResource(binding.appBarCustomer.customerContent.address.cardView, null)
+                    navController?.navigate(R.id.card_view_nominee)
+                    setResource(binding.appBarAccount.accountContent.nominee.cardView, null)
                 }
                 3 -> {
-                    navController?.navigate(R.id.card_view_photo_nid)
-                    setResource(binding.appBarCustomer.customerContent.photoNid.cardView, null)
+                    navController?.navigate(R.id.card_view_introducer)
+                    setResource(binding.appBarAccount.accountContent.introducer.cardView, null)
                 }
                 4 -> {
-                    navController?.navigate(R.id.card_view_signature)
-                    setResource(binding.appBarCustomer.customerContent.signature.cardView, null)
+                    navController?.navigate(R.id.card_view_transaction_profile)
+                    setResource(binding.appBarAccount.accountContent.transactionProfile.cardView, null)
                 }
                 5 -> {
-                    navController?.navigate(R.id.card_view_fingerprint)
-                    setResource(binding.appBarCustomer.customerContent.fingerprint.cardView, null)
-                }
-                6 -> {
-                    navController?.navigate(R.id.card_view_nominee)
-                    setResource(binding.appBarCustomer.customerContent.nominee.cardView, null)
+                    navController?.navigate(R.id.card_view_review)
+                    setResource(binding.appBarAccount.accountContent.review.cardView, null)
                 }
             }
 
             for (i in 0 until it) {
                 when (i) {
                     0 -> setResource(
-                        binding.appBarCustomer.customerContent.generalInfo.cardView,
+                        binding.appBarAccount.accountContent.accountInfo.cardView,
                         true
                     )
                     1 -> setResource(
-                        binding.appBarCustomer.customerContent.personalInfo.cardView,
+                        binding.appBarAccount.accountContent.othersInfo.cardView,
                         true
                     )
                     2 -> setResource(
-                        binding.appBarCustomer.customerContent.address.cardView,
+                        binding.appBarAccount.accountContent.nominee.cardView,
                         true
                     )
                     3 -> setResource(
-                        binding.appBarCustomer.customerContent.photoNid.cardView,
+                        binding.appBarAccount.accountContent.introducer.cardView,
                         true
                     )
                     4 -> setResource(
-                        binding.appBarCustomer.customerContent.signature.cardView,
+                        binding.appBarAccount.accountContent.transactionProfile.cardView,
                         true
                     )
                     5 -> setResource(
-                        binding.appBarCustomer.customerContent.fingerprint.cardView,
-                        true
-                    )
-                    6 -> setResource(
-                        binding.appBarCustomer.customerContent.nominee.cardView,
+                        binding.appBarAccount.accountContent.review.cardView,
                         true
                     )
                 }
@@ -88,34 +80,33 @@ class AccountActivity : BaseActivity() {
             for (i in it + 1..6) {
                 when (i) {
                     0 -> setResource(
-                        binding.appBarCustomer.customerContent.generalInfo.cardView,
+                        binding.appBarAccount.accountContent.accountInfo.cardView,
                         false
                     )
                     1 -> setResource(
-                        binding.appBarCustomer.customerContent.personalInfo.cardView,
+                        binding.appBarAccount.accountContent.othersInfo.cardView,
                         false
                     )
-                    2 -> setResource(binding.appBarCustomer.customerContent.address.cardView, false)
+                    2 -> setResource(binding.appBarAccount.accountContent.nominee.cardView, false)
                     3 -> setResource(
-                        binding.appBarCustomer.customerContent.photoNid.cardView,
+                        binding.appBarAccount.accountContent.introducer.cardView,
                         false
                     )
                     4 -> setResource(
-                        binding.appBarCustomer.customerContent.signature.cardView,
+                        binding.appBarAccount.accountContent.transactionProfile.cardView,
                         false
                     )
                     5 -> setResource(
-                        binding.appBarCustomer.customerContent.fingerprint.cardView,
+                        binding.appBarAccount.accountContent.review.cardView,
                         false
                     )
-                    6 -> setResource(binding.appBarCustomer.customerContent.nominee.cardView, false)
                 }
             }
         })
     }
 
     override fun initViewBinding() {
-        binding = ActivityCustomerBinding.inflate(layoutInflater)
+        binding = ActivityAccountBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
     }
@@ -123,40 +114,36 @@ class AccountActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        customerViewModel.configData()
+        accountViewModel.configData()
 
-        navController = findNavController(R.id.nav_host_fragment_content_customer)
+        navController = findNavController(R.id.nav_host_fragment_content_account)
         setCurrentState(0)
 
-        binding.appBarCustomer.customerContent.generalInfo.cardView.setOnClickListener {
+        binding.appBarAccount.accountContent.accountInfo.cardView.setOnClickListener {
             setCurrentState(0)
         }
 
-        binding.appBarCustomer.customerContent.personalInfo.cardView.setOnClickListener {
+        binding.appBarAccount.accountContent.othersInfo.cardView.setOnClickListener {
             setCurrentState(1)
         }
 
-        binding.appBarCustomer.customerContent.address.cardView.setOnClickListener {
+        binding.appBarAccount.accountContent.nominee.cardView.setOnClickListener {
             setCurrentState(2)
         }
 
-        binding.appBarCustomer.customerContent.photoNid.cardView.setOnClickListener {
+        binding.appBarAccount.accountContent.introducer.cardView.setOnClickListener {
             setCurrentState(3)
         }
 
-        binding.appBarCustomer.customerContent.signature.cardView.setOnClickListener {
+        binding.appBarAccount.accountContent.transactionProfile.cardView.setOnClickListener {
             setCurrentState(4)
         }
 
-        binding.appBarCustomer.customerContent.fingerprint.cardView.setOnClickListener {
+        binding.appBarAccount.accountContent.review.cardView.setOnClickListener {
             setCurrentState(5)
         }
 
-        binding.appBarCustomer.customerContent.nominee.cardView.setOnClickListener {
-            setCurrentState(6)
-        }
-
-        binding.appBarCustomer.btnCross.setOnClickListener {
+        binding.appBarAccount.btnCross.setOnClickListener {
             finish()
         }
 
@@ -164,44 +151,39 @@ class AccountActivity : BaseActivity() {
     }
 
     private fun setCurrentState(index: Int) {
-        customerViewModel.requestCurrentStep(index)
+        accountViewModel.requestCurrentStep(index)
     }
 
     private fun setTitle() {
-        binding.appBarCustomer.customerContent.generalInfo.textViewTitle.text =
-            getString(R.string.general_information)
-        binding.appBarCustomer.customerContent.generalInfo.txtViewSl.text =
+        binding.appBarAccount.accountContent.accountInfo.textViewTitle.text =
+            getString(R.string.account_information)
+        binding.appBarAccount.accountContent.accountInfo.txtViewSl.text =
             getString(R.string.one)
 
-        binding.appBarCustomer.customerContent.personalInfo.textViewTitle.text =
-            getString(R.string.personal_information)
-        binding.appBarCustomer.customerContent.personalInfo.txtViewSl.text =
+        binding.appBarAccount.accountContent.othersInfo.textViewTitle.text =
+            getString(R.string.others_customer)
+        binding.appBarAccount.accountContent.othersInfo.txtViewSl.text =
             getString(R.string.two)
 
-        binding.appBarCustomer.customerContent.address.textViewTitle.text =
-            getString(R.string.address)
-        binding.appBarCustomer.customerContent.address.txtViewSl.text =
+        binding.appBarAccount.accountContent.nominee.textViewTitle.text =
+            getString(R.string.nominee)
+        binding.appBarAccount.accountContent.nominee.txtViewSl.text =
             getString(R.string.three)
 
-        binding.appBarCustomer.customerContent.photoNid.textViewTitle.text =
-            getString(R.string.photo_nid)
-        binding.appBarCustomer.customerContent.photoNid.txtViewSl.text =
+        binding.appBarAccount.accountContent.introducer.textViewTitle.text =
+            getString(R.string.introducer)
+        binding.appBarAccount.accountContent.introducer.txtViewSl.text =
             getString(R.string.four)
 
-        binding.appBarCustomer.customerContent.signature.textViewTitle.text =
-            getString(R.string.signature)
-        binding.appBarCustomer.customerContent.signature.txtViewSl.text =
+        binding.appBarAccount.accountContent.transactionProfile.textViewTitle.text =
+            getString(R.string.transaction_profile)
+        binding.appBarAccount.accountContent.transactionProfile.txtViewSl.text =
             getString(R.string.five)
 
-        binding.appBarCustomer.customerContent.fingerprint.textViewTitle.text =
-            getString(R.string.fingerprint)
-        binding.appBarCustomer.customerContent.fingerprint.txtViewSl.text =
+        binding.appBarAccount.accountContent.review.textViewTitle.text =
+            getString(R.string.review)
+        binding.appBarAccount.accountContent.review.txtViewSl.text =
             getString(R.string.six)
-
-        binding.appBarCustomer.customerContent.nominee.textViewTitle.text =
-            getString(R.string.nominee)
-        binding.appBarCustomer.customerContent.nominee.txtViewSl.text =
-            getString(R.string.seven)
     }
 
     private fun setResource(cardView: CardView, isActive: Boolean?) {
