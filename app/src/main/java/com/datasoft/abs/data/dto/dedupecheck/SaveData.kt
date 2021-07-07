@@ -8,8 +8,7 @@ data class SaveData(
     val birthDate: String,
     val mobileNumber: String,
     val nationalID: String = "",
-    val gender: String = "",
+    val nationalityId: Int,
     val motherName: String = "",
-    val country: String = "",
     val city: String = "",
 )

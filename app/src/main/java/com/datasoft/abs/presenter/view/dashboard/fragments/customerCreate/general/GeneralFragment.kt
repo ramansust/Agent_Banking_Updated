@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.datasoft.abs.data.dto.config.Gender
+import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.GeneralFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
@@ -45,18 +45,25 @@ class GeneralFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val genderList = mutableListOf<Gender>()
+        val customerList = mutableListOf<CommonModel>()
+        val countryList = mutableListOf<CommonModel>()
 
         customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
             when (response) {
                 is Resource.Success -> {
                     response.data?.let {
-                        for (gender in it.genderList)
-                            genderList.add(gender)
+                        for (customer in it.customerTypeList)
+                            customerList.add(customer)
 
-                        binding.spinnerGender.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, genderList)
+                        binding.spinnerCustomerType.adapter =
+                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, customerList)
+
+                        for (country in it.nationalityList)
+                            countryList.add(country)
+
+                        binding.spinnerCountry.adapter =
+                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, countryList)
                     }
                 }
                 is Resource.Error -> {
@@ -69,13 +76,6 @@ class GeneralFragment : Fragment() {
             }
         })
 
-        val customerList = listOf(1, 2, 3, 4)
-        binding.spinnerCustomerType.adapter =
-            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, customerList)
-
-        val countryList = listOf("Bangladesh", "Nepal", "India")
-        binding.spinnerCountry.adapter =
-            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, countryList)
 
         viewModel.getSavedData().observe(viewLifecycleOwner, { response ->
             binding.edTxtFirstName.setText(response.firstName)
@@ -84,9 +84,8 @@ class GeneralFragment : Fragment() {
             binding.edTxtNid.setText(response.nationalID)
             binding.edTxtMobileNumber.setText(response.mobileNumber)
             binding.edTxtFatherName.setText(response.fatherName)
-            binding.spinnerCustomerType.setSelection(customerList.indexOf(response.customerType))
-            binding.spinnerGender.setSelection(genderList.indexOf(Gender(id = response.gender)))
-            binding.spinnerCountry.setSelection(countryList.indexOf(response.country))
+            binding.spinnerCustomerType.setSelection(customerList.indexOf(CommonModel(response.customerType)))
+            binding.spinnerCountry.setSelection(countryList.indexOf(CommonModel(response.nationalityId)))
             binding.edTxtMotherName.setText(response.motherName)
             binding.edTxtCity.setText(response.city)
         })
@@ -129,10 +128,9 @@ class GeneralFragment : Fragment() {
                 binding.edTxtNid.text.trim().toString(),
                 binding.edTxtMobileNumber.text.trim().toString(),
                 binding.edTxtFatherName.text.trim().toString(),
-                binding.spinnerCustomerType.selectedItem as Int,
-                (binding.spinnerGender.selectedItem as Gender).id,
+                customerList[binding.spinnerCustomerType.selectedItemPosition].id,
+                countryList[binding.spinnerCountry.selectedItemPosition].id,
                 binding.edTxtMotherName.text.trim().toString(),
-                binding.spinnerCountry.selectedItem as String,
                 binding.edTxtCity.text.trim().toString()
             )
         }

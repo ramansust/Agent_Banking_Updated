@@ -28,7 +28,7 @@ interface RestApiService {
     @POST("api/teller-dashboard")
     suspend fun getDashboardData(@Body dashboardRequest: DashboardRequest): Response<DashboardResponse>
 
-    @GET("api/others-info")
+    @GET("api/customer-general-config")
     suspend fun getConfigData() : Response<ConfigResponse>
 
     @POST("api/customer-list")

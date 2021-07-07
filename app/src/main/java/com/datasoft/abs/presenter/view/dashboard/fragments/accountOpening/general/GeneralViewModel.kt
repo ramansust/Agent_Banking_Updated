@@ -37,9 +37,8 @@ class GeneralViewModel @Inject constructor(
         mobileNumber: String,
         fatherName: String,
         customerType: Int,
-        gender: String,
+        nationalityId: Int,
         motherName: String,
-        country: String,
         city: String
     ) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -54,15 +53,14 @@ class GeneralViewModel @Inject constructor(
                 dob,
                 mobileNumber,
                 nid,
-                gender,
+                nationalityId,
                 motherName,
-                country,
                 city
             )
             savedData.postValue(saveData)
 
             if (firstName.isEmpty() || lastName.isEmpty() || dob.isEmpty() || nid.isEmpty() || mobileNumber.isEmpty()
-                || fatherName.isEmpty() || motherName.isEmpty() || gender.isEmpty() || country.isEmpty() || city.isEmpty()
+                || fatherName.isEmpty() || motherName.isEmpty() || city.isEmpty()
             ) {
                 dedupeData.postValue(
                     Resource.Error(
@@ -85,17 +83,16 @@ class GeneralViewModel @Inject constructor(
                 )
 
                 val sanctionRequest = SanctionScreeningRequest(
-                    "",
-                    city,
-                    country,
-                    "$firstName $lastName",
-                    customerType,
-                    dob,
+                    firstName,
+                    lastName,
                     fatherName,
-                    gender,
                     mobileNumber,
+                    city,
+                    "$customerType",
+                    dob,
                     motherName,
-                    nid
+                    nid,
+                    nationalityId
                 )
 
                 try {

@@ -65,7 +65,7 @@ class AwaitingFragment : Fragment() {
             }
         })
 
-        viewModel.getSearchData().observe(viewLifecycleOwner, { search ->
+        viewModel.getSearchData().observe(viewLifecycleOwner, {
 
         })
     }
