@@ -47,8 +47,12 @@ class CustomerActivity : BaseActivity() {
                     setResource(binding.appBarCustomer.customerContent.fingerprint.cardView, null)
                 }
                 6 -> {
-                    navController?.navigate(R.id.card_view_nominee)
-                    setResource(binding.appBarCustomer.customerContent.nominee.cardView, null)
+                    navController?.navigate(R.id.card_view_kyc)
+                    setResource(binding.appBarCustomer.customerContent.kyc.cardView, null)
+                }
+                7 -> {
+                    navController?.navigate(R.id.card_view_review)
+                    setResource(binding.appBarCustomer.customerContent.review.cardView, null)
                 }
             }
 
@@ -79,13 +83,17 @@ class CustomerActivity : BaseActivity() {
                         true
                     )
                     6 -> setResource(
-                        binding.appBarCustomer.customerContent.nominee.cardView,
+                        binding.appBarCustomer.customerContent.kyc.cardView,
+                        true
+                    )
+                    7 -> setResource(
+                        binding.appBarCustomer.customerContent.review.cardView,
                         true
                     )
                 }
             }
 
-            for (i in it + 1..6) {
+            for (i in it + 1..7) {
                 when (i) {
                     0 -> setResource(
                         binding.appBarCustomer.customerContent.generalInfo.cardView,
@@ -108,7 +116,8 @@ class CustomerActivity : BaseActivity() {
                         binding.appBarCustomer.customerContent.fingerprint.cardView,
                         false
                     )
-                    6 -> setResource(binding.appBarCustomer.customerContent.nominee.cardView, false)
+                    6 -> setResource(binding.appBarCustomer.customerContent.kyc.cardView, false)
+                    7 -> setResource(binding.appBarCustomer.customerContent.review.cardView, false)
                 }
             }
         })
@@ -152,8 +161,11 @@ class CustomerActivity : BaseActivity() {
             setCurrentState(5)
         }
 
-        binding.appBarCustomer.customerContent.nominee.cardView.setOnClickListener {
+        binding.appBarCustomer.customerContent.kyc.cardView.setOnClickListener {
             setCurrentState(6)
+        }
+        binding.appBarCustomer.customerContent.review.cardView.setOnClickListener {
+            setCurrentState(7)
         }
 
         binding.appBarCustomer.btnCross.setOnClickListener {
@@ -198,10 +210,15 @@ class CustomerActivity : BaseActivity() {
         binding.appBarCustomer.customerContent.fingerprint.txtViewSl.text =
             getString(R.string.six)
 
-        binding.appBarCustomer.customerContent.nominee.textViewTitle.text =
-            getString(R.string.nominee)
-        binding.appBarCustomer.customerContent.nominee.txtViewSl.text =
+        binding.appBarCustomer.customerContent.kyc.textViewTitle.text =
+            getString(R.string.kyc)
+        binding.appBarCustomer.customerContent.kyc.txtViewSl.text =
             getString(R.string.seven)
+
+        binding.appBarCustomer.customerContent.review.textViewTitle.text =
+            getString(R.string.review)
+        binding.appBarCustomer.customerContent.review.txtViewSl.text =
+            getString(R.string.eight)
     }
 
     private fun setResource(cardView: CardView, isActive: Boolean?) {

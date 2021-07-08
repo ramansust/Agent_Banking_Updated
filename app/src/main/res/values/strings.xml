@@ -54,6 +54,7 @@
     <string name="five">5.</string>
     <string name="six">6.</string>
     <string name="seven">7.</string>
+    <string name="eight">8.</string>
 
     <string name="account_information">Account Information</string>
     <string name="others_customer">Others Facilities and Customer Information</string>
@@ -68,6 +69,7 @@
     <string name="signature">Signature</string>
     <string name="fingerprint">Fingerprint</string>
     <string name="nominee">Nominee</string>
+    <string name="kyc">KYC</string>
     <string name="preview">Preview</string>
     <string name="save">Save</string>
     <string name="back">Back</string>
@@ -93,4 +95,20 @@
     <string name="nid_back">Back side NID</string>
     <string name="add_new">+Add New</string>
     <string name="search">Search</string>
+
+    <string name="address_type">Address Type*</string>
+    <string name="flat_no">Flat No</string>
+    <string name="block_no">Block No</string>
+    <string name="word_no">Word No</string>
+    <string name="post_code">Post Code*</string>
+    <string name="district">District*</string>
+    <string name="union">Union</string>
+    <string name="house_no">House No*</string>
+    <string name="village">Village*</string>
+    <string name="road_no">Road No</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="state">State</string>
+    <string name="thana">Thana</string>
+    <string name="contact_type">Contact Type*</string>
+    <string name="contact_no">Contact No*</string>
 </resources>

@@ -20,30 +20,36 @@
     <fragment
         android:id="@+id/card_view_address"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.address.AddressFragment"
-        android:label="photo_fragment"
-        tools:layout="@layout/photo_fragment" />
+        android:label="address_fragment"
+        tools:layout="@layout/address_fragment" />
 
     <fragment
         android:id="@+id/card_view_photo_nid"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.photo.PhotoFragment"
-        android:label="signature_fragment"
-        tools:layout="@layout/signature_fragment" />
+        android:label="photo_and_nid_fragment"
+        tools:layout="@layout/photo_fragment" />
 
     <fragment
         android:id="@+id/card_view_signature"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.signature.SignatureFragment"
-        android:label="fingerprint_fragment"
-        tools:layout="@layout/fingerprint_fragment" />
+        android:label="signature_fragment"
+        tools:layout="@layout/signature_fragment" />
 
     <fragment
         android:id="@+id/card_view_fingerprint"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.fingerprint.FingerprintFragment"
-        android:label="nominee_fragment"
-        tools:layout="@layout/nominee_fragment" />
+        android:label="fingerprint_fragment"
+        tools:layout="@layout/fingerprint_fragment" />
 
     <fragment
-        android:id="@+id/card_view_nominee"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.nominee.NomineeFragment"
+        android:id="@+id/card_view_kyc"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.kyc.KYCFragment"
+        android:label="kyc_fragment"
+        tools:layout="@layout/kyc_fragment" />
+
+    <fragment
+        android:id="@+id/card_view_review"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.review.ReviewFragment"
         android:label="review_fragment"
-        tools:layout="@layout/address_fragment" />
+        tools:layout="@layout/review_fragment" />
 </navigation>

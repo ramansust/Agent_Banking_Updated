@@ -1,4 +1,4 @@
-package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.nominee
+package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.kyc
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,14 +11,14 @@ import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.Custom
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NomineeFragment : Fragment() {
+class KYCFragment : Fragment() {
 
     companion object {
-        fun newInstance() = NomineeFragment()
+        fun newInstance() = KYCFragment()
     }
 
     private val customerViewModel: CustomerViewModel by activityViewModels()
-    private val viewModel: NomineeViewModel by activityViewModels()
+    private val viewModel: KYCViewModel by activityViewModels()
     private var _binding: NomineeFragmentBinding? = null
 
     // This property is only valid between onCreateView and

@@ -96,13 +96,25 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="@dimen/space_16x"
-        app:layout_constraintBottom_toTopOf="@+id/nominee"
+        app:layout_constraintBottom_toTopOf="@+id/kyc"
         app:layout_constraintEnd_toStartOf="@id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signature" />
 
     <include
-        android:id="@+id/nominee"
+        android:id="@+id/kyc"
+        layout="@layout/state_row"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/space_16x"
+        app:layout_constraintBottom_toTopOf="@+id/review"
+        app:layout_constraintEnd_toStartOf="@id/guideline4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fingerprint" />
+
+    <include
+        android:id="@+id/review"
         layout="@layout/state_row"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -111,7 +123,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fingerprint" />
+        app:layout_constraintTop_toBottomOf="@+id/kyc" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
