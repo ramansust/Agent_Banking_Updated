@@ -1,73 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:elevation="@dimen/space_5x"
     tools:context=".presenter.view.dashboard.fragments.customerCreate.general.GeneralFragment">
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="@dimen/space_5x">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ScrollView
-                android:id="@+id/scroll_view"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_back"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/txt_view_address_type"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="8dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/address_type"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toStartOf="@id/guideline_middle"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:textSize="@dimen/font_16x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_address_type"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/spinner_background"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_address_type"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_address_type"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_address_type" />
+                        android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_flat_no"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/flat_no"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/spinner_address_type"
-                        app:layout_constraintStart_toStartOf="@+id/spinner_address_type"
-                        app:layout_constraintTop_toBottomOf="@+id/spinner_address_type" />
+                        android:textSize="@dimen/font_16x" />
 
                     <EditText
                         android:id="@+id/ed_txt_flat_no"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/input_border"
@@ -76,26 +72,20 @@
                         android:hint="@string/type_here"
                         android:inputType="textPersonName"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_flat_no"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_flat_no"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_flat_no" />
+                        android:textSize="@dimen/font_16x" />
 
                     <TextView
                         android:id="@+id/txt_view_block_no"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/block_no"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/ed_txt_flat_no"
-                        app:layout_constraintStart_toStartOf="@+id/ed_txt_flat_no"
-                        app:layout_constraintTop_toBottomOf="@+id/ed_txt_flat_no" />
+                        android:textSize="@dimen/font_16x" />
 
                     <EditText
                         android:id="@+id/ed_txt_block_no"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/input_border"
@@ -104,26 +94,20 @@
                         android:hint="@string/type_here"
                         android:inputType="textPersonName"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_block_no"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_block_no"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_block_no" />
+                        android:textSize="@dimen/font_16x" />
 
                     <TextView
                         android:id="@+id/txt_view_word_no"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/word_no"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/ed_txt_block_no"
-                        app:layout_constraintStart_toStartOf="@+id/ed_txt_block_no"
-                        app:layout_constraintTop_toBottomOf="@+id/ed_txt_block_no" />
+                        android:textSize="@dimen/font_16x" />
 
                     <EditText
                         android:id="@+id/ed_txt_word_no"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/input_border"
@@ -132,26 +116,20 @@
                         android:hint="@string/type_here"
                         android:inputType="textPersonName"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_word_no"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_word_no"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_word_no" />
+                        android:textSize="@dimen/font_16x" />
 
                     <TextView
                         android:id="@+id/txt_view_post_code"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/post_code"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/ed_txt_word_no"
-                        app:layout_constraintStart_toStartOf="@+id/ed_txt_word_no"
-                        app:layout_constraintTop_toBottomOf="@+id/ed_txt_word_no" />
+                        android:textSize="@dimen/font_16x" />
 
                     <EditText
                         android:id="@+id/ed_txt_post_code"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/input_border"
@@ -160,95 +138,82 @@
                         android:hint="@string/type_here"
                         android:inputType="textPersonName"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_post_code"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_post_code"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_post_code" />
+                        android:textSize="@dimen/font_16x" />
 
                     <TextView
                         android:id="@+id/txt_view_country"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/country"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/ed_txt_post_code"
-                        app:layout_constraintStart_toStartOf="@+id/ed_txt_post_code"
-                        app:layout_constraintTop_toBottomOf="@+id/ed_txt_post_code" />
+                        android:textSize="@dimen/font_16x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_country"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/spinner_background"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_country"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_country"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_country" />
+                        android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_district"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/district"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/spinner_country"
-                        app:layout_constraintStart_toStartOf="@+id/spinner_country"
-                        app:layout_constraintTop_toBottomOf="@+id/spinner_country" />
+                        android:textSize="@dimen/font_16x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_district"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/spinner_background"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_district"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_district"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_district" />
+                        android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_union"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/union"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/spinner_district"
-                        app:layout_constraintStart_toStartOf="@+id/spinner_district"
-                        app:layout_constraintTop_toBottomOf="@+id/spinner_district" />
+                        android:textSize="@dimen/font_16x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_union"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/spinner_background"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_union"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_union"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_union" />
+                        android:background="@drawable/spinner_background" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline_middle"
+                    app:layout_constraintTop_toTopOf="parent">
 
 
                     <TextView
                         android:id="@+id/txt_view_house_no"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/house_no"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/guideline_middle"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:textSize="@dimen/font_16x" />
 
                     <EditText
                         android:id="@+id/ed_txt_house_no"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/input_border"
@@ -257,26 +222,20 @@
                         android:hint="@string/type_here"
                         android:inputType="textPersonName"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_house_no"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_house_no"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_house_no" />
+                        android:textSize="@dimen/font_16x" />
 
                     <TextView
                         android:id="@+id/txt_view_village"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/village"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/ed_txt_house_no"
-                        app:layout_constraintStart_toStartOf="@+id/ed_txt_house_no"
-                        app:layout_constraintTop_toBottomOf="@+id/ed_txt_house_no" />
+                        android:textSize="@dimen/font_16x" />
 
                     <EditText
                         android:id="@+id/ed_txt_village"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/input_border"
@@ -285,26 +244,20 @@
                         android:hint="@string/type_here"
                         android:inputType="textPersonName"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_village"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_village"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_village" />
+                        android:textSize="@dimen/font_16x" />
 
                     <TextView
                         android:id="@+id/txt_view_road_no"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/road_no"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/ed_txt_village"
-                        app:layout_constraintStart_toStartOf="@+id/ed_txt_village"
-                        app:layout_constraintTop_toBottomOf="@+id/ed_txt_village" />
+                        android:textSize="@dimen/font_16x" />
 
                     <EditText
                         android:id="@+id/ed_txt_road_no"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/input_border"
@@ -313,26 +266,20 @@
                         android:hint="@string/type_here"
                         android:inputType="textPersonName"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_road_no"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_road_no"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_road_no" />
+                        android:textSize="@dimen/font_16x" />
 
                     <TextView
                         android:id="@+id/txt_view_zip_code"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/zip_code"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/ed_txt_road_no"
-                        app:layout_constraintStart_toStartOf="@+id/ed_txt_road_no"
-                        app:layout_constraintTop_toBottomOf="@+id/ed_txt_road_no" />
+                        android:textSize="@dimen/font_16x" />
 
                     <EditText
                         android:id="@+id/ed_txt_zip_code"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/input_border"
@@ -341,26 +288,20 @@
                         android:hint="@string/type_here"
                         android:inputType="textPersonName"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_zip_code"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_zip_code"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_zip_code" />
+                        android:textSize="@dimen/font_16x" />
 
                     <TextView
                         android:id="@+id/txt_view_state"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/state"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/ed_txt_zip_code"
-                        app:layout_constraintStart_toStartOf="@+id/ed_txt_zip_code"
-                        app:layout_constraintTop_toBottomOf="@+id/ed_txt_zip_code" />
+                        android:textSize="@dimen/font_16x" />
 
                     <EditText
                         android:id="@+id/ed_txt_state"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/input_border"
@@ -369,26 +310,20 @@
                         android:hint="@string/type_here"
                         android:inputType="textPersonName"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_state"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_state"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_state" />
+                        android:textSize="@dimen/font_16x" />
 
                     <TextView
                         android:id="@+id/txt_view_city"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/city"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/ed_txt_state"
-                        app:layout_constraintStart_toStartOf="@+id/ed_txt_state"
-                        app:layout_constraintTop_toBottomOf="@+id/ed_txt_state" />
+                        android:textSize="@dimen/font_16x" />
 
                     <EditText
                         android:id="@+id/ed_txt_city"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/input_border"
@@ -397,96 +332,83 @@
                         android:hint="@string/type_here"
                         android:inputType="textPersonName"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_city"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_city"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_city" />
+                        android:textSize="@dimen/font_16x" />
 
                     <TextView
                         android:id="@+id/txt_view_thana"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/thana"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/ed_txt_city"
-                        app:layout_constraintStart_toStartOf="@+id/ed_txt_city"
-                        app:layout_constraintTop_toBottomOf="@+id/ed_txt_city" />
+                        android:textSize="@dimen/font_16x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_thana"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/spinner_background"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_thana"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_thana"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_thana" />
+                        android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_contact_type"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/contact_type"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/spinner_thana"
-                        app:layout_constraintStart_toStartOf="@+id/spinner_thana"
-                        app:layout_constraintTop_toBottomOf="@+id/spinner_thana" />
+                        android:textSize="@dimen/font_16x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_contact_type"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/spinner_background"
-                        app:layout_constraintEnd_toEndOf="@+id/txt_view_contact_type"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_contact_type"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_contact_type" />
+                        android:background="@drawable/spinner_background" />
 
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_middle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.5" />
+                </LinearLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_middle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
 
-            </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/btn_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/button_border"
-                android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
-                android:fontFamily="@font/oxygen_regular"
-                android:text="@string/next"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_20x"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+        </ScrollView>
 
-            <Button
-                android:id="@+id/btn_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/button_border"
-                android:fontFamily="@font/oxygen_regular"
-                android:text="@string/back"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_20x"
-                app:icon="@drawable/ic_baseline_arrow_back_ios_24"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_next"
-                app:layout_constraintEnd_toStartOf="@id/btn_next"
-                app:layout_constraintTop_toTopOf="@+id/btn_next" />
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_border"
+            android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:fontFamily="@font/oxygen_regular"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-</FrameLayout>
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_border"
+            android:fontFamily="@font/oxygen_regular"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_20x"
+            app:icon="@drawable/ic_baseline_arrow_back_ios_24"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_next"
+            app:layout_constraintEnd_toStartOf="@id/btn_next"
+            app:layout_constraintTop_toTopOf="@+id/btn_next" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

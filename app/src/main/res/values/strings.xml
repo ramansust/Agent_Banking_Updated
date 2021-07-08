@@ -111,4 +111,19 @@
     <string name="thana">Thana</string>
     <string name="contact_type">Contact Type*</string>
     <string name="contact_no">Contact No*</string>
+
+    <string name="marital_status">Marital Status*</string>
+    <string name="religion">Religion*</string>
+    <string name="education">Education*</string>
+    <string name="nationality">Nationality*</string>
+    <string name="vat_registration_no">VAT Registration No</string>
+    <string name="monthly_income">Monthly Income*</string>
+    <string name="residential_status">Residential Status</string>
+    <string name="spouse_name">Spouse Name</string>
+    <string name="number_of_dependents">Number of Dependents</string>
+    <string name="occupation">Occupation*</string>
+    <string name="birth_certificate_no">Birth Certificate No</string>
+    <string name="driving_license">Driving License</string>
+    <string name="source_of_fund_">Source of Fund*</string>
+    <string name="salutation">Salutation</string>
 </resources>
