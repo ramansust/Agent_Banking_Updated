@@ -1,6 +1,7 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.photo
 
 import android.app.Activity
+import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.os.Build
 import android.os.Bundle
@@ -18,6 +19,7 @@ import com.datasoft.abs.databinding.PhotoFragmentBinding
 import com.datasoft.abs.presenter.utils.Photos
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.github.gcacace.signaturepad.views.SignaturePad
 import com.pixelcarrot.base64image.Base64Image
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -86,6 +88,45 @@ class PhotoFragment : Fragment() {
 
         }
 
+        binding.btnBrowse.setOnClickListener {
+            ImagePicker.with(this)
+                .galleryOnly()
+                .crop()
+                .compress(1024)         // Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080)  // Final image resolution will be less than 1080 x 1080(Optional)
+                .createIntent { intent ->
+                    startForSignatureResult.launch(intent)
+                }
+
+        }
+
+        binding.signaturePad.setOnSignedListener(object : SignaturePad.OnSignedListener {
+
+            override fun onStartSigning() {
+
+            }
+
+            override fun onSigned() {
+                binding.btnTake.isEnabled = true
+                binding.btnClear.isEnabled = true
+            }
+
+            override fun onClear() {
+                binding.btnTake.isEnabled = false
+                binding.btnClear.isEnabled = false
+            }
+        })
+
+        binding.btnClear.setOnClickListener {
+            binding.signaturePad.clear()
+        }
+
+        binding.btnTake.setOnClickListener {
+            val signatureBitmap: Bitmap = binding.signaturePad.signatureBitmap
+            binding.imgView.setImageBitmap(signatureBitmap)
+            viewModel.setSignature(signatureBitmap)
+        }
+
         binding.btnNext.setOnClickListener {
             customerViewModel.requestCurrentStep(4)
         }
@@ -110,6 +151,10 @@ class PhotoFragment : Fragment() {
 
         viewModel.getSavedNIDBack().observe(viewLifecycleOwner, {
             binding.imgViewNidBack.setImageBitmap(it)
+        })
+
+        viewModel.getSavedSignature().observe(viewLifecycleOwner, {
+            binding.imgView.setImageBitmap(it)
         })
     }
 
@@ -208,6 +253,34 @@ class PhotoFragment : Fragment() {
                             Log.e("base64", "_______$it")
                         }
                     }
+                }
+                ImagePicker.RESULT_ERROR -> {
+                    Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    private val startForSignatureResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    //Image Uri will not be null for RESULT_OK
+                    val fileUri = data?.data!!
+                    binding.imgView.setImageURI(fileUri)
+
+                    val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver, fileUri))
+                    } else {
+                        MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, fileUri)
+                    }
+
+                    viewModel.setSignature(bitmap)
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()

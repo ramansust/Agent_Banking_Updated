@@ -39,7 +39,7 @@ class KYCFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnNext.setOnClickListener {
-//            customerViewModel.requestCurrentStep(2)
+            customerViewModel.requestCurrentStep(7)
         }
 
         binding.btnBack.setOnClickListener {

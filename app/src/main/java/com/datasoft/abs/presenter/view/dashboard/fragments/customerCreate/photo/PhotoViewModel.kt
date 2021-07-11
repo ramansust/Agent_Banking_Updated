@@ -24,6 +24,9 @@ class PhotoViewModel @Inject constructor(
     private val savedNIDBack = MutableLiveData<Bitmap>()
     fun getSavedNIDBack(): LiveData<Bitmap> = savedNIDBack
 
+    private val savedSignature = MutableLiveData<Bitmap>()
+    fun getSavedSignature(): LiveData<Bitmap> = savedSignature
+
     fun setPhoto(bitmap: Bitmap) {
         viewModelScope.launch(Dispatchers.IO) {
             savedPhoto.postValue(bitmap)
@@ -39,6 +42,12 @@ class PhotoViewModel @Inject constructor(
     fun setNIDBack(bitmap: Bitmap) {
         viewModelScope.launch(Dispatchers.IO) {
             savedNIDBack.postValue(bitmap)
+        }
+    }
+
+    fun setSignature(bitmap: Bitmap) {
+        viewModelScope.launch(Dispatchers.IO) {
+            savedSignature.postValue(bitmap)
         }
     }
 }

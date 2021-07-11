@@ -39,11 +39,11 @@ class FingerprintFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnNext.setOnClickListener {
-            customerViewModel.requestCurrentStep(6)
+            customerViewModel.requestCurrentStep(5)
         }
 
         binding.btnBack.setOnClickListener {
-            customerViewModel.requestCurrentStep(4)
+            customerViewModel.requestCurrentStep(3)
         }
 
     }

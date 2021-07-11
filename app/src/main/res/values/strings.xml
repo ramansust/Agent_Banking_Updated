@@ -126,4 +126,6 @@
     <string name="driving_license">Driving License</string>
     <string name="source_of_fund_">Source of Fund*</string>
     <string name="salutation">Salutation</string>
+    <string name="documents">Documents</string>
+    <string name="submit">Submit</string>
 </resources>

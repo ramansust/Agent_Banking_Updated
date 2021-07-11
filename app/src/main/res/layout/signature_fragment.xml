@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:elevation="@dimen/space_5x"
-    tools:context=".presenter.view.dashboard.fragments.customerCreate.photo.TransactionProfileFragment">
+    android:elevation="@dimen/space_5x">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

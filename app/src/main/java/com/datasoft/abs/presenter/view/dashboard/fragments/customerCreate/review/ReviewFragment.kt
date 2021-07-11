@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.FingerprintFragmentBinding
+import com.datasoft.abs.databinding.FragmentReviewBinding
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +20,7 @@ class ReviewFragment : Fragment() {
 
     private val customerViewModel: CustomerViewModel by activityViewModels()
     private val viewModel: ReviewViewModel by activityViewModels()
-    private var _binding: FingerprintFragmentBinding? = null
+    private var _binding: FragmentReviewBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -31,7 +32,7 @@ class ReviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FingerprintFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentReviewBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,11 +40,11 @@ class ReviewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnNext.setOnClickListener {
-            customerViewModel.requestCurrentStep(6)
+//            customerViewModel.requestCurrentStep(6)
         }
 
         binding.btnBack.setOnClickListener {
-            customerViewModel.requestCurrentStep(4)
+            customerViewModel.requestCurrentStep(6)
         }
 
     }

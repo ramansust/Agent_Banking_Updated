@@ -72,22 +72,10 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="@dimen/space_16x"
-        app:layout_constraintBottom_toTopOf="@+id/signature"
-        app:layout_constraintEnd_toStartOf="@id/guideline4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/address" />
-
-    <include
-        android:id="@+id/signature"
-        layout="@layout/state_row"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="@dimen/space_16x"
         app:layout_constraintBottom_toTopOf="@+id/fingerprint"
         app:layout_constraintEnd_toStartOf="@id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photo_nid" />
+        app:layout_constraintTop_toBottomOf="@+id/address" />
 
     <include
         android:id="@+id/fingerprint"
@@ -96,10 +84,22 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="@dimen/space_16x"
+        app:layout_constraintBottom_toTopOf="@+id/documents"
+        app:layout_constraintEnd_toStartOf="@id/guideline4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photo_nid" />
+
+    <include
+        android:id="@+id/documents"
+        layout="@layout/state_row"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/space_16x"
         app:layout_constraintBottom_toTopOf="@+id/kyc"
         app:layout_constraintEnd_toStartOf="@id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signature" />
+        app:layout_constraintTop_toBottomOf="@+id/fingerprint" />
 
     <include
         android:id="@+id/kyc"
@@ -111,7 +111,7 @@
         app:layout_constraintBottom_toTopOf="@+id/review"
         app:layout_constraintEnd_toStartOf="@id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fingerprint" />
+        app:layout_constraintTop_toBottomOf="@+id/documents" />
 
     <include
         android:id="@+id/review"

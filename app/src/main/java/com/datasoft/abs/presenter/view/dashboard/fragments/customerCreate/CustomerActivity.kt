@@ -39,12 +39,12 @@ class CustomerActivity : BaseActivity() {
                     setResource(binding.appBarCustomer.customerContent.photoNid.cardView, null)
                 }
                 4 -> {
-                    navController?.navigate(R.id.card_view_signature)
-                    setResource(binding.appBarCustomer.customerContent.signature.cardView, null)
-                }
-                5 -> {
                     navController?.navigate(R.id.card_view_fingerprint)
                     setResource(binding.appBarCustomer.customerContent.fingerprint.cardView, null)
+                }
+                5 -> {
+                    navController?.navigate(R.id.card_view_documents)
+                    setResource(binding.appBarCustomer.customerContent.documents.cardView, null)
                 }
                 6 -> {
                     navController?.navigate(R.id.card_view_kyc)
@@ -75,11 +75,11 @@ class CustomerActivity : BaseActivity() {
                         true
                     )
                     4 -> setResource(
-                        binding.appBarCustomer.customerContent.signature.cardView,
+                        binding.appBarCustomer.customerContent.fingerprint.cardView,
                         true
                     )
                     5 -> setResource(
-                        binding.appBarCustomer.customerContent.fingerprint.cardView,
+                        binding.appBarCustomer.customerContent.documents.cardView,
                         true
                     )
                     6 -> setResource(
@@ -109,11 +109,11 @@ class CustomerActivity : BaseActivity() {
                         false
                     )
                     4 -> setResource(
-                        binding.appBarCustomer.customerContent.signature.cardView,
+                        binding.appBarCustomer.customerContent.fingerprint.cardView,
                         false
                     )
                     5 -> setResource(
-                        binding.appBarCustomer.customerContent.fingerprint.cardView,
+                        binding.appBarCustomer.customerContent.documents.cardView,
                         false
                     )
                     6 -> setResource(binding.appBarCustomer.customerContent.kyc.cardView, false)
@@ -153,11 +153,11 @@ class CustomerActivity : BaseActivity() {
             setCurrentState(3)
         }
 
-        binding.appBarCustomer.customerContent.signature.cardView.setOnClickListener {
+        binding.appBarCustomer.customerContent.fingerprint.cardView.setOnClickListener {
             setCurrentState(4)
         }
 
-        binding.appBarCustomer.customerContent.fingerprint.cardView.setOnClickListener {
+        binding.appBarCustomer.customerContent.documents.cardView.setOnClickListener {
             setCurrentState(5)
         }
 
@@ -200,14 +200,14 @@ class CustomerActivity : BaseActivity() {
         binding.appBarCustomer.customerContent.photoNid.txtViewSl.text =
             getString(R.string.four)
 
-        binding.appBarCustomer.customerContent.signature.textViewTitle.text =
-            getString(R.string.signature)
-        binding.appBarCustomer.customerContent.signature.txtViewSl.text =
-            getString(R.string.five)
-
         binding.appBarCustomer.customerContent.fingerprint.textViewTitle.text =
             getString(R.string.fingerprint)
         binding.appBarCustomer.customerContent.fingerprint.txtViewSl.text =
+            getString(R.string.five)
+
+        binding.appBarCustomer.customerContent.documents.textViewTitle.text =
+            getString(R.string.documents)
+        binding.appBarCustomer.customerContent.documents.txtViewSl.text =
             getString(R.string.six)
 
         binding.appBarCustomer.customerContent.kyc.textViewTitle.text =

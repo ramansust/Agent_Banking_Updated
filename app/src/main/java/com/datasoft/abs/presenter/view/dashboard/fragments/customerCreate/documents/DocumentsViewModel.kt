@@ -1,4 +1,4 @@
-package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.signature
+package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.documents
 
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignatureViewModel @Inject constructor(
+class DocumentsViewModel @Inject constructor(
 
 ): ViewModel() {
 

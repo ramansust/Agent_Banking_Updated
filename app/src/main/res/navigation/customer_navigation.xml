@@ -30,16 +30,16 @@
         tools:layout="@layout/photo_fragment" />
 
     <fragment
-        android:id="@+id/card_view_signature"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.signature.SignatureFragment"
-        android:label="signature_fragment"
-        tools:layout="@layout/signature_fragment" />
-
-    <fragment
         android:id="@+id/card_view_fingerprint"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.fingerprint.FingerprintFragment"
         android:label="fingerprint_fragment"
         tools:layout="@layout/fingerprint_fragment" />
+
+    <fragment
+        android:id="@+id/card_view_documents"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.documents.DocumentsFragment"
+        android:label="signature_fragment"
+        tools:layout="@layout/signature_fragment" />
 
     <fragment
         android:id="@+id/card_view_kyc"
