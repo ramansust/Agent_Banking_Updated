@@ -153,4 +153,6 @@
     <string name="expiry_date">Expiry Date*</string>
     <string name="description">Description</string>
     <string name="related_documents_use">Related Documents Use</string>
+    <string name="add_address">Add Address</string>
+    <string name="contact">Contact</string>
 </resources>

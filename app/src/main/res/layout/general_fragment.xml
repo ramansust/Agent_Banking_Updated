@@ -15,331 +15,280 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/txt_view_first_name"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:fontFamily="@font/oxygen_bold"
-                android:text="@string/first_name"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toStartOf="@+id/txt_view_last_name"
-                app:layout_constraintHorizontal_bias="0.5"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/txt_view_last_name"
+                <TextView
+                    android:id="@+id/txt_view_salutation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/salutation"
+                    android:textSize="@dimen/font_16x" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_salutation"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/spinner_background" />
+
+                <TextView
+                    android:id="@+id/txt_view_last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/last_name"
+                    android:textSize="@dimen/font_16x" />
+
+                <EditText
+                    android:id="@+id/ed_txt_last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
+                    android:ems="10"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:hint="@string/type_here"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/space_8x"
+                    android:textSize="@dimen/font_16x" />
+
+                <TextView
+                    android:id="@+id/txt_view_nid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/nid"
+                    android:textSize="@dimen/font_16x" />
+
+                <EditText
+                    android:id="@+id/ed_txt_nid"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
+                    android:ems="10"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:hint="@string/type_here"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/space_8x"
+                    android:textSize="@dimen/font_16x" />
+
+                <TextView
+                    android:id="@+id/txt_view_customer_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/customer_type"
+                    android:textSize="@dimen/font_16x" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_customer_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/spinner_background" />
+
+                <TextView
+                    android:id="@+id/txt_view_mother_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/mother_name"
+                    android:textSize="@dimen/font_16x" />
+
+                <EditText
+                    android:id="@+id/ed_txt_mother_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
+                    android:ems="10"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:hint="@string/type_here"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/space_8x"
+                    android:textSize="@dimen/font_16x" />
+
+                <TextView
+                    android:id="@+id/txt_view_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/city"
+                    android:textSize="@dimen/font_16x" />
+
+                <EditText
+                    android:id="@+id/ed_txt_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
+                    android:ems="10"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:hint="@string/type_here"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/space_8x"
+                    android:textSize="@dimen/font_16x" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:fontFamily="@font/oxygen_bold"
-                android:text="@string/last_name"
-                android:textSize="@dimen/font_16x"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/txt_view_first_name"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/guideline_middle"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/ed_txt_first_name"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_48x"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/input_border"
-                android:ems="10"
-                android:fontFamily="@font/oxygen_regular"
-                android:hint="@string/type_here"
-                android:inputType="textPersonName"
-                android:padding="@dimen/space_8x"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toStartOf="@id/ed_txt_last_name"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_view_first_name" />
+                <TextView
+                    android:id="@+id/txt_view_first_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/first_name"
+                    android:textSize="@dimen/font_16x" />
 
-            <EditText
-                android:id="@+id/ed_txt_last_name"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_48x"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/input_border"
-                android:ems="10"
-                android:fontFamily="@font/oxygen_regular"
-                android:hint="@string/type_here"
-                android:inputType="textPersonName"
-                android:padding="@dimen/space_8x"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/ed_txt_first_name"
-                app:layout_constraintTop_toBottomOf="@id/txt_view_first_name" />
+                <EditText
+                    android:id="@+id/ed_txt_first_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
+                    android:ems="10"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:hint="@string/type_here"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/space_8x"
+                    android:textSize="@dimen/font_16x" />
 
-            <TextView
-                android:id="@+id/txt_view_dob"
-                android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/txt_view_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/date_of_birth"
+                    android:textSize="@dimen/font_16x" />
+
+                <EditText
+                    android:id="@+id/ed_txt_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:inputType="date"
+                    android:padding="@dimen/space_8x"
+                    android:textSize="@dimen/font_16x"
+                    app:drawableEndCompat="@drawable/ic_dob" />
+
+                <TextView
+                    android:id="@+id/txt_view_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/gender"
+                    android:textSize="@dimen/font_16x" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/spinner_background" />
+
+                <TextView
+                    android:id="@+id/txt_view_mobile_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/mobile_number"
+                    android:textSize="@dimen/font_16x" />
+
+                <EditText
+                    android:id="@+id/ed_txt_mobile_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
+                    android:ems="10"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:hint="@string/type_here"
+                    android:inputType="phone"
+                    android:padding="@dimen/space_8x"
+                    android:textSize="@dimen/font_16x" />
+
+                <TextView
+                    android:id="@+id/txt_view_father_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/father_name"
+                    android:textSize="@dimen/font_16x" />
+
+                <EditText
+                    android:id="@+id/ed_txt_father_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
+                    android:ems="10"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:hint="@string/type_here"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/space_8x"
+                    android:textSize="@dimen/font_16x" />
+
+                <TextView
+                    android:id="@+id/txt_view_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/country"
+                    android:textSize="@dimen/font_16x" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/spinner_background" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_middle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/oxygen_bold"
-                android:text="@string/date_of_birth"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toStartOf="@+id/txt_view_nid"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ed_txt_first_name" />
-
-            <TextView
-                android:id="@+id/txt_view_nid"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/oxygen_bold"
-                android:text="@string/nid"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/txt_view_dob"
-                app:layout_constraintTop_toBottomOf="@id/ed_txt_last_name" />
-
-            <EditText
-                android:id="@+id/ed_txt_dob"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_48x"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/input_border"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:fontFamily="@font/oxygen_regular"
-                android:inputType="date"
-                android:padding="@dimen/space_8x"
-                android:textSize="@dimen/font_16x"
-                app:drawableEndCompat="@drawable/ic_dob"
-                app:layout_constraintEnd_toStartOf="@id/ed_txt_nid"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_view_dob" />
-
-            <EditText
-                android:id="@+id/ed_txt_nid"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_48x"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/input_border"
-                android:ems="10"
-                android:fontFamily="@font/oxygen_regular"
-                android:hint="@string/type_here"
-                android:inputType="textPersonName"
-                android:padding="@dimen/space_8x"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/ed_txt_dob"
-                app:layout_constraintTop_toBottomOf="@id/txt_view_nid" />
-
-            <TextView
-                android:id="@+id/txt_view_mobile_no"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/oxygen_bold"
-                android:text="@string/mobile_number"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toStartOf="@+id/txt_view_customer_type"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ed_txt_dob" />
-
-            <EditText
-                android:id="@+id/ed_txt_mobile_number"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_48x"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/input_border"
-                android:ems="10"
-                android:fontFamily="@font/oxygen_regular"
-                android:hint="@string/type_here"
-                android:inputType="phone"
-                android:padding="@dimen/space_8x"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toStartOf="@id/spinner_customer_type"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_view_mobile_no" />
-
-            <TextView
-                android:id="@+id/txt_view_customer_type"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/oxygen_bold"
-                android:text="@string/customer_type"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/txt_view_mobile_no"
-                app:layout_constraintTop_toBottomOf="@id/ed_txt_nid" />
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spinner_customer_type"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_48x"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/spinner_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/ed_txt_mobile_number"
-                app:layout_constraintTop_toBottomOf="@id/txt_view_customer_type" />
-
-            <TextView
-                android:id="@+id/txt_view_father_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/oxygen_bold"
-                android:text="@string/father_name"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toStartOf="@+id/txt_view_mother_name"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ed_txt_mobile_number" />
-
-            <EditText
-                android:id="@+id/ed_txt_father_name"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_48x"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/input_border"
-                android:ems="10"
-                android:fontFamily="@font/oxygen_regular"
-                android:hint="@string/type_here"
-                android:inputType="textPersonName"
-                android:padding="@dimen/space_8x"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toStartOf="@+id/txt_view_mother_name"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_view_father_name" />
-
-            <TextView
-                android:id="@+id/txt_view_mother_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/oxygen_bold"
-                android:text="@string/mother_name"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/txt_view_father_name"
-                app:layout_constraintTop_toBottomOf="@id/spinner_customer_type" />
-
-            <EditText
-                android:id="@+id/ed_txt_mother_name"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_48x"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/input_border"
-                android:ems="10"
-                android:fontFamily="@font/oxygen_regular"
-                android:hint="@string/type_here"
-                android:inputType="textPersonName"
-                android:padding="@dimen/space_8x"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@id/txt_view_father_name"
-                app:layout_constraintTop_toBottomOf="@id/txt_view_mother_name" />
-
-            <TextView
-                android:id="@+id/txt_view_country"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/oxygen_bold"
-                android:text="@string/country"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/ed_txt_mother_name"
-                app:layout_constraintTop_toBottomOf="@id/ed_txt_mother_name" />
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spinner_country"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_48x"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/spinner_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/txt_view_city"
-                app:layout_constraintTop_toBottomOf="@+id/txt_view_country" />
-
-            <TextView
-                android:id="@+id/txt_view_city"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/oxygen_bold"
-                android:text="@string/city"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toEndOf="@+id/ed_txt_father_name"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ed_txt_father_name" />
-
-            <EditText
-                android:id="@+id/ed_txt_city"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_48x"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/input_border"
-                android:ems="10"
-                android:fontFamily="@font/oxygen_regular"
-                android:hint="@string/type_here"
-                android:inputType="textPersonName"
-                android:padding="@dimen/space_8x"
-                android:textSize="@dimen/font_16x"
-                app:layout_constraintEnd_toEndOf="@+id/txt_view_city"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_view_city" />
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
 
             <Button
                 android:id="@+id/btn_next"

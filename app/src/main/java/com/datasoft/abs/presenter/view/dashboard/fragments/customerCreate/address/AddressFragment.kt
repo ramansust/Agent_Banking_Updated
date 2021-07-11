@@ -1,5 +1,6 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.address
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +45,10 @@ class AddressFragment : Fragment() {
 
         binding.btnBack.setOnClickListener {
             customerViewModel.requestCurrentStep(1)
+        }
+
+        binding.floatingButtonAdd.setOnClickListener {
+            startActivity(Intent(requireContext(), AddressActivity::class.java))
         }
     }
 

@@ -25,316 +25,264 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/txt_view_marital_status"
+                <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/marital_status"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toStartOf="@id/guideline_middle"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_marital_status"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/spinner_background"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_marital_status"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_marital_status"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_marital_status" />
+                    <TextView
+                        android:id="@+id/txt_view_marital_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/marital_status"
+                        android:textSize="@dimen/font_16x" />
 
-                <TextView
-                    android:id="@+id/txt_view_religion"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/religion"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/spinner_marital_status"
-                    app:layout_constraintStart_toStartOf="@+id/spinner_marital_status"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner_marital_status" />
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_marital_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/spinner_background" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_religion"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/spinner_background"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_religion"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_religion"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_religion" />
+                    <TextView
+                        android:id="@+id/txt_view_religion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/religion"
+                        android:textSize="@dimen/font_16x" />
 
-                <TextView
-                    android:id="@+id/txt_view_education"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/education"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/spinner_religion"
-                    app:layout_constraintStart_toStartOf="@+id/spinner_religion"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner_religion" />
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_religion"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/spinner_background" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_education"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/spinner_background"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_education"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_education"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_education" />
+                    <TextView
+                        android:id="@+id/txt_view_education"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/education"
+                        android:textSize="@dimen/font_16x" />
 
-                <TextView
-                    android:id="@+id/txt_view_nationality"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/nationality"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/spinner_education"
-                    app:layout_constraintStart_toStartOf="@+id/spinner_education"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner_education" />
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_education"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/spinner_background" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_nationality"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/spinner_background"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_nationality"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_nationality"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_nationality" />
+                    <TextView
+                        android:id="@+id/txt_view_nationality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/nationality"
+                        android:textSize="@dimen/font_16x" />
 
-                <TextView
-                    android:id="@+id/txt_view_vat"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/vat_registration_no"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/spinner_nationality"
-                    app:layout_constraintStart_toStartOf="@+id/spinner_nationality"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner_nationality" />
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_nationality"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/spinner_background" />
 
-                <EditText
-                    android:id="@+id/ed_txt_vat"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/input_border"
-                    android:ems="10"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:hint="@string/type_here"
-                    android:inputType="textPersonName"
-                    android:padding="@dimen/space_8x"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_vat"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_vat"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_vat" />
+                    <TextView
+                        android:id="@+id/txt_view_vat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/vat_registration_no"
+                        android:textSize="@dimen/font_16x" />
 
-                <TextView
-                    android:id="@+id/txt_view_monthly_income"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/monthly_income"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/ed_txt_vat"
-                    app:layout_constraintStart_toStartOf="@+id/ed_txt_vat"
-                    app:layout_constraintTop_toBottomOf="@+id/ed_txt_vat" />
+                    <EditText
+                        android:id="@+id/ed_txt_vat"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_border"
+                        android:ems="10"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
 
-                <EditText
-                    android:id="@+id/ed_txt_monthly_income"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/input_border"
-                    android:ems="10"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:hint="@string/type_here"
-                    android:inputType="textPersonName"
-                    android:padding="@dimen/space_8x"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_monthly_income"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_monthly_income"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_monthly_income" />
+                    <TextView
+                        android:id="@+id/txt_view_monthly_income"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/monthly_income"
+                        android:textSize="@dimen/font_16x" />
 
+                    <EditText
+                        android:id="@+id/ed_txt_monthly_income"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_border"
+                        android:ems="10"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
 
-                <TextView
-                    android:id="@+id/txt_view_spouse_name"
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/spouse_name"
-                    android:textSize="@dimen/font_16x"
+                    android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/guideline_middle"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <EditText
-                    android:id="@+id/ed_txt_spouse_name"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/input_border"
-                    android:ems="10"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:hint="@string/type_here"
-                    android:inputType="textPersonName"
-                    android:padding="@dimen/space_8x"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_spouse_name"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_spouse_name"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_spouse_name" />
+                    <TextView
+                        android:id="@+id/txt_view_spouse_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/spouse_name"
+                        android:textSize="@dimen/font_16x" />
 
-                <TextView
-                    android:id="@+id/txt_view_dependent"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/number_of_dependents"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/ed_txt_spouse_name"
-                    app:layout_constraintStart_toStartOf="@+id/ed_txt_spouse_name"
-                    app:layout_constraintTop_toBottomOf="@+id/ed_txt_spouse_name" />
+                    <EditText
+                        android:id="@+id/ed_txt_spouse_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_border"
+                        android:ems="10"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
 
-                <EditText
-                    android:id="@+id/ed_txt_dependent"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/input_border"
-                    android:ems="10"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:hint="@string/type_here"
-                    android:inputType="textPersonName"
-                    android:padding="@dimen/space_8x"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_dependent"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_dependent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_dependent" />
+                    <TextView
+                        android:id="@+id/txt_view_dependent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/number_of_dependents"
+                        android:textSize="@dimen/font_16x" />
 
-                <TextView
-                    android:id="@+id/txt_view_occupation"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/occupation"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/ed_txt_dependent"
-                    app:layout_constraintStart_toStartOf="@+id/ed_txt_dependent"
-                    app:layout_constraintTop_toBottomOf="@+id/ed_txt_dependent" />
+                    <EditText
+                        android:id="@+id/ed_txt_dependent"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_border"
+                        android:ems="10"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_occupation"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/spinner_background"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_occupation"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_occupation"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_occupation" />
+                    <TextView
+                        android:id="@+id/txt_view_occupation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/occupation"
+                        android:textSize="@dimen/font_16x" />
 
-                <TextView
-                    android:id="@+id/txt_view_birth_certificate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/birth_certificate_no"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/spinner_occupation"
-                    app:layout_constraintStart_toStartOf="@+id/spinner_occupation"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner_occupation" />
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_occupation"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/spinner_background" />
 
-                <EditText
-                    android:id="@+id/ed_txt_birth_certificate"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/input_border"
-                    android:ems="10"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:hint="@string/type_here"
-                    android:inputType="textPersonName"
-                    android:padding="@dimen/space_8x"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_birth_certificate"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_birth_certificate"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_birth_certificate" />
+                    <TextView
+                        android:id="@+id/txt_view_birth_certificate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/birth_certificate_no"
+                        android:textSize="@dimen/font_16x" />
 
-                <TextView
-                    android:id="@+id/txt_view_driving_license"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/driving_license"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/ed_txt_birth_certificate"
-                    app:layout_constraintStart_toStartOf="@+id/ed_txt_birth_certificate"
-                    app:layout_constraintTop_toBottomOf="@+id/ed_txt_birth_certificate" />
+                    <EditText
+                        android:id="@+id/ed_txt_birth_certificate"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_border"
+                        android:ems="10"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
 
-                <EditText
-                    android:id="@+id/ed_txt_driving_license"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/input_border"
-                    android:ems="10"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:hint="@string/type_here"
-                    android:inputType="textPersonName"
-                    android:padding="@dimen/space_8x"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_driving_license"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_driving_license"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_driving_license" />
+                    <TextView
+                        android:id="@+id/txt_view_driving_license"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/driving_license"
+                        android:textSize="@dimen/font_16x" />
 
-                <TextView
-                    android:id="@+id/txt_view_source_of_fund"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/source_of_fund_"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/ed_txt_driving_license"
-                    app:layout_constraintStart_toStartOf="@+id/ed_txt_driving_license"
-                    app:layout_constraintTop_toBottomOf="@+id/ed_txt_driving_license" />
+                    <EditText
+                        android:id="@+id/ed_txt_driving_license"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_border"
+                        android:ems="10"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
 
-                <EditText
-                    android:id="@+id/ed_txt_source_of_fund"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/input_border"
-                    android:ems="10"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:hint="@string/type_here"
-                    android:inputType="textPersonName"
-                    android:padding="@dimen/space_8x"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_source_of_fund"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_source_of_fund"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_source_of_fund" />
+                    <TextView
+                        android:id="@+id/txt_view_source_of_fund"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/source_of_fund_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_source_of_fund"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_border"
+                        android:ems="10"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                </LinearLayout>
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline_middle"
