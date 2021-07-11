@@ -141,6 +141,9 @@ class PhotoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        customerViewModel.requestVisibility(false)
+        customerViewModel.requestListener(false)
+
         viewModel.getSavedPhoto().observe(viewLifecycleOwner, {
             binding.imgViewPhoto.setImageBitmap(it)
         })

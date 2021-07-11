@@ -39,6 +39,9 @@ class ReviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        customerViewModel.requestVisibility(false)
+        customerViewModel.requestListener(false)
+
         binding.btnNext.setOnClickListener {
 //            customerViewModel.requestCurrentStep(6)
         }

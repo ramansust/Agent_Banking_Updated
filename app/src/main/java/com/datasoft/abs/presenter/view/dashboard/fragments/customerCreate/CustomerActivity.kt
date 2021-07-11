@@ -20,6 +20,14 @@ class CustomerActivity : BaseActivity() {
     private var navController: NavController? = null
 
     override fun observeViewModel() {
+
+        customerViewModel.getAddVisibility().observe(this, {
+            if(it)
+                showAddButton()
+            else
+                hideAddButton()
+        })
+
         customerViewModel.getCurrentStep().observe(this, {
             when (it) {
                 0 -> {
@@ -172,6 +180,10 @@ class CustomerActivity : BaseActivity() {
             finish()
         }
 
+        binding.appBarCustomer.btnSave.setOnClickListener {
+            customerViewModel.requestListener(true)
+        }
+
         setTitle()
     }
 
@@ -241,5 +253,13 @@ class CustomerActivity : BaseActivity() {
     override fun onSaveInstanceState(oldInstanceState: Bundle) {
         super.onSaveInstanceState(oldInstanceState)
         oldInstanceState.clear()
+    }
+
+    private fun showAddButton() {
+        binding.appBarCustomer.btnSave.visibility = View.VISIBLE
+    }
+
+    private fun hideAddButton() {
+        binding.appBarCustomer.btnSave.visibility = View.INVISIBLE
     }
 }

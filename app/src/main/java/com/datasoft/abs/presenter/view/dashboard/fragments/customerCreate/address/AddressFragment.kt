@@ -1,29 +1,32 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.address
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.databinding.AddressFragmentBinding
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddressFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = AddressFragment()
-    }
-
     private val customerViewModel: CustomerViewModel by activityViewModels()
-    private val viewModel: AddressViewModel by activityViewModels()
+    private val addressViewModel: AddressViewModel by activityViewModels()
     private var _binding: AddressFragmentBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    @Inject
+    lateinit var addressAdapter: AddressListAdapter
+
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -39,6 +42,21 @@ class AddressFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView()
+
+        addressViewModel.getSavedData().observe(viewLifecycleOwner, {
+            addressAdapter.differ.submitList(it)
+            binding.btnNext.isEnabled = true
+        })
+
+        customerViewModel.getAddListener().observe(viewLifecycleOwner, {
+            if(it) {
+                resultLauncher.launch(Intent(requireContext(), AddressActivity::class.java))
+            }
+        })
+
+        customerViewModel.requestVisibility(true)
+
         binding.btnNext.setOnClickListener {
             customerViewModel.requestCurrentStep(3)
         }
@@ -46,9 +64,19 @@ class AddressFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             customerViewModel.requestCurrentStep(1)
         }
+    }
 
-        binding.floatingButtonAdd.setOnClickListener {
-            startActivity(Intent(requireContext(), AddressActivity::class.java))
+    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            addressViewModel.notifyData(result.data?.getStringExtra("data").toString())
+        }
+    }
+
+    private fun setupRecyclerView() {
+        binding.recyclerView.apply {
+            adapter = addressAdapter
+            layoutManager = LinearLayoutManager(activity)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
     }
 

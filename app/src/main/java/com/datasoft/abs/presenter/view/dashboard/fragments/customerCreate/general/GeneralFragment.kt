@@ -48,6 +48,9 @@ class GeneralFragment : Fragment() {
         val customerList = mutableListOf<CommonModel>()
         val countryList = mutableListOf<CommonModel>()
 
+        customerViewModel.requestVisibility(false)
+        customerViewModel.requestListener(false)
+
         customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
             when (response) {

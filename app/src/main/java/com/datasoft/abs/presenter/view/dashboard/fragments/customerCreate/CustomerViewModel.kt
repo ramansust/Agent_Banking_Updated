@@ -26,6 +26,12 @@ class CustomerViewModel @Inject constructor(
     private val currentStep: MutableLiveData<Int> = MutableLiveData()
     fun getCurrentStep(): LiveData<Int> = currentStep
 
+    private val addListener: MutableLiveData<Boolean> = MutableLiveData()
+    fun getAddListener(): LiveData<Boolean> = addListener
+
+    private val addVisibility: MutableLiveData<Boolean> = MutableLiveData()
+    fun getAddVisibility(): LiveData<Boolean> = addVisibility
+
     fun configData() {
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
@@ -53,6 +59,18 @@ class CustomerViewModel @Inject constructor(
     fun requestCurrentStep(index: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             currentStep.postValue(index)
+        }
+    }
+
+    fun requestListener(value: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            addListener.postValue(value)
+        }
+    }
+
+    fun requestVisibility(value: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            addVisibility.postValue(value)
         }
     }
 
