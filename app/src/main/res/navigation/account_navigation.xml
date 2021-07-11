@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/card_view_introducer"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.introducer.IntroducerFragment"
-        tools:layout="@layout/signature_fragment" />
+        tools:layout="@layout/fragment_documents" />
 
     <fragment
         android:id="@+id/card_view_transaction_profile"

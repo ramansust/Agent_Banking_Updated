@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.datasoft.abs.databinding.NomineeFragmentBinding
+import com.datasoft.abs.databinding.KycFragmentBinding
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,10 +19,9 @@ class KYCFragment : Fragment() {
 
     private val customerViewModel: CustomerViewModel by activityViewModels()
     private val viewModel: KYCViewModel by activityViewModels()
-    private var _binding: NomineeFragmentBinding? = null
+    private var _binding: KycFragmentBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -31,7 +30,7 @@ class KYCFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = NomineeFragmentBinding.inflate(inflater, container, false)
+        _binding = KycFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -44,10 +43,6 @@ class KYCFragment : Fragment() {
 
         binding.btnBack.setOnClickListener {
             customerViewModel.requestCurrentStep(5)
-        }
-
-        binding.btnPreview.setOnClickListener {
-//            customerViewModel.requestCurrentStep(2)
         }
     }
 

@@ -128,4 +128,29 @@
     <string name="salutation">Salutation</string>
     <string name="documents">Documents</string>
     <string name="submit">Submit</string>
+
+    <string name="risk_grading">Risk Grading</string>
+    <string name="type_of_boarding">Type of On-boarding</string>
+    <string name="black_listed">Black Listed</string>
+    <string name="close_associates_related_pep">Close associates related to PEP</string>
+    <string name="type_of_product">Type of Product</string>
+    <string name="yearly_transaction_worth">Yearly Transaction Worth</string>
+    <string name="resident_statue">Resident Status</string>
+    <string name="politically_exposed_person">Politically Exposed Person (PEP)</string>
+    <string name="interviewed_personally">Interviewed Personally (IP)</string>
+    <string name="profession">Profession</string>
+    <string name="transparency_risk">Transparency Risk</string>
+
+    <string name="documents_identification">Documents of Identification</string>
+    <string name="document_type">Document Type</string>
+    <string name="photocopy_collected">Photocopy Collected</string>
+    <string name="verified">Verified</string>
+
+    <string name="related_documents">Related Documents</string>
+    <string name="document_type_">Document Type*</string>
+    <string name="document_id">Document ID*</string>
+    <string name="issue_date">Issue Date*</string>
+    <string name="expiry_date">Expiry Date*</string>
+    <string name="description">Description</string>
+    <string name="related_documents_use">Related Documents Use</string>
 </resources>

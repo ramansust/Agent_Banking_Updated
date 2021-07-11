@@ -39,7 +39,7 @@
         android:id="@+id/card_view_documents"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.documents.DocumentsFragment"
         android:label="signature_fragment"
-        tools:layout="@layout/signature_fragment" />
+        tools:layout="@layout/fragment_documents" />
 
     <fragment
         android:id="@+id/card_view_kyc"
