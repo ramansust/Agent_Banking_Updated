@@ -17,6 +17,5 @@ data class ConfigResponse(
     val nationalityList : List<CommonModel>,
     val fingerKey : List<String>,
     val documentConfigData : List<DocumentConfigData>,
-    val countryList : List<CommonModel>,
     val customerTypeList : List<CommonModel>
 )

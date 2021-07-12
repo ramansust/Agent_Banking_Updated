@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.datasoft.abs.data.dto.CommonRequest
 import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
+import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.config.ConfigResponse
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
@@ -48,6 +49,10 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getConfigData(): Response<ConfigResponse> {
         return restApiService.getConfigData()
+    }
+
+    override suspend fun getCascadeAddress(area: Int, id: Int): Response<List<CommonModel>> {
+        return restApiService.getCascadeAddress(area, id)
     }
 
     override suspend fun getCustomerListData(customerRequest: CustomerRequest): Response<CustomerResponse> {

@@ -8,4 +8,5 @@ object Constant {
     const val DATABASE_NAME = "AgentBanking"
     const val PER_PAGE_ITEM = 10
     const val USER_NAME = "USER_NAME"
+    const val ADDRESS_INFO = "ADDRESS_INFO"
 }

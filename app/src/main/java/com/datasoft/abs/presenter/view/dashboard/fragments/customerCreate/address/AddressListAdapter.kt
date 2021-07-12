@@ -1,10 +1,12 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.address
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.datasoft.abs.data.dto.createCustomer.AddressInfo
 import com.datasoft.abs.databinding.AddressRowBinding
 import javax.inject.Inject
 
@@ -14,12 +16,12 @@ class AddressListAdapter @Inject constructor() :
     inner class AddressViewHolder(val binding: AddressRowBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<AddressInfo>() {
+        override fun areItemsTheSame(oldItem: AddressInfo, newItem: AddressInfo): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areContentsTheSame(oldItem: AddressInfo, newItem: AddressInfo): Boolean {
             return oldItem == newItem
         }
     }
@@ -36,21 +38,22 @@ class AddressListAdapter @Inject constructor() :
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((String) -> Unit)? = null
+    private var onItemClickListener: ((AddressInfo) -> Unit)? = null
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: AddressViewHolder, position: Int) {
         val value = differ.currentList[position]
 
         with(value) {
-            holder.binding.txtViewAddress.text = value
+            holder.binding.txtViewAddress.text = "${value.houseNo}, ${value.flatNo}, ${value.roadNo}, ${value.blockNo}, ${value.city}, ${value.postCode}, ${value.unionValue}, ${value.thanaValue}, ${value.districtValue}"
         }
 
-        holder.itemView.setOnClickListener {
+        holder.binding.imgViewDelete.setOnClickListener {
             onItemClickListener?.let { it(value) }
         }
     }
 
-    fun setOnItemClickListener(listener: (String) -> Unit) {
+    fun setOnItemClickListener(listener: (AddressInfo) -> Unit) {
         onItemClickListener = listener
     }
 }

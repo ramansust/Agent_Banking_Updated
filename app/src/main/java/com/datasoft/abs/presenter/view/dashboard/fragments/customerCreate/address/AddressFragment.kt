@@ -11,7 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.datasoft.abs.data.dto.createCustomer.AddressInfo
 import com.datasoft.abs.databinding.AddressFragmentBinding
+import com.datasoft.abs.presenter.utils.Constant.ADDRESS_INFO
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -46,7 +48,7 @@ class AddressFragment : Fragment() {
 
         addressViewModel.getSavedData().observe(viewLifecycleOwner, {
             addressAdapter.differ.submitList(it)
-            binding.btnNext.isEnabled = true
+            binding.btnNext.isEnabled = it.size > 0
         })
 
         customerViewModel.getAddListener().observe(viewLifecycleOwner, {
@@ -64,11 +66,15 @@ class AddressFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             customerViewModel.requestCurrentStep(1)
         }
+
+        addressAdapter.setOnItemClickListener {
+            addressViewModel.removeData(it)
+        }
     }
 
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            addressViewModel.notifyData(result.data?.getStringExtra("data").toString())
+            addressViewModel.notifyData(result.data?.getSerializableExtra(ADDRESS_INFO) as AddressInfo)
         }
     }
 

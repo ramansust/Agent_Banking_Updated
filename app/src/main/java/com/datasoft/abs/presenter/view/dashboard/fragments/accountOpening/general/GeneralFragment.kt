@@ -59,7 +59,7 @@ class GeneralFragment : Fragment() {
                         binding.spinnerCustomerType.adapter =
                             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, customerList)
 
-                        for (country in it.countryList)
+                        for (country in it.nationalityList)
                             countryList.add(country)
 
                         binding.spinnerCountry.adapter =

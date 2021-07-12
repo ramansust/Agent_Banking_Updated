@@ -3,6 +3,7 @@ package com.datasoft.abs.data.source.remote
 import com.datasoft.abs.data.dto.CommonRequest
 import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
+import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.config.ConfigResponse
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
@@ -19,6 +20,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 import java.util.*
 
 interface RestApiService {
@@ -54,4 +56,7 @@ interface RestApiService {
 
     @POST("api/transfer-list")
     suspend fun getTransferData(@Body commonRequest: CommonRequest): Response<Objects>
+
+    @GET("api/cascade-address")
+    suspend fun getCascadeAddress(@Query("forArea") area: Int, @Query("id") id: Int) : Response<List<CommonModel>>
 }
