@@ -45,20 +45,6 @@ class GeneralViewModel @Inject constructor(
 
             dedupeData.postValue(Resource.Loading())
 
-            val saveData = SaveData(
-                customerType,
-                fatherName,
-                firstName,
-                lastName,
-                dob,
-                mobileNumber,
-                nid,
-                nationalityId,
-                motherName,
-                city
-            )
-            savedData.postValue(saveData)
-
             if (firstName.isEmpty() || lastName.isEmpty() || dob.isEmpty() || nid.isEmpty() || mobileNumber.isEmpty()
                 || fatherName.isEmpty() || motherName.isEmpty() || city.isEmpty()
             ) {

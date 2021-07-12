@@ -45,6 +45,8 @@ class GeneralFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val salutationList = mutableListOf<CommonModel>()
+        val genderList = mutableListOf<CommonModel>()
         val customerList = mutableListOf<CommonModel>()
         val countryList = mutableListOf<CommonModel>()
 
@@ -56,15 +58,16 @@ class GeneralFragment : Fragment() {
             when (response) {
                 is Resource.Success -> {
                     response.data?.let {
-                        for (customer in it.customerTypeList)
-                            customerList.add(customer)
 
+                        genderList.addAll(it.genderList)
+                        binding.spinnerGender.adapter =
+                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, genderList)
+
+                        customerList.addAll(it.customerTypeList)
                         binding.spinnerCustomerType.adapter =
                             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, customerList)
 
-                        for (country in it.nationalityList)
-                            countryList.add(country)
-
+                        countryList.addAll(it.nationalityList)
                         binding.spinnerCountry.adapter =
                             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, countryList)
                     }
@@ -81,14 +84,16 @@ class GeneralFragment : Fragment() {
 
 
         viewModel.getSavedData().observe(viewLifecycleOwner, { response ->
+            if(salutationList.isNotEmpty()) binding.spinnerSalutation.setSelection(salutationList.indexOf(CommonModel(response.salutation)))
             binding.edTxtFirstName.setText(response.firstName)
             binding.edTxtLastName.setText(response.lastName)
             binding.edTxtDob.setText(response.birthDate)
             binding.edTxtNid.setText(response.nationalID)
             binding.edTxtMobileNumber.setText(response.mobileNumber)
             binding.edTxtFatherName.setText(response.fatherName)
-            binding.spinnerCustomerType.setSelection(customerList.indexOf(CommonModel(response.customerType)))
-            binding.spinnerCountry.setSelection(countryList.indexOf(CommonModel(response.nationalityId)))
+            if(customerList.isNotEmpty()) binding.spinnerCustomerType.setSelection(customerList.indexOf(CommonModel(response.customerType)))
+            if(countryList.isNotEmpty()) binding.spinnerCountry.setSelection(countryList.indexOf(CommonModel(response.nationalityId)))
+            if(genderList.isNotEmpty()) binding.spinnerGender.setSelection(genderList.indexOf(CommonModel(response.gender)))
             binding.edTxtMotherName.setText(response.motherName)
             binding.edTxtCity.setText(response.city)
         })
@@ -125,14 +130,16 @@ class GeneralFragment : Fragment() {
 
         binding.btnNext.setOnClickListener {
             viewModel.requestData(
+                if(salutationList.isNotEmpty()) salutationList[binding.spinnerSalutation.selectedItemPosition].id else 0,
                 binding.edTxtFirstName.text.trim().toString(),
                 binding.edTxtLastName.text.trim().toString(),
                 binding.edTxtDob.text.trim().toString(),
                 binding.edTxtNid.text.trim().toString(),
+                if(genderList.isNotEmpty()) salutationList[binding.spinnerGender.selectedItemPosition].id else 0,
                 binding.edTxtMobileNumber.text.trim().toString(),
                 binding.edTxtFatherName.text.trim().toString(),
-                customerList[binding.spinnerCustomerType.selectedItemPosition].id,
-                countryList[binding.spinnerCountry.selectedItemPosition].id,
+                if(customerList.isNotEmpty()) customerList[binding.spinnerCustomerType.selectedItemPosition].id else 0,
+                if(countryList.isNotEmpty()) countryList[binding.spinnerCountry.selectedItemPosition].id else 0,
                 binding.edTxtMotherName.text.trim().toString(),
                 binding.edTxtCity.text.trim().toString()
             )

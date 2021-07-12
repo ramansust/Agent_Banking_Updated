@@ -30,10 +30,12 @@ class GeneralViewModel @Inject constructor(
     fun getSavedData(): LiveData<SaveData> = savedData
 
     fun requestData(
+        salutation: Int,
         firstName: String,
         lastName: String,
         dob: String,
         nid: String,
+        gender: Int,
         mobileNumber: String,
         fatherName: String,
         customerType: Int,
@@ -46,6 +48,7 @@ class GeneralViewModel @Inject constructor(
             dedupeData.postValue(Resource.Loading())
 
             val saveData = SaveData(
+                salutation,
                 customerType,
                 fatherName,
                 firstName,
@@ -54,6 +57,7 @@ class GeneralViewModel @Inject constructor(
                 mobileNumber,
                 nid,
                 nationalityId,
+                gender,
                 motherName,
                 city
             )
