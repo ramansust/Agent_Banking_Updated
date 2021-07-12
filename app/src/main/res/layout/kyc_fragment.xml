@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ScrollView
+            <androidx.core.widget.NestedScrollView
                 android:id="@+id/scroll_view"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -198,7 +198,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/oxygen_bold"
-                            android:text="@string/zip_code"
+                            android:text="@string/profession"
                             android:textSize="@dimen/font_16x" />
 
                         <androidx.appcompat.widget.AppCompatSpinner
@@ -245,9 +245,75 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/linearLayout" />
 
+                    <LinearLayout
+                        android:id="@+id/linearLayout_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_16x"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:layout_marginEnd="@dimen/space_16x"
+                        android:orientation="horizontal"
+                        android:weightSum="1"
+                        android:background="@color/shimmer_background_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_view_documents_of_identifications">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/document_type"
+                            android:textColor="@color/customer_text"
+                            android:textSize="@dimen/font_20x"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.25"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/photocopy_collected"
+                            android:textColor="@color/customer_text"
+                            android:textSize="@dimen/font_20x"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.25"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/verified"
+                            android:textColor="@color/customer_text"
+                            android:textSize="@dimen/font_20x"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/space_8x"
+                        android:layout_marginEnd="@dimen/space_8x"
+                        android:layout_marginBottom="@dimen/space_8x"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout_header" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </ScrollView>
+            </androidx.core.widget.NestedScrollView>
 
             <Button
                 android:id="@+id/btn_next"

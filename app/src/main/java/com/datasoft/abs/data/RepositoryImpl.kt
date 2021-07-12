@@ -6,6 +6,7 @@ import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.config.ConfigResponse
+import com.datasoft.abs.data.dto.config.RiskGradeResponse
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
 import com.datasoft.abs.data.dto.customerList.CustomerResponse
@@ -49,6 +50,10 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getConfigData(): Response<ConfigResponse> {
         return restApiService.getConfigData()
+    }
+
+    override suspend fun getRiskGradeConfigData(): Response<RiskGradeResponse> {
+        return restApiService.getRiskGradeConfig()
     }
 
     override suspend fun getCascadeAddress(area: Int, id: Int): Response<List<CommonModel>> {

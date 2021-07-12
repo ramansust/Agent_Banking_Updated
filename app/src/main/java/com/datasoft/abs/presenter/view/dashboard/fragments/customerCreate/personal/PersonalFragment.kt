@@ -136,10 +136,10 @@ class PersonalFragment : Fragment() {
             viewModel.checkData(
                 if(maritalList.isNotEmpty()) maritalList[binding.spinnerMaritalStatus.selectedItemPosition].id else 0,
                 binding.edTxtSpouseName.text.trim().toString(),
-                if(religionList.isNotEmpty()) religionList[binding.spinnerEducation.selectedItemPosition].id else 0,
+                if(religionList.isNotEmpty()) religionList[binding.spinnerReligion.selectedItemPosition].id else 0,
                 binding.edTxtDependent.text.trim().toString(),
                 if(educationList.isNotEmpty()) educationList[binding.spinnerEducation.selectedItemPosition].id else 0,
-                if(occupationList.isNotEmpty()) maritalList[binding.spinnerOccupation.selectedItemPosition].id else 0,
+                if(occupationList.isNotEmpty()) occupationList[binding.spinnerOccupation.selectedItemPosition].id else 0,
                 if(nationalityList.isNotEmpty()) nationalityList[binding.spinnerNationality.selectedItemPosition].id else 0,
                 binding.edTxtBirthCertificate.text.trim().toString(),
                 binding.edTxtVat.text.trim().toString(),

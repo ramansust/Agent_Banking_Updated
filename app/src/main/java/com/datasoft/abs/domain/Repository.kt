@@ -6,6 +6,7 @@ import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.config.ConfigResponse
+import com.datasoft.abs.data.dto.config.RiskGradeResponse
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
 import com.datasoft.abs.data.dto.customerList.CustomerResponse
@@ -25,6 +26,7 @@ interface Repository {
     suspend fun getDashboardData(dayNo: Int): Response<DashboardResponse>
 
     suspend fun getConfigData(): Response<ConfigResponse>
+    suspend fun getRiskGradeConfigData(): Response<RiskGradeResponse>
     suspend fun getCascadeAddress(area: Int, id: Int): Response<List<CommonModel>>
     suspend fun getCustomerListData(customerRequest: CustomerRequest): Response<CustomerResponse>
     suspend fun getAccountListData(accountRequest: AccountRequest): Response<AccountResponse>
