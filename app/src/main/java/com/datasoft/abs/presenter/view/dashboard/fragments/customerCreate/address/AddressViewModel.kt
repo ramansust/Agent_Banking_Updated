@@ -21,9 +21,6 @@ class AddressViewModel @Inject constructor(
     private val network: Network
 ) : ViewModel() {
 
-    private val district = MutableLiveData<Resource<List<CommonModel>>>()
-    fun getDistrictData(): LiveData<Resource<List<CommonModel>>> = district
-
     private val thana = MutableLiveData<Resource<List<CommonModel>>>()
     fun getThanaData(): LiveData<Resource<List<CommonModel>>> = thana
 
@@ -35,30 +32,6 @@ class AddressViewModel @Inject constructor(
 
     private val sendMessage = MutableLiveData<Resource<AddressInfo>>()
     fun getMessage(): LiveData<Resource<AddressInfo>> = sendMessage
-
-    fun districtData(area: Int, id: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            if (network.isConnected()) {
-                try {
-                    val response = repository.getCascadeAddress(area, id)
-                    district.postValue(handleResponse(response))
-                } catch (e: Exception) {
-                    district.postValue(
-                        Resource.Error(
-                            "Something went wrong!", null
-                        )
-                    )
-                    e.printStackTrace()
-                }
-            } else {
-                district.postValue(
-                    Resource.Error(
-                        "No internet connection", null
-                    )
-                )
-            }
-        }
-    }
 
     fun thanaData(area: Int, id: Int) {
         viewModelScope.launch(Dispatchers.IO) {

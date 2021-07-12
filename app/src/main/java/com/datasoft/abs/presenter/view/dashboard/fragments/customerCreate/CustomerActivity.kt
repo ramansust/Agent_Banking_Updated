@@ -10,12 +10,14 @@ import androidx.navigation.findNavController
 import com.datasoft.abs.R
 import com.datasoft.abs.databinding.ActivityCustomerBinding
 import com.datasoft.abs.presenter.base.BaseActivity
+import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.kyc.KYCViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CustomerActivity : BaseActivity() {
 
     private val customerViewModel: CustomerViewModel by viewModels()
+    private val kycViewModel: KYCViewModel by viewModels()
     private lateinit var binding: ActivityCustomerBinding
     private var navController: NavController? = null
 
@@ -141,6 +143,7 @@ class CustomerActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         customerViewModel.configData()
+        kycViewModel.configData()
 
         navController = findNavController(R.id.nav_host_fragment_content_customer)
         setCurrentState(0)

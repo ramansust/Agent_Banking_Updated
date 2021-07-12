@@ -59,6 +59,10 @@ class GeneralFragment : Fragment() {
                 is Resource.Success -> {
                     response.data?.let {
 
+                        salutationList.addAll(it.salutationList)
+                        binding.spinnerSalutation.adapter =
+                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, salutationList)
+
                         genderList.addAll(it.genderList)
                         binding.spinnerGender.adapter =
                             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, genderList)

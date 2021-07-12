@@ -47,6 +47,10 @@ class AddressActivity : BaseActivity() {
                         binding.spinnerCountry.adapter =
                             ArrayAdapter(this, android.R.layout.simple_spinner_item, countryList)
 
+                        districtList.addAll(it.districtList)
+                        binding.spinnerDistrict.adapter =
+                            ArrayAdapter(this, android.R.layout.simple_spinner_item, districtList)
+
                         contactList.addAll(it.contactType)
                         binding.spinnerContactType.adapter =
                             ArrayAdapter(this, android.R.layout.simple_spinner_item, contactList)
@@ -58,30 +62,6 @@ class AddressActivity : BaseActivity() {
                     }
                 }
                 is Resource.Loading -> {
-                }
-            }
-        })
-
-        addressViewModel.getDistrictData().observe(this, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let {
-
-                        districtList.clear()
-                        districtList.addAll(it)
-                        binding.spinnerDistrict.adapter =
-                            ArrayAdapter(this, android.R.layout.simple_spinner_item, districtList)
-                    }
-                }
-
-                is Resource.Error -> {
-                    response.message?.let { message ->
-                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                is Resource.Loading -> {
-
                 }
             }
         })
@@ -195,21 +175,6 @@ class AddressActivity : BaseActivity() {
                 if(contactList.isNotEmpty()) contactList[binding.spinnerContactType.selectedItemPosition].id else 0,
                 binding.edTxtContactNo.text.trim().toString()
             )
-        }
-
-        binding.spinnerCountry.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                addressViewModel.districtData(AreaCode.DISTRICT.type, countryList[position].id)
-            }
         }
 
         binding.spinnerDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

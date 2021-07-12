@@ -55,7 +55,7 @@ class PersonalFragment : Fragment() {
                 is Resource.Success -> {
                     response.data?.let {
 
-//                        maritalList.addAll(it.m)
+                        maritalList.addAll(it.maritalStatusList)
                         binding.spinnerMaritalStatus.adapter =
                             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, maritalList)
 
@@ -63,7 +63,7 @@ class PersonalFragment : Fragment() {
                         binding.spinnerReligion.adapter =
                             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, religionList)
 
-//                        educationList.addAll(it.ed)
+                        educationList.addAll(it.educationList)
                         binding.spinnerEducation.adapter =
                             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, educationList)
 
