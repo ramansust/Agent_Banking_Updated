@@ -44,7 +44,7 @@ class AddressListAdapter @Inject constructor() :
     override fun onBindViewHolder(holder: AddressViewHolder, position: Int) {
         val value = differ.currentList[position]
 
-        holder.binding.txtViewAddress.text = "${value.houseNo}, ${value.city}, ${value.postCode}, ${value.thanaValue}, ${value.districtValue}"
+        holder.binding.txtViewAddress.text = "${position + 1}. ${value.houseNo}, ${value.city}, ${value.postCode}, ${value.thanaValue}, ${value.districtValue}"
 
         holder.binding.imgViewDelete.setOnClickListener {
             onItemClickListener?.let { it(value) }

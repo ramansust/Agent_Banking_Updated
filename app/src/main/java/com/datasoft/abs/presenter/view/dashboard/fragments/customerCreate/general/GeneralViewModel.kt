@@ -132,13 +132,13 @@ class GeneralViewModel @Inject constructor(
                         if (response.isSuccessful) {
                             response.body()?.let {
                                 return@let if (it.responseCode == "200") {
-                                    Resource.Success(resultResponse)
+                                    Resource.Success(response)
                                 } else
                                     Resource.Error(resultResponse.message)
                             }
                         }
                     }
-                    Resource.Error(resultResponse.message)
+                    Resource.Success(resultResponse)
                 } else
                     Resource.Error(resultResponse.message)
             }

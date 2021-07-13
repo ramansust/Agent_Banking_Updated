@@ -27,6 +27,7 @@ class KYCFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+    private var isChecked = false
 
     @Inject
     lateinit var documentAdapter: VerifyListAdapter
@@ -247,9 +248,13 @@ class KYCFragment : Fragment() {
                     CommonModel(it.transparencyRisk)
                 )
             )
+
+            if(isChecked)
+                customerViewModel.requestCurrentStep(7)
         })
 
         binding.btnNext.setOnClickListener {
+            isChecked = true
             viewModel.saveData(
                 if (onBoardingList.isNotEmpty()) onBoardingList[binding.spinnerOnBoarding.selectedItemPosition].id else 0,
                 if (residentList.isNotEmpty()) residentList[binding.spinnerResidentStatus.selectedItemPosition].id else 0,

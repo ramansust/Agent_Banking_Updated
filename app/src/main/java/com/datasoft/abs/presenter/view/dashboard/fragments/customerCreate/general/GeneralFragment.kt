@@ -29,9 +29,9 @@ class GeneralFragment : Fragment() {
 
     private val myCalendar: Calendar = Calendar.getInstance()
 
-
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+    private var isChecked = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -108,7 +108,8 @@ class GeneralFragment : Fragment() {
                 is Resource.Success -> {
 //                    goneProgressBar()
                     response.data?.let {
-                        customerViewModel.requestCurrentStep(1)
+                        if(isChecked)
+                            customerViewModel.requestCurrentStep(1)
                     }
                 }
                 is Resource.Error -> {
@@ -133,6 +134,7 @@ class GeneralFragment : Fragment() {
         }
 
         binding.btnNext.setOnClickListener {
+            isChecked = true
             viewModel.requestData(
                 if(salutationList.isNotEmpty()) salutationList[binding.spinnerSalutation.selectedItemPosition].id else 0,
                 binding.edTxtFirstName.text.trim().toString(),
