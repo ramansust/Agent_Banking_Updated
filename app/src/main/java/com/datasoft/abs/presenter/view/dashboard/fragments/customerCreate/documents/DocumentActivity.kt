@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.datasoft.abs.data.dto.config.DocumentConfigData
 import com.datasoft.abs.databinding.DocumentsActivityBinding
@@ -16,6 +18,7 @@ import com.datasoft.abs.presenter.base.BaseActivity
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
+import com.github.dhaval2404.imagepicker.ImagePicker
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -142,6 +145,30 @@ class DocumentActivity : BaseActivity() {
                 myCalendar[Calendar.DAY_OF_MONTH]
             ).show()
         }
+
+        binding.btnTakeFront.setOnClickListener {
+//            takePhotoUsingCamera.launch()
+            ImagePicker.with(this)
+                .crop()
+                .compress(1024)         //Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+                .createIntent { intent ->
+                    startForFrontResult.launch(intent)
+                }
+
+        }
+
+        binding.btnTakeBack.setOnClickListener {
+//            takePhotoUsingCamera.launch()
+            ImagePicker.with(this)
+                .crop()
+                .compress(1024)         //Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+                .createIntent { intent ->
+                    startForBackResult.launch(intent)
+                }
+
+        }
     }
 
     private var dateIssue = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
@@ -175,4 +202,42 @@ class DocumentActivity : BaseActivity() {
         super.onSaveInstanceState(oldInstanceState)
         oldInstanceState.clear()
     }
+
+    private val startForFrontResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    val fileUri = data?.data!!
+                    binding.imgViewFront.setImageURI(fileUri)
+                }
+                ImagePicker.RESULT_ERROR -> {
+                    Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    private val startForBackResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    val fileUri = data?.data!!
+                    binding.imgViewBack.setImageURI(fileUri)
+                }
+                ImagePicker.RESULT_ERROR -> {
+                    Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 }
