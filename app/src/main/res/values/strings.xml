@@ -93,6 +93,8 @@
     <string name="please_attach_your_nid">Please attach your NID</string>
     <string name="nid_front">Front side NID</string>
     <string name="nid_back">Back side NID</string>
+    <string name="front_image">Front side Image</string>
+    <string name="back_image">Back side Image</string>
     <string name="add_new">+Add New</string>
     <string name="search">Search</string>
 
@@ -156,4 +158,7 @@
     <string name="add_address">Add Address</string>
     <string name="contact">Contact</string>
     <string name="add">Add</string>
+    <string name="add_document">Add Document</string>
+    <string name="tracing_id">Tracing ID</string>
+    <string name="no_content_available">No Contents Available</string>
 </resources>

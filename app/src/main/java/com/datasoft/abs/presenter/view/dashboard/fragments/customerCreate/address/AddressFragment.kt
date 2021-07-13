@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -48,6 +49,10 @@ class AddressFragment : Fragment() {
 
         addressViewModel.getSavedData().observe(viewLifecycleOwner, {
             addressAdapter.differ.submitList(it)
+
+            binding.txtViewNoEntry.isVisible = it.size <= 0
+            binding.recyclerView.isVisible = it.size > 0
+
             binding.btnNext.isEnabled = it.size > 0
         })
 

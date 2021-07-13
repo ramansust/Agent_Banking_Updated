@@ -28,7 +28,7 @@ class KYCFragment : Fragment() {
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var documentAdapter: DocumentListAdapter
+    lateinit var documentAdapter: VerifyListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,

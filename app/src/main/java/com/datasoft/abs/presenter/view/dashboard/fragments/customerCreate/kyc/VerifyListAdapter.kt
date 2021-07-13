@@ -10,8 +10,8 @@ import com.datasoft.abs.data.dto.createCustomer.AddressInfo
 import com.datasoft.abs.databinding.DocumentRowBinding
 import javax.inject.Inject
 
-class DocumentListAdapter @Inject constructor() :
-    RecyclerView.Adapter<DocumentListAdapter.DocumentViewHolder>() {
+class VerifyListAdapter @Inject constructor() :
+    RecyclerView.Adapter<VerifyListAdapter.DocumentViewHolder>() {
 
     inner class DocumentViewHolder(val binding: DocumentRowBinding) :
         RecyclerView.ViewHolder(binding.root)
