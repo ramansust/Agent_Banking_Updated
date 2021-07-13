@@ -28,6 +28,7 @@ class DocumentsFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+    private var isAddEnabled = false
 
     @Inject
     lateinit var documentAdapter: DocumentListAdapter
@@ -76,9 +77,11 @@ class DocumentsFragment : Fragment() {
         })
 
         customerViewModel.getAddListener().observe(viewLifecycleOwner, {
-            if (it) {
+            if (it && isAddEnabled) {
                 resultLauncher.launch(Intent(requireContext(), DocumentActivity::class.java))
             }
+
+            isAddEnabled = true
         })
 
         documentAdapter.setOnItemClickListener {

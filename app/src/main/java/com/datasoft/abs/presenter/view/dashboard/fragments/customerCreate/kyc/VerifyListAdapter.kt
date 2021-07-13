@@ -5,8 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.datasoft.abs.data.dto.config.CommonModel
-import com.datasoft.abs.data.dto.createCustomer.AddressInfo
+import com.datasoft.abs.data.dto.createCustomer.DocumentVerificationInfo
 import com.datasoft.abs.databinding.DocumentRowBinding
 import javax.inject.Inject
 
@@ -16,12 +15,18 @@ class VerifyListAdapter @Inject constructor() :
     inner class DocumentViewHolder(val binding: DocumentRowBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<CommonModel>() {
-        override fun areItemsTheSame(oldItem: CommonModel, newItem: CommonModel): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<DocumentVerificationInfo>() {
+        override fun areItemsTheSame(
+            oldItem: DocumentVerificationInfo,
+            newItem: DocumentVerificationInfo
+        ): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: CommonModel, newItem: CommonModel): Boolean {
+        override fun areContentsTheSame(
+            oldItem: DocumentVerificationInfo,
+            newItem: DocumentVerificationInfo
+        ): Boolean {
             return oldItem == newItem
         }
     }
@@ -38,22 +43,33 @@ class VerifyListAdapter @Inject constructor() :
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((AddressInfo) -> Unit)? = null
+    private var onPhotocopyClickListener: ((Int, Boolean) -> Unit)? = null
+    private var onVerifiedClickListener: ((Int, Boolean) -> Unit)? = null
 
     override fun onBindViewHolder(holder: DocumentViewHolder, position: Int) {
         val value = differ.currentList[position]
 
         with(value) {
             holder.binding.txtViewDocumentName.text = value.name
+            holder.binding.switchCollected.isChecked = value.isPhotocopyCollected
+            holder.binding.switchVerified.isChecked = value.isVerified
         }
 
-//        holder.binding.imgViewDelete.setOnClickListener {
-//            onItemClickListener?.let { it(value) }
-//        }
+        holder.binding.switchCollected.setOnCheckedChangeListener { _, isChecked ->
+            onPhotocopyClickListener?.let { it(position, isChecked) }
+        }
+
+        holder.binding.switchVerified.setOnCheckedChangeListener { _, isChecked ->
+            onVerifiedClickListener?.let { it(position, isChecked) }
+        }
     }
 
-    fun setOnItemClickListener(listener: (AddressInfo) -> Unit) {
-        onItemClickListener = listener
+    fun setOnPhotocopyClickListener(listener: (Int, Boolean) -> Unit) {
+        onPhotocopyClickListener = listener
+    }
+
+    fun setOnVerifiedClickListener(listener: (Int, Boolean) -> Unit) {
+        onVerifiedClickListener = listener
     }
 }
 

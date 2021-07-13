@@ -31,6 +31,7 @@ class AddressFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+    private var isAddEnabled = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +46,8 @@ class AddressFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        customerViewModel.requestVisibility(true)
+
         setupRecyclerView()
 
         addressViewModel.getSavedData().observe(viewLifecycleOwner, {
@@ -57,12 +60,12 @@ class AddressFragment : Fragment() {
         })
 
         customerViewModel.getAddListener().observe(viewLifecycleOwner, {
-            if(it) {
+            if(it && isAddEnabled) {
                 resultLauncher.launch(Intent(requireContext(), AddressActivity::class.java))
             }
-        })
 
-        customerViewModel.requestVisibility(true)
+            isAddEnabled = true
+        })
 
         binding.btnNext.setOnClickListener {
             customerViewModel.requestCurrentStep(3)
