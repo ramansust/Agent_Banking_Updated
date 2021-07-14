@@ -33,7 +33,7 @@ class DocumentActivity : BaseActivity() {
     private val documentList = mutableListOf<DocumentConfigData>()
     private val myCalendar: Calendar = Calendar.getInstance()
 
-    private lateinit var frontUri: String
+    private var frontUri: String = ""
 
     override fun observeViewModel() {
 

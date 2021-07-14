@@ -95,31 +95,15 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/txt_view_document_type"
+                        android:id="@+id/txt_view_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/document_type_"
-                        android:textSize="@dimen/font_16x" />
-
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/spinner_documents_type"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/spinner_background" />
-
-                    <TextView
-                        android:id="@+id/txt_view_document_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/document_id"
+                        android:text="@string/name_"
                         android:textSize="@dimen/font_16x" />
 
                     <EditText
-                        android:id="@+id/ed_txt_document_id"
+                        android:id="@+id/ed_txt_name"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
@@ -132,16 +116,38 @@
                         android:textSize="@dimen/font_16x" />
 
                     <TextView
-                        android:id="@+id/txt_view_description"
+                        android:id="@+id/txt_view_mobile_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/description"
+                        android:text="@string/mobile_number"
                         android:textSize="@dimen/font_16x" />
 
                     <EditText
-                        android:id="@+id/ed_txt_description"
+                        android:id="@+id/ed_txt_mobile_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_border"
+                        android:ems="10"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="phone"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/address_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_address"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
@@ -158,67 +164,52 @@
                 <LinearLayout
                     android:id="@+id/linearLayout2"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="16dp"
                     android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/guideline_middle"
                     app:layout_constraintTop_toTopOf="@+id/linearLayout">
 
 
                     <TextView
-                        android:id="@+id/txt_view_issue_date"
+                        android:id="@+id/txt_view_relation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/issue_date"
+                        android:text="@string/relation"
                         android:textSize="@dimen/font_16x" />
 
-                    <EditText
-                        android:id="@+id/ed_txt_issue_date"
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_nominee_relation"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/input_border"
-                        android:clickable="false"
-                        android:cursorVisible="false"
-                        android:ems="10"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:hint="@string/type_here"
-                        android:inputType="date"
-                        android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
-                        app:drawableEndCompat="@drawable/ic_dob" />
+                        android:background="@drawable/spinner_background" />
 
                     <TextView
-                        android:id="@+id/txt_view_expiry_date"
+                        android:id="@+id/txt_view_emal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/expiry_date"
+                        android:text="@string/email_address"
                         android:textSize="@dimen/font_16x" />
 
                     <EditText
-                        android:id="@+id/ed_txt_expiry_date"
+                        android:id="@+id/ed_txt_email"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/input_border"
-                        android:clickable="false"
-                        android:cursorVisible="false"
                         android:ems="10"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
                         android:fontFamily="@font/oxygen_regular"
                         android:hint="@string/type_here"
-                        android:inputType="date"
+                        android:inputType="textEmailAddress"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
-                        app:drawableEndCompat="@drawable/ic_dob" />
+                        android:textSize="@dimen/font_16x" />
 
                 </LinearLayout>
 
@@ -227,85 +218,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toTopOf="@+id/txt_view_front"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_info"
                     app:layout_constraintGuide_percent="0.5"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txt_view_front"
+                    android:id="@+id/txt_view_guardian_info"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/oxygen_bold"
                     android:gravity="center"
-                    android:text="@string/front_image"
+                    android:text="@string/guardian_information"
                     android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_view_back"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/linearLayout" />
-
-                <TextView
-                    android:id="@+id/txt_view_back"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:gravity="center"
-                    android:text="@string/back_image"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/txt_view_front"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout" />
-
-                <ImageView
-                    android:id="@+id/img_view_front"
-                    android:layout_width="@dimen/space_150x"
-                    android:layout_height="@dimen/space_150x"
-                    android:layout_marginTop="16dp"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_photo_preview"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_front"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_front"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_front" />
-
-                <Button
-                    android:id="@+id/btn_take_front"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:text="@string/attach"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/img_view_front"
-                    app:layout_constraintStart_toStartOf="@+id/img_view_front"
-                    app:layout_constraintTop_toBottomOf="@+id/img_view_front" />
-
-                <ImageView
-                    android:id="@+id/img_view_back"
-                    android:layout_width="@dimen/space_150x"
-                    android:layout_height="@dimen/space_150x"
-                    android:layout_marginTop="16dp"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_photo_preview"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_back"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_back"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_back" />
-
-                <Button
-                    android:id="@+id/btn_take_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:text="@string/attach"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/img_view_back"
-                    app:layout_constraintStart_toStartOf="@+id/img_view_back"
-                    app:layout_constraintTop_toBottomOf="@+id/img_view_back" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

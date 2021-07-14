@@ -83,7 +83,7 @@
     <string name="gender">Gender*</string>
     <string name="country">Country*</string>
     <string name="city">City*</string>
-    <string name="take">TAKE</string>
+    <string name="attach">ATTACH</string>
     <string name="clear">CLEAR</string>
     <string name="browse">BROWSE</string>
     <string name="first_name">First Name*</string>
@@ -165,4 +165,14 @@
     <string name="no">NO</string>
     <string name="alert">Alert!</string>
     <string name="confirmation_message">Do you want to EXIT?</string>
+
+    <string name="nominated_person">Nominated Person for Emergency Contact</string>
+    <string name="name_">Name*</string>
+    <string name="relation">Relation*</string>
+    <string name="address_">Address*</string>
+    <string name="guardian_information">Guardian Information</string>
+    <string name="guardian_name">Name of Guardian*</string>
+    <string name="contact_number">Contact Number*</string>
+    <string name="email_address">Email Address</string>
+    <string name="minor_attains_date">Minor Attains Date</string>
 </resources>
