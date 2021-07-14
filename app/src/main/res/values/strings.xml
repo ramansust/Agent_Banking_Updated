@@ -161,4 +161,8 @@
     <string name="add_document">Add Document</string>
     <string name="tracing_id">Tracing ID</string>
     <string name="no_content_available">No Contents Available</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="alert">Alert!</string>
+    <string name="confirmation_message">Do you want to EXIT?</string>
 </resources>

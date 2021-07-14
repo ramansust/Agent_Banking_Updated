@@ -28,10 +28,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class PhotoFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = PhotoFragment()
-    }
-
     private val customerViewModel: CustomerViewModel by activityViewModels()
     private val viewModel: PhotoViewModel by activityViewModels()
     private var _binding: PhotoFragmentBinding? = null
@@ -144,21 +140,35 @@ class PhotoFragment : Fragment() {
         customerViewModel.requestVisibility(false)
         customerViewModel.requestListener(false)
 
+        var attachNumber = 0
+
         viewModel.getSavedPhoto().observe(viewLifecycleOwner, {
             binding.imgViewPhoto.setImageBitmap(it)
+            attachNumber++
+            nextButtonEnable(attachNumber)
         })
 
         viewModel.getSavedNIDFront().observe(viewLifecycleOwner, {
             binding.imgViewNidFront.setImageBitmap(it)
+            attachNumber++
+            nextButtonEnable(attachNumber)
         })
 
         viewModel.getSavedNIDBack().observe(viewLifecycleOwner, {
             binding.imgViewNidBack.setImageBitmap(it)
+            attachNumber++
+            nextButtonEnable(attachNumber)
         })
 
         viewModel.getSavedSignature().observe(viewLifecycleOwner, {
             binding.imgView.setImageBitmap(it)
+            attachNumber++
+            nextButtonEnable(attachNumber)
         })
+    }
+
+    private fun nextButtonEnable(attachNumber: Int) {
+        binding.btnNext.isEnabled = attachNumber >= 4
     }
 
     private val startForProfileImageResult =

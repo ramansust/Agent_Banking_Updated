@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -24,7 +25,7 @@ class CustomerActivity : BaseActivity() {
     override fun observeViewModel() {
 
         customerViewModel.getAddVisibility().observe(this, {
-            if(it)
+            if (it)
                 showAddButton()
             else
                 hideAddButton()
@@ -180,7 +181,7 @@ class CustomerActivity : BaseActivity() {
         }
 
         binding.appBarCustomer.btnCross.setOnClickListener {
-            finish()
+            showConfirmation()
         }
 
         binding.appBarCustomer.btnSave.setOnClickListener {
@@ -188,6 +189,10 @@ class CustomerActivity : BaseActivity() {
         }
 
         setTitle()
+    }
+
+    override fun onBackPressed() {
+        showConfirmation()
     }
 
     private fun setCurrentState(index: Int) {
@@ -264,5 +269,20 @@ class CustomerActivity : BaseActivity() {
 
     private fun hideAddButton() {
         binding.appBarCustomer.btnSave.visibility = View.INVISIBLE
+    }
+
+    private fun showConfirmation() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(resources.getString(R.string.alert))
+        builder.setMessage(resources.getString(R.string.confirmation_message))
+        builder.setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
+            dialog.dismiss()
+            finish()
+        }
+        builder.setNegativeButton(resources.getString(R.string.no)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 }

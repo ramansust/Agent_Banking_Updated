@@ -8,8 +8,8 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:elevation="@dimen/space_5x"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:elevation="@dimen/space_5x">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -23,6 +23,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/button_border"
                 android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:enabled="false"
                 android:fontFamily="@font/oxygen_regular"
                 android:text="@string/submit"
                 android:textColor="@color/white"
