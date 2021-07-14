@@ -8,5 +8,6 @@ data class DocumentInfo(
     val tracingID: String,
     val issueDate: String,
     val expiryDate: String,
-    val description: String
+    val description: String,
+    val frontUri: String
 ): Serializable

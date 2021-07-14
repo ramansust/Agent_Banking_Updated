@@ -33,6 +33,8 @@ class DocumentActivity : BaseActivity() {
     private val documentList = mutableListOf<DocumentConfigData>()
     private val myCalendar: Calendar = Calendar.getInstance()
 
+    private lateinit var frontUri: String
+
     override fun observeViewModel() {
 
         customerViewModel.getConfigData().observe(this, { response ->
@@ -111,7 +113,8 @@ class DocumentActivity : BaseActivity() {
                 binding.edTxtIssueDate.text.trim().toString(),
                 binding.edTxtDocumentId.text.trim().toString(),
                 binding.edTxtExpiryDate.text.trim().toString(),
-                binding.edTxtDescription.text.trim().toString()
+                binding.edTxtDescription.text.trim().toString(),
+                frontUri
             )
         }
 
@@ -211,6 +214,7 @@ class DocumentActivity : BaseActivity() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
+                    frontUri = fileUri.toString()
                     binding.imgViewFront.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {

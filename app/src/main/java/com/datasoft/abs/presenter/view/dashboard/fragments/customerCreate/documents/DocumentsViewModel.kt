@@ -47,13 +47,14 @@ class DocumentsViewModel @Inject constructor(
         issueDate: String,
         documentID: String,
         expiryDate: String,
-        description: String
+        description: String,
+        frontUri: String
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
             sendMessage.postValue(Resource.Loading())
 
-            if (documentID.isEmpty() || issueDate.isEmpty()) {
+            if (documentID.isEmpty() || issueDate.isEmpty() || expiryDate.isEmpty() || frontUri.isEmpty()) {
                 sendMessage.postValue(
                     Resource.Error(
                         "The fields must not be empty", null
@@ -63,7 +64,7 @@ class DocumentsViewModel @Inject constructor(
             }
 
             val documentInfo = DocumentInfo(
-                documentType, name, documentID, issueDate, expiryDate, description
+                documentType, name, documentID, issueDate, expiryDate, description, frontUri
             )
 
             sendMessage.postValue(Resource.Success(documentInfo))

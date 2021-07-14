@@ -67,13 +67,6 @@ class DocumentsFragment : Fragment() {
             binding.recyclerView.isVisible = it.size > 0
 
             binding.btnNext.isEnabled = it.size > 0
-
-            binding.txtViewDocumentName.isVisible = it.size > 0
-            binding.txtViewTracingId.isVisible = it.size > 0
-            binding.txtViewIssueDate.isVisible = it.size > 0
-            binding.txtViewExpiryDate.isVisible = it.size > 0
-            binding.txtViewDescription.isVisible = it.size > 0
-            binding.txtViewAction.isVisible = it.size > 0
         })
 
         customerViewModel.getAddListener().observe(viewLifecycleOwner, {

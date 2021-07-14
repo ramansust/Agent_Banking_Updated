@@ -1,5 +1,6 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.documents
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -46,7 +47,8 @@ class DocumentListAdapter @Inject constructor() :
         holder.binding.txtViewTracingId.text = value.tracingID
         holder.binding.txtViewIssueDate.text = value.issueDate
         holder.binding.txtViewExpiryDate.text = value.expiryDate
-        holder.binding.txtViewDescription.text = value.description
+
+        holder.binding.imgViewPhoto.setImageURI(Uri.parse(value.frontUri))
 
         holder.binding.imgViewDelete.setOnClickListener {
             onItemClickListener?.let { it(value) }
