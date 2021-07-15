@@ -24,6 +24,7 @@
     <dimen name="space_64x">64dp</dimen>
     <dimen name="space_96x">96dp</dimen>
     <dimen name="space_100x">100dp</dimen>
+    <dimen name="space_110x">110dp</dimen>
     <dimen name="space_150x">150dp</dimen>
     <dimen name="space_200x">200dp</dimen>
     <dimen name="space_320x">320dp</dimen>

@@ -59,6 +59,13 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
+            android:name=".presenter.view.dashboard.fragments.customerCreate.photo.SignatureActivity"
+            android:label="@string/signature"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AgentBanking.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
             android:name=".presenter.view.dashboard.fragments.accountOpening.AccountActivity"
             android:label="@string/activity_account"
             android:screenOrientation="landscape"

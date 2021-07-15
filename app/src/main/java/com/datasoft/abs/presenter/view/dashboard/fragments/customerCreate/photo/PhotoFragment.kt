@@ -1,7 +1,7 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.photo
 
 import android.app.Activity
-import android.graphics.Bitmap
+import android.content.Intent
 import android.graphics.ImageDecoder
 import android.os.Build
 import android.os.Bundle
@@ -10,16 +10,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.datasoft.abs.data.dto.config.DocumentConfigData
 import com.datasoft.abs.databinding.PhotoFragmentBinding
+import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Photos
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
+import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.personal.PersonalViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.github.gcacace.signaturepad.views.SignaturePad
 import com.pixelcarrot.base64image.Base64Image
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -30,6 +36,7 @@ class PhotoFragment : Fragment() {
 
     private val customerViewModel: CustomerViewModel by activityViewModels()
     private val viewModel: PhotoViewModel by activityViewModels()
+    private val personalViewModel: PersonalViewModel by activityViewModels()
     private var _binding: PhotoFragmentBinding? = null
 
     @Inject
@@ -84,51 +91,20 @@ class PhotoFragment : Fragment() {
 
         }
 
-        binding.btnBrowse.setOnClickListener {
-            ImagePicker.with(this)
-                .galleryOnly()
-                .crop()
-                .compress(1024)         // Final image size will be less than 1 MB(Optional)
-                .maxResultSize(1080, 1080)  // Final image resolution will be less than 1080 x 1080(Optional)
-                .createIntent { intent ->
-                    startForSignatureResult.launch(intent)
-                }
-
-        }
-
-        binding.signaturePad.setOnSignedListener(object : SignaturePad.OnSignedListener {
-
-            override fun onStartSigning() {
-
-            }
-
-            override fun onSigned() {
-                binding.btnTake.isEnabled = true
-                binding.btnClear.isEnabled = true
-            }
-
-            override fun onClear() {
-                binding.btnTake.isEnabled = false
-                binding.btnClear.isEnabled = false
-            }
-        })
-
-        binding.btnClear.setOnClickListener {
-            binding.signaturePad.clear()
-        }
-
-        binding.btnTake.setOnClickListener {
-            val signatureBitmap: Bitmap = binding.signaturePad.signatureBitmap
-            binding.imgView.setImageBitmap(signatureBitmap)
-            viewModel.setSignature(signatureBitmap)
-        }
-
         binding.btnNext.setOnClickListener {
             customerViewModel.requestCurrentStep(4)
         }
 
         binding.btnBack.setOnClickListener {
             customerViewModel.requestCurrentStep(2)
+        }
+
+        binding.btnTakeSignature.setOnClickListener {
+            resultLauncherSignature.launch(Intent(requireContext(), SignatureActivity::class.java))
+        }
+
+        binding.btnTakeGuardianSignature.setOnClickListener {
+            resultLauncherGuardianSignature.launch(Intent(requireContext(), SignatureActivity::class.java))
         }
 
         return root
@@ -139,6 +115,52 @@ class PhotoFragment : Fragment() {
 
         customerViewModel.requestVisibility(false)
         customerViewModel.requestListener(false)
+
+        val documentList = mutableListOf<DocumentConfigData>()
+
+        customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is Resource.Success -> {
+                    response.data?.let {
+
+                        documentList.addAll(it.documentConfigData)
+                        binding.spinnerGuardianDocumentType.adapter =
+                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, documentList)
+                    }
+                }
+                is Resource.Error -> {
+                    response.message?.let { message ->
+                        Log.e("TAG", "An error occurred: $message")
+                    }
+                }
+                is Resource.Loading -> {
+                }
+            }
+        })
+
+        personalViewModel.getCustomerAgeData().observe(viewLifecycleOwner, {
+
+            (it < Constant.ADULT_AGE).apply {
+                binding.txtViewMinorAttain.isVisible = this
+                binding.txtViewGuardianInfo.isVisible = this
+                binding.cardViewGuardianPhoto.isVisible = this
+                binding.cardViewGuardianSignature.isVisible = this
+                binding.cardViewGuardianDocuments.isVisible = this
+                binding.spinnerGuardianDocumentType.isVisible = this
+            }
+        })
+
+        viewModel.getBackImage().observe(viewLifecycleOwner, {
+            if(!it) {
+                binding.txtViewGuardianNidBack.visibility = View.INVISIBLE
+                binding.imgViewGuardianNidBack.visibility = View.INVISIBLE
+                binding.btnTakeGuardianNidBack.visibility = View.INVISIBLE
+            } else {
+                binding.txtViewGuardianNidBack.visibility = View.VISIBLE
+                binding.imgViewGuardianNidBack.visibility = View.VISIBLE
+                binding.btnTakeGuardianNidBack.visibility = View.VISIBLE
+            }
+        })
 
         var attachNumber = 0
 
@@ -161,11 +183,40 @@ class PhotoFragment : Fragment() {
         })
 
         viewModel.getSavedSignature().observe(viewLifecycleOwner, {
-            binding.imgView.setImageBitmap(it)
+//            binding.imgView.setImageBitmap(it)
             attachNumber++
             nextButtonEnable(attachNumber)
         })
+
+        binding.spinnerGuardianDocumentType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                viewModel.setBackImage(documentList[position].isBackRequired)
+            }
+        }
     }
+
+    private var resultLauncherSignature =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+//                viewModel.notifyData(result.data?.getSerializableExtra(Constant.DOCUMENT_INFO) as DocumentInfo)
+            }
+        }
+
+    private var resultLauncherGuardianSignature =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+//                viewModel.notifyData(result.data?.getSerializableExtra(Constant.DOCUMENT_INFO) as DocumentInfo)
+            }
+        }
 
     private fun nextButtonEnable(attachNumber: Int) {
         binding.btnNext.isEnabled = attachNumber >= 4
@@ -285,7 +336,7 @@ class PhotoFragment : Fragment() {
                 Activity.RESULT_OK -> {
                     //Image Uri will not be null for RESULT_OK
                     val fileUri = data?.data!!
-                    binding.imgView.setImageURI(fileUri)
+//                    binding.imgView.setImageURI(fileUri)
 
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver, fileUri))

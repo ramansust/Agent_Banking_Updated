@@ -90,7 +90,8 @@
     <string name="last_name">Last Name*</string>
     <string name="type_here">Type here</string>
     <string name="please_attach_your_photograph">Please attach your photograph</string>
-    <string name="please_attach_your_nid">Please attach your NID</string>
+    <string name="please_attach_your_nid">Please attach your Documents</string>
+    <string name="please_attach_your_signature">Please attach your Signature</string>
     <string name="nid_front">Front side NID</string>
     <string name="nid_back">Back side NID</string>
     <string name="front_image">Front side Image</string>
@@ -175,4 +176,5 @@
     <string name="contact_number">Contact Number*</string>
     <string name="email_address">Email Address</string>
     <string name="minor_attains_date">Minor Attains Date</string>
+    <string name="minor_attains_info">Minor Attains Information</string>
 </resources>

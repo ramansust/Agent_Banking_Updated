@@ -15,6 +15,9 @@ class PhotoViewModel @Inject constructor(
 
 ): ViewModel() {
 
+    private val backImage = MutableLiveData<Boolean>()
+    fun getBackImage(): LiveData<Boolean> = backImage
+
     private val savedPhoto = MutableLiveData<Bitmap>()
     fun getSavedPhoto(): LiveData<Bitmap> = savedPhoto
 
@@ -48,6 +51,12 @@ class PhotoViewModel @Inject constructor(
     fun setSignature(bitmap: Bitmap) {
         viewModelScope.launch(Dispatchers.IO) {
             savedSignature.postValue(bitmap)
+        }
+    }
+
+    fun setBackImage(isRequired: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            backImage.postValue(isRequired)
         }
     }
 }
