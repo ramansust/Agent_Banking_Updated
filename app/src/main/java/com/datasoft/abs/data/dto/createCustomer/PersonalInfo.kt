@@ -12,5 +12,15 @@ data class PersonalInfo(
     val vatRegistrationNo: String,
     val drivingLicense: String,
     val monthlyIncome: String,
-    val sourceOfFund: String
+    val sourceOfFund: String,
+    val nomineeName: String,
+    val nomineeMobile: String,
+    val nomineeAddress: String,
+    val nomineeRelation: Int,
+    val nomineeEmail: String,
+    val guardianName: String,
+    val guardianRelation: Int,
+    val guardianContact: String,
+    val guardianAddress: String,
+    val guardianDob: String
 )

@@ -1,5 +1,6 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.personal
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,13 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.PersonalFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Constant.ADULT_AGE
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class PersonalFragment : Fragment() {
@@ -26,6 +32,8 @@ class PersonalFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var isClicked = false
+    private var isAgeAboveEighteen = false
+    private val myCalendar: Calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,9 +53,20 @@ class PersonalFragment : Fragment() {
         val educationList = mutableListOf<CommonModel>()
         val occupationList = mutableListOf<CommonModel>()
         val nationalityList = mutableListOf<CommonModel>()
+        val relationList = mutableListOf<CommonModel>()
 
         customerViewModel.requestVisibility(false)
         customerViewModel.requestListener(false)
+
+        viewModel.getCustomerAgeData().observe(viewLifecycleOwner, {
+
+            (it < ADULT_AGE).apply {
+                isAgeAboveEighteen = this
+                binding.txtViewGuardian.isVisible = this
+                binding.linearLayoutGuardian.isVisible = this
+                binding.linearLayoutGuardian2.isVisible = this
+            }
+        })
 
         customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
@@ -74,6 +93,13 @@ class PersonalFragment : Fragment() {
                         nationalityList.addAll(it.nationalityList)
                         binding.spinnerNationality.adapter =
                             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, nationalityList)
+
+                        relationList.addAll(it.relationList)
+                        binding.spinnerNomineeRelation.adapter =
+                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, relationList)
+
+                        binding.spinnerGuardianRelation.adapter =
+                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, relationList)
                     }
                 }
                 is Resource.Error -> {
@@ -110,11 +136,27 @@ class PersonalFragment : Fragment() {
                         if(nationalityList.isNotEmpty()) binding.spinnerNationality.setSelection(nationalityList.indexOf(
                             CommonModel(it.nationality)
                         ))
+                        if(relationList.isNotEmpty()) binding.spinnerNomineeRelation.setSelection(relationList.indexOf(
+                            CommonModel(it.nomineeRelation)
+                        ))
+                        if(relationList.isNotEmpty()) binding.spinnerGuardianRelation.setSelection(relationList.indexOf(
+                            CommonModel(it.guardianRelation)
+                        ))
                         binding.edTxtBirthCertificate.setText(it.birthCertificateNo)
                         binding.edTxtVat.setText(it.vatRegistrationNo)
                         binding.edTxtDrivingLicense.setText(it.drivingLicense)
                         binding.edTxtMonthlyIncome.setText(it.monthlyIncome)
                         binding.edTxtSourceOfFund.setText(it.sourceOfFund)
+
+                        binding.edTxtName.setText(it.nomineeName)
+                        binding.edTxtMobileNumber.setText(it.nomineeMobile)
+                        binding.edTxtAddress.setText(it.nomineeAddress)
+                        binding.edTxtEmail.setText(it.nomineeEmail)
+
+                        binding.edTxtGuardianName.setText(it.guardianName)
+                        binding.edTxtGuardianContact.setText(it.guardianContact)
+                        binding.edTxtGuardianAddress.setText(it.guardianAddress)
+                        binding.edTxtGuardianDob.setText(it.guardianDob)
 
                         if(isClicked)
                             customerViewModel.requestCurrentStep(2)
@@ -131,9 +173,20 @@ class PersonalFragment : Fragment() {
 
         })
 
+        binding.edTxtGuardianDob.setOnClickListener {
+            val datePicker = DatePickerDialog(
+                requireContext(), date, myCalendar[Calendar.YEAR],
+                myCalendar[Calendar.MONTH],
+                myCalendar[Calendar.DAY_OF_MONTH]
+            )
+            datePicker.datePicker.maxDate = Calendar.getInstance().timeInMillis
+            datePicker.show()
+        }
+
         binding.btnNext.setOnClickListener {
             isClicked = true
             viewModel.checkData(
+                isAgeAboveEighteen,
                 if(maritalList.isNotEmpty()) maritalList[binding.spinnerMaritalStatus.selectedItemPosition].id else 0,
                 binding.edTxtSpouseName.text.trim().toString(),
                 if(religionList.isNotEmpty()) religionList[binding.spinnerReligion.selectedItemPosition].id else 0,
@@ -145,13 +198,37 @@ class PersonalFragment : Fragment() {
                 binding.edTxtVat.text.trim().toString(),
                 binding.edTxtDrivingLicense.text.trim().toString(),
                 binding.edTxtMonthlyIncome.text.trim().toString(),
-                binding.edTxtSourceOfFund.text.trim().toString()
+                binding.edTxtSourceOfFund.text.trim().toString(),
+
+                binding.edTxtName.text.trim().toString(),
+                binding.edTxtMobileNumber.text.trim().toString(),
+                binding.edTxtAddress.text.trim().toString(),
+                if(relationList.isNotEmpty()) relationList[binding.spinnerNomineeRelation.selectedItemPosition].id else 0,
+                binding.edTxtEmail.text.trim().toString(),
+
+                binding.edTxtGuardianName.text.trim().toString(),
+                if(relationList.isNotEmpty()) relationList[binding.spinnerGuardianRelation.selectedItemPosition].id else 0,
+                binding.edTxtGuardianContact.text.trim().toString(),
+                binding.edTxtGuardianAddress.text.trim().toString(),
+                binding.edTxtGuardianDob.text.trim().toString()
             )
         }
 
         binding.btnBack.setOnClickListener {
             customerViewModel.requestCurrentStep(0)
         }
+    }
+
+    private var date = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+        myCalendar.set(Calendar.YEAR, year)
+        myCalendar.set(Calendar.MONTH, monthOfYear)
+        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        updateLabel()
+    }
+
+    private fun updateLabel() {
+        val sdf = SimpleDateFormat(Constant.DATE_FORMAT, Locale.US)
+        binding.edTxtGuardianDob.setText(sdf.format(myCalendar.time))
     }
 
     override fun onDestroyView() {

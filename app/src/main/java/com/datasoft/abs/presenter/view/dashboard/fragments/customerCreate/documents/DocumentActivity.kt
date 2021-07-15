@@ -17,6 +17,7 @@ import com.datasoft.abs.databinding.DocumentsActivityBinding
 import com.datasoft.abs.presenter.base.BaseActivity
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
 import dagger.hilt.android.AndroidEntryPoint
@@ -134,19 +135,23 @@ class DocumentActivity : BaseActivity() {
         }
 
         binding.edTxtIssueDate.setOnClickListener {
-            DatePickerDialog(
+            val datePicker = DatePickerDialog(
                 this, dateIssue, myCalendar[Calendar.YEAR],
                 myCalendar[Calendar.MONTH],
                 myCalendar[Calendar.DAY_OF_MONTH]
-            ).show()
+            )
+            datePicker.datePicker.maxDate = Calendar.getInstance().timeInMillis
+            datePicker.show()
         }
 
         binding.edTxtExpiryDate.setOnClickListener {
-            DatePickerDialog(
+            val datePicker = DatePickerDialog(
                 this, dateExpiry, myCalendar[Calendar.YEAR],
                 myCalendar[Calendar.MONTH],
                 myCalendar[Calendar.DAY_OF_MONTH]
-            ).show()
+            )
+            datePicker.datePicker.minDate = Calendar.getInstance().timeInMillis
+            datePicker.show()
         }
 
         binding.btnTakeFront.setOnClickListener {
@@ -182,8 +187,7 @@ class DocumentActivity : BaseActivity() {
     }
 
     private fun updateIssueDate() {
-        val myFormat = "MM-dd-yyyy" //In which you need put here
-        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        val sdf = SimpleDateFormat(DATE_FORMAT, Locale.US)
         binding.edTxtIssueDate.setText(sdf.format(myCalendar.time))
     }
 
@@ -196,8 +200,7 @@ class DocumentActivity : BaseActivity() {
         }
 
     private fun updateExpiryDate() {
-        val myFormat = "MM-dd-yyyy" //In which you need put here
-        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        val sdf = SimpleDateFormat(DATE_FORMAT, Locale.US)
         binding.edTxtExpiryDate.setText(sdf.format(myCalendar.time))
     }
 

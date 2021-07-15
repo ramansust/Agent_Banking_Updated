@@ -10,4 +10,6 @@ object Constant {
     const val USER_NAME = "USER_NAME"
     const val ADDRESS_INFO = "ADDRESS_INFO"
     const val DOCUMENT_INFO = "DOCUMENT_INFO"
+    const val ADULT_AGE = 18
+    const val DATE_FORMAT = "MM-dd-yyyy"
 }

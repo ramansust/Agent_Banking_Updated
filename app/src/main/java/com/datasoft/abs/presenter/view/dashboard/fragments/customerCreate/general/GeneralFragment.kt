@@ -14,7 +14,9 @@ import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.GeneralFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
+import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.personal.PersonalViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -25,6 +27,7 @@ class GeneralFragment : Fragment() {
 
     private val customerViewModel: CustomerViewModel by activityViewModels()
     private val viewModel: GeneralViewModel by activityViewModels()
+    private val personalViewModel: PersonalViewModel by activityViewModels()
     private var _binding: GeneralFragmentBinding? = null
 
     private val myCalendar: Calendar = Calendar.getInstance()
@@ -126,11 +129,13 @@ class GeneralFragment : Fragment() {
         })
 
         binding.edTxtDob.setOnClickListener {
-            DatePickerDialog(
+            val datePicker = DatePickerDialog(
                 requireContext(), date, myCalendar[Calendar.YEAR],
                 myCalendar[Calendar.MONTH],
                 myCalendar[Calendar.DAY_OF_MONTH]
-            ).show()
+            )
+            datePicker.datePicker.maxDate = Calendar.getInstance().timeInMillis
+            datePicker.show()
         }
 
         binding.btnNext.setOnClickListener {
@@ -160,9 +165,9 @@ class GeneralFragment : Fragment() {
     }
 
     private fun updateLabel() {
-        val myFormat = "MM-dd-yyyy" //In which you need put here
-        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        val sdf = SimpleDateFormat(DATE_FORMAT, Locale.US)
         binding.edTxtDob.setText(sdf.format(myCalendar.time))
+        personalViewModel.customerAge(binding.edTxtDob.text.trim().toString())
     }
 
     override fun onDestroyView() {
