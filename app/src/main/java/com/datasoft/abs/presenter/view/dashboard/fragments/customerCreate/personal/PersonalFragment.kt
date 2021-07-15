@@ -68,6 +68,10 @@ class PersonalFragment : Fragment() {
             }
         })
 
+        viewModel.getCustomerDobData().observe(viewLifecycleOwner, {
+            binding.edTxtMinorAttainsDate.setText(it)
+        })
+
         customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
             when (response) {
@@ -179,7 +183,11 @@ class PersonalFragment : Fragment() {
                 myCalendar[Calendar.MONTH],
                 myCalendar[Calendar.DAY_OF_MONTH]
             )
-            datePicker.datePicker.maxDate = Calendar.getInstance().timeInMillis
+
+            val guardianCalender = Calendar.getInstance()
+            guardianCalender.set(guardianCalender[Calendar.YEAR] - ADULT_AGE, guardianCalender[Calendar.MONDAY], guardianCalender[Calendar.DAY_OF_MONTH])
+
+            datePicker.datePicker.maxDate = guardianCalender.timeInMillis
             datePicker.show()
         }
 

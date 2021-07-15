@@ -20,6 +20,9 @@ class PersonalViewModel @Inject constructor() : ViewModel() {
     private val customerAge = MutableLiveData<Int>()
     fun getCustomerAgeData(): LiveData<Int> = customerAge
 
+    private val customerDob = MutableLiveData<String>()
+    fun getCustomerDobData(): LiveData<String> = customerDob
+
     private val personalData = MutableLiveData<Resource<PersonalInfo>>()
     fun getPersonalData(): LiveData<Resource<PersonalInfo>> = personalData
 
@@ -99,6 +102,8 @@ class PersonalViewModel @Inject constructor() : ViewModel() {
 
     fun customerAge(dob: String = "07.15.2011") {
         viewModelScope.launch(Dispatchers.IO) {
+
+            customerDob.postValue(dob)
 
             val date = SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH).parse(dob)
             val c: Calendar = Calendar.getInstance()
