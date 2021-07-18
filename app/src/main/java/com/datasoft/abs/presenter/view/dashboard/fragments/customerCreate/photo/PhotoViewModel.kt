@@ -18,45 +18,85 @@ class PhotoViewModel @Inject constructor(
     private val backImage = MutableLiveData<Boolean>()
     fun getBackImage(): LiveData<Boolean> = backImage
 
-    private val savedPhoto = MutableLiveData<Bitmap>()
-    fun getSavedPhoto(): LiveData<Bitmap> = savedPhoto
+    private val userPhoto = MutableLiveData<Bitmap>()
+    fun getUserPhoto(): LiveData<Bitmap> = userPhoto
 
-    private val savedNIDFront = MutableLiveData<Bitmap>()
-    fun getSavedNIDFront(): LiveData<Bitmap> = savedNIDFront
+    private val userDocumentFront = MutableLiveData<Bitmap>()
+    fun getUserDocumentFront(): LiveData<Bitmap> = userDocumentFront
 
-    private val savedNIDBack = MutableLiveData<Bitmap>()
-    fun getSavedNIDBack(): LiveData<Bitmap> = savedNIDBack
+    private val userDocumentBack = MutableLiveData<Bitmap>()
+    fun getUserDocumentBack(): LiveData<Bitmap> = userDocumentBack
 
-    private val savedSignature = MutableLiveData<Bitmap>()
-    fun getSavedSignature(): LiveData<Bitmap> = savedSignature
+    private val userSignature = MutableLiveData<Bitmap>()
+    fun getUserSignature(): LiveData<Bitmap> = userSignature
 
-    fun setPhoto(bitmap: Bitmap) {
+    private val guardianPhoto = MutableLiveData<Bitmap>()
+    fun getGuardianPhoto(): LiveData<Bitmap> = guardianPhoto
+
+    private val guardianDocumentFront = MutableLiveData<Bitmap>()
+    fun getGuardianDocumentFront(): LiveData<Bitmap> = guardianDocumentFront
+
+    private val guardianDocumentBack = MutableLiveData<Bitmap>()
+    fun getGuardianDocumentBack(): LiveData<Bitmap> = guardianDocumentBack
+
+    private val guardianSignature = MutableLiveData<Bitmap>()
+    fun getGuardianSignature(): LiveData<Bitmap> = guardianSignature
+
+    private val guardianDocumentType = MutableLiveData<Int>()
+    fun getGuardianDocumentType(): LiveData<Int> = guardianDocumentType
+
+    fun setUserPhoto(bitmap: Bitmap) {
         viewModelScope.launch(Dispatchers.IO) {
-            savedPhoto.postValue(bitmap)
+            userPhoto.postValue(bitmap)
         }
     }
 
-    fun setNIDFront(bitmap: Bitmap) {
+    fun setUserDocumentFront(bitmap: Bitmap) {
         viewModelScope.launch(Dispatchers.IO) {
-            savedNIDFront.postValue(bitmap)
+            userDocumentFront.postValue(bitmap)
         }
     }
 
-    fun setNIDBack(bitmap: Bitmap) {
+    fun setUserDocumentBack(bitmap: Bitmap) {
         viewModelScope.launch(Dispatchers.IO) {
-            savedNIDBack.postValue(bitmap)
+            userDocumentBack.postValue(bitmap)
         }
     }
 
-    fun setSignature(bitmap: Bitmap) {
+    fun setUserSignature(bitmap: Bitmap) {
         viewModelScope.launch(Dispatchers.IO) {
-            savedSignature.postValue(bitmap)
+            userSignature.postValue(bitmap)
         }
     }
 
-    fun setBackImage(isRequired: Boolean) {
+    fun setBackImage(isRequired: Boolean, id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             backImage.postValue(isRequired)
+            guardianDocumentType.postValue(id)
+        }
+    }
+
+    fun setGuardianPhoto(bitmap: Bitmap) {
+        viewModelScope.launch(Dispatchers.IO) {
+            guardianPhoto.postValue(bitmap)
+        }
+    }
+
+    fun setGuardianDocumentFront(bitmap: Bitmap) {
+        viewModelScope.launch(Dispatchers.IO) {
+            guardianDocumentFront.postValue(bitmap)
+        }
+    }
+
+    fun setGuardianDocumentBack(bitmap: Bitmap) {
+        viewModelScope.launch(Dispatchers.IO) {
+            guardianDocumentBack.postValue(bitmap)
+        }
+    }
+
+    fun setGuardianSignature(bitmap: Bitmap) {
+        viewModelScope.launch(Dispatchers.IO) {
+            guardianSignature.postValue(bitmap)
         }
     }
 }

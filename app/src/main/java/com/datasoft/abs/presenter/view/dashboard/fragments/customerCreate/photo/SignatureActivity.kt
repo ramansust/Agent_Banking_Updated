@@ -9,6 +9,7 @@ import com.datasoft.abs.presenter.base.BaseActivity
 import com.datasoft.abs.presenter.utils.Constant
 import com.github.gcacace.signaturepad.views.SignaturePad
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.ByteArrayOutputStream
 
 @AndroidEntryPoint
 class SignatureActivity : BaseActivity() {
@@ -55,8 +56,13 @@ class SignatureActivity : BaseActivity() {
 
         binding.btnSave.setOnClickListener {
             val signatureBitmap: Bitmap = binding.signaturePad.signatureBitmap
+
+            val stream = ByteArrayOutputStream()
+            signatureBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            val byteArray: ByteArray = stream.toByteArray()
+
             val data = Intent()
-//            data.putExtra(Constant.SIGNATURE_INFO, signatureBitmap)
+            data.putExtra(Constant.SIGNATURE_INFO, byteArray)
             setResult(Activity.RESULT_OK, data)
             finish()
         }

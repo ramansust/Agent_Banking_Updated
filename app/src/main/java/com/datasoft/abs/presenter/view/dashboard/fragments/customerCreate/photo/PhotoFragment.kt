@@ -2,6 +2,7 @@ package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.photo
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.os.Build
 import android.os.Bundle
@@ -26,10 +27,10 @@ import com.datasoft.abs.presenter.utils.Photos
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.personal.PersonalViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.pixelcarrot.base64image.Base64Image
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class PhotoFragment : Fragment() {
@@ -56,11 +57,23 @@ class PhotoFragment : Fragment() {
         val root: View = binding.root
 
         binding.btnTakePhoto.setOnClickListener {
-//            takePhotoUsingCamera.launch()
             ImagePicker.with(this)
+                .cameraOnly()
                 .crop()
-                .compress(1024)         //Final image size will be less than 1 MB(Optional)
-                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+                .compress(1024)
+                .maxResultSize(1080, 1080)
+                .createIntent { intent ->
+                    startForProfileImageResult.launch(intent)
+                }
+
+        }
+
+        binding.btnBrowsePhoto.setOnClickListener {
+            ImagePicker.with(this)
+                .galleryOnly()
+                .crop()
+                .compress(1024)
+                .maxResultSize(1080, 1080)
                 .createIntent { intent ->
                     startForProfileImageResult.launch(intent)
                 }
@@ -68,11 +81,29 @@ class PhotoFragment : Fragment() {
         }
 
         binding.btnTakeNidFront.setOnClickListener {
-//            takePhotoUsingCamera.launch()
             ImagePicker.with(this)
+                .cameraOnly()
                 .crop()
-                .compress(1024)         //Final image size will be less than 1 MB(Optional)
-                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+                .compress(1024)
+                .maxResultSize(
+                    1080,
+                    1080
+                )
+                .createIntent { intent ->
+                    startForNIDFrontResult.launch(intent)
+                }
+
+        }
+
+        binding.btnBrowseNidFront.setOnClickListener {
+            ImagePicker.with(this)
+                .galleryOnly()
+                .crop()
+                .compress(1024)
+                .maxResultSize(
+                    1080,
+                    1080
+                )
                 .createIntent { intent ->
                     startForNIDFrontResult.launch(intent)
                 }
@@ -80,13 +111,115 @@ class PhotoFragment : Fragment() {
         }
 
         binding.btnTakeNidBack.setOnClickListener {
-//            takePhotoUsingCamera.launch()
             ImagePicker.with(this)
+                .cameraOnly()
                 .crop()
-                .compress(1024)         //Final image size will be less than 1 MB(Optional)
-                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+                .compress(1024)
+                .maxResultSize(
+                    1080,
+                    1080
+                )
                 .createIntent { intent ->
                     startForNIDBackResult.launch(intent)
+                }
+
+        }
+
+        binding.btnBrowseNidBack.setOnClickListener {
+            ImagePicker.with(this)
+                .galleryOnly()
+                .crop()
+                .compress(1024)
+                .maxResultSize(
+                    1080,
+                    1080
+                )
+                .createIntent { intent ->
+                    startForNIDBackResult.launch(intent)
+                }
+
+        }
+
+        binding.btnTakeGuardianPhoto.setOnClickListener {
+            ImagePicker.with(this)
+                .cameraOnly()
+                .crop()
+                .compress(1024)
+                .maxResultSize(1080, 1080)
+                .createIntent { intent ->
+                    startForGuardianPhotoResult.launch(intent)
+                }
+
+        }
+
+        binding.btnBrowseGuardianPhoto.setOnClickListener {
+            ImagePicker.with(this)
+                .galleryOnly()
+                .crop()
+                .compress(1024)
+                .maxResultSize(1080, 1080)
+                .createIntent { intent ->
+                    startForGuardianPhotoResult.launch(intent)
+                }
+
+        }
+
+        binding.btnTakeGuardianNidFront.setOnClickListener {
+            ImagePicker.with(this)
+                .cameraOnly()
+                .crop()
+                .compress(1024)
+                .maxResultSize(
+                    1080,
+                    1080
+                )
+                .createIntent { intent ->
+                    startForGuardianFrontResult.launch(intent)
+                }
+
+        }
+
+        binding.btnBrowseGuardianNidFront.setOnClickListener {
+            ImagePicker.with(this)
+                .galleryOnly()
+                .crop()
+                .compress(1024)
+                .maxResultSize(
+                    1080,
+                    1080
+                )
+                .createIntent { intent ->
+                    startForGuardianFrontResult.launch(intent)
+                }
+
+        }
+
+        binding.btnTakeGuardianNidBack.setOnClickListener {
+            ImagePicker.with(this)
+                .cameraOnly()
+                .crop()
+                .compress(1024)
+                .maxResultSize(
+                    1080,
+                    1080
+                )
+                .createIntent { intent ->
+                    startForGuardianBackResult.launch(intent)
+                }
+
+        }
+
+        binding.btnBrowseGuardianNidBack.setOnClickListener {
+            ImagePicker.with(this)
+                .galleryOnly()
+                .crop()
+                .compress(1024)
+                .maxResultSize(
+                    1080,
+                    1080
+                )
+                .createIntent { intent ->
+                    startForGuardianBackResult.launch(intent)
                 }
 
         }
@@ -103,8 +236,35 @@ class PhotoFragment : Fragment() {
             resultLauncherSignature.launch(Intent(requireContext(), SignatureActivity::class.java))
         }
 
+        binding.btnBrowseSignature.setOnClickListener {
+            ImagePicker.with(this)
+                .galleryOnly()
+                .crop()
+                .compress(1024)
+                .maxResultSize(1080, 1080)
+                .createIntent { intent ->
+                    startForSignatureResult.launch(intent)
+                }
+        }
+
         binding.btnTakeGuardianSignature.setOnClickListener {
-            resultLauncherGuardianSignature.launch(Intent(requireContext(), SignatureActivity::class.java))
+            resultLauncherGuardianSignature.launch(
+                Intent(
+                    requireContext(),
+                    SignatureActivity::class.java
+                )
+            )
+        }
+
+        binding.btnBrowseGuardianSignature.setOnClickListener {
+            ImagePicker.with(this)
+                .galleryOnly()
+                .crop()
+                .compress(1024)
+                .maxResultSize(1080, 1080)
+                .createIntent { intent ->
+                    startForGuardianSignatureResult.launch(intent)
+                }
         }
 
         return root
@@ -125,7 +285,11 @@ class PhotoFragment : Fragment() {
 
                         documentList.addAll(it.documentConfigData)
                         binding.spinnerGuardianDocumentType.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, documentList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                documentList
+                            )
                     }
                 }
                 is Resource.Error -> {
@@ -151,70 +315,120 @@ class PhotoFragment : Fragment() {
         })
 
         viewModel.getBackImage().observe(viewLifecycleOwner, {
-            if(!it) {
+            if (!it) {
                 binding.txtViewGuardianNidBack.visibility = View.INVISIBLE
                 binding.imgViewGuardianNidBack.visibility = View.INVISIBLE
                 binding.btnTakeGuardianNidBack.visibility = View.INVISIBLE
+                binding.btnBrowseGuardianNidBack.visibility = View.INVISIBLE
             } else {
                 binding.txtViewGuardianNidBack.visibility = View.VISIBLE
                 binding.imgViewGuardianNidBack.visibility = View.VISIBLE
                 binding.btnTakeGuardianNidBack.visibility = View.VISIBLE
+                binding.btnBrowseGuardianNidBack.visibility = View.VISIBLE
             }
         })
 
         var attachNumber = 0
 
-        viewModel.getSavedPhoto().observe(viewLifecycleOwner, {
+        viewModel.getUserPhoto().observe(viewLifecycleOwner, {
             binding.imgViewPhoto.setImageBitmap(it)
             attachNumber++
             nextButtonEnable(attachNumber)
         })
 
-        viewModel.getSavedNIDFront().observe(viewLifecycleOwner, {
+        viewModel.getUserDocumentFront().observe(viewLifecycleOwner, {
             binding.imgViewNidFront.setImageBitmap(it)
             attachNumber++
             nextButtonEnable(attachNumber)
         })
 
-        viewModel.getSavedNIDBack().observe(viewLifecycleOwner, {
+        viewModel.getUserDocumentBack().observe(viewLifecycleOwner, {
             binding.imgViewNidBack.setImageBitmap(it)
             attachNumber++
             nextButtonEnable(attachNumber)
         })
 
-        viewModel.getSavedSignature().observe(viewLifecycleOwner, {
-//            binding.imgView.setImageBitmap(it)
+        viewModel.getUserSignature().observe(viewLifecycleOwner, {
+            binding.imgViewSignature.setImageBitmap(it)
             attachNumber++
             nextButtonEnable(attachNumber)
         })
 
-        binding.spinnerGuardianDocumentType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+        viewModel.getGuardianPhoto().observe(viewLifecycleOwner, {
+            binding.imgViewGuardianPhoto.setImageBitmap(it)
+            attachNumber++
+            nextButtonEnable(attachNumber)
+        })
 
-            }
+        viewModel.getGuardianDocumentFront().observe(viewLifecycleOwner, {
+            binding.imgViewGuardianNidFront.setImageBitmap(it)
+            attachNumber++
+            nextButtonEnable(attachNumber)
+        })
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                viewModel.setBackImage(documentList[position].isBackRequired)
+        viewModel.getGuardianDocumentBack().observe(viewLifecycleOwner, {
+            binding.imgViewGuardianNidBack.setImageBitmap(it)
+            attachNumber++
+            nextButtonEnable(attachNumber)
+        })
+
+        viewModel.getGuardianSignature().observe(viewLifecycleOwner, {
+            binding.imgViewGuardianSignature.setImageBitmap(it)
+            attachNumber++
+            nextButtonEnable(attachNumber)
+        })
+
+        viewModel.getGuardianDocumentType().observe(viewLifecycleOwner, {
+            if (documentList.isNotEmpty()) binding.spinnerGuardianDocumentType.setSelection(
+                documentList.indexOf(
+                    DocumentConfigData(it)
+                )
+            )
+        })
+
+        binding.spinnerGuardianDocumentType.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    viewModel.setBackImage(
+                        documentList[position].isBackRequired,
+                        documentList[position].id
+                    )
+                }
             }
-        }
     }
 
     private var resultLauncherSignature =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-//                viewModel.notifyData(result.data?.getSerializableExtra(Constant.DOCUMENT_INFO) as DocumentInfo)
+                val byteArray = result.data?.getByteArrayExtra(Constant.SIGNATURE_INFO)
+
+                byteArray?.let { BitmapFactory.decodeByteArray(byteArray, 0, it.size) }?.let {
+                    viewModel.setUserSignature(
+                        it
+                    )
+                }
             }
         }
 
     private var resultLauncherGuardianSignature =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-//                viewModel.notifyData(result.data?.getSerializableExtra(Constant.DOCUMENT_INFO) as DocumentInfo)
+                val byteArray = result.data?.getByteArrayExtra(Constant.SIGNATURE_INFO)
+
+                byteArray?.let { BitmapFactory.decodeByteArray(byteArray, 0, it.size) }?.let {
+                    viewModel.setGuardianSignature(
+                        it
+                    )
+                }
             }
         }
 
@@ -229,27 +443,36 @@ class PhotoFragment : Fragment() {
 
             when (resultCode) {
                 Activity.RESULT_OK -> {
-                    //Image Uri will not be null for RESULT_OK
                     val fileUri = data?.data!!
 
-                    binding.imgViewPhoto.setImageURI(fileUri)
-
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver, fileUri))
+                        ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                requireActivity().contentResolver,
+                                fileUri
+                            )
+                        )
                     } else {
-                        MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, fileUri)
+                        MediaStore.Images.Media.getBitmap(
+                            requireActivity().contentResolver,
+                            fileUri
+                        )
                     }
 
-                    viewModel.setPhoto(bitmap)
+                    viewModel.setUserPhoto(bitmap)
 
-                    Base64Image.encode(bitmap) { base64 ->
+                    /*Base64Image.encode(bitmap) { base64 ->
                         base64?.let {
                             Log.e("base64", "_______$it")
                         }
-                    }
+                    }*/
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireActivity(),
+                        ImagePicker.getError(data),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 else -> {
                     Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
@@ -264,27 +487,30 @@ class PhotoFragment : Fragment() {
 
             when (resultCode) {
                 Activity.RESULT_OK -> {
-                    //Image Uri will not be null for RESULT_OK
                     val fileUri = data?.data!!
 
-                    binding.imgViewNidFront.setImageURI(fileUri)
-
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver, fileUri))
+                        ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                requireActivity().contentResolver,
+                                fileUri
+                            )
+                        )
                     } else {
-                        MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, fileUri)
+                        MediaStore.Images.Media.getBitmap(
+                            requireActivity().contentResolver,
+                            fileUri
+                        )
                     }
 
-                    viewModel.setNIDFront(bitmap)
-
-                    Base64Image.encode(bitmap) { base64 ->
-                        base64?.let {
-                            Log.e("base64", "_______$it")
-                        }
-                    }
+                    viewModel.setUserDocumentFront(bitmap)
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireActivity(),
+                        ImagePicker.getError(data),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 else -> {
                     Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
@@ -299,27 +525,147 @@ class PhotoFragment : Fragment() {
 
             when (resultCode) {
                 Activity.RESULT_OK -> {
+                    val fileUri = data?.data!!
+
+                    val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                requireActivity().contentResolver,
+                                fileUri
+                            )
+                        )
+                    } else {
+                        MediaStore.Images.Media.getBitmap(
+                            requireActivity().contentResolver,
+                            fileUri
+                        )
+                    }
+
+                    viewModel.setUserDocumentBack(bitmap)
+                }
+                ImagePicker.RESULT_ERROR -> {
+                    Toast.makeText(
+                        requireActivity(),
+                        ImagePicker.getError(data),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    private val startForGuardianPhotoResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            when (resultCode) {
+                Activity.RESULT_OK -> {
                     //Image Uri will not be null for RESULT_OK
                     val fileUri = data?.data!!
 
-                    binding.imgViewNidBack.setImageURI(fileUri)
-
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver, fileUri))
+                        ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                requireActivity().contentResolver,
+                                fileUri
+                            )
+                        )
                     } else {
-                        MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, fileUri)
+                        MediaStore.Images.Media.getBitmap(
+                            requireActivity().contentResolver,
+                            fileUri
+                        )
                     }
 
-                    viewModel.setNIDBack(bitmap)
-
-                    Base64Image.encode(bitmap) { base64 ->
-                        base64?.let {
-                            Log.e("base64", "_______$it")
-                        }
-                    }
+                    viewModel.setGuardianPhoto(bitmap)
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireActivity(),
+                        ImagePicker.getError(data),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    private val startForGuardianFrontResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    //Image Uri will not be null for RESULT_OK
+                    val fileUri = data?.data!!
+
+                    val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                requireActivity().contentResolver,
+                                fileUri
+                            )
+                        )
+                    } else {
+                        MediaStore.Images.Media.getBitmap(
+                            requireActivity().contentResolver,
+                            fileUri
+                        )
+                    }
+
+                    viewModel.setGuardianDocumentFront(bitmap)
+                }
+                ImagePicker.RESULT_ERROR -> {
+                    Toast.makeText(
+                        requireActivity(),
+                        ImagePicker.getError(data),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    private val startForGuardianBackResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    //Image Uri will not be null for RESULT_OK
+                    val fileUri = data?.data!!
+
+                    val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                requireActivity().contentResolver,
+                                fileUri
+                            )
+                        )
+                    } else {
+                        MediaStore.Images.Media.getBitmap(
+                            requireActivity().contentResolver,
+                            fileUri
+                        )
+                    }
+
+                    viewModel.setGuardianDocumentBack(bitmap)
+                }
+                ImagePicker.RESULT_ERROR -> {
+                    Toast.makeText(
+                        requireActivity(),
+                        ImagePicker.getError(data),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 else -> {
                     Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
@@ -334,20 +680,68 @@ class PhotoFragment : Fragment() {
 
             when (resultCode) {
                 Activity.RESULT_OK -> {
-                    //Image Uri will not be null for RESULT_OK
                     val fileUri = data?.data!!
-//                    binding.imgView.setImageURI(fileUri)
 
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver, fileUri))
+                        ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                requireActivity().contentResolver,
+                                fileUri
+                            )
+                        )
                     } else {
-                        MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, fileUri)
+                        MediaStore.Images.Media.getBitmap(
+                            requireActivity().contentResolver,
+                            fileUri
+                        )
                     }
 
-                    viewModel.setSignature(bitmap)
+                    viewModel.setUserSignature(bitmap)
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(requireActivity(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireActivity(),
+                        ImagePicker.getError(data),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    private val startForGuardianSignatureResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    val fileUri = data?.data!!
+
+                    val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                requireActivity().contentResolver,
+                                fileUri
+                            )
+                        )
+                    } else {
+                        MediaStore.Images.Media.getBitmap(
+                            requireActivity().contentResolver,
+                            fileUri
+                        )
+                    }
+
+                    viewModel.setGuardianSignature(bitmap)
+                }
+                ImagePicker.RESULT_ERROR -> {
+                    Toast.makeText(
+                        requireActivity(),
+                        ImagePicker.getError(data),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 else -> {
                     Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()

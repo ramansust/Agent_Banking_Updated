@@ -17,6 +17,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/oxygen_bold"
             android:text="@string/minor_attains_info"
+            android:textColor="@android:color/holo_blue_light"
             android:textSize="@dimen/font_16x"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,13 +84,31 @@
                     android:id="@+id/btn_take_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_5x"
                     android:fontFamily="@font/oxygen_regular"
                     android:text="@string/attach"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_browse_photo"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img_view_photo" />
+
+                <Button
+                    android:id="@+id/btn_browse_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_5x"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/browse"
+                    android:textSize="@dimen/font_12x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btn_take_photo"
+                    app:layout_constraintTop_toBottomOf="@+id/img_view_photo" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -154,12 +173,29 @@
                     android:id="@+id/btn_take_signature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_5x"
                     android:fontFamily="@font/oxygen_regular"
                     android:text="@string/attach"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_browse_signature"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_view_signature" />
+
+                <Button
+                    android:id="@+id/btn_browse_signature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_5x"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/browse"
+                    android:textSize="@dimen/font_12x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btn_take_signature"
                     app:layout_constraintTop_toBottomOf="@+id/img_view_signature" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -208,6 +244,45 @@
                     app:layout_constraintStart_toStartOf="@+id/img_view_nid_front"
                     app:layout_constraintTop_toBottomOf="@id/txt_view_nid" />
 
+
+                <ImageView
+                    android:id="@+id/img_view_nid_front"
+                    android:layout_width="@dimen/space_110x"
+                    android:layout_height="@dimen/space_110x"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_photo_preview"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_middle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_view_nid_front" />
+
+                <Button
+                    android:id="@+id/btn_take_nid_front"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_5x"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/attach"
+                    android:textSize="@dimen/font_12x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_browse_nid_front"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_view_nid_front" />
+
+                <Button
+                    android:id="@+id/btn_browse_nid_front"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_5x"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/browse"
+                    android:textSize="@dimen/font_12x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_middle"
+                    app:layout_constraintStart_toEndOf="@+id/btn_take_nid_front"
+                    app:layout_constraintTop_toBottomOf="@+id/img_view_nid_front" />
+
                 <TextView
                     android:id="@+id/txt_view_nid_back"
                     android:layout_width="0dp"
@@ -223,29 +298,6 @@
                     app:layout_constraintTop_toBottomOf="@id/txt_view_nid" />
 
                 <ImageView
-                    android:id="@+id/img_view_nid_front"
-                    android:layout_width="@dimen/space_110x"
-                    android:layout_height="@dimen/space_110x"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_photo_preview"
-                    app:layout_constraintEnd_toStartOf="@id/img_view_nid_back"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_nid_front" />
-
-                <Button
-                    android:id="@+id/btn_take_nid_front"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:text="@string/attach"
-                    android:textSize="@dimen/font_12x"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/img_view_nid_front"
-                    app:layout_constraintStart_toStartOf="@+id/img_view_nid_front"
-                    app:layout_constraintTop_toBottomOf="@+id/img_view_nid_front" />
-
-                <ImageView
                     android:id="@+id/img_view_nid_back"
                     android:layout_width="@dimen/space_110x"
                     android:layout_height="@dimen/space_110x"
@@ -253,7 +305,7 @@
                     android:contentDescription="@string/todo"
                     android:src="@drawable/ic_photo_preview"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/img_view_nid_front"
+                    app:layout_constraintStart_toEndOf="@id/guideline_middle"
                     app:layout_constraintTop_toBottomOf="@+id/txt_view_nid_back" />
 
                 <Button
@@ -264,9 +316,32 @@
                     android:text="@string/attach"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/img_view_nid_back"
-                    app:layout_constraintStart_toStartOf="@+id/img_view_nid_back"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_browse_nid_back"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/guideline_middle"
                     app:layout_constraintTop_toBottomOf="@+id/img_view_nid_back" />
+
+                <Button
+                    android:id="@+id/btn_browse_nid_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_5x"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/browse"
+                    android:textSize="@dimen/font_12x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_take_nid_back"
+                    app:layout_constraintTop_toBottomOf="@+id/img_view_nid_back" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_middle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintGuide_percent="0.5"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -279,6 +354,7 @@
             android:fontFamily="@font/oxygen_bold"
             android:gravity="center|start"
             android:text="@string/guardian_information"
+            android:textColor="@android:color/holo_blue_light"
             android:textSize="@dimen/font_16x"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/spinner_guardian_document_type"
@@ -360,13 +436,31 @@
                     android:id="@+id/btn_take_guardian_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_5x"
                     android:fontFamily="@font/oxygen_regular"
                     android:text="@string/attach"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_photo"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_photo" />
+
+                <Button
+                    android:id="@+id/btn_browse_guardian_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_5x"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/browse"
+                    android:textSize="@dimen/font_12x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btn_take_guardian_photo"
+                    app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_photo" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -432,13 +526,31 @@
                     android:id="@+id/btn_take_guardian_signature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_5x"
                     android:fontFamily="@font/oxygen_regular"
                     android:text="@string/attach"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_signature"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_signature" />
+
+                <Button
+                    android:id="@+id/btn_browse_guardian_signature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_5x"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/browse"
+                    android:textSize="@dimen/font_12x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btn_take_guardian_signature"
+                    app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_signature" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -487,6 +599,44 @@
                     app:layout_constraintStart_toStartOf="@+id/img_view_guardian_nid_front"
                     app:layout_constraintTop_toBottomOf="@id/txt_view_guardian_nid" />
 
+                <ImageView
+                    android:id="@+id/img_view_guardian_nid_front"
+                    android:layout_width="@dimen/space_110x"
+                    android:layout_height="@dimen/space_110x"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_photo_preview"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_middle_guardian"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_nid_front" />
+
+                <Button
+                    android:id="@+id/btn_take_guardian_nid_front"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_5x"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/attach"
+                    android:textSize="@dimen/font_12x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_nid_front"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_nid_front" />
+
+                <Button
+                    android:id="@+id/btn_browse_guardian_nid_front"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_5x"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/browse"
+                    android:textSize="@dimen/font_12x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_middle_guardian"
+                    app:layout_constraintStart_toEndOf="@+id/btn_take_guardian_nid_front"
+                    app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_nid_front" />
+
                 <TextView
                     android:id="@+id/txt_view_guardian_nid_back"
                     android:layout_width="0dp"
@@ -502,29 +652,6 @@
                     app:layout_constraintTop_toBottomOf="@id/txt_view_guardian_nid" />
 
                 <ImageView
-                    android:id="@+id/img_view_guardian_nid_front"
-                    android:layout_width="@dimen/space_110x"
-                    android:layout_height="@dimen/space_110x"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_photo_preview"
-                    app:layout_constraintEnd_toStartOf="@id/img_view_guardian_nid_back"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_nid_front" />
-
-                <Button
-                    android:id="@+id/btn_take_guardian_nid_front"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:text="@string/attach"
-                    android:textSize="@dimen/font_12x"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/img_view_guardian_nid_front"
-                    app:layout_constraintStart_toStartOf="@+id/img_view_guardian_nid_front"
-                    app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_nid_front" />
-
-                <ImageView
                     android:id="@+id/img_view_guardian_nid_back"
                     android:layout_width="@dimen/space_110x"
                     android:layout_height="@dimen/space_110x"
@@ -532,7 +659,7 @@
                     android:contentDescription="@string/todo"
                     android:src="@drawable/ic_photo_preview"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/img_view_guardian_nid_front"
+                    app:layout_constraintStart_toEndOf="@id/guideline_middle_guardian"
                     app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_nid_back" />
 
                 <Button
@@ -543,9 +670,32 @@
                     android:text="@string/attach"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/img_view_guardian_nid_back"
-                    app:layout_constraintStart_toStartOf="@+id/img_view_guardian_nid_back"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_nid_back"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/guideline_middle_guardian"
                     app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_nid_back" />
+
+                <Button
+                    android:id="@+id/btn_browse_guardian_nid_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_5x"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/browse"
+                    android:textSize="@dimen/font_12x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_take_guardian_nid_back"
+                    app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_nid_back" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_middle_guardian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintGuide_percent="0.5"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
