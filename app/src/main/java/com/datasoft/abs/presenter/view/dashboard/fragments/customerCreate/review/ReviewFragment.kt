@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.datasoft.abs.databinding.FingerprintFragmentBinding
 import com.datasoft.abs.databinding.FragmentReviewBinding
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,16 +13,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ReviewFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ReviewFragment()
-    }
-
     private val customerViewModel: CustomerViewModel by activityViewModels()
     private val viewModel: ReviewViewModel by activityViewModels()
     private var _binding: FragmentReviewBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -47,6 +41,34 @@ class ReviewFragment : Fragment() {
         }
 
         binding.btnBack.setOnClickListener {
+            customerViewModel.requestCurrentStep(6)
+        }
+
+        binding.btnGeneralEdit.setOnClickListener {
+            customerViewModel.requestCurrentStep(0)
+        }
+
+        binding.btnPersonalEdit.setOnClickListener {
+            customerViewModel.requestCurrentStep(1)
+        }
+
+        binding.btnAddressEdit.setOnClickListener {
+            customerViewModel.requestCurrentStep(2)
+        }
+
+        binding.btnPhotoNidEdit.setOnClickListener {
+            customerViewModel.requestCurrentStep(3)
+        }
+
+        binding.btnFingerprintEidt.setOnClickListener {
+            customerViewModel.requestCurrentStep(4)
+        }
+
+        binding.btnDocumentsEdit.setOnClickListener {
+            customerViewModel.requestCurrentStep(5)
+        }
+
+        binding.btnKycEdit.setOnClickListener {
             customerViewModel.requestCurrentStep(6)
         }
 
