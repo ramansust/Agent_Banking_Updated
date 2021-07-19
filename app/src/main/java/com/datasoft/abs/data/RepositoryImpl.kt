@@ -8,6 +8,7 @@ import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.config.ConfigResponse
 import com.datasoft.abs.data.dto.config.RiskGradeResponse
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
+import com.datasoft.abs.data.dto.createCustomer.CreateCustomerResponse
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
 import com.datasoft.abs.data.dto.customerList.CustomerResponse
 import com.datasoft.abs.data.dto.dashboard.DashboardRequest
@@ -76,7 +77,7 @@ class RepositoryImpl @Inject constructor(
         return restApiService.getDedupeCheckData(dedupeCheckRequest)
     }
 
-    override suspend fun createCustomerData(createCustomerRequest: CreateCustomerRequest): Response<Objects> {
+    override suspend fun createCustomerData(createCustomerRequest: CreateCustomerRequest): Response<CreateCustomerResponse> {
         return restApiService.createCustomerData(createCustomerRequest)
     }
 

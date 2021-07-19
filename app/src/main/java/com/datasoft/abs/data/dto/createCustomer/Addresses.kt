@@ -1,7 +1,8 @@
 package com.datasoft.abs.data.dto.createCustomer
 
-data class PresentAddress(
+data class Addresses(
     val addressLine: String,
+    val addressTypeId: Int,
     val countryCode: Int,
     val district: String,
     val districtCode: Int,

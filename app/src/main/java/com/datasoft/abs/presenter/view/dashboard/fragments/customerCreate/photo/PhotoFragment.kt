@@ -460,12 +460,6 @@ class PhotoFragment : Fragment() {
                     }
 
                     viewModel.setUserPhoto(bitmap)
-
-                    /*Base64Image.encode(bitmap) { base64 ->
-                        base64?.let {
-                            Log.e("base64", "_______$it")
-                        }
-                    }*/
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(

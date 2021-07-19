@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.createCustomer.AddressInfo
+import com.datasoft.abs.data.dto.createCustomer.Contact
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Network
@@ -29,6 +30,9 @@ class AddressViewModel @Inject constructor(
 
     private val saveData = MutableLiveData<ArrayList<AddressInfo>>()
     fun getSavedData(): LiveData<ArrayList<AddressInfo>> = saveData
+
+    private val contactData = MutableLiveData<ArrayList<Contact>>()
+    fun getContactData(): LiveData<ArrayList<Contact>> = contactData
 
     private val sendMessage = MutableLiveData<Resource<AddressInfo>>()
     fun getMessage(): LiveData<Resource<AddressInfo>> = sendMessage
@@ -127,6 +131,13 @@ class AddressViewModel @Inject constructor(
                 list.addAll(list.size - 1, it)
             }
             saveData.postValue(list)
+
+            val contactList: ArrayList<Contact> = ArrayList()
+            contactList.add(Contact(addressInfo.contactNo, addressInfo.contactType))
+            contactData.value?.let {
+                contactList.addAll(contactList.size - 1, it)
+            }
+            contactData.postValue(contactList)
         }
     }
 
@@ -138,6 +149,13 @@ class AddressViewModel @Inject constructor(
             }
             list.remove(addressInfo)
             saveData.postValue(list)
+
+            val contactList: ArrayList<Contact> = ArrayList()
+            contactData.value?.let {
+                contactList.addAll(it)
+            }
+            contactList.remove(Contact(addressInfo.contactNo, addressInfo.contactType))
+            contactData.postValue(contactList)
         }
     }
 

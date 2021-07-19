@@ -9,5 +9,6 @@ data class DocumentInfo(
     val issueDate: String,
     val expiryDate: String,
     val description: String,
-    val frontUri: String
+    val frontUri: String,
+    val backUri: String = ""
 ): Serializable

@@ -8,6 +8,7 @@ import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.config.ConfigResponse
 import com.datasoft.abs.data.dto.config.RiskGradeResponse
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
+import com.datasoft.abs.data.dto.createCustomer.CreateCustomerResponse
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
 import com.datasoft.abs.data.dto.customerList.CustomerResponse
 import com.datasoft.abs.data.dto.dashboard.DashboardResponse
@@ -33,7 +34,7 @@ interface Repository {
     suspend fun getSanctionScreeningData(sanctionScreeningRequest: SanctionScreeningRequest): Response<SanctionScreeningResponse>
     suspend fun getDedupeCheckData(dedupeCheckRequest: DedupeCheckRequest): Response<DedupeCheckResponse>
 
-    suspend fun createCustomerData(createCustomerRequest: CreateCustomerRequest): Response<Objects>
+    suspend fun createCustomerData(createCustomerRequest: CreateCustomerRequest): Response<CreateCustomerResponse>
     suspend fun getDepositData(commonRequest: CommonRequest): Response<Objects>
     suspend fun getWithdrawData(commonRequest: CommonRequest): Response<Objects>
     suspend fun getTransferData(commonRequest: CommonRequest): Response<Objects>

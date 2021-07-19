@@ -7,6 +7,7 @@ import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.config.ConfigResponse
 import com.datasoft.abs.data.dto.config.RiskGradeResponse
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
+import com.datasoft.abs.data.dto.createCustomer.CreateCustomerResponse
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
 import com.datasoft.abs.data.dto.customerList.CustomerResponse
 import com.datasoft.abs.data.dto.dashboard.DashboardRequest
@@ -47,7 +48,7 @@ interface RestApiService {
     suspend fun getDedupeCheckData(@Body dedupeCheckRequest: DedupeCheckRequest): Response<DedupeCheckResponse>
 
     @POST("api/create-customer")
-    suspend fun createCustomerData(@Body createCustomerRequest: CreateCustomerRequest): Response<Objects>
+    suspend fun createCustomerData(@Body createCustomerRequest: CreateCustomerRequest): Response<CreateCustomerResponse>
 
     @POST("api/deposit-list")
     suspend fun getDepositData(@Body commonRequest: CommonRequest): Response<Objects>

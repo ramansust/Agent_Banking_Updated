@@ -1,0 +1,31 @@
+package com.datasoft.abs.data.dto.createCustomer
+
+data class KycInfoX(
+    val accountOpeningWayId: Int,
+    val businessId: Int,
+    val isBirthCertificateNoReceived: Boolean,
+    val isBirthCertificateNoVerified: Boolean,
+    val isBlackListedId: Int,
+    val isCertificateOfIncorporationReceived: Boolean,
+    val isCertificateOfIncorporationVerified: Boolean,
+    val isDrivingLicenseNoReceived: Boolean,
+    val isDrivingLicenseNoVerified: Boolean,
+    val isETinNoReceived: Boolean,
+    val isETinNoVerified: Boolean,
+    val isInterviewedPersonally: Int,
+    val isNidNoReceived: Boolean,
+    val isNidNoVerified: Boolean,
+    val isOrgRegNoReceived: Boolean,
+    val isOrgRegNoVerified: Boolean,
+    val isPassportNoReceived: Boolean,
+    val isPassportNoVerified: Boolean,
+    val isPep: Int,
+    val isPepCloserId: Int,
+    val isVatRegNoReceived: Boolean,
+    val isVatRegNoVerified: Boolean,
+    val kycRiskFactorId: Int,
+    val professionOrNatureId: Int,
+    val residentStatusId: Int,
+    val transparencyRiskId: Int,
+    val typeOfProductId: Int
+)
