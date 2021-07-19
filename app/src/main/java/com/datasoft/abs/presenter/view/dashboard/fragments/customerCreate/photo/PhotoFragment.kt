@@ -7,6 +7,8 @@ import android.graphics.ImageDecoder
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64.DEFAULT
+import android.util.Base64.decode
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +21,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.RequestManager
 import com.datasoft.abs.data.dto.config.DocumentConfigData
 import com.datasoft.abs.databinding.PhotoFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
@@ -27,6 +30,7 @@ import com.datasoft.abs.presenter.utils.Photos
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.personal.PersonalViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.pixelcarrot.base64image.Base64Image
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
@@ -43,8 +47,10 @@ class PhotoFragment : Fragment() {
     @Inject
     lateinit var photos: Photos
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    @Inject
+    lateinit var glide: RequestManager
+
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -331,49 +337,49 @@ class PhotoFragment : Fragment() {
         var attachNumber = 0
 
         viewModel.getUserPhoto().observe(viewLifecycleOwner, {
-            binding.imgViewPhoto.setImageBitmap(it)
+            glide.load(decode(it, DEFAULT)).into(binding.imgViewPhoto)
             attachNumber++
             nextButtonEnable(attachNumber)
         })
 
-        viewModel.getUserDocumentFront().observe(viewLifecycleOwner, {
-            binding.imgViewNidFront.setImageBitmap(it)
+        viewModel.getDocumentFront().observe(viewLifecycleOwner, {
+            glide.load(decode(it, DEFAULT)).into(binding.imgViewNidFront)
             attachNumber++
             nextButtonEnable(attachNumber)
         })
 
-        viewModel.getUserDocumentBack().observe(viewLifecycleOwner, {
-            binding.imgViewNidBack.setImageBitmap(it)
+        viewModel.getDocumentBack().observe(viewLifecycleOwner, {
+            glide.load(decode(it, DEFAULT)).into(binding.imgViewNidBack)
             attachNumber++
             nextButtonEnable(attachNumber)
         })
 
-        viewModel.getUserSignature().observe(viewLifecycleOwner, {
-            binding.imgViewSignature.setImageBitmap(it)
+        viewModel.getSignature().observe(viewLifecycleOwner, {
+            glide.load(decode(it, DEFAULT)).into(binding.imgViewSignature)
             attachNumber++
             nextButtonEnable(attachNumber)
         })
 
         viewModel.getGuardianPhoto().observe(viewLifecycleOwner, {
-            binding.imgViewGuardianPhoto.setImageBitmap(it)
+            glide.load(decode(it, DEFAULT)).into(binding.imgViewGuardianPhoto)
             attachNumber++
             nextButtonEnable(attachNumber)
         })
 
         viewModel.getGuardianDocumentFront().observe(viewLifecycleOwner, {
-            binding.imgViewGuardianNidFront.setImageBitmap(it)
+            glide.load(decode(it, DEFAULT)).into(binding.imgViewGuardianNidFront)
             attachNumber++
             nextButtonEnable(attachNumber)
         })
 
         viewModel.getGuardianDocumentBack().observe(viewLifecycleOwner, {
-            binding.imgViewGuardianNidBack.setImageBitmap(it)
+            glide.load(decode(it, DEFAULT)).into(binding.imgViewGuardianNidBack)
             attachNumber++
             nextButtonEnable(attachNumber)
         })
 
         viewModel.getGuardianSignature().observe(viewLifecycleOwner, {
-            binding.imgViewGuardianSignature.setImageBitmap(it)
+            glide.load(decode(it, DEFAULT)).into(binding.imgViewGuardianSignature)
             attachNumber++
             nextButtonEnable(attachNumber)
         })
@@ -412,9 +418,12 @@ class PhotoFragment : Fragment() {
                 val byteArray = result.data?.getByteArrayExtra(Constant.SIGNATURE_INFO)
 
                 byteArray?.let { BitmapFactory.decodeByteArray(byteArray, 0, it.size) }?.let {
-                    viewModel.setUserSignature(
-                        it
-                    )
+
+                    Base64Image.encode(it) { base64 ->
+                        base64?.let { value ->
+                            viewModel.setUserSignature(value)
+                        }
+                    }
                 }
             }
         }
@@ -425,9 +434,12 @@ class PhotoFragment : Fragment() {
                 val byteArray = result.data?.getByteArrayExtra(Constant.SIGNATURE_INFO)
 
                 byteArray?.let { BitmapFactory.decodeByteArray(byteArray, 0, it.size) }?.let {
-                    viewModel.setGuardianSignature(
-                        it
-                    )
+
+                    Base64Image.encode(it) { base64 ->
+                        base64?.let { value ->
+                            viewModel.setGuardianSignature(value)
+                        }
+                    }
                 }
             }
         }
@@ -459,7 +471,11 @@ class PhotoFragment : Fragment() {
                         )
                     }
 
-                    viewModel.setUserPhoto(bitmap)
+                    Base64Image.encode(bitmap) { base64 ->
+                        base64?.let {
+                            viewModel.setUserPhoto(it)
+                        }
+                    }
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(
@@ -497,7 +513,11 @@ class PhotoFragment : Fragment() {
                         )
                     }
 
-                    viewModel.setUserDocumentFront(bitmap)
+                    Base64Image.encode(bitmap) { base64 ->
+                        base64?.let {
+                            viewModel.setUserDocumentFront(it)
+                        }
+                    }
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(
@@ -535,7 +555,11 @@ class PhotoFragment : Fragment() {
                         )
                     }
 
-                    viewModel.setUserDocumentBack(bitmap)
+                    Base64Image.encode(bitmap) { base64 ->
+                        base64?.let {
+                            viewModel.setUserDocumentBack(it)
+                        }
+                    }
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(
@@ -574,7 +598,11 @@ class PhotoFragment : Fragment() {
                         )
                     }
 
-                    viewModel.setGuardianPhoto(bitmap)
+                    Base64Image.encode(bitmap) { base64 ->
+                        base64?.let {
+                            viewModel.setGuardianPhoto(it)
+                        }
+                    }
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(
@@ -613,7 +641,11 @@ class PhotoFragment : Fragment() {
                         )
                     }
 
-                    viewModel.setGuardianDocumentFront(bitmap)
+                    Base64Image.encode(bitmap) { base64 ->
+                        base64?.let {
+                            viewModel.setGuardianDocumentFront(it)
+                        }
+                    }
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(
@@ -652,7 +684,11 @@ class PhotoFragment : Fragment() {
                         )
                     }
 
-                    viewModel.setGuardianDocumentBack(bitmap)
+                    Base64Image.encode(bitmap) { base64 ->
+                        base64?.let {
+                            viewModel.setGuardianDocumentBack(it)
+                        }
+                    }
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(
@@ -690,7 +726,11 @@ class PhotoFragment : Fragment() {
                         )
                     }
 
-                    viewModel.setUserSignature(bitmap)
+                    Base64Image.encode(bitmap) { base64 ->
+                        base64?.let {
+                            viewModel.setUserSignature(it)
+                        }
+                    }
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(
@@ -728,7 +768,11 @@ class PhotoFragment : Fragment() {
                         )
                     }
 
-                    viewModel.setGuardianSignature(bitmap)
+                    Base64Image.encode(bitmap) { base64 ->
+                        base64?.let {
+                            viewModel.setGuardianSignature(it)
+                        }
+                    }
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(

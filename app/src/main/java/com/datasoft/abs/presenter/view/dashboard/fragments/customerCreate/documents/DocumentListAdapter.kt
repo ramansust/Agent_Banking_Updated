@@ -1,27 +1,29 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.documents
 
 import android.net.Uri
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.datasoft.abs.data.dto.createCustomer.DocumentInfo
+import com.bumptech.glide.RequestManager
+import com.datasoft.abs.data.dto.createCustomer.RelatedDoc
 import com.datasoft.abs.databinding.DocumentAttachRowBinding
 import javax.inject.Inject
 
-class DocumentListAdapter @Inject constructor() :
+class DocumentListAdapter @Inject constructor(val glide: RequestManager) :
     RecyclerView.Adapter<DocumentListAdapter.DocumentViewHolder>() {
 
     inner class DocumentViewHolder(val binding: DocumentAttachRowBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<DocumentInfo>() {
-        override fun areItemsTheSame(oldItem: DocumentInfo, newItem: DocumentInfo): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<RelatedDoc>() {
+        override fun areItemsTheSame(oldItem: RelatedDoc, newItem: RelatedDoc): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: DocumentInfo, newItem: DocumentInfo): Boolean {
+        override fun areContentsTheSame(oldItem: RelatedDoc, newItem: RelatedDoc): Boolean {
             return oldItem == newItem
         }
     }
@@ -38,24 +40,25 @@ class DocumentListAdapter @Inject constructor() :
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((DocumentInfo) -> Unit)? = null
+    private var onItemClickListener: ((RelatedDoc) -> Unit)? = null
 
     override fun onBindViewHolder(holder: DocumentViewHolder, position: Int) {
         val value = differ.currentList[position]
 
-        holder.binding.txtViewDocumentName.text = value.name
-        holder.binding.txtViewTracingId.text = value.tracingID
+        holder.binding.txtViewDocumentName.text = value.docTypeName
+        holder.binding.txtViewTracingId.text = value.tracingId
         holder.binding.txtViewIssueDate.text = value.issueDate
-        holder.binding.txtViewExpiryDate.text = value.expiryDate
+        holder.binding.txtViewExpiryDate.text = value.expiredDate
 
-        holder.binding.imgViewPhoto.setImageURI(Uri.parse(value.frontUri))
+//        glide.load(Base64.decode(value.frontSideImage, Base64.DEFAULT)).into(holder.binding.imgViewPhoto)
+        holder.binding.imgViewPhoto.setImageURI(Uri.parse(value.frontSideImage))
 
         holder.binding.imgViewDelete.setOnClickListener {
             onItemClickListener?.let { it(value) }
         }
     }
 
-    fun setOnItemClickListener(listener: (DocumentInfo) -> Unit) {
+    fun setOnItemClickListener(listener: (RelatedDoc) -> Unit) {
         onItemClickListener = listener
     }
 }

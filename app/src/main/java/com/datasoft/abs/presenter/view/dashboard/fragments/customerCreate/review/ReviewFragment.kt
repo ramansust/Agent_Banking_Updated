@@ -1,11 +1,6 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.review
 
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.datasoft.abs.data.dto.createCustomer.Addresses
-import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
-import com.datasoft.abs.data.dto.createCustomer.GuardianInfo
-import com.datasoft.abs.data.dto.createCustomer.RelatedDoc
+import com.datasoft.abs.data.dto.createCustomer.*
 import com.datasoft.abs.databinding.FragmentReviewBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
@@ -27,7 +19,6 @@ import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.genera
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.kyc.KYCViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.personal.PersonalViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.photo.PhotoViewModel
-import com.pixelcarrot.base64image.Base64Image
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -50,6 +41,8 @@ class ReviewFragment : Fragment() {
 
     private val createCustomerRequest = CreateCustomerRequest()
     private var guardian = GuardianInfo()
+    private var nomineeInfo = EmergencyContact()
+    private var kycInfo = KycInfoX()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -113,35 +106,35 @@ class ReviewFragment : Fragment() {
         })
 
         photoNIDViewModel.getUserPhoto().observe(viewLifecycleOwner, {
-            createCustomerRequest.profilePhoto = convertBitmapToBase64(it)
+            createCustomerRequest.profilePhoto = it
         })
 
-        photoNIDViewModel.getUserSignature().observe(viewLifecycleOwner, {
-            createCustomerRequest.signaturePhoto = convertBitmapToBase64(it)
+        photoNIDViewModel.getSignature().observe(viewLifecycleOwner, {
+            createCustomerRequest.signaturePhoto = it
         })
 
-        photoNIDViewModel.getUserDocumentFront().observe(viewLifecycleOwner, {
-            createCustomerRequest.nidFrontSide = convertBitmapToBase64(it)
+        photoNIDViewModel.getDocumentFront().observe(viewLifecycleOwner, {
+            createCustomerRequest.nidFrontSide = it
         })
 
-        photoNIDViewModel.getUserDocumentBack().observe(viewLifecycleOwner, {
-            createCustomerRequest.nidBackSide = convertBitmapToBase64(it)
+        photoNIDViewModel.getDocumentBack().observe(viewLifecycleOwner, {
+            createCustomerRequest.nidBackSide = it
         })
 
         photoNIDViewModel.getGuardianPhoto().observe(viewLifecycleOwner, {
-            guardian.profilePhoto = convertBitmapToBase64(it)
+            guardian.profilePhoto = it
         })
 
         photoNIDViewModel.getGuardianSignature().observe(viewLifecycleOwner, {
-            guardian.signaturePhoto = convertBitmapToBase64(it)
+            guardian.signaturePhoto = it
         })
 
         photoNIDViewModel.getGuardianDocumentFront().observe(viewLifecycleOwner, {
-            guardian.docFrontSide = convertBitmapToBase64(it)
+            guardian.docFrontSide = it
         })
 
         photoNIDViewModel.getGuardianDocumentBack().observe(viewLifecycleOwner, {
-            guardian.docBackSide = convertBitmapToBase64(it)
+            guardian.docBackSide = it
         })
 
         photoNIDViewModel.getGuardianDocumentType().observe(viewLifecycleOwner, {
@@ -149,31 +142,33 @@ class ReviewFragment : Fragment() {
         })
 
         documentsViewModel.getSavedData().observe(viewLifecycleOwner, {
-            val list = mutableListOf<RelatedDoc>()
-            for (documentInfo in it) {
-                list.add(
-                    RelatedDoc(
-                        documentInfo.backUri,
-                        documentInfo.description,
-                        documentInfo.name,
-                        documentInfo.documentType,
-                        documentInfo.expiryDate,
-                        convertBitmapToBase64(convertUriToBitmap(Uri.parse(documentInfo.frontUri))),
-                        documentInfo.issueDate,
-                        documentInfo.tracingID
-                    )
-                )
-            }
-
-            createCustomerRequest.relatedDocs = list
+            createCustomerRequest.relatedDocs = it
         })
 
         kycViewModel.getKYCData().observe(viewLifecycleOwner, {
+            kycInfo.apply {
+                residentStatusId = it.residentStatus
+                isBlackListedId = it.blackListed
+                isPep = it.isPep
+                isPepCloserId = it.isPepCloser
+                isInterviewedPersonally = it.isInterviewedPersonally
+                typeOfProductId = it.typeOfProduct
+                professionOrNatureId = it.profession
+                transparencyRiskId = it.transparencyRisk
+            }
 
+            createCustomerRequest.kycInfo = kycInfo
         })
 
         kycViewModel.getDocumentList().observe(viewLifecycleOwner, {
+            for (verification in it) {
+                if(verification.name == "Passport") {
+                    kycInfo.isPassportNoReceived = verification.isPhotocopyCollected
+                    kycInfo.isPassportNoVerified = verification.isVerified
+                }
+            }
 
+            createCustomerRequest.kycInfo = kycInfo
         })
 
         personalViewModel.getPersonalData().observe(viewLifecycleOwner, { response ->
@@ -186,6 +181,12 @@ class ReviewFragment : Fragment() {
                         guardian.nameOfGuardian = it.guardianName
                         guardian.relationShipId = it.guardianRelation
                         guardian.permanentAddress = it.guardianAddress
+
+                        nomineeInfo.address = it.nomineeAddress
+                        nomineeInfo.email = it.nomineeEmail
+                        nomineeInfo.mobileNo = it.nomineeMobile
+                        nomineeInfo.name = it.nomineeName
+                        nomineeInfo.relationshipId = it.nomineeRelation
 
                         createCustomerRequest.apply {
                             maritalStatus = it.maritalStatus
@@ -201,6 +202,7 @@ class ReviewFragment : Fragment() {
                             monthlyIncome = it.monthlyIncome.toInt()
                             sourceOfFund = it.sourceOfFund
                             guardianInfo = guardian
+                            emergencyContact = nomineeInfo
                         }
                     }
                 }
@@ -273,32 +275,6 @@ class ReviewFragment : Fragment() {
             customerViewModel.requestCurrentStep(6)
         }
 
-    }
-
-    private fun convertBitmapToBase64(bitmap: Bitmap): String {
-        Base64Image.encode(bitmap) { base64 ->
-            base64?.let {
-                return@let
-            }
-        }
-
-        return ""
-    }
-
-    private fun convertUriToBitmap(uri: Uri): Bitmap {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            ImageDecoder.decodeBitmap(
-                ImageDecoder.createSource(
-                    requireActivity().contentResolver,
-                    uri
-                )
-            )
-        } else {
-            MediaStore.Images.Media.getBitmap(
-                requireActivity().contentResolver,
-                uri
-            )
-        }
     }
 
     override fun onDestroyView() {

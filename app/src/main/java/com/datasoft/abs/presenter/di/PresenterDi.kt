@@ -38,8 +38,8 @@ object PresenterDi {
         @ApplicationContext context: Context
     ) = Glide.with(context).setDefaultRequestOptions(
         RequestOptions()
-            .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_launcher_background)
+            .placeholder(R.drawable.ic_photo_preview)
+            .error(R.drawable.ic_photo_preview)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
     )
 

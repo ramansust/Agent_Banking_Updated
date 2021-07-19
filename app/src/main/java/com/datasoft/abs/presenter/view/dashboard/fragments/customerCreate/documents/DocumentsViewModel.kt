@@ -1,11 +1,10 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.documents
 
-import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.datasoft.abs.data.dto.createCustomer.DocumentInfo
+import com.datasoft.abs.data.dto.createCustomer.RelatedDoc
 import com.datasoft.abs.presenter.states.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,23 +16,20 @@ class DocumentsViewModel @Inject constructor(
 
 ): ViewModel() {
 
-    private val saveData = MutableLiveData<ArrayList<DocumentInfo>>()
-    fun getSavedData(): LiveData<ArrayList<DocumentInfo>> = saveData
-
-    private val savedSignature = MutableLiveData<Bitmap>()
-    fun getSavedSignature(): LiveData<Bitmap> = savedSignature
+    private val saveData = MutableLiveData<ArrayList<RelatedDoc>>()
+    fun getSavedData(): LiveData<ArrayList<RelatedDoc>> = saveData
 
     private val backImage = MutableLiveData<Boolean>()
     fun getBackImage(): LiveData<Boolean> = backImage
 
-    private val sendMessage = MutableLiveData<Resource<DocumentInfo>>()
-    fun getMessage(): LiveData<Resource<DocumentInfo>> = sendMessage
+    private val sendMessage = MutableLiveData<Resource<RelatedDoc>>()
+    fun getMessage(): LiveData<Resource<RelatedDoc>> = sendMessage
 
-    fun setSignature(bitmap: Bitmap) {
-        viewModelScope.launch(Dispatchers.IO) {
-            savedSignature.postValue(bitmap)
-        }
-    }
+    private val documentFrontImage = MutableLiveData<String>()
+    fun getDocumentFrontImage(): LiveData<String> = documentFrontImage
+
+    private val documentBackImage = MutableLiveData<String>()
+    fun getDocumentBackImage(): LiveData<String> = documentBackImage
 
     fun setBackImage(isRequired: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -48,13 +44,14 @@ class DocumentsViewModel @Inject constructor(
         documentID: String,
         expiryDate: String,
         description: String,
-        frontUri: String
+        frontImage: String,
+        backImage: String
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
             sendMessage.postValue(Resource.Loading())
 
-            if (documentID.isEmpty() || issueDate.isEmpty() || expiryDate.isEmpty() || frontUri.isEmpty()) {
+            if (documentID.isEmpty() || issueDate.isEmpty() || expiryDate.isEmpty() || frontImage.isEmpty()) {
                 sendMessage.postValue(
                     Resource.Error(
                         "The fields must not be empty", null
@@ -63,17 +60,17 @@ class DocumentsViewModel @Inject constructor(
                 return@launch
             }
 
-            val documentInfo = DocumentInfo(
-                documentType, name, documentID, issueDate, expiryDate, description, frontUri
+            val documentInfo = RelatedDoc(
+                backImage, description, name, documentType, expiryDate, frontImage, issueDate, documentID
             )
 
             sendMessage.postValue(Resource.Success(documentInfo))
         }
     }
 
-    fun notifyData(documentInfo: DocumentInfo) {
+    fun notifyData(documentInfo: RelatedDoc) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list: ArrayList<DocumentInfo> = ArrayList()
+            val list: ArrayList<RelatedDoc> = ArrayList()
             list.add(documentInfo)
             saveData.value?.let {
                 list.addAll(list.size - 1, it)
@@ -82,14 +79,26 @@ class DocumentsViewModel @Inject constructor(
         }
     }
 
-    fun removeData(documentInfo: DocumentInfo) {
+    fun removeData(documentInfo: RelatedDoc) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list: ArrayList<DocumentInfo> = ArrayList()
+            val list: ArrayList<RelatedDoc> = ArrayList()
             saveData.value?.let {
                 list.addAll(it)
             }
             list.remove(documentInfo)
             saveData.postValue(list)
+        }
+    }
+
+    fun setDocumentFrontImage(value: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            documentFrontImage.postValue(value)
+        }
+    }
+
+    fun setDocumentBackImage(value: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            documentBackImage.postValue(value)
         }
     }
 }

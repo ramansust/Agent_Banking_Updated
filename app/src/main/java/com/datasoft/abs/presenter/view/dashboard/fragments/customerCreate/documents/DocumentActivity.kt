@@ -34,7 +34,8 @@ class DocumentActivity : BaseActivity() {
     private val documentList = mutableListOf<DocumentConfigData>()
     private val myCalendar: Calendar = Calendar.getInstance()
 
-    private var frontUri: String = ""
+    private var frontImageUri: String = ""
+    private var backImageUri: String = ""
 
     override fun observeViewModel() {
 
@@ -117,7 +118,8 @@ class DocumentActivity : BaseActivity() {
                 binding.edTxtDocumentId.text.trim().toString(),
                 binding.edTxtExpiryDate.text.trim().toString(),
                 binding.edTxtDescription.text.trim().toString(),
-                frontUri
+                frontImageUri,
+                backImageUri
             )
         }
 
@@ -244,7 +246,8 @@ class DocumentActivity : BaseActivity() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
-                    frontUri = fileUri.toString()
+
+                    frontImageUri = fileUri.toString()
                     binding.imgViewFront.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {
@@ -264,6 +267,8 @@ class DocumentActivity : BaseActivity() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
+
+                    backImageUri = fileUri.toString()
                     binding.imgViewBack.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {

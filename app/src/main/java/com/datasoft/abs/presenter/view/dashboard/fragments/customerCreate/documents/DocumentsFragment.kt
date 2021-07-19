@@ -2,7 +2,11 @@ package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.docum
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +16,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.datasoft.abs.data.dto.createCustomer.DocumentInfo
+import com.datasoft.abs.data.dto.createCustomer.RelatedDoc
 import com.datasoft.abs.databinding.FragmentDocumentsBinding
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
+import com.pixelcarrot.base64image.Base64Image
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -85,7 +90,8 @@ class DocumentsFragment : Fragment() {
     private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                viewModel.notifyData(result.data?.getSerializableExtra(Constant.DOCUMENT_INFO) as DocumentInfo)
+                val relatedDoc = result.data?.getSerializableExtra(Constant.DOCUMENT_INFO) as RelatedDoc
+                viewModel.notifyData(relatedDoc)
             }
         }
 
@@ -101,5 +107,28 @@ class DocumentsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun fileUriToString(uri: String) {
+
+        val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            ImageDecoder.decodeBitmap(
+                ImageDecoder.createSource(
+                    requireActivity().contentResolver,
+                    Uri.parse(uri)
+                )
+            )
+        } else {
+            MediaStore.Images.Media.getBitmap(
+                requireActivity().contentResolver,
+                Uri.parse(uri)
+            )
+        }
+
+        Base64Image.encode(bitmap) { base64 ->
+            base64?.let {
+                viewModel.setDocumentFrontImage(it)
+            }
+        }
     }
 }
