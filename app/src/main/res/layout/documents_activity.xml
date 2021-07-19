@@ -276,12 +276,27 @@
                     android:id="@+id/btn_take_front"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginEnd="@dimen/space_5x"
                     android:fontFamily="@font/oxygen_regular"
                     android:text="@string/attach"
                     android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/img_view_front"
-                    app:layout_constraintStart_toStartOf="@+id/img_view_front"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_browse_front"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_view_front" />
+
+                <Button
+                    android:id="@+id/btn_browse_front"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_5x"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/browse"
+                    android:textSize="@dimen/font_16x"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                    app:layout_constraintStart_toEndOf="@+id/btn_take_front"
                     app:layout_constraintTop_toBottomOf="@+id/img_view_front" />
 
                 <ImageView
@@ -299,12 +314,27 @@
                     android:id="@+id/btn_take_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginEnd="@dimen/space_5x"
                     android:fontFamily="@font/oxygen_regular"
                     android:text="@string/attach"
                     android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="@+id/img_view_back"
-                    app:layout_constraintStart_toStartOf="@+id/img_view_back"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_browse_back"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/guideline_middle"
+                    app:layout_constraintTop_toBottomOf="@+id/img_view_back" />
+
+                <Button
+                    android:id="@+id/btn_browse_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_5x"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/browse"
+                    android:textSize="@dimen/font_16x"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_take_back"
                     app:layout_constraintTop_toBottomOf="@+id/img_view_back" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

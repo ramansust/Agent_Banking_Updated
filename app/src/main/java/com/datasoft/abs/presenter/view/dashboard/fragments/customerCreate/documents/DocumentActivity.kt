@@ -59,14 +59,16 @@ class DocumentActivity : BaseActivity() {
         })
 
         documentsViewModel.getBackImage().observe(this, {
-            if(!it) {
+            if (!it) {
                 binding.txtViewBack.visibility = View.INVISIBLE
                 binding.imgViewBack.visibility = View.INVISIBLE
                 binding.btnTakeBack.visibility = View.INVISIBLE
+                binding.btnBrowseBack.visibility = View.INVISIBLE
             } else {
                 binding.txtViewBack.visibility = View.VISIBLE
                 binding.imgViewBack.visibility = View.VISIBLE
                 binding.btnTakeBack.visibility = View.VISIBLE
+                binding.btnBrowseBack.visibility = View.VISIBLE
             }
         })
 
@@ -109,8 +111,8 @@ class DocumentActivity : BaseActivity() {
 
         binding.btnSave.setOnClickListener {
             documentsViewModel.checkData(
-                if(documentList.isNotEmpty()) documentList[binding.spinnerDocumentsType.selectedItemPosition].id else 0,
-                if(documentList.isNotEmpty()) documentList[binding.spinnerDocumentsType.selectedItemPosition].name else "",
+                if (documentList.isNotEmpty()) documentList[binding.spinnerDocumentsType.selectedItemPosition].id else 0,
+                if (documentList.isNotEmpty()) documentList[binding.spinnerDocumentsType.selectedItemPosition].name else "",
                 binding.edTxtIssueDate.text.trim().toString(),
                 binding.edTxtDocumentId.text.trim().toString(),
                 binding.edTxtExpiryDate.text.trim().toString(),
@@ -119,20 +121,21 @@ class DocumentActivity : BaseActivity() {
             )
         }
 
-        binding.spinnerDocumentsType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+        binding.spinnerDocumentsType.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
 
-            }
+                }
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                documentsViewModel.setBackImage(documentList[position].isBackRequired)
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    documentsViewModel.setBackImage(documentList[position].isBackRequired)
+                }
             }
-        }
 
         binding.edTxtIssueDate.setOnClickListener {
             val datePicker = DatePickerDialog(
@@ -155,11 +158,23 @@ class DocumentActivity : BaseActivity() {
         }
 
         binding.btnTakeFront.setOnClickListener {
-//            takePhotoUsingCamera.launch()
             ImagePicker.with(this)
+                .cameraOnly()
                 .crop()
-                .compress(1024)         //Final image size will be less than 1 MB(Optional)
-                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+                .compress(1024)
+                .maxResultSize(1080, 1080)
+                .createIntent { intent ->
+                    startForFrontResult.launch(intent)
+                }
+
+        }
+
+        binding.btnBrowseFront.setOnClickListener {
+            ImagePicker.with(this)
+                .galleryOnly()
+                .crop()
+                .compress(1024)
+                .maxResultSize(1080, 1080)
                 .createIntent { intent ->
                     startForFrontResult.launch(intent)
                 }
@@ -167,11 +182,23 @@ class DocumentActivity : BaseActivity() {
         }
 
         binding.btnTakeBack.setOnClickListener {
-//            takePhotoUsingCamera.launch()
             ImagePicker.with(this)
+                .cameraOnly()
                 .crop()
-                .compress(1024)         //Final image size will be less than 1 MB(Optional)
-                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+                .compress(1024)
+                .maxResultSize(1080, 1080)
+                .createIntent { intent ->
+                    startForBackResult.launch(intent)
+                }
+
+        }
+
+        binding.btnBrowseBack.setOnClickListener {
+            ImagePicker.with(this)
+                .galleryOnly()
+                .crop()
+                .compress(1024)
+                .maxResultSize(1080, 1080)
                 .createIntent { intent ->
                     startForBackResult.launch(intent)
                 }
