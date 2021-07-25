@@ -91,7 +91,7 @@ class DocumentsFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val relatedDoc = result.data?.getSerializableExtra(Constant.DOCUMENT_INFO) as RelatedDoc
-                viewModel.notifyData(relatedDoc)
+                fileUriToString(relatedDoc)
             }
         }
 
@@ -109,25 +109,26 @@ class DocumentsFragment : Fragment() {
         _binding = null
     }
 
-    private fun fileUriToString(uri: String) {
+    private fun fileUriToString(relatedDoc: RelatedDoc) {
 
         val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             ImageDecoder.decodeBitmap(
                 ImageDecoder.createSource(
                     requireActivity().contentResolver,
-                    Uri.parse(uri)
+                    Uri.parse(relatedDoc.frontSideImage)
                 )
             )
         } else {
             MediaStore.Images.Media.getBitmap(
                 requireActivity().contentResolver,
-                Uri.parse(uri)
+                Uri.parse(relatedDoc.frontSideImage)
             )
         }
 
         Base64Image.encode(bitmap) { base64 ->
             base64?.let {
-                viewModel.setDocumentFrontImage(it)
+                relatedDoc.frontSideImage = it
+                viewModel.notifyData(relatedDoc)
             }
         }
     }

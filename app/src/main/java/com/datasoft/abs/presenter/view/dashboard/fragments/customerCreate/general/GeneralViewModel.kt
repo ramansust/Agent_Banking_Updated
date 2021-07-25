@@ -8,6 +8,7 @@ import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckRequest
 import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckResponse
 import com.datasoft.abs.data.dto.dedupecheck.SaveData
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
+import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Network
@@ -28,6 +29,9 @@ class GeneralViewModel @Inject constructor(
 
     private val savedData = MutableLiveData<SaveData>()
     fun getSavedData(): LiveData<SaveData> = savedData
+
+    private val sanction = MutableLiveData<SanctionScreeningResponse>()
+    fun getSanctionData(): LiveData<SanctionScreeningResponse> = sanction
 
     fun requestData(
         salutation: Int,
@@ -131,10 +135,8 @@ class GeneralViewModel @Inject constructor(
                         val response = repository.getSanctionScreeningData(sanctionScreeningRequest)
                         if (response.isSuccessful) {
                             response.body()?.let {
-                                return@let if (it.responseCode == "200") {
-                                    Resource.Success(response)
-                                } else
-                                    Resource.Error(resultResponse.message)
+                                sanction.postValue(it)
+                                return@let Resource.Success(response)
                             }
                         }
                     }

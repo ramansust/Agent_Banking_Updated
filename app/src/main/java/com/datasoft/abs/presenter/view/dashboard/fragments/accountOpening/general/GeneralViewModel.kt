@@ -113,10 +113,7 @@ class GeneralViewModel @Inject constructor(
                         val response = repository.getSanctionScreeningData(sanctionScreeningRequest)
                         if (response.isSuccessful) {
                             response.body()?.let {
-                                return@let if (it.responseCode == "200") {
-                                    Resource.Success(resultResponse)
-                                } else
-                                    Resource.Error(resultResponse.message)
+                                return@let Resource.Success(resultResponse)
                             }
                         }
                     }

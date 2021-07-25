@@ -11,7 +11,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.data.dto.config.CommonModel
-import com.datasoft.abs.data.dto.createCustomer.DocumentVerificationInfo
 import com.datasoft.abs.databinding.KycFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
@@ -47,34 +46,8 @@ class KYCFragment : Fragment() {
 
         setupRecyclerView()
 
-        viewModel.getDocumentList().observe(viewLifecycleOwner, {
+        customerViewModel.getDocumentList().observe(viewLifecycleOwner, {
             documentAdapter.differ.submitList(it)
-        })
-
-        customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let {
-                        val documentList = mutableListOf<DocumentVerificationInfo>()
-                        for (value in it.documentTypeList) {
-                            val info = DocumentVerificationInfo(
-                                value.id, value.name,
-                                isPhotocopyCollected = false,
-                                isVerified = false
-                            )
-                            documentList.add(info)
-                        }
-                        viewModel.documentList(documentList as ArrayList<DocumentVerificationInfo>)
-                    }
-                }
-                is Resource.Error -> {
-                    response.message?.let { message ->
-                        Log.e("TAG", "An error occurred: $message")
-                    }
-                }
-                is Resource.Loading -> {
-                }
-            }
         })
 
         customerViewModel.requestVisibility(false)
@@ -274,11 +247,11 @@ class KYCFragment : Fragment() {
         }
 
         documentAdapter.setOnPhotocopyClickListener { index, isChecked ->
-            viewModel.collectedDocument(index, isChecked)
+            customerViewModel.collectedDocument(index, isChecked)
         }
 
         documentAdapter.setOnVerifiedClickListener { index, isChecked ->
-            viewModel.verifiedDocument(index, isChecked)
+            customerViewModel.verifiedDocument(index, isChecked)
         }
     }
 

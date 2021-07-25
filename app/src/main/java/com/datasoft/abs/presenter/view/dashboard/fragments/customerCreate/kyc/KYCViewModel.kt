@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.config.RiskGradeResponse
-import com.datasoft.abs.data.dto.createCustomer.DocumentVerificationInfo
 import com.datasoft.abs.data.dto.createCustomer.KYCInfo
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
@@ -27,9 +26,6 @@ class KYCViewModel @Inject constructor(
 
     private val kycData = MutableLiveData<KYCInfo>()
     fun getKYCData(): LiveData<KYCInfo> = kycData
-
-    private val documentList = MutableLiveData<ArrayList<DocumentVerificationInfo>>()
-    fun getDocumentList(): LiveData<ArrayList<DocumentVerificationInfo>> = documentList
 
     fun configData() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -91,27 +87,5 @@ class KYCViewModel @Inject constructor(
             }
         }
         return Resource.Error(response.message())
-    }
-
-    fun documentList(list: ArrayList<DocumentVerificationInfo>) {
-        viewModelScope.launch(Dispatchers.IO) {
-            if (documentList.value == null) {
-                documentList.postValue(list)
-            }
-        }
-    }
-
-    fun collectedDocument(index: Int, isChecked: Boolean) {
-        viewModelScope.launch(Dispatchers.IO) {
-            documentList.value?.get(index)?.isPhotocopyCollected = isChecked
-            documentList.postValue(documentList.value)
-        }
-    }
-
-    fun verifiedDocument(index: Int, isChecked: Boolean) {
-        viewModelScope.launch(Dispatchers.IO) {
-            documentList.value?.get(index)?.isVerified = isChecked
-            documentList.postValue(documentList.value)
-        }
     }
 }

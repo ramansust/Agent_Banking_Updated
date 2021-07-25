@@ -50,8 +50,8 @@ class DocumentListAdapter @Inject constructor(val glide: RequestManager) :
         holder.binding.txtViewIssueDate.text = value.issueDate
         holder.binding.txtViewExpiryDate.text = value.expiredDate
 
-//        glide.load(Base64.decode(value.frontSideImage, Base64.DEFAULT)).into(holder.binding.imgViewPhoto)
-        holder.binding.imgViewPhoto.setImageURI(Uri.parse(value.frontSideImage))
+        glide.load(Base64.decode(value.frontSideImage, Base64.DEFAULT)).into(holder.binding.imgViewPhoto)
+//        holder.binding.imgViewPhoto.setImageURI(Uri.parse(value.frontSideImage))
 
         holder.binding.imgViewDelete.setOnClickListener {
             onItemClickListener?.let { it(value) }

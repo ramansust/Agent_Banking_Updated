@@ -60,6 +60,11 @@ class ReviewFragment : Fragment() {
         customerViewModel.requestVisibility(false)
         customerViewModel.requestListener(false)
 
+        generalViewModel.getSanctionData().observe(viewLifecycleOwner, {
+            createCustomerRequest.customerNo = it.customerNo
+            createCustomerRequest.branchId = it.branchId
+        })
+
         generalViewModel.getSavedData().observe(viewLifecycleOwner, {
             createCustomerRequest.apply {
                 salutation = it.salutation
@@ -123,22 +128,27 @@ class ReviewFragment : Fragment() {
 
         photoNIDViewModel.getGuardianPhoto().observe(viewLifecycleOwner, {
             guardian.profilePhoto = it
+            createCustomerRequest.guardianInfo = guardian
         })
 
         photoNIDViewModel.getGuardianSignature().observe(viewLifecycleOwner, {
             guardian.signaturePhoto = it
+            createCustomerRequest.guardianInfo = guardian
         })
 
         photoNIDViewModel.getGuardianDocumentFront().observe(viewLifecycleOwner, {
             guardian.docFrontSide = it
+            createCustomerRequest.guardianInfo = guardian
         })
 
         photoNIDViewModel.getGuardianDocumentBack().observe(viewLifecycleOwner, {
             guardian.docBackSide = it
+            createCustomerRequest.guardianInfo = guardian
         })
 
         photoNIDViewModel.getGuardianDocumentType().observe(viewLifecycleOwner, {
             guardian.documentTypeId = it
+            createCustomerRequest.guardianInfo = guardian
         })
 
         documentsViewModel.getSavedData().observe(viewLifecycleOwner, {
@@ -160,13 +170,30 @@ class ReviewFragment : Fragment() {
             createCustomerRequest.kycInfo = kycInfo
         })
 
-        kycViewModel.getDocumentList().observe(viewLifecycleOwner, {
-            for (verification in it) {
-                if(verification.name == "Passport") {
-                    kycInfo.isPassportNoReceived = verification.isPhotocopyCollected
-                    kycInfo.isPassportNoVerified = verification.isVerified
-                }
-            }
+        customerViewModel.getDocumentList().observe(viewLifecycleOwner, {
+            kycInfo.isNidNoReceived = it[0].isPhotocopyCollected
+            kycInfo.isNidNoVerified = it[0].isVerified
+
+            kycInfo.isPassportNoReceived = it[1].isPhotocopyCollected
+            kycInfo.isPassportNoVerified = it[1].isVerified
+
+            kycInfo.isBirthCertificateNoReceived = it[2].isPhotocopyCollected
+            kycInfo.isBirthCertificateNoVerified = it[2].isVerified
+
+            kycInfo.isETinNoReceived = it[3].isPhotocopyCollected
+            kycInfo.isETinNoVerified = it[3].isVerified
+
+            kycInfo.isDrivingLicenseNoReceived = it[4].isPhotocopyCollected
+            kycInfo.isDrivingLicenseNoVerified = it[4].isVerified
+
+            kycInfo.isVatRegNoReceived = it[5].isPhotocopyCollected
+            kycInfo.isVatRegNoVerified = it[5].isVerified
+
+            kycInfo.isOrgRegNoReceived = it[6].isPhotocopyCollected
+            kycInfo.isOrgRegNoVerified = it[6].isVerified
+
+            kycInfo.isCertificateOfIncorporationReceived = it[7].isPhotocopyCollected
+            kycInfo.isCertificateOfIncorporationVerified = it[7].isVerified
 
             createCustomerRequest.kycInfo = kycInfo
         })

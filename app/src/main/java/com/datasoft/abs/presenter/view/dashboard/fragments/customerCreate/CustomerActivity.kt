@@ -145,6 +145,7 @@ class CustomerActivity : BaseActivity() {
 
         customerViewModel.configData()
         kycViewModel.configData()
+        customerViewModel.setDocumentList()
 
         navController = findNavController(R.id.nav_host_fragment_content_customer)
         setCurrentState(0)
