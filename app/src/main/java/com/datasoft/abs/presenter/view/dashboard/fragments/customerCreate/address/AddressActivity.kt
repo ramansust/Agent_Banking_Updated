@@ -153,6 +153,7 @@ class AddressActivity : BaseActivity() {
 
         binding.btnSave.setOnClickListener {
             addressViewModel.checkData(
+                if(addressList.isNotEmpty()) addressList[binding.spinnerAddressType.selectedItemPosition].name else "",
                 if(addressList.isNotEmpty()) addressList[binding.spinnerAddressType.selectedItemPosition].id else 0,
                 binding.edTxtHouseNo.text.trim().toString(),
                 binding.edTxtFlatNo.text.trim().toString(),

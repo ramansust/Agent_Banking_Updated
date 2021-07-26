@@ -3,6 +3,7 @@ package com.datasoft.abs.data.dto.createCustomer
 import java.io.Serializable
 
 data class AddressInfo(
+    val addressTypeValue: String,
     val addressType: Int,
     val houseNo: String,
     val flatNo: String,

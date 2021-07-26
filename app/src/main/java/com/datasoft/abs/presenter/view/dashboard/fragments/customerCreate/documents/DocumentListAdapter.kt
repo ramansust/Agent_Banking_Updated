@@ -1,6 +1,5 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.documents
 
-import android.net.Uri
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.ViewGroup

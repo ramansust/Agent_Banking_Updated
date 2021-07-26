@@ -1,16 +1,20 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.review
 
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.RequestManager
 import com.datasoft.abs.data.dto.createCustomer.*
 import com.datasoft.abs.databinding.FragmentReviewBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.address.AddressViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.documents.DocumentsViewModel
@@ -20,6 +24,7 @@ import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.kyc.KY
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.personal.PersonalViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.photo.PhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ReviewFragment : Fragment() {
@@ -44,6 +49,9 @@ class ReviewFragment : Fragment() {
     private var nomineeInfo = EmergencyContact()
     private var kycInfo = KycInfoX()
 
+    @Inject
+    lateinit var glide: RequestManager
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,12 +68,27 @@ class ReviewFragment : Fragment() {
         customerViewModel.requestVisibility(false)
         customerViewModel.requestListener(false)
 
+        personalViewModel.getCustomerAgeData().observe(viewLifecycleOwner, {
+            (it < Constant.ADULT_AGE).apply {
+                binding.imgViewGuardianPhoto.isVisible = this
+                binding.imgViewGuardianSignature.isVisible = this
+            }
+        })
+
         generalViewModel.getSanctionData().observe(viewLifecycleOwner, {
             createCustomerRequest.customerNo = it.customerNo
             createCustomerRequest.branchId = it.branchId
         })
 
         generalViewModel.getSavedData().observe(viewLifecycleOwner, {
+            val fullName = it.firstName + it.lastName
+            binding.txtViewFatherNameValue.text = fullName
+            binding.txtViewDobValue.text = it.birthDate
+            binding.txtViewNidValue.text = it.nationalID
+            binding.txtViewMobileNoValue.text = it.mobileNumber
+            binding.txtViewFatherNameValue.text = it.fatherName
+            binding.txtViewMotherNameValue.text = it.motherName
+
             createCustomerRequest.apply {
                 salutation = it.salutation
                 firstName = it.firstName
@@ -86,7 +109,7 @@ class ReviewFragment : Fragment() {
             for (addressInfo in it) {
                 list.add(
                     Addresses(
-                        addressInfo.houseNo,
+                        addressInfo.houseNo + addressInfo.village,
                         addressInfo.addressType,
                         addressInfo.country,
                         addressInfo.districtValue,
@@ -104,6 +127,33 @@ class ReviewFragment : Fragment() {
             }
 
             createCustomerRequest.addressess = list
+
+            when {
+                it.size > 1 -> {
+                    binding.txtViewAddress1.visibility = View.VISIBLE
+                    binding.txtViewAddress1Value.visibility = View.VISIBLE
+
+                    binding.txtViewAddress2.visibility = View.VISIBLE
+                    binding.txtViewAddress2Value.visibility = View.VISIBLE
+
+                    binding.txtViewAddress1.text = it[0].addressTypeValue
+                    val addressLine1 = it[0].houseNo + "," + it[0].village
+                    binding.txtViewAddress1Value.text = addressLine1
+
+                    binding.txtViewAddress2.text = it[1].addressTypeValue
+                    val addressLine2 = it[1].houseNo + "," + it[1].village
+                    binding.txtViewAddress2Value.text = addressLine2
+                }
+
+                it.size == 1 -> {
+                    binding.txtViewAddress1.visibility = View.VISIBLE
+                    binding.txtViewAddress1Value.visibility = View.VISIBLE
+
+                    binding.txtViewAddress1.text = it[0].addressTypeValue
+                    val addressLine = it[0].houseNo + "," + it[0].village
+                    binding.txtViewAddress1Value.text = addressLine
+                }
+            }
         })
 
         addressViewModel.getContactData().observe(viewLifecycleOwner, {
@@ -112,10 +162,14 @@ class ReviewFragment : Fragment() {
 
         photoNIDViewModel.getUserPhoto().observe(viewLifecycleOwner, {
             createCustomerRequest.profilePhoto = it
+
+            glide.load(Base64.decode(it, Base64.DEFAULT)).into(binding.imgViewPhoto)
         })
 
         photoNIDViewModel.getSignature().observe(viewLifecycleOwner, {
             createCustomerRequest.signaturePhoto = it
+
+            glide.load(Base64.decode(it, Base64.DEFAULT)).into(binding.imgViewSignature)
         })
 
         photoNIDViewModel.getDocumentFront().observe(viewLifecycleOwner, {
@@ -129,11 +183,15 @@ class ReviewFragment : Fragment() {
         photoNIDViewModel.getGuardianPhoto().observe(viewLifecycleOwner, {
             guardian.profilePhoto = it
             createCustomerRequest.guardianInfo = guardian
+
+            glide.load(Base64.decode(it, Base64.DEFAULT)).into(binding.imgViewGuardianPhoto)
         })
 
         photoNIDViewModel.getGuardianSignature().observe(viewLifecycleOwner, {
             guardian.signaturePhoto = it
             createCustomerRequest.guardianInfo = guardian
+
+            glide.load(Base64.decode(it, Base64.DEFAULT)).into(binding.imgViewGuardianSignature)
         })
 
         photoNIDViewModel.getGuardianDocumentFront().observe(viewLifecycleOwner, {

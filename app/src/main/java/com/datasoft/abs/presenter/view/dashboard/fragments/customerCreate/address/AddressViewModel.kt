@@ -95,7 +95,7 @@ class AddressViewModel @Inject constructor(
     }
 
     fun checkData(
-        addressType: Int, houseNo: String, flatNo: String, village: String,
+        addressTypeValue: String, addressType: Int, houseNo: String, flatNo: String, village: String,
         blockNo: String, roadNo: String, wordNo: String, zipCode: String, postCode: String,
         state: String, country: Int, countryValue: String, city: String, district: Int, districtValue: String,
         thana: Int, thanaValue: String, union: Int, unionValue: String, contactType: Int, contactNo: String
@@ -114,7 +114,7 @@ class AddressViewModel @Inject constructor(
             }
 
             val addressInfo = AddressInfo(
-                addressType, houseNo, flatNo, village,
+                addressTypeValue, addressType, houseNo, flatNo, village,
                 blockNo, roadNo, wordNo, zipCode, postCode, state, country, countryValue,
                 city, district, districtValue, thana, thanaValue, union, unionValue, contactType, contactNo
             )
