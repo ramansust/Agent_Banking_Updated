@@ -181,4 +181,8 @@
 
     <string name="something_wrong">Something went wrong!</string>
     <string name="no_internet">No internet connection</string>
+
+    <string name="left_hand">Left Hand</string>
+    <string name="right_hand">Right Hand</string>
+    <string name="scan">Scan</string>
 </resources>

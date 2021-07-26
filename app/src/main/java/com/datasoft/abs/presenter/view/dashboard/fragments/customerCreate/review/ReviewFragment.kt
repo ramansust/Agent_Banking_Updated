@@ -155,6 +155,10 @@ class ReviewFragment : Fragment() {
             createCustomerRequest.relatedDocs = it
         })
 
+        fingerprintViewModel.getFingerList().observe(viewLifecycleOwner, {
+            createCustomerRequest.fingerPrint = FingerPrint("", "", "")
+        })
+
         kycViewModel.getKYCData().observe(viewLifecycleOwner, {
             kycInfo.apply {
                 residentStatusId = it.residentStatus
