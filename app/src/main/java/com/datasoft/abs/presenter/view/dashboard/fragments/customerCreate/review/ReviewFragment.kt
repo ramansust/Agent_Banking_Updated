@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.RequestManager
+import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.createCustomer.*
 import com.datasoft.abs.databinding.FragmentReviewBinding
 import com.datasoft.abs.presenter.states.Resource
@@ -137,11 +138,11 @@ class ReviewFragment : Fragment() {
                     binding.txtViewAddress2Value.visibility = View.VISIBLE
 
                     binding.txtViewAddress1.text = it[0].addressTypeValue
-                    val addressLine1 = it[0].houseNo + "," + it[0].village
+                    val addressLine1 = it[0].houseNo + ", " + it[0].village
                     binding.txtViewAddress1Value.text = addressLine1
 
                     binding.txtViewAddress2.text = it[1].addressTypeValue
-                    val addressLine2 = it[1].houseNo + "," + it[1].village
+                    val addressLine2 = it[1].houseNo + ", " + it[1].village
                     binding.txtViewAddress2Value.text = addressLine2
                 }
 
@@ -150,7 +151,7 @@ class ReviewFragment : Fragment() {
                     binding.txtViewAddress1Value.visibility = View.VISIBLE
 
                     binding.txtViewAddress1.text = it[0].addressTypeValue
-                    val addressLine = it[0].houseNo + "," + it[0].village
+                    val addressLine = it[0].houseNo + ", " + it[0].village
                     binding.txtViewAddress1Value.text = addressLine
                 }
             }
@@ -221,11 +222,11 @@ class ReviewFragment : Fragment() {
                     binding.txtViewDocument2Value.visibility = View.VISIBLE
 
                     binding.txtViewDocument1.text = it[0].docTypeName
-                    val document1 = it[0].issueDate + "-" + it[0].expiredDate
+                    val document1 = resources.getString(R.string.issue_date_) + ": " + it[0].issueDate + ", " + resources.getString(R.string.expiry_date_) + ": " + it[0].expiredDate
                     binding.txtViewDocument1Value.text = document1
 
                     binding.txtViewDocument2.text = it[1].docTypeName
-                    val document2 = it[1].issueDate + "-" + it[1].expiredDate
+                    val document2 = resources.getString(R.string.issue_date_) + ": " + it[1].issueDate + ", " + resources.getString(R.string.expiry_date_) + ": " + it[1].expiredDate
                     binding.txtViewDocument2Value.text = document2
                 }
 
@@ -234,7 +235,7 @@ class ReviewFragment : Fragment() {
                     binding.txtViewDocument1Value.visibility = View.VISIBLE
 
                     binding.txtViewDocument1.text = it[0].docTypeName
-                    val document1 = it[0].issueDate + "-" + it[0].expiredDate
+                    val document1 = resources.getString(R.string.issue_date_) + ": " + it[0].issueDate + ", " + resources.getString(R.string.expiry_date_) + ": " + it[0].expiredDate
                     binding.txtViewDocument1Value.text = document1
                 }
             }
@@ -292,9 +293,9 @@ class ReviewFragment : Fragment() {
             var verifiedNot = ""
 
             for (info in it) {
-                if(info.isPhotocopyCollected && binding.txtViewPhotocopyValue.visibility == View.INVISIBLE) {
+                if(info.isPhotocopyCollected && binding.txtViewPhotocopyValue.visibility == View.GONE) {
                     binding.txtViewPhotocopyValue.visibility = View.VISIBLE
-                } else if(!info.isPhotocopyCollected && binding.txtViewPhotocopyValueNot.visibility == View.INVISIBLE) {
+                } else if(!info.isPhotocopyCollected && binding.txtViewPhotocopyValueNot.visibility == View.GONE) {
                     binding.txtViewPhotocopyValueNot.visibility = View.VISIBLE
                 }
 
@@ -304,9 +305,9 @@ class ReviewFragment : Fragment() {
                     photocopyNot += info.name + ", "
                 }
 
-                if(info.isVerified && binding.txtViewVerifiedValue.visibility == View.INVISIBLE) {
+                if(info.isVerified && binding.txtViewVerifiedValue.visibility == View.GONE) {
                     binding.txtViewVerifiedValue.visibility = View.VISIBLE
-                } else if(!info.isVerified && binding.txtViewVerifiedValueNot.visibility == View.INVISIBLE) {
+                } else if(!info.isVerified && binding.txtViewVerifiedValueNot.visibility == View.GONE) {
                     binding.txtViewVerifiedValueNot.visibility = View.VISIBLE
                 }
 
@@ -317,17 +318,38 @@ class ReviewFragment : Fragment() {
                 }
             }
 
-            binding.txtViewPhotocopyValue.text = photocopy
-            binding.txtViewPhotocopyValueNot.text = photocopyNot
+            if(photocopy.isNotEmpty()) {
+                photocopy = photocopy.substring(0, photocopy.length - 2)
+                binding.txtViewPhotocopyValue.text = photocopy
+            }
 
-            binding.txtViewVerifiedValue.text = verified
-            binding.txtViewVerifiedValueNot.text = verifiedNot
+            if(photocopyNot.isNotEmpty()) {
+                photocopyNot = photocopyNot.substring(0, photocopyNot.length - 2)
+                binding.txtViewPhotocopyValueNot.text = photocopyNot
+            }
+
+            if(verified.isNotEmpty()) {
+                verified = verified.substring(0, verified.length - 2)
+                binding.txtViewVerifiedValue.text = verified
+            }
+
+            if(verifiedNot.isNotEmpty()) {
+                verifiedNot = verifiedNot.substring(0, verifiedNot.length - 2)
+                binding.txtViewVerifiedValueNot.text = verifiedNot
+            }
         })
 
         personalViewModel.getPersonalData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     response.data?.let {
+
+                        binding.txtViewReligionValue.text = it.religionValue
+                        binding.txtViewEducationValue.text = it.educationValue
+                        binding.txtViewOccupationValue.text = it.occupationValue
+                        binding.txtViewNationalityValue.text = it.nationalityValue
+                        binding.txtViewMonthlyIncomeValue.text = it.monthlyIncome
+                        binding.txtViewSourceOfFundValue.text = it.sourceOfFund
 
                         guardian.contactNo = it.guardianContact
                         guardian.dob = it.guardianDob
