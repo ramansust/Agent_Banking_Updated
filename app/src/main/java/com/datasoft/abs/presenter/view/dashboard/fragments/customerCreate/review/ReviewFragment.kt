@@ -211,6 +211,33 @@ class ReviewFragment : Fragment() {
 
         documentsViewModel.getSavedData().observe(viewLifecycleOwner, {
             createCustomerRequest.relatedDocs = it
+
+            when {
+                it.size > 1 -> {
+                    binding.txtViewDocument1.visibility = View.VISIBLE
+                    binding.txtViewDocument1Value.visibility = View.VISIBLE
+
+                    binding.txtViewDocument2.visibility = View.VISIBLE
+                    binding.txtViewDocument2Value.visibility = View.VISIBLE
+
+                    binding.txtViewDocument1.text = it[0].docTypeName
+                    val document1 = it[0].issueDate + "-" + it[0].expiredDate
+                    binding.txtViewDocument1Value.text = document1
+
+                    binding.txtViewDocument2.text = it[1].docTypeName
+                    val document2 = it[1].issueDate + "-" + it[1].expiredDate
+                    binding.txtViewDocument2Value.text = document2
+                }
+
+                it.size == 1 -> {
+                    binding.txtViewDocument1.visibility = View.VISIBLE
+                    binding.txtViewDocument1Value.visibility = View.VISIBLE
+
+                    binding.txtViewDocument1.text = it[0].docTypeName
+                    val document1 = it[0].issueDate + "-" + it[0].expiredDate
+                    binding.txtViewDocument1Value.text = document1
+                }
+            }
         })
 
         fingerprintViewModel.getFingerList().observe(viewLifecycleOwner, {
@@ -258,6 +285,43 @@ class ReviewFragment : Fragment() {
             kycInfo.isCertificateOfIncorporationVerified = it[7].isVerified
 
             createCustomerRequest.kycInfo = kycInfo
+
+            var photocopy = ""
+            var photocopyNot = ""
+            var verified = ""
+            var verifiedNot = ""
+
+            for (info in it) {
+                if(info.isPhotocopyCollected && binding.txtViewPhotocopyValue.visibility == View.INVISIBLE) {
+                    binding.txtViewPhotocopyValue.visibility = View.VISIBLE
+                } else if(!info.isPhotocopyCollected && binding.txtViewPhotocopyValueNot.visibility == View.INVISIBLE) {
+                    binding.txtViewPhotocopyValueNot.visibility = View.VISIBLE
+                }
+
+                if(info.isPhotocopyCollected) {
+                    photocopy += info.name + ", "
+                } else {
+                    photocopyNot += info.name + ", "
+                }
+
+                if(info.isVerified && binding.txtViewVerifiedValue.visibility == View.INVISIBLE) {
+                    binding.txtViewVerifiedValue.visibility = View.VISIBLE
+                } else if(!info.isVerified && binding.txtViewVerifiedValueNot.visibility == View.INVISIBLE) {
+                    binding.txtViewVerifiedValueNot.visibility = View.VISIBLE
+                }
+
+                if(info.isVerified) {
+                    verified += info.name + ", "
+                } else {
+                    verifiedNot += info.name + ", "
+                }
+            }
+
+            binding.txtViewPhotocopyValue.text = photocopy
+            binding.txtViewPhotocopyValueNot.text = photocopyNot
+
+            binding.txtViewVerifiedValue.text = verified
+            binding.txtViewVerifiedValueNot.text = verifiedNot
         })
 
         personalViewModel.getPersonalData().observe(viewLifecycleOwner, { response ->
@@ -352,7 +416,7 @@ class ReviewFragment : Fragment() {
             customerViewModel.requestCurrentStep(3)
         }
 
-        binding.btnFingerprintEidt.setOnClickListener {
+        binding.btnFingerprintEdit.setOnClickListener {
             customerViewModel.requestCurrentStep(4)
         }
 
