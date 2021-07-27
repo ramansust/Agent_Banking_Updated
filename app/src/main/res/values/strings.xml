@@ -198,4 +198,9 @@
     <string name="left_hand">Left Hand</string>
     <string name="right_hand">Right Hand</string>
     <string name="scan">Scan</string>
+
+    <string name="user_photo">User Photo</string>
+    <string name="user_signature">User Signature</string>
+    <string name="guardian_photo">Guardian Photo</string>
+    <string name="guardian_signature">Guardian Signature</string>
 </resources>

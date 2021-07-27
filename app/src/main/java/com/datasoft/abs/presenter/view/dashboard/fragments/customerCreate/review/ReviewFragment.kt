@@ -73,6 +73,9 @@ class ReviewFragment : Fragment() {
             (it < Constant.ADULT_AGE).apply {
                 binding.imgViewGuardianPhoto.isVisible = this
                 binding.imgViewGuardianSignature.isVisible = this
+
+                binding.txtViewGuardianPhoto.isVisible = this
+                binding.txtViewGuardianSignature.isVisible = this
             }
         })
 
@@ -83,7 +86,7 @@ class ReviewFragment : Fragment() {
 
         generalViewModel.getSavedData().observe(viewLifecycleOwner, {
             val fullName = it.firstName + it.lastName
-            binding.txtViewFatherNameValue.text = fullName
+            binding.txtViewFullNameValue.text = fullName
             binding.txtViewDobValue.text = it.birthDate
             binding.txtViewNidValue.text = it.nationalID
             binding.txtViewMobileNoValue.text = it.mobileNumber
@@ -138,11 +141,11 @@ class ReviewFragment : Fragment() {
                     binding.txtViewAddress2Value.visibility = View.VISIBLE
 
                     binding.txtViewAddress1.text = it[0].addressTypeValue
-                    val addressLine1 = it[0].houseNo + ", " + it[0].village
+                    val addressLine1 = it[0].houseNo + ", " + it[0].village + ", " + it[0].districtValue + ", " + it[0].countryValue
                     binding.txtViewAddress1Value.text = addressLine1
 
                     binding.txtViewAddress2.text = it[1].addressTypeValue
-                    val addressLine2 = it[1].houseNo + ", " + it[1].village
+                    val addressLine2 = it[1].houseNo + ", " + it[1].village + ", " + it[1].districtValue + ", " + it[1].countryValue
                     binding.txtViewAddress2Value.text = addressLine2
                 }
 
@@ -151,7 +154,7 @@ class ReviewFragment : Fragment() {
                     binding.txtViewAddress1Value.visibility = View.VISIBLE
 
                     binding.txtViewAddress1.text = it[0].addressTypeValue
-                    val addressLine = it[0].houseNo + ", " + it[0].village
+                    val addressLine = it[0].houseNo + ", " + it[0].village + ", " + it[0].districtValue + ", " + it[0].countryValue
                     binding.txtViewAddress1Value.text = addressLine
                 }
             }
@@ -222,11 +225,11 @@ class ReviewFragment : Fragment() {
                     binding.txtViewDocument2Value.visibility = View.VISIBLE
 
                     binding.txtViewDocument1.text = it[0].docTypeName
-                    val document1 = resources.getString(R.string.issue_date_) + ": " + it[0].issueDate + ", " + resources.getString(R.string.expiry_date_) + ": " + it[0].expiredDate
+                    val document1 = resources.getString(R.string.tracing_id) + ": " + it[0].tracingId + ", " + resources.getString(R.string.expiry_date_) + ": " + it[0].expiredDate
                     binding.txtViewDocument1Value.text = document1
 
                     binding.txtViewDocument2.text = it[1].docTypeName
-                    val document2 = resources.getString(R.string.issue_date_) + ": " + it[1].issueDate + ", " + resources.getString(R.string.expiry_date_) + ": " + it[1].expiredDate
+                    val document2 = resources.getString(R.string.tracing_id) + ": " + it[1].tracingId + ", " + resources.getString(R.string.expiry_date_) + ": " + it[1].expiredDate
                     binding.txtViewDocument2Value.text = document2
                 }
 
@@ -235,7 +238,7 @@ class ReviewFragment : Fragment() {
                     binding.txtViewDocument1Value.visibility = View.VISIBLE
 
                     binding.txtViewDocument1.text = it[0].docTypeName
-                    val document1 = resources.getString(R.string.issue_date_) + ": " + it[0].issueDate + ", " + resources.getString(R.string.expiry_date_) + ": " + it[0].expiredDate
+                    val document1 = resources.getString(R.string.tracing_id) + ": " + it[0].tracingId + ", " + resources.getString(R.string.expiry_date_) + ": " + it[0].expiredDate
                     binding.txtViewDocument1Value.text = document1
                 }
             }
