@@ -85,7 +85,7 @@ class ReviewFragment : Fragment() {
         })
 
         generalViewModel.getSavedData().observe(viewLifecycleOwner, {
-            val fullName = it.firstName + it.lastName
+            val fullName = it.firstName + " " + it.lastName
             binding.txtViewFullNameValue.text = fullName
             binding.txtViewDobValue.text = it.birthDate
             binding.txtViewNidValue.text = it.nationalID
