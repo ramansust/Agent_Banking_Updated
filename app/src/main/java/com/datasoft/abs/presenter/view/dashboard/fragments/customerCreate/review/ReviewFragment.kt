@@ -88,6 +88,7 @@ class ReviewFragment : Fragment() {
 
                 binding.viewMiddle.visibility = View.VISIBLE
 
+                binding.txtViewGuardianInfo.visibility = View.VISIBLE
                 binding.txtViewGuardianName.visibility = View.VISIBLE
                 binding.txtViewGuardianNameValue.visibility = View.VISIBLE
                 binding.txtViewGuardianMobileNumber.visibility = View.VISIBLE
@@ -115,6 +116,7 @@ class ReviewFragment : Fragment() {
 
                 binding.viewMiddle.visibility = View.GONE
 
+                binding.txtViewGuardianInfo.visibility = View.GONE
                 binding.txtViewGuardianName.visibility = View.GONE
                 binding.txtViewGuardianNameValue.visibility = View.GONE
                 binding.txtViewGuardianMobileNumber.visibility = View.GONE

@@ -96,10 +96,24 @@
                         android:layout_marginTop="@dimen/space_8x"
                         android:background="@color/shimmer_background_color"
                         android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_name"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline_left"
+                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_info"
+                        app:layout_constraintEnd_toEndOf="@+id/btn_general_edit"
                         app:layout_constraintStart_toStartOf="@id/txt_view_general"
                         app:layout_constraintTop_toBottomOf="@+id/txt_view_father_name" />
+
+                    <TextView
+                        android:id="@+id/txt_view_guardian_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/guardian_information"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:textSize="@dimen/font_16x"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_name"
+                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
+                        app:layout_constraintTop_toBottomOf="@+id/view_middle" />
 
                     <TextView
                         android:id="@+id/txt_view_guardian_name"
@@ -112,7 +126,7 @@
                         android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_mobile_number"
                         app:layout_constraintStart_toStartOf="@id/txt_view_general"
-                        app:layout_constraintTop_toBottomOf="@+id/view_middle" />
+                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info" />
 
                     <TextView
                         android:id="@+id/txt_view_guardian_mobile_number"
@@ -156,21 +170,10 @@
                         android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/view_middle_1"
+                        app:layout_constraintBottom_toTopOf="@+id/view_middle"
                         app:layout_constraintStart_toStartOf="@+id/guideline_left"
                         app:layout_constraintTop_toBottomOf="@+id/txt_view_nid_value" />
 
-                    <View
-                        android:id="@+id/view_middle_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/space_1x"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:background="@color/shimmer_background_color"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_name"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
-                        app:layout_constraintStart_toEndOf="@id/guideline_left"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_father_name_value" />
 
                     <TextView
                         android:id="@+id/txt_view_guardian_name_value"
@@ -182,7 +185,7 @@
                         android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_mobile_number_value"
                         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                        app:layout_constraintTop_toBottomOf="@+id/view_middle_1" />
+                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info" />
 
                     <TextView
                         android:id="@+id/txt_view_guardian_mobile_number_value"
@@ -228,21 +231,10 @@
                         android:fontFamily="@font/oxygen_regular"
                         android:text="@string/mother_name_"
                         android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/view_middle_2"
+                        app:layout_constraintBottom_toTopOf="@+id/view_middle"
                         app:layout_constraintStart_toStartOf="@+id/guideline_middle"
                         app:layout_constraintTop_toBottomOf="@+id/txt_view_mobile_no" />
 
-                    <View
-                        android:id="@+id/view_middle_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/space_1x"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:background="@color/shimmer_background_color"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_name"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-                        app:layout_constraintStart_toEndOf="@id/guideline_middle"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_mother_name" />
 
                     <TextView
                         android:id="@+id/txt_view_guardian_relation"
@@ -255,7 +247,7 @@
                         android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_dob"
                         app:layout_constraintStart_toStartOf="@+id/guideline_middle"
-                        app:layout_constraintTop_toBottomOf="@+id/view_middle_2" />
+                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info" />
 
                     <TextView
                         android:id="@+id/txt_view_guardian_dob"
@@ -299,21 +291,9 @@
                         android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/view_middle_3"
+                        app:layout_constraintBottom_toTopOf="@+id/view_middle"
                         app:layout_constraintStart_toStartOf="@+id/guideline_right"
                         app:layout_constraintTop_toBottomOf="@+id/txt_view_mobile_no_value" />
-
-                    <View
-                        android:id="@+id/view_middle_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/space_1x"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:background="@color/shimmer_background_color"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_relation_value"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_mother_name_value" />
 
                     <TextView
                         android:id="@+id/txt_view_guardian_relation_value"
@@ -325,7 +305,7 @@
                         android:visibility="gone"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_dob_value"
                         app:layout_constraintStart_toStartOf="@+id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/view_middle_3" />
+                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info" />
 
                     <TextView
                         android:id="@+id/txt_view_guardian_dob_value"
@@ -368,7 +348,7 @@
             <LinearLayout
                 android:id="@+id/linear_layout_2"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/space_200x"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_16x"
                 android:layout_marginEnd="@dimen/space_16x"
                 android:background="@drawable/input_border"
@@ -407,17 +387,19 @@
                         android:id="@+id/txt_view_religion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_regular"
                         android:text="@string/religion_"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_occupation"
                         app:layout_constraintStart_toStartOf="@+id/txt_view_personal"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_personal" />
+                        app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
 
                     <TextView
                         android:id="@+id/txt_view_occupation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_regular"
                         android:text="@string/occupation_"
                         android:textSize="@dimen/font_16x"
@@ -429,6 +411,7 @@
                         android:id="@+id/txt_view_monthly_income"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_regular"
                         android:text="@string/monthly_income_"
                         android:textSize="@dimen/font_16x"
@@ -440,16 +423,18 @@
                         android:id="@+id/txt_view_religion_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_occupation_value"
                         app:layout_constraintStart_toStartOf="@+id/guideline_left_1"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_personal" />
+                        app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
 
                     <TextView
                         android:id="@+id/txt_view_occupation_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_monthly_income_value"
@@ -460,6 +445,7 @@
                         android:id="@+id/txt_view_monthly_income_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -470,17 +456,19 @@
                         android:id="@+id/txt_view_education"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_regular"
                         android:text="@string/education_"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_nationality"
                         app:layout_constraintStart_toStartOf="@+id/guideline_middle_1"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_personal" />
+                        app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
 
                     <TextView
                         android:id="@+id/txt_view_nationality"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_regular"
                         android:text="@string/nationality_"
                         android:textSize="@dimen/font_16x"
@@ -492,6 +480,7 @@
                         android:id="@+id/txt_view_source_of_fund"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_regular"
                         android:text="@string/source_of_fund__"
                         android:textSize="@dimen/font_16x"
@@ -503,16 +492,18 @@
                         android:id="@+id/txt_view_education_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_nationality_value"
                         app:layout_constraintStart_toStartOf="@+id/guideline_right_1"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_personal" />
+                        app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
 
                     <TextView
                         android:id="@+id/txt_view_nationality_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_source_of_fund_value"
@@ -523,6 +514,7 @@
                         android:id="@+id/txt_view_source_of_fund_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toBottomOf="parent"
