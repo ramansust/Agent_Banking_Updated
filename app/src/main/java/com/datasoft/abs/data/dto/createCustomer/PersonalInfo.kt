@@ -24,6 +24,7 @@ data class PersonalInfo(
     val nomineeEmail: String,
     val guardianName: String,
     val guardianRelation: Int,
+    val guardianRelationValue: String,
     val guardianContact: String,
     val guardianAddress: String,
     val guardianDob: String

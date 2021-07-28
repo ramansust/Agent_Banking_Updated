@@ -51,6 +51,7 @@ class PersonalViewModel @Inject constructor() : ViewModel() {
         nomineeEmail: String,
         guardianName: String,
         guardianRelation: Int,
+        guardianRelationValue: String,
         guardianContact: String,
         guardianAddress: String,
         guardianDob: String
@@ -99,6 +100,7 @@ class PersonalViewModel @Inject constructor() : ViewModel() {
                 nomineeEmail,
                 guardianName,
                 guardianRelation,
+                guardianRelationValue,
                 guardianContact,
                 guardianAddress,
                 guardianDob

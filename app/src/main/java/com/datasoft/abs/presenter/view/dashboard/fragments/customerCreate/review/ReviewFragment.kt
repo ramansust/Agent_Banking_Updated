@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.RequestManager
@@ -70,12 +69,60 @@ class ReviewFragment : Fragment() {
         customerViewModel.requestListener(false)
 
         personalViewModel.getCustomerAgeData().observe(viewLifecycleOwner, {
-            (it < Constant.ADULT_AGE).apply {
-                binding.imgViewGuardianPhoto.isVisible = this
-                binding.imgViewGuardianSignature.isVisible = this
+            if (it < Constant.ADULT_AGE) {
+                binding.imgViewGuardianPhoto.visibility = View.VISIBLE
+                binding.imgViewGuardianSignature.visibility = View.VISIBLE
 
-                binding.txtViewGuardianPhoto.isVisible = this
-                binding.txtViewGuardianSignature.isVisible = this
+                binding.txtViewGuardianPhoto.visibility = View.VISIBLE
+                binding.txtViewGuardianSignature.visibility = View.VISIBLE
+
+                binding.txtViewNidValue.visibility = View.GONE
+                binding.txtViewMobileNoValue.visibility = View.GONE
+                binding.txtViewFatherNameValue.visibility = View.GONE
+                binding.txtViewMotherNameValue.visibility = View.GONE
+
+                binding.txtViewNid.visibility = View.GONE
+                binding.txtViewMobileNo.visibility = View.GONE
+                binding.txtViewFatherName.visibility = View.GONE
+                binding.txtViewMotherName.visibility = View.GONE
+
+                binding.viewMiddle.visibility = View.VISIBLE
+
+                binding.txtViewGuardianName.visibility = View.VISIBLE
+                binding.txtViewGuardianNameValue.visibility = View.VISIBLE
+                binding.txtViewGuardianMobileNumber.visibility = View.VISIBLE
+                binding.txtViewGuardianMobileNumberValue.visibility = View.VISIBLE
+                binding.txtViewGuardianRelation.visibility = View.VISIBLE
+                binding.txtViewGuardianRelationValue.visibility = View.VISIBLE
+                binding.txtViewGuardianDob.visibility = View.VISIBLE
+                binding.txtViewGuardianDobValue.visibility = View.VISIBLE
+            } else if (it >= Constant.ADULT_AGE) {
+                binding.imgViewGuardianPhoto.visibility = View.INVISIBLE
+                binding.imgViewGuardianSignature.visibility = View.INVISIBLE
+
+                binding.txtViewGuardianPhoto.visibility = View.INVISIBLE
+                binding.txtViewGuardianSignature.visibility = View.INVISIBLE
+
+                binding.txtViewNidValue.visibility = View.VISIBLE
+                binding.txtViewMobileNoValue.visibility = View.VISIBLE
+                binding.txtViewFatherNameValue.visibility = View.VISIBLE
+                binding.txtViewMotherNameValue.visibility = View.VISIBLE
+
+                binding.txtViewNid.visibility = View.VISIBLE
+                binding.txtViewMobileNo.visibility = View.VISIBLE
+                binding.txtViewFatherName.visibility = View.VISIBLE
+                binding.txtViewMotherName.visibility = View.VISIBLE
+
+                binding.viewMiddle.visibility = View.GONE
+
+                binding.txtViewGuardianName.visibility = View.GONE
+                binding.txtViewGuardianNameValue.visibility = View.GONE
+                binding.txtViewGuardianMobileNumber.visibility = View.GONE
+                binding.txtViewGuardianMobileNumberValue.visibility = View.GONE
+                binding.txtViewGuardianRelation.visibility = View.GONE
+                binding.txtViewGuardianRelationValue.visibility = View.GONE
+                binding.txtViewGuardianDob.visibility = View.GONE
+                binding.txtViewGuardianDobValue.visibility = View.GONE
             }
         })
 
@@ -141,11 +188,13 @@ class ReviewFragment : Fragment() {
                     binding.txtViewAddress2Value.visibility = View.VISIBLE
 
                     binding.txtViewAddress1.text = it[0].addressTypeValue
-                    val addressLine1 = it[0].houseNo + ", " + it[0].village + ", " + it[0].districtValue + ", " + it[0].countryValue
+                    val addressLine1 =
+                        it[0].houseNo + ", " + it[0].village + ", " + it[0].districtValue + ", " + it[0].countryValue
                     binding.txtViewAddress1Value.text = addressLine1
 
                     binding.txtViewAddress2.text = it[1].addressTypeValue
-                    val addressLine2 = it[1].houseNo + ", " + it[1].village + ", " + it[1].districtValue + ", " + it[1].countryValue
+                    val addressLine2 =
+                        it[1].houseNo + ", " + it[1].village + ", " + it[1].districtValue + ", " + it[1].countryValue
                     binding.txtViewAddress2Value.text = addressLine2
                 }
 
@@ -154,7 +203,8 @@ class ReviewFragment : Fragment() {
                     binding.txtViewAddress1Value.visibility = View.VISIBLE
 
                     binding.txtViewAddress1.text = it[0].addressTypeValue
-                    val addressLine = it[0].houseNo + ", " + it[0].village + ", " + it[0].districtValue + ", " + it[0].countryValue
+                    val addressLine =
+                        it[0].houseNo + ", " + it[0].village + ", " + it[0].districtValue + ", " + it[0].countryValue
                     binding.txtViewAddress1Value.text = addressLine
                 }
             }
@@ -225,11 +275,17 @@ class ReviewFragment : Fragment() {
                     binding.txtViewDocument2Value.visibility = View.VISIBLE
 
                     binding.txtViewDocument1.text = it[0].docTypeName
-                    val document1 = resources.getString(R.string.tracing_id) + ": " + it[0].tracingId + ", " + resources.getString(R.string.expiry_date_) + ": " + it[0].expiredDate
+                    val document1 =
+                        resources.getString(R.string.tracing_id) + ": " + it[0].tracingId + ", " + resources.getString(
+                            R.string.expiry_date_
+                        ) + ": " + it[0].expiredDate
                     binding.txtViewDocument1Value.text = document1
 
                     binding.txtViewDocument2.text = it[1].docTypeName
-                    val document2 = resources.getString(R.string.tracing_id) + ": " + it[1].tracingId + ", " + resources.getString(R.string.expiry_date_) + ": " + it[1].expiredDate
+                    val document2 =
+                        resources.getString(R.string.tracing_id) + ": " + it[1].tracingId + ", " + resources.getString(
+                            R.string.expiry_date_
+                        ) + ": " + it[1].expiredDate
                     binding.txtViewDocument2Value.text = document2
                 }
 
@@ -238,7 +294,10 @@ class ReviewFragment : Fragment() {
                     binding.txtViewDocument1Value.visibility = View.VISIBLE
 
                     binding.txtViewDocument1.text = it[0].docTypeName
-                    val document1 = resources.getString(R.string.tracing_id) + ": " + it[0].tracingId + ", " + resources.getString(R.string.expiry_date_) + ": " + it[0].expiredDate
+                    val document1 =
+                        resources.getString(R.string.tracing_id) + ": " + it[0].tracingId + ", " + resources.getString(
+                            R.string.expiry_date_
+                        ) + ": " + it[0].expiredDate
                     binding.txtViewDocument1Value.text = document1
                 }
             }
@@ -296,47 +355,47 @@ class ReviewFragment : Fragment() {
             var verifiedNot = ""
 
             for (info in it) {
-                if(info.isPhotocopyCollected && binding.txtViewPhotocopyValue.visibility == View.GONE) {
+                if (info.isPhotocopyCollected && binding.txtViewPhotocopyValue.visibility == View.GONE) {
                     binding.txtViewPhotocopyValue.visibility = View.VISIBLE
-                } else if(!info.isPhotocopyCollected && binding.txtViewPhotocopyValueNot.visibility == View.GONE) {
+                } else if (!info.isPhotocopyCollected && binding.txtViewPhotocopyValueNot.visibility == View.GONE) {
                     binding.txtViewPhotocopyValueNot.visibility = View.VISIBLE
                 }
 
-                if(info.isPhotocopyCollected) {
+                if (info.isPhotocopyCollected) {
                     photocopy += info.name + ", "
                 } else {
                     photocopyNot += info.name + ", "
                 }
 
-                if(info.isVerified && binding.txtViewVerifiedValue.visibility == View.GONE) {
+                if (info.isVerified && binding.txtViewVerifiedValue.visibility == View.GONE) {
                     binding.txtViewVerifiedValue.visibility = View.VISIBLE
-                } else if(!info.isVerified && binding.txtViewVerifiedValueNot.visibility == View.GONE) {
+                } else if (!info.isVerified && binding.txtViewVerifiedValueNot.visibility == View.GONE) {
                     binding.txtViewVerifiedValueNot.visibility = View.VISIBLE
                 }
 
-                if(info.isVerified) {
+                if (info.isVerified) {
                     verified += info.name + ", "
                 } else {
                     verifiedNot += info.name + ", "
                 }
             }
 
-            if(photocopy.isNotEmpty()) {
+            if (photocopy.isNotEmpty()) {
                 photocopy = photocopy.substring(0, photocopy.length - 2)
                 binding.txtViewPhotocopyValue.text = photocopy
             }
 
-            if(photocopyNot.isNotEmpty()) {
+            if (photocopyNot.isNotEmpty()) {
                 photocopyNot = photocopyNot.substring(0, photocopyNot.length - 2)
                 binding.txtViewPhotocopyValueNot.text = photocopyNot
             }
 
-            if(verified.isNotEmpty()) {
+            if (verified.isNotEmpty()) {
                 verified = verified.substring(0, verified.length - 2)
                 binding.txtViewVerifiedValue.text = verified
             }
 
-            if(verifiedNot.isNotEmpty()) {
+            if (verifiedNot.isNotEmpty()) {
                 verifiedNot = verifiedNot.substring(0, verifiedNot.length - 2)
                 binding.txtViewVerifiedValueNot.text = verifiedNot
             }
@@ -359,6 +418,11 @@ class ReviewFragment : Fragment() {
                         guardian.nameOfGuardian = it.guardianName
                         guardian.relationShipId = it.guardianRelation
                         guardian.permanentAddress = it.guardianAddress
+
+                        binding.txtViewGuardianNameValue.text = it.guardianName
+                        binding.txtViewGuardianMobileNumberValue.text = it.guardianContact
+                        binding.txtViewGuardianRelationValue.text = it.guardianRelationValue
+                        binding.txtViewGuardianDobValue.text = it.guardianDob
 
                         nomineeInfo.address = it.nomineeAddress
                         nomineeInfo.email = it.nomineeEmail

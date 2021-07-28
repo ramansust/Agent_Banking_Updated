@@ -18,7 +18,7 @@
             <LinearLayout
                 android:id="@+id/linear_layout_1"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/space_200x"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/space_16x"
                 android:background="@drawable/input_border"
                 android:visibility="visible"
@@ -57,49 +57,92 @@
                         android:id="@+id/txt_view_full_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_regular"
                         android:text="@string/full_name"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_nid"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_general"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_general" />
+                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
 
                     <TextView
                         android:id="@+id/txt_view_nid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_regular"
                         android:text="@string/nid_"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_father_name"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_general"
+                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
                         app:layout_constraintTop_toBottomOf="@+id/txt_view_full_name" />
 
                     <TextView
                         android:id="@+id/txt_view_father_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_regular"
                         android:text="@string/father_name_"
                         android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_general"
+                        app:layout_constraintBottom_toTopOf="@+id/view_middle"
+                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
                         app:layout_constraintTop_toBottomOf="@+id/txt_view_nid" />
+
+                    <View
+                        android:id="@+id/view_middle"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_1x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@color/shimmer_background_color"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_name"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline_left"
+                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_view_father_name" />
+
+                    <TextView
+                        android:id="@+id/txt_view_guardian_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:text="@string/name"
+                        android:textSize="@dimen/font_16x"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_mobile_number"
+                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
+                        app:layout_constraintTop_toBottomOf="@+id/view_middle" />
+
+                    <TextView
+                        android:id="@+id/txt_view_guardian_mobile_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:text="@string/mobile_number_"
+                        android:textSize="@dimen/font_16x"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_name" />
 
                     <TextView
                         android:id="@+id/txt_view_full_name_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_nid_value"
                         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_general" />
+                        app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
 
                     <TextView
                         android:id="@+id/txt_view_nid_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_father_name_value"
@@ -110,27 +153,66 @@
                         android:id="@+id/txt_view_father_name_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/view_middle_1"
                         app:layout_constraintStart_toStartOf="@+id/guideline_left"
                         app:layout_constraintTop_toBottomOf="@+id/txt_view_nid_value" />
+
+                    <View
+                        android:id="@+id/view_middle_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_1x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@color/shimmer_background_color"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_name"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                        app:layout_constraintStart_toEndOf="@id/guideline_left"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_view_father_name_value" />
+
+                    <TextView
+                        android:id="@+id/txt_view_guardian_name_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:textSize="@dimen/font_16x"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_mobile_number_value"
+                        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                        app:layout_constraintTop_toBottomOf="@+id/view_middle_1" />
+
+                    <TextView
+                        android:id="@+id/txt_view_guardian_mobile_number_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:textSize="@dimen/font_16x"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_name_value" />
 
                     <TextView
                         android:id="@+id/txt_view_dob"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_regular"
                         android:text="@string/date_of_birth_"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_mobile_no"
                         app:layout_constraintStart_toStartOf="@+id/guideline_middle"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_general" />
+                        app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
 
                     <TextView
                         android:id="@+id/txt_view_mobile_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_regular"
                         android:text="@string/mobile_number_"
                         android:textSize="@dimen/font_16x"
@@ -142,27 +224,68 @@
                         android:id="@+id/txt_view_mother_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_regular"
                         android:text="@string/mother_name_"
                         android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/view_middle_2"
                         app:layout_constraintStart_toStartOf="@+id/guideline_middle"
                         app:layout_constraintTop_toBottomOf="@+id/txt_view_mobile_no" />
+
+                    <View
+                        android:id="@+id/view_middle_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_1x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@color/shimmer_background_color"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_name"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+                        app:layout_constraintStart_toEndOf="@id/guideline_middle"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_view_mother_name" />
+
+                    <TextView
+                        android:id="@+id/txt_view_guardian_relation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:text="@string/relation_"
+                        android:textSize="@dimen/font_16x"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_dob"
+                        app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+                        app:layout_constraintTop_toBottomOf="@+id/view_middle_2" />
+
+                    <TextView
+                        android:id="@+id/txt_view_guardian_dob"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:text="@string/date_of_birth_"
+                        android:textSize="@dimen/font_16x"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_relation" />
 
                     <TextView
                         android:id="@+id/txt_view_dob_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_mobile_no_value"
                         app:layout_constraintStart_toStartOf="@+id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_general" />
+                        app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
 
                     <TextView
                         android:id="@+id/txt_view_mobile_no_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
                         app:layout_constraintBottom_toTopOf="@+id/txt_view_mother_name_value"
@@ -173,11 +296,48 @@
                         android:id="@+id/txt_view_mother_name_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:fontFamily="@font/oxygen_bold"
                         android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/view_middle_3"
                         app:layout_constraintStart_toStartOf="@+id/guideline_right"
                         app:layout_constraintTop_toBottomOf="@+id/txt_view_mobile_no_value" />
+
+                    <View
+                        android:id="@+id/view_middle_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_1x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@color/shimmer_background_color"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_relation_value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/guideline_right"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_view_mother_name_value" />
+
+                    <TextView
+                        android:id="@+id/txt_view_guardian_relation_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:textSize="@dimen/font_16x"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_dob_value"
+                        app:layout_constraintStart_toStartOf="@+id/guideline_right"
+                        app:layout_constraintTop_toBottomOf="@+id/view_middle_3" />
+
+                    <TextView
+                        android:id="@+id/txt_view_guardian_dob_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:textSize="@dimen/font_16x"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline_right"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_relation_value" />
 
 
                     <androidx.constraintlayout.widget.Guideline
@@ -691,7 +851,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/space_16x">
+                    android:layout_margin="@dimen/space_16x"
+                    tools:ignore="TooManyViews">
 
                     <TextView
                         android:id="@+id/txt_view_document"

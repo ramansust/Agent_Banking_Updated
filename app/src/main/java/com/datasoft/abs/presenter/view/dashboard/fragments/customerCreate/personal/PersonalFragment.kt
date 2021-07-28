@@ -220,6 +220,7 @@ class PersonalFragment : Fragment() {
 
                 binding.edTxtGuardianName.text.trim().toString(),
                 if(relationList.isNotEmpty()) relationList[binding.spinnerGuardianRelation.selectedItemPosition].id else 0,
+                if(relationList.isNotEmpty()) relationList[binding.spinnerGuardianRelation.selectedItemPosition].name else "",
                 binding.edTxtGuardianContact.text.trim().toString(),
                 binding.edTxtGuardianAddress.text.trim().toString(),
                 binding.edTxtGuardianDob.text.trim().toString()

@@ -183,6 +183,7 @@
     <string name="nominated_person">Nominated Person for Emergency Contact</string>
     <string name="name_">Name*</string>
     <string name="relation">Relation*</string>
+    <string name="relation_">Relation</string>
     <string name="address_">Address*</string>
     <string name="guardian_information">Guardian Information</string>
     <string name="guardian_name">Name of Guardian*</string>
