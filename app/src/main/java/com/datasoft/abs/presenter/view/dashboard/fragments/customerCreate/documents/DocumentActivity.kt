@@ -51,6 +51,8 @@ class DocumentActivity : BaseActivity() {
                 }
                 is Resource.Error -> {
                     response.message?.let { message ->
+                        binding.btnSave.isFocusable = false
+                        binding.btnSave.isClickable = false
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }

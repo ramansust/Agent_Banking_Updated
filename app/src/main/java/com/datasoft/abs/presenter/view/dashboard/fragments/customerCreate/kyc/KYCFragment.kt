@@ -153,6 +153,7 @@ class KYCFragment : Fragment() {
                 }
                 is Resource.Error -> {
                     response.message?.let { message ->
+                        binding.btnNext.isEnabled = false
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
@@ -222,7 +223,7 @@ class KYCFragment : Fragment() {
                 )
             )
 
-            if(isChecked)
+            if (isChecked)
                 customerViewModel.requestCurrentStep(7)
         })
 

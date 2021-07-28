@@ -3,6 +3,7 @@ package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.addre
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -58,6 +59,8 @@ class AddressActivity : BaseActivity() {
                 }
                 is Resource.Error -> {
                     response.message?.let { message ->
+                        binding.btnSave.isFocusable = false
+                        binding.btnSave.isClickable = false
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
@@ -153,8 +156,8 @@ class AddressActivity : BaseActivity() {
 
         binding.btnSave.setOnClickListener {
             addressViewModel.checkData(
-                if(addressList.isNotEmpty()) addressList[binding.spinnerAddressType.selectedItemPosition].name else "",
-                if(addressList.isNotEmpty()) addressList[binding.spinnerAddressType.selectedItemPosition].id else 0,
+                if (addressList.isNotEmpty()) addressList[binding.spinnerAddressType.selectedItemPosition].name else "",
+                if (addressList.isNotEmpty()) addressList[binding.spinnerAddressType.selectedItemPosition].id else 0,
                 binding.edTxtHouseNo.text.trim().toString(),
                 binding.edTxtFlatNo.text.trim().toString(),
                 binding.edTxtVillage.text.trim().toString(),
@@ -164,34 +167,62 @@ class AddressActivity : BaseActivity() {
                 binding.edTxtZipCode.text.trim().toString(),
                 binding.edTxtPostCode.text.trim().toString(),
                 binding.edTxtState.text.trim().toString(),
-                if(countryList.isNotEmpty()) countryList[binding.spinnerCountry.selectedItemPosition].id else 0,
-                if(countryList.isNotEmpty()) countryList[binding.spinnerCountry.selectedItemPosition].name else "",
+                if (countryList.isNotEmpty()) countryList[binding.spinnerCountry.selectedItemPosition].id else 0,
+                if (countryList.isNotEmpty()) countryList[binding.spinnerCountry.selectedItemPosition].name else "",
                 binding.edTxtCity.text.trim().toString(),
-                if(districtList.isNotEmpty()) districtList[binding.spinnerDistrict.selectedItemPosition].id else 0,
-                if(districtList.isNotEmpty()) districtList[binding.spinnerDistrict.selectedItemPosition].name else "",
-                if(thanaList.isNotEmpty()) thanaList[binding.spinnerThana.selectedItemPosition].id else 0,
-                if(thanaList.isNotEmpty()) thanaList[binding.spinnerThana.selectedItemPosition].name else "",
-                if(unionList.isNotEmpty()) unionList[binding.spinnerUnion.selectedItemPosition].id else 0,
-                if(unionList.isNotEmpty()) unionList[binding.spinnerUnion.selectedItemPosition].name else "",
-                if(contactList.isNotEmpty()) contactList[binding.spinnerContactType.selectedItemPosition].id else 0,
+                if (districtList.isNotEmpty()) districtList[binding.spinnerDistrict.selectedItemPosition].id else 0,
+                if (districtList.isNotEmpty()) districtList[binding.spinnerDistrict.selectedItemPosition].name else "",
+                if (thanaList.isNotEmpty()) thanaList[binding.spinnerThana.selectedItemPosition].id else 0,
+                if (thanaList.isNotEmpty()) thanaList[binding.spinnerThana.selectedItemPosition].name else "",
+                if (unionList.isNotEmpty()) unionList[binding.spinnerUnion.selectedItemPosition].id else 0,
+                if (unionList.isNotEmpty()) unionList[binding.spinnerUnion.selectedItemPosition].name else "",
+                if (contactList.isNotEmpty()) contactList[binding.spinnerContactType.selectedItemPosition].id else 0,
                 binding.edTxtContactNo.text.trim().toString()
             )
         }
 
-        binding.spinnerDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+        binding.spinnerContactType.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
 
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    binding.edTxtContactNo.setText("")
+                    if (contactList.isNotEmpty() && contactList[position].name.equals(
+                            "email",
+                            true
+                        )
+                    ) {
+                        binding.edTxtContactNo.inputType =
+                            InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+                    } else {
+                        binding.edTxtContactNo.inputType =
+                            InputType.TYPE_CLASS_PHONE
+                    }
+                }
             }
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                addressViewModel.thanaData(AreaCode.THANA.type, districtList[position].id)
+        binding.spinnerDistrict.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    addressViewModel.thanaData(AreaCode.THANA.type, districtList[position].id)
+                }
             }
-        }
 
         binding.spinnerThana.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {

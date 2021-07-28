@@ -81,6 +81,7 @@ class GeneralFragment : Fragment() {
                 }
                 is Resource.Error -> {
                     response.message?.let { message ->
+                        binding.btnNext.isEnabled = false
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
