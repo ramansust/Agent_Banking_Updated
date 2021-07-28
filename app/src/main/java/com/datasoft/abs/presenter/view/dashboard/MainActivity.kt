@@ -36,9 +36,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(false)
-
-//        binding.appBarMain.toolbar.setNavigationIcon(R.drawable.ic_menu)
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
