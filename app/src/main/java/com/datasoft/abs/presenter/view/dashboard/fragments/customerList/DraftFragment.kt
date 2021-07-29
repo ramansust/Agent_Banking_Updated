@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.datasoft.abs.data.dto.customerList.Row
 import com.datasoft.abs.databinding.FragmentCustomerBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Status
@@ -42,15 +43,19 @@ class DraftFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        val list = mutableListOf<Row>()
 
         viewModel.getAllCustomerData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     stopShimmer()
                     response.data?.let { customerResponse ->
-                        customerAdapter.differ.submitList(customerResponse.rows.filter {
+
+                        list.addAll(customerResponse.rows.filter {
                             it.customerStatus == Status.DRAFT.type
                         })
+
+                        customerAdapter.differ.submitList(list)
                     }
                 }
                 is Resource.Error -> {
@@ -65,8 +70,24 @@ class DraftFragment : Fragment() {
             }
         })
 
-        viewModel.getSearchData().observe(viewLifecycleOwner, { search ->
+        viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is Resource.Success -> {
+                    response.data?.let { search ->
+                        customerAdapter.differ.submitList(list.filter {
+                            it.fullName.contains(search, true)
+                        })
+                    }
+                }
 
+                is Resource.Error -> {
+
+                }
+
+                is Resource.Loading -> {
+
+                }
+            }
         })
     }
 

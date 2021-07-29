@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        app:tabBackground="@color/dashboard_bg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tabBackground="@color/dashboard_bg"
         app:tabGravity="start"
         app:tabTextAppearance="@style/MyCustomTextAppearance" />
 
@@ -43,6 +43,7 @@
         android:ems="10"
         android:fontFamily="@font/oxygen_regular"
         android:hint="@string/search"
+        android:imeOptions="actionDone"
         android:inputType="textPersonName"
         android:padding="@dimen/space_8x"
         android:textSize="@dimen/font_16x"

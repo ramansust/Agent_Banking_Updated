@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.datasoft.abs.data.dto.accountList.Row
 import com.datasoft.abs.databinding.FragmentAccountBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Status
@@ -43,14 +44,19 @@ class ActiveFragment : Fragment() {
 
         setupRecyclerView()
 
+        val list = mutableListOf<Row>()
+
         viewModel.getAllAccountData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     stopShimmer()
                     response.data?.let { accountResponse ->
-                        accountAdapter.differ.submitList(accountResponse.rows.filter {
+
+                        list.addAll(accountResponse.rows.filter {
                             it.accountStatus == Status.ACTIVE.type
                         })
+
+                        accountAdapter.differ.submitList(list)
                     }
                 }
                 is Resource.Error -> {
@@ -65,8 +71,24 @@ class ActiveFragment : Fragment() {
             }
         })
 
-        viewModel.getSearchData().observe(viewLifecycleOwner, {
+        viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is Resource.Success -> {
+                    response.data?.let { search ->
+                        accountAdapter.differ.submitList(list.filter {
+                            it.accountTitle.contains(search, true)
+                        })
+                    }
+                }
 
+                is Resource.Error -> {
+
+                }
+
+                is Resource.Loading -> {
+
+                }
+            }
         })
     }
 

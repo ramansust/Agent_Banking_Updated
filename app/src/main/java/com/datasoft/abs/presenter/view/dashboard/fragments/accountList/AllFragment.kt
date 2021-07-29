@@ -63,7 +63,7 @@ class AllFragment : Fragment() {
         })
 
         viewModel.getSearchData().observe(viewLifecycleOwner, { search ->
-            Toast.makeText(requireContext(), search, Toast.LENGTH_SHORT).show()
+
         })
     }
 

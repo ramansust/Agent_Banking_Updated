@@ -24,12 +24,12 @@ class CustomerListMainViewModel @Inject constructor(
     private val customerData = MutableLiveData<Resource<CustomerResponse>>()
     fun getAllCustomerData(): LiveData<Resource<CustomerResponse>> = customerData
 
-    private val searchData: MutableLiveData<String> = MutableLiveData()
-    fun getSearchData(): LiveData<String> = searchData
+    private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
+    fun getSearchData(): LiveData<Resource<String>> = searchData
 
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            searchData.postValue(search)
+            searchData.postValue(Resource.Success(search))
         }
     }
 
