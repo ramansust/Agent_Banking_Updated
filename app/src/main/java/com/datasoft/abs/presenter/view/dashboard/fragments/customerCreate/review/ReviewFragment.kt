@@ -467,24 +467,29 @@ class ReviewFragment : Fragment() {
         viewModel.getCreateCustomerData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
+                    goneProgressBar()
                     response.data?.let {
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     }
                 }
                 is Resource.Error -> {
+                    goneProgressBar()
                     response.message?.let { message ->
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
                 is Resource.Loading -> {
-
+                    showProgressBar()
                 }
             }
+
+            binding.btnNext.isEnabled = true
         })
 
         binding.btnNext.setOnClickListener {
             Log.e("value", "" + createCustomerRequest)
-//            viewModel.createCustomer(createCustomerRequest)
+            binding.btnNext.isEnabled = false
+            viewModel.createCustomer(createCustomerRequest)
         }
 
         binding.btnBack.setOnClickListener {
@@ -519,6 +524,14 @@ class ReviewFragment : Fragment() {
             customerViewModel.requestCurrentStep(6)
         }
 
+    }
+
+    private fun goneProgressBar() {
+        binding.loaderView.visibility = View.GONE
+    }
+
+    private fun showProgressBar() {
+        binding.loaderView.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {

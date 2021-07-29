@@ -1,1107 +1,1135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presenter.view.dashboard.fragments.customerCreate.review.ReviewFragment">
 
-    <androidx.cardview.widget.CardView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="@dimen/space_5x">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:elevation="@dimen/space_5x">
 
-            <LinearLayout
-                android:id="@+id/linear_layout_1"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/space_16x"
-                android:background="@drawable/input_border"
-                android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/linear_layout_2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="match_parent">
 
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
+                    android:id="@+id/linear_layout_1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/space_16x">
-
-                    <TextView
-                        android:id="@+id/txt_view_general"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/general_information"
-                        android:textSize="@dimen/font_20x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Button
-                        android:id="@+id/btn_general_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <TextView
-                        android:id="@+id/txt_view_full_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/full_name"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_nid"
-                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
-
-                    <TextView
-                        android:id="@+id/txt_view_nid"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/nid_"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_father_name"
-                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_full_name" />
-
-                    <TextView
-                        android:id="@+id/txt_view_father_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/father_name_"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/view_middle"
-                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_nid" />
-
-                    <View
-                        android:id="@+id/view_middle"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/space_1x"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:background="@color/shimmer_background_color"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_info"
-                        app:layout_constraintEnd_toEndOf="@+id/btn_general_edit"
-                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_father_name" />
-
-                    <TextView
-                        android:id="@+id/txt_view_guardian_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/guardian_information"
-                        android:textColor="@android:color/holo_blue_light"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_name"
-                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
-                        app:layout_constraintTop_toBottomOf="@+id/view_middle" />
-
-                    <TextView
-                        android:id="@+id/txt_view_guardian_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/name"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_mobile_number"
-                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info" />
-
-                    <TextView
-                        android:id="@+id/txt_view_guardian_mobile_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/mobile_number_"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/txt_view_general"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_name" />
-
-                    <TextView
-                        android:id="@+id/txt_view_full_name_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_nid_value"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
-
-                    <TextView
-                        android:id="@+id/txt_view_nid_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_father_name_value"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_full_name_value" />
-
-                    <TextView
-                        android:id="@+id/txt_view_father_name_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/view_middle"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_nid_value" />
-
-
-                    <TextView
-                        android:id="@+id/txt_view_guardian_name_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_mobile_number_value"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info" />
-
-                    <TextView
-                        android:id="@+id/txt_view_guardian_mobile_number_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_name_value" />
-
-                    <TextView
-                        android:id="@+id/txt_view_dob"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/date_of_birth_"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_mobile_no"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
-
-                    <TextView
-                        android:id="@+id/txt_view_mobile_no"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/mobile_number_"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_mother_name"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_dob" />
-
-                    <TextView
-                        android:id="@+id/txt_view_mother_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/mother_name_"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/view_middle"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_mobile_no" />
-
-
-                    <TextView
-                        android:id="@+id/txt_view_guardian_relation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/relation_"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_dob"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info" />
-
-                    <TextView
-                        android:id="@+id/txt_view_guardian_dob"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/date_of_birth_"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_relation" />
-
-                    <TextView
-                        android:id="@+id/txt_view_dob_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_mobile_no_value"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
-
-                    <TextView
-                        android:id="@+id/txt_view_mobile_no_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_mother_name_value"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_dob_value" />
-
-                    <TextView
-                        android:id="@+id/txt_view_mother_name_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/view_middle"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_mobile_no_value" />
-
-                    <TextView
-                        android:id="@+id/txt_view_guardian_relation_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_dob_value"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info" />
-
-                    <TextView
-                        android:id="@+id/txt_view_guardian_dob_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_right"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_relation_value" />
-
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_left"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.25" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_middle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.5" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.75" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_layout_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_16x"
-                android:layout_marginEnd="@dimen/space_16x"
-                android:background="@drawable/input_border"
-                android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/linear_layout_3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linear_layout_1">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/space_16x">
-
-                    <TextView
-                        android:id="@+id/txt_view_personal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/personal_information"
-                        android:textSize="@dimen/font_20x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Button
-                        android:id="@+id/btn_personal_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txt_view_religion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/religion_"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_occupation"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_personal"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
-
-                    <TextView
-                        android:id="@+id/txt_view_occupation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/occupation_"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_monthly_income"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_personal"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_religion" />
-
-                    <TextView
-                        android:id="@+id/txt_view_monthly_income"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/monthly_income_"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_personal"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_occupation" />
-
-                    <TextView
-                        android:id="@+id/txt_view_religion_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_occupation_value"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_left_1"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
-
-                    <TextView
-                        android:id="@+id/txt_view_occupation_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_monthly_income_value"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_left_1"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_religion_value" />
-
-                    <TextView
-                        android:id="@+id/txt_view_monthly_income_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_left_1"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_occupation_value" />
-
-                    <TextView
-                        android:id="@+id/txt_view_education"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/education_"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_nationality"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle_1"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
-
-                    <TextView
-                        android:id="@+id/txt_view_nationality"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/nationality_"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_source_of_fund"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle_1"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_education" />
-
-                    <TextView
-                        android:id="@+id/txt_view_source_of_fund"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/source_of_fund__"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle_1"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_nationality" />
-
-                    <TextView
-                        android:id="@+id/txt_view_education_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_nationality_value"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_right_1"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
-
-                    <TextView
-                        android:id="@+id/txt_view_nationality_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_source_of_fund_value"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_right_1"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_education_value" />
-
-                    <TextView
-                        android:id="@+id/txt_view_source_of_fund_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_right_1"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_nationality_value" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_left_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.25" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_middle_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.5" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_right_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.75" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_layout_3"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space_200x"
-                android:layout_marginStart="@dimen/space_16x"
-                android:layout_marginTop="@dimen/space_16x"
-                android:layout_marginEnd="@dimen/space_16x"
-                android:background="@drawable/input_border"
-                app:layout_constraintBottom_toTopOf="@+id/linear_layout_4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linear_layout_2">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/space_16x">
-
-                    <TextView
-                        android:id="@+id/txt_view_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/address"
-                        android:textSize="@dimen/font_20x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txt_view_address_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_address_2"
-                        app:layout_constraintStart_toStartOf="@id/txt_view_address"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_address"
-                        app:layout_constraintVertical_chainStyle="packed" />
-
-                    <TextView
-                        android:id="@+id/txt_view_address_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/txt_view_address"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_address_1" />
-
-                    <TextView
-                        android:id="@+id/txt_view_address_1_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_address_2_value"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle_2"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_address"
-                        app:layout_constraintVertical_chainStyle="packed" />
-
-                    <TextView
-                        android:id="@+id/txt_view_address_2_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle_2"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_address_1_value" />
-
-                    <Button
-                        android:id="@+id/btn_address_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_middle_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent=".25" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_layout_4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_16x"
-                android:layout_marginTop="@dimen/space_16x"
-                android:layout_marginEnd="@dimen/space_16x"
-                android:background="@drawable/input_border"
-                app:layout_constraintBottom_toTopOf="@+id/linear_layout_5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linear_layout_3">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/space_16x">
-
-                    <TextView
-                        android:id="@+id/txt_view_photo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/photo_nid"
-                        android:textSize="@dimen/font_20x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Button
-                        android:id="@+id/btn_photo_nid_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txt_view_user_photo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/user_photo"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/img_view_photo"
-                        app:layout_constraintStart_toStartOf="@+id/img_view_photo"
-                        app:layout_constraintTop_toBottomOf="@+id/img_view_photo" />
-
-                    <TextView
-                        android:id="@+id/txt_view_user_signature"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/user_signature"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintEnd_toEndOf="@+id/img_view_signature"
-                        app:layout_constraintStart_toStartOf="@+id/img_view_signature"
-                        app:layout_constraintTop_toBottomOf="@+id/img_view_signature" />
-
-                    <TextView
-                        android:id="@+id/txt_view_guardian_photo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/guardian_photo"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="invisible"
-                        app:layout_constraintEnd_toEndOf="@+id/img_view_guardian_photo"
-                        app:layout_constraintStart_toStartOf="@+id/img_view_guardian_photo"
-                        app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_photo" />
-
-                    <TextView
-                        android:id="@+id/txt_view_guardian_signature"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/guardian_signature"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="invisible"
-                        app:layout_constraintEnd_toEndOf="@+id/img_view_guardian_signature"
-                        app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_signature" />
-
-                    <ImageView
-                        android:id="@+id/img_view_photo"
-                        android:layout_width="@dimen/space_110x"
-                        android:layout_height="@dimen/space_110x"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_photo_preview"
-                        app:layout_constraintEnd_toStartOf="@+id/img_view_signature"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintHorizontal_chainStyle="spread_inside"
-                        app:layout_constraintStart_toStartOf="@+id/txt_view_photo"
-                        app:layout_constraintTop_toBottomOf="@id/btn_photo_nid_edit" />
-
-                    <ImageView
-                        android:id="@+id/img_view_signature"
-                        android:layout_width="@dimen/space_110x"
-                        android:layout_height="@dimen/space_110x"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_photo_preview"
-                        app:layout_constraintEnd_toStartOf="@+id/img_view_guardian_photo"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/img_view_photo"
-                        app:layout_constraintTop_toBottomOf="@id/btn_photo_nid_edit" />
-
-                    <ImageView
-                        android:id="@+id/img_view_guardian_photo"
-                        android:layout_width="@dimen/space_110x"
-                        android:layout_height="@dimen/space_110x"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_photo_preview"
-                        android:visibility="invisible"
-                        app:layout_constraintEnd_toStartOf="@+id/img_view_guardian_signature"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/img_view_signature"
-                        app:layout_constraintTop_toBottomOf="@id/btn_photo_nid_edit" />
-
-                    <ImageView
-                        android:id="@+id/img_view_guardian_signature"
-                        android:layout_width="@dimen/space_110x"
-                        android:layout_height="@dimen/space_110x"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_photo_preview"
-                        android:visibility="invisible"
-                        app:layout_constraintEnd_toEndOf="@+id/btn_photo_nid_edit"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/img_view_guardian_photo"
-                        app:layout_constraintTop_toBottomOf="@id/btn_photo_nid_edit" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_layout_5"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space_200x"
-                android:layout_marginStart="@dimen/space_16x"
-                android:layout_marginTop="@dimen/space_16x"
-                android:layout_marginEnd="@dimen/space_16x"
-                android:background="@drawable/input_border"
-                android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/linear_layout_6"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linear_layout_4">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/space_16x">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/fingerprint"
-                        android:textSize="@dimen/font_20x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Button
-                        android:id="@+id/btn_fingerprint_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_layout_6"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space_200x"
-                android:layout_marginStart="@dimen/space_16x"
-                android:layout_marginTop="@dimen/space_16x"
-                android:layout_marginEnd="@dimen/space_16x"
-                android:background="@drawable/input_border"
-                app:layout_constraintBottom_toTopOf="@+id/linear_layout_7"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linear_layout_5">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/space_16x"
-                    tools:ignore="TooManyViews">
-
-                    <TextView
-                        android:id="@+id/txt_view_document"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/documents"
-                        android:textSize="@dimen/font_20x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txt_view_document_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_document_2"
-                        app:layout_constraintStart_toStartOf="@id/txt_view_document"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_document"
-                        app:layout_constraintVertical_chainStyle="packed" />
-
-                    <TextView
-                        android:id="@+id/txt_view_document_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/txt_view_document"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_document_1" />
-
-                    <TextView
-                        android:id="@+id/txt_view_document_1_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_document_2_value"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle_6"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_document"
-                        app:layout_constraintVertical_chainStyle="packed" />
-
-                    <TextView
-                        android:id="@+id/txt_view_document_2_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle_6"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_document_1_value" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_middle_6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent=".25" />
-
-                    <Button
-                        android:id="@+id/btn_documents_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:background="@drawable/input_border"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/linear_layout_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
 
-            </LinearLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/space_16x">
 
-            <LinearLayout
-                android:id="@+id/linear_layout_7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/space_16x"
-                android:background="@drawable/input_border"
-                app:layout_constraintBottom_toTopOf="@+id/btn_next"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linear_layout_6">
+                        <TextView
+                            android:id="@+id/txt_view_general"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/general_information"
+                            android:textSize="@dimen/font_20x"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/btn_general_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                        <TextView
+                            android:id="@+id/txt_view_full_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/full_name"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_nid"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_general"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_nid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/nid_"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_father_name"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_general"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_full_name" />
+
+                        <TextView
+                            android:id="@+id/txt_view_father_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/father_name_"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/view_middle"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_general"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_nid" />
+
+                        <View
+                            android:id="@+id/view_middle"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/space_1x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@color/shimmer_background_color"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_info"
+                            app:layout_constraintEnd_toEndOf="@+id/btn_general_edit"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_general"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_father_name" />
+
+                        <TextView
+                            android:id="@+id/txt_view_guardian_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/guardian_information"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_name"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_general"
+                            app:layout_constraintTop_toBottomOf="@+id/view_middle" />
+
+                        <TextView
+                            android:id="@+id/txt_view_guardian_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/name"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_mobile_number"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_general"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info" />
+
+                        <TextView
+                            android:id="@+id/txt_view_guardian_mobile_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/mobile_number_"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_general"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_name" />
+
+                        <TextView
+                            android:id="@+id/txt_view_full_name_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_nid_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_nid_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_father_name_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_full_name_value" />
+
+                        <TextView
+                            android:id="@+id/txt_view_father_name_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/view_middle"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_nid_value" />
+
+
+                        <TextView
+                            android:id="@+id/txt_view_guardian_name_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_mobile_number_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info" />
+
+                        <TextView
+                            android:id="@+id/txt_view_guardian_mobile_number_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_name_value" />
+
+                        <TextView
+                            android:id="@+id/txt_view_dob"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/date_of_birth_"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_mobile_no"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_mobile_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/mobile_number_"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_mother_name"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_dob" />
+
+                        <TextView
+                            android:id="@+id/txt_view_mother_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/mother_name_"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/view_middle"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_mobile_no" />
+
+
+                        <TextView
+                            android:id="@+id/txt_view_guardian_relation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/relation_"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_dob"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info" />
+
+                        <TextView
+                            android:id="@+id/txt_view_guardian_dob"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/date_of_birth_"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_relation" />
+
+                        <TextView
+                            android:id="@+id/txt_view_dob_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_mobile_no_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_right"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_mobile_no_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_mother_name_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_right"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_dob_value" />
+
+                        <TextView
+                            android:id="@+id/txt_view_mother_name_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/view_middle"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_right"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_mobile_no_value" />
+
+                        <TextView
+                            android:id="@+id/txt_view_guardian_relation_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_dob_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_right"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info" />
+
+                        <TextView
+                            android:id="@+id/txt_view_guardian_dob_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_right"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_relation_value" />
+
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_left"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.25" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_middle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.75" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/space_16x">
-
-                    <TextView
-                        android:id="@+id/txt_view_kyc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/kyc"
-                        android:textSize="@dimen/font_20x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txt_view_photocopy"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/photocopy_collected"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toBottomOf="@+id/txt_view_photocopy_value_not"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline_middle_7"
-                        app:layout_constraintStart_toStartOf="@id/txt_view_kyc"
-                        app:layout_constraintTop_toTopOf="@+id/txt_view_photocopy_value" />
-
-                    <TextView
-                        android:id="@+id/txt_view_verified"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:text="@string/verified"
-                        android:textSize="@dimen/font_16x"
-                        app:layout_constraintBottom_toBottomOf="@+id/txt_view_verified_value_not"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline_middle_7"
-                        app:layout_constraintStart_toStartOf="@id/txt_view_kyc"
-                        app:layout_constraintTop_toTopOf="@+id/txt_view_verified_value"
-                        tools:ignore="TooManyViews" />
-
-                    <TextView
-                        android:id="@+id/txt_view_photocopy_value"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_5x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/address"
-                        android:textColor="@color/add_customer"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_photocopy_value_not"
-                        app:layout_constraintEnd_toEndOf="@id/btn_kyc_edit"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle_7"
-                        app:layout_constraintTop_toBottomOf="@id/btn_kyc_edit" />
-
-                    <TextView
-                        android:id="@+id/txt_view_photocopy_value_not"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_5x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/address"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/view"
-                        app:layout_constraintEnd_toEndOf="@id/btn_kyc_edit"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle_7"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_photocopy_value" />
-
-                    <View
-                        android:id="@+id/view"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/space_1x"
-                        android:layout_marginTop="@dimen/space_5x"
-                        android:layout_marginBottom="@dimen/space_5x"
-                        android:background="@color/shimmer_background_color"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_verified_value"
-                        app:layout_constraintEnd_toEndOf="@id/btn_kyc_edit"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle_7"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_photocopy_value_not" />
-
-                    <TextView
-                        android:id="@+id/txt_view_verified_value"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_5x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/address"
-                        android:textColor="@color/add_customer"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_view_verified_value_not"
-                        app:layout_constraintEnd_toEndOf="@id/btn_kyc_edit"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle_7"
-                        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-                    <TextView
-                        android:id="@+id/txt_view_verified_value_not"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_5x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/address"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:textSize="@dimen/font_16x"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/btn_kyc_edit"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_middle_7"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_verified_value" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_middle_7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent=".25" />
-
-                    <Button
-                        android:id="@+id/btn_kyc_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginEnd="@dimen/space_16x"
+                    android:background="@drawable/input_border"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/linear_layout_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_1">
 
 
-            </LinearLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/space_16x">
 
-            <Button
-                android:id="@+id/btn_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/space_16x"
-                android:layout_marginBottom="@dimen/space_16x"
-                android:background="@drawable/button_border"
-                android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
-                android:fontFamily="@font/oxygen_regular"
-                android:text="@string/submit"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_20x"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                        <TextView
+                            android:id="@+id/txt_view_personal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/personal_information"
+                            android:textSize="@dimen/font_20x"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/btn_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/space_16x"
-                android:layout_marginBottom="@dimen/space_16x"
-                android:background="@drawable/button_border"
-                android:fontFamily="@font/oxygen_regular"
-                android:text="@string/back"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_20x"
-                app:icon="@drawable/ic_baseline_arrow_back_ios_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_next" />
+                        <Button
+                            android:id="@+id/btn_personal_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-</androidx.core.widget.NestedScrollView>
+                        <TextView
+                            android:id="@+id/txt_view_religion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/religion_"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_occupation"
+                            app:layout_constraintStart_toStartOf="@+id/txt_view_personal"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_occupation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/occupation_"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_monthly_income"
+                            app:layout_constraintStart_toStartOf="@+id/txt_view_personal"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_religion" />
+
+                        <TextView
+                            android:id="@+id/txt_view_monthly_income"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/monthly_income_"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/txt_view_personal"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_occupation" />
+
+                        <TextView
+                            android:id="@+id/txt_view_religion_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_occupation_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_left_1"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_occupation_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_monthly_income_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_left_1"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_religion_value" />
+
+                        <TextView
+                            android:id="@+id/txt_view_monthly_income_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_left_1"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_occupation_value" />
+
+                        <TextView
+                            android:id="@+id/txt_view_education"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/education_"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_nationality"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle_1"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_nationality"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/nationality_"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_source_of_fund"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle_1"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_education" />
+
+                        <TextView
+                            android:id="@+id/txt_view_source_of_fund"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/source_of_fund__"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle_1"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_nationality" />
+
+                        <TextView
+                            android:id="@+id/txt_view_education_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_nationality_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_right_1"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_nationality_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_source_of_fund_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_right_1"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_education_value" />
+
+                        <TextView
+                            android:id="@+id/txt_view_source_of_fund_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_right_1"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_nationality_value" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_left_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.25" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_middle_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_right_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.75" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_200x"
+                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginEnd="@dimen/space_16x"
+                    android:background="@drawable/input_border"
+                    app:layout_constraintBottom_toTopOf="@+id/linear_layout_4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_2">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/space_16x">
+
+                        <TextView
+                            android:id="@+id/txt_view_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/address"
+                            android:textSize="@dimen/font_20x"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_view_address_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_address_2"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_address"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_address"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <TextView
+                            android:id="@+id/txt_view_address_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_address"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_address_1" />
+
+                        <TextView
+                            android:id="@+id/txt_view_address_1_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_address_2_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle_2"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_address"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <TextView
+                            android:id="@+id/txt_view_address_2_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle_2"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_address_1_value" />
+
+                        <Button
+                            android:id="@+id/btn_address_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_middle_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".25" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginEnd="@dimen/space_16x"
+                    android:background="@drawable/input_border"
+                    app:layout_constraintBottom_toTopOf="@+id/linear_layout_5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_3">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/space_16x">
+
+                        <TextView
+                            android:id="@+id/txt_view_photo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/photo_nid"
+                            android:textSize="@dimen/font_20x"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/btn_photo_nid_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_view_user_photo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/user_photo"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintEnd_toEndOf="@+id/img_view_photo"
+                            app:layout_constraintStart_toStartOf="@+id/img_view_photo"
+                            app:layout_constraintTop_toBottomOf="@+id/img_view_photo" />
+
+                        <TextView
+                            android:id="@+id/txt_view_user_signature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/user_signature"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintEnd_toEndOf="@+id/img_view_signature"
+                            app:layout_constraintStart_toStartOf="@+id/img_view_signature"
+                            app:layout_constraintTop_toBottomOf="@+id/img_view_signature" />
+
+                        <TextView
+                            android:id="@+id/txt_view_guardian_photo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/guardian_photo"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@+id/img_view_guardian_photo"
+                            app:layout_constraintStart_toStartOf="@+id/img_view_guardian_photo"
+                            app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_photo" />
+
+                        <TextView
+                            android:id="@+id/txt_view_guardian_signature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/guardian_signature"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@+id/img_view_guardian_signature"
+                            app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_signature" />
+
+                        <ImageView
+                            android:id="@+id/img_view_photo"
+                            android:layout_width="@dimen/space_110x"
+                            android:layout_height="@dimen/space_110x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_photo_preview"
+                            app:layout_constraintEnd_toStartOf="@+id/img_view_signature"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside"
+                            app:layout_constraintStart_toStartOf="@+id/txt_view_photo"
+                            app:layout_constraintTop_toBottomOf="@id/btn_photo_nid_edit" />
+
+                        <ImageView
+                            android:id="@+id/img_view_signature"
+                            android:layout_width="@dimen/space_110x"
+                            android:layout_height="@dimen/space_110x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_photo_preview"
+                            app:layout_constraintEnd_toStartOf="@+id/img_view_guardian_photo"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/img_view_photo"
+                            app:layout_constraintTop_toBottomOf="@id/btn_photo_nid_edit" />
+
+                        <ImageView
+                            android:id="@+id/img_view_guardian_photo"
+                            android:layout_width="@dimen/space_110x"
+                            android:layout_height="@dimen/space_110x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_photo_preview"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toStartOf="@+id/img_view_guardian_signature"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/img_view_signature"
+                            app:layout_constraintTop_toBottomOf="@id/btn_photo_nid_edit" />
+
+                        <ImageView
+                            android:id="@+id/img_view_guardian_signature"
+                            android:layout_width="@dimen/space_110x"
+                            android:layout_height="@dimen/space_110x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_photo_preview"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@+id/btn_photo_nid_edit"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/img_view_guardian_photo"
+                            app:layout_constraintTop_toBottomOf="@id/btn_photo_nid_edit" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_200x"
+                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginEnd="@dimen/space_16x"
+                    android:background="@drawable/input_border"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/linear_layout_6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_4">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/space_16x">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/fingerprint"
+                            android:textSize="@dimen/font_20x"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/btn_fingerprint_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_200x"
+                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginEnd="@dimen/space_16x"
+                    android:background="@drawable/input_border"
+                    app:layout_constraintBottom_toTopOf="@+id/linear_layout_7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_5">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/space_16x"
+                        tools:ignore="TooManyViews">
+
+                        <TextView
+                            android:id="@+id/txt_view_document"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/documents"
+                            android:textSize="@dimen/font_20x"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_view_document_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_document_2"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_document"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_document"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <TextView
+                            android:id="@+id/txt_view_document_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_document"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_document_1" />
+
+                        <TextView
+                            android:id="@+id/txt_view_document_1_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_document_2_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle_6"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_document"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <TextView
+                            android:id="@+id/txt_view_document_2_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle_6"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_document_1_value" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_middle_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".25" />
+
+                        <Button
+                            android:id="@+id/btn_documents_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16x"
+                    android:background="@drawable/input_border"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_next"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_6">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/space_16x">
+
+                        <TextView
+                            android:id="@+id/txt_view_kyc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/kyc"
+                            android:textSize="@dimen/font_20x"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_view_photocopy"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/photocopy_collected"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toBottomOf="@+id/txt_view_photocopy_value_not"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline_middle_7"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_kyc"
+                            app:layout_constraintTop_toTopOf="@+id/txt_view_photocopy_value" />
+
+                        <TextView
+                            android:id="@+id/txt_view_verified"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/verified"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toBottomOf="@+id/txt_view_verified_value_not"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline_middle_7"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_kyc"
+                            app:layout_constraintTop_toTopOf="@+id/txt_view_verified_value"
+                            tools:ignore="TooManyViews" />
+
+                        <TextView
+                            android:id="@+id/txt_view_photocopy_value"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_5x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/address"
+                            android:textColor="@color/add_customer"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_photocopy_value_not"
+                            app:layout_constraintEnd_toEndOf="@id/btn_kyc_edit"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle_7"
+                            app:layout_constraintTop_toBottomOf="@id/btn_kyc_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_photocopy_value_not"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_5x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/address"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@+id/view"
+                            app:layout_constraintEnd_toEndOf="@id/btn_kyc_edit"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle_7"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_photocopy_value" />
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/space_1x"
+                            android:layout_marginTop="@dimen/space_5x"
+                            android:layout_marginBottom="@dimen/space_5x"
+                            android:background="@color/shimmer_background_color"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_verified_value"
+                            app:layout_constraintEnd_toEndOf="@id/btn_kyc_edit"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle_7"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_photocopy_value_not" />
+
+                        <TextView
+                            android:id="@+id/txt_view_verified_value"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_5x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/address"
+                            android:textColor="@color/add_customer"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_verified_value_not"
+                            app:layout_constraintEnd_toEndOf="@id/btn_kyc_edit"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle_7"
+                            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+                        <TextView
+                            android:id="@+id/txt_view_verified_value_not"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_5x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/address"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="@dimen/font_16x"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/btn_kyc_edit"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle_7"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_verified_value" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_middle_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".25" />
+
+                        <Button
+                            android:id="@+id/btn_kyc_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_16x"
+                    android:layout_marginBottom="@dimen/space_16x"
+                    android:background="@drawable/button_border"
+                    android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/submit"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_20x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_16x"
+                    android:layout_marginBottom="@dimen/space_16x"
+                    android:background="@drawable/button_border"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:text="@string/back"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_20x"
+                    app:icon="@drawable/ic_baseline_arrow_back_ios_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_next" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/loader_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,6 @@ data class Row(
     val accountStatus: Int,
     val accountFor: Int,
     val manDateOfAccount: Int,
-    val balance: Int,
+    val balance: Float,
     val lazyLoader: LazyLoader
 )

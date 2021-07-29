@@ -26,6 +26,9 @@ class ReviewViewModel @Inject constructor(
 
     fun createCustomer(createCustomerRequest: CreateCustomerRequest) {
         viewModelScope.launch(Dispatchers.IO) {
+
+            createCustomerData.postValue(Resource.Loading())
+
             if (network.isConnected()) {
                 try {
                     val response = repository.createCustomerData(createCustomerRequest)
