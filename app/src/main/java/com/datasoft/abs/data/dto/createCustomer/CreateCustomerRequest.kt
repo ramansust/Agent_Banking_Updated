@@ -50,8 +50,4 @@ data class CreateCustomerRequest(
     var spouseName: String = "",
     var tin: String = "",
     var vatRegistrationNo: String= ""
-) {
-    override fun toString(): String {
-        return "CreateCustomerRequest(accountsNumberWithOtherBank='$accountsNumberWithOtherBank', accountsWithOtherBankName='$accountsWithOtherBankName', addressess=$addressess, annualTurnover=$annualTurnover, birthCertificateNo='$birthCertificateNo', branchId=$branchId, certificateOfIncorporationNo='$certificateOfIncorporationNo', contacts=$contacts, customerNo='$customerNo', customerType=$customerType, dob='$dob', drivingLicenseNo='$drivingLicenseNo', email='$email', emergencyContact=$emergencyContact, fatherName='$fatherName', fingerPrint=$fingerPrint, firstName='$firstName', gender=$gender, guardianInfo=$guardianInfo, highestEducationalDegree='$highestEducationalDegree', highestEducationalDegreeId=$highestEducationalDegreeId, isResident=$isResident, kycInfo=$kycInfo, lastName='$lastName', maritalStatus=$maritalStatus, middleName='$middleName', mobile='$mobile', monthlyIncome=$monthlyIncome, motherName='$motherName', nationalityId=$nationalityId, natureOfProductOrService='$natureOfProductOrService', netWorthOfTheOrganization=$netWorthOfTheOrganization, nid='$nid', noOfDependent=$noOfDependent, noOfEmployeesInBusiness=$noOfEmployeesInBusiness, occupationId=$occupationId, passportNo='$passportNo', registrationNo='$registrationNo', relatedDocs=${relatedDocs[0].documentTypeId} ${relatedDocs[0].docTypeName} ${relatedDocs[0].expiredDate} ${relatedDocs[0].issueDate} ${relatedDocs[0].documentTypeId} ${relatedDocs[0].tracingId}, religion=$religion, salutation=$salutation, sourceOfFund='$sourceOfFund', spouseName='$spouseName', tin='$tin', vatRegistrationNo='$vatRegistrationNo')"
-    }
-}
+)

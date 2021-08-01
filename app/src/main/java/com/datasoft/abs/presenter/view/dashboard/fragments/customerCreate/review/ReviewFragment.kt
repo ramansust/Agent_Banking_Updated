@@ -486,13 +486,9 @@ class ReviewFragment : Fragment() {
                     showProgressBar()
                 }
             }
-
-            binding.btnNext.isEnabled = true
         })
 
         binding.btnNext.setOnClickListener {
-            Log.e("value", "" + createCustomerRequest)
-            binding.btnNext.isEnabled = false
             viewModel.createCustomer(createCustomerRequest)
         }
 
