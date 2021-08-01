@@ -2,9 +2,8 @@ package com.datasoft.abs.presenter.view.dashboard.fragments.dashboard
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import javax.inject.Inject
 
-class DashboardAdapter @Inject constructor(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class DashboardAdapter constructor(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int = 2
 

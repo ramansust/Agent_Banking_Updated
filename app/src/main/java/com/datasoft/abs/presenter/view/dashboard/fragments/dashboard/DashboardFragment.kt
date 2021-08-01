@@ -11,16 +11,12 @@ import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.FragmentDashboardTransactionBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
 
     private val viewModel: DashboardViewModel by activityViewModels()
     private var _binding: FragmentDashboardTransactionBinding? = null
-
-    @Inject
-    lateinit var adapter: DashboardAdapter
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -34,7 +30,7 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardTransactionBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.pager.adapter = adapter
+        binding.pager.adapter = DashboardAdapter(this)
 
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             when(position) {
