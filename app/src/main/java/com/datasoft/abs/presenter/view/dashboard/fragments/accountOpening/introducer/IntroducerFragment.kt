@@ -6,23 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.datasoft.abs.databinding.AddressFragmentBinding
-import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
+import com.datasoft.abs.databinding.IntroducerFragmentBinding
+import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class IntroducerFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = IntroducerFragment()
-    }
-
-    private val customerViewModel: CustomerViewModel by activityViewModels()
+    private val accountViewModel: AccountViewModel by activityViewModels()
     private val viewModel: IntroducerViewModel by activityViewModels()
-    private var _binding: AddressFragmentBinding? = null
+    private var _binding: IntroducerFragmentBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -31,7 +26,7 @@ class IntroducerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = AddressFragmentBinding.inflate(inflater, container, false)
+        _binding = IntroducerFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,11 +34,11 @@ class IntroducerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnNext.setOnClickListener {
-            customerViewModel.requestCurrentStep(3)
+            accountViewModel.requestCurrentStep(4)
         }
 
         binding.btnBack.setOnClickListener {
-            customerViewModel.requestCurrentStep(1)
+            accountViewModel.requestCurrentStep(2)
         }
     }
 

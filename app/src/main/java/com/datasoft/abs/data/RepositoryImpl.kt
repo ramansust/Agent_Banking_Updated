@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData
 import com.datasoft.abs.data.dto.CommonRequest
 import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
-import com.datasoft.abs.data.dto.config.CommonModel
-import com.datasoft.abs.data.dto.config.ConfigResponse
-import com.datasoft.abs.data.dto.config.RiskGradeResponse
+import com.datasoft.abs.data.dto.config.*
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerResponse
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
@@ -91,6 +89,14 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getTransferData(commonRequest: CommonRequest): Response<Objects> {
         return restApiService.getTransferData(commonRequest)
+    }
+
+    override suspend fun getAccountConfigData(): Response<AccountConfigResponse> {
+        return restApiService.getAccountConfig()
+    }
+
+    override suspend fun getTransactionProfileConfigData(): Response<List<TransactionProfileConfig>> {
+        return restApiService.getTransactionProfileConfig()
     }
 
     override suspend fun insert(generalInfo: GeneralInfo) {

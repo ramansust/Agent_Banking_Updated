@@ -8,13 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.config.CommonModel
-import com.datasoft.abs.databinding.GeneralFragmentBinding
+import com.datasoft.abs.databinding.GeneralAccountFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
-import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
+import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,12 +22,11 @@ import java.util.*
 @AndroidEntryPoint
 class GeneralFragment : Fragment() {
 
-    private val customerViewModel: CustomerViewModel by activityViewModels()
+    private val accountViewModel: AccountViewModel by activityViewModels()
     private val viewModel: GeneralViewModel by activityViewModels()
-    private var _binding: GeneralFragmentBinding? = null
+    private var _binding: GeneralAccountFragmentBinding? = null
 
     private val myCalendar: Calendar = Calendar.getInstance()
-
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -38,32 +36,49 @@ class GeneralFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = GeneralFragmentBinding.inflate(inflater, container, false)
+        _binding = GeneralAccountFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val customerList = mutableListOf<CommonModel>()
-        val countryList = mutableListOf<CommonModel>()
+        val productCategoryList = mutableListOf<CommonModel>()
+        val operatingInstructionList = mutableListOf<CommonModel>()
+        val currencyList = mutableListOf<CommonModel>()
+        val typeOfAccountList = mutableListOf<CommonModel>()
+        val customerNameList = mutableListOf<CommonModel>()
+        val sourceOfFundList = mutableListOf<CommonModel>()
 
-        customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
+        accountViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
             when (response) {
                 is Resource.Success -> {
                     response.data?.let {
-                        for (customer in it.customerTypeList)
-                            customerList.add(customer)
 
-                        binding.spinnerCustomerType.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, customerList)
+                        productCategoryList.addAll(it.productCategoryList)
+                        binding.spinnerProductCategory.adapter =
+                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, productCategoryList)
 
-                        for (country in it.nationalityList)
-                            countryList.add(country)
+                        operatingInstructionList.addAll(it.operationInstructionList)
+                        binding.spinnerOperatingInstruction.adapter =
+                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, operatingInstructionList)
 
-                        binding.spinnerCountry.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, countryList)
+                        currencyList.addAll(it.currencyList)
+                        binding.spinnerCurrency.adapter =
+                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, currencyList)
+
+                        typeOfAccountList.addAll(it.productCategoryList)
+                        binding.spinnerTypeOfAccount.adapter =
+                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, typeOfAccountList)
+
+                        customerNameList.addAll(it.customerList)
+                        binding.spinnerCustomerName.adapter =
+                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, customerNameList)
+
+                        sourceOfFundList.addAll(it.sourceOfFundList)
+                        binding.spinnerSourceOfFund.adapter =
+                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, sourceOfFundList)
                     }
                 }
                 is Resource.Error -> {
@@ -78,42 +93,11 @@ class GeneralFragment : Fragment() {
 
         viewModel.getSavedData().observe(viewLifecycleOwner, { response ->
             with(binding) {
-                edTxtFirstName.setText(response.firstName)
-                edTxtLastName.setText(response.lastName)
-                edTxtDob.setText(response.birthDate)
-                edTxtNid.setText(response.nationalID)
-                edTxtMobileNumber.setText(response.mobileNumber)
-                edTxtFatherName.setText(response.fatherName)
-//                spinnerCustomerType.setSelection(customerList.indexOf(response.customerType))
-//                spinnerCountry.setSelection(countryList.indexOf(response.nationalID))
-                edTxtMotherName.setText(response.motherName)
-                edTxtCity.setText(response.city)
+
             }
         })
 
-        viewModel.getDedupeData().observe(viewLifecycleOwner, { response ->
-
-            when (response) {
-                is Resource.Success -> {
-//                    goneProgressBar()
-                    response.data?.let {
-                        customerViewModel.requestCurrentStep(1)
-                    }
-                }
-                is Resource.Error -> {
-//                    goneProgressBar()
-                    response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-                        Log.e("TAG", "An error occurred: $message")
-                    }
-                }
-                is Resource.Loading -> {
-//                    showProgressBar()
-                }
-            }
-        })
-
-        binding.edTxtDob.setOnClickListener {
+        binding.edTxtOpeningDate.setOnClickListener {
             DatePickerDialog(
                 requireContext(), date, myCalendar[Calendar.YEAR],
                 myCalendar[Calendar.MONTH],
@@ -122,18 +106,7 @@ class GeneralFragment : Fragment() {
         }
 
         binding.btnNext.setOnClickListener {
-            viewModel.requestData(
-                binding.edTxtFirstName.text.trim().toString(),
-                binding.edTxtLastName.text.trim().toString(),
-                binding.edTxtDob.text.trim().toString(),
-                binding.edTxtNid.text.trim().toString(),
-                binding.edTxtMobileNumber.text.trim().toString(),
-                binding.edTxtFatherName.text.trim().toString(),
-                binding.spinnerCustomerType.selectedItem as Int,
-                12,
-                binding.edTxtMotherName.text.trim().toString(),
-                binding.edTxtCity.text.trim().toString()
-            )
+            accountViewModel.requestCurrentStep(1)
         }
     }
 
@@ -147,7 +120,7 @@ class GeneralFragment : Fragment() {
     private fun updateLabel() {
         val myFormat = "MM-dd-yyyy" //In which you need put here
         val sdf = SimpleDateFormat(myFormat, Locale.US)
-        binding.edTxtDob.setText(sdf.format(myCalendar.time))
+        binding.edTxtOpeningDate.setText(sdf.format(myCalendar.time))
     }
 
     override fun onDestroyView() {

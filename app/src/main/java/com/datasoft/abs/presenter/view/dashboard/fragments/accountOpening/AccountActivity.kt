@@ -114,7 +114,7 @@ class AccountActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        accountViewModel.configData()
+        accountViewModel.accountConfigData()
 
         navController = findNavController(R.id.nav_host_fragment_content_account)
         setCurrentState(0)

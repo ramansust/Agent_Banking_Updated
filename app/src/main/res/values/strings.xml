@@ -59,6 +59,7 @@
     <string name="account_information">Account Information</string>
     <string name="others_customer">Others Facilities and Customer Information</string>
     <string name="introducer">Introducer</string>
+    <string name="introducer_">Introducer*</string>
     <string name="transaction_profile">Transaction Profile</string>
     <string name="review">Review</string>
 
@@ -204,4 +205,15 @@
     <string name="user_signature">User Signature</string>
     <string name="guardian_photo">Guardian Photo</string>
     <string name="guardian_signature">Guardian Signature</string>
+
+    <string name="product_category_">Product Category*</string>
+    <string name="operating_instruction_">Operating Instruction*</string>
+    <string name="title_account_">Title of Account*</string>
+    <string name="currency_">Currency*</string>
+    <string name="initial_amount">Initial Amount</string>
+
+    <string name="type_of_account_">Type of Account*</string>
+    <string name="customer_name_">Customer Name*</string>
+    <string name="opening_date_">Opening Date*</string>
+    <string name="source_fund_">Source(s) of Fund*</string>
 </resources>

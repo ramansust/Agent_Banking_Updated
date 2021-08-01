@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.PhotoFragmentBinding
 import com.datasoft.abs.presenter.utils.Photos
+import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.pixelcarrot.base64image.Base64Image
@@ -26,11 +27,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class OthersFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = OthersFragment()
-    }
-
-    private val customerViewModel: CustomerViewModel by activityViewModels()
+    private val accountViewModel: AccountViewModel by activityViewModels()
     private val viewModel: OthersViewModel by activityViewModels()
     private var _binding: PhotoFragmentBinding? = null
 
@@ -87,11 +84,11 @@ class OthersFragment : Fragment() {
         }
 
         binding.btnNext.setOnClickListener {
-            customerViewModel.requestCurrentStep(4)
+            accountViewModel.requestCurrentStep(2)
         }
 
         binding.btnBack.setOnClickListener {
-            customerViewModel.requestCurrentStep(2)
+            accountViewModel.requestCurrentStep(0)
         }
 
         return root

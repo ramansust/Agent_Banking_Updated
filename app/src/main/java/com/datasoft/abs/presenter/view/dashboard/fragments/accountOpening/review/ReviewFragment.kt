@@ -6,23 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.datasoft.abs.databinding.FingerprintFragmentBinding
-import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
+import com.datasoft.abs.databinding.FragmentAccountReviewBinding
+import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ReviewFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ReviewFragment()
-    }
-
-    private val customerViewModel: CustomerViewModel by activityViewModels()
+    private val accountViewModel: AccountViewModel by activityViewModels()
     private val viewModel: ReviewViewModel by activityViewModels()
-    private var _binding: FingerprintFragmentBinding? = null
+    private var _binding: FragmentAccountReviewBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -31,7 +26,7 @@ class ReviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FingerprintFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentAccountReviewBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,11 +34,11 @@ class ReviewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnNext.setOnClickListener {
-            customerViewModel.requestCurrentStep(6)
+
         }
 
         binding.btnBack.setOnClickListener {
-            customerViewModel.requestCurrentStep(4)
+            accountViewModel.requestCurrentStep(4)
         }
 
     }

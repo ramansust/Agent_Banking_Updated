@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData
 import com.datasoft.abs.data.dto.CommonRequest
 import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
-import com.datasoft.abs.data.dto.config.CommonModel
-import com.datasoft.abs.data.dto.config.ConfigResponse
-import com.datasoft.abs.data.dto.config.RiskGradeResponse
+import com.datasoft.abs.data.dto.config.*
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerResponse
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
@@ -38,6 +36,9 @@ interface Repository {
     suspend fun getDepositData(commonRequest: CommonRequest): Response<Objects>
     suspend fun getWithdrawData(commonRequest: CommonRequest): Response<Objects>
     suspend fun getTransferData(commonRequest: CommonRequest): Response<Objects>
+
+    suspend fun getAccountConfigData(): Response<AccountConfigResponse>
+    suspend fun getTransactionProfileConfigData(): Response<List<TransactionProfileConfig>>
 
     suspend fun insert(generalInfo: GeneralInfo)
     fun getAll(): LiveData<List<GeneralInfo>>

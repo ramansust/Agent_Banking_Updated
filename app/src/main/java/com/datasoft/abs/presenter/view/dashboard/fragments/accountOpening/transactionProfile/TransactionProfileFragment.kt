@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.PhotoFragmentBinding
 import com.datasoft.abs.presenter.utils.Photos
+import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.pixelcarrot.base64image.Base64Image
@@ -26,19 +27,14 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class TransactionProfileFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = TransactionProfileFragment()
-    }
-
-    private val customerViewModel: CustomerViewModel by activityViewModels()
+    private val accountViewModel: AccountViewModel by activityViewModels()
     private val viewModel: TransactionProfileViewModel by activityViewModels()
     private var _binding: PhotoFragmentBinding? = null
 
     @Inject
     lateinit var photos: Photos
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -87,11 +83,11 @@ class TransactionProfileFragment : Fragment() {
         }
 
         binding.btnNext.setOnClickListener {
-            customerViewModel.requestCurrentStep(4)
+            accountViewModel.requestCurrentStep(5)
         }
 
         binding.btnBack.setOnClickListener {
-            customerViewModel.requestCurrentStep(2)
+            accountViewModel.requestCurrentStep(3)
         }
 
         return root

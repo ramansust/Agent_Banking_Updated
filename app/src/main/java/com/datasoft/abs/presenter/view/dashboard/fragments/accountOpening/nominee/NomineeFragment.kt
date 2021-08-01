@@ -13,16 +13,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NomineeFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = NomineeFragment()
-    }
-
     private val customerViewModel: CustomerViewModel by activityViewModels()
     private val viewModel: NomineeViewModel by activityViewModels()
     private var _binding: NomineeFragmentBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -39,15 +34,11 @@ class NomineeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnNext.setOnClickListener {
-//            customerViewModel.requestCurrentStep(2)
+            customerViewModel.requestCurrentStep(3)
         }
 
         binding.btnBack.setOnClickListener {
-            customerViewModel.requestCurrentStep(5)
-        }
-
-        binding.btnPreview.setOnClickListener {
-//            customerViewModel.requestCurrentStep(2)
+            customerViewModel.requestCurrentStep(1)
         }
     }
 

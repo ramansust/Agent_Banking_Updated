@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.datasoft.abs.data.dto.config.ConfigResponse
+import com.datasoft.abs.data.dto.config.AccountConfigResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Network
@@ -20,17 +20,17 @@ class AccountViewModel @Inject constructor(
     private val network: Network
 ) : ViewModel() {
 
-    private val configData = MutableLiveData<Resource<ConfigResponse>>()
-    fun getConfigData(): LiveData<Resource<ConfigResponse>> = configData
+    private val configData = MutableLiveData<Resource<AccountConfigResponse>>()
+    fun getConfigData(): LiveData<Resource<AccountConfigResponse>> = configData
 
     private val currentStep: MutableLiveData<Int> = MutableLiveData()
     fun getCurrentStep(): LiveData<Int> = currentStep
 
-    fun configData() {
+    fun accountConfigData() {
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
                 try {
-                    val response = repository.getConfigData()
+                    val response = repository.getAccountConfigData()
                     configData.postValue(handleConfigResponse(response))
                 } catch (e: Exception) {
                     configData.postValue(
@@ -56,7 +56,7 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    private fun handleConfigResponse(response: Response<ConfigResponse>): Resource<ConfigResponse> {
+    private fun handleConfigResponse(response: Response<AccountConfigResponse>): Resource<AccountConfigResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse)
