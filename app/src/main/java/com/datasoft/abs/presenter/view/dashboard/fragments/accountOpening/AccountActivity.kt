@@ -115,6 +115,7 @@ class AccountActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         accountViewModel.accountConfigData()
+        accountViewModel.transactionProfileData()
 
         navController = findNavController(R.id.nav_host_fragment_content_account)
         setCurrentState(0)
