@@ -49,6 +49,8 @@ class ReviewFragment : Fragment() {
     private var nomineeInfo = EmergencyContact()
     private var kycInfo = KycInfoX()
 
+    private var isAdult = false
+
     @Inject
     lateinit var glide: RequestManager
 
@@ -70,6 +72,7 @@ class ReviewFragment : Fragment() {
 
         personalViewModel.getCustomerAgeData().observe(viewLifecycleOwner, {
             if (it < Constant.ADULT_AGE) {
+                isAdult = false
                 binding.imgViewGuardianPhoto.visibility = View.VISIBLE
                 binding.imgViewGuardianSignature.visibility = View.VISIBLE
 
@@ -98,6 +101,8 @@ class ReviewFragment : Fragment() {
                 binding.txtViewGuardianDob.visibility = View.VISIBLE
                 binding.txtViewGuardianDobValue.visibility = View.VISIBLE
             } else if (it >= Constant.ADULT_AGE) {
+                isAdult = true
+
                 binding.imgViewGuardianPhoto.visibility = View.INVISIBLE
                 binding.imgViewGuardianSignature.visibility = View.INVISIBLE
 
@@ -153,7 +158,6 @@ class ReviewFragment : Fragment() {
                 mobile = it.mobileNumber
                 motherName = it.motherName
                 fatherName = it.fatherName
-                //city & country
             }
         })
 
@@ -162,19 +166,12 @@ class ReviewFragment : Fragment() {
             for (addressInfo in it) {
                 list.add(
                     Addresses(
-                        addressInfo.houseNo + addressInfo.village,
+                        addressInfo.houseNo + ", " + addressInfo.village,
                         addressInfo.addressType,
                         addressInfo.country,
-                        addressInfo.districtValue,
                         addressInfo.district,
-                        "",
-                        0,
                         addressInfo.postCode,
-                        "",
-                        addressInfo.thanaValue,
-                        addressInfo.thana,
-                        addressInfo.unionValue,
-                        addressInfo.union
+                        addressInfo.thana
                     )
                 )
             }
@@ -306,11 +303,12 @@ class ReviewFragment : Fragment() {
         })
 
         fingerprintViewModel.getFingerList().observe(viewLifecycleOwner, {
-            createCustomerRequest.fingerPrint = FingerPrint("", "", "")
+            createCustomerRequest.fingerPrint = FingerPrint("", "", "", ", ", "", "")
         })
 
         kycViewModel.getKYCData().observe(viewLifecycleOwner, {
             kycInfo.apply {
+                accountOpeningWayId = it.typeOfOnboarding
                 residentStatusId = it.residentStatus
                 isBlackListedId = it.blackListed
                 isPep = it.isPep
@@ -319,6 +317,7 @@ class ReviewFragment : Fragment() {
                 typeOfProductId = it.typeOfProduct
                 professionOrNatureId = it.profession
                 transparencyRiskId = it.transparencyRisk
+                kycRiskFactorId = it.transactionalRisk
             }
 
             createCustomerRequest.kycInfo = kycInfo
@@ -445,7 +444,12 @@ class ReviewFragment : Fragment() {
                             drivingLicenseNo = it.drivingLicense
                             monthlyIncome = it.monthlyIncome.toInt()
                             sourceOfFund = it.sourceOfFund
-                            guardianInfo = guardian
+
+                            guardianInfo = if (isAdult)
+                                guardian
+                            else
+                                null
+
                             emergencyContact = nomineeInfo
                         }
                     }
