@@ -13,14 +13,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/space_16x">
 
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
@@ -43,7 +42,7 @@
                     android:background="@drawable/input_border"
                     android:fontFamily="@font/oxygen_regular"
                     android:hint="@string/type_here"
-                    android:inputType="textPersonName|textCapSentences"
+                    android:inputType="number"
                     android:maxLength="@integer/edit_text_input_length"
                     android:padding="@dimen/space_8x"
                     android:textSize="@dimen/font_16x" />
@@ -87,9 +86,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/space_8x"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline_middle"
@@ -140,10 +137,9 @@
                 android:id="@+id/btn_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 android:background="@drawable/button_border"
                 android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:enabled="false"
                 android:fontFamily="@font/oxygen_regular"
                 android:text="@string/next"
                 android:textColor="@color/white"
@@ -156,7 +152,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/space_16x"
-                android:layout_marginBottom="@dimen/space_16x"
                 android:background="@drawable/button_border"
                 android:fontFamily="@font/oxygen_regular"
                 android:text="@string/back"

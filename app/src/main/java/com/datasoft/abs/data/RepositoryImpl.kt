@@ -6,6 +6,7 @@ import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.config.*
 import com.datasoft.abs.data.dto.createAccount.general.CustomerDataResponse
+import com.datasoft.abs.data.dto.createAccount.introducer.IntroducerInfo
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerResponse
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
@@ -96,12 +97,16 @@ class RepositoryImpl @Inject constructor(
         return restApiService.getAccountConfig()
     }
 
-    override suspend fun getTransactionProfileConfigData(): Response<List<TransactionProfileConfig>> {
-        return restApiService.getTransactionProfileConfig()
+    override suspend fun getTransactionProfileConfigData(productID: Int): Response<TransactionProfileConfig> {
+        return restApiService.getTransactionProfileConfig(productID)
     }
 
     override suspend fun getCustomerData(customerID: String): Response<CustomerDataResponse> {
         return restApiService.getCustomerData(customerID)
+    }
+
+    override suspend fun getIntroducerData(accountNo: String): Response<IntroducerInfo> {
+        return restApiService.getIntroducerData(accountNo)
     }
 
     override suspend fun insert(generalInfo: GeneralInfo) {

@@ -1,48 +1,52 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.transactionProfile
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.datasoft.abs.data.dto.config.TransactionProfileConfig
-import com.datasoft.abs.databinding.AddressRowBinding
+import com.datasoft.abs.data.dto.config.TpDetail
+import com.datasoft.abs.databinding.TransactionProfileRowBinding
 import javax.inject.Inject
 
 class TransactionProfileAdapter @Inject constructor() :
-    RecyclerView.Adapter<TransactionProfileAdapter.AddressViewHolder>() {
+    RecyclerView.Adapter<TransactionProfileAdapter.TransactionProfileViewModel>() {
 
-    inner class AddressViewHolder(val binding: AddressRowBinding) :
+    inner class TransactionProfileViewModel(val binding: TransactionProfileRowBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<TransactionProfileConfig>() {
-        override fun areItemsTheSame(oldItem: TransactionProfileConfig, newItem: TransactionProfileConfig): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<TpDetail>() {
+        override fun areItemsTheSame(oldItem: TpDetail, newItem: TpDetail): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: TransactionProfileConfig, newItem: TransactionProfileConfig): Boolean {
+        override fun areContentsTheSame(oldItem: TpDetail, newItem: TpDetail): Boolean {
             return oldItem == newItem
         }
     }
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddressViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionProfileViewModel {
 
-        val binding = AddressRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return AddressViewHolder(binding)
+        val binding = TransactionProfileRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TransactionProfileViewModel(binding)
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
 
-    @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: AddressViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TransactionProfileViewModel, position: Int) {
         val value = differ.currentList[position]
 
-        holder.binding.txtViewAddress.text = value.transactionProfileList[0].name
+        holder.binding.txtViewName.text = value.name
+
+        holder.binding.edTxtDailyTransaction.setText(value.limitNoOfDailyTrn.toString())
+        holder.binding.edTxtDailyAmount.setText(value.limitDailyTrnAmt.toString())
+        holder.binding.edTxtMonthlyTransaction.setText(value.limitNoOfMonthlyTrn.toString())
+        holder.binding.edTxtMonthlyAmount.setText(value.limitMonthlyTrnAmt.toString())
+        holder.binding.edTxtTransactionAmount.setText(value.limitMaxTrnAmt.toString())
     }
 }
 

@@ -5,6 +5,7 @@ import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.config.*
 import com.datasoft.abs.data.dto.createAccount.general.CustomerDataResponse
+import com.datasoft.abs.data.dto.createAccount.introducer.IntroducerInfo
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerResponse
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
@@ -68,8 +69,11 @@ interface RestApiService {
     suspend fun getAccountConfig() : Response<AccountConfigResponse>
 
     @GET("api/tp-config")
-    suspend fun getTransactionProfileConfig() : Response<List<TransactionProfileConfig>>
+    suspend fun getTransactionProfileConfig(@Query("productId") productID: Int) : Response<TransactionProfileConfig>
 
     @GET("api/customer-details-list")
     suspend fun getCustomerData(@Query("custId") customerID: String) : Response<CustomerDataResponse>
+
+    @GET("api/introduce-acc-info")
+    suspend fun getIntroducerData(@Query("accountNo") accountNo: String) : Response<IntroducerInfo>
 }

@@ -21,10 +21,117 @@
             android:text="@string/no_content_available"
             android:textColor="@color/customer_text"
             android:textSize="@dimen/font_24x"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/btn_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8x"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/txt_view_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/space_8x"
+                android:layout_marginEnd="@dimen/space_5x"
+                android:layout_weight="1"
+                android:background="@color/shimmer_background_color"
+                android:fontFamily="@font/oxygen_bold"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/space_5x"
+                android:paddingEnd="@dimen/space_5x"
+                android:text="@string/transaction_type"
+                android:textColor="@color/customer_text"
+                android:textSize="@dimen/font_16x" />
+
+
+            <TextView
+                android:id="@+id/ed_txt_daily_transaction"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/space_5x"
+                android:layout_weight="1"
+                android:background="@color/shimmer_background_color"
+                android:fontFamily="@font/oxygen_bold"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/space_5x"
+                android:paddingEnd="@dimen/space_5x"
+                android:text="@string/daily_transaction"
+                android:textColor="@color/customer_text"
+                android:textSize="@dimen/font_16x" />
+
+            <TextView
+                android:id="@+id/ed_txt_daily_amount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/space_5x"
+                android:layout_weight="1"
+                android:background="@color/shimmer_background_color"
+                android:fontFamily="@font/oxygen_bold"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/space_5x"
+                android:paddingEnd="@dimen/space_5x"
+                android:text="@string/daily_amount"
+                android:textColor="@color/customer_text"
+                android:textSize="@dimen/font_16x" />
+
+            <TextView
+                android:id="@+id/ed_txt_monthly_transaction"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/space_5x"
+                android:layout_weight="1"
+                android:background="@color/shimmer_background_color"
+                android:fontFamily="@font/oxygen_bold"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/space_5x"
+                android:paddingEnd="@dimen/space_5x"
+                android:text="@string/monthly_transaction"
+                android:textColor="@color/customer_text"
+                android:textSize="@dimen/font_16x" />
+
+            <TextView
+                android:id="@+id/ed_txt_monthly_amount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/space_5x"
+                android:layout_weight="1"
+                android:background="@color/shimmer_background_color"
+                android:fontFamily="@font/oxygen_bold"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/space_5x"
+                android:paddingEnd="@dimen/space_5x"
+                android:text="@string/monthly_amount"
+                android:textColor="@color/customer_text"
+                android:textSize="@dimen/font_16x" />
+
+            <TextView
+                android:id="@+id/ed_txt_transaction_amount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/space_8x"
+                android:layout_weight="1"
+                android:background="@color/shimmer_background_color"
+                android:fontFamily="@font/oxygen_bold"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/space_5x"
+                android:paddingEnd="@dimen/space_5x"
+                android:text="@string/transaction_amount"
+                android:textColor="@color/customer_text"
+                android:textSize="@dimen/font_16x" />
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -35,7 +142,7 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_header">
 
         </androidx.recyclerview.widget.RecyclerView>
 

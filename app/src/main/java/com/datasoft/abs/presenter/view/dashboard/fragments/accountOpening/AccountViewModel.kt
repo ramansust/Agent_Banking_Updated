@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.config.AccountConfigResponse
 import com.datasoft.abs.data.dto.config.TransactionProfileConfig
+import com.datasoft.abs.data.dto.createAccount.introducer.IntroducerInfo
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Network
@@ -24,8 +25,8 @@ class AccountViewModel @Inject constructor(
     private val configData = MutableLiveData<Resource<AccountConfigResponse>>()
     fun getConfigData(): LiveData<Resource<AccountConfigResponse>> = configData
 
-    private val transactionProfile = MutableLiveData<Resource<List<TransactionProfileConfig>>>()
-    fun getTransactionProfileData(): LiveData<Resource<List<TransactionProfileConfig>>> =
+    private val transactionProfile = MutableLiveData<Resource<TransactionProfileConfig>>()
+    fun getTransactionProfileData(): LiveData<Resource<TransactionProfileConfig>> =
         transactionProfile
 
     private val currentStep: MutableLiveData<Int> = MutableLiveData()
@@ -55,14 +56,14 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    fun transactionProfileData() {
+    fun transactionProfileData(productID: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
                 try {
-                    val response = repository.getTransactionProfileConfigData()
+                    val response = repository.getTransactionProfileConfigData(productID)
                     transactionProfile.postValue(handleTransactionProfileResponse(response))
                 } catch (e: Exception) {
-                    configData.postValue(
+                    transactionProfile.postValue(
                         Resource.Error(
                             "Something went wrong!", null
                         )
@@ -70,7 +71,7 @@ class AccountViewModel @Inject constructor(
                     e.printStackTrace()
                 }
             } else {
-                configData.postValue(
+                transactionProfile.postValue(
                     Resource.Error(
                         "No internet connection", null
                     )
@@ -94,7 +95,7 @@ class AccountViewModel @Inject constructor(
         return Resource.Error(response.message())
     }
 
-    private fun handleTransactionProfileResponse(response: Response<List<TransactionProfileConfig>>): Resource<List<TransactionProfileConfig>> {
+    private fun handleTransactionProfileResponse(response: Response<TransactionProfileConfig>): Resource<TransactionProfileConfig> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse)
@@ -102,5 +103,4 @@ class AccountViewModel @Inject constructor(
         }
         return Resource.Error(response.message())
     }
-
 }

@@ -1,12 +1,18 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.introducer
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.IntroducerFragmentBinding
+import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,13 +31,63 @@ class IntroducerFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = IntroducerFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getIntroducerData().observe(viewLifecycleOwner, { response ->
+            when(response) {
+
+                is Resource.Success -> {
+                    response.data?.let {
+                        binding.txtViewAccountTitle.text = it.accountTitle
+                        binding.txtViewName.text = it.fullName
+                        binding.txtViewAccountNumber.text = it.accountNumber
+
+                        binding.btnNext.isEnabled = true
+                    }
+                }
+
+                is Resource.Error -> {
+
+                }
+
+                is Resource.Loading -> {
+
+                }
+
+            }
+        })
+
+        accountViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
+
+            val relationList = mutableListOf<CommonModel>()
+
+            when (response) {
+                is Resource.Success -> {
+                    response.data?.let {
+
+                        relationList.addAll(it.relationList)
+                        binding.spinnerRelation.adapter =
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                relationList
+                            )
+                    }
+                }
+                is Resource.Error -> {
+                    response.message?.let { message ->
+                        Log.e("TAG", "An error occurred: $message")
+                    }
+                }
+                is Resource.Loading -> {
+                }
+            }
+        })
 
         binding.btnNext.setOnClickListener {
             accountViewModel.requestCurrentStep(4)
@@ -40,6 +96,18 @@ class IntroducerFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             accountViewModel.requestCurrentStep(2)
         }
+
+        binding.edTxtIntroducer.addTextChangedListener(textWatcher)
+    }
+
+    private val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+
+        override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+            viewModel.introducerData(charSequence.toString())
+        }
+
+        override fun afterTextChanged(editable: Editable) {}
     }
 
     override fun onDestroyView() {

@@ -56,6 +56,7 @@ class GeneralFragment : Fragment() {
         val operatingInstructionList = mutableListOf<CommonModel>()
         val currencyList = mutableListOf<CommonModel>()
         val typeOfAccountList = mutableListOf<ProductConfig>()
+        val accountList = mutableListOf<ProductConfig>()
         val customerNameList = mutableListOf<CommonModel>()
         val sourceOfFundList = mutableListOf<CommonModel>()
 
@@ -80,13 +81,15 @@ class GeneralFragment : Fragment() {
         })
 
         viewModel.getProductID().observe(viewLifecycleOwner, { categoryID ->
+
+            accountList.addAll(typeOfAccountList.filter {
+                it.categoryId == categoryID
+            })
+
             binding.spinnerTypeOfAccount.adapter =
                 ArrayAdapter(
                     requireContext(),
-                    android.R.layout.simple_spinner_item,
-                    typeOfAccountList.filter {
-                        it.categoryId == categoryID
-                    })
+                    android.R.layout.simple_spinner_item, accountList)
         })
 
         accountViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
@@ -183,6 +186,22 @@ class GeneralFragment : Fragment() {
                     id: Long
                 ) {
                     viewModel.customerData(customerNameList[position].id.toString())
+                }
+            }
+
+        binding.spinnerTypeOfAccount.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    accountViewModel.transactionProfileData(accountList[position].id)
                 }
             }
 

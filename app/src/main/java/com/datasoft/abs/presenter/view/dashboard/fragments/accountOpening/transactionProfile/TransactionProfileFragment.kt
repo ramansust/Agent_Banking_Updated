@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.datasoft.abs.data.dto.config.CommonModel
+import com.datasoft.abs.data.dto.config.TpDetail
 import com.datasoft.abs.databinding.TransactionProfileFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
@@ -53,10 +56,29 @@ class TransactionProfileFragment : Fragment() {
         setupRecyclerView()
 
         accountViewModel.getTransactionProfileData().observe(viewLifecycleOwner, { response ->
-            when(response) {
+            when (response) {
                 is Resource.Success -> {
                     response.data?.let {
-                        transactionAdapter.differ.submitList(it)
+
+                        val list = mutableListOf<TpDetail>()
+
+                        for (details in it.tpDetails) {
+                            details.name =
+                                it.transactionProfileList[it.transactionProfileList.indexOf(
+                                    CommonModel(details.transactionProfileName)
+                                )].name + " " + it.transactionCodeList[it.transactionCodeList.indexOf(
+                                    CommonModel(details.code)
+                                )].name
+                            list.add(details)
+                        }
+
+                        transactionAdapter.differ.submitList(list)
+
+                        binding.txtViewNoEntry.isVisible = it.tpDetails.isEmpty()
+                        binding.recyclerView.isVisible = it.tpDetails.isNotEmpty()
+                        binding.linearLayoutHeader.isVisible = it.tpDetails.isNotEmpty()
+
+                        binding.btnNext.isEnabled = it.tpDetails.isNotEmpty()
                     }
                 }
 

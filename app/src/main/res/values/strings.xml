@@ -227,4 +227,11 @@
     <string name="sms_banking">SMS Banking</string>
     <string name="e_statement">e-Statement</string>
     <string name="internet_banking">Internet Banking</string>
+
+    <string name="transaction_type">Transaction Type</string>
+    <string name="daily_transaction">Daily Transaction</string>
+    <string name="daily_amount">Daily Amount</string>
+    <string name="monthly_transaction">Monthly Transaction</string>
+    <string name="monthly_amount">Monthly Amount</string>
+    <string name="transaction_amount">Max. Transaction Amount</string>
 </resources>
