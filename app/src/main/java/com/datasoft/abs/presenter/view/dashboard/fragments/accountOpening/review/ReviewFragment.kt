@@ -41,6 +41,26 @@ class ReviewFragment : Fragment() {
             accountViewModel.requestCurrentStep(4)
         }
 
+        binding.btnAccountEdit.setOnClickListener {
+            accountViewModel.requestCurrentStep(0)
+        }
+
+        binding.btnOthersEdit.setOnClickListener {
+            accountViewModel.requestCurrentStep(1)
+        }
+
+        binding.btnNomineeEdit.setOnClickListener {
+            accountViewModel.requestCurrentStep(2)
+        }
+
+        binding.btnIntroducerEdit.setOnClickListener {
+            accountViewModel.requestCurrentStep(3)
+        }
+
+        binding.btnTransactionProfileEdit.setOnClickListener {
+            accountViewModel.requestCurrentStep(4)
+        }
+
     }
 
     override fun onDestroyView() {

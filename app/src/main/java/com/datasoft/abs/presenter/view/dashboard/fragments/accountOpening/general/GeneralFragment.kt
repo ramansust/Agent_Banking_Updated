@@ -7,17 +7,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.data.dto.config.CommonModel
+import com.datasoft.abs.data.dto.config.ProductConfig
 import com.datasoft.abs.databinding.GeneralAccountFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
-
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class GeneralFragment : Fragment() {
@@ -31,6 +35,9 @@ class GeneralFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
+    @Inject
+    lateinit var customerAdapter: CustomerAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,12 +50,44 @@ class GeneralFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView()
+
         val productCategoryList = mutableListOf<CommonModel>()
         val operatingInstructionList = mutableListOf<CommonModel>()
         val currencyList = mutableListOf<CommonModel>()
-        val typeOfAccountList = mutableListOf<CommonModel>()
+        val typeOfAccountList = mutableListOf<ProductConfig>()
         val customerNameList = mutableListOf<CommonModel>()
         val sourceOfFundList = mutableListOf<CommonModel>()
+
+        viewModel.getCustomerData().observe(viewLifecycleOwner, { response ->
+
+            when (response) {
+                is Resource.Success -> {
+                    response.data?.let {
+                        customerAdapter.differ.submitList(it.customerData)
+                    }
+                }
+
+                is Resource.Error -> {
+                    response.message?.let { message ->
+                        Log.e("TAG", "An error occurred: $message")
+                    }
+                }
+
+                is Resource.Loading -> {
+                }
+            }
+        })
+
+        viewModel.getProductID().observe(viewLifecycleOwner, { categoryID ->
+            binding.spinnerTypeOfAccount.adapter =
+                ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_spinner_item,
+                    typeOfAccountList.filter {
+                        it.categoryId == categoryID
+                    })
+        })
 
         accountViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
@@ -58,27 +97,45 @@ class GeneralFragment : Fragment() {
 
                         productCategoryList.addAll(it.productCategoryList)
                         binding.spinnerProductCategory.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, productCategoryList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                productCategoryList
+                            )
 
                         operatingInstructionList.addAll(it.operationInstructionList)
                         binding.spinnerOperatingInstruction.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, operatingInstructionList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                operatingInstructionList
+                            )
 
                         currencyList.addAll(it.currencyList)
                         binding.spinnerCurrency.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, currencyList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                currencyList
+                            )
 
-                        typeOfAccountList.addAll(it.productCategoryList)
-                        binding.spinnerTypeOfAccount.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, typeOfAccountList)
+                        typeOfAccountList.addAll(it.productConfig)
 
                         customerNameList.addAll(it.customerList)
                         binding.spinnerCustomerName.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, customerNameList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                customerNameList
+                            )
 
                         sourceOfFundList.addAll(it.sourceOfFundList)
                         binding.spinnerSourceOfFund.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, sourceOfFundList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                sourceOfFundList
+                            )
                     }
                 }
                 is Resource.Error -> {
@@ -96,6 +153,38 @@ class GeneralFragment : Fragment() {
 
             }
         })
+
+        binding.spinnerProductCategory.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    viewModel.setProductID(productCategoryList[position].id)
+                }
+            }
+
+        binding.spinnerCustomerName.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    viewModel.customerData(customerNameList[position].id.toString())
+                }
+            }
 
         binding.edTxtOpeningDate.setOnClickListener {
             DatePickerDialog(
@@ -121,6 +210,14 @@ class GeneralFragment : Fragment() {
         val myFormat = "MM-dd-yyyy" //In which you need put here
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         binding.edTxtOpeningDate.setText(sdf.format(myCalendar.time))
+    }
+
+    private fun setupRecyclerView() {
+        binding.recyclerView.apply {
+            adapter = customerAdapter
+            layoutManager = LinearLayoutManager(activity)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        }
     }
 
     override fun onDestroyView() {

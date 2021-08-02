@@ -60,7 +60,8 @@
                     android:id="@+id/txt_view_account_title"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
                     android:fontFamily="@font/oxygen_regular"
                     android:textSize="@dimen/font_16x" />
 
@@ -76,7 +77,8 @@
                     android:id="@+id/txt_view_name"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
                     android:fontFamily="@font/oxygen_regular"
                     android:textSize="@dimen/font_16x" />
 
@@ -120,7 +122,8 @@
                     android:id="@+id/txt_view_account_number"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
                     android:fontFamily="@font/oxygen_regular"
                     android:textSize="@dimen/font_16x" />
 

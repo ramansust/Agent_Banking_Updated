@@ -1,6 +1,5 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.others
 
-import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,30 +14,48 @@ class OthersViewModel @Inject constructor(
 
 ): ViewModel() {
 
-    private val savedPhoto = MutableLiveData<Bitmap>()
-    fun getSavedPhoto(): LiveData<Bitmap> = savedPhoto
+    private val chequeBook = MutableLiveData<Boolean>()
+    fun getChequeBook(): LiveData<Boolean> = chequeBook
 
-    private val savedNIDFront = MutableLiveData<Bitmap>()
-    fun getSavedNIDFront(): LiveData<Bitmap> = savedNIDFront
+    private val smsBanking = MutableLiveData<Boolean>()
+    fun getSMSBanking(): LiveData<Boolean> = smsBanking
 
-    private val savedNIDBack = MutableLiveData<Bitmap>()
-    fun getSavedNIDBack(): LiveData<Bitmap> = savedNIDBack
+    private val debitCard = MutableLiveData<Boolean>()
+    fun getDebitCard(): LiveData<Boolean> = debitCard
 
-    fun setPhoto(bitmap: Bitmap) {
+    private val eStatement = MutableLiveData<Boolean>()
+    fun getEStatement(): LiveData<Boolean> = eStatement
+
+    private val internetBanking = MutableLiveData<Boolean>()
+    fun getInternetBanking(): LiveData<Boolean> = internetBanking
+
+    fun setChequeBook(value: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
-            savedPhoto.postValue(bitmap)
+            chequeBook.postValue(value)
         }
     }
 
-    fun setNIDFront(bitmap: Bitmap) {
+    fun setSMSBanking(value: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
-            savedNIDFront.postValue(bitmap)
+            smsBanking.postValue(value)
         }
     }
 
-    fun setNIDBack(bitmap: Bitmap) {
+    fun setDebitCard(value: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
-            savedNIDBack.postValue(bitmap)
+            debitCard.postValue(value)
+        }
+    }
+
+    fun setEStatement(value: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eStatement.postValue(value)
+        }
+    }
+
+    fun setInternetBanking(value: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            internetBanking.postValue(value)
         }
     }
 }

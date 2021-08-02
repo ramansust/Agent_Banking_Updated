@@ -57,7 +57,7 @@
     <string name="eight">8.</string>
 
     <string name="account_information">Account Information</string>
-    <string name="others_customer">Others Facilities and Customer Information</string>
+    <string name="others_customer">Others Facilities</string>
     <string name="introducer">Introducer</string>
     <string name="introducer_">Introducer*</string>
     <string name="transaction_profile">Transaction Profile</string>
@@ -216,4 +216,15 @@
     <string name="customer_name_">Customer Name*</string>
     <string name="opening_date_">Opening Date*</string>
     <string name="source_fund_">Source(s) of Fund*</string>
+
+    <string name="other_facilities">Other Facilities</string>
+    <string name="customer_info">Customer Information</string>
+    <string name="signatory">Signatory</string>
+    <string name="mandatory">Mandatory</string>
+
+    <string name="cheque_book">Cheque Book</string>
+    <string name="debit_card">Debit Card</string>
+    <string name="sms_banking">SMS Banking</string>
+    <string name="e_statement">e-Statement</string>
+    <string name="internet_banking">Internet Banking</string>
 </resources>
