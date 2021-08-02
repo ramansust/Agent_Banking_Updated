@@ -58,9 +58,10 @@
                 android:text="@string/cheque_book"
                 android:textColor="@color/customer_text"
                 android:textSize="@dimen/font_20x"
+                app:layout_constraintBottom_toBottomOf="@+id/switch_cheque_book"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/switch_cheque_book" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_cheque_book"
@@ -73,11 +74,11 @@
                 android:id="@+id/txt_view_sms_banking"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_8x"
                 android:fontFamily="@font/oxygen_regular"
                 android:text="@string/sms_banking"
                 android:textColor="@color/customer_text"
                 android:textSize="@dimen/font_20x"
+                app:layout_constraintBottom_toBottomOf="@+id/switch_sms_banking"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/switch_sms_banking" />
@@ -95,11 +96,11 @@
                 android:id="@+id/txt_view_debit_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_8x"
                 android:fontFamily="@font/oxygen_regular"
                 android:text="@string/debit_card"
                 android:textColor="@color/customer_text"
                 android:textSize="@dimen/font_20x"
+                app:layout_constraintBottom_toBottomOf="@+id/switch_debit_card"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/switch_debit_card" />
@@ -116,11 +117,11 @@
                 android:id="@+id/txt_view_e_statement"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_8x"
                 android:fontFamily="@font/oxygen_regular"
                 android:text="@string/e_statement"
                 android:textColor="@color/customer_text"
                 android:textSize="@dimen/font_20x"
+                app:layout_constraintBottom_toBottomOf="@+id/switch_e_statement"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/switch_e_statement" />
@@ -137,11 +138,11 @@
                 android:id="@+id/txt_view_internet_banking"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_8x"
                 android:fontFamily="@font/oxygen_regular"
                 android:text="@string/internet_banking"
                 android:textColor="@color/customer_text"
                 android:textSize="@dimen/font_20x"
+                app:layout_constraintBottom_toBottomOf="@+id/switch_internet_banking"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/switch_internet_banking" />
