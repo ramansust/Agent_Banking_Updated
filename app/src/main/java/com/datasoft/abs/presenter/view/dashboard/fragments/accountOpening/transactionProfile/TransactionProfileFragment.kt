@@ -101,6 +101,7 @@ class TransactionProfileFragment : Fragment() {
             adapter = transactionAdapter
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+//            (this.layoutManager as LinearLayoutManager).stackFromEnd = true
         }
     }
 

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -34,6 +35,7 @@ class GeneralFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+    private var isClicked = false
 
     @Inject
     lateinit var customerAdapter: CustomerAdapter
@@ -85,6 +87,8 @@ class GeneralFragment : Fragment() {
 
         viewModel.getProductID().observe(viewLifecycleOwner, { categoryID ->
 
+            accountList.clear()
+
             accountList.addAll(typeOfAccountList.filter {
                 it.categoryId == categoryID
             })
@@ -92,7 +96,8 @@ class GeneralFragment : Fragment() {
             binding.spinnerTypeOfAccount.adapter =
                 ArrayAdapter(
                     requireContext(),
-                    android.R.layout.simple_spinner_item, accountList)
+                    android.R.layout.simple_spinner_item, accountList
+                )
         })
 
         accountViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
@@ -154,8 +159,60 @@ class GeneralFragment : Fragment() {
             }
         })
 
-        viewModel.getSavedData().observe(viewLifecycleOwner, { response ->
-            with(binding) {
+        viewModel.getAccountInfo().observe(viewLifecycleOwner, { response ->
+            when (response) {
+
+                is Resource.Success -> {
+                    response.data?.let {
+
+                        if (productCategoryList.isNotEmpty()) binding.spinnerProductCategory.setSelection(
+                            productCategoryList.indexOf(
+                                CommonModel(it.categoryId)
+                            )
+                        )
+
+                        if (accountList.isNotEmpty()) binding.spinnerTypeOfAccount.setSelection(
+                            accountList.indexOf(
+                                ProductConfig(id = it.accountId)
+                            )
+                        )
+
+                        if (operatingInstructionList.isNotEmpty()) binding.spinnerOperatingInstruction.setSelection(
+                            operatingInstructionList.indexOf(
+                                CommonModel(it.operatingId)
+                            )
+                        )
+
+                        if (sourceOfFundList.isNotEmpty()) binding.spinnerSourceOfFund.setSelection(
+                            sourceOfFundList.indexOf(
+                                CommonModel(it.fundId)
+                            )
+                        )
+
+                        if (currencyList.isNotEmpty()) binding.spinnerCurrency.setSelection(
+                            currencyList.indexOf(
+                                CommonModel(it.currencyId)
+                            )
+                        )
+
+                        binding.edTxtAccountTitle.setText(it.accountTitle)
+                        binding.edTxtOpeningDate.setText(it.openingDate)
+                        binding.edTxtInitialAmount.setText(it.initialAmount.toString())
+
+                        if(isClicked)
+                            accountViewModel.requestCurrentStep(1)
+                    }
+                }
+
+                is Resource.Error -> {
+                    response.message?.let { message ->
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                is Resource.Loading -> {
+
+                }
 
             }
         })
@@ -217,7 +274,19 @@ class GeneralFragment : Fragment() {
         }
 
         binding.btnNext.setOnClickListener {
-            accountViewModel.requestCurrentStep(1)
+            isClicked = true
+
+            viewModel.setAccountInfo(
+                if (productCategoryList.isNotEmpty()) productCategoryList[binding.spinnerProductCategory.selectedItemPosition].id else 0,
+                if (accountList.isNotEmpty()) accountList[binding.spinnerTypeOfAccount.selectedItemPosition].id else 0,
+                if (operatingInstructionList.isNotEmpty()) operatingInstructionList[binding.spinnerOperatingInstruction.selectedItemPosition].id else 0,
+                if (customerNameList.isNotEmpty()) customerNameList[binding.spinnerCustomerName.selectedItemPosition].id.toString() else "",
+                binding.edTxtAccountTitle.text.trim().toString(),
+                binding.edTxtOpeningDate.text.trim().toString(),
+                if (currencyList.isNotEmpty()) currencyList[binding.spinnerCurrency.selectedItemPosition].id else 0,
+                if (sourceOfFundList.isNotEmpty()) sourceOfFundList[binding.spinnerSourceOfFund.selectedItemPosition].id else 0,
+                if(binding.edTxtInitialAmount.text.trim().toString().isNotEmpty()) binding.edTxtInitialAmount.text.trim().toString().toInt() else 0
+            )
         }
     }
 

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.datasoft.abs.data.dto.createAccount.general.AccountInfo
 import com.datasoft.abs.data.dto.createAccount.general.CustomerDataResponse
-import com.datasoft.abs.data.dto.dedupecheck.SaveData
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Network
@@ -24,8 +24,8 @@ class GeneralViewModel @Inject constructor(
     private val customerData = MutableLiveData<Resource<CustomerDataResponse>>()
     fun getCustomerData(): LiveData<Resource<CustomerDataResponse>> = customerData
 
-    private val savedData = MutableLiveData<SaveData>()
-    fun getSavedData(): LiveData<SaveData> = savedData
+    private val accountInfo = MutableLiveData<Resource<AccountInfo>>()
+    fun getAccountInfo(): LiveData<Resource<AccountInfo>> = accountInfo
 
     private val productID = MutableLiveData<Int>()
     fun getProductID(): LiveData<Int> = productID
@@ -64,6 +64,49 @@ class GeneralViewModel @Inject constructor(
                     )
                 )
             }
+        }
+    }
+
+    fun setAccountInfo(
+        categoryId: Int,
+        accountId: Int,
+        operatingId: Int,
+        customerId: String,
+        accountTitle: String,
+        openingDate: String,
+        currencyId: Int,
+        fundId: Int,
+        initialAmount: Int
+    ) {
+
+        viewModelScope.launch(Dispatchers.IO) {
+
+            accountInfo.postValue(Resource.Loading())
+
+            if (accountTitle.isEmpty() || openingDate.isEmpty() || initialAmount == 0) {
+                accountInfo.postValue(
+                    Resource.Error(
+                        "The fields must not be empty", null
+                    )
+                )
+                return@launch
+            }
+
+            accountInfo.postValue(
+                Resource.Success(
+                    AccountInfo(
+                        categoryId,
+                        accountId,
+                        operatingId,
+                        customerId,
+                        accountTitle,
+                        openingDate,
+                        currencyId,
+                        fundId,
+                        initialAmount
+                    )
+                )
+            )
         }
     }
 

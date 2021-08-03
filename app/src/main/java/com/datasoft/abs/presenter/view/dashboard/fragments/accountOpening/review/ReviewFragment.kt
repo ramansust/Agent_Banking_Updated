@@ -12,12 +12,16 @@ import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
 import com.datasoft.abs.databinding.FragmentAccountReviewBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
+import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.general.GeneralViewModel
+import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.others.OthersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ReviewFragment : Fragment() {
 
     private val accountViewModel: AccountViewModel by activityViewModels()
+    private val generalViewModel: GeneralViewModel by activityViewModels()
+    private val othersViewModel: OthersViewModel by activityViewModels()
     private val viewModel: ReviewViewModel by activityViewModels()
     private var _binding: FragmentAccountReviewBinding? = null
 
@@ -41,6 +45,44 @@ class ReviewFragment : Fragment() {
 
         accountViewModel.requestVisibility(false)
         accountViewModel.requestListener(false)
+
+        generalViewModel.getAccountInfo().observe(viewLifecycleOwner, { response ->
+            when(response) {
+                is Resource.Success -> {
+                    response.data?.let {
+
+                    }
+                }
+
+                is Resource.Error -> {
+
+                }
+
+                is Resource.Loading -> {
+
+                }
+            }
+        })
+
+        othersViewModel.getChequeBook().observe(viewLifecycleOwner, {
+
+        })
+
+        othersViewModel.getSMSBanking().observe(viewLifecycleOwner, {
+
+        })
+
+        othersViewModel.getDebitCard().observe(viewLifecycleOwner, {
+
+        })
+
+        othersViewModel.getEStatement().observe(viewLifecycleOwner, {
+
+        })
+
+        othersViewModel.getInternetBanking().observe(viewLifecycleOwner, {
+
+        })
 
         binding.btnNext.setOnClickListener {
             viewModel.createAccount(createAccountRequest)

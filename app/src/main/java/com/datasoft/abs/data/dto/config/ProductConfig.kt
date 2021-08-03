@@ -1,9 +1,9 @@
 package com.datasoft.abs.data.dto.config
 
 data class ProductConfig(
-    val categoryId: Int,
+    val categoryId: Int = 0,
     val id: Int,
-    val name: String
+    val name: String = ""
 ) {
     override fun toString(): String {
         return name
