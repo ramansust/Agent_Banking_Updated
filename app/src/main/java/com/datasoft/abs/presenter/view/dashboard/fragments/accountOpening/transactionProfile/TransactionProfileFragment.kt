@@ -53,6 +53,9 @@ class TransactionProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        accountViewModel.requestVisibility(false)
+        accountViewModel.requestListener(false)
+
         setupRecyclerView()
 
         accountViewModel.getTransactionProfileData().observe(viewLifecycleOwner, { response ->

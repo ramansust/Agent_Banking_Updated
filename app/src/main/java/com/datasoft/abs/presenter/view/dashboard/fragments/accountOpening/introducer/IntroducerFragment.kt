@@ -38,6 +38,9 @@ class IntroducerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        accountViewModel.requestVisibility(false)
+        accountViewModel.requestListener(false)
+
         viewModel.getIntroducerData().observe(viewLifecycleOwner, { response ->
             when(response) {
 

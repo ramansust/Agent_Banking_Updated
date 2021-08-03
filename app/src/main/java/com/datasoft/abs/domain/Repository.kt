@@ -7,6 +7,8 @@ import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.config.*
 import com.datasoft.abs.data.dto.createAccount.general.CustomerDataResponse
 import com.datasoft.abs.data.dto.createAccount.introducer.IntroducerInfo
+import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
+import com.datasoft.abs.data.dto.createAccount.review.CreateAccountResponse
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerResponse
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
@@ -43,6 +45,7 @@ interface Repository {
     suspend fun getTransactionProfileConfigData(productID: Int): Response<TransactionProfileConfig>
     suspend fun getCustomerData(customerID: String): Response<CustomerDataResponse>
     suspend fun getIntroducerData(accountNo: String): Response<IntroducerInfo>
+    suspend fun createAccountData(createAccountRequest: CreateAccountRequest): Response<CreateAccountResponse>
 
     suspend fun insert(generalInfo: GeneralInfo)
     fun getAll(): LiveData<List<GeneralInfo>>

@@ -51,7 +51,7 @@
                     android:contentDescription="@string/todo"
                     android:text="@string/add"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/font_16x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

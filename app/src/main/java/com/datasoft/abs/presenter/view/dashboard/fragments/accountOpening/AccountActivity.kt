@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -20,6 +21,14 @@ class AccountActivity : BaseActivity() {
     private var navController: NavController? = null
 
     override fun observeViewModel() {
+
+        accountViewModel.getAddVisibility().observe(this, {
+            if (it)
+                showAddButton()
+            else
+                hideAddButton()
+        })
+
         accountViewModel.getCurrentStep().observe(this, {
             when (it) {
                 0 -> {
@@ -40,7 +49,10 @@ class AccountActivity : BaseActivity() {
                 }
                 4 -> {
                     navController?.navigate(R.id.card_view_transaction_profile)
-                    setResource(binding.appBarAccount.accountContent.transactionProfile.cardView, null)
+                    setResource(
+                        binding.appBarAccount.accountContent.transactionProfile.cardView,
+                        null
+                    )
                 }
                 5 -> {
                     navController?.navigate(R.id.card_view_review)
@@ -144,7 +156,11 @@ class AccountActivity : BaseActivity() {
         }
 
         binding.appBarAccount.btnCross.setOnClickListener {
-            finish()
+            showConfirmation()
+        }
+
+        binding.appBarAccount.btnSave.setOnClickListener {
+            accountViewModel.requestListener(true)
         }
 
         setTitle()
@@ -201,6 +217,33 @@ class AccountActivity : BaseActivity() {
             img.visibility = View.INVISIBLE
             cardView.setBackgroundColor(getColor(R.color.purple_200))
         }
+    }
+
+    private fun showAddButton() {
+        binding.appBarAccount.btnSave.visibility = View.VISIBLE
+    }
+
+    private fun hideAddButton() {
+        binding.appBarAccount.btnSave.visibility = View.INVISIBLE
+    }
+
+    override fun onBackPressed() {
+        showConfirmation()
+    }
+
+    private fun showConfirmation() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(resources.getString(R.string.alert))
+        builder.setMessage(resources.getString(R.string.confirmation_message))
+        builder.setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
+            dialog.dismiss()
+            finish()
+        }
+        builder.setNegativeButton(resources.getString(R.string.no)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     override fun onSaveInstanceState(oldInstanceState: Bundle) {

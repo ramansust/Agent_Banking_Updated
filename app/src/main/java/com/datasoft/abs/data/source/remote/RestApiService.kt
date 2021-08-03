@@ -6,6 +6,8 @@ import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.config.*
 import com.datasoft.abs.data.dto.createAccount.general.CustomerDataResponse
 import com.datasoft.abs.data.dto.createAccount.introducer.IntroducerInfo
+import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
+import com.datasoft.abs.data.dto.createAccount.review.CreateAccountResponse
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerRequest
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerResponse
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
@@ -76,4 +78,7 @@ interface RestApiService {
 
     @GET("api/introduce-acc-info")
     suspend fun getIntroducerData(@Query("accountNo") accountNo: String) : Response<IntroducerInfo>
+
+    @POST("api/create-account")
+    suspend fun createAccountData(@Body createAccountRequest: CreateAccountRequest): Response<CreateAccountResponse>
 }

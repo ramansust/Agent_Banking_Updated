@@ -43,6 +43,9 @@ class OthersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        accountViewModel.requestVisibility(false)
+        accountViewModel.requestListener(false)
+
         viewModel.getChequeBook().observe(viewLifecycleOwner, {
             binding.switchChequeBook.isChecked = it
         })

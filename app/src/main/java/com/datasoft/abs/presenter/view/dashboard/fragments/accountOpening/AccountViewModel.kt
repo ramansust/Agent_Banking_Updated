@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.config.AccountConfigResponse
 import com.datasoft.abs.data.dto.config.TransactionProfileConfig
-import com.datasoft.abs.data.dto.createAccount.introducer.IntroducerInfo
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Network
@@ -21,6 +20,12 @@ class AccountViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network
 ) : ViewModel() {
+
+    private val addListener: MutableLiveData<Boolean> = MutableLiveData()
+    fun getAddListener(): LiveData<Boolean> = addListener
+
+    private val addVisibility: MutableLiveData<Boolean> = MutableLiveData()
+    fun getAddVisibility(): LiveData<Boolean> = addVisibility
 
     private val configData = MutableLiveData<Resource<AccountConfigResponse>>()
     fun getConfigData(): LiveData<Resource<AccountConfigResponse>> = configData
@@ -102,5 +107,17 @@ class AccountViewModel @Inject constructor(
             }
         }
         return Resource.Error(response.message())
+    }
+
+    fun requestListener(value: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            addListener.postValue(value)
+        }
+    }
+
+    fun requestVisibility(value: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            addVisibility.postValue(value)
+        }
     }
 }

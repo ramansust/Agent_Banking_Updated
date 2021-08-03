@@ -1,12 +1,16 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.review
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
 import com.datasoft.abs.databinding.FragmentAccountReviewBinding
+import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,6 +23,8 @@ class ReviewFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+
+    private val createAccountRequest = CreateAccountRequest()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,8 +39,11 @@ class ReviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnNext.setOnClickListener {
+        accountViewModel.requestVisibility(false)
+        accountViewModel.requestListener(false)
 
+        binding.btnNext.setOnClickListener {
+            viewModel.createAccount(createAccountRequest)
         }
 
         binding.btnBack.setOnClickListener {
@@ -61,6 +70,37 @@ class ReviewFragment : Fragment() {
             accountViewModel.requestCurrentStep(4)
         }
 
+        viewModel.getCreateAccountData().observe(viewLifecycleOwner, { response ->
+
+            when(response) {
+                is Resource.Success -> {
+                    goneProgressBar()
+                    response.data?.let {
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                is Resource.Error -> {
+                    goneProgressBar()
+                    response.message?.let { message ->
+                        Log.e("TAG", "An error occurred: $message")
+                    }
+                }
+
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
+        })
+
+    }
+
+    private fun goneProgressBar() {
+        binding.loaderView.visibility = View.GONE
+    }
+
+    private fun showProgressBar() {
+        binding.loaderView.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {

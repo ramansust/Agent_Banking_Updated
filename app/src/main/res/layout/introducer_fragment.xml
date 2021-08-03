@@ -62,6 +62,8 @@
                     android:layout_marginTop="@dimen/space_8x"
                     android:background="@drawable/input_border"
                     android:fontFamily="@font/oxygen_regular"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/space_8x"
                     android:textSize="@dimen/font_16x" />
 
                 <TextView
@@ -79,6 +81,8 @@
                     android:layout_marginTop="@dimen/space_8x"
                     android:background="@drawable/input_border"
                     android:fontFamily="@font/oxygen_regular"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/space_8x"
                     android:textSize="@dimen/font_16x" />
 
             </LinearLayout>
@@ -122,6 +126,8 @@
                     android:layout_marginTop="@dimen/space_8x"
                     android:background="@drawable/input_border"
                     android:fontFamily="@font/oxygen_regular"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/space_8x"
                     android:textSize="@dimen/font_16x" />
 
             </LinearLayout>

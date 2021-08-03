@@ -50,6 +50,9 @@ class GeneralFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        accountViewModel.requestVisibility(false)
+        accountViewModel.requestListener(false)
+
         setupRecyclerView()
 
         val productCategoryList = mutableListOf<CommonModel>()
