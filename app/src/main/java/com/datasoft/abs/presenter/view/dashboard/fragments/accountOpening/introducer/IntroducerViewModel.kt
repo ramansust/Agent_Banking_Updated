@@ -24,6 +24,9 @@ class IntroducerViewModel @Inject constructor(
     fun getIntroducerData(): LiveData<Resource<IntroducerInfo>> =
         introducer
 
+    private val relationId = MutableLiveData<Int>()
+    fun getRelationId(): LiveData<Int> = relationId
+
     fun introducerData(accountNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
@@ -55,5 +58,11 @@ class IntroducerViewModel @Inject constructor(
             }
         }
         return Resource.Error(response.message())
+    }
+
+    fun setRelationId(value: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            relationId.postValue(value)
+        }
     }
 }

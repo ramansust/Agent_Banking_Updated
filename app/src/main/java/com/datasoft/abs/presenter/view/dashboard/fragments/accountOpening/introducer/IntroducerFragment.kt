@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -65,9 +66,9 @@ class IntroducerFragment : Fragment() {
             }
         })
 
-        accountViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
+        val relationList = mutableListOf<CommonModel>()
 
-            val relationList = mutableListOf<CommonModel>()
+        accountViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
             when (response) {
                 is Resource.Success -> {
@@ -99,6 +100,22 @@ class IntroducerFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             accountViewModel.requestCurrentStep(2)
         }
+
+        binding.spinnerRelation.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    viewModel.setRelationId(relationList[position].id)
+                }
+            }
 
         binding.edTxtIntroducer.addTextChangedListener(textWatcher)
     }

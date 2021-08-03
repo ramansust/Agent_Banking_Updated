@@ -58,28 +58,29 @@ class TransactionProfileFragment : Fragment() {
 
         setupRecyclerView()
 
+        val list = mutableListOf<TpDetail>()
+
         accountViewModel.getTransactionProfileData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     response.data?.let {
 
-                        val list = mutableListOf<TpDetail>()
-
                         for (details in it.tpDetails) {
-                            details.name =
+                            details.profileName =
                                 it.transactionProfileList[it.transactionProfileList.indexOf(
                                     CommonModel(details.transactionProfileName)
-                                )].name + " " + it.transactionCodeList[it.transactionCodeList.indexOf(
-                                    CommonModel(details.code)
                                 )].name
+                            details.codeName = it.transactionCodeList[it.transactionCodeList.indexOf(
+                                CommonModel(details.code)
+                            )].name
                             list.add(details)
                         }
 
                         transactionAdapter.differ.submitList(list)
+                        viewModel.setTransactionProfile(list)
 
                         binding.txtViewNoEntry.isVisible = it.tpDetails.isEmpty()
-                        binding.recyclerView.isVisible = it.tpDetails.isNotEmpty()
-                        binding.linearLayoutHeader.isVisible = it.tpDetails.isNotEmpty()
+                        binding.scrollView.isVisible = it.tpDetails.isNotEmpty()
 
                         binding.btnNext.isEnabled = it.tpDetails.isNotEmpty()
                     }
@@ -94,6 +95,32 @@ class TransactionProfileFragment : Fragment() {
                 }
             }
         })
+
+        transactionAdapter.setOnTextChangeListener { i, i2, i3 ->
+            when(i3) {
+                0 -> {
+                    list[i].limitNoOfDailyTrn = i2
+                }
+
+                1 -> {
+                    list[i].limitDailyTrnAmt = i2
+                }
+
+                2 -> {
+                    list[i].limitNoOfMonthlyTrn = i2
+                }
+
+                3 -> {
+                    list[i].limitMonthlyTrnAmt = i2
+                }
+
+                4 -> {
+                    list[i].limitMaxTrnAmt = i2
+                }
+            }
+
+            viewModel.setTransactionProfile(list)
+        }
     }
 
     private fun setupRecyclerView() {
@@ -101,7 +128,6 @@ class TransactionProfileFragment : Fragment() {
             adapter = transactionAdapter
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-//            (this.layoutManager as LinearLayoutManager).stackFromEnd = true
         }
     }
 

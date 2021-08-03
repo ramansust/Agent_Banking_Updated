@@ -9,11 +9,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
+import com.datasoft.abs.data.dto.createAccount.review.TransactionProfile
 import com.datasoft.abs.databinding.FragmentAccountReviewBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.general.GeneralViewModel
+import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.introducer.IntroducerViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.others.OthersViewModel
+import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.transactionProfile.TransactionProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +25,8 @@ class ReviewFragment : Fragment() {
     private val accountViewModel: AccountViewModel by activityViewModels()
     private val generalViewModel: GeneralViewModel by activityViewModels()
     private val othersViewModel: OthersViewModel by activityViewModels()
+    private val introducerViewModel: IntroducerViewModel by activityViewModels()
+    private val transactionViewModel: TransactionProfileViewModel by activityViewModels()
     private val viewModel: ReviewViewModel by activityViewModels()
     private var _binding: FragmentAccountReviewBinding? = null
 
@@ -47,10 +52,18 @@ class ReviewFragment : Fragment() {
         accountViewModel.requestListener(false)
 
         generalViewModel.getAccountInfo().observe(viewLifecycleOwner, { response ->
-            when(response) {
+            when (response) {
                 is Resource.Success -> {
                     response.data?.let {
-
+                        createAccountRequest.apply {
+                            productId = it.categoryId
+                            customerId = it.accountId
+                            currencyId = it.currencyId
+                            initialAmount = it.initialAmount
+                            accountTitle = it.accountTitle
+                            mandateOfAccOperationId = it.operatingId
+                            natureOfBusinessId = it.fundId
+                        }
                     }
                 }
 
@@ -65,23 +78,66 @@ class ReviewFragment : Fragment() {
         })
 
         othersViewModel.getChequeBook().observe(viewLifecycleOwner, {
-
+            createAccountRequest.isChequeBookEnable = it
         })
 
         othersViewModel.getSMSBanking().observe(viewLifecycleOwner, {
-
+            createAccountRequest.isSmsBankingEnable = it
         })
 
         othersViewModel.getDebitCard().observe(viewLifecycleOwner, {
-
+            createAccountRequest.isDebitCardEnable = it
         })
 
         othersViewModel.getEStatement().observe(viewLifecycleOwner, {
-
+            createAccountRequest.isEStatementEnable = it
         })
 
         othersViewModel.getInternetBanking().observe(viewLifecycleOwner, {
+            createAccountRequest.isInternetBankingEnable = it
+        })
 
+        introducerViewModel.getIntroducerData().observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is Resource.Success -> {
+                    response.data?.let {
+                        createAccountRequest.introducerId = 0
+                    }
+                }
+
+                is Resource.Error -> {
+
+                }
+
+                is Resource.Loading -> {
+
+                }
+            }
+        })
+
+        introducerViewModel.getRelationId().observe(viewLifecycleOwner, {
+            createAccountRequest.relationWithIntroducer = it
+        })
+
+        transactionViewModel.getTransactionProfile().observe(viewLifecycleOwner, {
+            val list = mutableListOf<TransactionProfile>()
+
+            for (details in it) {
+                list.add(
+                    TransactionProfile(
+                        details.codeName,
+                        details.limitDailyTrnAmt,
+                        details.limitMaxTrnAmt,
+                        details.limitMonthlyTrnAmt,
+                        details.limitNoOfDailyTrn,
+                        details.limitNoOfMonthlyTrn,
+                        details.transactionProfileTypeId,
+                        details.profileName
+                    )
+                )
+            }
+
+            createAccountRequest.transactionProfile = list
         })
 
         binding.btnNext.setOnClickListener {
@@ -114,7 +170,7 @@ class ReviewFragment : Fragment() {
 
         viewModel.getCreateAccountData().observe(viewLifecycleOwner, { response ->
 
-            when(response) {
+            when (response) {
                 is Resource.Success -> {
                     goneProgressBar()
                     response.data?.let {
