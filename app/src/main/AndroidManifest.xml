@@ -70,7 +70,7 @@
             android:label="@string/activity_account"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AgentBanking.NoActionBar"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
