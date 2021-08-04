@@ -9,5 +9,6 @@ data class AccountConfigResponse(
     val productConfig: List<ProductConfig>,
     val relatedDocTypeList: List<CommonModel>,
     val relationList: List<CommonModel>,
-    val sourceOfFundList: List<CommonModel>
+    val sourceOfFundList: List<CommonModel>,
+    val occupationList: List<CommonModel>
 )

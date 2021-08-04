@@ -1,5 +1,7 @@
 package com.datasoft.abs.data.dto.createAccount.review
 
+import java.io.Serializable
+
 data class Nominee(
     val birthDate: String,
     val contactAddress: String,
@@ -26,4 +28,4 @@ data class Nominee(
     val relationship: Int,
     val shareOfPercentage: Int,
     val signaturePhoto: String
-)
+): Serializable

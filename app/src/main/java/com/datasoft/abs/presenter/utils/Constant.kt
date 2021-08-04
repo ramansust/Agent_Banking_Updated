@@ -9,6 +9,7 @@ object Constant {
     const val PER_PAGE_ITEM = 100
     const val USER_NAME = "USER_NAME"
     const val ADDRESS_INFO = "ADDRESS_INFO"
+    const val NOMINEE_INFO = "NOMINEE_INFO"
     const val DOCUMENT_INFO = "DOCUMENT_INFO"
     const val SIGNATURE_INFO = "SIGNATURE_INFO"
     const val ADULT_AGE = 18

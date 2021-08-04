@@ -76,6 +76,7 @@
     <string name="back">Back</string>
     <string name="next">Next</string>
     <string name="full_name">Full Name</string>
+    <string name="full_name_">Full Name*</string>
     <string name="date_of_birth_">Date of Birth</string>
     <string name="date_of_birth">Date of Birth*</string>
     <string name="mobile_number_">Mobile Number</string>
@@ -234,4 +235,13 @@
     <string name="monthly_transaction">Monthly Transaction</string>
     <string name="monthly_amount">Monthly Amount</string>
     <string name="transaction_amount">Max. Transaction Amount</string>
+
+    <string name="present_address_">Present Address*</string>
+    <string name="percent_share_">Percent of Share*</string>
+    <string name="id_value_">ID Value*</string>
+    <string name="permanent_address_">Permanent Address*</string>
+    <string name="applicant_">Applicant*</string>
+    <string name="father_spouse_name">Father\'s/Spouse Name*</string>
+    <string name="relation_with_nominee_">Relation with Nominee*</string>
+    <string name="add_nominee">Add Nominee</string>
 </resources>
