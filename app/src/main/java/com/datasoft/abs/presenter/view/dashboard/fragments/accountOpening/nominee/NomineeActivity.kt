@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -13,6 +14,7 @@ import com.datasoft.abs.databinding.NomineeActivityBinding
 import com.datasoft.abs.presenter.base.BaseActivity
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Constant.ADULT_AGE
 import com.datasoft.abs.presenter.utils.Constant.NOMINEE_INFO
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +36,16 @@ class NomineeActivity : BaseActivity() {
 
     override fun observeViewModel() {
 
+        nomineeViewModel.getNomineeAge().observe(this, {
+            if (it < ADULT_AGE) {
+                binding.linearLayoutNominee1.visibility = View.VISIBLE
+                binding.linearLayoutNominee2.visibility = View.VISIBLE
+            } else {
+                binding.linearLayoutNominee1.visibility = View.GONE
+                binding.linearLayoutNominee2.visibility = View.GONE
+            }
+        })
+
         accountViewModel.getConfigData().observe(this, { response ->
             when (response) {
                 is Resource.Success -> {
@@ -43,8 +55,14 @@ class NomineeActivity : BaseActivity() {
                         binding.spinnerRelation.adapter =
                             ArrayAdapter(this, android.R.layout.simple_spinner_item, relationList)
 
+                        binding.spinnerNomineeWithRelation.adapter =
+                            ArrayAdapter(this, android.R.layout.simple_spinner_item, relationList)
+
                         documentList.addAll(it.documentTypeList)
                         binding.spinnerDocumentsType.adapter =
+                            ArrayAdapter(this, android.R.layout.simple_spinner_item, documentList)
+
+                        binding.spinnerNomineeDocType.adapter =
                             ArrayAdapter(this, android.R.layout.simple_spinner_item, documentList)
 
                         occupationList.addAll(it.occupationList)
@@ -124,15 +142,15 @@ class NomineeActivity : BaseActivity() {
                 "",
                 "",
                 "",
-                "",
-                "",
-                "",
-                0,
-                "",
-                "",
-                "",
-                0,
-                "",
+                binding.edTxtNomineeName.text.trim().toString(),
+                binding.edTxtNomineeDob.text.trim().toString(),
+                binding.edTxtNomineePermanentAddress.text.trim().toString(),
+                if (documentList.isNotEmpty()) documentList[binding.spinnerNomineeDocType.selectedItemPosition].id else 0,
+                binding.edTxtNomineeExpiryDate.text.trim().toString(),
+                binding.edTxtNomineeFatherSpouseName.text.trim().toString(),
+                binding.edTxtNomineePresentAddress.text.trim().toString(),
+                if (relationList.isNotEmpty()) relationList[binding.spinnerNomineeWithRelation.selectedItemPosition].id else 0,
+                binding.edTxtNomineeIdValue.text.trim().toString(),
             )
         }
 
@@ -153,6 +171,34 @@ class NomineeActivity : BaseActivity() {
                 myCalendar[Calendar.DAY_OF_MONTH]
             )
             datePicker.datePicker.maxDate = Calendar.getInstance().timeInMillis
+            datePicker.show()
+        }
+
+        binding.edTxtNomineeExpiryDate.setOnClickListener {
+            val datePicker = DatePickerDialog(
+                this, nomineeDateExpiry, myCalendar[Calendar.YEAR],
+                myCalendar[Calendar.MONTH],
+                myCalendar[Calendar.DAY_OF_MONTH]
+            )
+            datePicker.datePicker.minDate = Calendar.getInstance().timeInMillis
+            datePicker.show()
+        }
+
+        binding.edTxtNomineeDob.setOnClickListener {
+            val datePicker = DatePickerDialog(
+                this, nomineeBirhtDate, myCalendar[Calendar.YEAR],
+                myCalendar[Calendar.MONTH],
+                myCalendar[Calendar.DAY_OF_MONTH]
+            )
+
+            val guardianCalender = Calendar.getInstance()
+            guardianCalender.set(
+                guardianCalender[Calendar.YEAR] - ADULT_AGE,
+                guardianCalender[Calendar.MONDAY],
+                guardianCalender[Calendar.DAY_OF_MONTH]
+            )
+
+            datePicker.datePicker.maxDate = guardianCalender.timeInMillis
             datePicker.show()
         }
     }
@@ -181,6 +227,32 @@ class NomineeActivity : BaseActivity() {
         val sdf = SimpleDateFormat(Constant.DATE_FORMAT, Locale.US)
         binding.edTxtDob.setText(sdf.format(myCalendar.time))
         nomineeViewModel.nomineeAge(binding.edTxtDob.text.trim().toString())
+    }
+
+    private var nomineeDateExpiry =
+        DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, monthOfYear)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateNomineeExpiry()
+        }
+
+    private fun updateNomineeExpiry() {
+        val sdf = SimpleDateFormat(Constant.DATE_FORMAT, Locale.US)
+        binding.edTxtNomineeExpiryDate.setText(sdf.format(myCalendar.time))
+    }
+
+    private var nomineeBirhtDate =
+        DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, monthOfYear)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateNomineeBirthDate()
+        }
+
+    private fun updateNomineeBirthDate() {
+        val sdf = SimpleDateFormat(Constant.DATE_FORMAT, Locale.US)
+        binding.edTxtNomineeDob.setText(sdf.format(myCalendar.time))
     }
 
     override fun onSaveInstanceState(oldInstanceState: Bundle) {

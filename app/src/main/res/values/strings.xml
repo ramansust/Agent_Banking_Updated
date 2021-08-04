@@ -241,7 +241,11 @@
     <string name="id_value_">ID Value*</string>
     <string name="permanent_address_">Permanent Address*</string>
     <string name="applicant_">Applicant*</string>
-    <string name="father_spouse_name">Father\'s/Spouse Name*</string>
+    <string name="father_spouse_name">Father\'s Spouse Name*</string>
     <string name="relation_with_nominee_">Relation with Nominee*</string>
     <string name="add_nominee">Add Nominee</string>
+    <string name="nominee_remain_minor">Nominee Remain Minor</string>
+
+    <string name="nominee_photo_">Nominee\'s Photo*</string>
+    <string name="nominee_signature_">Nominee\'s Signature*</string>
 </resources>

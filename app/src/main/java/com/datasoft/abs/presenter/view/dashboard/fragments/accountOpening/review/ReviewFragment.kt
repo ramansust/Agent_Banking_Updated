@@ -15,6 +15,7 @@ import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.general.GeneralViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.introducer.IntroducerViewModel
+import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.nominee.NomineeViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.others.OthersViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.transactionProfile.TransactionProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +26,7 @@ class ReviewFragment : Fragment() {
     private val accountViewModel: AccountViewModel by activityViewModels()
     private val generalViewModel: GeneralViewModel by activityViewModels()
     private val othersViewModel: OthersViewModel by activityViewModels()
+    private val nomineeViewModel: NomineeViewModel by activityViewModels()
     private val introducerViewModel: IntroducerViewModel by activityViewModels()
     private val transactionViewModel: TransactionProfileViewModel by activityViewModels()
     private val viewModel: ReviewViewModel by activityViewModels()
@@ -95,6 +97,10 @@ class ReviewFragment : Fragment() {
 
         othersViewModel.getInternetBanking().observe(viewLifecycleOwner, {
             createAccountRequest.isInternetBankingEnable = it
+        })
+
+        nomineeViewModel.getSavedData().observe(viewLifecycleOwner, {
+            createAccountRequest.nominees = it
         })
 
         introducerViewModel.getIntroducerData().observe(viewLifecycleOwner, { response ->
