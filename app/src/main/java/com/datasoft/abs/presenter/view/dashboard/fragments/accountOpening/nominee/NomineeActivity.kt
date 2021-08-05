@@ -47,6 +47,11 @@ class NomineeActivity : BaseActivity() {
     private val documentList = mutableListOf<CommonModel>()
     private val occupationList = mutableListOf<CommonModel>()
 
+    private var photo = ""
+    private var signature = ""
+    private var docFront = ""
+    private var docBack = ""
+
     @Inject
     lateinit var glide: RequestManager
     private var isMinor = false
@@ -171,10 +176,10 @@ class NomineeActivity : BaseActivity() {
                 binding.edTxtIdValue.text.trim().toString(),
                 binding.edTxtPresentAddress.text.trim().toString(),
                 "Applicant 1",
-                "",
-                "",
-                "",
-                "",
+                photo,
+                signature,
+                docFront,
+                docBack,
                 binding.edTxtNomineeName.text.trim().toString(),
                 binding.edTxtNomineeDob.text.trim().toString(),
                 binding.edTxtNomineePermanentAddress.text.trim().toString(),
@@ -368,6 +373,7 @@ class NomineeActivity : BaseActivity() {
 
                     Base64Image.encode(it) { base64 ->
                         base64?.let { value ->
+                            signature = value
                             glide.load(Base64.decode(value, Base64.DEFAULT))
                                 .into(binding.imgViewNomineeSignature)
                         }
@@ -384,6 +390,7 @@ class NomineeActivity : BaseActivity() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
+                    signature = fileUri.toString()
                     binding.imgViewNomineeSignature.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {
@@ -407,6 +414,7 @@ class NomineeActivity : BaseActivity() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
+                    photo = fileUri.toString()
                     binding.imgViewNomineePhoto.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {
@@ -430,6 +438,7 @@ class NomineeActivity : BaseActivity() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
+                    docFront = fileUri.toString()
                     binding.imgViewFrontDoc.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {
@@ -453,6 +462,7 @@ class NomineeActivity : BaseActivity() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
+                    docBack = fileUri.toString()
                     binding.imgViewBackDoc.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {

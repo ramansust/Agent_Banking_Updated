@@ -1,6 +1,5 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.nominee
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -40,11 +39,15 @@ class NomineeListAdapter @Inject constructor() :
 
     private var onItemClickListener: ((Nominee) -> Unit)? = null
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: NomineeViewHolder, position: Int) {
         val value = differ.currentList[position]
 
-        holder.binding.txtViewAddress.text = "${position + 1}. ${value.name}, ${value.motherName}, ${value.fatherName}, ${value.dob}, ${value.shareOfPercentage}"
+        holder.binding.txtViewNameValue.text = value.name
+        holder.binding.txtViewDobValue.text = value.dob
+        holder.binding.txtViewPercentShareValue.text = value.shareOfPercentage.toString()
+        holder.binding.txtViewFatherNameValue.text = value.fatherName
+        holder.binding.txtViewMotherNameValue.text = value.motherName
+        holder.binding.txtViewRelationValue.text = value.relationship.toString()
 
         holder.binding.imgViewDelete.setOnClickListener {
             onItemClickListener?.let { it(value) }

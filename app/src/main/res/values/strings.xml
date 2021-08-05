@@ -238,6 +238,7 @@
 
     <string name="present_address_">Present Address*</string>
     <string name="percent_share_">Percent of Share*</string>
+    <string name="percent_share">Percent of Share</string>
     <string name="id_value_">ID Value*</string>
     <string name="permanent_address_">Permanent Address*</string>
     <string name="applicant_">Applicant*</string>
