@@ -67,20 +67,6 @@ class NomineeActivity : BaseActivity() {
             }
         })
 
-        nomineeViewModel.getBackImageNominee().observe(this, {
-            if (!it) {
-                binding.txtViewNomineeBackDoc.visibility = View.INVISIBLE
-                binding.imgViewNomineeBackDoc.visibility = View.INVISIBLE
-                binding.btnTakeNomineeBackDoc.visibility = View.INVISIBLE
-                binding.btnBrowseNomineeBackDoc.visibility = View.INVISIBLE
-            } else {
-                binding.txtViewNomineeBackDoc.visibility = View.VISIBLE
-                binding.imgViewNomineeBackDoc.visibility = View.VISIBLE
-                binding.btnTakeNomineeBackDoc.visibility = View.VISIBLE
-                binding.btnBrowseNomineeBackDoc.visibility = View.VISIBLE
-            }
-        })
-
         nomineeViewModel.getNomineeAge().observe(this, {
             if (it < ADULT_AGE) {
                 isMinor = true
@@ -355,66 +341,6 @@ class NomineeActivity : BaseActivity() {
             )
         }
 
-        binding.btnTakeNomineeFrontDoc.setOnClickListener {
-            ImagePicker.with(this)
-                .cameraOnly()
-                .crop()
-                .compress(IMAGE_COMPRESS)
-                .maxResultSize(
-                    IMAGE_RESOLUTION_WIDTH,
-                    IMAGE_RESOLUTION_HEIGHT
-                )
-                .createIntent { intent ->
-                    startForNomineeDocFrontResult.launch(intent)
-                }
-
-        }
-
-        binding.btnBrowseNomineeFrontDoc.setOnClickListener {
-            ImagePicker.with(this)
-                .galleryOnly()
-                .crop()
-                .compress(IMAGE_COMPRESS)
-                .maxResultSize(
-                    IMAGE_RESOLUTION_WIDTH,
-                    IMAGE_RESOLUTION_HEIGHT
-                )
-                .createIntent { intent ->
-                    startForNomineeDocFrontResult.launch(intent)
-                }
-
-        }
-
-        binding.btnTakeNomineeBackDoc.setOnClickListener {
-            ImagePicker.with(this)
-                .cameraOnly()
-                .crop()
-                .compress(IMAGE_COMPRESS)
-                .maxResultSize(
-                    IMAGE_RESOLUTION_WIDTH,
-                    IMAGE_RESOLUTION_HEIGHT
-                )
-                .createIntent { intent ->
-                    startForNomineeDocBackResult.launch(intent)
-                }
-
-        }
-
-        binding.btnBrowseNomineeBackDoc.setOnClickListener {
-            ImagePicker.with(this)
-                .galleryOnly()
-                .crop()
-                .compress(IMAGE_COMPRESS)
-                .maxResultSize(
-                    IMAGE_RESOLUTION_WIDTH,
-                    IMAGE_RESOLUTION_HEIGHT
-                )
-                .createIntent { intent ->
-                    startForNomineeDocBackResult.launch(intent)
-                }
-
-        }
-
         binding.spinnerDocumentsType.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -428,23 +354,6 @@ class NomineeActivity : BaseActivity() {
                     id: Long
                 ) {
                     nomineeViewModel.setBackImage(false)
-                }
-            }
-
-        binding.spinnerNomineeDocType.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-//                    nomineeViewModel.setBackImageNominee(documentList[position].isBackRequired)
-                    nomineeViewModel.setBackImageNominee(false)
                 }
             }
 
@@ -545,52 +454,6 @@ class NomineeActivity : BaseActivity() {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
                     binding.imgViewBackDoc.setImageURI(fileUri)
-                }
-                ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        this,
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                else -> {
-                    Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-    private val startForNomineeDocFrontResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            val resultCode = result.resultCode
-            val data = result.data
-
-            when (resultCode) {
-                Activity.RESULT_OK -> {
-                    val fileUri = data?.data!!
-                    binding.imgViewNomineeFrontDoc.setImageURI(fileUri)
-                }
-                ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        this,
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                else -> {
-                    Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-    private val startForNomineeDocBackResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            val resultCode = result.resultCode
-            val data = result.data
-
-            when (resultCode) {
-                Activity.RESULT_OK -> {
-                    val fileUri = data?.data!!
-                    binding.imgViewNomineeBackDoc.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(

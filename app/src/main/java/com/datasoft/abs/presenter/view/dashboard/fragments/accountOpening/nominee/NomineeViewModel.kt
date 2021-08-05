@@ -29,9 +29,6 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
     private val backImage = MutableLiveData<Boolean>()
     fun getBackImage(): LiveData<Boolean> = backImage
 
-    private val backImageNominee = MutableLiveData<Boolean>()
-    fun getBackImageNominee(): LiveData<Boolean> = backImageNominee
-
     fun checkData(
         fullName: String,
         motherName: String,
@@ -163,12 +160,6 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
     fun setBackImage(isRequired: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             backImage.postValue(isRequired)
-        }
-    }
-
-    fun setBackImageNominee(isRequired: Boolean) {
-        viewModelScope.launch(Dispatchers.IO) {
-            backImageNominee.postValue(isRequired)
         }
     }
 }
