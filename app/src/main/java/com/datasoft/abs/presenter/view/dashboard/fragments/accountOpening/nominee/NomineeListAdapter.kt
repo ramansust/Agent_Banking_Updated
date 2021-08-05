@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.createAccount.review.Nominee
-import com.datasoft.abs.databinding.AddressRowBinding
+import com.datasoft.abs.databinding.NomineeRowBinding
 import javax.inject.Inject
 
 class NomineeListAdapter @Inject constructor() :
     RecyclerView.Adapter<NomineeListAdapter.NomineeViewHolder>() {
 
-    inner class NomineeViewHolder(val binding: AddressRowBinding) :
+    inner class NomineeViewHolder(val binding: NomineeRowBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<Nominee>() {
@@ -30,7 +30,7 @@ class NomineeListAdapter @Inject constructor() :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NomineeViewHolder {
 
-        val binding = AddressRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = NomineeRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return NomineeViewHolder(binding)
     }
 

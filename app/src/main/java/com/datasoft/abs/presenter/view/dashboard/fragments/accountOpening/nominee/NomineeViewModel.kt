@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createAccount.review.Nominee
-import com.datasoft.abs.data.dto.createCustomer.AddressInfo
-import com.datasoft.abs.data.dto.createCustomer.Contact
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,6 +25,12 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
 
     private val saveData = MutableLiveData<ArrayList<Nominee>>()
     fun getSavedData(): LiveData<ArrayList<Nominee>> = saveData
+
+    private val backImage = MutableLiveData<Boolean>()
+    fun getBackImage(): LiveData<Boolean> = backImage
+
+    private val backImageNominee = MutableLiveData<Boolean>()
+    fun getBackImageNominee(): LiveData<Boolean> = backImageNominee
 
     fun checkData(
         fullName: String,
@@ -55,19 +59,36 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
         nomineeFatherSpouseName: String,
         nomineePresentAddress: String,
         nomineeWithRelation: Int,
-        nomineeIdValue: String
+        nomineeIdValue: String,
+        isMinor: Boolean
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
             nomineeData.postValue(Resource.Loading())
 
-            if (fullName.isEmpty() || motherName.isEmpty()) {
+            if (fullName.isEmpty() || motherName.isEmpty() || expiryDate.isEmpty() ||
+                presentAddress.isEmpty() || fatherName.isEmpty() || birthDate.isEmpty() ||
+                percentShare == 0 || idValue.isEmpty() || permanentAddress.isEmpty() ||
+                photo.isEmpty() || signature.isEmpty()
+            ) {
                 nomineeData.postValue(
                     Resource.Error(
                         "The fields must not be empty", null
                     )
                 )
                 return@launch
+            } else if (isMinor) {
+                if (nomineeName.isEmpty() || nomineeBirthDate.isEmpty() || nomineePermanentAddress.isEmpty() ||
+                    nomineeExpiryDate.isEmpty() || nomineeFatherSpouseName.isEmpty() || nomineePresentAddress.isEmpty() ||
+                    nomineeIdValue.isEmpty()
+                ) {
+                    nomineeData.postValue(
+                        Resource.Error(
+                            "The fields must not be empty", null
+                        )
+                    )
+                    return@launch
+                }
             }
 
             val nomineeInfo = Nominee(
@@ -136,6 +157,18 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
             }
             list.remove(nomineeInfo)
             saveData.postValue(list)
+        }
+    }
+
+    fun setBackImage(isRequired: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            backImage.postValue(isRequired)
+        }
+    }
+
+    fun setBackImageNominee(isRequired: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            backImageNominee.postValue(isRequired)
         }
     }
 }

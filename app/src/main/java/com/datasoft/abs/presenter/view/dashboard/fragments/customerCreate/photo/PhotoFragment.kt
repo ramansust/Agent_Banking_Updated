@@ -26,6 +26,9 @@ import com.datasoft.abs.data.dto.config.DocumentConfigData
 import com.datasoft.abs.databinding.PhotoFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Constant.IMAGE_COMPRESS
+import com.datasoft.abs.presenter.utils.Constant.IMAGE_RESOLUTION_HEIGHT
+import com.datasoft.abs.presenter.utils.Constant.IMAGE_RESOLUTION_WIDTH
 import com.datasoft.abs.presenter.utils.Photos
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.personal.PersonalViewModel
@@ -66,8 +69,8 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .cameraOnly()
                 .crop()
-                .compress(1024)
-                .maxResultSize(1080, 1080)
+                .compress(IMAGE_COMPRESS)
+                .maxResultSize(IMAGE_RESOLUTION_WIDTH, IMAGE_RESOLUTION_HEIGHT)
                 .createIntent { intent ->
                     startForProfileImageResult.launch(intent)
                 }
@@ -78,8 +81,8 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .galleryOnly()
                 .crop()
-                .compress(1024)
-                .maxResultSize(1080, 1080)
+                .compress(IMAGE_COMPRESS)
+                .maxResultSize(IMAGE_RESOLUTION_WIDTH, IMAGE_RESOLUTION_HEIGHT)
                 .createIntent { intent ->
                     startForProfileImageResult.launch(intent)
                 }
@@ -90,10 +93,10 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .cameraOnly()
                 .crop()
-                .compress(1024)
+                .compress(IMAGE_COMPRESS)
                 .maxResultSize(
-                    1080,
-                    1080
+                    IMAGE_RESOLUTION_WIDTH,
+                    IMAGE_RESOLUTION_HEIGHT
                 )
                 .createIntent { intent ->
                     startForNIDFrontResult.launch(intent)
@@ -105,10 +108,10 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .galleryOnly()
                 .crop()
-                .compress(1024)
+                .compress(IMAGE_COMPRESS)
                 .maxResultSize(
-                    1080,
-                    1080
+                    IMAGE_RESOLUTION_WIDTH,
+                    IMAGE_RESOLUTION_HEIGHT
                 )
                 .createIntent { intent ->
                     startForNIDFrontResult.launch(intent)
@@ -120,10 +123,10 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .cameraOnly()
                 .crop()
-                .compress(1024)
+                .compress(IMAGE_COMPRESS)
                 .maxResultSize(
-                    1080,
-                    1080
+                    IMAGE_RESOLUTION_WIDTH,
+                    IMAGE_RESOLUTION_HEIGHT
                 )
                 .createIntent { intent ->
                     startForNIDBackResult.launch(intent)
@@ -135,10 +138,10 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .galleryOnly()
                 .crop()
-                .compress(1024)
+                .compress(IMAGE_COMPRESS)
                 .maxResultSize(
-                    1080,
-                    1080
+                    IMAGE_RESOLUTION_WIDTH,
+                    IMAGE_RESOLUTION_HEIGHT
                 )
                 .createIntent { intent ->
                     startForNIDBackResult.launch(intent)
@@ -150,8 +153,8 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .cameraOnly()
                 .crop()
-                .compress(1024)
-                .maxResultSize(1080, 1080)
+                .compress(IMAGE_COMPRESS)
+                .maxResultSize(IMAGE_RESOLUTION_WIDTH, IMAGE_RESOLUTION_HEIGHT)
                 .createIntent { intent ->
                     startForGuardianPhotoResult.launch(intent)
                 }
@@ -162,8 +165,8 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .galleryOnly()
                 .crop()
-                .compress(1024)
-                .maxResultSize(1080, 1080)
+                .compress(IMAGE_COMPRESS)
+                .maxResultSize(IMAGE_RESOLUTION_WIDTH, IMAGE_RESOLUTION_HEIGHT)
                 .createIntent { intent ->
                     startForGuardianPhotoResult.launch(intent)
                 }
@@ -174,10 +177,10 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .cameraOnly()
                 .crop()
-                .compress(1024)
+                .compress(IMAGE_COMPRESS)
                 .maxResultSize(
-                    1080,
-                    1080
+                    IMAGE_RESOLUTION_WIDTH,
+                    IMAGE_RESOLUTION_HEIGHT
                 )
                 .createIntent { intent ->
                     startForGuardianFrontResult.launch(intent)
@@ -189,10 +192,10 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .galleryOnly()
                 .crop()
-                .compress(1024)
+                .compress(IMAGE_COMPRESS)
                 .maxResultSize(
-                    1080,
-                    1080
+                    IMAGE_RESOLUTION_WIDTH,
+                    IMAGE_RESOLUTION_HEIGHT
                 )
                 .createIntent { intent ->
                     startForGuardianFrontResult.launch(intent)
@@ -204,10 +207,10 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .cameraOnly()
                 .crop()
-                .compress(1024)
+                .compress(IMAGE_COMPRESS)
                 .maxResultSize(
-                    1080,
-                    1080
+                    IMAGE_RESOLUTION_WIDTH,
+                    IMAGE_RESOLUTION_HEIGHT
                 )
                 .createIntent { intent ->
                     startForGuardianBackResult.launch(intent)
@@ -219,10 +222,10 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .galleryOnly()
                 .crop()
-                .compress(1024)
+                .compress(IMAGE_COMPRESS)
                 .maxResultSize(
-                    1080,
-                    1080
+                    IMAGE_RESOLUTION_WIDTH,
+                    IMAGE_RESOLUTION_HEIGHT
                 )
                 .createIntent { intent ->
                     startForGuardianBackResult.launch(intent)
@@ -246,8 +249,8 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .galleryOnly()
                 .crop()
-                .compress(1024)
-                .maxResultSize(1080, 1080)
+                .compress(IMAGE_COMPRESS)
+                .maxResultSize(IMAGE_RESOLUTION_WIDTH, IMAGE_RESOLUTION_HEIGHT)
                 .createIntent { intent ->
                     startForSignatureResult.launch(intent)
                 }
@@ -266,8 +269,8 @@ class PhotoFragment : Fragment() {
             ImagePicker.with(this)
                 .galleryOnly()
                 .crop()
-                .compress(1024)
-                .maxResultSize(1080, 1080)
+                .compress(IMAGE_COMPRESS)
+                .maxResultSize(IMAGE_RESOLUTION_WIDTH, IMAGE_RESOLUTION_HEIGHT)
                 .createIntent { intent ->
                     startForGuardianSignatureResult.launch(intent)
                 }

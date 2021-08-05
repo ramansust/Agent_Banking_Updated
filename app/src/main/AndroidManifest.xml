@@ -74,7 +74,7 @@
 
         <activity
             android:name=".presenter.view.dashboard.fragments.accountOpening.nominee.NomineeActivity"
-            android:label="@string/activity_account"
+            android:label="@string/nominee"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AgentBanking.NoActionBar"
             android:windowSoftInputMode="adjustPan|stateHidden" />

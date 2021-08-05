@@ -14,4 +14,8 @@ object Constant {
     const val SIGNATURE_INFO = "SIGNATURE_INFO"
     const val ADULT_AGE = 18
     const val DATE_FORMAT = "MM-dd-yyyy"
+
+    const val IMAGE_RESOLUTION_WIDTH = 1080
+    const val IMAGE_RESOLUTION_HEIGHT = 1080
+    const val IMAGE_COMPRESS = 1024
 }

@@ -18,6 +18,9 @@ import com.datasoft.abs.presenter.base.BaseActivity
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
+import com.datasoft.abs.presenter.utils.Constant.IMAGE_COMPRESS
+import com.datasoft.abs.presenter.utils.Constant.IMAGE_RESOLUTION_HEIGHT
+import com.datasoft.abs.presenter.utils.Constant.IMAGE_RESOLUTION_WIDTH
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
 import dagger.hilt.android.AndroidEntryPoint
@@ -165,8 +168,8 @@ class DocumentActivity : BaseActivity() {
             ImagePicker.with(this)
                 .cameraOnly()
                 .crop()
-                .compress(1024)
-                .maxResultSize(1080, 1080)
+                .compress(IMAGE_COMPRESS)
+                .maxResultSize(IMAGE_RESOLUTION_WIDTH, IMAGE_RESOLUTION_HEIGHT)
                 .createIntent { intent ->
                     startForFrontResult.launch(intent)
                 }
@@ -177,8 +180,8 @@ class DocumentActivity : BaseActivity() {
             ImagePicker.with(this)
                 .galleryOnly()
                 .crop()
-                .compress(1024)
-                .maxResultSize(1080, 1080)
+                .compress(IMAGE_COMPRESS)
+                .maxResultSize(IMAGE_RESOLUTION_WIDTH, IMAGE_RESOLUTION_HEIGHT)
                 .createIntent { intent ->
                     startForFrontResult.launch(intent)
                 }
@@ -189,8 +192,8 @@ class DocumentActivity : BaseActivity() {
             ImagePicker.with(this)
                 .cameraOnly()
                 .crop()
-                .compress(1024)
-                .maxResultSize(1080, 1080)
+                .compress(IMAGE_COMPRESS)
+                .maxResultSize(IMAGE_RESOLUTION_WIDTH, IMAGE_RESOLUTION_HEIGHT)
                 .createIntent { intent ->
                     startForBackResult.launch(intent)
                 }
@@ -201,8 +204,8 @@ class DocumentActivity : BaseActivity() {
             ImagePicker.with(this)
                 .galleryOnly()
                 .crop()
-                .compress(1024)
-                .maxResultSize(1080, 1080)
+                .compress(IMAGE_COMPRESS)
+                .maxResultSize(IMAGE_RESOLUTION_WIDTH, IMAGE_RESOLUTION_HEIGHT)
                 .createIntent { intent ->
                     startForBackResult.launch(intent)
                 }
