@@ -14,6 +14,7 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
+import com.datasoft.abs.data.dto.createAccount.review.JointCustomerInfo
 import com.datasoft.abs.data.dto.createAccount.review.Nominee
 import com.datasoft.abs.data.dto.createAccount.review.TransactionProfile
 import com.datasoft.abs.databinding.FragmentAccountReviewBinding
@@ -70,13 +71,38 @@ class ReviewFragment : Fragment() {
                 is Resource.Success -> {
                     response.data?.let {
                         createAccountRequest.apply {
-                            productId = it.categoryId
-                            customerId = it.customerId
+                            productId = it.accountId
                             currencyId = it.currencyId
                             initialAmount = it.initialAmount
                             accountTitle = it.accountTitle
                             mandateOfAccOperationId = it.operatingId
                             natureOfBusinessId = it.fundId
+                        }
+                    }
+                }
+
+                is Resource.Error -> {
+
+                }
+
+                is Resource.Loading -> {
+
+                }
+            }
+        })
+
+        generalViewModel.getCustomerData().observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is Resource.Success -> {
+                    response.data?.let {
+                        createAccountRequest.apply {
+                            val list = mutableListOf<JointCustomerInfo>()
+
+                            for (value in it.customerData) {
+                                list.add(JointCustomerInfo(1, value.customerId, value.isSignatory, value.isRequired))
+                            }
+
+                            jointCustomer = list
                         }
                     }
                 }
@@ -166,6 +192,7 @@ class ReviewFragment : Fragment() {
         })
 
         binding.btnNext.setOnClickListener {
+            Log.e("Value", "" + createAccountRequest)
             viewModel.createAccount(createAccountRequest)
         }
 

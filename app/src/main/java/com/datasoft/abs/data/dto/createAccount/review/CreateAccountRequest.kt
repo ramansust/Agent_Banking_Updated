@@ -3,7 +3,6 @@ package com.datasoft.abs.data.dto.createAccount.review
 data class CreateAccountRequest(
     var accountTitle: String = "",
     var currencyId: Int = 0,
-    var customerId: String = "",
     var initialAmount: Int = 0,
     var introducerId: Int = 0,
     var isChequeBookEnable: Boolean = false,
@@ -17,5 +16,10 @@ data class CreateAccountRequest(
     var productId: Int = 0,
     var relationWithIntroducer: Int = 0,
     var sectorCode: Int = 0,
-    var transactionProfile: List<TransactionProfile> = emptyList()
-)
+    var transactionProfile: List<TransactionProfile> = emptyList(),
+    var jointCustomer: List<JointCustomerInfo> = emptyList()
+) {
+    override fun toString(): String {
+        return "CreateAccountRequest(accountTitle='$accountTitle', currencyId=$currencyId, initialAmount=$initialAmount, introducerId=$introducerId, isChequeBookEnable=$isChequeBookEnable, isDebitCardEnable=$isDebitCardEnable, isEStatementEnable=$isEStatementEnable, isInternetBankingEnable=$isInternetBankingEnable, isSmsBankingEnable=$isSmsBankingEnable, mandateOfAccOperationId=$mandateOfAccOperationId, natureOfBusinessId=$natureOfBusinessId, nominees=$nominees, productId=$productId, relationWithIntroducer=$relationWithIntroducer, sectorCode=$sectorCode, transactionProfile=$transactionProfile, jointCustomer=$jointCustomer)"
+    }
+}
