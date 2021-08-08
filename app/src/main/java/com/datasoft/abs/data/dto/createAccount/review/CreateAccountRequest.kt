@@ -3,7 +3,7 @@ package com.datasoft.abs.data.dto.createAccount.review
 data class CreateAccountRequest(
     var accountTitle: String = "",
     var currencyId: Int = 0,
-    var customerId: Int = 0,
+    var customerId: String = "",
     var initialAmount: Int = 0,
     var introducerId: Int = 0,
     var isChequeBookEnable: Boolean = false,

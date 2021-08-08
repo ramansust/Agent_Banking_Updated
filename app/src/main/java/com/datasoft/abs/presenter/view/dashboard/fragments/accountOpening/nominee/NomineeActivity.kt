@@ -161,20 +161,20 @@ class NomineeActivity : BaseActivity() {
         binding.btnSave.setOnClickListener {
             nomineeViewModel.checkData(
                 binding.edTxtFullName.text.trim().toString(),
-                binding.edTxtMotherName.text.trim().toString(),
-                binding.edTxtSpouseName.text.trim().toString(),
-                if (relationList.isNotEmpty()) relationList[binding.spinnerRelation.selectedItemPosition].id else 0,
-                if (documentList.isNotEmpty()) documentList[binding.spinnerDocumentsType.selectedItemPosition].id else 0,
-                binding.edTxtExpiryDate.text.trim().toString(),
-                binding.edTxtPresentAddress.text.trim().toString(),
                 binding.edTxtFatherName.text.trim().toString(),
+                binding.edTxtMotherName.text.trim().toString(),
                 binding.edTxtDob.text.trim().toString(),
+                binding.edTxtSpouseName.text.trim().toString(),
                 if (binding.edTxtPercentShare.text.trim().toString()
                         .isNotEmpty()
                 ) binding.edTxtPercentShare.text.trim().toString()
                     .toInt() else 0,
+                if (relationList.isNotEmpty()) relationList[binding.spinnerRelation.selectedItemPosition].id else 0,
                 if (occupationList.isNotEmpty()) occupationList[binding.spinnerOccupation.selectedItemPosition].id else 0,
+                if (documentList.isNotEmpty()) documentList[binding.spinnerDocumentsType.selectedItemPosition].id else 0,
                 binding.edTxtIdValue.text.trim().toString(),
+                binding.edTxtExpiryDate.text.trim().toString(),
+                binding.edTxtPresentAddress.text.trim().toString(),
                 binding.edTxtPresentAddress.text.trim().toString(),
                 "Applicant 1",
                 photo,
@@ -182,14 +182,14 @@ class NomineeActivity : BaseActivity() {
                 docFront,
                 docBack,
                 binding.edTxtNomineeName.text.trim().toString(),
-                binding.edTxtNomineeDob.text.trim().toString(),
-                binding.edTxtNomineePermanentAddress.text.trim().toString(),
-                if (documentList.isNotEmpty()) documentList[binding.spinnerNomineeDocType.selectedItemPosition].id else 0,
-                binding.edTxtNomineeExpiryDate.text.trim().toString(),
                 binding.edTxtNomineeFatherSpouseName.text.trim().toString(),
+                binding.edTxtNomineeDob.text.trim().toString(),
                 binding.edTxtNomineePresentAddress.text.trim().toString(),
+                binding.edTxtNomineePermanentAddress.text.trim().toString(),
                 if (relationList.isNotEmpty()) relationList[binding.spinnerNomineeWithRelation.selectedItemPosition].id else 0,
+                if (documentList.isNotEmpty()) documentList[binding.spinnerNomineeDocType.selectedItemPosition].id else 0,
                 binding.edTxtNomineeIdValue.text.trim().toString(),
+                binding.edTxtNomineeExpiryDate.text.trim().toString(),
                 isMinor
             )
         }

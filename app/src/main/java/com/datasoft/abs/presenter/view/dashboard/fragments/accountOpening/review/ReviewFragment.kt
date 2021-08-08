@@ -71,7 +71,7 @@ class ReviewFragment : Fragment() {
                     response.data?.let {
                         createAccountRequest.apply {
                             productId = it.categoryId
-                            customerId = it.accountId
+                            customerId = it.customerId
                             currencyId = it.currencyId
                             initialAmount = it.initialAmount
                             accountTitle = it.accountTitle

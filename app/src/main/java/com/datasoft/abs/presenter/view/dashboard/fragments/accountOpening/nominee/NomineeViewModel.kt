@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createAccount.review.Nominee
+import com.datasoft.abs.data.dto.createAccount.review.NomineeRemainMinor
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,43 +31,43 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
     fun getBackImage(): LiveData<Boolean> = backImage
 
     fun checkData(
-        fullName: String,
-        motherName: String,
-        spouseName: String,
-        relation: Int,
-        documentType: Int,
-        expiryDate: String,
-        presentAddress: String,
+        name: String,
         fatherName: String,
-        birthDate: String,
-        percentShare: Int,
-        occupation: Int,
-        idValue: String,
+        motherName: String,
+        dob: String,
+        spouseName: String,
+        shareOfPercentage: Int,
+        relationship: Int,
+        occupationId: Int,
+        docTypeId: Int,
+        nidNo: String,
+        expiryDate: String,
         permanentAddress: String,
+        presentAddress: String,
         applicant: String,
         photo: String,
-        signature: String,
-        docFront: String,
-        docBack: String,
+        signaturePhoto: String,
+        nidFrontPhoto: String,
+        nidBackPhoto: String,
         nomineeName: String,
-        nomineeBirthDate: String,
-        nomineePermanentAddress: String,
-        nomineeDocumentType: Int,
-        nomineeExpiryDate: String,
         nomineeFatherSpouseName: String,
+        nomineeBirthDate: String,
         nomineePresentAddress: String,
+        nomineePermanentAddress: String,
         nomineeWithRelation: Int,
+        nomineeDocId: Int,
         nomineeIdValue: String,
+        nomineeExpiryDate: String,
         isMinor: Boolean
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
             nomineeData.postValue(Resource.Loading())
 
-            if (fullName.isEmpty() || motherName.isEmpty() || expiryDate.isEmpty() ||
-                presentAddress.isEmpty() || fatherName.isEmpty() || birthDate.isEmpty() ||
-                percentShare == 0 || idValue.isEmpty() || permanentAddress.isEmpty() ||
-                photo.isEmpty() || signature.isEmpty() || docFront.isEmpty()
+            if (name.isEmpty() || motherName.isEmpty() || expiryDate.isEmpty() ||
+                presentAddress.isEmpty() || fatherName.isEmpty() || dob.isEmpty() ||
+                shareOfPercentage == 0 || nidNo.isEmpty() || permanentAddress.isEmpty() || presentAddress.isEmpty() ||
+                photo.isEmpty() || signaturePhoto.isEmpty() || nidFrontPhoto.isEmpty()
             ) {
                 nomineeData.postValue(
                     Resource.Error(
@@ -89,31 +90,25 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
             }
 
             val nomineeInfo = Nominee(
-                nomineeBirthDate,
-                presentAddress,
-                birthDate,
-                documentType,
-                "email",
+                name,
                 fatherName,
-                "mobile",
                 motherName,
-                "NID",
-                fullName,
-                docBack,
-                docFront,
-                0,
-                nomineePresentAddress,
-                "",
-                "",
-                "",
-                nomineePermanentAddress,
-                0,
-                "1205",
+                dob,
+                spouseName,
+                shareOfPercentage,
+                relationship,
+                occupationId,
+                docTypeId,
+                nidNo,
+                expiryDate,
+                permanentAddress,
+                presentAddress,
+                applicant,
                 photo,
-                nomineeDocumentType,
-                nomineeWithRelation,
-                percentShare,
-                signature
+                signaturePhoto,
+                nidFrontPhoto,
+                nidBackPhoto,
+                if(isMinor) NomineeRemainMinor(nomineeName, nomineeFatherSpouseName, nomineeBirthDate, nomineePresentAddress, nomineePermanentAddress, nomineeWithRelation, nomineeDocId, nomineeIdValue, nomineeExpiryDate) else null
             )
 
             nomineeData.postValue(Resource.Success(nomineeInfo))
