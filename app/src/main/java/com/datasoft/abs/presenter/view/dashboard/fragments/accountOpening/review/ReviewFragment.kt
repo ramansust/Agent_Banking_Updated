@@ -1,14 +1,20 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.review
 
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
+import com.datasoft.abs.data.dto.createAccount.review.Nominee
 import com.datasoft.abs.data.dto.createAccount.review.TransactionProfile
 import com.datasoft.abs.databinding.FragmentAccountReviewBinding
 import com.datasoft.abs.presenter.states.Resource
@@ -18,7 +24,12 @@ import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.introd
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.nominee.NomineeViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.others.OthersViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.transactionProfile.TransactionProfileViewModel
+import com.pixelcarrot.base64image.Base64Image
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ReviewFragment : Fragment() {
@@ -47,6 +58,7 @@ class ReviewFragment : Fragment() {
         return binding.root
     }
 
+    @DelicateCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -100,7 +112,10 @@ class ReviewFragment : Fragment() {
         })
 
         nomineeViewModel.getSavedData().observe(viewLifecycleOwner, {
-            createAccountRequest.nominees = it
+            GlobalScope.launch(Dispatchers.IO) {
+                createAccountRequest.nominees = fileUriToBase64(it)
+                viewModel.setDataPrepared(true)
+            }
         })
 
         introducerViewModel.getIntroducerData().observe(viewLifecycleOwner, { response ->
@@ -144,6 +159,10 @@ class ReviewFragment : Fragment() {
             }
 
             createAccountRequest.transactionProfile = list
+        })
+
+        viewModel.getDataPrepared().observe(viewLifecycleOwner, {
+            binding.btnNext.isEnabled = it
         })
 
         binding.btnNext.setOnClickListener {
@@ -210,5 +229,102 @@ class ReviewFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun fileUriToBase64(list: List<Nominee>): List<Nominee> {
+        val nomineeList = mutableListOf<Nominee>()
+        for (value in list) {
+
+            if (value.photo.isNotEmpty() && Uri.parse(value.photo).isAbsolute) {
+                val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    ImageDecoder.decodeBitmap(
+                        ImageDecoder.createSource(
+                            requireActivity().contentResolver,
+                            value.photo.toUri()
+                        )
+                    )
+                } else {
+                    MediaStore.Images.Media.getBitmap(
+                        requireActivity().contentResolver,
+                        value.photo.toUri()
+                    )
+                }
+
+                Base64Image.encode(bitmap) { base64 ->
+                    base64?.let {
+                        value.photo = it
+                    }
+                }
+            }
+
+            if (value.signaturePhoto.isNotEmpty() && Uri.parse(value.signaturePhoto).isAbsolute) {
+                val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    ImageDecoder.decodeBitmap(
+                        ImageDecoder.createSource(
+                            requireActivity().contentResolver,
+                            value.signaturePhoto.toUri()
+                        )
+                    )
+                } else {
+                    MediaStore.Images.Media.getBitmap(
+                        requireActivity().contentResolver,
+                        value.signaturePhoto.toUri()
+                    )
+                }
+
+                Base64Image.encode(bitmap) { base64 ->
+                    base64?.let {
+                        value.signaturePhoto = it
+                    }
+                }
+            }
+
+            if (value.nidFrontPhoto.isNotEmpty() && Uri.parse(value.nidFrontPhoto).isAbsolute) {
+                val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    ImageDecoder.decodeBitmap(
+                        ImageDecoder.createSource(
+                            requireActivity().contentResolver,
+                            value.nidFrontPhoto.toUri()
+                        )
+                    )
+                } else {
+                    MediaStore.Images.Media.getBitmap(
+                        requireActivity().contentResolver,
+                        value.nidFrontPhoto.toUri()
+                    )
+                }
+
+                Base64Image.encode(bitmap) { base64 ->
+                    base64?.let {
+                        value.nidFrontPhoto = it
+                    }
+                }
+            }
+
+            if (value.nidBackPhoto.isNotEmpty() && Uri.parse(value.nidBackPhoto).isAbsolute) {
+                val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    ImageDecoder.decodeBitmap(
+                        ImageDecoder.createSource(
+                            requireActivity().contentResolver,
+                            value.nidBackPhoto.toUri()
+                        )
+                    )
+                } else {
+                    MediaStore.Images.Media.getBitmap(
+                        requireActivity().contentResolver,
+                        value.nidBackPhoto.toUri()
+                    )
+                }
+
+                Base64Image.encode(bitmap) { base64 ->
+                    base64?.let {
+                        value.nidBackPhoto = it
+                    }
+                }
+            }
+
+            nomineeList.add(value)
+        }
+        return nomineeList
     }
 }

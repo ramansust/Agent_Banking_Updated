@@ -66,7 +66,7 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
             if (fullName.isEmpty() || motherName.isEmpty() || expiryDate.isEmpty() ||
                 presentAddress.isEmpty() || fatherName.isEmpty() || birthDate.isEmpty() ||
                 percentShare == 0 || idValue.isEmpty() || permanentAddress.isEmpty() ||
-                photo.isEmpty() || signature.isEmpty()
+                photo.isEmpty() || signature.isEmpty() || docFront.isEmpty()
             ) {
                 nomineeData.postValue(
                     Resource.Error(

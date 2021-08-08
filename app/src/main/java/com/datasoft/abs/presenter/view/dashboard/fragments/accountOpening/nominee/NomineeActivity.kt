@@ -54,6 +54,7 @@ class NomineeActivity : BaseActivity() {
 
     @Inject
     lateinit var glide: RequestManager
+
     private var isMinor = false
 
     override fun observeViewModel() {

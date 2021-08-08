@@ -24,6 +24,9 @@ class ReviewViewModel @Inject constructor(
     private val createAccountData = MutableLiveData<Resource<CreateAccountResponse>>()
     fun getCreateAccountData(): LiveData<Resource<CreateAccountResponse>> = createAccountData
 
+    private val dataPrepared = MutableLiveData<Boolean>()
+    fun getDataPrepared(): LiveData<Boolean> = dataPrepared
+
     fun createAccount(createAccountRequest: CreateAccountRequest) {
         viewModelScope.launch(Dispatchers.IO) {
 
@@ -58,5 +61,11 @@ class ReviewViewModel @Inject constructor(
             }
         }
         return Resource.Error(response.message())
+    }
+
+    fun setDataPrepared(value: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataPrepared.postValue(value)
+        }
     }
 }

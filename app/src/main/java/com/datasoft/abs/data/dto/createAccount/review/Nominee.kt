@@ -13,8 +13,8 @@ data class Nominee(
     val motherName: String,
     val nidNo: String,
     val name: String,
-    val nidBackPhoto: String,
-    val nidFrontPhoto: String,
+    var nidBackPhoto: String,
+    var nidFrontPhoto: String,
     val nomineeAge: Int,
     val nomineeCity: String,
     val nomineeCountyId: String,
@@ -23,9 +23,9 @@ data class Nominee(
     val nomineeStreetAddress: String,
     val nomineeThanaId: Int,
     val nomineeZipCode: String,
-    val photo: String,
+    var photo: String,
     val relatedDocType: Int,
     val relationship: Int,
     val shareOfPercentage: Int,
-    val signaturePhoto: String
+    var signaturePhoto: String
 ): Serializable
