@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -71,6 +72,8 @@ class GeneralFragment : Fragment() {
                 is Resource.Success -> {
                     response.data?.let {
                         customerAdapter.differ.submitList(it.customerData)
+
+                        binding.btnNext.isEnabled = it.customerData.isNotEmpty()
                     }
                 }
 
@@ -131,14 +134,7 @@ class GeneralFragment : Fragment() {
                             )
 
                         typeOfAccountList.addAll(it.productConfig)
-
                         customerNameList.addAll(it.customerList)
-                        binding.spinnerCustomerName.adapter =
-                            ArrayAdapter(
-                                requireContext(),
-                                android.R.layout.simple_spinner_item,
-                                customerNameList
-                            )
 
                         sourceOfFundList.addAll(it.sourceOfFundList)
                         binding.spinnerSourceOfFund.adapter =
@@ -195,11 +191,12 @@ class GeneralFragment : Fragment() {
                             )
                         )
 
+                        binding.spinnerCustomerName.text = it.customerId
                         binding.edTxtAccountTitle.setText(it.accountTitle)
                         binding.edTxtOpeningDate.setText(it.openingDate)
                         binding.edTxtInitialAmount.setText(it.initialAmount.toString())
 
-                        if(isClicked)
+                        if (isClicked)
                             accountViewModel.requestCurrentStep(1)
                     }
                 }
@@ -233,22 +230,6 @@ class GeneralFragment : Fragment() {
                 }
             }
 
-        binding.spinnerCustomerName.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    viewModel.customerData(customerNameList[position].id.toString())
-                }
-            }
-
         binding.spinnerTypeOfAccount.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -273,6 +254,16 @@ class GeneralFragment : Fragment() {
             ).show()
         }
 
+        binding.spinnerCustomerName.setOnClickListener {
+            showDialog(
+                customerNameList,
+                !operatingInstructionList[binding.spinnerOperatingInstruction.selectedItemPosition].name.contains(
+                    "Single Account",
+                    true
+                )
+            )
+        }
+
         binding.btnNext.setOnClickListener {
             isClicked = true
 
@@ -280,12 +271,14 @@ class GeneralFragment : Fragment() {
                 if (productCategoryList.isNotEmpty()) productCategoryList[binding.spinnerProductCategory.selectedItemPosition].id else 0,
                 if (accountList.isNotEmpty()) accountList[binding.spinnerTypeOfAccount.selectedItemPosition].id else 0,
                 if (operatingInstructionList.isNotEmpty()) operatingInstructionList[binding.spinnerOperatingInstruction.selectedItemPosition].id else 0,
-                if (customerNameList.isNotEmpty()) customerNameList[binding.spinnerCustomerName.selectedItemPosition].id.toString() else "",
+                binding.spinnerCustomerName.text.trim().toString(),
                 binding.edTxtAccountTitle.text.trim().toString(),
                 binding.edTxtOpeningDate.text.trim().toString(),
                 if (currencyList.isNotEmpty()) currencyList[binding.spinnerCurrency.selectedItemPosition].id else 0,
                 if (sourceOfFundList.isNotEmpty()) sourceOfFundList[binding.spinnerSourceOfFund.selectedItemPosition].id else 0,
-                if(binding.edTxtInitialAmount.text.trim().toString().isNotEmpty()) binding.edTxtInitialAmount.text.trim().toString().toInt() else 0
+                if (binding.edTxtInitialAmount.text.trim().toString()
+                        .isNotEmpty()
+                ) binding.edTxtInitialAmount.text.trim().toString().toInt() else 0
             )
         }
     }
@@ -314,5 +307,67 @@ class GeneralFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showDialog(list: List<CommonModel>, isMultiple: Boolean) {
+
+        lateinit var dialog: AlertDialog
+
+        val customerArray = mutableListOf<String>()
+        val customerID = mutableListOf<Int>()
+        val arrayChecked = mutableListOf<Boolean>()
+
+        var selectedCustomer = ""
+        var selectedCustomerID = ""
+
+        for (value in list) {
+            customerArray.add(value.name)
+            arrayChecked.add(false)
+            customerID.add(value.id)
+        }
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Select your Customer Name")
+        if (isMultiple) {
+            builder.setMultiChoiceItems(
+                customerArray.toTypedArray(),
+                null
+            ) { _, which, isChecked ->
+                arrayChecked[which] = isChecked
+            }
+        } else {
+            builder.setSingleChoiceItems(customerArray.toTypedArray(), -1) { _, which ->
+                selectedCustomer = customerArray[which]
+                selectedCustomerID = customerID[which].toString()
+            }
+        }
+
+        builder.setPositiveButton("OK") { _, _ ->
+            if (isMultiple) {
+                val stringBuilder = StringBuffer()
+                val stringBuilderID = StringBuffer()
+                for (i in customerArray.indices) {
+                    val checked = arrayChecked[i]
+                    if (checked) {
+                        stringBuilder.append(customerArray[i] + ", ")
+                        stringBuilderID.append(customerID[i].toString() + ", ")
+                    }
+                }
+
+                if (stringBuilder.length > 2 && stringBuilderID.length > 2) {
+                    binding.spinnerCustomerName.text =
+                        stringBuilder.toString().subSequence(0, stringBuilder.length - 2)
+                    viewModel.customerData(stringBuilderID.substring(0, stringBuilderID.length - 2))
+                }
+            } else {
+                if (selectedCustomer.isNotEmpty() && selectedCustomerID.isNotEmpty()) {
+                    binding.spinnerCustomerName.text = selectedCustomer
+                    viewModel.customerData(selectedCustomerID)
+                }
+            }
+        }
+
+        dialog = builder.create()
+        dialog.show()
     }
 }

@@ -51,8 +51,13 @@ class CustomerAdapter @Inject constructor() :
         holder.binding.txtViewMotherName.text = value.motherName
         holder.binding.txtViewDob.text = value.dob
 
-        holder.binding.switchSignatory.isChecked = value.isSignatory
-        holder.binding.switchMandatory.isChecked = value.isRequired
+        if(differ.currentList.size > 1) {
+            holder.binding.switchSignatory.isChecked = value.isSignatory
+            holder.binding.switchMandatory.isChecked = value.isRequired
+        } else {
+            holder.binding.switchSignatory.isEnabled = false
+            holder.binding.switchMandatory.isEnabled = false
+        }
     }
 }
 
