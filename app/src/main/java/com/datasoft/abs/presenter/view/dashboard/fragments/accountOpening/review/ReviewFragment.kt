@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
 import com.datasoft.abs.data.dto.createAccount.review.JointCustomerInfo
 import com.datasoft.abs.data.dto.createAccount.review.Nominee
@@ -48,6 +49,8 @@ class ReviewFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val createAccountRequest = CreateAccountRequest()
+
+    private val othersList = mutableListOf<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -99,7 +102,14 @@ class ReviewFragment : Fragment() {
                             val list = mutableListOf<JointCustomerInfo>()
 
                             for (value in it.customerData) {
-                                list.add(JointCustomerInfo(1, value.customerId, value.isSignatory, value.isRequired))
+                                list.add(
+                                    JointCustomerInfo(
+                                        1,
+                                        value.customerId,
+                                        value.isSignatory,
+                                        value.isRequired
+                                    )
+                                )
                             }
 
                             jointCustomer = list
@@ -119,22 +129,31 @@ class ReviewFragment : Fragment() {
 
         othersViewModel.getChequeBook().observe(viewLifecycleOwner, {
             createAccountRequest.isChequeBookEnable = it
+            if (it) othersList.add(0)
         })
 
         othersViewModel.getSMSBanking().observe(viewLifecycleOwner, {
             createAccountRequest.isSmsBankingEnable = it
+            if (it) othersList.add(1)
         })
 
         othersViewModel.getDebitCard().observe(viewLifecycleOwner, {
             createAccountRequest.isDebitCardEnable = it
+            if (it) othersList.add(2)
         })
 
         othersViewModel.getEStatement().observe(viewLifecycleOwner, {
             createAccountRequest.isEStatementEnable = it
+            if (it) othersList.add(3)
         })
 
         othersViewModel.getInternetBanking().observe(viewLifecycleOwner, {
             createAccountRequest.isInternetBankingEnable = it
+            if (it) othersList.add(4)
+        })
+
+        othersViewModel.getNotifyData().observe(viewLifecycleOwner, {
+            otherFacilities()
         })
 
         nomineeViewModel.getSavedData().observe(viewLifecycleOwner, {
@@ -242,7 +261,56 @@ class ReviewFragment : Fragment() {
                 }
             }
         })
+    }
 
+    private fun otherFacilities() {
+        val interested = StringBuilder()
+        val notInterested = StringBuilder()
+        if (othersList.isNotEmpty()) {
+            for (i in 0..4) {
+                if (othersList.indexOf(i) >= 0) {
+                    when (i) {
+                        0 -> interested.append(resources.getString(R.string.cheque_book))
+                            .append(", ")
+                        1 -> interested.append(resources.getString(R.string.sms_banking))
+                            .append(", ")
+                        2 -> interested.append(resources.getString(R.string.debit_card))
+                            .append(", ")
+                        3 -> interested.append(resources.getString(R.string.e_statement))
+                            .append(", ")
+                        4 -> interested.append(resources.getString(R.string.internet_banking))
+                            .append(", ")
+                    }
+                } else {
+                    when (i) {
+                        0 -> notInterested.append(resources.getString(R.string.cheque_book))
+                            .append(", ")
+                        1 -> notInterested.append(resources.getString(R.string.sms_banking))
+                            .append(", ")
+                        2 -> notInterested.append(resources.getString(R.string.debit_card))
+                            .append(", ")
+                        3 -> notInterested.append(resources.getString(R.string.e_statement))
+                            .append(", ")
+                        4 -> notInterested.append(resources.getString(R.string.internet_banking))
+                            .append(" ,")
+                    }
+                }
+            }
+
+            if (interested.isNotEmpty() && interested.length > 2)
+                binding.txtViewInterestedServiceValue.text =
+                    interested.substring(0, interested.length - 2)
+            if (notInterested.isNotEmpty() && notInterested.length > 2)
+                binding.txtViewNotInterestedValue.text =
+                    notInterested.substring(0, notInterested.length - 2)
+
+        } else {
+            val notInterestedValue =
+                resources.getString(R.string.cheque_book) + ", " + resources.getString(R.string.sms_banking) + ", " + resources.getString(
+                    R.string.debit_card
+                ) + ", " + resources.getString(R.string.e_statement) + ", " + resources.getString(R.string.internet_banking)
+            binding.txtViewNotInterestedValue.text = notInterestedValue
+        }
     }
 
     private fun goneProgressBar() {

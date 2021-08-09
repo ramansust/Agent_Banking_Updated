@@ -10,6 +10,7 @@ data class Nominee(
     val spouseName: String,
     val shareOfPercentage: Int,
     val relationship: Int,
+    val relationshipValue: String,
     val occupationId: Int,
     val docTypeId: Int,
     val nidNo: String,

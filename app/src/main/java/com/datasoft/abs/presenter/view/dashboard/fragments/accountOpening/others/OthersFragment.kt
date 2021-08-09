@@ -19,6 +19,7 @@ class OthersFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+    private var isClicked = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +31,8 @@ class OthersFragment : Fragment() {
         val root: View = binding.root
 
         binding.btnNext.setOnClickListener {
-            accountViewModel.requestCurrentStep(2)
+            isClicked = true
+            viewModel.setNotify(true)
         }
 
         binding.btnBack.setOnClickListener {
@@ -45,6 +47,11 @@ class OthersFragment : Fragment() {
 
         accountViewModel.requestVisibility(false)
         accountViewModel.requestListener(false)
+
+        viewModel.getNotifyData().observe(viewLifecycleOwner, {
+            if(isClicked)
+                accountViewModel.requestCurrentStep(2)
+        })
 
         viewModel.getChequeBook().observe(viewLifecycleOwner, {
             binding.switchChequeBook.isChecked = it

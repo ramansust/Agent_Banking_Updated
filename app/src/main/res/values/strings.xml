@@ -248,5 +248,9 @@
     <string name="nominee_remain_minor">Nominee Remain Minor</string>
 
     <string name="nominee_photo_">Nominee\'s Photo*</string>
+    <string name="nominee_photo">Nominee\'s Photo</string>
     <string name="nominee_signature_">Nominee\'s Signature*</string>
+
+    <string name="interested_service">Interested Services</string>
+    <string name="not_interested">Not Interested</string>
 </resources>

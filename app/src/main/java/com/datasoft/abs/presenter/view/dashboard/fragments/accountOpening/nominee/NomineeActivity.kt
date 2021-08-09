@@ -170,6 +170,7 @@ class NomineeActivity : BaseActivity() {
                 ) binding.edTxtPercentShare.text.trim().toString()
                     .toInt() else 0,
                 if (relationList.isNotEmpty()) relationList[binding.spinnerRelation.selectedItemPosition].id else 0,
+                if (relationList.isNotEmpty()) relationList[binding.spinnerRelation.selectedItemPosition].name else "",
                 if (occupationList.isNotEmpty()) occupationList[binding.spinnerOccupation.selectedItemPosition].id else 0,
                 if (documentList.isNotEmpty()) documentList[binding.spinnerDocumentsType.selectedItemPosition].id else 0,
                 binding.edTxtIdValue.text.trim().toString(),

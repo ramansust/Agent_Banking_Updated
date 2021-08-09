@@ -14,6 +14,9 @@ class OthersViewModel @Inject constructor(
 
 ): ViewModel() {
 
+    private val notify = MutableLiveData<Boolean>()
+    fun getNotifyData(): LiveData<Boolean> = notify
+
     private val chequeBook = MutableLiveData<Boolean>()
     fun getChequeBook(): LiveData<Boolean> = chequeBook
 
@@ -58,4 +61,11 @@ class OthersViewModel @Inject constructor(
             internetBanking.postValue(value)
         }
     }
+
+    fun setNotify(value: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            notify.postValue(value)
+        }
+    }
+
 }
