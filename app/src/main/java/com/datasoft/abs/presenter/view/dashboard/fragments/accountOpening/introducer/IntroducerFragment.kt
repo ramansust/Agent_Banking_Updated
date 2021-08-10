@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.config.CommonModel
@@ -27,6 +28,8 @@ class IntroducerFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
+    private var isClicked = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,7 +46,7 @@ class IntroducerFragment : Fragment() {
         accountViewModel.requestListener(false)
 
         viewModel.getIntroducerData().observe(viewLifecycleOwner, { response ->
-            when(response) {
+            when (response) {
 
                 is Resource.Success -> {
                     response.data?.let {
@@ -56,7 +59,10 @@ class IntroducerFragment : Fragment() {
                 }
 
                 is Resource.Error -> {
-
+                    response.message?.let { message ->
+                        if(isClicked)
+                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                    }
                 }
 
                 is Resource.Loading -> {
@@ -117,7 +123,12 @@ class IntroducerFragment : Fragment() {
                 }
             }
 
-        binding.edTxtIntroducer.addTextChangedListener(textWatcher)
+//        binding.edTxtIntroducer.addTextChangedListener(textWatcher) // 1001120013386
+
+        binding.imgViewSearch.setOnClickListener {
+            isClicked = true
+            viewModel.introducerData(binding.edTxtIntroducer.text.trim().toString())
+        }
     }
 
     private val textWatcher = object : TextWatcher {

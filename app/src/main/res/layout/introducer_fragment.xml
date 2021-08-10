@@ -34,18 +34,41 @@
                     android:text="@string/introducer_"
                     android:textSize="@dimen/font_16x" />
 
-                <EditText
-                    android:id="@+id/ed_txt_introducer"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/space_48x"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_8x"
-                    android:background="@drawable/input_border"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:hint="@string/type_here"
-                    android:inputType="number"
-                    android:maxLength="@integer/edit_text_input_length"
-                    android:padding="@dimen/space_8x"
-                    android:textSize="@dimen/font_16x" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/ed_txt_introducer"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/space_48x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="number"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/img_view_search"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/img_view_search"
+                        android:layout_width="@dimen/space_48x"
+                        android:layout_height="@dimen/space_48x"
+                        android:contentDescription="@string/todo"
+                        android:padding="@dimen/space_8x"
+                        android:src="@drawable/ic_search"
+                        app:layout_constraintBottom_toBottomOf="@+id/ed_txt_introducer"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/ed_txt_introducer" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:layout_width="match_parent"

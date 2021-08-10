@@ -29,6 +29,17 @@ class IntroducerViewModel @Inject constructor(
 
     fun introducerData(accountNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
+
+            if(accountNo.isEmpty()) {
+                introducer.postValue(
+                    Resource.Error(
+                        "Search filed must not be empty!", null
+                    )
+                )
+
+                return@launch
+            }
+
             if (network.isConnected()) {
                 try {
                     val response = repository.getIntroducerData(accountNo)
