@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
 import com.datasoft.abs.data.dto.createAccount.review.JointCustomerInfo
@@ -32,6 +33,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ReviewFragment : Fragment() {
@@ -49,8 +51,10 @@ class ReviewFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val createAccountRequest = CreateAccountRequest()
-
     private val othersList = mutableListOf<Int>()
+
+    @Inject
+    lateinit var nomineeAdapter: NomineeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,6 +72,8 @@ class ReviewFragment : Fragment() {
 
         accountViewModel.requestVisibility(false)
         accountViewModel.requestListener(false)
+
+        setupRecyclerView()
 
         generalViewModel.getAccountInfo().observe(viewLifecycleOwner, { response ->
             when (response) {
@@ -157,6 +163,8 @@ class ReviewFragment : Fragment() {
         })
 
         nomineeViewModel.getSavedData().observe(viewLifecycleOwner, {
+            nomineeAdapter.differ.submitList(it)
+
             GlobalScope.launch(Dispatchers.IO) {
                 createAccountRequest.nominees = fileUriToBase64(it)
                 viewModel.setDataPrepared(true)
@@ -168,6 +176,8 @@ class ReviewFragment : Fragment() {
                 is Resource.Success -> {
                     response.data?.let {
                         createAccountRequest.introducerId = 0
+                        binding.txtViewNameValue.text = it.fullName
+                        binding.txtViewAccountNumberValue.text = it.accountNumber
                     }
                 }
 
@@ -421,5 +431,13 @@ class ReviewFragment : Fragment() {
             nomineeList.add(value)
         }
         return nomineeList
+    }
+
+    private fun setupRecyclerView() {
+        binding.recyclerView.apply {
+            adapter = nomineeAdapter
+            layoutManager = LinearLayoutManager(activity)
+//            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        }
     }
 }
