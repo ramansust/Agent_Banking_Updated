@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.data.dto.createAccount.review.Nominee
 import com.datasoft.abs.databinding.NomineeFragmentBinding
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Constant.MAX_SHARE
+import com.datasoft.abs.presenter.utils.Constant.SHARE_PERCENT_INFO
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -29,6 +31,8 @@ class NomineeFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
     private var isAddEnabled = false
+
+    private var sharePercent = 0
 
     @Inject
     lateinit var nomineeAdapter: NomineeListAdapter
@@ -45,9 +49,16 @@ class NomineeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        accountViewModel.requestVisibility(true)
-
         setupRecyclerView()
+
+        nomineeViewModel.getSharePercent().observe(viewLifecycleOwner, {
+            sharePercent = it
+            if (it >= MAX_SHARE) {
+                accountViewModel.requestVisibility(false)
+            } else {
+                accountViewModel.requestVisibility(true)
+            }
+        })
 
         nomineeViewModel.getSavedData().observe(viewLifecycleOwner, {
             nomineeAdapter.differ.submitList(it)
@@ -59,8 +70,8 @@ class NomineeFragment : Fragment() {
         })
 
         accountViewModel.getAddListener().observe(viewLifecycleOwner, {
-            if(it && isAddEnabled) {
-                resultLauncher.launch(Intent(requireContext(), NomineeActivity::class.java))
+            if (it && isAddEnabled) {
+                resultLauncher.launch(Intent(requireContext(), NomineeActivity::class.java).putExtra(SHARE_PERCENT_INFO, sharePercent))
             }
 
             isAddEnabled = true
@@ -79,11 +90,12 @@ class NomineeFragment : Fragment() {
         }
     }
 
-    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            nomineeViewModel.notifyData(result.data?.getSerializableExtra(Constant.NOMINEE_INFO) as Nominee)
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                nomineeViewModel.notifyData(result.data?.getSerializableExtra(Constant.NOMINEE_INFO) as Nominee)
+            }
         }
-    }
 
     private fun setupRecyclerView() {
         binding.recyclerView.apply {

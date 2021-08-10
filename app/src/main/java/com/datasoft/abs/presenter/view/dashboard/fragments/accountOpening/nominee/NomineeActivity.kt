@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Base64
 import android.util.Log
 import android.view.View
@@ -24,7 +25,9 @@ import com.datasoft.abs.presenter.utils.Constant.ADULT_AGE
 import com.datasoft.abs.presenter.utils.Constant.IMAGE_COMPRESS
 import com.datasoft.abs.presenter.utils.Constant.IMAGE_RESOLUTION_HEIGHT
 import com.datasoft.abs.presenter.utils.Constant.IMAGE_RESOLUTION_WIDTH
+import com.datasoft.abs.presenter.utils.Constant.MAX_SHARE
 import com.datasoft.abs.presenter.utils.Constant.NOMINEE_INFO
+import com.datasoft.abs.presenter.utils.Constant.SHARE_PERCENT_INFO
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.photo.SignatureActivity
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -153,6 +156,18 @@ class NomineeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         accountViewModel.accountConfigData()
+
+        val extras = intent.extras
+        if (null != extras) {
+            binding.edTxtPercentShare.filters =
+                arrayOf<InputFilter>(
+                    MinMaxFilter(
+                        "1", "" + (MAX_SHARE - extras.getInt(
+                            SHARE_PERCENT_INFO
+                        ))
+                    )
+                )
+        }
 
         binding.btnCross.setOnClickListener {
             finish()

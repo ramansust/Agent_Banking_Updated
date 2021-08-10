@@ -18,4 +18,6 @@ object Constant {
     const val IMAGE_RESOLUTION_WIDTH = 1080
     const val IMAGE_RESOLUTION_HEIGHT = 1080
     const val IMAGE_COMPRESS = 1024
+    const val MAX_SHARE = 100
+    const val SHARE_PERCENT_INFO = "SHARE_PERCENT_INFO"
 }

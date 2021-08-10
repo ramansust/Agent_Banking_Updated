@@ -21,6 +21,9 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
     private val nomineeAge = MutableLiveData<Int>()
     fun getNomineeAge(): LiveData<Int> = nomineeAge
 
+    private val sharePercent = MutableLiveData<Int>().apply { postValue(0) }
+    fun getSharePercent(): LiveData<Int> = sharePercent
+
     private val nomineeData = MutableLiveData<Resource<Nominee>>()
     fun getNomineeData(): LiveData<Resource<Nominee>> = nomineeData
 
@@ -65,7 +68,7 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
 
             nomineeData.postValue(Resource.Loading())
 
-            if (name.isEmpty() || motherName.isEmpty() || expiryDate.isEmpty() ||
+            /*if (name.isEmpty() || motherName.isEmpty() || expiryDate.isEmpty() ||
                 presentAddress.isEmpty() || fatherName.isEmpty() || dob.isEmpty() ||
                 shareOfPercentage == 0 || nidNo.isEmpty() || permanentAddress.isEmpty() || presentAddress.isEmpty() ||
                 photo.isEmpty() || signaturePhoto.isEmpty() || nidFrontPhoto.isEmpty()
@@ -88,7 +91,7 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
                     )
                     return@launch
                 }
-            }
+            }*/
 
             val nomineeInfo = Nominee(
                 name,
@@ -110,7 +113,17 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
                 signaturePhoto,
                 nidFrontPhoto,
                 nidBackPhoto,
-                if(isMinor) NomineeRemainMinor(nomineeName, nomineeFatherSpouseName, nomineeBirthDate, nomineePresentAddress, nomineePermanentAddress, nomineeWithRelation, nomineeDocId, nomineeIdValue, nomineeExpiryDate) else null
+                if (isMinor) NomineeRemainMinor(
+                    nomineeName,
+                    nomineeFatherSpouseName,
+                    nomineeBirthDate,
+                    nomineePresentAddress,
+                    nomineePermanentAddress,
+                    nomineeWithRelation,
+                    nomineeDocId,
+                    nomineeIdValue,
+                    nomineeExpiryDate
+                ) else null
             )
 
             nomineeData.postValue(Resource.Success(nomineeInfo))
@@ -140,6 +153,7 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
                 list.addAll(list.size - 1, it)
             }
             saveData.postValue(list)
+            setSharePercent(nomineeInfo.shareOfPercentage)
         }
     }
 
@@ -151,12 +165,25 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
             }
             list.remove(nomineeInfo)
             saveData.postValue(list)
+            removeSharePercent(nomineeInfo.shareOfPercentage)
         }
     }
 
     fun setBackImage(isRequired: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             backImage.postValue(isRequired)
+        }
+    }
+
+    private fun setSharePercent(value: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            sharePercent.postValue(sharePercent.value?.plus(value))
+        }
+    }
+
+    private fun removeSharePercent(value: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            sharePercent.postValue(sharePercent.value?.minus(value))
         }
     }
 }
