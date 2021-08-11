@@ -52,11 +52,13 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_general_edit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/button_border"
                             android:text="@string/edit"
+                            android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -383,11 +385,13 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_personal_edit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/button_border"
                             android:text="@string/edit"
+                            android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -633,11 +637,13 @@
                             app:layout_constraintStart_toStartOf="@+id/guideline_middle_2"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_address_1_value" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_address_edit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/button_border"
                             android:text="@string/edit"
+                            android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -682,11 +688,13 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_photo_nid_edit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/button_border"
                             android:text="@string/edit"
+                            android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -821,11 +829,13 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_fingerprint_edit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/button_border"
                             android:text="@string/edit"
+                            android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -919,11 +929,13 @@
                             android:orientation="vertical"
                             app:layout_constraintGuide_percent=".25" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_documents_edit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/button_border"
                             android:text="@string/edit"
+                            android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1068,11 +1080,13 @@
                             android:orientation="vertical"
                             app:layout_constraintGuide_percent=".25" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_kyc_edit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/button_border"
                             android:text="@string/edit"
+                            android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1080,7 +1094,7 @@
 
                 </LinearLayout>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_next"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1088,25 +1102,25 @@
                     android:layout_marginBottom="@dimen/space_16x"
                     android:background="@drawable/button_border"
                     android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:paddingStart="@dimen/space_16x"
+                    android:paddingEnd="@dimen/space_8x"
                     android:text="@string/submit"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_20x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/space_16x"
                     android:layout_marginBottom="@dimen/space_16x"
                     android:background="@drawable/button_border"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:drawableStart="@drawable/ic_baseline_arrow_back_ios_24"
+                    android:paddingStart="@dimen/space_16x"
+                    android:paddingEnd="@dimen/space_16x"
                     android:text="@string/back"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_20x"
-                    app:icon="@drawable/ic_baseline_arrow_back_ios_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/btn_next" />
             </androidx.constraintlayout.widget.ConstraintLayout>

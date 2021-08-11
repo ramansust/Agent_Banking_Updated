@@ -15,6 +15,7 @@
         <item name="android:fontFamily">@font/oxygen_regular</item>
 
         <item name="android:spinnerItemStyle">@style/SpinnerTheme</item>
+        <item name="materialButtonStyle">@style/ButtonTheme</item>
 
     </style>
 
@@ -47,6 +48,13 @@
         <item name="android:paddingTop">@dimen/space_5x</item>
         <item name="android:paddingBottom">@dimen/space_5x</item>
         <item name="android:paddingRight">@dimen/space_16x</item>
+    </style>
+
+    <style name="ButtonTheme" parent="android:style/Widget.Button">
+        <item name="android:textSize">@dimen/font_20x</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/oxygen_regular</item>
+        <item name="android:background">@color/purple_500</item>
     </style>
 
 </resources>

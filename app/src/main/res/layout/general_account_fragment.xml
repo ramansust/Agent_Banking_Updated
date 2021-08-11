@@ -349,18 +349,17 @@
 
         </androidx.core.widget.NestedScrollView>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_16x"
             android:background="@drawable/button_border"
             android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
             android:enabled="false"
-            android:fontFamily="@font/oxygen_regular"
+            android:paddingStart="@dimen/space_16x"
+            android:paddingEnd="@dimen/space_8x"
             android:text="@string/next"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_20x"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
