@@ -81,13 +81,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_view_photo_hide" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_take_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/space_5x"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:background="@drawable/button_border"
                     android:text="@string/attach"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btn_browse_photo"
@@ -95,13 +96,14 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_browse_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_5x"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:background="@drawable/button_border"
                     android:text="@string/browse"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -166,13 +168,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_view_signature_hide" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_take_signature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/space_5x"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:background="@drawable/button_border"
                     android:text="@string/attach"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btn_browse_signature"
@@ -180,13 +183,14 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_browse_signature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_5x"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:background="@drawable/button_border"
                     android:text="@string/browse"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -252,26 +256,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_view_nid_front" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_take_nid_front"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/space_5x"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:background="@drawable/button_border"
                     android:text="@string/attach"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btn_browse_nid_front"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_browse_nid_front"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_5x"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:background="@drawable/button_border"
                     android:text="@string/browse"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/guideline_middle"
@@ -302,25 +308,28 @@
                     app:layout_constraintStart_toEndOf="@id/guideline_middle"
                     app:layout_constraintTop_toBottomOf="@+id/txt_view_nid_back" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_take_nid_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/button_border"
                     android:fontFamily="@font/oxygen_regular"
                     android:text="@string/attach"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btn_browse_nid_back"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toEndOf="@+id/guideline_middle" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_browse_nid_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_5x"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:background="@drawable/button_border"
                     android:text="@string/browse"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -425,13 +434,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_photo_hide" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_take_guardian_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/space_5x"
+                    android:background="@drawable/button_border"
                     android:fontFamily="@font/oxygen_regular"
                     android:text="@string/attach"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_photo"
@@ -439,13 +450,14 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_browse_guardian_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_5x"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:background="@drawable/button_border"
                     android:text="@string/browse"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -511,13 +523,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_signature_hide" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_take_guardian_signature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/space_5x"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:background="@drawable/button_border"
                     android:text="@string/attach"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_signature"
@@ -525,13 +538,14 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_browse_guardian_signature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_5x"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:background="@drawable/button_border"
                     android:text="@string/browse"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -598,26 +612,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_nid_front" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_take_guardian_nid_front"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/space_5x"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:background="@drawable/button_border"
                     android:text="@string/attach"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_nid_front"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_browse_guardian_nid_front"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_5x"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:background="@drawable/button_border"
                     android:text="@string/browse"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/guideline_middle_guardian"
@@ -649,25 +665,28 @@
                     app:layout_constraintStart_toEndOf="@id/guideline_middle_guardian"
                     app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_nid_back" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_take_guardian_nid_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/button_border"
                     android:fontFamily="@font/oxygen_regular"
                     android:text="@string/attach"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_nid_back"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toEndOf="@+id/guideline_middle_guardian" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_browse_guardian_nid_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_5x"
-                    android:fontFamily="@font/oxygen_regular"
+                    android:background="@drawable/button_border"
                     android:text="@string/browse"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

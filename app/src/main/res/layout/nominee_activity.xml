@@ -503,105 +503,113 @@
                             app:layout_constraintStart_toStartOf="@+id/txt_view_back_doc"
                             app:layout_constraintTop_toBottomOf="@id/txt_view_back_doc" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_take_nominee_photo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:layout_marginEnd="@dimen/space_5x"
-                            android:fontFamily="@font/oxygen_regular"
+                            android:background="@drawable/button_border"
                             android:text="@string/attach"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_nominee_photo"
                             app:layout_constraintStart_toStartOf="@id/txt_view_nominee_photo"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_nominee_photo" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_browse_nominee_photo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/space_5x"
                             android:layout_marginTop="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_regular"
+                            android:background="@drawable/button_border"
                             android:text="@string/browse"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toEndOf="@id/txt_view_nominee_photo"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_nominee_photo"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_nominee_photo" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_take_nominee_signature"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:layout_marginEnd="@dimen/space_5x"
-                            android:fontFamily="@font/oxygen_regular"
+                            android:background="@drawable/button_border"
                             android:text="@string/attach"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_nominee_signature"
                             app:layout_constraintStart_toStartOf="@id/txt_view_nominee_signature"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_nominee_signature" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_browse_nominee_signature"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/space_5x"
                             android:layout_marginTop="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_regular"
+                            android:background="@drawable/button_border"
                             android:text="@string/browse"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toEndOf="@id/txt_view_nominee_signature"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_nominee_signature"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_nominee_signature" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_take_front_doc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:layout_marginEnd="@dimen/space_5x"
-                            android:fontFamily="@font/oxygen_regular"
+                            android:background="@drawable/button_border"
                             android:text="@string/attach"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_front_doc"
                             app:layout_constraintStart_toStartOf="@id/txt_view_front_doc"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_front_doc" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_browse_front_doc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/space_5x"
                             android:layout_marginTop="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_regular"
+                            android:background="@drawable/button_border"
                             android:text="@string/browse"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toEndOf="@id/txt_view_front_doc"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_front_doc"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_front_doc" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_take_back_doc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:layout_marginEnd="@dimen/space_5x"
-                            android:fontFamily="@font/oxygen_regular"
+                            android:background="@drawable/button_border"
                             android:text="@string/attach"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_back_doc"
                             app:layout_constraintStart_toStartOf="@id/txt_view_back_doc"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_back_doc" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_browse_back_doc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/space_5x"
                             android:layout_marginTop="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_regular"
+                            android:background="@drawable/button_border"
                             android:text="@string/browse"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toEndOf="@id/txt_view_back_doc"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_back_doc"

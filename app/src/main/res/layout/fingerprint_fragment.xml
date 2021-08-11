@@ -59,13 +59,14 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_scan_left_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_16x"
-                        android:fontFamily="@font/oxygen_regular"
+                        android:background="@drawable/button_border"
                         android:text="@string/scan"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/font_12x"
                         app:layout_constraintEnd_toEndOf="@+id/img_view_left_1"
                         app:layout_constraintStart_toStartOf="@+id/img_view_left_1"
@@ -104,14 +105,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_scan_left_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_16x"
+                        android:background="@drawable/button_border"
                         android:enabled="false"
-                        android:fontFamily="@font/oxygen_regular"
                         android:text="@string/scan"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/font_12x"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/img_view_left_2"
@@ -151,14 +153,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_scan_left_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_16x"
+                        android:background="@drawable/button_border"
                         android:enabled="false"
-                        android:fontFamily="@font/oxygen_regular"
                         android:text="@string/scan"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/font_12x"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/img_view_left_3"
@@ -198,14 +201,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_scan_left_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_16x"
+                        android:background="@drawable/button_border"
                         android:enabled="false"
-                        android:fontFamily="@font/oxygen_regular"
                         android:text="@string/scan"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/font_12x"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/img_view_left_4"
@@ -245,14 +249,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_scan_left_5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_16x"
+                        android:background="@drawable/button_border"
                         android:enabled="false"
-                        android:fontFamily="@font/oxygen_regular"
                         android:text="@string/scan"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/font_12x"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/img_view_left_5"
@@ -306,14 +311,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_scan_right_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_16x"
+                        android:background="@drawable/button_border"
                         android:enabled="false"
-                        android:fontFamily="@font/oxygen_regular"
                         android:text="@string/scan"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/font_12x"
                         app:layout_constraintEnd_toEndOf="@+id/img_view_right_1"
                         app:layout_constraintStart_toStartOf="@+id/img_view_right_1"
@@ -352,14 +358,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_scan_right_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_16x"
+                        android:background="@drawable/button_border"
                         android:enabled="false"
-                        android:fontFamily="@font/oxygen_regular"
                         android:text="@string/scan"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/font_12x"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/img_view_right_2"
@@ -399,14 +406,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_scan_right_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_16x"
+                        android:background="@drawable/button_border"
                         android:enabled="false"
-                        android:fontFamily="@font/oxygen_regular"
                         android:text="@string/scan"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/font_12x"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/img_view_right_3"
@@ -446,14 +454,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_scan_right_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_16x"
+                        android:background="@drawable/button_border"
                         android:enabled="false"
-                        android:fontFamily="@font/oxygen_regular"
                         android:text="@string/scan"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/font_12x"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/img_view_right_4"
@@ -493,14 +502,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_scan_right_5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_16x"
+                        android:background="@drawable/button_border"
                         android:enabled="false"
-                        android:fontFamily="@font/oxygen_regular"
                         android:text="@string/scan"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/font_12x"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/img_view_right_5"
