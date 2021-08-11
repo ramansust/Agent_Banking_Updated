@@ -13,7 +13,7 @@ import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.databinding.FragmentAccountMainBinding
 import com.datasoft.abs.presenter.utils.Status
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountList.adapter.AccountMainAdapter
-import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerActivity
+import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -64,7 +64,7 @@ class AccountMainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnAdd.setOnClickListener {
-            startActivity(Intent(requireContext(), CustomerActivity::class.java))
+            startActivity(Intent(requireContext(), AccountActivity::class.java))
         }
 
         binding.edTxtSearch.addTextChangedListener(textWatcher)

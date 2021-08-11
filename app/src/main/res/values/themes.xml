@@ -25,7 +25,7 @@
     <style name="Theme.AgentBanking.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="NavigationDrawerStyle">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/font_16x</item>
         <item name="android:fontFamily">@font/oxygen_regular</item>
     </style>
 
@@ -34,6 +34,12 @@
         <item name="android:textAllCaps">true</item>
         <item name="fontFamily">@font/oxygen_regular</item>
         <item name="android:fontFamily">@font/oxygen_regular</item>
+    </style>
+
+    <style name="SpinnerTheme">
+        <item name="android:textColor">@color/customer_text</item>
+        <item name="android:fontFamily">@font/oxygen_regular</item>
+        <item name="android:textSize">@dimen/font_16x</item>
     </style>
 
 </resources>

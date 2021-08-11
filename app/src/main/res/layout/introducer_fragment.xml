@@ -20,7 +20,7 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="@dimen/space_8x"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +132,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space_48x"
                     android:layout_marginTop="@dimen/space_8x"
-                    android:background="@drawable/spinner_background" />
+                    android:background="@drawable/spinner_background"
+                    android:theme="@style/SpinnerTheme" />
 
                 <TextView
                     android:layout_width="match_parent"

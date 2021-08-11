@@ -19,7 +19,7 @@
                 android:id="@+id/scroll_view"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/space_8x"
                 app:layout_constraintBottom_toTopOf="@+id/btn_back"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -33,8 +33,8 @@
                         android:id="@+id/txt_view_risk_grading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="@dimen/space_16x"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/risk_grading"
                         android:textSize="@dimen/font_24x"
@@ -45,9 +45,9 @@
                         android:id="@+id/linearLayout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="@dimen/space_16x"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:layout_marginEnd="@dimen/space_8x"
                         android:orientation="vertical"
                         app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
                             android:id="@+id/txt_view_black_listed"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/black_listed"
                             android:textSize="@dimen/font_16x" />
@@ -81,14 +81,15 @@
                             android:id="@+id/spinner_black_listed"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/spinner_background" />
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@drawable/spinner_background"
+                            android:theme="@style/SpinnerTheme" />
 
                         <TextView
                             android:id="@+id/txt_view_close_associates"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/close_associates_related_pep"
                             android:textSize="@dimen/font_16x" />
@@ -97,14 +98,15 @@
                             android:id="@+id/spinner_close_associates"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/spinner_background" />
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@drawable/spinner_background"
+                            android:theme="@style/SpinnerTheme" />
 
                         <TextView
                             android:id="@+id/txt_view_type_product"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/type_of_product"
                             android:textSize="@dimen/font_16x" />
@@ -113,14 +115,15 @@
                             android:id="@+id/spinner_type_product"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/spinner_background" />
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@drawable/spinner_background"
+                            android:theme="@style/SpinnerTheme" />
 
                         <TextView
                             android:id="@+id/txt_view_yearly_transaction"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/yearly_transaction_worth"
                             android:textSize="@dimen/font_16x" />
@@ -129,16 +132,17 @@
                             android:id="@+id/spinner_yearly_transaction"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/spinner_background" />
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@drawable/spinner_background"
+                            android:theme="@style/SpinnerTheme" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="@dimen/space_8x"
+                        android:layout_marginEnd="@dimen/space_16x"
                         android:orientation="vertical"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/guideline_middle"
@@ -157,14 +161,15 @@
                             android:id="@+id/spinner_resident_status"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/spinner_background" />
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@drawable/spinner_background"
+                            android:theme="@style/SpinnerTheme" />
 
                         <TextView
                             android:id="@+id/txt_view_politically_exposed"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/politically_exposed_person"
                             android:textSize="@dimen/font_16x" />
@@ -173,14 +178,15 @@
                             android:id="@+id/spinner_politically_exposed"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/spinner_background" />
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@drawable/spinner_background"
+                            android:theme="@style/SpinnerTheme" />
 
                         <TextView
                             android:id="@+id/txt_view_interviewed_personally"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/interviewed_personally"
                             android:textSize="@dimen/font_16x" />
@@ -189,14 +195,15 @@
                             android:id="@+id/spinner_interviewed_personally"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/spinner_background" />
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@drawable/spinner_background"
+                            android:theme="@style/SpinnerTheme" />
 
                         <TextView
                             android:id="@+id/txt_view_profession"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/profession"
                             android:textSize="@dimen/font_16x" />
@@ -205,14 +212,15 @@
                             android:id="@+id/spinner_profession"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/spinner_background" />
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@drawable/spinner_background"
+                            android:theme="@style/SpinnerTheme" />
 
                         <TextView
                             android:id="@+id/txt_view_transparency_risk"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/transparency_risk"
                             android:textSize="@dimen/font_16x" />
@@ -221,8 +229,9 @@
                             android:id="@+id/spinner_transparency_risk"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/spinner_background" />
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@drawable/spinner_background"
+                            android:theme="@style/SpinnerTheme" />
 
                     </LinearLayout>
 
@@ -237,8 +246,8 @@
                         android:id="@+id/txt_view_documents_of_identifications"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="@dimen/space_16x"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/documents_identification"
                         android:textSize="@dimen/font_24x"
@@ -249,10 +258,11 @@
                         android:id="@+id/linearLayout_header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="@dimen/space_8x"
                         android:layout_marginTop="@dimen/space_16x"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="@dimen/space_8x"
                         android:background="@color/dashboard_bg"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingStart="@dimen/space_8x"
                         android:paddingTop="@dimen/space_16x"
@@ -323,8 +333,8 @@
                 android:id="@+id/btn_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="@dimen/space_16x"
+                android:layout_marginBottom="@dimen/space_16x"
                 android:background="@drawable/button_border"
                 android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
                 android:fontFamily="@font/oxygen_regular"
@@ -338,8 +348,8 @@
                 android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="@dimen/space_16x"
+                android:layout_marginBottom="@dimen/space_16x"
                 android:background="@drawable/button_border"
                 android:fontFamily="@font/oxygen_regular"
                 android:text="@string/back"

@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:itemIconSize="40dp"
+        app:itemIconSize="@dimen/space_48x"
         app:headerLayout="@layout/nav_header_main"
         app:itemTextAppearance="@style/NavigationDrawerStyle"
         app:menu="@menu/activity_main_drawer" />

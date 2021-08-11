@@ -11,8 +11,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/space_16x"
+        android:layout_marginEnd="@dimen/space_16x"
         android:elevation="@dimen/space_5x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +55,7 @@
                 android:id="@+id/input_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/space_8x"
                 app:layout_constraintBottom_toTopOf="@+id/login"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -83,9 +83,9 @@
             <Button
                 android:id="@+id/login"
                 android:layout_width="0dp"
-                android:layout_height="70dp"
+                android:layout_height="@dimen/space_70x"
                 android:layout_gravity="start"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="@dimen/space_32x"
                 android:fontFamily="@font/oxygen_regular"
                 android:text="@string/action_sign_in"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -108,8 +108,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="324dp"
-        android:layout_height="262dp"
+        android:layout_width="@dimen/space_324x"
+        android:layout_height="@dimen/space_262x"
         android:contentDescription="@string/login_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -119,10 +119,10 @@
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="@dimen/space_170x"
+        android:layout_height="@dimen/space_48x"
+        android:layout_marginEnd="@dimen/space_16x"
+        android:layout_marginBottom="@dimen/space_16x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_datasoft" />
@@ -142,7 +142,7 @@
         android:id="@+id/loader_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="@dimen/space_16x"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
