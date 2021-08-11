@@ -32,4 +32,5 @@
     <dimen name="space_262x">262dp</dimen>
     <dimen name="space_320x">320dp</dimen>
     <dimen name="space_324x">324dp</dimen>
+    <dimen name="space_500x">500dp</dimen>
 </resources>

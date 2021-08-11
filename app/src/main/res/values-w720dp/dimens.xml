@@ -30,6 +30,7 @@
     <dimen name="space_170x">120dp</dimen>
     <dimen name="space_200x">150dp</dimen>
     <dimen name="space_262x">215dp</dimen>
-    <dimen name="space_320x">260dp</dimen>
+    <dimen name="space_320x">240dp</dimen>
     <dimen name="space_324x">265dp</dimen>
+    <dimen name="space_500x">400dp</dimen>
 </resources>

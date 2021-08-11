@@ -53,8 +53,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space_48x"
                             android:layout_marginTop="@dimen/space_8x"
-                            android:background="@drawable/spinner_background"
-                            android:theme="@style/SpinnerTheme" />
+                            android:background="@drawable/spinner_background" />
 
                         <TextView
                             android:id="@+id/txt_view_last_name"
@@ -114,8 +113,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space_48x"
                             android:layout_marginTop="@dimen/space_8x"
-                            android:background="@drawable/spinner_background"
-                            android:theme="@style/SpinnerTheme" />
+                            android:background="@drawable/spinner_background" />
 
                         <TextView
                             android:id="@+id/txt_view_mother_name"
@@ -234,8 +232,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space_48x"
                             android:layout_marginTop="@dimen/space_8x"
-                            android:background="@drawable/spinner_background"
-                            android:theme="@style/SpinnerTheme" />
+                            android:background="@drawable/spinner_background" />
 
                         <TextView
                             android:id="@+id/txt_view_mobile_no"
@@ -295,8 +292,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/space_48x"
                             android:layout_marginTop="@dimen/space_8x"
-                            android:background="@drawable/spinner_background"
-                            android:theme="@style/SpinnerTheme" />
+                            android:background="@drawable/spinner_background" />
 
                     </LinearLayout>
 

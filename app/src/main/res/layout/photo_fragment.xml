@@ -366,7 +366,6 @@
             android:layout_marginStart="@dimen/space_8x"
             android:layout_marginEnd="@dimen/space_16x"
             android:background="@drawable/spinner_background"
-            android:theme="@style/SpinnerTheme"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"

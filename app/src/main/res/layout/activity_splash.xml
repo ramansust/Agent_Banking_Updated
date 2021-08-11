@@ -7,8 +7,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="432dp"
-        android:layout_height="220dp"
+        android:layout_width="@dimen/space_320x"
+        android:layout_height="@dimen/space_200x"
+        android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,8 +18,9 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="491dp"
+        android:layout_width="@dimen/space_500x"
         android:layout_height="0dp"
+        android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,10 +28,11 @@
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/space_170x"
+        android:layout_height="@dimen/space_48x"
         android:layout_marginEnd="@dimen/space_16x"
         android:layout_marginBottom="@dimen/space_16x"
+        android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_datasoft" />

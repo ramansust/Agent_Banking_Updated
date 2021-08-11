@@ -50,8 +50,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="@dimen/space_8x"
-                        android:background="@drawable/spinner_background"
-                        android:theme="@style/SpinnerTheme" />
+                        android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_religion"
@@ -67,8 +66,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="@dimen/space_8x"
-                        android:background="@drawable/spinner_background"
-                        android:theme="@style/SpinnerTheme" />
+                        android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_education"
@@ -84,8 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="@dimen/space_8x"
-                        android:background="@drawable/spinner_background"
-                        android:theme="@style/SpinnerTheme" />
+                        android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_nationality"
@@ -101,8 +98,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="@dimen/space_8x"
-                        android:background="@drawable/spinner_background"
-                        android:theme="@style/SpinnerTheme" />
+                        android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_vat"
@@ -218,8 +214,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="@dimen/space_8x"
-                        android:background="@drawable/spinner_background"
-                        android:theme="@style/SpinnerTheme" />
+                        android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_birth_certificate"
@@ -405,8 +400,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="@dimen/space_8x"
-                        android:background="@drawable/spinner_background"
-                        android:theme="@style/SpinnerTheme" />
+                        android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_email"
@@ -494,8 +488,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="@dimen/space_8x"
-                        android:background="@drawable/spinner_background"
-                        android:theme="@style/SpinnerTheme" />
+                        android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_guardian_contact"

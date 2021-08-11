@@ -35,7 +35,7 @@
         android:layout_marginTop="@dimen/space_16x"
         android:layout_marginEnd="@dimen/space_16x"
         android:background="@drawable/spinner_background"
-        android:theme="@style/SpinnerTheme"
+        android:padding="@dimen/space_8x"
         app:layout_constraintBottom_toBottomOf="@+id/tab_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
