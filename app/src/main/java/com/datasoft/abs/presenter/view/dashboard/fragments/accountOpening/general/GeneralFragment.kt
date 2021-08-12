@@ -269,12 +269,16 @@ class GeneralFragment : Fragment() {
 
             viewModel.setAccountInfo(
                 if (productCategoryList.isNotEmpty()) productCategoryList[binding.spinnerProductCategory.selectedItemPosition].id else 0,
+                if (productCategoryList.isNotEmpty()) productCategoryList[binding.spinnerProductCategory.selectedItemPosition].name else "",
                 if (accountList.isNotEmpty()) accountList[binding.spinnerTypeOfAccount.selectedItemPosition].id else 0,
+                if (accountList.isNotEmpty()) accountList[binding.spinnerTypeOfAccount.selectedItemPosition].name else "",
                 if (operatingInstructionList.isNotEmpty()) operatingInstructionList[binding.spinnerOperatingInstruction.selectedItemPosition].id else 0,
+                if (operatingInstructionList.isNotEmpty()) operatingInstructionList[binding.spinnerOperatingInstruction.selectedItemPosition].name else "",
                 binding.spinnerCustomerName.text.trim().toString(),
                 binding.edTxtAccountTitle.text.trim().toString(),
                 binding.edTxtOpeningDate.text.trim().toString(),
                 if (currencyList.isNotEmpty()) currencyList[binding.spinnerCurrency.selectedItemPosition].id else 0,
+                if (currencyList.isNotEmpty()) currencyList[binding.spinnerCurrency.selectedItemPosition].name else "",
                 if (sourceOfFundList.isNotEmpty()) sourceOfFundList[binding.spinnerSourceOfFund.selectedItemPosition].id else 0,
                 if (binding.edTxtInitialAmount.text.trim().toString()
                         .isNotEmpty()

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createAccount.general.AccountInfo
 import com.datasoft.abs.data.dto.createAccount.general.CustomerDataResponse
+import com.datasoft.abs.data.dto.createAccount.general.DisplayAccountInfo
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Network
@@ -26,6 +27,9 @@ class GeneralViewModel @Inject constructor(
 
     private val accountInfo = MutableLiveData<Resource<AccountInfo>>()
     fun getAccountInfo(): LiveData<Resource<AccountInfo>> = accountInfo
+
+    private val displayAccountInfo = MutableLiveData<Resource<DisplayAccountInfo>>()
+    fun getDisplayAccountInfo(): LiveData<Resource<DisplayAccountInfo>> = displayAccountInfo
 
     private val productID = MutableLiveData<Int>()
     fun getProductID(): LiveData<Int> = productID
@@ -69,12 +73,16 @@ class GeneralViewModel @Inject constructor(
 
     fun setAccountInfo(
         categoryId: Int,
+        categoryValue: String,
         accountId: Int,
+        accountValue: String,
         operatingId: Int,
+        operatingValue: String,
         customerId: String,
         accountTitle: String,
         openingDate: String,
         currencyId: Int,
+        currencyValue: String,
         fundId: Int,
         initialAmount: Int
     ) {
@@ -103,6 +111,20 @@ class GeneralViewModel @Inject constructor(
                         openingDate,
                         currencyId,
                         fundId,
+                        initialAmount
+                    )
+                )
+            )
+
+            displayAccountInfo.postValue(
+                Resource.Success(
+                    DisplayAccountInfo(
+                        categoryValue,
+                        accountValue,
+                        operatingValue,
+                        accountTitle,
+                        openingDate,
+                        currencyValue,
                         initialAmount
                     )
                 )

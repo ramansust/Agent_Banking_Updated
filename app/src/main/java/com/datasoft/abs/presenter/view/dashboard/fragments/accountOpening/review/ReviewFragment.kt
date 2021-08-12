@@ -56,6 +56,9 @@ class ReviewFragment : Fragment() {
     @Inject
     lateinit var nomineeAdapter: NomineeAdapter
 
+    @Inject
+    lateinit var transactionAdapter: TransactionAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -74,6 +77,7 @@ class ReviewFragment : Fragment() {
         accountViewModel.requestListener(false)
 
         setupRecyclerView()
+        setupRecyclerViewTransaction()
 
         generalViewModel.getAccountInfo().observe(viewLifecycleOwner, { response ->
             when (response) {
@@ -87,6 +91,29 @@ class ReviewFragment : Fragment() {
                             mandateOfAccOperationId = it.operatingId
                             natureOfBusinessId = it.fundId
                         }
+                    }
+                }
+
+                is Resource.Error -> {
+
+                }
+
+                is Resource.Loading -> {
+
+                }
+            }
+        })
+
+        generalViewModel.getDisplayAccountInfo().observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is Resource.Success -> {
+                    response.data?.let {
+                        binding.txtViewAccountValue.text = it.accountTitle
+                        binding.txtViewProductValue.text = it.category
+                        binding.txtViewAccountTypeValue.text = it.account
+                        binding.txtViewOperatingValue.text = it.operating
+                        binding.txtViewOpeningValue.text = it.openingDate
+                        binding.txtViewCurrencyValue.text = it.currency
                     }
                 }
 
@@ -196,6 +223,8 @@ class ReviewFragment : Fragment() {
         })
 
         transactionViewModel.getTransactionProfile().observe(viewLifecycleOwner, {
+            transactionAdapter.differ.submitList(it)
+
             val list = mutableListOf<TransactionProfile>()
 
             for (details in it) {
@@ -437,7 +466,13 @@ class ReviewFragment : Fragment() {
         binding.recyclerView.apply {
             adapter = nomineeAdapter
             layoutManager = LinearLayoutManager(activity)
-//            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        }
+    }
+
+    private fun setupRecyclerViewTransaction() {
+        binding.recyclerViewTransaction.apply {
+            adapter = transactionAdapter
+            layoutManager = LinearLayoutManager(activity)
         }
     }
 }

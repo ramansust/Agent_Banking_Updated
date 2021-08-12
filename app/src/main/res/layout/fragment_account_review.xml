@@ -61,6 +61,150 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <TextView
+                            android:id="@+id/txt_view_account"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/account_title"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_product"
+                            app:layout_constraintStart_toStartOf="@+id/txt_view_account_info"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_account_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_product"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/product_category"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_account_type"
+                            app:layout_constraintStart_toStartOf="@+id/txt_view_account_info"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_account" />
+
+                        <TextView
+                            android:id="@+id/txt_view_account_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/type_of_account"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/txt_view_account_info"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_product" />
+
+                        <TextView
+                            android:id="@+id/txt_view_account_value"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:layout_marginEnd="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_product_value"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_account_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_product_value"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:layout_marginEnd="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_account_type_value"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_account_value" />
+
+                        <TextView
+                            android:id="@+id/txt_view_account_type_value"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:layout_marginEnd="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_product_value" />
+
+                        <TextView
+                            android:id="@+id/txt_view_operating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/operating_instruction"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_opening"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_account_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_opening"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/opening_date"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_currency"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_operating" />
+
+                        <TextView
+                            android:id="@+id/txt_view_currency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/currency"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_opening" />
+
+                        <TextView
+                            android:id="@+id/txt_view_operating_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_opening_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_right"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_account_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_opening_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_view_currency_value"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_right"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_operating_value" />
+
+                        <TextView
+                            android:id="@+id/txt_view_currency_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_right"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_opening_value" />
+
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guideline_left"
@@ -439,7 +583,7 @@
                 <LinearLayout
                     android:id="@+id/linear_layout_5"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/space_200x"
+                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/space_16x"
                     android:background="@drawable/input_border"
                     app:layout_constraintBottom_toTopOf="@+id/btn_next"
@@ -472,6 +616,66 @@
                             android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_view_transaction_type"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/transaction_type"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintEnd_toStartOf="@+id/txt_view_monthly_transaction"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_transaction_profile_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_monthly_transaction"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_8x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:layout_marginEnd="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/monthly_transaction"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintEnd_toStartOf="@+id/txt_view_max_transaction_amount"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/txt_view_transaction_type"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_transaction_profile_edit" />
+
+                        <TextView
+                            android:id="@+id/txt_view_max_transaction_amount"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:text="@string/transaction_amount"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/txt_view_monthly_transaction"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_transaction_profile_edit" />
+
+                        <View
+                            android:id="@+id/view_transaction"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/space_1x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@color/shimmer_background_color"
+                            app:layout_constraintEnd_toEndOf="@+id/btn_transaction_profile_edit"
+                            app:layout_constraintStart_toStartOf="@+id/txt_view_transaction_type"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_max_transaction_amount" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view_transaction"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view_transaction" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
