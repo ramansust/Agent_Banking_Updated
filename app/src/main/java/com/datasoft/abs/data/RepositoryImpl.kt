@@ -21,13 +21,13 @@ import com.datasoft.abs.data.dto.login.LoginRequest
 import com.datasoft.abs.data.dto.login.LoginResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
+import com.datasoft.abs.data.dto.transaction.DepositResponse
 import com.datasoft.abs.data.source.local.db.dao.GeneralInfoDao
 import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
 import com.datasoft.abs.data.source.remote.JwtHelper
 import com.datasoft.abs.data.source.remote.RestRemoteDataSource
 import com.datasoft.abs.domain.Repository
 import retrofit2.Response
-import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -83,15 +83,15 @@ class RepositoryImpl @Inject constructor(
         return restApiService.createCustomerData(createCustomerRequest)
     }
 
-    override suspend fun getDepositData(commonRequest: CommonRequest): Response<Objects> {
+    override suspend fun getDepositData(commonRequest: CommonRequest): Response<DepositResponse> {
         return restApiService.getDepositData(commonRequest)
     }
 
-    override suspend fun getWithdrawData(commonRequest: CommonRequest): Response<Objects> {
+    override suspend fun getWithdrawData(commonRequest: CommonRequest): Response<DepositResponse> {
         return restApiService.getWithdrawData(commonRequest)
     }
 
-    override suspend fun getTransferData(commonRequest: CommonRequest): Response<Objects> {
+    override suspend fun getBalanceData(commonRequest: CommonRequest): Response<DepositResponse> {
         return restApiService.getTransferData(commonRequest)
     }
 

@@ -268,4 +268,9 @@
     <string name="balance_transfer_list">Balance Transfer List</string>
     <string name="eftn_transaction">EFTN Transaction</string>
     <string name="rtgs_transaction">RTGS Transaction</string>
+
+    <string name="deposit">Deposit</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="transfer">Transfer</string>
+    <string name="balance_inquiry">Balance Inquiry</string>
 </resources>

@@ -19,9 +19,9 @@ import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckResponse
 import com.datasoft.abs.data.dto.login.LoginResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
+import com.datasoft.abs.data.dto.transaction.DepositResponse
 import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
 import retrofit2.Response
-import java.util.*
 
 interface Repository {
     suspend fun performLogin(userName: String, password: String): Response<LoginResponse>
@@ -37,9 +37,9 @@ interface Repository {
     suspend fun getDedupeCheckData(dedupeCheckRequest: DedupeCheckRequest): Response<DedupeCheckResponse>
 
     suspend fun createCustomerData(createCustomerRequest: CreateCustomerRequest): Response<CreateCustomerResponse>
-    suspend fun getDepositData(commonRequest: CommonRequest): Response<Objects>
-    suspend fun getWithdrawData(commonRequest: CommonRequest): Response<Objects>
-    suspend fun getTransferData(commonRequest: CommonRequest): Response<Objects>
+    suspend fun getDepositData(commonRequest: CommonRequest): Response<DepositResponse>
+    suspend fun getWithdrawData(commonRequest: CommonRequest): Response<DepositResponse>
+    suspend fun getBalanceData(commonRequest: CommonRequest): Response<DepositResponse>
 
     suspend fun getAccountConfigData(): Response<AccountConfigResponse>
     suspend fun getTransactionProfileConfigData(productID: Int): Response<TransactionProfileConfig>

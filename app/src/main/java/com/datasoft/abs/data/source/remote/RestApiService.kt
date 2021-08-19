@@ -20,12 +20,12 @@ import com.datasoft.abs.data.dto.login.LoginRequest
 import com.datasoft.abs.data.dto.login.LoginResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
+import com.datasoft.abs.data.dto.transaction.DepositResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import java.util.*
 
 interface RestApiService {
     @POST("api/login")
@@ -53,13 +53,13 @@ interface RestApiService {
     suspend fun createCustomerData(@Body createCustomerRequest: CreateCustomerRequest): Response<CreateCustomerResponse>
 
     @POST("api/deposit-list")
-    suspend fun getDepositData(@Body commonRequest: CommonRequest): Response<Objects>
+    suspend fun getDepositData(@Body commonRequest: CommonRequest): Response<DepositResponse>
 
     @POST("api/withdraw-list")
-    suspend fun getWithdrawData(@Body commonRequest: CommonRequest): Response<Objects>
+    suspend fun getWithdrawData(@Body commonRequest: CommonRequest): Response<DepositResponse>
 
     @POST("api/transfer-list")
-    suspend fun getTransferData(@Body commonRequest: CommonRequest): Response<Objects>
+    suspend fun getTransferData(@Body commonRequest: CommonRequest): Response<DepositResponse>
 
     @GET("api/cascade-address")
     suspend fun getCascadeAddress(@Query("forArea") area: Int, @Query("id") id: Int) : Response<List<CommonModel>>

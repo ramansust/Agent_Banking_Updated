@@ -5,8 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.datasoft.abs.R
 import com.datasoft.abs.databinding.FragmentTransactionBinding
+import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.TransactionAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TransactionFragment : Fragment() {
@@ -16,6 +20,9 @@ class TransactionFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
+    @Inject
+    lateinit var adapter: TransactionAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,7 +30,20 @@ class TransactionFragment : Fragment() {
     ): View {
 
         _binding = FragmentTransactionBinding.inflate(inflater, container, false)
-        return binding.root
+        val root: View = binding.root
+
+        binding.pager.adapter = adapter
+
+        TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
+            when (position) {
+                0 -> tab.text = resources.getString(R.string.deposit)
+                1 -> tab.text = resources.getString(R.string.withdraw)
+                2 -> tab.text = resources.getString(R.string.transfer)
+                3 -> tab.text = resources.getString(R.string.balance_inquiry)
+            }
+        }.attach()
+
+        return root
     }
 
     override fun onDestroyView() {
