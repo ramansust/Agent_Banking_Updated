@@ -50,7 +50,7 @@
         <item name="android:paddingRight">@dimen/space_16x</item>
     </style>
 
-    <style name="ButtonTheme" parent="@style/Widget.AppCompat.Button">
+    <style name="ButtonTheme" parent="Widget.MaterialComponents.Button">
         <item name="android:textSize">@dimen/font_20x</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/oxygen_regular</item>

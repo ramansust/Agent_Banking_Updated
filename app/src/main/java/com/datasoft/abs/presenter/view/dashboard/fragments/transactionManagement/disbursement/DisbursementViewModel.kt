@@ -1,4 +1,4 @@
-package com.datasoft.abs.presenter.view.dashboard.fragments.transaction
+package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.disbursement
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class TransactionViewModel @Inject constructor(private val repository: Repository): ViewModel() {
+class DisbursementViewModel @Inject constructor(private val repository: Repository): ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is Transaction Fragment"

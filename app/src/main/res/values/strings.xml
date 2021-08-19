@@ -261,4 +261,11 @@
     <string name="not_interested">Not Interested</string>
     <string name="not_applicable">N/A</string>
     <string name="under_construction">Under construction...</string>
+
+    <string name="transaction_disbursement">Transaction Disbursement</string>
+    <string name="deposit_list">Deposit List</string>
+    <string name="withdrawal_list">Withdrawal List</string>
+    <string name="balance_transfer_list">Balance Transfer List</string>
+    <string name="eftn_transaction">EFTN Transaction</string>
+    <string name="rtgs_transaction">RTGS Transaction</string>
 </resources>

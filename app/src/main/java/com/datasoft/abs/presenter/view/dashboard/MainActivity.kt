@@ -62,6 +62,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_account -> getString(R.string.menu_account)
                 R.id.nav_account_list -> getString(R.string.menu_account_list)
                 R.id.nav_transaction -> getString(R.string.menu_transaction)
+                R.id.transaction -> getString(R.string.menu_transaction)
+                R.id.disbursement -> getString(R.string.transaction_disbursement)
+                R.id.deposit -> getString(R.string.deposit_list)
+                R.id.withdraw -> getString(R.string.withdrawal_list)
+                R.id.balance -> getString(R.string.balance_transfer_list)
+                R.id.eftn -> getString(R.string.eftn_transaction)
+                R.id.rtgs -> getString(R.string.rtgs_transaction)
                 else -> getString(R.string.menu_profile)
             }
         }

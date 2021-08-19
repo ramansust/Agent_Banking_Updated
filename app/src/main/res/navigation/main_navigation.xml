@@ -9,7 +9,7 @@
         android:id="@+id/nav_profile"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.profile.ProfileFragment"
         android:label="@string/menu_profile"
-        tools:layout="@layout/fragment_transaction" />
+        tools:layout="@layout/fragment_main_transaction" />
 
     <fragment
         android:id="@+id/nav_dashboard"
@@ -43,7 +43,78 @@
 
     <fragment
         android:id="@+id/nav_transaction"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transaction.TransactionFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.TransactionMainFragment"
+        android:label="@string/menu_transaction"
+        tools:layout="@layout/fragment_main_transaction">
+        <action
+            android:id="@+id/action_nav_transaction_to_transaction"
+            app:destination="@id/transaction" />
+
+        <action
+            android:id="@+id/action_nav_transaction_to_disbursement"
+            app:destination="@id/disbursement" />
+
+        <action
+            android:id="@+id/action_nav_transaction_to_deposit"
+            app:destination="@id/deposit" />
+
+        <action
+            android:id="@+id/action_nav_transaction_to_withdraw"
+            app:destination="@id/withdraw" />
+
+        <action
+            android:id="@+id/action_nav_transaction_to_balance"
+            app:destination="@id/balance" />
+
+        <action
+            android:id="@+id/action_nav_transaction_to_eftn"
+            app:destination="@id/eftn" />
+
+        <action
+            android:id="@+id/action_nav_transaction_to_rtgs"
+            app:destination="@id/rtgs" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transaction"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.transaction.TransactionFragment"
         android:label="@string/menu_transaction"
         tools:layout="@layout/fragment_transaction" />
+
+    <fragment
+        android:id="@+id/disbursement"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.disbursement.DisbursementFragment"
+        android:label="@string/transaction_disbursement"
+        tools:layout="@layout/fragment_disbursement" />
+
+    <fragment
+        android:id="@+id/deposit"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.deposit.DepositFragment"
+        android:label="@string/deposit_list"
+        tools:layout="@layout/fragment_deposit" />
+
+    <fragment
+        android:id="@+id/withdraw"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.withdrawal.WithdrawalFragment"
+        android:label="@string/withdrawal_list"
+        tools:layout="@layout/fragment_withdraw" />
+
+    <fragment
+        android:id="@+id/balance"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.balance.BalanceFragment"
+        android:label="@string/balance_transfer_list"
+        tools:layout="@layout/fragment_balance" />
+
+    <fragment
+        android:id="@+id/eftn"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn.EFTNFragment"
+        android:label="@string/eftn_transaction"
+        tools:layout="@layout/fragment_eftn" />
+
+    <fragment
+        android:id="@+id/rtgs"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.rtgs.RTGSFragment"
+        android:label="@string/rtgs_transaction"
+        tools:layout="@layout/fragment_rtgs" />
+
 </navigation>
