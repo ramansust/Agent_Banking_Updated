@@ -69,6 +69,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.balance -> getString(R.string.balance_transfer_list)
                 R.id.eftn -> getString(R.string.eftn_transaction)
                 R.id.rtgs -> getString(R.string.rtgs_transaction)
+                R.id.EFTNTransaction -> getString(R.string.eftn_transaction)
+                R.id.RTGSTransaction -> getString(R.string.rtgs_transaction)
                 else -> getString(R.string.menu_profile)
             }
         }

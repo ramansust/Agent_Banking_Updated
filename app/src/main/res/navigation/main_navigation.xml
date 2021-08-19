@@ -109,12 +109,30 @@
         android:id="@+id/eftn"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn.EFTNFragment"
         android:label="@string/eftn_transaction"
-        tools:layout="@layout/fragment_eftn" />
+        tools:layout="@layout/fragment_eftn">
+        <action
+            android:id="@+id/action_eftn_to_EFTNTransactionFragment"
+            app:destination="@id/EFTNTransaction" />
+    </fragment>
 
     <fragment
         android:id="@+id/rtgs"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.rtgs.RTGSFragment"
         android:label="@string/rtgs_transaction"
-        tools:layout="@layout/fragment_rtgs" />
+        tools:layout="@layout/fragment_rtgs">
+        <action
+            android:id="@+id/action_rtgs_to_RTGSTransactionFragment"
+            app:destination="@id/RTGSTransaction" />
+    </fragment>
+    <fragment
+        android:id="@+id/EFTNTransaction"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn.EFTNTransactionFragment"
+        android:label="@string/eftn_transaction"
+        tools:layout="@layout/fragment_eftn_transaction" />
+    <fragment
+        android:id="@+id/RTGSTransaction"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.rtgs.RTGSTransactionFragment"
+        android:label="@string/rtgs_transaction"
+        tools:layout="@layout/fragment_eftn_transaction" />
 
 </navigation>

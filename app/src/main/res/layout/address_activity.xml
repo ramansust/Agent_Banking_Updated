@@ -86,9 +86,9 @@
                     android:id="@+id/linearLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginEnd="@dimen/space_8x"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                     app:layout_constraintStart_toStartOf="parent"
@@ -106,14 +106,14 @@
                         android:id="@+id/spinner_address_type"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_flat_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/flat_no"
                         android:textSize="@dimen/font_16x" />
@@ -122,7 +122,7 @@
                         android:id="@+id/ed_txt_flat_no"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/input_border"
                         android:maxLength="@integer/edit_text_input_length"
                         android:fontFamily="@font/oxygen_regular"
@@ -135,7 +135,7 @@
                         android:id="@+id/txt_view_block_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/block_no"
                         android:textSize="@dimen/font_16x" />
@@ -144,7 +144,7 @@
                         android:id="@+id/ed_txt_block_no"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/input_border"
                         android:maxLength="@integer/edit_text_input_length"
                         android:fontFamily="@font/oxygen_regular"
@@ -157,7 +157,7 @@
                         android:id="@+id/txt_view_word_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/word_no"
                         android:textSize="@dimen/font_16x" />
@@ -166,7 +166,7 @@
                         android:id="@+id/ed_txt_word_no"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/input_border"
                         android:maxLength="@integer/edit_text_input_length"
                         android:fontFamily="@font/oxygen_regular"
@@ -179,7 +179,7 @@
                         android:id="@+id/txt_view_post_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/post_code"
                         android:textSize="@dimen/font_16x" />
@@ -188,7 +188,7 @@
                         android:id="@+id/ed_txt_post_code"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/input_border"
                         android:maxLength="@integer/edit_text_input_length"
                         android:fontFamily="@font/oxygen_regular"
@@ -201,7 +201,7 @@
                         android:id="@+id/txt_view_country"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/country"
                         android:textSize="@dimen/font_16x" />
@@ -210,14 +210,14 @@
                         android:id="@+id/spinner_country"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_district"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/district"
                         android:textSize="@dimen/font_16x" />
@@ -226,7 +226,7 @@
                         android:id="@+id/spinner_district"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/spinner_background" />
 
                     <TextView
@@ -242,14 +242,14 @@
                         android:id="@+id/spinner_union"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:id="@+id/txt_view_contact"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/contact"
                         android:textColor="@android:color/holo_blue_light"
@@ -259,7 +259,7 @@
                         android:id="@+id/txt_view_contact_type"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/contact_type"
                         android:textSize="@dimen/font_16x" />
@@ -268,7 +268,7 @@
                         android:id="@+id/spinner_contact_type"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/spinner_background" />
 
                 </LinearLayout>
@@ -276,9 +276,9 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="@dimen/space_8x"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginEnd="@dimen/space_16x"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/guideline_middle"
@@ -297,7 +297,7 @@
                         android:id="@+id/ed_txt_house_no"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/input_border"
                         android:maxLength="@integer/edit_text_input_length"
                         android:fontFamily="@font/oxygen_regular"
@@ -310,7 +310,7 @@
                         android:id="@+id/txt_view_village"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/village"
                         android:textSize="@dimen/font_16x" />
@@ -319,7 +319,7 @@
                         android:id="@+id/ed_txt_village"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/input_border"
                         android:maxLength="@integer/edit_text_input_length"
                         android:fontFamily="@font/oxygen_regular"
@@ -332,7 +332,7 @@
                         android:id="@+id/txt_view_road_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/road_no"
                         android:textSize="@dimen/font_16x" />
@@ -341,7 +341,7 @@
                         android:id="@+id/ed_txt_road_no"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/input_border"
                         android:maxLength="@integer/edit_text_input_length"
                         android:fontFamily="@font/oxygen_regular"
@@ -354,7 +354,7 @@
                         android:id="@+id/txt_view_zip_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/zip_code"
                         android:textSize="@dimen/font_16x" />
@@ -363,7 +363,7 @@
                         android:id="@+id/ed_txt_zip_code"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/input_border"
                         android:maxLength="@integer/edit_text_input_length"
                         android:fontFamily="@font/oxygen_regular"
@@ -376,7 +376,7 @@
                         android:id="@+id/txt_view_state"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/state"
                         android:textSize="@dimen/font_16x" />
@@ -385,7 +385,7 @@
                         android:id="@+id/ed_txt_state"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/input_border"
                         android:maxLength="@integer/edit_text_input_length"
                         android:fontFamily="@font/oxygen_regular"
@@ -398,7 +398,7 @@
                         android:id="@+id/txt_view_city"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/city"
                         android:textSize="@dimen/font_16x" />
@@ -407,7 +407,7 @@
                         android:id="@+id/ed_txt_city"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/input_border"
                         android:maxLength="@integer/edit_text_input_length"
                         android:fontFamily="@font/oxygen_regular"
@@ -420,7 +420,7 @@
                         android:id="@+id/txt_view_thana"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/thana"
                         android:textSize="@dimen/font_16x" />
@@ -429,13 +429,13 @@
                         android:id="@+id/spinner_thana"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/spinner_background" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/contact_no"
                         android:textSize="@dimen/font_16x"
@@ -444,7 +444,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/input_border"
                         android:maxLength="@integer/edit_text_input_length"
                         android:fontFamily="@font/oxygen_regular"
@@ -457,7 +457,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/contact"
                         android:textSize="@dimen/font_20x"
@@ -467,7 +467,7 @@
                         android:id="@+id/txt_view_contact_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/contact_no"
                         android:textSize="@dimen/font_16x" />
@@ -476,7 +476,7 @@
                         android:id="@+id/ed_txt_contact_no"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/input_border"
                         android:maxLength="@integer/edit_text_input_length"
                         android:fontFamily="@font/oxygen_regular"

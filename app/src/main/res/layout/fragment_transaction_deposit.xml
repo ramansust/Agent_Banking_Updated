@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/space_16x"
+    tools:context=".presenter.view.dashboard.fragments.customerCreate.general.GeneralFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_payment_mode"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/space_48x"
+            android:layout_marginTop="@dimen/space_16x"
+            android:background="@drawable/spinner_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline_left"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_currency"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/space_48x"
+            android:layout_marginTop="@dimen/space_16x"
+            android:background="@drawable/spinner_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_payment_mode" />
+
+        <EditText
+            android:id="@+id/ed_txt_amount"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/space_48x"
+            android:layout_marginTop="@dimen/space_16x"
+            android:background="@drawable/input_border"
+            android:fontFamily="@font/oxygen_regular"
+            android:hint="@string/type_here"
+            android:inputType="textPersonName|textCapSentences"
+            android:maxLength="@integer/edit_text_input_length"
+            android:padding="@dimen/space_8x"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_currency" />
+
+        <EditText
+            android:id="@+id/ed_txt_vat"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/space_48x"
+            android:layout_marginTop="@dimen/space_16x"
+            android:background="@drawable/input_border"
+            android:fontFamily="@font/oxygen_regular"
+            android:hint="@string/type_here"
+            android:inputType="textPersonName|textCapSentences"
+            android:maxLength="@integer/edit_text_input_length"
+            android:padding="@dimen/space_8x"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/ed_txt_amount" />
+
+        <EditText
+            android:id="@+id/ed_txt_total"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/space_48x"
+            android:layout_marginTop="@dimen/space_16x"
+            android:background="@drawable/input_border"
+            android:fontFamily="@font/oxygen_regular"
+            android:hint="@string/type_here"
+            android:inputType="textPersonName|textCapSentences"
+            android:maxLength="@integer/edit_text_input_length"
+            android:padding="@dimen/space_8x"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/ed_txt_vat" />
+
+        <EditText
+            android:id="@+id/ed_txt_in_words"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/space_48x"
+            android:layout_marginTop="@dimen/space_16x"
+            android:background="@drawable/input_border"
+            android:fontFamily="@font/oxygen_regular"
+            android:hint="@string/type_here"
+            android:inputType="textPersonName|textCapSentences"
+            android:maxLength="@integer/edit_text_input_length"
+            android:padding="@dimen/space_8x"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/ed_txt_total" />
+
+        <EditText
+            android:id="@+id/ed_txt_remarks"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/space_48x"
+            android:layout_marginTop="@dimen/space_16x"
+            android:background="@drawable/input_border"
+            android:fontFamily="@font/oxygen_regular"
+            android:hint="@string/type_here"
+            android:inputType="textPersonName|textCapSentences"
+            android:maxLength="@integer/edit_text_input_length"
+            android:padding="@dimen/space_8x"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/ed_txt_in_words" />
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/payment_mode_"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintBottom_toBottomOf="@+id/spinner_payment_mode"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/spinner_payment_mode" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/currency_"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintBottom_toBottomOf="@+id/spinner_currency"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/spinner_currency" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/amount_"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintBottom_toBottomOf="@+id/ed_txt_amount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ed_txt_amount" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/charge_vat"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintBottom_toBottomOf="@+id/ed_txt_vat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ed_txt_vat" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/total"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintBottom_toBottomOf="@+id/ed_txt_total"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ed_txt_total" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/in_words"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintBottom_toBottomOf="@+id/ed_txt_in_words"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ed_txt_in_words" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/remarks_"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintBottom_toBottomOf="@+id/ed_txt_remarks"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ed_txt_remarks" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

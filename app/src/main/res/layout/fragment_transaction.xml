@@ -20,7 +20,9 @@
             app:layout_constraintStart_toEndOf="@id/guideline_left"
             app:layout_constraintTop_toTopOf="parent"
             app:tabBackground="@color/dashboard_bg"
-            app:tabGravity="start"
+            app:tabGravity="fill"
+            app:tabMaxWidth="0dp"
+            app:tabMode="fixed"
             app:tabTextAppearance="@style/MyCustomTextAppearance" />
 
         <androidx.viewpager2.widget.ViewPager2
