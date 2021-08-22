@@ -276,6 +276,7 @@
 
     <string name="payment_mode_">Payment Mode*</string>
     <string name="amount_">Amount*</string>
+    <string name="amount">Amount</string>
     <string name="charge_vat">Charge with VAT</string>
     <string name="total">Total</string>
     <string name="in_words">In Words</string>
@@ -284,4 +285,23 @@
     <string name="awaiting_approval">Awaiting Approval</string>
     <string name="disburse">Disburse</string>
     <string name="reject">Reject</string>
+
+    <string name="sender_account_no_">Sender Account No*</string>
+    <string name="bank_">Bank*</string>
+    <string name="receiver_address">Receiver Address</string>
+    <string name="receiver_name_">Receiver Name*</string>
+    <string name="receiver_name">Receiver Name</string>
+    <string name="vat">Vat</string>
+    <string name="receiver_account_no_">Receiver Account No*</string>
+    <string name="receiver_account_no">Receiver Account No</string>
+    <string name="branch_">Branch*</string>
+    <string name="receiver_city">Receiver City</string>
+    <string name="charge">Charge</string>
+    <string name="receiver_email">Receiver Email</string>
+    <string name="receiver_mobile">Receiver Mobile</string>
+    <string name="remarks">Remarks</string>
+    <string name="account_type">Account Type</string>
+    <string name="receiver_ac_">Receiver A/C*</string>
+    <string name="receiver_bank">Receiver Bank</string>
+    <string name="branch_routing">Branch &amp; Routing No</string>
 </resources>

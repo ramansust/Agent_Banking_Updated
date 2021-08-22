@@ -31,7 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/introducer_"
+                    android:text="@string/sender_account_no_"
                     android:textSize="@dimen/font_16x" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +42,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/ed_txt_introducer"
+                        android:id="@+id/ed_txt_sender_account_no"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/space_48x"
                         android:background="@drawable/input_border"
@@ -64,9 +64,9 @@
                         android:contentDescription="@string/todo"
                         android:padding="@dimen/space_8x"
                         android:src="@drawable/ic_search"
-                        app:layout_constraintBottom_toBottomOf="@+id/ed_txt_introducer"
+                        app:layout_constraintBottom_toBottomOf="@+id/ed_txt_sender_account_no"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/ed_txt_introducer" />
+                        app:layout_constraintTop_toTopOf="@+id/ed_txt_sender_account_no" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -75,17 +75,34 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_16x"
                     android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/account_title"
+                    android:text="@string/bank_"
                     android:textSize="@dimen/font_16x" />
 
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_bank"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/spinner_background" />
+
                 <TextView
-                    android:id="@+id/txt_view_account_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/receiver_name_"
+                    android:textSize="@dimen/font_16x" />
+
+                <EditText
+                    android:id="@+id/ed_txt_receiver_name"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space_48x"
                     android:layout_marginTop="@dimen/space_8x"
                     android:background="@drawable/input_border"
                     android:fontFamily="@font/oxygen_regular"
-                    android:gravity="center_vertical"
+                    android:hint="@string/type_here"
+                    android:inputType="textPersonName|textCapSentences"
+                    android:maxLength="@integer/edit_text_input_length"
                     android:padding="@dimen/space_8x"
                     android:textSize="@dimen/font_16x" />
 
@@ -94,17 +111,42 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_16x"
                     android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/name"
+                    android:text="@string/receiver_address"
                     android:textSize="@dimen/font_16x" />
 
-                <TextView
-                    android:id="@+id/txt_view_name"
+                <EditText
+                    android:id="@+id/ed_txt_receiver_address"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space_48x"
                     android:layout_marginTop="@dimen/space_8x"
                     android:background="@drawable/input_border"
                     android:fontFamily="@font/oxygen_regular"
-                    android:gravity="center_vertical"
+                    android:hint="@string/type_here"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="@integer/edit_text_input_length"
+                    android:padding="@dimen/space_8x"
+                    android:textSize="@dimen/font_16x" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/vat"
+                    android:textSize="@dimen/font_16x" />
+
+                <EditText
+                    android:id="@+id/ed_txt_vat"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:hint="@string/type_here"
+                    android:inputType="textPersonName|textCapSentences"
+                    android:maxLength="@integer/edit_text_input_length"
                     android:padding="@dimen/space_8x"
                     android:textSize="@dimen/font_16x" />
 
@@ -120,15 +162,35 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/txt_view_relation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/relation_"
+                    android:text="@string/receiver_account_no_"
+                    android:textSize="@dimen/font_16x" />
+
+                <EditText
+                    android:id="@+id/ed_txt_receiver_account_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:hint="@string/type_here"
+                    android:inputType="textPersonName|textCapSentences"
+                    android:maxLength="@integer/edit_text_input_length"
+                    android:padding="@dimen/space_8x"
+                    android:textSize="@dimen/font_16x" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/branch_"
                     android:textSize="@dimen/font_16x" />
 
                 <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_relation"
+                    android:id="@+id/spinner_branch"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space_48x"
                     android:layout_marginTop="@dimen/space_8x"
@@ -139,17 +201,61 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_16x"
                     android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/account_number"
+                    android:text="@string/receiver_city"
                     android:textSize="@dimen/font_16x" />
 
-                <TextView
-                    android:id="@+id/txt_view_account_number"
+                <EditText
+                    android:id="@+id/ed_txt_receiver_city"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space_48x"
                     android:layout_marginTop="@dimen/space_8x"
                     android:background="@drawable/input_border"
                     android:fontFamily="@font/oxygen_regular"
-                    android:gravity="center_vertical"
+                    android:hint="@string/type_here"
+                    android:inputType="phone"
+                    android:maxLength="@integer/edit_text_input_length"
+                    android:padding="@dimen/space_8x"
+                    android:textSize="@dimen/font_16x" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/amount_"
+                    android:textSize="@dimen/font_16x" />
+
+                <EditText
+                    android:id="@+id/ed_txt_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:hint="@string/type_here"
+                    android:inputType="number"
+                    android:maxLength="@integer/int_input_length"
+                    android:padding="@dimen/space_8x"
+                    android:textSize="@dimen/font_16x" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/charge"
+                    android:textSize="@dimen/font_16x" />
+
+                <EditText
+                    android:id="@+id/ed_txt_charge"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:background="@drawable/input_border"
+                    android:fontFamily="@font/oxygen_regular"
+                    android:hint="@string/type_here"
+                    android:inputType="textPersonName|textCapSentences"
+                    android:maxLength="@integer/edit_text_input_length"
                     android:padding="@dimen/space_8x"
                     android:textSize="@dimen/font_16x" />
 

@@ -1,20 +1,20 @@
-package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.rtgs
+package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.datasoft.abs.databinding.FragmentRtgsTransactionBinding
+import com.datasoft.abs.databinding.FragmentEftnTransactionDetailsBinding
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountList.adapter.AccountAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class RTGSTransactionFragment : Fragment() {
+class EFTNTransactionDetailsFragment : Fragment() {
 
-    private var _binding: FragmentRtgsTransactionBinding? = null
+    private var _binding: FragmentEftnTransactionDetailsBinding? = null
 
     @Inject
     lateinit var accountAdapter: AccountAdapter
@@ -27,7 +27,7 @@ class RTGSTransactionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentRtgsTransactionBinding.inflate(inflater, container, false)
+        _binding = FragmentEftnTransactionDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 

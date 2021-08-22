@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.datasoft.abs.databinding.FragmentTransactionDepositBinding
+import com.datasoft.abs.databinding.FragmentTransactionTransferBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TransferFragment : Fragment() {
 
-    private var _binding: FragmentTransactionDepositBinding? = null
+    private var _binding: FragmentTransactionTransferBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -22,7 +22,7 @@ class TransferFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentTransactionDepositBinding.inflate(inflater, container, false)
+        _binding = FragmentTransactionTransferBinding.inflate(inflater, container, false)
         return binding.root
     }
 
