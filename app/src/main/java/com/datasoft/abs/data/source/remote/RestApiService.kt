@@ -20,7 +20,7 @@ import com.datasoft.abs.data.dto.login.LoginRequest
 import com.datasoft.abs.data.dto.login.LoginResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
-import com.datasoft.abs.data.dto.transaction.DepositResponse
+import com.datasoft.abs.data.dto.transaction.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -35,7 +35,7 @@ interface RestApiService {
     suspend fun getDashboardData(@Body dashboardRequest: DashboardRequest): Response<DashboardResponse>
 
     @GET("api/customer-general-config")
-    suspend fun getConfigData() : Response<ConfigResponse>
+    suspend fun getConfigData(): Response<ConfigResponse>
 
     @POST("api/customer-list")
     suspend fun getCustomerListData(@Body customerRequest: CustomerRequest): Response<CustomerResponse>
@@ -62,23 +62,38 @@ interface RestApiService {
     suspend fun getTransferData(@Body commonRequest: CommonRequest): Response<DepositResponse>
 
     @GET("api/cascade-address")
-    suspend fun getCascadeAddress(@Query("forArea") area: Int, @Query("id") id: Int) : Response<List<CommonModel>>
+    suspend fun getCascadeAddress(
+        @Query("forArea") area: Int,
+        @Query("id") id: Int
+    ): Response<List<CommonModel>>
 
     @GET("api/riskgrade-config")
-    suspend fun getRiskGradeConfig() : Response<RiskGradeResponse>
+    suspend fun getRiskGradeConfig(): Response<RiskGradeResponse>
 
     @GET("api/account-general-config")
-    suspend fun getAccountConfig() : Response<AccountConfigResponse>
+    suspend fun getAccountConfig(): Response<AccountConfigResponse>
 
     @GET("api/tp-config")
-    suspend fun getTransactionProfileConfig(@Query("productId") productID: Int) : Response<TransactionProfileConfig>
+    suspend fun getTransactionProfileConfig(@Query("productId") productID: Int): Response<TransactionProfileConfig>
 
     @GET("api/customer-details-list")
-    suspend fun getCustomerData(@Query("custId") customerID: String) : Response<CustomerDataResponse>
+    suspend fun getCustomerData(@Query("custId") customerID: String): Response<CustomerDataResponse>
 
     @GET("api/introduce-acc-info")
-    suspend fun getIntroducerData(@Query("accountNo") accountNo: String) : Response<IntroducerInfo>
+    suspend fun getIntroducerData(@Query("accountNo") accountNo: String): Response<IntroducerInfo>
 
     @POST("api/create-account")
     suspend fun createAccountData(@Body createAccountRequest: CreateAccountRequest): Response<CreateAccountResponse>
+
+    @POST("api/trn-acc-info")
+    suspend fun getAccountDetails(@Body accountDetailsRequest: AccountDetailsRequest): Response<AccountDetailsResponse>
+
+    @GET("api/trn-cr-account")
+    suspend fun getReceiverDetails(@Query("accountNo") accountNo: String): Response<ReceiverDetailsResponse>
+
+    @POST("api/acc-tp-info")
+    suspend fun getAmountDetails(@Body amountDetailsRequest: AmountDetailsRequest): Response<AmountDetailsResponse>
+
+    @POST("api/withdraw-deposit")
+    suspend fun getWithdrawDeposit(@Body withdrawDepositRequest: WithdrawDepositRequest): Response<WithdrawDepositResponse>
 }

@@ -21,7 +21,7 @@ import com.datasoft.abs.data.dto.login.LoginRequest
 import com.datasoft.abs.data.dto.login.LoginResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
-import com.datasoft.abs.data.dto.transaction.DepositResponse
+import com.datasoft.abs.data.dto.transaction.*
 import com.datasoft.abs.data.source.local.db.dao.GeneralInfoDao
 import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
 import com.datasoft.abs.data.source.remote.JwtHelper
@@ -113,6 +113,22 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun createAccountData(createAccountRequest: CreateAccountRequest): Response<CreateAccountResponse> {
         return restApiService.createAccountData(createAccountRequest)
+    }
+
+    override suspend fun getAccountDetails(accountDetailsRequest: AccountDetailsRequest): Response<AccountDetailsResponse> {
+        return restApiService.getAccountDetails(accountDetailsRequest)
+    }
+
+    override suspend fun getReceiverDetails(accountNumber: String): Response<ReceiverDetailsResponse> {
+        return restApiService.getReceiverDetails(accountNumber)
+    }
+
+    override suspend fun getAmountDetails(amountDetailsRequest: AmountDetailsRequest): Response<AmountDetailsResponse> {
+        return restApiService.getAmountDetails(amountDetailsRequest)
+    }
+
+    override suspend fun getWithdrawDeposit(withdrawDepositRequest: WithdrawDepositRequest): Response<WithdrawDepositResponse> {
+        return restApiService.getWithdrawDeposit(withdrawDepositRequest)
     }
 
     override suspend fun insert(generalInfo: GeneralInfo) {

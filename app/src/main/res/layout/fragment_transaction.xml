@@ -33,6 +33,7 @@
                 android:inputType="number"
                 android:maxLength="@integer/edit_text_input_length"
                 android:padding="@dimen/space_8x"
+                android:text="1001120013386"
                 android:textSize="@dimen/font_16x"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/img_view_search"

@@ -19,7 +19,7 @@ import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckResponse
 import com.datasoft.abs.data.dto.login.LoginResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
-import com.datasoft.abs.data.dto.transaction.DepositResponse
+import com.datasoft.abs.data.dto.transaction.*
 import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
 import retrofit2.Response
 
@@ -46,6 +46,10 @@ interface Repository {
     suspend fun getCustomerData(customerID: String): Response<CustomerDataResponse>
     suspend fun getIntroducerData(accountNo: String): Response<IntroducerInfo>
     suspend fun createAccountData(createAccountRequest: CreateAccountRequest): Response<CreateAccountResponse>
+    suspend fun getAccountDetails(accountDetailsRequest: AccountDetailsRequest): Response<AccountDetailsResponse>
+    suspend fun getReceiverDetails(accountNumber: String): Response<ReceiverDetailsResponse>
+    suspend fun getAmountDetails(amountDetailsRequest: AmountDetailsRequest): Response<AmountDetailsResponse>
+    suspend fun getWithdrawDeposit(withdrawDepositRequest: WithdrawDepositRequest): Response<WithdrawDepositResponse>
 
     suspend fun insert(generalInfo: GeneralInfo)
     fun getAll(): LiveData<List<GeneralInfo>>

@@ -287,6 +287,7 @@
     <string name="reject">Reject</string>
 
     <string name="sender_account_no_">Sender Account No*</string>
+    <string name="sender_ac">Sender A/C</string>
     <string name="bank_">Bank*</string>
     <string name="receiver_address">Receiver Address</string>
     <string name="receiver_name_">Receiver Name*</string>
@@ -294,6 +295,7 @@
     <string name="vat">Vat</string>
     <string name="receiver_account_no_">Receiver Account No*</string>
     <string name="receiver_account_no">Receiver Account No</string>
+    <string name="receiver_ac">Receiver A/C</string>
     <string name="branch_">Branch*</string>
     <string name="receiver_city">Receiver City</string>
     <string name="charge">Charge</string>
@@ -304,4 +306,11 @@
     <string name="receiver_ac_">Receiver A/C*</string>
     <string name="receiver_bank">Receiver Bank</string>
     <string name="branch_routing">Branch &amp; Routing No</string>
+
+    <string name="transaction_no">Transaction NO</string>
+    <string name="debit">Debit</string>
+    <string name="credit">Credit</string>
+    <string name="date">date</string>
+    <string name="routing">Routing</string>
+    <string name="date_time">Date Time</string>
 </resources>
