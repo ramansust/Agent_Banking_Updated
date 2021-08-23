@@ -142,6 +142,16 @@
             app:layout_constraintStart_toEndOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/ed_txt_search" />
 
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_1x"
+            android:layout_marginTop="@dimen/space_8x"
+            android:background="@color/shimmer_background_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_view_date_time" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view"
             android:layout_width="0dp"
@@ -150,7 +160,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_view_date_time" />
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
