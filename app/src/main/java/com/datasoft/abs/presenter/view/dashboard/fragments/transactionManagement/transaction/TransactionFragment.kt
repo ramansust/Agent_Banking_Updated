@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.request.RequestOptions
 import com.datasoft.abs.R
 import com.datasoft.abs.databinding.FragmentTransactionBinding
 import com.datasoft.abs.presenter.states.Resource
@@ -70,7 +71,15 @@ class TransactionFragment : Fragment() {
 
                         viewModel.setAccountNumber(it.accountNo!!)
 
-                        glide.load(Base64.decode(it.profileImage, Base64.DEFAULT))
+                        glide.load(
+                            Base64.decode(
+                                it.profileImage!!.substring(
+                                    it.profileImage.indexOf(
+                                        ","
+                                    ) + 1
+                                ), Base64.DEFAULT
+                            )
+                        ).apply(RequestOptions().circleCrop())
                             .into(binding.imgViewPhoto)
                     }
                 }

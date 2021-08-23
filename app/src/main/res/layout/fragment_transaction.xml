@@ -58,7 +58,7 @@
             android:id="@+id/img_view_photo"
             android:layout_width="@dimen/space_110x"
             android:layout_height="@dimen/space_110x"
-            android:layout_marginTop="@dimen/space_8x"
+            android:layout_marginTop="@dimen/space_16x"
             android:contentDescription="@string/todo"
             android:src="@drawable/ic_photo_preview"
             app:layout_constraintEnd_toStartOf="@id/guideline_left"
