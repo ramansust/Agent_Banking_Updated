@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EFTNViewModel @Inject constructor(
+class EFTNTransactionDetailsViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network
 ): ViewModel() {

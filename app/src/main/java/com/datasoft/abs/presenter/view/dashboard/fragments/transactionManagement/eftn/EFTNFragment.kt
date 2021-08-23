@@ -1,10 +1,13 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.datasoft.abs.R
 import com.datasoft.abs.databinding.FragmentEftnBinding
@@ -15,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class EFTNFragment : Fragment() {
 
     private var _binding: FragmentEftnBinding? = null
+    private val viewModel: EFTNViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -47,6 +51,18 @@ class EFTNFragment : Fragment() {
         binding.btnAdd.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_eftn_to_EFTNTransactionFragment)
         }
+
+        binding.edTxtSearch.addTextChangedListener(textWatcher)
+    }
+
+    private val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+
+        override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+            viewModel.setSearchData(charSequence.toString())
+        }
+
+        override fun afterTextChanged(editable: Editable) {}
     }
 
     override fun onDestroyView() {

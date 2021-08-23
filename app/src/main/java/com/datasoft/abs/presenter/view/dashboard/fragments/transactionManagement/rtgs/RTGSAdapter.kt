@@ -37,6 +37,8 @@ class RTGSAdapter @Inject constructor() :
         return differ.currentList.size
     }
 
+    private var onItemClickListener: ((Row) -> Unit)? = null
+
     override fun onBindViewHolder(holder: AccountViewHolder, position: Int) {
         val account = differ.currentList[position]
 
@@ -50,6 +52,14 @@ class RTGSAdapter @Inject constructor() :
             holder.binding.txtViewAmount.text = this.natureOfBusiness
             holder.binding.txtViewEntryDate.text = this.natureOfBusiness
         }
+
+        holder.binding.imgViewEdit.setOnClickListener {
+            onItemClickListener?.let { it(account) }
+        }
+    }
+
+    fun setOnItemClickListener(listener: (Row) -> Unit) {
+        onItemClickListener = listener
     }
 
 }

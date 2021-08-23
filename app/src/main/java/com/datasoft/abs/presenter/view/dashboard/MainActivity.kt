@@ -46,7 +46,13 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_profile, R.id.nav_dashboard, R.id.nav_customer, R.id.nav_customer_list, R.id.nav_account, R.id.nav_account_list, R.id.nav_transaction
+                R.id.nav_profile,
+                R.id.nav_dashboard,
+                R.id.nav_customer,
+                R.id.nav_customer_list,
+                R.id.nav_account,
+                R.id.nav_account_list,
+                R.id.nav_transaction
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -67,11 +73,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.deposit -> getString(R.string.deposit_list)
                 R.id.withdraw -> getString(R.string.withdrawal_list)
                 R.id.balance -> getString(R.string.balance_transfer_list)
-                R.id.eftn -> getString(R.string.eftn_transaction)
-                R.id.rtgs -> getString(R.string.rtgs_transaction)
-                R.id.EFTNTransaction -> getString(R.string.eftn_transaction)
-                R.id.RTGSTransaction -> getString(R.string.rtgs_transaction)
-                R.id.transactionDetailsFragment -> getString(R.string.transaction_details)
+                R.id.eftn, R.id.EFTNTransaction -> getString(R.string.eftn_transaction)
+                R.id.rtgs, R.id.RTGSTransaction -> getString(R.string.rtgs_transaction)
+                R.id.transactionDetailsFragment, R.id.EFTNTransactionDetailsFragment -> getString(R.string.transaction_details)
                 else -> getString(R.string.menu_profile)
             }
         }

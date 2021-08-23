@@ -1,4 +1,4 @@
-package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn
+package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.rtgs
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EFTNViewModel @Inject constructor(
+class RTGSTransactionViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network
 ): ViewModel() {

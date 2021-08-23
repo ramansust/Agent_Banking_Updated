@@ -5,19 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.datasoft.abs.databinding.FragmentEftnTransactionDetailsBinding
-import com.datasoft.abs.presenter.view.dashboard.fragments.accountList.adapter.AccountAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class EFTNTransactionDetailsFragment : Fragment() {
 
     private var _binding: FragmentEftnTransactionDetailsBinding? = null
-
-    @Inject
-    lateinit var accountAdapter: AccountAdapter
+    private val args: EFTNTransactionDetailsFragmentArgs by navArgs()
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
