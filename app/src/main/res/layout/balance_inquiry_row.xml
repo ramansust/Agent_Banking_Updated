@@ -54,6 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_8x"
         android:fontFamily="@font/oxygen_regular"
+        android:maxLines="1"
         android:text="@string/date"
         android:textSize="@dimen/font_20x"
         app:layout_constraintEnd_toEndOf="parent"

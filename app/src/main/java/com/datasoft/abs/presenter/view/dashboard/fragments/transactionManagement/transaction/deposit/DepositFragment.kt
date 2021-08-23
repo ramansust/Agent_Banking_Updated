@@ -89,6 +89,7 @@ class DepositFragment : Fragment() {
                     response.data?.let {
                         binding.edTxtChargeVat.setText(it.chargeAmt)
                         binding.edTxtInWords.setText(it.currencyToWord)
+                        binding.edTxtTotal.setText(it.transactionalAmount)
                     }
                 }
 
