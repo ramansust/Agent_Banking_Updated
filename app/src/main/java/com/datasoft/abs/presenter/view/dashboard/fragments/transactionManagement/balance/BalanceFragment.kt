@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.data.dto.CommonRequest
@@ -49,6 +50,8 @@ class BalanceFragment : Fragment() {
 
         val list = mutableListOf<Row>()
         viewModel.getBalanceData().observe(viewLifecycleOwner, { response ->
+
+            list.clear()
 
             when (response) {
                 is Resource.Success -> {
@@ -91,7 +94,9 @@ class BalanceFragment : Fragment() {
         })
 
         depositAdapter.setOnItemClickListener {
-            Toast.makeText(requireContext(), "Details...", Toast.LENGTH_SHORT).show()
+            val action =
+                BalanceFragmentDirections.actionBalanceToTransactionDetailsFragment(it.transactionNo!!)
+            Navigation.findNavController(view).navigate(action)
         }
 
         binding.edTxtSearch.addTextChangedListener(textWatcher)

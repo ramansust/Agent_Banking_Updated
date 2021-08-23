@@ -46,10 +46,13 @@ interface Repository {
     suspend fun getCustomerData(customerID: String): Response<CustomerDataResponse>
     suspend fun getIntroducerData(accountNo: String): Response<IntroducerInfo>
     suspend fun createAccountData(createAccountRequest: CreateAccountRequest): Response<CreateAccountResponse>
+
     suspend fun getAccountDetails(accountDetailsRequest: AccountDetailsRequest): Response<AccountDetailsResponse>
     suspend fun getReceiverDetails(accountNumber: String): Response<ReceiverDetailsResponse>
     suspend fun getAmountDetails(amountDetailsRequest: AmountDetailsRequest): Response<AmountDetailsResponse>
     suspend fun getWithdrawDeposit(withdrawDepositRequest: WithdrawDepositRequest): Response<WithdrawDepositResponse>
+    suspend fun getBalanceInquiry(accountNo: String): Response<BalanceInquiryResponse>
+    suspend fun getTransactionDetails(transactionNo: String): Response<TransactionDetailsResponse>
 
     suspend fun insert(generalInfo: GeneralInfo)
     fun getAll(): LiveData<List<GeneralInfo>>

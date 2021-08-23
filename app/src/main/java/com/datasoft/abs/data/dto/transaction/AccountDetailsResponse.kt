@@ -22,6 +22,7 @@ data class AccountDetailsResponse(
     val profileImage: String?,
     val serviceAgent: Int?,
     val signatureImage: String?,
+    val transaction: List<CommonModel>?,
     val trnProfileType: List<CommonModel>?,
     val trnType: List<CommonModel>?
 )

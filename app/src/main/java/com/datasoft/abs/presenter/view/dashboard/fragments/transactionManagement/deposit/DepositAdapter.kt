@@ -45,7 +45,10 @@ class DepositAdapter @Inject constructor() :
         with(deposit) {
             holder.binding.txtViewSlNo.text = (position  + 1).toString()
             holder.binding.txtViewTransactionNo.text = this.transactionNo
-            holder.binding.txtViewAccountNumber.text = this.crAccountNumber
+            if(this.crAccountNumber?.isNotEmpty() == true)
+                holder.binding.txtViewAccountNumber.text = this.crAccountNumber
+            else
+                holder.binding.txtViewAccountNumber.text = this.drAccountNumber
             holder.binding.txtViewDateTime.text = this.transactionDate
             holder.binding.txtViewDescription.text = this.narration
             holder.binding.txtViewAmount.text = this.balance.toString()

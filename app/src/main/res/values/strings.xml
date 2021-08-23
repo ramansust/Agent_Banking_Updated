@@ -307,11 +307,12 @@
     <string name="receiver_bank">Receiver Bank</string>
     <string name="branch_routing">Branch &amp; Routing No</string>
 
-    <string name="transaction_no">Transaction NO</string>
+    <string name="transaction_no">Transaction No</string>
     <string name="debit">Debit</string>
     <string name="credit">Credit</string>
-    <string name="date">date</string>
+    <string name="date">Date</string>
     <string name="routing">Routing</string>
     <string name="date_time">Date Time</string>
     <string name="view">View</string>
+    <string name="transaction_details">Transaction Details</string>
 </resources>

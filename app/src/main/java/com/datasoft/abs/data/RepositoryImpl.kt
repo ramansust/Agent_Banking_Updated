@@ -131,6 +131,14 @@ class RepositoryImpl @Inject constructor(
         return restApiService.getWithdrawDeposit(withdrawDepositRequest)
     }
 
+    override suspend fun getBalanceInquiry(accountNo: String): Response<BalanceInquiryResponse> {
+        return restApiService.getBalanceInquiry(accountNo)
+    }
+
+    override suspend fun getTransactionDetails(transactionNo: String): Response<TransactionDetailsResponse> {
+        return restApiService.getTransactionDetails(transactionNo)
+    }
+
     override suspend fun insert(generalInfo: GeneralInfo) {
         generalInfoDao.insert(generalInfo)
     }

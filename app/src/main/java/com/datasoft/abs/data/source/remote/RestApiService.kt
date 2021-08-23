@@ -96,4 +96,10 @@ interface RestApiService {
 
     @POST("api/withdraw-deposit")
     suspend fun getWithdrawDeposit(@Body withdrawDepositRequest: WithdrawDepositRequest): Response<WithdrawDepositResponse>
+
+    @GET("api/balance-inquiry")
+    suspend fun getBalanceInquiry(@Query("accountNo") accountNo: String): Response<BalanceInquiryResponse>
+
+    @GET("api/transaction-details")
+    suspend fun getTransactionDetails(@Query("transactionNo") transactionNo: String): Response<TransactionDetailsResponse>
 }

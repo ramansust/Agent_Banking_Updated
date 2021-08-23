@@ -68,6 +68,8 @@ class TransactionFragment : Fragment() {
                         binding.txtViewAccountType.text = it.acType
                         binding.txtViewBalance.text = it.balance.toString()
 
+                        viewModel.setAccountNumber(it.accountNo!!)
+
                         glide.load(Base64.decode(it.profileImage, Base64.DEFAULT))
                             .into(binding.imgViewPhoto)
                     }

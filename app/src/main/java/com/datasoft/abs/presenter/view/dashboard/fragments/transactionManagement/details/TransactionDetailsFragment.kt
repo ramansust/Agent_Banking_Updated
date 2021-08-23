@@ -1,4 +1,4 @@
-package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.transaction.balanceInquiry
+package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,26 +7,26 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.datasoft.abs.databinding.FragmentBalanceInquiryBinding
+import com.datasoft.abs.databinding.FragmentTransactionDetailsBinding
 import com.datasoft.abs.presenter.states.Resource
-import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.transaction.TransactionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class BalanceInquiryFragment : Fragment() {
+class TransactionDetailsFragment : Fragment() {
 
-    private var _binding: FragmentBalanceInquiryBinding? = null
-    private val viewModel: TransactionViewModel by activityViewModels()
-    private val balanceInquiryViewModel: BalanceInquiryViewModel by activityViewModels()
+    private val viewModel: TransactionDetailsViewModel by activityViewModels()
+    private var _binding: FragmentTransactionDetailsBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+    private val args: TransactionDetailsFragmentArgs by navArgs()
 
     @Inject
-    lateinit var balanceInquiryAdapter: BalanceInquiryAdapter
+    lateinit var transactionDetailsAdapter: TransactionDetailsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +34,7 @@ class BalanceInquiryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentBalanceInquiryBinding.inflate(inflater, container, false)
+        _binding = FragmentTransactionDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -43,11 +43,12 @@ class BalanceInquiryFragment : Fragment() {
 
         setupRecyclerView()
 
-        balanceInquiryViewModel.getBalanceInquiry().observe(viewLifecycleOwner, { response ->
+        viewModel.getTransactionDetails().observe(viewLifecycleOwner, { response ->
+
             when (response) {
                 is Resource.Success -> {
                     response.data?.let { dataResponse ->
-                        balanceInquiryAdapter.differ.submitList(dataResponse)
+                        transactionDetailsAdapter.differ.submitList(dataResponse)
                     }
                 }
 
@@ -63,10 +64,7 @@ class BalanceInquiryFragment : Fragment() {
             }
         })
 
-        viewModel.getAccountNumber().observe(viewLifecycleOwner, {
-            if (it.isNotEmpty())
-                balanceInquiryViewModel.balanceInquiry(it)
-        })
+        viewModel.transactionDetails(args.transactionNo)
     }
 
     override fun onDestroyView() {
@@ -76,7 +74,7 @@ class BalanceInquiryFragment : Fragment() {
 
     private fun setupRecyclerView() {
         binding.recycleView.apply {
-            adapter = balanceInquiryAdapter
+            adapter = transactionDetailsAdapter
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }

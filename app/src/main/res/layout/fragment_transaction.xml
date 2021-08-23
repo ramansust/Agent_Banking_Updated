@@ -31,7 +31,7 @@
                 android:fontFamily="@font/oxygen_regular"
                 android:hint="@string/type_here"
                 android:inputType="number"
-                android:letterSpacing=".5"
+                android:letterSpacing=".25"
                 android:maxLength="@integer/edit_text_input_length"
                 android:padding="@dimen/space_8x"
                 android:text="1001120013386"

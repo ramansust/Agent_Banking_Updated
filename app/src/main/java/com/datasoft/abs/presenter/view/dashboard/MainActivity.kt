@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.rtgs -> getString(R.string.rtgs_transaction)
                 R.id.EFTNTransaction -> getString(R.string.eftn_transaction)
                 R.id.RTGSTransaction -> getString(R.string.rtgs_transaction)
+                R.id.transactionDetailsFragment -> getString(R.string.transaction_details)
                 else -> getString(R.string.menu_profile)
             }
         }

@@ -91,19 +91,31 @@
         android:id="@+id/deposit"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.deposit.DepositFragment"
         android:label="@string/deposit_list"
-        tools:layout="@layout/fragment_deposit" />
+        tools:layout="@layout/fragment_deposit">
+        <action
+            android:id="@+id/action_deposit_to_transactionDetailsFragment"
+            app:destination="@id/transactionDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/withdraw"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.withdrawal.WithdrawalFragment"
         android:label="@string/withdrawal_list"
-        tools:layout="@layout/fragment_withdraw" />
+        tools:layout="@layout/fragment_withdraw">
+        <action
+            android:id="@+id/action_withdraw_to_transactionDetailsFragment"
+            app:destination="@id/transactionDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/balance"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.balance.BalanceFragment"
         android:label="@string/balance_transfer_list"
-        tools:layout="@layout/fragment_balance" />
+        tools:layout="@layout/fragment_balance">
+        <action
+            android:id="@+id/action_balance_to_transactionDetailsFragment"
+            app:destination="@id/transactionDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/eftn"
@@ -134,5 +146,16 @@
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.rtgs.RTGSTransactionFragment"
         android:label="@string/rtgs_transaction"
         tools:layout="@layout/fragment_eftn_transaction" />
+    <fragment
+        android:id="@+id/transactionDetailsFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.details.TransactionDetailsFragment"
+        android:label="@string/transaction_details"
+        tools:layout="@layout/fragment_transaction_details">
+
+        <argument
+            android:name="transaction_no"
+            android:defaultValue=''
+            app:argType="string" />
+    </fragment>
 
 </navigation>
