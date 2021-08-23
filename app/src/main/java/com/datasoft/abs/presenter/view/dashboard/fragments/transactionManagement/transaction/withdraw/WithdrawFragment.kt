@@ -19,6 +19,7 @@ class WithdrawFragment : Fragment() {
 
     private var _binding: FragmentTransactionDepositBinding? = null
     private val viewModel: TransactionViewModel by activityViewModels()
+    private val withdrawViewModel: WithdrawViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -82,7 +83,7 @@ class WithdrawFragment : Fragment() {
             }
         })
 
-        viewModel.getAmountDetails().observe(viewLifecycleOwner, { response ->
+        withdrawViewModel.getAmountDetails().observe(viewLifecycleOwner, { response ->
             when(response) {
                 is Resource.Success -> {
                     response.data?.let {
@@ -101,9 +102,9 @@ class WithdrawFragment : Fragment() {
             }
         })
 
-        binding.edTxtAmount.setOnFocusChangeListener { v, hasFocus ->
+        binding.edTxtAmount.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus && binding.edTxtAmount.text.trim().isNotEmpty()) {
-                viewModel.amountDetails(
+                withdrawViewModel.amountDetails(
                     acType, accountNumber, branchID, 1,
                     if (binding.edTxtAmount.text.trim().toString()
                             .isNotEmpty()
@@ -111,7 +112,7 @@ class WithdrawFragment : Fragment() {
                         .toInt() else 0,
                     if (currencyList.isNotEmpty()) currencyList[binding.spinnerCurrency.selectedItemPosition].id else 0,
                     if (paymentList.isNotEmpty()) paymentList[binding.spinnerPaymentMode.selectedItemPosition].id else 0,
-                    1
+                    2
                 )
             }
         }

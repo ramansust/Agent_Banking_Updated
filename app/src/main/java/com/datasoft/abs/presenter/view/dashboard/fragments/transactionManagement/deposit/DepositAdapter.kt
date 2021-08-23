@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.transaction.Row
-import com.datasoft.abs.databinding.AccountRowBinding
+import com.datasoft.abs.databinding.DepositRowBinding
 import javax.inject.Inject
 
 class DepositAdapter @Inject constructor() :
-    RecyclerView.Adapter<DepositAdapter.AccountViewHolder>() {
+    RecyclerView.Adapter<DepositAdapter.DepositViewHolder>() {
 
-    inner class AccountViewHolder(val binding: AccountRowBinding) :
+    inner class DepositViewHolder(val binding: DepositRowBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<Row>() {
@@ -27,10 +27,10 @@ class DepositAdapter @Inject constructor() :
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DepositViewHolder {
 
-        val binding = AccountRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return AccountViewHolder(binding)
+        val binding = DepositRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return DepositViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -39,21 +39,20 @@ class DepositAdapter @Inject constructor() :
 
     private var onItemClickListener: ((Row) -> Unit)? = null
 
-    override fun onBindViewHolder(holder: AccountViewHolder, position: Int) {
-        val account = differ.currentList[position]
+    override fun onBindViewHolder(holder: DepositViewHolder, position: Int) {
+        val deposit = differ.currentList[position]
 
-        with(account) {
-            holder.binding.txtViewSlNo.text = this.id.toString()
-            holder.binding.txtViewAccountTitle.text = this.transactionNo
+        with(deposit) {
+            holder.binding.txtViewSlNo.text = (position  + 1).toString()
+            holder.binding.txtViewTransactionNo.text = this.transactionNo
             holder.binding.txtViewAccountNumber.text = this.crAccountNumber
-            holder.binding.txtViewSourceOfFund.text = this.transactionDate
-            holder.binding.txtViewUnit.text = this.drAccountNumber
-
-//            glide.load(this.imageUrl).into(holder.binding.ivAutoImageSlider)
+            holder.binding.txtViewDateTime.text = this.transactionDate
+            holder.binding.txtViewDescription.text = this.narration
+            holder.binding.txtViewAmount.text = this.balance.toString()
         }
 
-        holder.itemView.setOnClickListener {
-            onItemClickListener?.let { it(account) }
+        holder.binding.imgViewEdit.setOnClickListener {
+            onItemClickListener?.let { it(deposit) }
         }
     }
 

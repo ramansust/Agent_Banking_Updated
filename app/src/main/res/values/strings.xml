@@ -313,4 +313,5 @@
     <string name="date">date</string>
     <string name="routing">Routing</string>
     <string name="date_time">Date Time</string>
+    <string name="view">View</string>
 </resources>

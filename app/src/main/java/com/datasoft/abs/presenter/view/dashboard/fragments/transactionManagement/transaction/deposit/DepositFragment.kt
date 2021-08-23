@@ -19,6 +19,7 @@ class DepositFragment : Fragment() {
 
     private var _binding: FragmentTransactionDepositBinding? = null
     private val viewModel: TransactionViewModel by activityViewModels()
+    private val depositViewModel: DepositViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -82,7 +83,7 @@ class DepositFragment : Fragment() {
             }
         })
 
-        viewModel.getAmountDetails().observe(viewLifecycleOwner, { response ->
+        depositViewModel.getAmountDetails().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     response.data?.let {
@@ -101,9 +102,9 @@ class DepositFragment : Fragment() {
             }
         })
 
-        binding.edTxtAmount.setOnFocusChangeListener { v, hasFocus ->
+        binding.edTxtAmount.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus && binding.edTxtAmount.text.trim().isNotEmpty()) {
-                viewModel.amountDetails(
+                depositViewModel.amountDetails(
                     acType, accountNumber, branchID, 1,
                     if (binding.edTxtAmount.text.trim().toString()
                             .isNotEmpty()
