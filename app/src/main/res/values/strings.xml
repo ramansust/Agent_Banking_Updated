@@ -13,6 +13,8 @@
     <string name="menu_account">Account Opening</string>
     <string name="menu_account_list">Account List</string>
     <string name="menu_transaction">Transaction</string>
+    <string name="menu_cash_register">Cash Register</string>
+    <string name="menu_business_close">Business: Close</string>
 
     <string name="test_password">Pass@word4</string>
     <string name="test_username">emroz</string>
@@ -43,6 +45,7 @@
     <string name="total_deposit">Total Deposit</string>
     <string name="total_withdraw">Total Withdraw</string>
     <string name="total_balance">Agent A/C balance</string>
+    <string name="balance">Balance:</string>
     <string name="action_logout">Logout</string>
     <string name="menu_profile">Profile</string>
     <string name="todo">TODO</string>
@@ -55,6 +58,15 @@
     <string name="six">6.</string>
     <string name="seven">7.</string>
     <string name="eight">8.</string>
+
+    <string name="thousand">1000</string>
+    <string name="five_hundred">500</string>
+    <string name="hundred">100</string>
+    <string name="fifty">50</string>
+    <string name="twenty">20</string>
+    <string name="ten">10</string>
+    <string name="five_">5</string>
+    <string name="two_">2</string>
 
     <string name="account_information">Account Information</string>
     <string name="others_customer">Others Facilities</string>
@@ -181,6 +193,7 @@
     <string name="no">NO</string>
     <string name="alert">Alert!</string>
     <string name="confirmation_message">Do you want to EXIT?</string>
+    <string name="confirmation_message_logout">Do you want to LOGOUT?</string>
 
     <string name="nominated_person">Nominated Person for Emergency Contact</string>
     <string name="name_">Name*</string>
@@ -236,6 +249,7 @@
     <string name="internet_banking">Internet Banking</string>
 
     <string name="transaction_type">Transaction Type</string>
+    <string name="transaction_type_">Transaction Type*</string>
     <string name="daily_transaction">Daily Transaction</string>
     <string name="daily_amount">Daily Amount</string>
     <string name="monthly_transaction">Monthly Transaction</string>
@@ -315,4 +329,26 @@
     <string name="date_time">Date Time</string>
     <string name="view">View</string>
     <string name="transaction_details">Transaction Details</string>
+
+    <string name="current_password_">Current Password*</string>
+    <string name="new_password_">New Password*</string>
+    <string name="confirm_new_password_">Confirm New Password*</string>
+    <string name="update_password">Update Password</string>
+    <string name="password_rules">* Must be minimum 8 and maximum 50 characters\n* Must have at least 1 upper case character\n* Must have at least 1 lower case character\n* Must have at least 1 numeric character\n* Must have at least 1 special character ! @ # $ % ^ &amp; * ( )\n* Must be different from last 3 passwords</string>
+    <string name="change_password">Change Password</string>
+    <string name="entry_by">Entry By</string>
+    <string name="cash_breakdown">Cash Breakdown</string>
+    <string name="denomination">Denomination</string>
+    <string name="pcs">PCS</string>
+    <string name="close">Close</string>
+    <string name="branch_sign_off">Branch Sign Off</string>
+    <string name="code">Code</string>
+    <string name="sign_off">Sign Off</string>
+    <string name="current_balance">Current Balance</string>
+    <string name="reference_number">Ref. Number</string>
+    <string name="feeder_transaction">Feeder Transaction</string>
+    <string name="feeder_transaction_add">+Feeder Transaction</string>
+    <string name="feeder_account_no_">Feeder Account No*</string>
+    <string name="transaction_purpose_">Transaction Purpose*</string>
+    <string name="total_amount">Total Amount</string>
 </resources>

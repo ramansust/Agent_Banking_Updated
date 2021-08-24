@@ -9,7 +9,11 @@
         android:id="@+id/nav_profile"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.profile.ProfileFragment"
         android:label="@string/menu_profile"
-        tools:layout="@layout/fragment_main_transaction" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_nav_profile_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_dashboard"
@@ -73,6 +77,25 @@
         <action
             android:id="@+id/action_nav_transaction_to_rtgs"
             app:destination="@id/rtgs" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_business_close"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.businessClose.BusinessCloseFragment"
+        android:label="@string/menu_business_close"
+        tools:layout="@layout/fragment_business_close" />
+
+    <fragment
+        android:id="@+id/nav_cash_register"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.cashRegister.CashRegisterFragment"
+        android:label="@string/menu_cash_register"
+        tools:layout="@layout/fragment_cash_register">
+        <action
+            android:id="@+id/action_nav_cash_register_to_feederTransactionFragment"
+            app:destination="@id/feederTransactionFragment" />
+        <action
+            android:id="@+id/action_nav_cash_register_to_cashRegisterCreateFragment"
+            app:destination="@id/cashRegisterCreateFragment" />
     </fragment>
 
     <fragment
@@ -191,5 +214,20 @@
             android:defaultValue=''
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.profile.ChangePasswordFragment"
+        android:label="ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/feederTransactionFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.cashRegister.FeederTransactionFragment"
+        android:label="@string/feeder_transaction"
+        tools:layout="@layout/fragment_feeder_transaction" />
+    <fragment
+        android:id="@+id/cashRegisterCreateFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.cashRegister.CashRegisterCreateFragment"
+        android:label="@string/menu_cash_register"
+        tools:layout="@layout/fragment_cash_register_create" />
 
 </navigation>

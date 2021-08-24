@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
+import com.datasoft.abs.R
 import com.datasoft.abs.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +28,14 @@ class ProfileFragment : Fragment() {
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnChangePassword.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_nav_profile_to_changePasswordFragment)
+        }
     }
 
     override fun onDestroyView() {

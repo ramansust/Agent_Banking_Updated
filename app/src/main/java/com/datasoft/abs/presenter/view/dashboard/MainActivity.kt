@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -52,7 +53,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_customer_list,
                 R.id.nav_account,
                 R.id.nav_account_list,
-                R.id.nav_transaction
+                R.id.nav_transaction,
+                R.id.nav_business_close,
+                R.id.nav_cash_register
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -68,6 +71,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_account -> getString(R.string.menu_account)
                 R.id.nav_account_list -> getString(R.string.menu_account_list)
                 R.id.nav_transaction -> getString(R.string.menu_transaction)
+                R.id.nav_business_close -> getString(R.string.menu_business_close)
+                R.id.nav_cash_register -> getString(R.string.menu_cash_register)
                 R.id.transaction -> getString(R.string.menu_transaction)
                 R.id.disbursement -> getString(R.string.transaction_disbursement)
                 R.id.deposit -> getString(R.string.deposit_list)
@@ -76,6 +81,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.eftn, R.id.EFTNTransaction -> getString(R.string.eftn_transaction)
                 R.id.rtgs, R.id.RTGSTransaction -> getString(R.string.rtgs_transaction)
                 R.id.transactionDetailsFragment, R.id.EFTNTransactionDetailsFragment -> getString(R.string.transaction_details)
+                R.id.changePasswordFragment -> getString(R.string.change_password)
+                R.id.cashRegisterCreateFragment -> getString(R.string.cash_breakdown)
+                R.id.feederTransactionFragment -> getString(R.string.feeder_transaction)
                 else -> getString(R.string.menu_profile)
             }
         }
@@ -106,7 +114,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_logout -> {
-                finish()
+                showConfirmation()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -116,5 +124,20 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    private fun showConfirmation() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(resources.getString(R.string.alert))
+        builder.setMessage(resources.getString(R.string.confirmation_message_logout))
+        builder.setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
+            dialog.dismiss()
+            finish()
+        }
+        builder.setNegativeButton(resources.getString(R.string.no)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 }

@@ -1,18 +1,18 @@
-package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn
+package com.datasoft.abs.presenter.view.dashboard.fragments.businessClose
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.datasoft.abs.databinding.FragmentEftnTransactionBinding
+import com.datasoft.abs.databinding.FragmentBusinessCloseBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class EFTNTransactionFragment : Fragment() {
+class BusinessCloseFragment : Fragment() {
 
-    private var _binding: FragmentEftnTransactionBinding? = null
+    private var _binding: FragmentBusinessCloseBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -22,7 +22,7 @@ class EFTNTransactionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEftnTransactionBinding.inflate(inflater, container, false)
+        _binding = FragmentBusinessCloseBinding.inflate(inflater, container, false)
         return binding.root
     }
 
