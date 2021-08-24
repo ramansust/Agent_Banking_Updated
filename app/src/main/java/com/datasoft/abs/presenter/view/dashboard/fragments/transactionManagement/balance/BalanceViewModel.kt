@@ -35,6 +35,9 @@ class BalanceViewModel @Inject constructor(
 
     fun requestBalanceData(commonRequest: CommonRequest) {
         viewModelScope.launch(Dispatchers.IO) {
+
+            balanceData.postValue(Resource.Loading())
+
             if (network.isConnected()) {
                 try {
                     val response = repository.getBalanceData(commonRequest)

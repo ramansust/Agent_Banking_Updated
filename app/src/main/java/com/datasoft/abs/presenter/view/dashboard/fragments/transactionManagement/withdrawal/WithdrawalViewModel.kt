@@ -19,7 +19,7 @@ import javax.inject.Inject
 class WithdrawalViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network
-): ViewModel() {
+) : ViewModel() {
 
     private val withdrawData = MutableLiveData<Resource<DepositResponse>>()
     fun getWithdrawData(): LiveData<Resource<DepositResponse>> = withdrawData
@@ -35,6 +35,9 @@ class WithdrawalViewModel @Inject constructor(
 
     fun requestWithdrawData(commonRequest: CommonRequest) {
         viewModelScope.launch(Dispatchers.IO) {
+
+            withdrawData.postValue(Resource.Loading())
+
             if (network.isConnected()) {
                 try {
                     val response = repository.getWithdrawData(commonRequest)

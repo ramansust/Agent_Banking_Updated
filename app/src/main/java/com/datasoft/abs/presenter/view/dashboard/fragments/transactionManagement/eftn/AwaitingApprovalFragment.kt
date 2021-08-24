@@ -42,6 +42,7 @@ class AwaitingApprovalFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        startShimmer()
 
         val list = mutableListOf<Row>()
         viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
@@ -85,5 +86,14 @@ class AwaitingApprovalFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
+    }
+
+    private fun startShimmer() {
+        binding.shimmerView.startShimmer()
+    }
+
+    private fun stopShimmer() {
+        binding.shimmerView.stopShimmer()
+        binding.shimmerView.visibility = View.GONE
     }
 }

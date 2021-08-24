@@ -35,6 +35,9 @@ class DepositViewModel @Inject constructor(
 
     fun requestDepositData(commonRequest: CommonRequest) {
         viewModelScope.launch(Dispatchers.IO) {
+
+            depositData.postValue(Resource.Loading())
+
             if (network.isConnected()) {
                 try {
                     val response = repository.getDepositData(commonRequest)

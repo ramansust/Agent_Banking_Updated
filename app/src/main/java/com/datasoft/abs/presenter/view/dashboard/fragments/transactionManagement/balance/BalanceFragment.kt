@@ -55,6 +55,7 @@ class BalanceFragment : Fragment() {
 
             when (response) {
                 is Resource.Success -> {
+                    stopShimmer()
                     response.data?.let { dataResponse ->
                         list.addAll(dataResponse.rows!!)
                         depositAdapter.differ.submitList(list)
@@ -62,10 +63,11 @@ class BalanceFragment : Fragment() {
                 }
 
                 is Resource.Loading -> {
-
+                    startShimmer()
                 }
 
                 is Resource.Error -> {
+                    stopShimmer()
                     response.message?.let { message ->
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
@@ -123,5 +125,14 @@ class BalanceFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
+    }
+
+    private fun startShimmer() {
+        binding.shimmerView.startShimmer()
+    }
+
+    private fun stopShimmer() {
+        binding.shimmerView.stopShimmer()
+        binding.shimmerView.visibility = View.GONE
     }
 }

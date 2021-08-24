@@ -26,6 +26,9 @@ class TransactionDetailsViewModel @Inject constructor(
 
     fun transactionDetails(transactionNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
+
+            transactionDetails.postValue(Resource.Loading())
+
             if (network.isConnected()) {
                 try {
                     val response = repository.getTransactionDetails(transactionNo)

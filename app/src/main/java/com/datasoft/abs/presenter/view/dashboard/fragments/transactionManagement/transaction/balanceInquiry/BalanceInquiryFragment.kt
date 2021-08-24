@@ -46,16 +46,18 @@ class BalanceInquiryFragment : Fragment() {
         balanceInquiryViewModel.getBalanceInquiry().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
+                    stopShimmer()
                     response.data?.let { dataResponse ->
                         balanceInquiryAdapter.differ.submitList(dataResponse)
                     }
                 }
 
                 is Resource.Loading -> {
-
+                    startShimmer()
                 }
 
                 is Resource.Error -> {
+                    stopShimmer()
                     response.message?.let { message ->
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
@@ -80,5 +82,14 @@ class BalanceInquiryFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
+    }
+
+    private fun startShimmer() {
+        binding.shimmerView.startShimmer()
+    }
+
+    private fun stopShimmer() {
+        binding.shimmerView.stopShimmer()
+        binding.shimmerView.visibility = View.GONE
     }
 }

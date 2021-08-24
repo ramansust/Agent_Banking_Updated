@@ -35,6 +35,7 @@
     <string name="customer_type">Customer type</string>
     <string name="account_title">Account Title</string>
     <string name="account_number">Account Number</string>
+    <string name="account_no">Account No</string>
     <string name="name">Name</string>
     <string name="source_of_fund">Source of Income</string>
     <string name="entry_date">Entry Date</string>
@@ -45,7 +46,7 @@
     <string name="total_deposit">Total Deposit</string>
     <string name="total_withdraw">Total Withdraw</string>
     <string name="total_balance">Agent A/C balance</string>
-    <string name="balance">Balance:</string>
+    <string name="balance">Balance (TK)</string>
     <string name="action_logout">Logout</string>
     <string name="menu_profile">Profile</string>
     <string name="todo">TODO</string>

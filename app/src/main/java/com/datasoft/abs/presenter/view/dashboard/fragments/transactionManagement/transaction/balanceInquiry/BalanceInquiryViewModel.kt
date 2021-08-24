@@ -26,6 +26,8 @@ class BalanceInquiryViewModel @Inject constructor(
     fun balanceInquiry(accountNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
 
+            balanceInquiry.postValue(Resource.Loading())
+
             if (accountNo.isEmpty()) {
                 balanceInquiry.postValue(
                     Resource.Error(

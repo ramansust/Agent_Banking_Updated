@@ -1,5 +1,6 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.transaction
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Base64
 import android.view.LayoutInflater
@@ -56,6 +57,7 @@ class TransactionFragment : Fragment() {
         return root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -65,8 +67,10 @@ class TransactionFragment : Fragment() {
                 is Resource.Success -> {
                     response.data?.let {
                         binding.txtViewAccountName.text = it.accountTitle
-                        binding.txtViewAccountNumber.text = it.accountNo
-                        binding.txtViewAccountType.text = it.acType
+                        binding.txtViewAccountNumber.text =
+                            resources.getString(R.string.account_no) + ": " + it.accountNo
+                        binding.txtViewAccountType.text =
+                            resources.getString(R.string.account_type) + ": " + it.acType
                         binding.txtViewBalance.text = it.balance.toString()
 
                         viewModel.setAccountNumber(it.accountNo!!)
