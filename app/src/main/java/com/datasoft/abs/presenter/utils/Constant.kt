@@ -15,6 +15,7 @@ object Constant {
     const val ADULT_AGE = 18
     const val DATE_FORMAT = "MM-dd-yyyy"
     const val DATE_FORMAT_API = "yyyy-MM-dd HH:mm:ss"
+    const val BALANCE_FORMAT = "##,##,##,###.###"
 
     const val IMAGE_RESOLUTION_WIDTH = 1080
     const val IMAGE_RESOLUTION_HEIGHT = 1080

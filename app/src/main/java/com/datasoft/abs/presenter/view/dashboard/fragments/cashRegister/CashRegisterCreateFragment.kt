@@ -1,5 +1,6 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.cashRegister
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.datasoft.abs.databinding.FragmentCashRegisterCreateBinding
+import com.datasoft.abs.presenter.utils.Constant
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class CashRegisterCreateFragment : Fragment() {
@@ -176,6 +179,7 @@ class CashRegisterCreateFragment : Fragment() {
         override fun afterTextChanged(editable: Editable) {}
     }
 
+    @SuppressLint("SetTextI18n")
     private fun displayTotal() {
         val totalAmount: Long = (binding.txtViewThousand.text.toString()
             .toInt() + binding.txtViewFiveHundred.text.toString()
@@ -186,7 +190,7 @@ class CashRegisterCreateFragment : Fragment() {
             .toInt() + binding.txtViewFive.text.toString()
             .toInt() + binding.txtViewTwo.text.toString().toInt()).toLong()
 
-        binding.txtViewTotalAmount.text = totalAmount.toString()
+        binding.txtViewTotalAmount.text = "\u09F3" + DecimalFormat(Constant.BALANCE_FORMAT).format(totalAmount).toString()
     }
 
     override fun onDestroyView() {

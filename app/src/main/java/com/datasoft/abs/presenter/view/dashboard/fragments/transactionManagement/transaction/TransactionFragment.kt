@@ -14,9 +14,11 @@ import com.bumptech.glide.request.RequestOptions
 import com.datasoft.abs.R
 import com.datasoft.abs.databinding.FragmentTransactionBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant.BALANCE_FORMAT
 import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.TransactionAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -71,7 +73,8 @@ class TransactionFragment : Fragment() {
                             resources.getString(R.string.account_no) + ": " + it.accountNo
                         binding.txtViewAccountType.text =
                             resources.getString(R.string.account_type) + ": " + it.acType
-                        binding.txtViewBalance.text = it.balance.toString()
+
+                        binding.txtViewBalance.text = DecimalFormat(BALANCE_FORMAT).format(it.balance).toString()
 
                         viewModel.setAccountNumber(it.accountNo!!)
 
