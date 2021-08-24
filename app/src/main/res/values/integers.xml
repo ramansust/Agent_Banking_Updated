@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="int_input_length">7</integer>
+    <integer name="cash_breakdown_item_length">5</integer>
     <integer name="edit_text_input_length">50</integer>
 </resources>

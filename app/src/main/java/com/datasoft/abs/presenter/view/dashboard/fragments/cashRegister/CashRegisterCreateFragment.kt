@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import com.datasoft.abs.databinding.FragmentCashRegisterCreateBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class CashRegisterCreateFragment : Fragment() {
 
@@ -48,7 +47,11 @@ class CashRegisterCreateFragment : Fragment() {
             if (charSequence.isNotEmpty()) {
                 val value = 1000 * charSequence.toString().toInt()
                 binding.txtViewThousand.text = value.toString()
+            } else {
+                binding.txtViewThousand.text = "0"
             }
+
+            displayTotal()
         }
 
         override fun afterTextChanged(editable: Editable) {}
@@ -61,7 +64,11 @@ class CashRegisterCreateFragment : Fragment() {
             if (charSequence.isNotEmpty()) {
                 val value = 500 * charSequence.toString().toInt()
                 binding.txtViewFiveHundred.text = value.toString()
+            } else {
+                binding.txtViewFiveHundred.text = "0"
             }
+
+            displayTotal()
         }
 
         override fun afterTextChanged(editable: Editable) {}
@@ -74,7 +81,11 @@ class CashRegisterCreateFragment : Fragment() {
             if (charSequence.isNotEmpty()) {
                 val value = 100 * charSequence.toString().toInt()
                 binding.txtViewHundred.text = value.toString()
+            } else {
+                binding.txtViewHundred.text = "0"
             }
+
+            displayTotal()
         }
 
         override fun afterTextChanged(editable: Editable) {}
@@ -87,7 +98,11 @@ class CashRegisterCreateFragment : Fragment() {
             if (charSequence.isNotEmpty()) {
                 val value = 50 * charSequence.toString().toInt()
                 binding.txtViewFifty.text = value.toString()
+            } else {
+                binding.txtViewFifty.text = "0"
             }
+
+            displayTotal()
         }
 
         override fun afterTextChanged(editable: Editable) {}
@@ -100,7 +115,11 @@ class CashRegisterCreateFragment : Fragment() {
             if (charSequence.isNotEmpty()) {
                 val value = 20 * charSequence.toString().toInt()
                 binding.txtViewTwenty.text = value.toString()
+            } else {
+                binding.txtViewTwenty.text = "0"
             }
+
+            displayTotal()
         }
 
         override fun afterTextChanged(editable: Editable) {}
@@ -113,7 +132,11 @@ class CashRegisterCreateFragment : Fragment() {
             if (charSequence.isNotEmpty()) {
                 val value = 10 * charSequence.toString().toInt()
                 binding.txtViewTen.text = value.toString()
+            } else {
+                binding.txtViewTen.text = "0"
             }
+
+            displayTotal()
         }
 
         override fun afterTextChanged(editable: Editable) {}
@@ -126,7 +149,11 @@ class CashRegisterCreateFragment : Fragment() {
             if (charSequence.isNotEmpty()) {
                 val value = 5 * charSequence.toString().toInt()
                 binding.txtViewFive.text = value.toString()
+            } else {
+                binding.txtViewFive.text = "0"
             }
+
+            displayTotal()
         }
 
         override fun afterTextChanged(editable: Editable) {}
@@ -139,10 +166,27 @@ class CashRegisterCreateFragment : Fragment() {
             if (charSequence.isNotEmpty()) {
                 val value = 2 * charSequence.toString().toInt()
                 binding.txtViewTwo.text = value.toString()
+            } else {
+                binding.txtViewTwo.text = "0"
             }
+
+            displayTotal()
         }
 
         override fun afterTextChanged(editable: Editable) {}
+    }
+
+    private fun displayTotal() {
+        val totalAmount: Long = (binding.txtViewThousand.text.toString()
+            .toInt() + binding.txtViewFiveHundred.text.toString()
+            .toInt() + binding.txtViewHundred.text.toString()
+            .toInt() + binding.txtViewFifty.text.toString()
+            .toInt() + binding.txtViewTwenty.text.toString()
+            .toInt() + binding.txtViewTen.text.toString()
+            .toInt() + binding.txtViewFive.text.toString()
+            .toInt() + binding.txtViewTwo.text.toString().toInt()).toLong()
+
+        binding.txtViewTotalAmount.text = totalAmount.toString()
     }
 
     override fun onDestroyView() {

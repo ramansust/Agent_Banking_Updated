@@ -176,7 +176,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:hint="@string/type_here"
                             android:inputType="number"
-                            android:maxLength="@integer/int_input_length"
+                            android:maxLength="@integer/cash_breakdown_item_length"
                             android:padding="@dimen/space_8x"
                             android:textSize="@dimen/font_20x" />
 
@@ -189,7 +189,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:hint="@string/type_here"
                             android:inputType="number"
-                            android:maxLength="@integer/int_input_length"
+                            android:maxLength="@integer/cash_breakdown_item_length"
                             android:padding="@dimen/space_8x"
                             android:textSize="@dimen/font_20x" />
 
@@ -202,7 +202,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:hint="@string/type_here"
                             android:inputType="number"
-                            android:maxLength="@integer/int_input_length"
+                            android:maxLength="@integer/cash_breakdown_item_length"
                             android:padding="@dimen/space_8x"
                             android:textSize="@dimen/font_20x" />
 
@@ -215,7 +215,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:hint="@string/type_here"
                             android:inputType="number"
-                            android:maxLength="@integer/int_input_length"
+                            android:maxLength="@integer/cash_breakdown_item_length"
                             android:padding="@dimen/space_8x"
                             android:textSize="@dimen/font_20x" />
 
@@ -228,7 +228,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:hint="@string/type_here"
                             android:inputType="number"
-                            android:maxLength="@integer/int_input_length"
+                            android:maxLength="@integer/cash_breakdown_item_length"
                             android:padding="@dimen/space_8x"
                             android:textSize="@dimen/font_20x" />
 
@@ -241,7 +241,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:hint="@string/type_here"
                             android:inputType="number"
-                            android:maxLength="@integer/int_input_length"
+                            android:maxLength="@integer/cash_breakdown_item_length"
                             android:padding="@dimen/space_8x"
                             android:textSize="@dimen/font_20x" />
 
@@ -254,7 +254,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:hint="@string/type_here"
                             android:inputType="number"
-                            android:maxLength="@integer/int_input_length"
+                            android:maxLength="@integer/cash_breakdown_item_length"
                             android:padding="@dimen/space_8x"
                             android:textSize="@dimen/font_20x" />
 
@@ -267,7 +267,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:hint="@string/type_here"
                             android:inputType="number"
-                            android:maxLength="@integer/int_input_length"
+                            android:maxLength="@integer/cash_breakdown_item_length"
                             android:padding="@dimen/space_8x"
                             android:textSize="@dimen/font_20x" />
 
@@ -299,7 +299,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:gravity="center"
-                            android:text="@string/thousand"
+                            android:text="@string/zero"
                             android:textSize="@dimen/font_20x" />
 
                         <TextView
@@ -309,7 +309,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:gravity="center"
-                            android:text="@string/five_hundred"
+                            android:text="@string/zero"
                             android:textSize="@dimen/font_20x" />
 
                         <TextView
@@ -319,7 +319,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:gravity="center"
-                            android:text="@string/hundred"
+                            android:text="@string/zero"
                             android:textSize="@dimen/font_20x" />
 
                         <TextView
@@ -329,7 +329,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:gravity="center"
-                            android:text="@string/fifty"
+                            android:text="@string/zero"
                             android:textSize="@dimen/font_20x" />
 
                         <TextView
@@ -339,7 +339,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:gravity="center"
-                            android:text="@string/twenty"
+                            android:text="@string/zero"
                             android:textSize="@dimen/font_20x" />
 
                         <TextView
@@ -349,7 +349,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:gravity="center"
-                            android:text="@string/ten"
+                            android:text="@string/zero"
                             android:textSize="@dimen/font_20x" />
 
                         <TextView
@@ -359,7 +359,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:gravity="center"
-                            android:text="@string/five_"
+                            android:text="@string/zero"
                             android:textSize="@dimen/font_20x" />
 
                         <TextView
@@ -369,7 +369,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:gravity="center"
-                            android:text="@string/two_"
+                            android:text="@string/zero"
                             android:textSize="@dimen/font_20x" />
 
                         <TextView
@@ -379,7 +379,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:gravity="center"
-                            android:text="@string/total_amount"
+                            android:text="@string/zero"
                             android:textSize="@dimen/font_24x" />
 
                     </LinearLayout>

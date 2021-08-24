@@ -351,4 +351,5 @@
     <string name="feeder_account_no_">Feeder Account No*</string>
     <string name="transaction_purpose_">Transaction Purpose*</string>
     <string name="total_amount">Total Amount</string>
+    <string name="zero">0</string>
 </resources>
