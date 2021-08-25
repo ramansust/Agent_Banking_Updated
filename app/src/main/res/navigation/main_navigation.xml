@@ -221,13 +221,22 @@
         tools:layout="@layout/fragment_change_password" />
     <fragment
         android:id="@+id/feederTransactionFragment"
-        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.cashRegister.FeederTransactionFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.cashRegister.feederTransaction.FeederTransactionFragment"
         android:label="@string/feeder_transaction"
-        tools:layout="@layout/fragment_feeder_transaction" />
+        tools:layout="@layout/fragment_feeder_transaction" >
+        <action
+            android:id="@+id/action_feederTransactionFragment_to_feederTransactionCreateFragment"
+            app:destination="@id/feederTransactionCreateFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cashRegisterCreateFragment"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.cashRegister.CashRegisterCreateFragment"
         android:label="@string/menu_cash_register"
         tools:layout="@layout/fragment_cash_register_create" />
+    <fragment
+        android:id="@+id/feederTransactionCreateFragment"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.cashRegister.feederTransaction.FeederTransactionCreateFragment"
+        android:label="@string/feeder_transaction"
+        tools:layout="@layout/fragment_feeder_transaction_create" />
 
 </navigation>

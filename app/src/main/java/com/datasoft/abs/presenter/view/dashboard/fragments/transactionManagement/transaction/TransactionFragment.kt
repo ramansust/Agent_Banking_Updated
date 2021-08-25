@@ -67,6 +67,7 @@ class TransactionFragment : Fragment() {
             when (response) {
 
                 is Resource.Success -> {
+                    goneProgressBar()
                     response.data?.let {
                         binding.txtViewAccountName.text = it.accountTitle
                         binding.txtViewAccountNumber.text =
@@ -74,7 +75,8 @@ class TransactionFragment : Fragment() {
                         binding.txtViewAccountType.text =
                             resources.getString(R.string.account_type) + ": " + it.acType
 
-                        binding.txtViewBalance.text = DecimalFormat(BALANCE_FORMAT).format(it.balance).toString()
+                        binding.txtViewBalance.text =
+                            DecimalFormat(BALANCE_FORMAT).format(it.balance).toString()
 
                         viewModel.setAccountNumber(it.accountNo!!)
 
@@ -92,13 +94,14 @@ class TransactionFragment : Fragment() {
                 }
 
                 is Resource.Error -> {
+                    goneProgressBar()
                     response.message?.let { message ->
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 is Resource.Loading -> {
-
+                    showProgressBar()
                 }
 
             }
@@ -112,5 +115,13 @@ class TransactionFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun goneProgressBar() {
+        binding.loaderView.visibility = View.GONE
+    }
+
+    private fun showProgressBar() {
+        binding.loaderView.visibility = View.VISIBLE
     }
 }

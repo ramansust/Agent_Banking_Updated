@@ -94,7 +94,9 @@ class DepositFragment : Fragment() {
                 }
 
                 is Resource.Error -> {
-
+                    response.message?.let { message ->
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                    }
                 }
 
                 is Resource.Loading -> {

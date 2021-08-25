@@ -89,7 +89,7 @@ class TransferViewModel @Inject constructor(
                 return Resource.Success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.Error(response.errorBody()!!.string())
     }
 
     fun receiverDetails(accountNo: String) {

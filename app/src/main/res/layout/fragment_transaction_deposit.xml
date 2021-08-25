@@ -57,8 +57,8 @@
                     android:background="@drawable/input_border"
                     android:fontFamily="@font/oxygen_regular"
                     android:hint="@string/type_here"
-                    android:inputType="textPersonName|textCapSentences"
-                    android:maxLength="@integer/edit_text_input_length"
+                    android:inputType="number"
+                    android:maxLength="@integer/int_input_length"
                     android:padding="@dimen/space_8x"
                     android:textSize="@dimen/font_16x" />
 
@@ -83,6 +83,7 @@
                     android:inputType="textPersonName|textCapSentences"
                     android:maxLength="@integer/edit_text_input_length"
                     android:padding="@dimen/space_8x"
+                    android:textColor="@color/customer_text"
                     android:textSize="@dimen/font_16x" />
 
                 <TextView
@@ -94,7 +95,7 @@
                     android:textSize="@dimen/font_16x" />
 
                 <EditText
-                    android:id="@+id/ed_txt_receiver_address"
+                    android:id="@+id/ed_txt_remarks"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space_96x"
                     android:layout_marginTop="@dimen/space_8x"
@@ -151,6 +152,7 @@
                     android:hint="@string/type_here"
                     android:maxLength="@integer/edit_text_input_length"
                     android:padding="@dimen/space_8x"
+                    android:textColor="@color/customer_text"
                     android:textSize="@dimen/font_16x" />
 
                 <TextView
@@ -173,6 +175,7 @@
                     android:hint="@string/type_here"
                     android:maxLength="@integer/edit_text_input_length"
                     android:padding="@dimen/space_8x"
+                    android:textColor="@color/customer_text"
                     android:textSize="@dimen/font_16x" />
 
             </LinearLayout>

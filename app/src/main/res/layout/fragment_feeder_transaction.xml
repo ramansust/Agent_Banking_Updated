@@ -1,171 +1,232 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presenter.view.dashboard.fragments.customerCreate.general.GeneralFragment">
+    android:background="@color/dashboard_bg"
+    android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="@dimen/space_5x">
+    <EditText
+        android:id="@+id/ed_txt_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_16x"
+        android:layout_marginEnd="@dimen/space_16x"
+        android:background="@drawable/input_border"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="@dimen/space_5x"
+        android:ems="10"
+        android:fontFamily="@font/oxygen_regular"
+        android:hint="@string/search"
+        android:imeOptions="actionDone"
+        android:inputType="textPersonName"
+        android:padding="@dimen/space_8x"
+        android:textSize="@dimen/font_16x"
+        app:layout_constraintEnd_toStartOf="@id/btn_add"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_16x"
+        android:layout_marginEnd="@dimen/space_16x"
+        android:background="@drawable/add_customer_button"
+        android:paddingStart="@dimen/space_16x"
+        android:paddingEnd="@dimen/space_16x"
+        android:text="@string/add_new"
+        android:textSize="@dimen/font_12x"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/ed_txt_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ed_txt_search">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/space_16x">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/space_8x"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <include layout="@layout/common_shimmer_row" />
 
-                <TextView
-                    android:id="@+id/txt_view_introducer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/feeder_account_no_"
-                    android:textSize="@dimen/font_16x" />
+            <include layout="@layout/common_shimmer_row" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_feeder_account_no"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="@dimen/space_8x"
-                    android:background="@drawable/spinner_background" />
+            <include layout="@layout/common_shimmer_row" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/amount_"
-                    android:textSize="@dimen/font_16x" />
+            <include layout="@layout/common_shimmer_row" />
 
-                <EditText
-                    android:id="@+id/ed_txt_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="@dimen/space_8x"
-                    android:background="@drawable/input_border"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:hint="@string/type_here"
-                    android:inputType="number"
-                    android:maxLength="@integer/int_input_length"
-                    android:padding="@dimen/space_8x"
-                    android:textSize="@dimen/font_16x" />
+            <include layout="@layout/common_shimmer_row" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/reference_number"
-                    android:textSize="@dimen/font_16x" />
+            <include layout="@layout/common_shimmer_row" />
 
-                <EditText
-                    android:id="@+id/ed_txt_reference_no"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="@dimen/space_8x"
-                    android:background="@drawable/input_border"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:hint="@string/type_here"
-                    android:inputType="textPersonName|textCapSentences"
-                    android:maxLength="@integer/edit_text_input_length"
-                    android:padding="@dimen/space_8x"
-                    android:textSize="@dimen/font_16x" />
+            <include layout="@layout/common_shimmer_row" />
 
-            </LinearLayout>
+            <include layout="@layout/common_shimmer_row" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_8x"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guideline_middle"
-                app:layout_constraintTop_toTopOf="parent">
+            <include layout="@layout/common_shimmer_row" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/transaction_type_"
-                    android:textSize="@dimen/font_16x" />
+            <include layout="@layout/common_shimmer_row" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_transaction_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="@dimen/space_8x"
-                    android:background="@drawable/spinner_background" />
+            <include layout="@layout/common_shimmer_row" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/transaction_purpose_"
-                    android:textSize="@dimen/font_16x" />
+            <include layout="@layout/common_shimmer_row" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_transaction_purpose"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="@dimen/space_8x"
-                    android:background="@drawable/spinner_background" />
+            <include layout="@layout/common_shimmer_row" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:text="@string/remarks"
-                    android:textSize="@dimen/font_16x" />
+            <include layout="@layout/common_shimmer_row" />
 
-                <EditText
-                    android:id="@+id/ed_txt_remarks"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginTop="@dimen/space_8x"
-                    android:background="@drawable/input_border"
-                    android:fontFamily="@font/oxygen_regular"
-                    android:hint="@string/type_here"
-                    android:inputType="phone"
-                    android:maxLength="@integer/edit_text_input_length"
-                    android:padding="@dimen/space_8x"
-                    android:textSize="@dimen/font_16x" />
+            <include layout="@layout/common_shimmer_row" />
 
-            </LinearLayout>
+        </LinearLayout>
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_middle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_border"
-                android:enabled="false"
-                android:paddingStart="@dimen/space_16x"
-                android:paddingEnd="@dimen/space_16x"
-                android:text="@string/save"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+    <TextView
+        android:id="@+id/txt_view_sl_no"
+        android:layout_width="@dimen/space_100x"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_5x"
+        android:layout_marginTop="@dimen/space_8x"
+        android:layout_marginEnd="@dimen/space_5x"
+        android:fontFamily="@font/oxygen_regular"
+        android:text="@string/sl_no"
+        android:textColor="@color/customer_text"
+        android:textSize="@dimen/font_20x"
+        app:layout_constraintEnd_toStartOf="@+id/txt_view_date"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-</FrameLayout>
+    <TextView
+        android:id="@+id/txt_view_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_8x"
+        android:layout_marginEnd="@dimen/space_5x"
+        android:fontFamily="@font/oxygen_regular"
+        android:text="@string/date"
+        android:textColor="@color/customer_text"
+        android:textSize="@dimen/font_20x"
+        app:layout_constraintEnd_toStartOf="@+id/txt_view_account_number"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txt_view_sl_no"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add" />
+
+    <TextView
+        android:id="@+id/txt_view_account_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_8x"
+        android:layout_marginEnd="@dimen/space_5x"
+        android:fontFamily="@font/oxygen_regular"
+        android:text="@string/account_number"
+        android:textColor="@color/customer_text"
+        android:textSize="@dimen/font_20x"
+        app:layout_constraintEnd_toStartOf="@+id/txt_view_reference_number"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txt_view_date"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add" />
+
+    <TextView
+        android:id="@+id/txt_view_reference_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_8x"
+        android:layout_marginEnd="@dimen/space_5x"
+        android:fontFamily="@font/oxygen_regular"
+        android:text="@string/reference_number"
+        android:textColor="@color/customer_text"
+        android:textSize="@dimen/font_20x"
+        app:layout_constraintEnd_toStartOf="@+id/txt_view_transaction_type"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txt_view_account_number"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add" />
+
+    <TextView
+        android:id="@+id/txt_view_transaction_type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_8x"
+        android:layout_marginEnd="@dimen/space_5x"
+        android:fontFamily="@font/oxygen_regular"
+        android:text="@string/transaction_type"
+        android:textColor="@color/customer_text"
+        android:textSize="@dimen/font_20x"
+        app:layout_constraintEnd_toStartOf="@+id/txt_view_amount"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txt_view_reference_number"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add" />
+
+    <TextView
+        android:id="@+id/txt_view_amount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_8x"
+        android:layout_marginEnd="@dimen/space_5x"
+        android:fontFamily="@font/oxygen_regular"
+        android:text="@string/amount"
+        android:textColor="@color/customer_text"
+        android:textSize="@dimen/font_20x"
+        app:layout_constraintEnd_toStartOf="@+id/txt_view_current_balance"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txt_view_transaction_type"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add" />
+
+    <TextView
+        android:id="@+id/txt_view_current_balance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_8x"
+        android:layout_marginEnd="@dimen/space_5x"
+        android:fontFamily="@font/oxygen_regular"
+        android:text="@string/current_balance"
+        android:textColor="@color/customer_text"
+        android:textSize="@dimen/font_20x"
+        app:layout_constraintEnd_toStartOf="@+id/txt_view_entry_by"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txt_view_amount"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add" />
+
+    <TextView
+        android:id="@+id/txt_view_entry_by"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_8x"
+        android:fontFamily="@font/oxygen_regular"
+        android:text="@string/entry_by"
+        android:textColor="@color/customer_text"
+        android:textSize="@dimen/font_20x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txt_view_current_balance"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_1x"
+        android:layout_marginTop="@dimen/space_8x"
+        android:background="@color/shimmer_background_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_account_number" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_8x"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

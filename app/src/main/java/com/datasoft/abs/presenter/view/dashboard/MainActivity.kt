@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.transactionDetailsFragment, R.id.EFTNTransactionDetailsFragment -> getString(R.string.transaction_details)
                 R.id.changePasswordFragment -> getString(R.string.change_password)
                 R.id.cashRegisterCreateFragment -> getString(R.string.cash_breakdown)
-                R.id.feederTransactionFragment -> getString(R.string.feeder_transaction)
+                R.id.feederTransactionFragment, R.id.feederTransactionCreateFragment -> getString(R.string.feeder_transaction)
                 else -> getString(R.string.menu_profile)
             }
         }

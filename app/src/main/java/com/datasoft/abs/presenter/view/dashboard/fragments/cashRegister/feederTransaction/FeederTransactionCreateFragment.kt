@@ -1,18 +1,18 @@
-package com.datasoft.abs.presenter.view.dashboard.fragments.cashRegister
+package com.datasoft.abs.presenter.view.dashboard.fragments.cashRegister.feederTransaction
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.datasoft.abs.databinding.FragmentFeederTransactionBinding
+import com.datasoft.abs.databinding.FragmentFeederTransactionCreateBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class FeederTransactionFragment : Fragment() {
+class FeederTransactionCreateFragment : Fragment() {
 
-    private var _binding: FragmentFeederTransactionBinding? = null
+    private var _binding: FragmentFeederTransactionCreateBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -22,7 +22,7 @@ class FeederTransactionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFeederTransactionBinding.inflate(inflater, container, false)
+        _binding = FragmentFeederTransactionCreateBinding.inflate(inflater, container, false)
         return binding.root
     }
 

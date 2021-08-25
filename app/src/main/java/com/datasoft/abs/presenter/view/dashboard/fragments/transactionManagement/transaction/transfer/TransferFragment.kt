@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.FragmentTransactionTransferBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.transaction.TransactionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,9 +17,14 @@ class TransferFragment : Fragment() {
 
     private var _binding: FragmentTransactionTransferBinding? = null
     private val viewModel: TransferViewModel by activityViewModels()
+    private val transactionViewModel: TransactionViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+
+    private var acType = ""
+    private var accountNumber = ""
+    private var branchID = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +38,30 @@ class TransferFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        transactionViewModel.getAccountDetails().observe(viewLifecycleOwner, { response ->
+            when (response) {
+
+                is Resource.Success -> {
+                    response.data?.let {
+                        acType = it.acType!!
+                        accountNumber = it.accountNo!!
+                        branchID = it.branchId!!
+                    }
+                }
+
+                is Resource.Error -> {
+                    response.message?.let { message ->
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                is Resource.Loading -> {
+
+                }
+
+            }
+        })
 
         viewModel.getReceiverDetails().observe(viewLifecycleOwner, { response ->
             when (response) {
@@ -55,8 +85,45 @@ class TransferFragment : Fragment() {
             }
         })
 
+        viewModel.getAmountDetails().observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is Resource.Success -> {
+                    response.data?.let {
+                        binding.edTxtChargeVat.setText(it.chargeAmt)
+                        binding.edTxtInWords.setText(it.currencyToWord)
+                        binding.edTxtTotal.setText(it.transactionalAmount)
+                    }
+                }
+
+                is Resource.Error -> {
+                    response.message?.let { message ->
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                is Resource.Loading -> {
+
+                }
+            }
+        })
+
         binding.imgViewSearch.setOnClickListener {
             viewModel.receiverDetails(binding.edTxtReceiverAccountNo.text.trim().toString())
+        }
+
+        binding.edTxtAmount.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus && binding.edTxtAmount.text.trim().isNotEmpty()) {
+                viewModel.amountDetails(
+                    acType, accountNumber, branchID, 1,
+                    if (binding.edTxtAmount.text.trim().toString()
+                            .isNotEmpty()
+                    ) binding.edTxtAmount.text.trim().toString()
+                        .toInt() else 0,
+                    1,
+                    1,
+                    1
+                )
+            }
         }
     }
 
