@@ -68,7 +68,7 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
 
             nomineeData.postValue(Resource.Loading())
 
-            /*if (name.isEmpty() || motherName.isEmpty() || expiryDate.isEmpty() ||
+            if (name.isEmpty() || motherName.isEmpty() || expiryDate.isEmpty() ||
                 presentAddress.isEmpty() || fatherName.isEmpty() || dob.isEmpty() ||
                 shareOfPercentage == 0 || nidNo.isEmpty() || permanentAddress.isEmpty() || presentAddress.isEmpty() ||
                 photo.isEmpty() || signaturePhoto.isEmpty() || nidFrontPhoto.isEmpty()
@@ -91,7 +91,7 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
                     )
                     return@launch
                 }
-            }*/
+            }
 
             val nomineeInfo = Nominee(
                 name,
