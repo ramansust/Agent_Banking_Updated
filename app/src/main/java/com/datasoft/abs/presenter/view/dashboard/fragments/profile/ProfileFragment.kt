@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.datasoft.abs.R
 import com.datasoft.abs.databinding.FragmentProfileBinding
@@ -14,7 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
-    private val viewModel: ProfileViewModel by activityViewModels()
     private var _binding: FragmentProfileBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.

@@ -36,6 +36,8 @@ class DepositViewModel @Inject constructor(
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
+            amountDetails.postValue(Resource.Loading())
+
             if (trnAmount == 0) {
                 amountDetails.postValue(
                     Resource.Error(

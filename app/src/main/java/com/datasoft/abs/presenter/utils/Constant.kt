@@ -22,4 +22,5 @@ object Constant {
     const val IMAGE_COMPRESS = 1024
     const val MAX_SHARE = 100
     const val SHARE_PERCENT_INFO = "SHARE_PERCENT_INFO"
+    const val PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%!\\-_?&])(?=\\S+\$).{8,}"
 }

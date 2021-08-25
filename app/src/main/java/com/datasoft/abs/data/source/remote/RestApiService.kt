@@ -18,6 +18,8 @@ import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckRequest
 import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckResponse
 import com.datasoft.abs.data.dto.login.LoginRequest
 import com.datasoft.abs.data.dto.login.LoginResponse
+import com.datasoft.abs.data.dto.profile.ChangePasswordRequest
+import com.datasoft.abs.data.dto.profile.ChangePasswordResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.data.dto.transaction.*
@@ -102,4 +104,7 @@ interface RestApiService {
 
     @GET("api/transaction-details")
     suspend fun getTransactionDetails(@Query("transactionNo") transactionNo: String): Response<TransactionDetailsResponse>
+
+    @POST("api/change-password")
+    suspend fun getChangePassword(@Body changePasswordRequest: ChangePasswordRequest): Response<ChangePasswordResponse>
 }

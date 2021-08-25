@@ -17,6 +17,8 @@ import com.datasoft.abs.data.dto.dashboard.DashboardResponse
 import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckRequest
 import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckResponse
 import com.datasoft.abs.data.dto.login.LoginResponse
+import com.datasoft.abs.data.dto.profile.ChangePasswordRequest
+import com.datasoft.abs.data.dto.profile.ChangePasswordResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.data.dto.transaction.*
@@ -53,6 +55,7 @@ interface Repository {
     suspend fun getWithdrawDeposit(withdrawDepositRequest: WithdrawDepositRequest): Response<WithdrawDepositResponse>
     suspend fun getBalanceInquiry(accountNo: String): Response<BalanceInquiryResponse>
     suspend fun getTransactionDetails(transactionNo: String): Response<TransactionDetailsResponse>
+    suspend fun getChangePassword(changePasswordRequest: ChangePasswordRequest): Response<ChangePasswordResponse>
 
     suspend fun insert(generalInfo: GeneralInfo)
     fun getAll(): LiveData<List<GeneralInfo>>
