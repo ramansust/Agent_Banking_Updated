@@ -10,7 +10,7 @@ data class TransactionDetailsResponseItem(
     val id: Int?,
     val narration: String?,
     val serviceName: String?,
-    val transactionDate: String?,
+    val transactionDate: String,
     val transactionNo: String?,
     val transactionType: String?
 )

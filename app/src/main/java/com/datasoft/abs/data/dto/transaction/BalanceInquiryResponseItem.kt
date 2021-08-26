@@ -4,7 +4,7 @@ data class BalanceInquiryResponseItem(
     val credit: Double?,
     val debit: Double?,
     val narration: String?,
-    val transactionDate: String?,
+    val transactionDate: String,
     val transactionNo: String?,
     val transactionType: String?
 )

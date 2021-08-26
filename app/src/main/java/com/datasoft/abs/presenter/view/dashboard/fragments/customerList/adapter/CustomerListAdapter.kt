@@ -7,6 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.customerList.Row
 import com.datasoft.abs.databinding.CustomerRowBinding
+import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
+import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT_API
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class CustomerListAdapter @Inject constructor() :
@@ -48,9 +53,14 @@ class CustomerListAdapter @Inject constructor() :
             holder.binding.txtViewName.text = this.fullName
             holder.binding.txtViewCustomerType.text = this.customerType
             holder.binding.txtViewUnit.text = this.branchName
-            holder.binding.txtViewEntryDate.text = this.entryDate
-
-//            glide.load(this.imageUrl).into(holder.binding.ivAutoImageSlider)
+            try {
+                holder.binding.txtViewEntryDate.text = SimpleDateFormat(
+                    DATE_FORMAT,
+                    Locale.US
+                ).format(SimpleDateFormat(DATE_FORMAT_API, Locale.US).parse(this.entryDate))
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
         }
 
         holder.itemView.setOnClickListener {

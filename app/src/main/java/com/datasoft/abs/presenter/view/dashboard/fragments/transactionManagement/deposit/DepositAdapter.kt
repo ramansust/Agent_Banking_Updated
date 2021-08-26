@@ -7,6 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.transaction.Row
 import com.datasoft.abs.databinding.DepositRowBinding
+import com.datasoft.abs.presenter.utils.Constant
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class DepositAdapter @Inject constructor() :
@@ -49,7 +53,16 @@ class DepositAdapter @Inject constructor() :
                 holder.binding.txtViewAccountNumber.text = this.crAccountNumber
             else
                 holder.binding.txtViewAccountNumber.text = this.drAccountNumber
-            holder.binding.txtViewDateTime.text = this.transactionDate
+
+            try {
+                holder.binding.txtViewDateTime.text = SimpleDateFormat(
+                    Constant.DATE_FORMAT,
+                    Locale.US
+                ).format(SimpleDateFormat(Constant.DATE_FORMAT_API, Locale.US).parse(this.transactionDate))
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+
             holder.binding.txtViewDescription.text = this.narration
             holder.binding.txtViewAmount.text = this.balance.toString()
         }

@@ -7,6 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.transaction.BalanceInquiryResponseItem
 import com.datasoft.abs.databinding.BalanceInquiryRowBinding
+import com.datasoft.abs.presenter.utils.Constant
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class BalanceInquiryAdapter @Inject constructor() :
@@ -44,7 +48,15 @@ class BalanceInquiryAdapter @Inject constructor() :
             holder.binding.txtViewTransactionNo.text = this.transactionNo
             holder.binding.txtViewDebit.text = this.debit.toString()
             holder.binding.txtViewCredit.text = this.credit.toString()
-            holder.binding.txtViewDate.text = this.transactionDate
+
+            try {
+                holder.binding.txtViewDate.text = SimpleDateFormat(
+                    Constant.DATE_FORMAT,
+                    Locale.US
+                ).format(SimpleDateFormat(Constant.DATE_FORMAT_API, Locale.US).parse(this.transactionDate))
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
         }
     }
 

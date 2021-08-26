@@ -11,7 +11,7 @@ data class Row(
     val narration: String?,
     val serviceTypeId: Int?,
     val systemCode: String?,
-    val transactionDate: String?,
+    val transactionDate: String,
     val transactionDateTime: String?,
     val transactionNo: String?,
     val transactionType: String?
