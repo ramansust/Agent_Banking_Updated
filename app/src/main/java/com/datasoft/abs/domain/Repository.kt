@@ -22,6 +22,8 @@ import com.datasoft.abs.data.dto.profile.ChangePasswordResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.data.dto.transaction.*
+import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
+import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
 import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
 import retrofit2.Response
 
@@ -56,6 +58,11 @@ interface Repository {
     suspend fun getBalanceInquiry(accountNo: String): Response<BalanceInquiryResponse>
     suspend fun getTransactionDetails(transactionNo: String): Response<TransactionDetailsResponse>
     suspend fun getChangePassword(changePasswordRequest: ChangePasswordRequest): Response<ChangePasswordResponse>
+
+    suspend fun getRTGSList(accountRequest: AccountRequest): Response<RTGSListResponse>
+    suspend fun getBankList(): Response<List<CommonModel>>
+    suspend fun getBranchList(bankId: Int): Response<List<CommonModel>>
+    suspend fun createRTGSTransaction(createRequest: CreateRequest): Response<CreateCustomerResponse>
 
     suspend fun insert(generalInfo: GeneralInfo)
     fun getAll(): LiveData<List<GeneralInfo>>

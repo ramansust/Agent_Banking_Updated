@@ -1,14 +1,12 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn
 
 import android.os.Bundle
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.RequestManager
-import com.bumptech.glide.request.RequestOptions
 import com.datasoft.abs.databinding.FragmentEftnTransactionDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

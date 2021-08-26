@@ -158,6 +158,9 @@
         <action
             android:id="@+id/action_rtgs_to_RTGSTransactionFragment"
             app:destination="@id/RTGSTransaction" />
+        <action
+            android:id="@+id/action_rtgs_to_EFTNTransactionDetailsFragment"
+            app:destination="@id/EFTNTransactionDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/EFTNTransaction"
@@ -223,7 +226,7 @@
         android:id="@+id/feederTransactionFragment"
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.cashRegister.feederTransaction.FeederTransactionFragment"
         android:label="@string/feeder_transaction"
-        tools:layout="@layout/fragment_feeder_transaction" >
+        tools:layout="@layout/fragment_feeder_transaction">
         <action
             android:id="@+id/action_feederTransactionFragment_to_feederTransactionCreateFragment"
             app:destination="@id/feederTransactionCreateFragment" />
@@ -238,5 +241,29 @@
         android:name="com.datasoft.abs.presenter.view.dashboard.fragments.cashRegister.feederTransaction.FeederTransactionCreateFragment"
         android:label="@string/feeder_transaction"
         tools:layout="@layout/fragment_feeder_transaction_create" />
+    <fragment
+        android:id="@+id/awaitingApprovalFragmentRTGS"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.rtgs.AwaitingApprovalFragment"
+        android:label="@string/awaiting_approval">
+        <action
+            android:id="@+id/action_awaitingApprovalFragmentRTGS_to_EFTNTransactionDetailsFragment"
+            app:destination="@id/EFTNTransactionDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rejectFragmentRTGS"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.rtgs.RejectFragment"
+        android:label="@string/reject">
+        <action
+            android:id="@+id/action_rejectFragmentRTGS_to_EFTNTransactionDetailsFragment"
+            app:destination="@id/EFTNTransactionDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/disburseFragmentRTGS"
+        android:name="com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.rtgs.DisburseFragment"
+        android:label="@string/disburse">
+        <action
+            android:id="@+id/action_disburseFragmentRTGS_to_EFTNTransactionDetailsFragment"
+            app:destination="@id/EFTNTransactionDetailsFragment" />
+    </fragment>
 
 </navigation>

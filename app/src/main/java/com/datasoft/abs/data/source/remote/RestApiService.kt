@@ -23,6 +23,8 @@ import com.datasoft.abs.data.dto.profile.ChangePasswordResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.data.dto.transaction.*
+import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
+import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -107,4 +109,16 @@ interface RestApiService {
 
     @POST("api/change-password")
     suspend fun getChangePassword(@Body changePasswordRequest: ChangePasswordRequest): Response<ChangePasswordResponse>
+
+    @POST("api/rtgs-list")
+    suspend fun getRTGSList(@Body accountRequest: AccountRequest): Response<RTGSListResponse>
+
+    @GET("api/rtgs-config")
+    suspend fun getBankList(): Response<List<CommonModel>>
+
+    @GET("api/cascade-bank-branch")
+    suspend fun getBranchList(@Query("bankId") bankId: Int): Response<List<CommonModel>>
+
+    @POST("api/create-rtgs")
+    suspend fun createRTGSTransaction(@Body createRequest: CreateRequest): Response<CreateCustomerResponse>
 }

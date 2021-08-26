@@ -1,4 +1,4 @@
-package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn
+package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.rtgs
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,7 +16,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class EFTNViewModel @Inject constructor(
+class RTGSViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network
 ) : ViewModel() {
@@ -24,8 +24,8 @@ class EFTNViewModel @Inject constructor(
     private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
     fun getSearchData(): LiveData<Resource<String>> = searchData
 
-    private val eftnData = MutableLiveData<Resource<RTGSListResponse>>()
-    fun getEFTNData(): LiveData<Resource<RTGSListResponse>> = eftnData
+    private val rtgsData = MutableLiveData<Resource<RTGSListResponse>>()
+    fun getRTGSData(): LiveData<Resource<RTGSListResponse>> = rtgsData
 
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -33,17 +33,17 @@ class EFTNViewModel @Inject constructor(
         }
     }
 
-    fun requestEFTNData(accountRequest: AccountRequest) {
+    fun requestRTGSData(accountRequest: AccountRequest) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            eftnData.postValue(Resource.Loading())
+            rtgsData.postValue(Resource.Loading())
 
             if (network.isConnected()) {
                 try {
                     val response = repository.getRTGSList(accountRequest)
-                    eftnData.postValue(handleResponse(response))
+                    rtgsData.postValue(handleResponse(response))
                 } catch (e: Exception) {
-                    eftnData.postValue(
+                    rtgsData.postValue(
                         Resource.Error(
                             "Something went wrong!", null
                         )
@@ -51,7 +51,7 @@ class EFTNViewModel @Inject constructor(
                     e.printStackTrace()
                 }
             } else {
-                eftnData.postValue(
+                rtgsData.postValue(
                     Resource.Error(
                         "No internet connection", null
                     )

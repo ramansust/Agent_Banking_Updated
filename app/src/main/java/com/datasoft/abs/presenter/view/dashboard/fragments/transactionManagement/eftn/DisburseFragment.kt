@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.data.dto.accountList.Row
 import com.datasoft.abs.databinding.FragmentAwaitingApprovalBinding
 import com.datasoft.abs.presenter.states.Resource
-import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.rtgs.RTGSAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -24,7 +23,7 @@ class DisburseFragment : Fragment() {
     private val viewModel: EFTNViewModel by activityViewModels()
 
     @Inject
-    lateinit var rtgsAdapter: RTGSAdapter
+    lateinit var rtgsAdapter: EFTNListAdapter
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!

@@ -24,6 +24,8 @@ import com.datasoft.abs.data.dto.profile.ChangePasswordResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.data.dto.transaction.*
+import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
+import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
 import com.datasoft.abs.data.source.local.db.dao.GeneralInfoDao
 import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
 import com.datasoft.abs.data.source.remote.JwtHelper
@@ -143,6 +145,22 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getChangePassword(changePasswordRequest: ChangePasswordRequest): Response<ChangePasswordResponse> {
         return restApiService.getChangePassword(changePasswordRequest)
+    }
+
+    override suspend fun getRTGSList(accountRequest: AccountRequest): Response<RTGSListResponse> {
+        return restApiService.getRTGSList(accountRequest)
+    }
+
+    override suspend fun getBankList(): Response<List<CommonModel>> {
+        return restApiService.getBankList()
+    }
+
+    override suspend fun getBranchList(bankId: Int): Response<List<CommonModel>> {
+        return restApiService.getBranchList(bankId)
+    }
+
+    override suspend fun createRTGSTransaction(createRequest: CreateRequest): Response<CreateCustomerResponse> {
+        return restApiService.createRTGSTransaction(createRequest)
     }
 
     override suspend fun insert(generalInfo: GeneralInfo) {

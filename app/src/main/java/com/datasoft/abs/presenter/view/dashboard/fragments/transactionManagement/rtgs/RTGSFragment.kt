@@ -10,9 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.datasoft.abs.R
+import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.databinding.FragmentRtgsBinding
-import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn.EFTNAdapter
-import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn.EFTNViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class RTGSFragment : Fragment() {
 
     private var _binding: FragmentRtgsBinding? = null
-    private val viewModel: EFTNViewModel by activityViewModels()
+    private val viewModel: RTGSViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -34,7 +33,7 @@ class RTGSFragment : Fragment() {
         _binding = FragmentRtgsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.pager.adapter = EFTNAdapter(this)
+        binding.pager.adapter = RTGSAdapter(this)
 
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             when (position) {
@@ -49,6 +48,8 @@ class RTGSFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.requestRTGSData(AccountRequest(1, status = "7"))
 
         binding.btnAdd.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_rtgs_to_RTGSTransactionFragment)

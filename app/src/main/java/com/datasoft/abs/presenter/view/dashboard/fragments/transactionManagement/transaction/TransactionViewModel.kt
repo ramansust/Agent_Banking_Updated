@@ -40,7 +40,7 @@ class TransactionViewModel @Inject constructor(
             if (accountNo.isEmpty()) {
                 accountDetails.postValue(
                     Resource.Error(
-                        "Search filed must not be empty!", null
+                        "Search field must not be empty!", null
                     )
                 )
 
@@ -99,7 +99,7 @@ class TransactionViewModel @Inject constructor(
             if (acType.isEmpty() || accountNumber.isEmpty()) {
                 withdrawDeposit.postValue(
                     Resource.Error(
-                        "Filed must not be empty!", null
+                        "Field must not be empty!", null
                     )
                 )
 
