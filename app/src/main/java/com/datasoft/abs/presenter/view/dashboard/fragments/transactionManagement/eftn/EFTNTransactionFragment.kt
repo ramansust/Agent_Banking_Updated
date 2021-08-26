@@ -117,6 +117,8 @@ class EFTNTransactionFragment : Fragment() {
                     response.data?.let {
                         senderAccountNo = it.accountNo!!
                         binding.btnNext.isEnabled = true
+                        binding.btnAgentFinger.isEnabled = true
+                        binding.btnCustomerFinger.isEnabled = true
                     }
                 }
 
@@ -130,7 +132,6 @@ class EFTNTransactionFragment : Fragment() {
                 is Resource.Loading -> {
                     showProgressBar()
                 }
-
             }
         })
 

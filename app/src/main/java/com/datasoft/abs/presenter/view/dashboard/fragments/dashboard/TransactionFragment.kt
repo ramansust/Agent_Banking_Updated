@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.datasoft.abs.databinding.FragmentDashboardBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -20,7 +21,7 @@ import com.github.mikephil.charting.components.YAxis.AxisDependency
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
 import dagger.hilt.android.AndroidEntryPoint
-
+import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class TransactionFragment : Fragment() {
@@ -59,14 +60,10 @@ class TransactionFragment : Fragment() {
                 is Resource.Success -> {
                     goneProgressBar()
                     response.data?.let { dashBoardResponse ->
-                        binding.txtViewOpen.text =
-                            dashBoardResponse.vmAgentInfos.total_Customer.toString()
-                        binding.txtViewDeposit.text =
-                            dashBoardResponse.vmAgentInfos.deposit.toString()
-                        binding.txtViewWithdraw.text =
-                            dashBoardResponse.vmAgentInfos.withdraw.toString()
-                        binding.txtViewBalance.text =
-                            dashBoardResponse.vmAgentInfos.current_Balance.toString()
+                        binding.txtViewOpen.text = DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.total_Customer).toString()
+                        binding.txtViewDeposit.text = DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.deposit).toString()
+                        binding.txtViewWithdraw.text = DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.withdraw).toString()
+                        binding.txtViewBalance.text = DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.current_Balance).toString()
                     }
                 }
                 is Resource.Error -> {

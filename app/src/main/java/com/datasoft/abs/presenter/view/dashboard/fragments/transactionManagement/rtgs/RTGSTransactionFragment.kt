@@ -116,6 +116,8 @@ class RTGSTransactionFragment : Fragment() {
                     response.data?.let {
                         senderAccountNo = it.accountNo!!
                         binding.btnNext.isEnabled = true
+                        binding.btnAgentFinger.isEnabled = true
+                        binding.btnCustomerFinger.isEnabled = true
                     }
                 }
 
@@ -154,7 +156,6 @@ class RTGSTransactionFragment : Fragment() {
                 is Resource.Loading -> {
                     showProgressBar()
                 }
-
             }
         })
 
