@@ -90,7 +90,7 @@ class DisburseFragment : Fragment() {
         })
 
         rtgsAdapter.setOnItemClickListener {
-
+            viewModel.setDetails(it.id!!)
         }
     }
 

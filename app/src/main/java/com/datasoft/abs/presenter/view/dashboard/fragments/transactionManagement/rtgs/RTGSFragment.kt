@@ -56,6 +56,14 @@ class RTGSFragment : Fragment() {
         }
 
         binding.edTxtSearch.addTextChangedListener(textWatcher)
+
+        viewModel.getDetailsData().observe(viewLifecycleOwner, { value ->
+            if (value > 0) {
+                val action =
+                    RTGSFragmentDirections.actionRtgsToEFTNTransactionDetailsFragment(value.toLong())
+                Navigation.findNavController(view).navigate(action)
+            }
+        })
     }
 
     private val textWatcher = object : TextWatcher {

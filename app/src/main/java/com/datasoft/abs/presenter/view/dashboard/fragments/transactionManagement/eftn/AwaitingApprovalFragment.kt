@@ -92,7 +92,7 @@ class AwaitingApprovalFragment : Fragment() {
         })
 
         rtgsAdapter.setOnItemClickListener {
-
+            viewModel.setDetails(it.id!!)
         }
     }
 

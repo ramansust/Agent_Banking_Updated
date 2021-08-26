@@ -192,9 +192,9 @@
         android:label="@string/transaction_details"
         tools:layout="@layout/fragment_eftn_transaction_details">
         <argument
-            android:name="transaction_no"
-            android:defaultValue=''
-            app:argType="string" />
+            android:name="transaction_id"
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"

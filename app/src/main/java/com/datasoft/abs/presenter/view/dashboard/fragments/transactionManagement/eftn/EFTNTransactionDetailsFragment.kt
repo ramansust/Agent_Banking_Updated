@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.RequestManager
 import com.datasoft.abs.databinding.FragmentEftnTransactionDetailsBinding
+import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.rtgs.RTGSViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -17,6 +19,8 @@ class EFTNTransactionDetailsFragment : Fragment() {
 
     private var _binding: FragmentEftnTransactionDetailsBinding? = null
     private val args: EFTNTransactionDetailsFragmentArgs by navArgs()
+
+    private val viewModel: RTGSViewModel by activityViewModels()
 
     @Inject
     lateinit var glide: RequestManager
@@ -35,6 +39,8 @@ class EFTNTransactionDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.setDetails(0)
 
         /*binding.edTxtAccountNumber.setText()
         binding.edTxtAccountTitle.setText()

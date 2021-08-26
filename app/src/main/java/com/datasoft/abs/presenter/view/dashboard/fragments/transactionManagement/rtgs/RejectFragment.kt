@@ -89,7 +89,7 @@ class RejectFragment : Fragment() {
         })
 
         rtgsAdapter.setOnItemClickListener {
-
+            viewModel.setDetails(it.id!!)
         }
     }
 
