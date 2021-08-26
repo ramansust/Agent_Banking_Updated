@@ -90,12 +90,7 @@ class AwaitingApprovalFragment : Fragment() {
         })
 
         rtgsAdapter.setOnItemClickListener {
-            val action =
-                AwaitingApprovalFragmentDirections.actionAwaitingApprovalFragmentRTGSToEFTNTransactionDetailsFragment(
-                    it.id.toString()
-                )
 
-//            Navigation.findNavController(view).navigate(action)
         }
     }
 

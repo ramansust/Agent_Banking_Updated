@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.datasoft.abs.data.dto.accountList.Row
+import com.datasoft.abs.data.dto.transaction.rtgs.Row
 import com.datasoft.abs.databinding.FragmentAwaitingApprovalBinding
 import com.datasoft.abs.presenter.states.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,13 +44,39 @@ class DisburseFragment : Fragment() {
         startShimmer()
 
         val list = mutableListOf<Row>()
+        viewModel.getEFTNData().observe(viewLifecycleOwner, { response ->
+
+//            list.clear()
+
+            when (response) {
+                is Resource.Success -> {
+                    stopShimmer()
+                    response.data?.let {
+                        list.addAll(it.rows)
+                        rtgsAdapter.differ.submitList(list)
+                    }
+                }
+
+                is Resource.Error -> {
+                    stopShimmer()
+                    response.message?.let { message ->
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                is Resource.Loading -> {
+                    startShimmer()
+                }
+            }
+        })
+
         viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
 
             when (response) {
                 is Resource.Success -> {
                     response.data?.let { search ->
-                       rtgsAdapter.differ.submitList(list.filter {
-                            it.accountNumber.contains(search, true)
+                        rtgsAdapter.differ.submitList(list.filter {
+                            it.senderAccNumber!!.contains(search, true)
                         })
                     }
                 }
@@ -66,11 +92,7 @@ class DisburseFragment : Fragment() {
         })
 
         rtgsAdapter.setOnItemClickListener {
-            val action =
-                DisburseFragmentDirections.actionDisburseFragmentToEFTNTransactionDetailsFragment(
-                    it.accountNumber
-                )
-            Navigation.findNavController(view).navigate(action)
+
         }
     }
 

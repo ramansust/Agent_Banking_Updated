@@ -60,9 +60,11 @@ interface Repository {
     suspend fun getChangePassword(changePasswordRequest: ChangePasswordRequest): Response<ChangePasswordResponse>
 
     suspend fun getRTGSList(accountRequest: AccountRequest): Response<RTGSListResponse>
+    suspend fun getEFTNList(accountRequest: AccountRequest): Response<RTGSListResponse>
     suspend fun getBankList(): Response<List<CommonModel>>
     suspend fun getBranchList(bankId: Int): Response<List<CommonModel>>
     suspend fun createRTGSTransaction(createRequest: CreateRequest): Response<CreateCustomerResponse>
+    suspend fun createEFTNTransaction(createRequest: CreateRequest): Response<CreateCustomerResponse>
 
     suspend fun insert(generalInfo: GeneralInfo)
     fun getAll(): LiveData<List<GeneralInfo>>

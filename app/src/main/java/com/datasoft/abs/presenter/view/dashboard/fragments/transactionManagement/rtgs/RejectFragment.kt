@@ -89,11 +89,7 @@ class RejectFragment : Fragment() {
         })
 
         rtgsAdapter.setOnItemClickListener {
-            val action =
-                RejectFragmentDirections.actionRejectFragmentRTGSToEFTNTransactionDetailsFragment(
-                    it.id.toString()
-                )
-//            Navigation.findNavController(view).navigate(action)
+
         }
     }
 

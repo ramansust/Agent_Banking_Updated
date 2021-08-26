@@ -113,6 +113,9 @@ interface RestApiService {
     @POST("api/rtgs-list")
     suspend fun getRTGSList(@Body accountRequest: AccountRequest): Response<RTGSListResponse>
 
+    @POST("api/eftn-list")
+    suspend fun getEFTNList(@Body accountRequest: AccountRequest): Response<RTGSListResponse>
+
     @GET("api/rtgs-config")
     suspend fun getBankList(): Response<List<CommonModel>>
 
@@ -121,4 +124,7 @@ interface RestApiService {
 
     @POST("api/create-rtgs")
     suspend fun createRTGSTransaction(@Body createRequest: CreateRequest): Response<CreateCustomerResponse>
+
+    @POST("api/create-eftn")
+    suspend fun createEFTNTransaction(@Body createRequest: CreateRequest): Response<CreateCustomerResponse>
 }

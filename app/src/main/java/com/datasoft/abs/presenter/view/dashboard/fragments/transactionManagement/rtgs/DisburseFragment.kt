@@ -90,11 +90,7 @@ class DisburseFragment : Fragment() {
         })
 
         rtgsAdapter.setOnItemClickListener {
-            val action =
-                DisburseFragmentDirections.actionDisburseFragmentRTGSToEFTNTransactionDetailsFragment(
-                    it.id.toString()
-                )
-//            Navigation.findNavController(view).navigate(action)
+
         }
     }
 

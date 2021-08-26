@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.datasoft.abs.R
+import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.databinding.FragmentEftnBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,6 +48,8 @@ class EFTNFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.requestEFTNData(AccountRequest(1, status = "7"))
 
         binding.btnAdd.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_eftn_to_EFTNTransactionFragment)

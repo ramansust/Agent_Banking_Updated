@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.datasoft.abs.data.dto.accountList.Row
+import com.datasoft.abs.data.dto.transaction.rtgs.Row
 import com.datasoft.abs.databinding.EftnTransactionRowBinding
 import javax.inject.Inject
 
@@ -17,7 +17,7 @@ class EFTNListAdapter @Inject constructor() :
 
     private val differCallback = object : DiffUtil.ItemCallback<Row>() {
         override fun areItemsTheSame(oldItem: Row, newItem: Row): Boolean {
-            return oldItem.accountNumber == newItem.accountNumber
+            return oldItem.receiverAccNumber == newItem.receiverAccNumber
         }
 
         override fun areContentsTheSame(oldItem: Row, newItem: Row): Boolean {
@@ -29,7 +29,8 @@ class EFTNListAdapter @Inject constructor() :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountViewHolder {
 
-        val binding = EftnTransactionRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            EftnTransactionRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AccountViewHolder(binding)
     }
 
@@ -40,21 +41,22 @@ class EFTNListAdapter @Inject constructor() :
     private var onItemClickListener: ((Row) -> Unit)? = null
 
     override fun onBindViewHolder(holder: AccountViewHolder, position: Int) {
-        val account = differ.currentList[position]
+        val item = differ.currentList[position]
 
-        with(account) {
-            holder.binding.txtViewSlNo.text = this.id.toString()
-            holder.binding.txtViewSenderAc.text = this.accountTitle
-            holder.binding.txtViewReceiverName.text = this.accountNumber
-            holder.binding.txtViewReceiverAc.text = this.natureOfBusiness
-            holder.binding.txtViewReceiverBank.text = this.natureOfBusiness
-            holder.binding.txtViewRouting.text = this.natureOfBusiness
-            holder.binding.txtViewAmount.text = this.natureOfBusiness
-            holder.binding.txtViewEntryDate.text = this.natureOfBusiness
+        with(item) {
+            val slNo = position + 1
+            holder.binding.txtViewSlNo.text = slNo.toString()
+            holder.binding.txtViewSenderAc.text = this.senderAccNumber
+            holder.binding.txtViewReceiverName.text = this.receiverName
+            holder.binding.txtViewReceiverAc.text = this.receiverAccNumber
+//            holder.binding.txtViewReceiverBank.text = "static"
+            holder.binding.txtViewRouting.text = this.receiverRouting
+            holder.binding.txtViewAmount.text = this.amount.toString()
+            holder.binding.txtViewEntryDate.text = this.entryDate
         }
 
         holder.binding.imgViewEdit.setOnClickListener {
-            onItemClickListener?.let { it(account) }
+            onItemClickListener?.let { it(item) }
         }
     }
 

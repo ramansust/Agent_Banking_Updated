@@ -151,6 +151,10 @@ class RepositoryImpl @Inject constructor(
         return restApiService.getRTGSList(accountRequest)
     }
 
+    override suspend fun getEFTNList(accountRequest: AccountRequest): Response<RTGSListResponse> {
+        return restApiService.getEFTNList(accountRequest)
+    }
+
     override suspend fun getBankList(): Response<List<CommonModel>> {
         return restApiService.getBankList()
     }
@@ -161,6 +165,10 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun createRTGSTransaction(createRequest: CreateRequest): Response<CreateCustomerResponse> {
         return restApiService.createRTGSTransaction(createRequest)
+    }
+
+    override suspend fun createEFTNTransaction(createRequest: CreateRequest): Response<CreateCustomerResponse> {
+        return restApiService.createEFTNTransaction(createRequest)
     }
 
     override suspend fun insert(generalInfo: GeneralInfo) {

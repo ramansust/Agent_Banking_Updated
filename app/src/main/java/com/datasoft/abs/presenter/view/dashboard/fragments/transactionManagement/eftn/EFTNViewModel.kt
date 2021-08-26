@@ -40,7 +40,7 @@ class EFTNViewModel @Inject constructor(
 
             if (network.isConnected()) {
                 try {
-                    val response = repository.getRTGSList(accountRequest)
+                    val response = repository.getEFTNList(accountRequest)
                     eftnData.postValue(handleResponse(response))
                 } catch (e: Exception) {
                     eftnData.postValue(
