@@ -9,10 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.customerList.Row
 import com.datasoft.abs.databinding.FragmentCustomerBinding
 import com.datasoft.abs.presenter.states.Resource
-import com.datasoft.abs.presenter.utils.Status
+import com.datasoft.abs.presenter.utils.Constant.PER_PAGE_ITEM
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerList.adapter.CustomerListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -30,6 +31,9 @@ class ActiveFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
+    private val list = mutableListOf<Row>()
+    private var isLoading = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,20 +47,19 @@ class ActiveFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        initScrollListener()
 
-        val list = mutableListOf<Row>()
-
-        viewModel.getAllCustomerData().observe(viewLifecycleOwner, { response ->
+        viewModel.getActiveData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     stopShimmer()
                     response.data?.let { customerResponse ->
 
-                        list.addAll(customerResponse.rows.filter {
-                            it.customerStatus == Status.ACTIVE.type
-                        })
-
+                        list.addAll(customerResponse.rows)
                         customerAdapter.differ.submitList(list)
+
+                        if (list.size >= customerResponse.pageNumber * PER_PAGE_ITEM)
+                            isLoading = false
                     }
                 }
                 is Resource.Error -> {
@@ -72,7 +75,7 @@ class ActiveFragment : Fragment() {
         })
 
         viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
-            when(response) {
+            when (response) {
                 is Resource.Success -> {
                     response.data?.let { search ->
                         customerAdapter.differ.submitList(list.filter {
@@ -87,6 +90,23 @@ class ActiveFragment : Fragment() {
 
                 is Resource.Loading -> {
 
+                }
+            }
+        })
+    }
+
+    private fun initScrollListener() {
+        binding.recycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
+
+                if (!isLoading) {
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == list.size - 1) {
+                        viewModel.loadMoreActive()
+                        isLoading = true
+                    }
                 }
             }
         })

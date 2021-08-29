@@ -26,19 +26,26 @@ class CustomerListMainViewModel @Inject constructor(
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
 ) : ViewModel() {
 
-    private val customerData = MutableLiveData<Resource<CustomerResponse>>()
-    fun getAllCustomerData(): LiveData<Resource<CustomerResponse>> = customerData
+    private var activePageNumber = 0
+    private var awaitingPageNumber = 0
+    private var draftPageNumber = 0
+
+    private val active = MutableLiveData<Resource<CustomerResponse>>()
+    fun getActiveData(): LiveData<Resource<CustomerResponse>> = active
+
+    private val awaiting = MutableLiveData<Resource<CustomerResponse>>()
+    fun getAwaitingData(): LiveData<Resource<CustomerResponse>> = awaiting
+
+    private val draft = MutableLiveData<Resource<CustomerResponse>>()
+    fun getDraftData(): LiveData<Resource<CustomerResponse>> = draft
 
     private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
     fun getSearchData(): LiveData<Resource<String>> = searchData
 
     init {
-        requestCustomerData(
-            CustomerRequest(
-                1,
-                status = "${Status.ACTIVE.type}, ${Status.AWAITING.type}, ${Status.DRAFT.type}"
-            )
-        )
+        loadMoreActive()
+        loadMoreAwaiting()
+        loadMoreDraft()
     }
 
     fun setSearchData(search: String) {
@@ -47,14 +54,14 @@ class CustomerListMainViewModel @Inject constructor(
         }
     }
 
-    private fun requestCustomerData(customerRequest: CustomerRequest) {
+    private fun requestActiveData(customerRequest: CustomerRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
                 try {
                     val response = repository.getCustomerListData(customerRequest)
-                    customerData.postValue(handleCustomerResponse(response))
+                    active.postValue(handleCustomerResponse(response, activePageNumber))
                 } catch (e: Exception) {
-                    customerData.postValue(
+                    active.postValue(
                         Resource.Error(
                             somethingWrong, null
                         )
@@ -62,7 +69,7 @@ class CustomerListMainViewModel @Inject constructor(
                     e.printStackTrace()
                 }
             } else {
-                customerData.postValue(
+                active.postValue(
                     Resource.Error(
                         noInternet, null
                     )
@@ -71,13 +78,89 @@ class CustomerListMainViewModel @Inject constructor(
         }
     }
 
-    private fun handleCustomerResponse(response: Response<CustomerResponse>): Resource<CustomerResponse> {
+    private fun requestAwaitingData(customerRequest: CustomerRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (network.isConnected()) {
+                try {
+                    val response = repository.getCustomerListData(customerRequest)
+                    awaiting.postValue(handleCustomerResponse(response, awaitingPageNumber))
+                } catch (e: Exception) {
+                    awaiting.postValue(
+                        Resource.Error(
+                            somethingWrong, null
+                        )
+                    )
+                    e.printStackTrace()
+                }
+            } else {
+                awaiting.postValue(
+                    Resource.Error(
+                        noInternet, null
+                    )
+                )
+            }
+        }
+    }
+
+    private fun requestDraftData(customerRequest: CustomerRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (network.isConnected()) {
+                try {
+                    val response = repository.getCustomerListData(customerRequest)
+                    draft.postValue(handleCustomerResponse(response, draftPageNumber))
+                } catch (e: Exception) {
+                    draft.postValue(
+                        Resource.Error(
+                            somethingWrong, null
+                        )
+                    )
+                    e.printStackTrace()
+                }
+            } else {
+                draft.postValue(
+                    Resource.Error(
+                        noInternet, null
+                    )
+                )
+            }
+        }
+    }
+
+    private fun handleCustomerResponse(response: Response<CustomerResponse>, pageNumber: Int): Resource<CustomerResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
+                resultResponse.pageNumber = pageNumber
                 return Resource.Success(resultResponse)
             }
         }
         return Resource.Error(response.message())
+    }
+
+    fun loadMoreActive() {
+        requestActiveData(
+            CustomerRequest(
+                ++activePageNumber,
+                status = "${Status.ACTIVE.type}"
+            )
+        )
+    }
+
+    fun loadMoreAwaiting() {
+        requestAwaitingData(
+            CustomerRequest(
+                ++awaitingPageNumber,
+                status = "${Status.AWAITING.type}"
+            )
+        )
+    }
+
+    fun loadMoreDraft() {
+        requestDraftData(
+            CustomerRequest(
+                ++draftPageNumber,
+                status = "${Status.DRAFT.type}"
+            )
+        )
     }
 
 }

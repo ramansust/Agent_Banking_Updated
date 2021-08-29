@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.datasoft.abs.databinding.FragmentBusinessCloseBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class BusinessCloseFragment : Fragment() {
 

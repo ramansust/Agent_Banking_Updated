@@ -45,6 +45,7 @@
                     android:hint="@string/type_here"
                     android:maxLength="@integer/int_input_length"
                     android:padding="@dimen/space_8x"
+                    android:textColor="@color/customer_text"
                     android:textSize="@dimen/font_16x" />
 
                 <TextView
@@ -67,6 +68,7 @@
                     android:hint="@string/type_here"
                     android:maxLength="@integer/edit_text_input_length"
                     android:padding="@dimen/space_8x"
+                    android:textColor="@color/customer_text"
                     android:textSize="@dimen/font_16x" />
 
             </LinearLayout>
@@ -99,6 +101,7 @@
                     android:hint="@string/type_here"
                     android:maxLength="@integer/edit_text_input_length"
                     android:padding="@dimen/space_8x"
+                    android:textColor="@color/customer_text"
                     android:textSize="@dimen/font_16x" />
 
             </LinearLayout>
