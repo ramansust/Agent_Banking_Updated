@@ -9,9 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.databinding.FragmentAccountMainBinding
-import com.datasoft.abs.presenter.utils.Status
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountList.adapter.AccountMainAdapter
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountActivity
 import com.google.android.material.tabs.TabLayoutMediator
@@ -49,13 +47,6 @@ class AccountMainFragment : Fragment() {
 //                3 -> tab.text = "Draft"
             }
         }.attach()
-
-        viewModel.requestAccountData(
-            AccountRequest(
-                1,
-                status = "${Status.ACTIVE.type}, ${Status.AWAITING.type}, ${Status.DRAFT.type}"
-            )
-        )
 
         return root
     }

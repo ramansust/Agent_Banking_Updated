@@ -6,14 +6,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createCustomer.RelatedDoc
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class DocumentsViewModel @Inject constructor(
-
+    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
 ): ViewModel() {
 
     private val saveData = MutableLiveData<ArrayList<RelatedDoc>>()
@@ -54,7 +56,7 @@ class DocumentsViewModel @Inject constructor(
             if (documentID.isEmpty() || issueDate.isEmpty() || expiryDate.isEmpty() || frontImage.isEmpty()) {
                 sendMessage.postValue(
                     Resource.Error(
-                        "The fields must not be empty", null
+                        fieldEmpty, null
                     )
                 )
                 return@launch

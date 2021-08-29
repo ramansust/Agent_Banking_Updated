@@ -11,17 +11,22 @@ import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class GeneralViewModel @Inject constructor(
     private val repository: Repository,
-    private val network: Network
+    private val network: Network,
+    @Named(Constant.NO_INTERNET) private val noInternet: String,
+    @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
+    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
 ) : ViewModel() {
 
     private val dedupeData = MutableLiveData<Resource<DedupeCheckResponse>>()
@@ -72,7 +77,7 @@ class GeneralViewModel @Inject constructor(
             ) {
                 dedupeData.postValue(
                     Resource.Error(
-                        "The fields must not be empty", null
+                        fieldEmpty, null
                     )
                 )
                 return@launch
@@ -109,7 +114,7 @@ class GeneralViewModel @Inject constructor(
                 } catch (e: Exception) {
                     dedupeData.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -117,7 +122,7 @@ class GeneralViewModel @Inject constructor(
             } else {
                 dedupeData.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }

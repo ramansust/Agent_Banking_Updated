@@ -8,6 +8,7 @@ import com.datasoft.abs.data.dto.profile.ChangePasswordRequest
 import com.datasoft.abs.data.dto.profile.ChangePasswordResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.PASSWORD_REGEX
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,11 +16,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val repository: Repository,
-    private val network: Network
+    private val network: Network,
+    @Named(Constant.NO_INTERNET) private val noInternet: String,
+    @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
+    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
 ) : ViewModel() {
 
     private val changePassword = MutableLiveData<Resource<ChangePasswordResponse>>()
@@ -33,7 +38,7 @@ class ProfileViewModel @Inject constructor(
             if (currentPassword.isEmpty() || newPassword.isEmpty() || confirmNewPassword.isEmpty()) {
                 changePassword.postValue(
                     Resource.Error(
-                        "Field must not be empty!", null
+                        fieldEmpty, null
                     )
                 )
 
@@ -69,7 +74,7 @@ class ProfileViewModel @Inject constructor(
                 } catch (e: Exception) {
                     changePassword.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -77,7 +82,7 @@ class ProfileViewModel @Inject constructor(
             } else {
                 changePassword.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }

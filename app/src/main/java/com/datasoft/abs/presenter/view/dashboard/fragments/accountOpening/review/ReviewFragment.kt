@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
@@ -29,9 +30,7 @@ import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.others
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.transactionProfile.TransactionProfileViewModel
 import com.pixelcarrot.base64image.Base64Image
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -69,7 +68,6 @@ class ReviewFragment : Fragment() {
         return binding.root
     }
 
-    @DelicateCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -192,7 +190,7 @@ class ReviewFragment : Fragment() {
         nomineeViewModel.getSavedData().observe(viewLifecycleOwner, {
             nomineeAdapter.differ.submitList(it)
 
-            GlobalScope.launch(Dispatchers.IO) {
+            lifecycleScope.launch(Dispatchers.IO) {
                 createAccountRequest.nominees = fileUriToBase64(it)
                 viewModel.setDataPrepared(true)
             }

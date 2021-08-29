@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createCustomer.PersonalInfo
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -13,9 +14,12 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
-class PersonalViewModel @Inject constructor() : ViewModel() {
+class PersonalViewModel @Inject constructor(
+    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
+) : ViewModel() {
 
     private val customerAge = MutableLiveData<Int>()
     fun getCustomerAgeData(): LiveData<Int> = customerAge
@@ -63,14 +67,14 @@ class PersonalViewModel @Inject constructor() : ViewModel() {
             if (sourceOfFund.isEmpty() || nomineeName.isEmpty() || nomineeMobile.isEmpty() || nomineeAddress.isEmpty()) {
                 personalData.postValue(
                     Resource.Error(
-                        "The fields must not be empty", null
+                        fieldEmpty, null
                     )
                 )
                 return@launch
             } else if (isAgeAboveEighteen && (guardianName.isEmpty() || guardianContact.isEmpty() || guardianDob.isEmpty())) {
                 personalData.postValue(
                     Resource.Error(
-                        "The fields must not be empty", null
+                        fieldEmpty, null
                     )
                 )
                 return@launch

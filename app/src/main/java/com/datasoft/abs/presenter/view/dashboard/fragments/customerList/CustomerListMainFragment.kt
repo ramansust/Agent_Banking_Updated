@@ -9,9 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.datasoft.abs.data.dto.customerList.CustomerRequest
 import com.datasoft.abs.databinding.FragmentAccountMainBinding
-import com.datasoft.abs.presenter.utils.Status
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerActivity
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerList.adapter.CustomerListMainAdapter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -27,8 +25,7 @@ class CustomerListMainFragment : Fragment() {
     @Inject
     lateinit var adapter: CustomerListMainAdapter
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -50,13 +47,6 @@ class CustomerListMainFragment : Fragment() {
 //                3 -> tab.text = "Draft"
             }
         }.attach()
-
-        viewModel.requestCustomerData(
-            CustomerRequest(
-                1,
-                status = "${Status.ACTIVE.type}, ${Status.AWAITING.type}, ${Status.DRAFT.type}"
-            )
-        )
 
         return root
     }

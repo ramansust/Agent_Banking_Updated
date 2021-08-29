@@ -12,7 +12,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.datasoft.abs.data.dto.CommonRequest
 import com.datasoft.abs.data.dto.transaction.Row
 import com.datasoft.abs.databinding.FragmentWithdrawBinding
 import com.datasoft.abs.presenter.states.Resource
@@ -39,7 +38,6 @@ class WithdrawalFragment : Fragment() {
     ): View {
 
         _binding = FragmentWithdrawBinding.inflate(inflater, container, false)
-        viewModel.requestWithdrawData(CommonRequest(1))
         return binding.root
     }
 

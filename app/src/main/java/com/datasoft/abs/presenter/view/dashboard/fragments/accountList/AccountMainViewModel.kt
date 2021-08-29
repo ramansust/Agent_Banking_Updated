@@ -8,17 +8,22 @@ import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Network
+import com.datasoft.abs.presenter.utils.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class AccountMainViewModel @Inject constructor(
     private val repository: Repository,
-    private val network: Network
+    private val network: Network,
+    @Named(Constant.NO_INTERNET) private val noInternet: String,
+    @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
 ) : ViewModel() {
 
     private val accountData = MutableLiveData<Resource<AccountResponse>>()
@@ -27,13 +32,22 @@ class AccountMainViewModel @Inject constructor(
     private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
     fun getSearchData(): LiveData<Resource<String>> = searchData
 
+    init {
+        requestAccountData(
+            AccountRequest(
+                1,
+                status = "${Status.ACTIVE.type}, ${Status.AWAITING.type}, ${Status.DRAFT.type}"
+            )
+        )
+    }
+
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
             searchData.postValue(Resource.Success(search))
         }
     }
 
-    fun requestAccountData(accountRequest: AccountRequest) {
+    private fun requestAccountData(accountRequest: AccountRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
                 try {
@@ -42,7 +56,7 @@ class AccountMainViewModel @Inject constructor(
                 } catch (e: Exception) {
                     accountData.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -50,7 +64,7 @@ class AccountMainViewModel @Inject constructor(
             } else {
                 accountData.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }

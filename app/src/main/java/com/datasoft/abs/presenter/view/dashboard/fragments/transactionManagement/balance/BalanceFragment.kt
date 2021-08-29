@@ -12,7 +12,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.datasoft.abs.data.dto.CommonRequest
 import com.datasoft.abs.data.dto.transaction.Row
 import com.datasoft.abs.databinding.FragmentBalanceBinding
 import com.datasoft.abs.presenter.states.Resource
@@ -39,7 +38,6 @@ class BalanceFragment : Fragment() {
     ): View {
 
         _binding = FragmentBalanceBinding.inflate(inflater, container, false)
-        viewModel.requestBalanceData(CommonRequest(1))
         return binding.root
     }
 

@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.datasoft.abs.R
 import com.datasoft.abs.databinding.FragmentDashboardTransactionBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,10 +34,10 @@ class DashboardFragment : Fragment() {
         binding.pager.adapter = DashboardAdapter(this)
 
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
-            when(position) {
-                0 -> tab.text = "Transaction"
-                1 -> tab.text = "Loan"
-                else -> tab.text = "Transaction"
+            when (position) {
+                0 -> tab.text = resources.getString(R.string.menu_transaction)
+                1 -> tab.text = resources.getString(R.string.loan)
+                else -> tab.text = resources.getString(R.string.menu_transaction)
             }
         }.attach()
 

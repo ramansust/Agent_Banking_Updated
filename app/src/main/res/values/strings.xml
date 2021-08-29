@@ -277,6 +277,7 @@
     <string name="not_interested">Not Interested</string>
     <string name="not_applicable">N/A</string>
     <string name="under_construction">Under construction...</string>
+    <string name="loan">Loan</string>
 
     <string name="transaction_disbursement">Transaction Disbursement</string>
     <string name="deposit_list">Deposit List</string>
@@ -356,4 +357,10 @@
     <string name="zero">0</string>
     <string name="customer">Customer</string>
     <string name="agent">Agent</string>
+
+    <string name="filed_empty">The fields must not be empty!</string>
+    <string name="search_empty">Search field must not be empty!</string>
+    <string name="id_empty">Customer ID must not be empty!</string>
+    <string name="select_customer_name">Select your Customer Name</string>
+    <string name="ok">OK</string>
 </resources>

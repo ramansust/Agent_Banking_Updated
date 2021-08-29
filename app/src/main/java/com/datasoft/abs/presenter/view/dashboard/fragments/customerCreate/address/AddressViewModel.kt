@@ -9,17 +9,22 @@ import com.datasoft.abs.data.dto.createCustomer.AddressInfo
 import com.datasoft.abs.data.dto.createCustomer.Contact
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class AddressViewModel @Inject constructor(
     private val repository: Repository,
-    private val network: Network
+    private val network: Network,
+    @Named(Constant.NO_INTERNET) private val noInternet: String,
+    @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
+    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
 ) : ViewModel() {
 
     private val thana = MutableLiveData<Resource<List<CommonModel>>>()
@@ -46,7 +51,7 @@ class AddressViewModel @Inject constructor(
                 } catch (e: Exception) {
                     thana.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -54,7 +59,7 @@ class AddressViewModel @Inject constructor(
             } else {
                 thana.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }
@@ -70,7 +75,7 @@ class AddressViewModel @Inject constructor(
                 } catch (e: Exception) {
                     union.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -78,7 +83,7 @@ class AddressViewModel @Inject constructor(
             } else {
                 union.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }
@@ -107,7 +112,7 @@ class AddressViewModel @Inject constructor(
             if (houseNo.isEmpty() || village.isEmpty() || postCode.isEmpty() || city.isEmpty() || contactNo.isEmpty()) {
                 sendMessage.postValue(
                     Resource.Error(
-                        "The fields must not be empty", null
+                        fieldEmpty, null
                     )
                 )
                 return@launch

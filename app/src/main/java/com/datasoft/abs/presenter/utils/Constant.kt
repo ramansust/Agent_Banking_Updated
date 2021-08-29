@@ -24,4 +24,10 @@ object Constant {
     const val SHARE_PERCENT_INFO = "SHARE_PERCENT_INFO"
     const val PASSWORD_REGEX =
         "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%!\\-_?&])(?=\\S+\$).{8,}"
+
+    const val NO_INTERNET = "NO_INTERNET"
+    const val SOMETHING_WRONG = "SOMETHING_WRONG"
+    const val FIELD_EMPTY = "FIELD_EMPTY"
+    const val SEARCH_EMPTY = "SEARCH_EMPTY"
+    const val ID_EMPTY = "ID_EMPTY"
 }

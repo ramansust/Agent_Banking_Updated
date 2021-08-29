@@ -9,17 +9,23 @@ import com.datasoft.abs.data.dto.createAccount.general.CustomerDataResponse
 import com.datasoft.abs.data.dto.createAccount.general.DisplayAccountInfo
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class GeneralViewModel @Inject constructor(
     private val repository: Repository,
-    private val network: Network
+    private val network: Network,
+    @Named(Constant.NO_INTERNET) private val noInternet: String,
+    @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
+    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
+    @Named(Constant.ID_EMPTY) private val idEmpty: String,
 ) : ViewModel() {
 
     private val customerData = MutableLiveData<Resource<CustomerDataResponse>>()
@@ -42,7 +48,7 @@ class GeneralViewModel @Inject constructor(
             if (customerID.isEmpty()) {
                 customerData.postValue(
                     Resource.Error(
-                        "Customer ID must not be empty", null
+                        idEmpty, null
                     )
                 )
                 return@launch
@@ -56,7 +62,7 @@ class GeneralViewModel @Inject constructor(
                 } catch (e: Exception) {
                     customerData.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -64,7 +70,7 @@ class GeneralViewModel @Inject constructor(
             } else {
                 customerData.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }
@@ -94,7 +100,7 @@ class GeneralViewModel @Inject constructor(
             if (accountTitle.isEmpty() || openingDate.isEmpty() || initialAmount == 0) {
                 accountInfo.postValue(
                     Resource.Error(
-                        "The fields must not be empty", null
+                        fieldEmpty, null
                     )
                 )
                 return@launch

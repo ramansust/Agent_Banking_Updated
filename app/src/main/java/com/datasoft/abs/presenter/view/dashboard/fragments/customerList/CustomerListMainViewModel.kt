@@ -8,17 +8,22 @@ import com.datasoft.abs.data.dto.customerList.CustomerRequest
 import com.datasoft.abs.data.dto.customerList.CustomerResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Network
+import com.datasoft.abs.presenter.utils.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class CustomerListMainViewModel @Inject constructor(
     private val repository: Repository,
-    private val network: Network
+    private val network: Network,
+    @Named(Constant.NO_INTERNET) private val noInternet: String,
+    @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
 ) : ViewModel() {
 
     private val customerData = MutableLiveData<Resource<CustomerResponse>>()
@@ -27,13 +32,22 @@ class CustomerListMainViewModel @Inject constructor(
     private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
     fun getSearchData(): LiveData<Resource<String>> = searchData
 
+    init {
+        requestCustomerData(
+            CustomerRequest(
+                1,
+                status = "${Status.ACTIVE.type}, ${Status.AWAITING.type}, ${Status.DRAFT.type}"
+            )
+        )
+    }
+
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
             searchData.postValue(Resource.Success(search))
         }
     }
 
-    fun requestCustomerData(customerRequest: CustomerRequest) {
+    private fun requestCustomerData(customerRequest: CustomerRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
                 try {
@@ -42,7 +56,7 @@ class CustomerListMainViewModel @Inject constructor(
                 } catch (e: Exception) {
                     customerData.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -50,7 +64,7 @@ class CustomerListMainViewModel @Inject constructor(
             } else {
                 customerData.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }

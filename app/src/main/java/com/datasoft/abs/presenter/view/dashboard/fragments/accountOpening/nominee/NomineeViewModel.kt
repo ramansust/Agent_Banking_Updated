@@ -14,9 +14,12 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
-class NomineeViewModel @Inject constructor() : ViewModel() {
+class NomineeViewModel @Inject constructor(
+    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
+) : ViewModel() {
 
     private val nomineeAge = MutableLiveData<Int>()
     fun getNomineeAge(): LiveData<Int> = nomineeAge
@@ -75,7 +78,7 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
             ) {
                 nomineeData.postValue(
                     Resource.Error(
-                        "The fields must not be empty", null
+                        fieldEmpty, null
                     )
                 )
                 return@launch
@@ -86,7 +89,7 @@ class NomineeViewModel @Inject constructor() : ViewModel() {
                 ) {
                     nomineeData.postValue(
                         Resource.Error(
-                            "The fields must not be empty", null
+                            fieldEmpty, null
                         )
                     )
                     return@launch

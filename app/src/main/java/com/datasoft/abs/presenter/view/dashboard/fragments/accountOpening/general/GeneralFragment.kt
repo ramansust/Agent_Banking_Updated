@@ -15,10 +15,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.config.ProductConfig
 import com.datasoft.abs.databinding.GeneralAccountFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -295,8 +297,7 @@ class GeneralFragment : Fragment() {
     }
 
     private fun updateLabel() {
-        val myFormat = "MM-dd-yyyy" //In which you need put here
-        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        val sdf = SimpleDateFormat(DATE_FORMAT, Locale.US)
         binding.edTxtOpeningDate.setText(sdf.format(myCalendar.time))
     }
 
@@ -331,7 +332,7 @@ class GeneralFragment : Fragment() {
         }
 
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Select your Customer Name")
+        builder.setTitle(resources.getString(R.string.select_customer_name))
         if (isMultiple) {
             builder.setMultiChoiceItems(
                 customerArray.toTypedArray(),
@@ -346,7 +347,7 @@ class GeneralFragment : Fragment() {
             }
         }
 
-        builder.setPositiveButton("OK") { _, _ ->
+        builder.setPositiveButton(resources.getString(R.string.ok)) { _, _ ->
             if (isMultiple) {
                 val stringBuilder = StringBuffer()
                 val stringBuilderID = StringBuffer()

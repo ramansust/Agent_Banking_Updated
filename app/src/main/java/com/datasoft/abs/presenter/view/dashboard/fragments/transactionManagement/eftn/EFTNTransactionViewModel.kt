@@ -11,18 +11,24 @@ import com.datasoft.abs.data.dto.transaction.AccountDetailsResponse
 import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class EFTNTransactionViewModel @Inject constructor(
     private val repository: Repository,
-    private val network: Network
-): ViewModel() {
+    private val network: Network,
+    @Named(Constant.NO_INTERNET) private val noInternet: String,
+    @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
+    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
+    @Named(Constant.SEARCH_EMPTY) private val searchEmpty: String
+) : ViewModel() {
 
     private val createEFTN = MutableLiveData<Resource<CreateCustomerResponse>>()
     fun getCreationData(): LiveData<Resource<CreateCustomerResponse>> = createEFTN
@@ -48,7 +54,7 @@ class EFTNTransactionViewModel @Inject constructor(
                 } catch (e: Exception) {
                     bankList.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -56,7 +62,7 @@ class EFTNTransactionViewModel @Inject constructor(
             } else {
                 bankList.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }
@@ -75,7 +81,7 @@ class EFTNTransactionViewModel @Inject constructor(
                 } catch (e: Exception) {
                     branchList.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -83,7 +89,7 @@ class EFTNTransactionViewModel @Inject constructor(
             } else {
                 branchList.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }
@@ -98,7 +104,7 @@ class EFTNTransactionViewModel @Inject constructor(
             if (accountNo.isEmpty()) {
                 accountDetails.postValue(
                     Resource.Error(
-                        "Search field must not be empty!", null
+                        searchEmpty, null
                     )
                 )
 
@@ -112,7 +118,7 @@ class EFTNTransactionViewModel @Inject constructor(
                 } catch (e: Exception) {
                     accountDetails.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -120,7 +126,7 @@ class EFTNTransactionViewModel @Inject constructor(
             } else {
                 accountDetails.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }
@@ -147,7 +153,7 @@ class EFTNTransactionViewModel @Inject constructor(
             if (receiverAccNumber.isEmpty() || receiverName.isEmpty() || senderAccNumber.isEmpty() || amount == 0) {
                 createEFTN.postValue(
                     Resource.Error(
-                        "The fields must not be empty!", null
+                        fieldEmpty, null
                     )
                 )
 
@@ -180,7 +186,7 @@ class EFTNTransactionViewModel @Inject constructor(
                 } catch (e: Exception) {
                     createEFTN.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -188,7 +194,7 @@ class EFTNTransactionViewModel @Inject constructor(
             } else {
                 createEFTN.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }

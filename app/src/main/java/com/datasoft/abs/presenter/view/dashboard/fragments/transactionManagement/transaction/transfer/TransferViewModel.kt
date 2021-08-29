@@ -9,18 +9,23 @@ import com.datasoft.abs.data.dto.transaction.AmountDetailsResponse
 import com.datasoft.abs.data.dto.transaction.ReceiverDetailsResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class TransferViewModel @Inject constructor(
     private val repository: Repository,
-    private val network: Network
-): ViewModel() {
+    private val network: Network,
+    @Named(Constant.NO_INTERNET) private val noInternet: String,
+    @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
+    @Named(Constant.SEARCH_EMPTY) private val searchEmpty: String
+) : ViewModel() {
 
     private val receiverDetails = MutableLiveData<Resource<ReceiverDetailsResponse>>()
     fun getReceiverDetails(): LiveData<Resource<ReceiverDetailsResponse>> = receiverDetails
@@ -68,7 +73,7 @@ class TransferViewModel @Inject constructor(
                 } catch (e: Exception) {
                     amountDetails.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -76,7 +81,7 @@ class TransferViewModel @Inject constructor(
             } else {
                 amountDetails.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }
@@ -95,10 +100,10 @@ class TransferViewModel @Inject constructor(
     fun receiverDetails(accountNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            if(accountNo.isEmpty()) {
+            if (accountNo.isEmpty()) {
                 receiverDetails.postValue(
                     Resource.Error(
-                        "Search filed must not be empty!", null
+                        searchEmpty, null
                     )
                 )
 
@@ -112,7 +117,7 @@ class TransferViewModel @Inject constructor(
                 } catch (e: Exception) {
                     receiverDetails.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -120,7 +125,7 @@ class TransferViewModel @Inject constructor(
             } else {
                 receiverDetails.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }

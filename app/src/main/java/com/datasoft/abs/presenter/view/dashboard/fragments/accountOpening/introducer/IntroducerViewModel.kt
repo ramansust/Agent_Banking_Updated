@@ -7,17 +7,22 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createAccount.introducer.IntroducerInfo
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class IntroducerViewModel @Inject constructor(
     private val repository: Repository,
-    private val network: Network
+    private val network: Network,
+    @Named(Constant.NO_INTERNET) private val noInternet: String,
+    @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
+    @Named(Constant.SEARCH_EMPTY) private val searchEmpty: String,
 ) : ViewModel() {
 
     private val introducer = MutableLiveData<Resource<IntroducerInfo>>()
@@ -33,7 +38,7 @@ class IntroducerViewModel @Inject constructor(
             if(accountNo.isEmpty()) {
                 introducer.postValue(
                     Resource.Error(
-                        "Search filed must not be empty!", null
+                        searchEmpty, null
                     )
                 )
 
@@ -47,7 +52,7 @@ class IntroducerViewModel @Inject constructor(
                 } catch (e: Exception) {
                     introducer.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -55,7 +60,7 @@ class IntroducerViewModel @Inject constructor(
             } else {
                 introducer.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }

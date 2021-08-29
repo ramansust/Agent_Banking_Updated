@@ -8,17 +8,22 @@ import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant.NO_INTERNET
+import com.datasoft.abs.presenter.utils.Constant.SOMETHING_WRONG
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class EFTNViewModel @Inject constructor(
     private val repository: Repository,
-    private val network: Network
+    private val network: Network,
+    @Named(NO_INTERNET) private val noInternet: String,
+    @Named(SOMETHING_WRONG) private val somethingWrong: String
 ) : ViewModel() {
 
     private val details: MutableLiveData<Int> = MutableLiveData()
@@ -29,6 +34,10 @@ class EFTNViewModel @Inject constructor(
 
     private val eftnData = MutableLiveData<Resource<RTGSListResponse>>()
     fun getEFTNData(): LiveData<Resource<RTGSListResponse>> = eftnData
+
+    init {
+        requestEFTNData(AccountRequest(1, status = "7"))
+    }
 
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -42,7 +51,7 @@ class EFTNViewModel @Inject constructor(
         }
     }
 
-    fun requestEFTNData(accountRequest: AccountRequest) {
+    private fun requestEFTNData(accountRequest: AccountRequest) {
         viewModelScope.launch(Dispatchers.IO) {
 
             eftnData.postValue(Resource.Loading())
@@ -54,7 +63,7 @@ class EFTNViewModel @Inject constructor(
                 } catch (e: Exception) {
                     eftnData.postValue(
                         Resource.Error(
-                            "Something went wrong!", null
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
@@ -62,7 +71,7 @@ class EFTNViewModel @Inject constructor(
             } else {
                 eftnData.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }

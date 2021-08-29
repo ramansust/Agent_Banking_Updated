@@ -30,6 +30,10 @@ class RTGSViewModel @Inject constructor(
     private val rtgsData = MutableLiveData<Resource<RTGSListResponse>>()
     fun getRTGSData(): LiveData<Resource<RTGSListResponse>> = rtgsData
 
+    init {
+        requestRTGSData(AccountRequest(1, status = "7"))
+    }
+
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
             searchData.postValue(Resource.Success(search))
@@ -42,7 +46,7 @@ class RTGSViewModel @Inject constructor(
         }
     }
 
-    fun requestRTGSData(accountRequest: AccountRequest) {
+    private fun requestRTGSData(accountRequest: AccountRequest) {
         viewModelScope.launch(Dispatchers.IO) {
 
             rtgsData.postValue(Resource.Loading())

@@ -8,17 +8,22 @@ import com.datasoft.abs.data.dto.login.LoginResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.utils.Network
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 //class LoginViewModel (repository: Repository) : BaseViewModel(repository) {
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val repository: Repository,
-    private val networkHelper: Network
+    private val networkHelper: Network,
+    @Named(Constant.NO_INTERNET) private val noInternet: String,
+    @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
+    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
 ) : ViewModel() {
 
     private val login: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
@@ -33,7 +38,7 @@ class LoginViewModel @Inject constructor(
             if (username.isEmpty() || password.isEmpty()) {
                 login.postValue(
                     Resource.Error(
-                        "The fields must not be empty", null
+                        fieldEmpty, null
                     )
                 )
                 return@launch
@@ -44,7 +49,7 @@ class LoginViewModel @Inject constructor(
             } else {
                 login.postValue(
                     Resource.Error(
-                        "No internet connection", null
+                        noInternet, null
                     )
                 )
             }
@@ -69,7 +74,7 @@ class LoginViewModel @Inject constructor(
         } catch (e: Exception) {
             login.postValue(
                 Resource.Error(
-                    "Something went wrong!", null
+                    somethingWrong, null
                 )
             )
             e.printStackTrace()
