@@ -8,7 +8,7 @@ import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.createCustomer.CreateCustomerResponse
 import com.datasoft.abs.data.dto.transaction.AccountDetailsRequest
 import com.datasoft.abs.data.dto.transaction.AccountDetailsResponse
-import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
+import com.datasoft.abs.data.dto.transaction.eftn.CreateEFTNRequest
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -135,16 +135,15 @@ class EFTNTransactionViewModel @Inject constructor(
 
 
     fun createRequest(
-        amount: Int,
-        bankId: Int,
-        charge: Int,
-        receiverAccNumber: String,
-        receiverAddress: String,
-        receiverBranchId: Int,
-        receiverCity: String,
-        receiverName: String,
-        senderAccNumber: String,
-        vat: Int
+         amount: Int,
+         bankId: Int,
+         receiverAccNumber: String,
+         receiverBranchId: Int,
+         receiverEmail: String,
+         receiverMobile: String,
+         receiverName: String,
+         remarks: String,
+         senderAccNumber: String
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
@@ -163,23 +162,16 @@ class EFTNTransactionViewModel @Inject constructor(
             if (network.isConnected()) {
                 try {
                     val response = repository.createEFTNTransaction(
-                        CreateRequest(
+                        CreateEFTNRequest(
                             amount,
                             bankId,
-                            charge,
-                            "",
                             receiverAccNumber,
-                            receiverAddress,
                             receiverBranchId,
-                            receiverCity,
+                            receiverEmail,
+                            receiverMobile,
                             receiverName,
-                            "",
-                            "",
-                            senderAccNumber,
-                            "",
-                            "",
-                            "",
-                            vat
+                            remarks,
+                            senderAccNumber
                         )
                     )
                     createEFTN.postValue(handleCreationResponse(response))

@@ -23,6 +23,7 @@ import com.datasoft.abs.data.dto.profile.ChangePasswordResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.data.dto.transaction.*
+import com.datasoft.abs.data.dto.transaction.eftn.CreateEFTNRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.Details
 import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
@@ -114,7 +115,7 @@ interface RestApiService {
     @POST("api/rtgs-list")
     suspend fun getRTGSList(@Body accountRequest: AccountRequest): Response<RTGSListResponse>
 
-    @POST("api/eftn-list")
+    @POST("api/eft-list")
     suspend fun getEFTNList(@Body accountRequest: AccountRequest): Response<RTGSListResponse>
 
     @GET("api/rtgs-config")
@@ -126,8 +127,8 @@ interface RestApiService {
     @POST("api/create-rtgs")
     suspend fun createRTGSTransaction(@Body createRequest: CreateRequest): Response<CreateCustomerResponse>
 
-    @POST("api/create-eftn")
-    suspend fun createEFTNTransaction(@Body createRequest: CreateRequest): Response<CreateCustomerResponse>
+    @POST("api/create-eft")
+    suspend fun createEFTNTransaction(@Body createRequest: CreateEFTNRequest): Response<CreateCustomerResponse>
 
     @POST("api/cash-register-list")
     suspend fun getCashRegisterList(@Body accountRequest: AccountRequest): Response<RTGSListResponse>
@@ -141,9 +142,9 @@ interface RestApiService {
     @POST("api/create-feeder")
     suspend fun createFeeder(@Body createRequest: CreateRequest): Response<CreateCustomerResponse>
 
-    @GET("api/rgts-details")
-    suspend fun getRTGSDetails(@Query("transactionId") transactionId: String): Response<Details>
+    @GET("api/rtgs-details")
+    suspend fun getRTGSDetails(@Query("id") transactionId: String): Response<Details>
 
-    @GET("api/eftn-details")
-    suspend fun getEFTNSDetails(@Query("transactionId") transactionId: String): Response<Details>
+    @GET("api/eft-details")
+    suspend fun getEFTNSDetails(@Query("id") transactionId: String): Response<Details>
 }

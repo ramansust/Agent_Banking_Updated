@@ -53,7 +53,7 @@ class EFTNListAdapter @Inject constructor() :
             holder.binding.txtViewSenderAc.text = this.senderAccNumber
             holder.binding.txtViewReceiverName.text = this.receiverName
             holder.binding.txtViewReceiverAc.text = this.receiverAccNumber
-//            holder.binding.txtViewReceiverBank.text = "static"
+            holder.binding.txtViewReceiverBank.text = this.receiverBank
             holder.binding.txtViewRouting.text = this.receiverRouting
             holder.binding.txtViewAmount.text = this.amount.toString()
 

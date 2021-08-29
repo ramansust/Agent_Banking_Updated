@@ -7,5 +7,6 @@ data class Row(
     val receiverAccNumber: String?,
     val receiverName: String?,
     val receiverRouting: String?,
-    val senderAccNumber: String?
+    val senderAccNumber: String?,
+    val receiverBank: String?
 )

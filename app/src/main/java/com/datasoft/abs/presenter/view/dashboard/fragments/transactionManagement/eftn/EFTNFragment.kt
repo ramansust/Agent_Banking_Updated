@@ -57,7 +57,7 @@ class EFTNFragment : Fragment() {
         viewModel.getDetailsData().observe(viewLifecycleOwner, { value ->
             if (value > 0) {
                 val action =
-                    EFTNFragmentDirections.actionEftnToEFTNTransactionDetailsFragment(value.toLong())
+                    EFTNFragmentDirections.actionEftnToEFTNTransactionDetailsFragment(value.toLong(), false)
                 Navigation.findNavController(view).navigate(action)
             }
         })

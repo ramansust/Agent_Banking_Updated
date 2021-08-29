@@ -15,7 +15,6 @@ import com.datasoft.abs.presenter.states.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class DisburseFragment : Fragment() {
 
@@ -45,9 +44,6 @@ class DisburseFragment : Fragment() {
 
         val list = mutableListOf<Row>()
         viewModel.getEFTNData().observe(viewLifecycleOwner, { response ->
-
-//            list.clear()
-
             when (response) {
                 is Resource.Success -> {
                     stopShimmer()

@@ -57,7 +57,7 @@ class RTGSFragment : Fragment() {
         viewModel.getDetailsData().observe(viewLifecycleOwner, { value ->
             if (value > 0) {
                 val action =
-                    RTGSFragmentDirections.actionRtgsToEFTNTransactionDetailsFragment(value.toLong())
+                    RTGSFragmentDirections.actionRtgsToEFTNTransactionDetailsFragment(value.toLong(), true)
                 Navigation.findNavController(view).navigate(action)
             }
         })

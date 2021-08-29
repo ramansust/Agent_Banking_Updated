@@ -195,6 +195,10 @@
             android:name="transaction_id"
             android:defaultValue="0L"
             app:argType="long" />
+        <argument
+            android:name="isRTGS"
+            app:argType="boolean"
+            android:defaultValue="true" />
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"

@@ -5,6 +5,7 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
@@ -24,6 +25,7 @@ class EFTNTransactionDetailsFragment : Fragment() {
     private val args: EFTNTransactionDetailsFragmentArgs by navArgs()
 
     private val viewModel: RTGSViewModel by activityViewModels()
+    private val eftnViewModel: EFTNViewModel by activityViewModels()
 
     @Inject
     lateinit var glide: RequestManager
@@ -44,25 +46,29 @@ class EFTNTransactionDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.setDetails(0)
-        viewModel.detailsData(args.transactionId.toString(), true)
+        eftnViewModel.setDetails(0)
+
+        viewModel.detailsData(args.transactionId.toString(), args.isRTGS)
 
         viewModel.getTransactionDetails().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     response.data?.let {
-                        binding.edTxtAccountNumber.setText(it.senderAccNumber)
-                        binding.edTxtAccountTitle.setText(it.accountTitle)
-                        binding.edTxtAccountType.setText(it.accountType)
+                        goneProgressBar()
+
+                        binding.edTxtAccountNumber.setText(it.sendeAccNo)
+                        binding.edTxtAccountTitle.setText(it.senderAccTitle)
+                        binding.edTxtAccountType.setText(it.productName)
                         binding.edTxtAmount.setText(it.amount!!.toString())
-                        binding.edTxtReceiverAccountNo.setText(it.receiverAccNumber)
+                        binding.edTxtReceiverAccountNo.setText(it.receiverAccNo)
                         binding.edTxtReceiverName.setText(it.receiverName)
-                        binding.edTxtReceiverBank.setText(it.receiverBank)
-                        binding.edTxtBranchRouting.setText(it.receiverRouting)
+                        binding.edTxtReceiverBank.setText(it.bankName)
+                        binding.edTxtBranchRouting.setText(it.branchName)
 
                         glide.load(
                             Base64.decode(
-                                it.senderPhoto!!.substring(
-                                    it.senderPhoto.indexOf(
+                                it.profilePicture!!.substring(
+                                    it.profilePicture.indexOf(
                                         ","
                                     ) + 1
                                 ), Base64.DEFAULT
@@ -73,11 +79,14 @@ class EFTNTransactionDetailsFragment : Fragment() {
                 }
 
                 is Resource.Loading -> {
-
+                    showProgressBar()
                 }
 
                 is Resource.Error -> {
-
+                    goneProgressBar()
+                    response.message?.let { message ->
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         })
@@ -86,5 +95,13 @@ class EFTNTransactionDetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun goneProgressBar() {
+        binding.loaderView.visibility = View.GONE
+    }
+
+    private fun showProgressBar() {
+        binding.loaderView.visibility = View.VISIBLE
     }
 }

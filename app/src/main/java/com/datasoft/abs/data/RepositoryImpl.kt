@@ -24,6 +24,7 @@ import com.datasoft.abs.data.dto.profile.ChangePasswordResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.data.dto.transaction.*
+import com.datasoft.abs.data.dto.transaction.eftn.CreateEFTNRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.Details
 import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
@@ -168,7 +169,7 @@ class RepositoryImpl @Inject constructor(
         return restApiService.createRTGSTransaction(createRequest)
     }
 
-    override suspend fun createEFTNTransaction(createRequest: CreateRequest): Response<CreateCustomerResponse> {
+    override suspend fun createEFTNTransaction(createRequest: CreateEFTNRequest): Response<CreateCustomerResponse> {
         return restApiService.createEFTNTransaction(createRequest)
     }
 

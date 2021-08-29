@@ -15,7 +15,6 @@ import com.datasoft.abs.databinding.FragmentEftnTransactionBinding
 import com.datasoft.abs.presenter.states.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class EFTNTransactionFragment : Fragment() {
 
@@ -171,14 +170,13 @@ class EFTNTransactionFragment : Fragment() {
                 ) binding.edTxtAmount.text.trim().toString()
                     .toInt() else 0,
                 if (bankList.isNotEmpty()) bankList[binding.spinnerBank.selectedItemPosition].id else 0,
-                0,
                 binding.edTxtReceiverAccountNo.text.trim().toString(),
-                binding.edTxtReceiverEmail.text.trim().toString(),
                 if (branchList.isNotEmpty()) branchList[binding.spinnerBank.selectedItemPosition].id else 0,
+                binding.edTxtReceiverEmail.text.trim().toString(),
                 binding.edTxtReceiverMobile.text.trim().toString(),
                 binding.edTxtReceiverName.text.trim().toString(),
+                binding.edTxtRemarks.text.trim().toString(),
                 binding.edTxtSenderAccountNo.text.trim().toString(),
-                0,
             )
         }
     }
