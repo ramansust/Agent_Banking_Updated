@@ -23,6 +23,7 @@ import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.data.dto.transaction.*
 import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
+import com.datasoft.abs.data.dto.transaction.rtgs.Details
 import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
 import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
 import retrofit2.Response
@@ -70,6 +71,9 @@ interface Repository {
     suspend fun getFeederList(accountRequest: AccountRequest): Response<RTGSListResponse>
     suspend fun createCashRegister(createRequest: CreateRequest): Response<CreateCustomerResponse>
     suspend fun createFeeder(createRequest: CreateRequest): Response<CreateCustomerResponse>
+
+    suspend fun getRTGSDetails(transactionID: String): Response<Details>
+    suspend fun getEFTNSDetails(transactionID: String): Response<Details>
 
     suspend fun insert(generalInfo: GeneralInfo)
     fun getAll(): LiveData<List<GeneralInfo>>

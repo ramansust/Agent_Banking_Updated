@@ -24,6 +24,7 @@ import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.data.dto.transaction.*
 import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
+import com.datasoft.abs.data.dto.transaction.rtgs.Details
 import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -139,4 +140,10 @@ interface RestApiService {
 
     @POST("api/create-feeder")
     suspend fun createFeeder(@Body createRequest: CreateRequest): Response<CreateCustomerResponse>
+
+    @GET("api/rgts-details")
+    suspend fun getRTGSDetails(@Query("transactionId") transactionId: String): Response<Details>
+
+    @GET("api/eftn-details")
+    suspend fun getEFTNSDetails(@Query("transactionId") transactionId: String): Response<Details>
 }

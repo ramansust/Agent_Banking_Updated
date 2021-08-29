@@ -25,6 +25,7 @@ import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.data.dto.transaction.*
 import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
+import com.datasoft.abs.data.dto.transaction.rtgs.Details
 import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
 import com.datasoft.abs.data.source.local.db.dao.GeneralInfoDao
 import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
@@ -185,6 +186,14 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun createFeeder(createRequest: CreateRequest): Response<CreateCustomerResponse> {
         return restApiService.createFeeder(createRequest)
+    }
+
+    override suspend fun getRTGSDetails(transactionID: String): Response<Details> {
+        return restApiService.getRTGSDetails(transactionID)
+    }
+
+    override suspend fun getEFTNSDetails(transactionID: String): Response<Details> {
+        return restApiService.getEFTNSDetails(transactionID)
     }
 
     override suspend fun insert(generalInfo: GeneralInfo) {
