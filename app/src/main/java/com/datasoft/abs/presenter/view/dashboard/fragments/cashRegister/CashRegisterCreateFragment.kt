@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.FragmentCashRegisterCreateBinding
 import com.datasoft.abs.presenter.utils.Constant
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,6 +18,7 @@ import java.text.DecimalFormat
 class CashRegisterCreateFragment : Fragment() {
 
     private var _binding: FragmentCashRegisterCreateBinding? = null
+    private val viewModel: CashRegisterViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -41,6 +43,10 @@ class CashRegisterCreateFragment : Fragment() {
         binding.edTxtTen.addTextChangedListener(textWatcherTen)
         binding.edTxtFive.addTextChangedListener(textWatcherFive)
         binding.edTxtTwo.addTextChangedListener(textWatcherTwo)
+
+        binding.btnNext.setOnClickListener {
+            viewModel.createRequest(0, 0, 0, "", "", 0, "", "", "", 0)
+        }
     }
 
     private val textWatcherThousand = object : TextWatcher {
@@ -190,7 +196,8 @@ class CashRegisterCreateFragment : Fragment() {
             .toInt() + binding.txtViewFive.text.toString()
             .toInt() + binding.txtViewTwo.text.toString().toInt()).toLong()
 
-        binding.txtViewTotalAmount.text = "\u09F3" + DecimalFormat(Constant.BALANCE_FORMAT).format(totalAmount).toString()
+        binding.txtViewTotalAmount.text =
+            "\u09F3" + DecimalFormat(Constant.BALANCE_FORMAT).format(totalAmount).toString()
     }
 
     override fun onDestroyView() {

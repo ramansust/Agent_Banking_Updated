@@ -45,6 +45,7 @@ class DashboardFragment : Fragment() {
         binding.spinnerDay.adapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, daysList)
 
+//        binding.spinnerDay.setSelection(0, false)
         binding.spinnerDay.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 

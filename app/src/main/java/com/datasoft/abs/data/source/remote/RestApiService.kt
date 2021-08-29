@@ -127,4 +127,16 @@ interface RestApiService {
 
     @POST("api/create-eftn")
     suspend fun createEFTNTransaction(@Body createRequest: CreateRequest): Response<CreateCustomerResponse>
+
+    @POST("api/cash-register-list")
+    suspend fun getCashRegisterList(@Body accountRequest: AccountRequest): Response<RTGSListResponse>
+
+    @POST("api/feeder-list")
+    suspend fun getFeederList(@Body accountRequest: AccountRequest): Response<RTGSListResponse>
+
+    @POST("api/create-cash-register")
+    suspend fun createCashRegister(@Body createRequest: CreateRequest): Response<CreateCustomerResponse>
+
+    @POST("api/create-feeder")
+    suspend fun createFeeder(@Body createRequest: CreateRequest): Response<CreateCustomerResponse>
 }

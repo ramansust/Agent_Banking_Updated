@@ -6,12 +6,14 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.R
+import com.datasoft.abs.data.dto.transaction.rtgs.Row
 import com.datasoft.abs.databinding.FragmentCashRegisterBinding
 import com.datasoft.abs.presenter.states.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,13 +56,38 @@ class CashRegisterFragment : Fragment() {
                 .navigate(R.id.action_nav_cash_register_to_feederTransactionFragment)
         }
 
+        val list = mutableListOf<Row>()
+        viewModel.getCashRegisterData().observe(viewLifecycleOwner, { response ->
+
+            when (response) {
+                is Resource.Success -> {
+                    stopShimmer()
+                    response.data?.let {
+                        list.addAll(it.rows)
+                        cashRegisterAdapter.differ.submitList(list)
+                    }
+                }
+
+                is Resource.Error -> {
+                    stopShimmer()
+                    response.message?.let { message ->
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                is Resource.Loading -> {
+                    startShimmer()
+                }
+            }
+        })
+
         viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     response.data?.let { search ->
-//                        cashRegisterAdapter.differ.submitList(list.filter {
-//                            it.accountNumber.contains(search, true)
-//                        })
+                        cashRegisterAdapter.differ.submitList(list.filter {
+                            it.senderAccNumber!!.contains(search, true)
+                        })
                     }
                 }
 
@@ -98,5 +125,14 @@ class CashRegisterFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun startShimmer() {
+        binding.shimmerView.startShimmer()
+    }
+
+    private fun stopShimmer() {
+        binding.shimmerView.stopShimmer()
+        binding.shimmerView.visibility = View.GONE
     }
 }

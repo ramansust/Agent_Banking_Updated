@@ -5,19 +5,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.datasoft.abs.data.dto.customerList.Row
-import com.datasoft.abs.databinding.CustomerRowBinding
+import com.datasoft.abs.data.dto.transaction.rtgs.Row
+import com.datasoft.abs.databinding.FeederTransactionRowBinding
 import javax.inject.Inject
 
 class FeederTransactionListAdapter @Inject constructor() :
-    RecyclerView.Adapter<FeederTransactionListAdapter.CustomerViewHolder>() {
+    RecyclerView.Adapter<FeederTransactionListAdapter.FeederViewHolder>() {
 
-    inner class CustomerViewHolder(val binding: CustomerRowBinding) :
+    inner class FeederViewHolder(val binding: FeederTransactionRowBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<Row>() {
         override fun areItemsTheSame(oldItem: Row, newItem: Row): Boolean {
-            return oldItem.customerNo == newItem.customerNo
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Row, newItem: Row): Boolean {
@@ -27,10 +27,10 @@ class FeederTransactionListAdapter @Inject constructor() :
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeederViewHolder {
 
-        val binding = CustomerRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CustomerViewHolder(binding)
+        val binding = FeederTransactionRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return FeederViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -39,18 +39,18 @@ class FeederTransactionListAdapter @Inject constructor() :
 
     private var onItemClickListener: ((Row) -> Unit)? = null
 
-    override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FeederViewHolder, position: Int) {
         val customer = differ.currentList[position]
 
         with(customer) {
             holder.binding.txtViewSlNo.text = this.id.toString()
-            holder.binding.txtViewCustomerNo.text = this.customerNo
-            holder.binding.txtViewName.text = this.fullName
-            holder.binding.txtViewCustomerType.text = this.customerType
-            holder.binding.txtViewUnit.text = this.branchName
-            holder.binding.txtViewEntryDate.text = this.entryDate
-
-//            glide.load(this.imageUrl).into(holder.binding.ivAutoImageSlider)
+            holder.binding.txtViewDate.text = this.senderAccNumber
+            holder.binding.txtViewAccountNumber.text = this.receiverRouting
+            holder.binding.txtViewReferenceNumber.text = this.receiverAccNumber
+            holder.binding.txtViewTransactionType.text = this.receiverName
+            holder.binding.txtViewAmount.text = this.entryDate
+            holder.binding.txtViewCurrentBalance.text = this.entryDate
+            holder.binding.txtViewEntryBy.text = this.entryDate
         }
 
         holder.itemView.setOnClickListener {

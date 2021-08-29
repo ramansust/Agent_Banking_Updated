@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.datasoft.abs.data.dto.customerList.CustomerRequest
-import com.datasoft.abs.data.dto.customerList.CustomerResponse
+import com.datasoft.abs.data.dto.accountList.AccountRequest
+import com.datasoft.abs.data.dto.createCustomer.CreateCustomerResponse
+import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
+import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -23,10 +25,14 @@ class FeederTransactionViewModel @Inject constructor(
     private val network: Network,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
+    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
 ) : ViewModel() {
 
-    private val customerData = MutableLiveData<Resource<CustomerResponse>>()
-    fun getAllCustomerData(): LiveData<Resource<CustomerResponse>> = customerData
+    private val createFeeder = MutableLiveData<Resource<CreateCustomerResponse>>()
+    fun getCreationData(): LiveData<Resource<CreateCustomerResponse>> = createFeeder
+
+    private val feederData = MutableLiveData<Resource<RTGSListResponse>>()
+    fun getFeederData(): LiveData<Resource<RTGSListResponse>> = feederData
 
     private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
     fun getSearchData(): LiveData<Resource<String>> = searchData
@@ -37,14 +43,18 @@ class FeederTransactionViewModel @Inject constructor(
         }
     }
 
-    fun requestCustomerData(customerRequest: CustomerRequest) {
+    init {
+        requestFeederData(AccountRequest(1, status = "7"))
+    }
+
+    private fun requestFeederData(accountRequest: AccountRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
                 try {
-                    val response = repository.getCustomerListData(customerRequest)
-                    customerData.postValue(handleCustomerResponse(response))
+                    val response = repository.getFeederList(accountRequest)
+                    feederData.postValue(handleCustomerResponse(response))
                 } catch (e: Exception) {
-                    customerData.postValue(
+                    feederData.postValue(
                         Resource.Error(
                             somethingWrong, null
                         )
@@ -52,7 +62,7 @@ class FeederTransactionViewModel @Inject constructor(
                     e.printStackTrace()
                 }
             } else {
-                customerData.postValue(
+                feederData.postValue(
                     Resource.Error(
                         noInternet, null
                     )
@@ -61,7 +71,83 @@ class FeederTransactionViewModel @Inject constructor(
         }
     }
 
-    private fun handleCustomerResponse(response: Response<CustomerResponse>): Resource<CustomerResponse> {
+    fun createRequest(
+        amount: Int,
+        bankId: Int,
+        charge: Int,
+        receiverAccNumber: String,
+        receiverAddress: String,
+        receiverBranchId: Int,
+        receiverCity: String,
+        receiverName: String,
+        senderAccNumber: String,
+        vat: Int
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+
+            createFeeder.postValue(Resource.Loading())
+
+            if (receiverAccNumber.isEmpty() || receiverName.isEmpty() || senderAccNumber.isEmpty() || amount == 0) {
+                createFeeder.postValue(
+                    Resource.Error(
+                        fieldEmpty, null
+                    )
+                )
+
+                return@launch
+            }
+
+            if (network.isConnected()) {
+                try {
+                    val response = repository.createRTGSTransaction(
+                        CreateRequest(
+                            amount,
+                            bankId,
+                            charge,
+                            "",
+                            receiverAccNumber,
+                            receiverAddress,
+                            receiverBranchId,
+                            receiverCity,
+                            receiverName,
+                            "",
+                            "",
+                            senderAccNumber,
+                            "",
+                            "",
+                            "",
+                            vat
+                        )
+                    )
+                    createFeeder.postValue(handleCreationResponse(response))
+                } catch (e: Exception) {
+                    createFeeder.postValue(
+                        Resource.Error(
+                            somethingWrong, null
+                        )
+                    )
+                    e.printStackTrace()
+                }
+            } else {
+                createFeeder.postValue(
+                    Resource.Error(
+                        noInternet, null
+                    )
+                )
+            }
+        }
+    }
+
+    private fun handleCustomerResponse(response: Response<RTGSListResponse>): Resource<RTGSListResponse> {
+        if (response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+                return Resource.Success(resultResponse)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleCreationResponse(response: Response<CreateCustomerResponse>): Resource<CreateCustomerResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse)

@@ -171,6 +171,22 @@ class RepositoryImpl @Inject constructor(
         return restApiService.createEFTNTransaction(createRequest)
     }
 
+    override suspend fun getCashRegisterList(accountRequest: AccountRequest): Response<RTGSListResponse> {
+        return restApiService.getCashRegisterList(accountRequest)
+    }
+
+    override suspend fun getFeederList(accountRequest: AccountRequest): Response<RTGSListResponse> {
+        return restApiService.getFeederList(accountRequest)
+    }
+
+    override suspend fun createCashRegister(createRequest: CreateRequest): Response<CreateCustomerResponse> {
+        return restApiService.createCashRegister(createRequest)
+    }
+
+    override suspend fun createFeeder(createRequest: CreateRequest): Response<CreateCustomerResponse> {
+        return restApiService.createFeeder(createRequest)
+    }
+
     override suspend fun insert(generalInfo: GeneralInfo) {
         generalInfoDao.insert(generalInfo)
     }

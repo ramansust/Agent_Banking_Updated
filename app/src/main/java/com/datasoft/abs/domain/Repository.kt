@@ -66,6 +66,11 @@ interface Repository {
     suspend fun createRTGSTransaction(createRequest: CreateRequest): Response<CreateCustomerResponse>
     suspend fun createEFTNTransaction(createRequest: CreateRequest): Response<CreateCustomerResponse>
 
+    suspend fun getCashRegisterList(accountRequest: AccountRequest): Response<RTGSListResponse>
+    suspend fun getFeederList(accountRequest: AccountRequest): Response<RTGSListResponse>
+    suspend fun createCashRegister(createRequest: CreateRequest): Response<CreateCustomerResponse>
+    suspend fun createFeeder(createRequest: CreateRequest): Response<CreateCustomerResponse>
+
     suspend fun insert(generalInfo: GeneralInfo)
     fun getAll(): LiveData<List<GeneralInfo>>
 }
