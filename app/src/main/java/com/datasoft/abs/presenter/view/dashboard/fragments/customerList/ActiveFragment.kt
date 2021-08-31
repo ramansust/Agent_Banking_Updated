@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.customerList.Row
 import com.datasoft.abs.databinding.FragmentCustomerBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.PER_PAGE_ITEM
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerList.adapter.CustomerListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class ActiveFragment : Fragment() {
@@ -52,14 +52,16 @@ class ActiveFragment : Fragment() {
         viewModel.getActiveData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
+                    list.clear()
                     stopShimmer()
+
                     response.data?.let { customerResponse ->
-
                         list.addAll(customerResponse.rows)
-                        customerAdapter.differ.submitList(list)
+                        customerAdapter.differ.submitList(list.map {
+                            it.copy()
+                        })
 
-                        if (list.size >= customerResponse.pageNumber * PER_PAGE_ITEM)
-                            isLoading = false
+                        isLoading = list.size < customerResponse.pageNumber * PER_PAGE_ITEM
                     }
                 }
                 is Resource.Error -> {

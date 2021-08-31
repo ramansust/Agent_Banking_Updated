@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
 import com.datasoft.abs.data.dto.customerList.CustomerResponse
+import com.datasoft.abs.data.dto.customerList.Row
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -59,7 +60,16 @@ class CustomerListMainViewModel @Inject constructor(
             if (network.isConnected()) {
                 try {
                     val response = repository.getCustomerListData(customerRequest)
-                    active.postValue(handleCustomerResponse(response, activePageNumber))
+                    val list = mutableListOf<Row>()
+                    val res = handleCustomerResponse(response, activePageNumber)
+
+                    list.apply {
+                        active.value?.data?.rows?.let { addAll(it) }
+                        addAll(res.data?.rows!!)
+                    }
+
+                    res.data!!.rows = list
+                    active.postValue(res)
                 } catch (e: Exception) {
                     active.postValue(
                         Resource.Error(
@@ -83,7 +93,17 @@ class CustomerListMainViewModel @Inject constructor(
             if (network.isConnected()) {
                 try {
                     val response = repository.getCustomerListData(customerRequest)
-                    awaiting.postValue(handleCustomerResponse(response, awaitingPageNumber))
+                    val list = mutableListOf<Row>()
+                    val res = handleCustomerResponse(response, awaitingPageNumber)
+
+                    list.apply {
+                        awaiting.value?.data?.rows?.let { addAll(it) }
+                        addAll(res.data?.rows!!)
+                    }
+
+                    res.data!!.rows = list
+                    awaiting.postValue(res)
+//                    awaiting.postValue(handleCustomerResponse(response, awaitingPageNumber))
                 } catch (e: Exception) {
                     awaiting.postValue(
                         Resource.Error(
@@ -107,7 +127,17 @@ class CustomerListMainViewModel @Inject constructor(
             if (network.isConnected()) {
                 try {
                     val response = repository.getCustomerListData(customerRequest)
-                    draft.postValue(handleCustomerResponse(response, draftPageNumber))
+                    val list = mutableListOf<Row>()
+                    val res = handleCustomerResponse(response, draftPageNumber)
+
+                    list.apply {
+                        draft.value?.data?.rows?.let { addAll(it) }
+                        addAll(res.data?.rows!!)
+                    }
+
+                    res.data!!.rows = list
+                    draft.postValue(res)
+//                    draft.postValue(handleCustomerResponse(response, draftPageNumber))
                 } catch (e: Exception) {
                     draft.postValue(
                         Resource.Error(
