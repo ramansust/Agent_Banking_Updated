@@ -16,11 +16,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
 
-    private val viewModel: DashboardViewModel by activityViewModels()
+    private val transactionViewModel: TransactionViewModel by activityViewModels()
     private var _binding: FragmentDashboardTransactionBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+
+//    @Inject
+//    lateinit var adapter: DashboardAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +32,11 @@ class DashboardFragment : Fragment() {
     ): View {
 
         _binding = FragmentDashboardTransactionBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.pager.adapter = DashboardAdapter(this)
 
@@ -57,11 +64,9 @@ class DashboardFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                viewModel.setDayCount(daysList[position].value.toInt())
+                transactionViewModel.requestDashboardData(daysList[position].value.toInt())
             }
         }
-
-        return root
     }
 
     override fun onDestroyView() {

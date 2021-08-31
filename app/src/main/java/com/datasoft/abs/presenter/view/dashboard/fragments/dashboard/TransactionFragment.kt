@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.datasoft.abs.databinding.FragmentDashboardBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -26,8 +25,7 @@ import java.text.DecimalFormat
 @AndroidEntryPoint
 class TransactionFragment : Fragment() {
 
-    private val viewModel: TransactionViewModel by viewModels()
-    private val viewModelDashboard: DashboardViewModel by activityViewModels()
+    private val viewModel: TransactionViewModel by activityViewModels()
     private var _binding: FragmentDashboardBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
@@ -49,20 +47,24 @@ class TransactionFragment : Fragment() {
         setValueOnPieChart(binding.pieChart, 40, 30, 30)
         setValueOnLineChart(binding.lineChart)
 
-        viewModelDashboard.getDayCount().observe(viewLifecycleOwner, {
-            viewModel.requestDashboardData(it)
-        })
-
         viewModel.getDashboardData().observe(viewLifecycleOwner, { response ->
 
             when (response) {
                 is Resource.Success -> {
                     goneProgressBar()
                     response.data?.let { dashBoardResponse ->
-                        binding.txtViewOpen.text = DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.total_Customer).toString()
-                        binding.txtViewDeposit.text = DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.deposit).toString()
-                        binding.txtViewWithdraw.text = DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.withdraw).toString()
-                        binding.txtViewBalance.text = DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.current_Balance).toString()
+                        binding.txtViewOpen.text =
+                            DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.total_Customer)
+                                .toString()
+                        binding.txtViewDeposit.text =
+                            DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.deposit)
+                                .toString()
+                        binding.txtViewWithdraw.text =
+                            DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.withdraw)
+                                .toString()
+                        binding.txtViewBalance.text =
+                            DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.current_Balance)
+                                .toString()
                     }
                 }
                 is Resource.Error -> {
@@ -85,7 +87,8 @@ class TransactionFragment : Fragment() {
         val arrayListPie = mutableListOf(
             PieEntry(approved.toFloat(), "Approved", null),
             PieEntry(pending.toFloat(), "Pending", null),
-            PieEntry(onHold.toFloat(), "On Hold", null))
+            PieEntry(onHold.toFloat(), "On Hold", null)
+        )
 
         //pie chart enable
         chart_pie.description.isEnabled = false
@@ -197,7 +200,7 @@ class TransactionFragment : Fragment() {
 
     private fun setData(chart: LineChart, count: Int, range: Float) {
 
-         val values1: ArrayList<Entry> = ArrayList()
+        val values1: ArrayList<Entry> = ArrayList()
 
         for (i in 0 until count) {
             val value = (Math.random() * (range / 2f)).toFloat() + 50

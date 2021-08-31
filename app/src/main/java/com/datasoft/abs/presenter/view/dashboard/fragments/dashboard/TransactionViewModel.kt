@@ -25,7 +25,6 @@ class TransactionViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val dashboardData = MutableLiveData<Resource<DashboardResponse>>()
-
     fun getDashboardData(): LiveData<Resource<DashboardResponse>> = dashboardData
 
     fun requestDashboardData(dayNo: Int) {
