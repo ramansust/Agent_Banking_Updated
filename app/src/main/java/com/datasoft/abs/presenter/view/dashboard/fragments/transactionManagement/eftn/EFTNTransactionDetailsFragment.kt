@@ -13,7 +13,6 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.datasoft.abs.databinding.FragmentEftnTransactionDetailsBinding
 import com.datasoft.abs.presenter.states.Resource
-import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.rtgs.RTGSViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,9 +22,7 @@ class EFTNTransactionDetailsFragment : Fragment() {
 
     private var _binding: FragmentEftnTransactionDetailsBinding? = null
     private val args: EFTNTransactionDetailsFragmentArgs by navArgs()
-
-    private val viewModel: RTGSViewModel by activityViewModels()
-    private val eftnViewModel: EFTNViewModel by activityViewModels()
+    private val detailsViewModel: EFTNTransactionViewModel by activityViewModels()
 
     @Inject
     lateinit var glide: RequestManager
@@ -45,12 +42,10 @@ class EFTNTransactionDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.setDetails(0)
-        eftnViewModel.setDetails(0)
+        detailsViewModel.setDetails(0)
 
-        viewModel.detailsData(args.transactionId.toString(), args.isRTGS)
-
-        viewModel.getTransactionDetails().observe(viewLifecycleOwner, { response ->
+        detailsViewModel.detailsData(args.transactionId.toString(), args.isRTGS)
+        detailsViewModel.getTransactionDetails().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     response.data?.let {
@@ -84,6 +79,7 @@ class EFTNTransactionDetailsFragment : Fragment() {
 
                 is Resource.Error -> {
                     goneProgressBar()
+
                     response.message?.let { message ->
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }

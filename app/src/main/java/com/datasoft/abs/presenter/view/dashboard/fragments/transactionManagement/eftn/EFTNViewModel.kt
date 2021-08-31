@@ -26,9 +26,6 @@ class EFTNViewModel @Inject constructor(
     @Named(SOMETHING_WRONG) private val somethingWrong: String
 ) : ViewModel() {
 
-    private val details: MutableLiveData<Int> = MutableLiveData()
-    fun getDetailsData(): LiveData<Int> = details
-
     private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
     fun getSearchData(): LiveData<Resource<String>> = searchData
 
@@ -42,12 +39,6 @@ class EFTNViewModel @Inject constructor(
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
             searchData.postValue(Resource.Success(search))
-        }
-    }
-
-    fun setDetails(id: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            details.postValue(id)
         }
     }
 

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.databinding.FragmentAwaitingApprovalBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn.EFTNTransactionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -19,6 +20,7 @@ class RejectFragment : Fragment() {
 
     private var _binding: FragmentAwaitingApprovalBinding? = null
     private val viewModel: RTGSViewModel by activityViewModels()
+    private val detailsViewModel: EFTNTransactionViewModel by activityViewModels()
 
     @Inject
     lateinit var rtgsAdapter: RTGSListAdapter
@@ -42,8 +44,6 @@ class RejectFragment : Fragment() {
 
         val list = mutableListOf<com.datasoft.abs.data.dto.transaction.rtgs.Row>()
         viewModel.getRTGSData().observe(viewLifecycleOwner, { response ->
-
-//            list.clear()
 
             when (response) {
                 is Resource.Success -> {
@@ -89,7 +89,7 @@ class RejectFragment : Fragment() {
         })
 
         rtgsAdapter.setOnItemClickListener {
-            viewModel.setDetails(it.id!!)
+            detailsViewModel.setDetails(it.id!!)
         }
     }
 

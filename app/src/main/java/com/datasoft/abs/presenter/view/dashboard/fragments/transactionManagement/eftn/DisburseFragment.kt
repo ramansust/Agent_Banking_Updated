@@ -20,6 +20,7 @@ class DisburseFragment : Fragment() {
 
     private var _binding: FragmentAwaitingApprovalBinding? = null
     private val viewModel: EFTNViewModel by activityViewModels()
+    private val detailsViewModel: EFTNTransactionViewModel by activityViewModels()
 
     @Inject
     lateinit var rtgsAdapter: EFTNListAdapter
@@ -88,7 +89,7 @@ class DisburseFragment : Fragment() {
         })
 
         rtgsAdapter.setOnItemClickListener {
-            viewModel.setDetails(it.id!!)
+            detailsViewModel.setDetails(it.id!!)
         }
     }
 

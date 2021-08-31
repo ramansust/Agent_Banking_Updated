@@ -9,6 +9,7 @@ import com.datasoft.abs.data.dto.createCustomer.CreateCustomerResponse
 import com.datasoft.abs.data.dto.transaction.AccountDetailsRequest
 import com.datasoft.abs.data.dto.transaction.AccountDetailsResponse
 import com.datasoft.abs.data.dto.transaction.eftn.CreateEFTNRequest
+import com.datasoft.abs.data.dto.transaction.rtgs.Details
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -30,6 +31,9 @@ class EFTNTransactionViewModel @Inject constructor(
     @Named(Constant.SEARCH_EMPTY) private val searchEmpty: String
 ) : ViewModel() {
 
+    private val details: MutableLiveData<Int> = MutableLiveData()
+    fun getDetailsData(): LiveData<Int> = details
+
     private val createEFTN = MutableLiveData<Resource<CreateCustomerResponse>>()
     fun getCreationData(): LiveData<Resource<CreateCustomerResponse>> = createEFTN
 
@@ -41,6 +45,9 @@ class EFTNTransactionViewModel @Inject constructor(
 
     private val branchList: MutableLiveData<Resource<List<CommonModel>>> = MutableLiveData()
     fun getBranchList(): LiveData<Resource<List<CommonModel>>> = branchList
+
+    private val transactionDetails: MutableLiveData<Resource<Details>> = MutableLiveData()
+    fun getTransactionDetails(): LiveData<Resource<Details>> = transactionDetails
 
     fun requestBankList() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -193,6 +200,12 @@ class EFTNTransactionViewModel @Inject constructor(
         }
     }
 
+    fun setDetails(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            details.postValue(id)
+        }
+    }
+
     private fun handleResponse(response: Response<List<CommonModel>>): Resource<List<CommonModel>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
@@ -212,6 +225,45 @@ class EFTNTransactionViewModel @Inject constructor(
     }
 
     private fun handleCreationResponse(response: Response<CreateCustomerResponse>): Resource<CreateCustomerResponse> {
+        if (response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+                return Resource.Success(resultResponse)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    fun detailsData(transactionId: String, isRTGS: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+
+            transactionDetails.postValue(Resource.Loading())
+
+            if (network.isConnected()) {
+                try {
+                    val response =
+                        if (isRTGS) repository.getRTGSDetails(transactionId) else repository.getEFTNSDetails(
+                            transactionId
+                        )
+                    transactionDetails.postValue(handleDetailsResponse(response))
+                } catch (e: Exception) {
+                    transactionDetails.postValue(
+                        Resource.Error(
+                            somethingWrong, null
+                        )
+                    )
+                    e.printStackTrace()
+                }
+            } else {
+                transactionDetails.postValue(
+                    Resource.Error(
+                        noInternet, null
+                    )
+                )
+            }
+        }
+    }
+
+    private fun handleDetailsResponse(response: Response<Details>): Resource<Details> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse)

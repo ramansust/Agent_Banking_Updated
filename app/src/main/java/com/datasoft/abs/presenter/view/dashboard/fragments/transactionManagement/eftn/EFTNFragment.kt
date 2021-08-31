@@ -19,6 +19,7 @@ class EFTNFragment : Fragment() {
 
     private var _binding: FragmentEftnBinding? = null
     private val viewModel: EFTNViewModel by activityViewModels()
+    private val detailsViewModel: EFTNTransactionViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -54,7 +55,7 @@ class EFTNFragment : Fragment() {
 
         binding.edTxtSearch.addTextChangedListener(textWatcher)
 
-        viewModel.getDetailsData().observe(viewLifecycleOwner, { value ->
+        detailsViewModel.getDetailsData().observe(viewLifecycleOwner, { value ->
             if (value > 0) {
                 val action =
                     EFTNFragmentDirections.actionEftnToEFTNTransactionDetailsFragment(value.toLong(), false)

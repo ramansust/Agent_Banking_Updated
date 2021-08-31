@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.datasoft.abs.R
 import com.datasoft.abs.databinding.FragmentRtgsBinding
+import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn.EFTNTransactionViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,6 +20,7 @@ class RTGSFragment : Fragment() {
 
     private var _binding: FragmentRtgsBinding? = null
     private val viewModel: RTGSViewModel by activityViewModels()
+    private val detailsViewModel: EFTNTransactionViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -54,7 +56,7 @@ class RTGSFragment : Fragment() {
 
         binding.edTxtSearch.addTextChangedListener(textWatcher)
 
-        viewModel.getDetailsData().observe(viewLifecycleOwner, { value ->
+        detailsViewModel.getDetailsData().observe(viewLifecycleOwner, { value ->
             if (value > 0) {
                 val action =
                     RTGSFragmentDirections.actionRtgsToEFTNTransactionDetailsFragment(value.toLong(), true)
