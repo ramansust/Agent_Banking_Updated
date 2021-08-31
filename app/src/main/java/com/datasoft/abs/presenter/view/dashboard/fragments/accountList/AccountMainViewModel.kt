@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
+import com.datasoft.abs.data.dto.accountList.Row
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -26,19 +27,26 @@ class AccountMainViewModel @Inject constructor(
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
 ) : ViewModel() {
 
-    private val accountData = MutableLiveData<Resource<AccountResponse>>()
-    fun getAllAccountData(): LiveData<Resource<AccountResponse>> = accountData
+    private var activePageNumber = 0
+    private var awaitingPageNumber = 0
+    private var draftPageNumber = 0
+
+    private val active = MutableLiveData<Resource<AccountResponse>>()
+    fun getActiveData(): LiveData<Resource<AccountResponse>> = active
+
+    private val awaiting = MutableLiveData<Resource<AccountResponse>>()
+    fun getAwaitingData(): LiveData<Resource<AccountResponse>> = awaiting
+
+    private val draft = MutableLiveData<Resource<AccountResponse>>()
+    fun getDraftData(): LiveData<Resource<AccountResponse>> = draft
 
     private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
     fun getSearchData(): LiveData<Resource<String>> = searchData
 
     init {
-        requestAccountData(
-            AccountRequest(
-                1,
-                status = "${Status.ACTIVE.type}, ${Status.AWAITING.type}, ${Status.DRAFT.type}"
-            )
-        )
+        loadMoreActive()
+        loadMoreAwaiting()
+        loadMoreDraft()
     }
 
     fun setSearchData(search: String) {
@@ -47,14 +55,23 @@ class AccountMainViewModel @Inject constructor(
         }
     }
 
-    private fun requestAccountData(accountRequest: AccountRequest) {
+    private fun requestActiveData(accountRequest: AccountRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
                 try {
                     val response = repository.getAccountListData(accountRequest)
-                    accountData.postValue(handleAccountResponse(response))
+                    val list = mutableListOf<Row>()
+                    val res = handleCustomerResponse(response, activePageNumber)
+
+                    list.apply {
+                        active.value?.data?.rows?.let { addAll(it) }
+                        addAll(res.data?.rows!!)
+                    }
+
+                    res.data!!.rows = list
+                    active.postValue(res)
                 } catch (e: Exception) {
-                    accountData.postValue(
+                    active.postValue(
                         Resource.Error(
                             somethingWrong, null
                         )
@@ -62,7 +79,7 @@ class AccountMainViewModel @Inject constructor(
                     e.printStackTrace()
                 }
             } else {
-                accountData.postValue(
+                active.postValue(
                     Resource.Error(
                         noInternet, null
                     )
@@ -71,13 +88,112 @@ class AccountMainViewModel @Inject constructor(
         }
     }
 
-    private fun handleAccountResponse(response: Response<AccountResponse>): Resource<AccountResponse> {
+    private fun requestAwaitingData(accountRequest: AccountRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (network.isConnected()) {
+                try {
+                    val response = repository.getAccountListData(accountRequest)
+                    val list = mutableListOf<Row>()
+                    val res = handleCustomerResponse(response, awaitingPageNumber)
+
+                    list.apply {
+                        awaiting.value?.data?.rows?.let { addAll(it) }
+                        addAll(res.data?.rows!!)
+                    }
+
+                    res.data!!.rows = list
+                    awaiting.postValue(res)
+//                    awaiting.postValue(handleCustomerResponse(response, awaitingPageNumber))
+                } catch (e: Exception) {
+                    awaiting.postValue(
+                        Resource.Error(
+                            somethingWrong, null
+                        )
+                    )
+                    e.printStackTrace()
+                }
+            } else {
+                awaiting.postValue(
+                    Resource.Error(
+                        noInternet, null
+                    )
+                )
+            }
+        }
+    }
+
+    private fun requestDraftData(accountRequest: AccountRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (network.isConnected()) {
+                try {
+                    val response = repository.getAccountListData(accountRequest)
+                    val list = mutableListOf<Row>()
+                    val res = handleCustomerResponse(response, draftPageNumber)
+
+                    list.apply {
+                        draft.value?.data?.rows?.let { addAll(it) }
+                        addAll(res.data?.rows!!)
+                    }
+
+                    res.data!!.rows = list
+                    draft.postValue(res)
+//                    draft.postValue(handleCustomerResponse(response, draftPageNumber))
+                } catch (e: Exception) {
+                    draft.postValue(
+                        Resource.Error(
+                            somethingWrong, null
+                        )
+                    )
+                    e.printStackTrace()
+                }
+            } else {
+                draft.postValue(
+                    Resource.Error(
+                        noInternet, null
+                    )
+                )
+            }
+        }
+    }
+
+    private fun handleCustomerResponse(
+        response: Response<AccountResponse>,
+        pageNumber: Int
+    ): Resource<AccountResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
+                resultResponse.pageNumber = pageNumber
                 return Resource.Success(resultResponse)
             }
         }
         return Resource.Error(response.message())
+    }
+
+    fun loadMoreActive() {
+        requestActiveData(
+            AccountRequest(
+                ++activePageNumber,
+                status = "${Status.ACTIVE.type}"
+            )
+        )
+    }
+
+    fun loadMoreAwaiting() {
+        requestAwaitingData(
+            AccountRequest(
+                ++awaitingPageNumber,
+                status = "${Status.AWAITING.type}"
+            )
+        )
+    }
+
+    fun loadMoreDraft() {
+        requestDraftData(
+            AccountRequest(
+                ++draftPageNumber,
+                status = "${Status.DRAFT.type}"
+            )
+        )
     }
 
 }

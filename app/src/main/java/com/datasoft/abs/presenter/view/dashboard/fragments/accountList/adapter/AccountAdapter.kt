@@ -48,8 +48,6 @@ class AccountAdapter @Inject constructor() :
             holder.binding.txtViewAccountNumber.text = this.accountNumber
             holder.binding.txtViewSourceOfFund.text = this.natureOfBusiness
             holder.binding.txtViewUnit.text = this.branchName
-
-//            glide.load(this.imageUrl).into(holder.binding.ivAutoImageSlider)
         }
 
         holder.itemView.setOnClickListener {
