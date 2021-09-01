@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -59,12 +60,15 @@ class RejectFragment : Fragment() {
                         })
 
                         isLoading = list.size < dataResponse.pageNumber * Constant.PER_PAGE_ITEM
+
+                        showNoContent()
                     }
                 }
 
                 is Resource.Error -> {
                     stopShimmer()
                     response.message?.let { message ->
+                        showNoContent()
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -129,6 +133,11 @@ class RejectFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun showNoContent() {
+        binding.txtViewNoEntry.isVisible = list.size <= 0
+        binding.recycleView.isVisible = list.size > 0
     }
 
     private fun startShimmer() {
