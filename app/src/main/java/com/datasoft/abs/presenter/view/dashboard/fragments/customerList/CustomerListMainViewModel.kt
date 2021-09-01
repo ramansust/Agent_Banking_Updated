@@ -59,17 +59,16 @@ class CustomerListMainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
                 try {
-                    val response = repository.getCustomerListData(customerRequest)
                     val list = mutableListOf<Row>()
-                    val res = handleCustomerResponse(response, activePageNumber)
+                    val response = handleCustomerResponse(repository.getCustomerListData(customerRequest), activePageNumber)
 
                     list.apply {
                         active.value?.data?.rows?.let { addAll(it) }
-                        addAll(res.data?.rows!!)
+                        addAll(response.data?.rows!!)
                     }
 
-                    res.data!!.rows = list
-                    active.postValue(res)
+                    response.data!!.rows = list
+                    active.postValue(response)
                 } catch (e: Exception) {
                     active.postValue(
                         Resource.Error(
@@ -92,17 +91,16 @@ class CustomerListMainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
                 try {
-                    val response = repository.getCustomerListData(customerRequest)
                     val list = mutableListOf<Row>()
-                    val res = handleCustomerResponse(response, awaitingPageNumber)
+                    val response = handleCustomerResponse(repository.getCustomerListData(customerRequest), awaitingPageNumber)
 
                     list.apply {
                         awaiting.value?.data?.rows?.let { addAll(it) }
-                        addAll(res.data?.rows!!)
+                        addAll(response.data?.rows!!)
                     }
 
-                    res.data!!.rows = list
-                    awaiting.postValue(res)
+                    response.data!!.rows = list
+                    awaiting.postValue(response)
 //                    awaiting.postValue(handleCustomerResponse(response, awaitingPageNumber))
                 } catch (e: Exception) {
                     awaiting.postValue(
@@ -126,17 +124,16 @@ class CustomerListMainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
                 try {
-                    val response = repository.getCustomerListData(customerRequest)
                     val list = mutableListOf<Row>()
-                    val res = handleCustomerResponse(response, draftPageNumber)
+                    val response = handleCustomerResponse(repository.getCustomerListData(customerRequest), draftPageNumber)
 
                     list.apply {
                         draft.value?.data?.rows?.let { addAll(it) }
-                        addAll(res.data?.rows!!)
+                        addAll(response.data?.rows!!)
                     }
 
-                    res.data!!.rows = list
-                    draft.postValue(res)
+                    response.data!!.rows = list
+                    draft.postValue(response)
 //                    draft.postValue(handleCustomerResponse(response, draftPageNumber))
                 } catch (e: Exception) {
                     draft.postValue(

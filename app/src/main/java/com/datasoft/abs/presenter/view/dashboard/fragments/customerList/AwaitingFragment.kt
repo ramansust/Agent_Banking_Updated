@@ -57,6 +57,7 @@ class AwaitingFragment : Fragment() {
                     response.data?.let { customerResponse ->
 
                         list.addAll(customerResponse.rows)
+
                         customerAdapter.differ.submitList(list.map {
                             it.copy()
                         })

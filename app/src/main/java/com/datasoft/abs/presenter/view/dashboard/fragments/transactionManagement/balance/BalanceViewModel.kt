@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.CommonRequest
 import com.datasoft.abs.data.dto.transaction.DepositResponse
+import com.datasoft.abs.data.dto.transaction.Row
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -23,7 +24,9 @@ class BalanceViewModel @Inject constructor(
     private val network: Network,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
-): ViewModel() {
+) : ViewModel() {
+
+    private var pageNumber = 0
 
     private val balanceData = MutableLiveData<Resource<DepositResponse>>()
     fun getBalanceData(): LiveData<Resource<DepositResponse>> = balanceData
@@ -32,7 +35,7 @@ class BalanceViewModel @Inject constructor(
     fun getSearchData(): LiveData<Resource<String>> = searchData
 
     init {
-        requestBalanceData(CommonRequest(1))
+        loadMore()
     }
 
     fun setSearchData(search: String) {
@@ -41,15 +44,34 @@ class BalanceViewModel @Inject constructor(
         }
     }
 
+    fun loadMore() {
+        requestBalanceData(
+            CommonRequest(
+                ++pageNumber
+            )
+        )
+    }
+
     private fun requestBalanceData(commonRequest: CommonRequest) {
         viewModelScope.launch(Dispatchers.IO) {
+
+            val list = mutableListOf<Row>()
+            list.apply {
+                balanceData.value?.data?.rows?.let { addAll(it) }
+            }
 
             balanceData.postValue(Resource.Loading())
 
             if (network.isConnected()) {
                 try {
-                    val response = repository.getBalanceData(commonRequest)
-                    balanceData.postValue(handleResponse(response))
+                    val response = handleResponse(repository.getBalanceData(commonRequest), pageNumber)
+
+                    list.apply {
+                        addAll(response.data?.rows!!)
+                    }
+
+                    response.data!!.rows = list
+                    balanceData.postValue(response)
                 } catch (e: Exception) {
                     balanceData.postValue(
                         Resource.Error(
@@ -68,9 +90,10 @@ class BalanceViewModel @Inject constructor(
         }
     }
 
-    private fun handleResponse(response: Response<DepositResponse>): Resource<DepositResponse> {
+    private fun handleResponse(response: Response<DepositResponse>, pageNumber: Int): Resource<DepositResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
+                resultResponse.pageNumber = pageNumber
                 return Resource.Success(resultResponse)
             }
         }

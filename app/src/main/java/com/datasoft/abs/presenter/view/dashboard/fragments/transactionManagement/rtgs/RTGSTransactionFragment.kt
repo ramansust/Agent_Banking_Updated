@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.FragmentRtgsTransactionBinding
 import com.datasoft.abs.presenter.states.Resource
@@ -143,6 +144,7 @@ class RTGSTransactionFragment : Fragment() {
                     response.data?.let {
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                         binding.btnNext.isEnabled = false
+                        findNavController().navigateUp()
                     }
                 }
 

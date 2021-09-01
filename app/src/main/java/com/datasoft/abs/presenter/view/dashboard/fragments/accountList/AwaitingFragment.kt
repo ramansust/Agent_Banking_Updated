@@ -57,9 +57,7 @@ class AwaitingFragment : Fragment() {
 
                     response.data?.let { customerResponse ->
 
-                        list.addAll(customerResponse.rows.filter {
-                            it.accountStatus == Status.AWAITING.type
-                        })
+                        list.addAll(customerResponse.rows)
 
                         accountAdapter.differ.submitList(list.map {
                             it.copy()

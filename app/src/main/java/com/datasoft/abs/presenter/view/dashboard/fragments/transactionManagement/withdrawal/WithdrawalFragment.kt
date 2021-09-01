@@ -12,9 +12,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.transaction.Row
 import com.datasoft.abs.databinding.FragmentWithdrawBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.deposit.DepositAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -27,6 +29,8 @@ class WithdrawalFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+    val list = mutableListOf<Row>()
+    private var isLoading = false
 
     @Inject
     lateinit var depositAdapter: DepositAdapter
@@ -45,18 +49,23 @@ class WithdrawalFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        initScrollListener()
 
-        val list = mutableListOf<Row>()
         viewModel.getWithdrawData().observe(viewLifecycleOwner, { response ->
-
-            list.clear()
 
             when (response) {
                 is Resource.Success -> {
+                    list.clear()
                     stopShimmer()
+
                     response.data?.let { dataResponse ->
-                        list.addAll(dataResponse.rows!!)
-                        depositAdapter.differ.submitList(list)
+                        dataResponse.rows?.let { list.addAll(it) }
+
+                        depositAdapter.differ.submitList(list.map {
+                            it.copy()
+                        })
+
+                        isLoading = list.size < dataResponse.pageNumber * Constant.PER_PAGE_ITEM
                     }
                 }
 
@@ -123,6 +132,23 @@ class WithdrawalFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
+    }
+
+    private fun initScrollListener() {
+        binding.recycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
+
+                if (!isLoading) {
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == list.size - 1) {
+                        viewModel.loadMore()
+                        isLoading = true
+                    }
+                }
+            }
+        })
     }
 
     private fun startShimmer() {

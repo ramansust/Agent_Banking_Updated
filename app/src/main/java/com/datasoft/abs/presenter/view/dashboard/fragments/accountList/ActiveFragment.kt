@@ -57,9 +57,7 @@ class ActiveFragment : Fragment() {
 
                     response.data?.let { accountResponse ->
 
-                        list.addAll(accountResponse.rows.filter {
-                            it.accountStatus == Status.ACTIVE.type
-                        })
+                        list.addAll(accountResponse.rows)
 
                         accountAdapter.differ.submitList(list.map {
                             it.copy()

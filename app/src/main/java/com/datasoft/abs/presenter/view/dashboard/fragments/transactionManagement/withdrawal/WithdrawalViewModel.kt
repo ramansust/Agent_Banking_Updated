@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.CommonRequest
 import com.datasoft.abs.data.dto.transaction.DepositResponse
+import com.datasoft.abs.data.dto.transaction.Row
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -25,6 +26,8 @@ class WithdrawalViewModel @Inject constructor(
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String
 ) : ViewModel() {
 
+    private var pageNumber = 0
+
     private val withdrawData = MutableLiveData<Resource<DepositResponse>>()
     fun getWithdrawData(): LiveData<Resource<DepositResponse>> = withdrawData
 
@@ -32,7 +35,7 @@ class WithdrawalViewModel @Inject constructor(
     fun getSearchData(): LiveData<Resource<String>> = searchData
 
     init {
-        requestWithdrawData(CommonRequest(1))
+        loadMore()
     }
 
     fun setSearchData(search: String) {
@@ -41,15 +44,35 @@ class WithdrawalViewModel @Inject constructor(
         }
     }
 
+    fun loadMore() {
+        requestWithdrawData(
+            CommonRequest(
+                ++pageNumber
+            )
+        )
+    }
+
     private fun requestWithdrawData(commonRequest: CommonRequest) {
         viewModelScope.launch(Dispatchers.IO) {
+
+            val list = mutableListOf<Row>()
+            list.apply {
+                withdrawData.value?.data?.rows?.let { addAll(it) }
+            }
 
             withdrawData.postValue(Resource.Loading())
 
             if (network.isConnected()) {
                 try {
-                    val response = repository.getWithdrawData(commonRequest)
-                    withdrawData.postValue(handleResponse(response))
+
+                    val response = handleResponse(repository.getWithdrawData(commonRequest), pageNumber)
+
+                    list.apply {
+                        addAll(response.data?.rows!!)
+                    }
+
+                    response.data!!.rows = list
+                    withdrawData.postValue(response)
                 } catch (e: Exception) {
                     withdrawData.postValue(
                         Resource.Error(
@@ -68,9 +91,10 @@ class WithdrawalViewModel @Inject constructor(
         }
     }
 
-    private fun handleResponse(response: Response<DepositResponse>): Resource<DepositResponse> {
+    private fun handleResponse(response: Response<DepositResponse>, pageNumber: Int): Resource<DepositResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
+                resultResponse.pageNumber = pageNumber
                 return Resource.Success(resultResponse)
             }
         }
