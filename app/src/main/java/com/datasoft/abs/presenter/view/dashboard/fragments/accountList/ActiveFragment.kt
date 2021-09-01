@@ -14,7 +14,6 @@ import com.datasoft.abs.data.dto.accountList.Row
 import com.datasoft.abs.databinding.FragmentAccountBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
-import com.datasoft.abs.presenter.utils.Status
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountList.adapter.AccountAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

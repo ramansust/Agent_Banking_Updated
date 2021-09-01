@@ -25,7 +25,6 @@ import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -34,6 +33,8 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var glide: RequestManager
+
+    private var mainMenu: Menu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +92,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.feederTransactionFragment, R.id.feederTransactionCreateFragment -> getString(R.string.feeder_transaction)
                 else -> getString(R.string.menu_profile)
             }
+
+//            when (destination.id) {
+//                R.id.transactionDetailsFragment, R.id.EFTNTransactionDetailsFragment -> hideToolbarItems()
+//                else -> showToolbarItems()
+//            }
         }
 
 //        setDataIntoNavHeader()
@@ -99,6 +105,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun setDataIntoToolbar() {
         binding.appBarMain.txtViewUserName.text = intent.extras?.get(USER_NAME).toString()
+    }
+
+    private fun hideToolbarItems() {
+        binding.appBarMain.txtViewUserName.visibility = View.GONE
+        mainMenu?.findItem(R.id.action_logout)?.isVisible = false
+    }
+
+    private fun showToolbarItems() {
+        binding.appBarMain.txtViewUserName.visibility = View.VISIBLE
+        mainMenu?.findItem(R.id.action_logout)?.isVisible = true
     }
 
     private fun setDataIntoNavHeader() {
@@ -113,6 +129,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
+        mainMenu = menu
         return true
     }
 

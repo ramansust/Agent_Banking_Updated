@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
+import com.datasoft.abs.data.dto.transaction.rtgs.Row
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant.NO_INTERNET
 import com.datasoft.abs.presenter.utils.Constant.SOMETHING_WRONG
 import com.datasoft.abs.presenter.utils.Network
+import com.datasoft.abs.presenter.utils.RTGSStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,14 +28,26 @@ class EFTNViewModel @Inject constructor(
     @Named(SOMETHING_WRONG) private val somethingWrong: String
 ) : ViewModel() {
 
+    private var awaitingPageNumber = 0
+    private var disbursePageNumber = 0
+    private var rejectPageNumber = 0
+
     private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
     fun getSearchData(): LiveData<Resource<String>> = searchData
 
-    private val eftnData = MutableLiveData<Resource<RTGSListResponse>>()
-    fun getEFTNData(): LiveData<Resource<RTGSListResponse>> = eftnData
+    private val awaiting = MutableLiveData<Resource<RTGSListResponse>>()
+    fun getAwaitingData(): LiveData<Resource<RTGSListResponse>> = awaiting
+
+    private val disburse = MutableLiveData<Resource<RTGSListResponse>>()
+    fun getDisburseData(): LiveData<Resource<RTGSListResponse>> = disburse
+
+    private val reject = MutableLiveData<Resource<RTGSListResponse>>()
+    fun getRejectData(): LiveData<Resource<RTGSListResponse>> = reject
 
     init {
-        requestEFTNData(AccountRequest(1, status = "7"))
+        loadMoreAwaiting()
+        loadMoreDisburse()
+        loadMoreReject()
     }
 
     fun setSearchData(search: String) {
@@ -42,17 +56,25 @@ class EFTNViewModel @Inject constructor(
         }
     }
 
-    private fun requestEFTNData(accountRequest: AccountRequest) {
+    private fun requestDisburseData(accountRequest: AccountRequest) {
         viewModelScope.launch(Dispatchers.IO) {
-
-            eftnData.postValue(Resource.Loading())
-
             if (network.isConnected()) {
                 try {
-                    val response = repository.getEFTNList(accountRequest)
-                    eftnData.postValue(handleResponse(response))
+                    val list = mutableListOf<Row>()
+                    val response = handleCustomerResponse(
+                        repository.getEFTNList(accountRequest),
+                        disbursePageNumber
+                    )
+
+                    list.apply {
+                        disburse.value?.data?.rows?.let { addAll(it) }
+                        addAll(response.data?.rows!!)
+                    }
+
+                    response.data!!.rows = list
+                    disburse.postValue(response)
                 } catch (e: Exception) {
-                    eftnData.postValue(
+                    disburse.postValue(
                         Resource.Error(
                             somethingWrong, null
                         )
@@ -60,7 +82,7 @@ class EFTNViewModel @Inject constructor(
                     e.printStackTrace()
                 }
             } else {
-                eftnData.postValue(
+                disburse.postValue(
                     Resource.Error(
                         noInternet, null
                     )
@@ -69,12 +91,114 @@ class EFTNViewModel @Inject constructor(
         }
     }
 
-    private fun handleResponse(response: Response<RTGSListResponse>): Resource<RTGSListResponse> {
+    private fun requestAwaitingData(accountRequest: AccountRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (network.isConnected()) {
+                try {
+                    val list = mutableListOf<Row>()
+                    val response = handleCustomerResponse(
+                        repository.getEFTNList(accountRequest),
+                        awaitingPageNumber
+                    )
+
+                    list.apply {
+                        awaiting.value?.data?.rows?.let { addAll(it) }
+                        addAll(response.data?.rows!!)
+                    }
+
+                    response.data!!.rows = list
+                    awaiting.postValue(response)
+                } catch (e: Exception) {
+                    awaiting.postValue(
+                        Resource.Error(
+                            somethingWrong, null
+                        )
+                    )
+                    e.printStackTrace()
+                }
+            } else {
+                awaiting.postValue(
+                    Resource.Error(
+                        noInternet, null
+                    )
+                )
+            }
+        }
+    }
+
+    private fun requestRejectData(accountRequest: AccountRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (network.isConnected()) {
+                try {
+
+                    val list = mutableListOf<Row>()
+                    val response = handleCustomerResponse(
+                        repository.getEFTNList(accountRequest),
+                        rejectPageNumber
+                    )
+
+                    list.apply {
+                        reject.value?.data?.rows?.let { addAll(it) }
+                        addAll(response.data?.rows!!)
+                    }
+
+                    response.data!!.rows = list
+                    reject.postValue(response)
+                } catch (e: Exception) {
+                    reject.postValue(
+                        Resource.Error(
+                            somethingWrong, null
+                        )
+                    )
+                    e.printStackTrace()
+                }
+            } else {
+                reject.postValue(
+                    Resource.Error(
+                        noInternet, null
+                    )
+                )
+            }
+        }
+    }
+
+    private fun handleCustomerResponse(
+        response: Response<RTGSListResponse>,
+        pageNumber: Int
+    ): Resource<RTGSListResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
+                resultResponse.pageNumber = pageNumber
                 return Resource.Success(resultResponse)
             }
         }
         return Resource.Error(response.message())
+    }
+
+    fun loadMoreDisburse() {
+        requestDisburseData(
+            AccountRequest(
+                ++disbursePageNumber,
+                status = "${RTGSStatus.DISBURSE.type}"
+            )
+        )
+    }
+
+    fun loadMoreAwaiting() {
+        requestAwaitingData(
+            AccountRequest(
+                ++awaitingPageNumber,
+                status = "${RTGSStatus.AWAITING.type}"
+            )
+        )
+    }
+
+    fun loadMoreReject() {
+        requestRejectData(
+            AccountRequest(
+                ++rejectPageNumber,
+                status = "${RTGSStatus.REJECT.type}"
+            )
+        )
     }
 }
