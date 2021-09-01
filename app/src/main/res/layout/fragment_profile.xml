@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_border"
             android:paddingStart="@dimen/space_16x"
-            android:paddingEnd="@dimen/space_8x"
+            android:paddingEnd="@dimen/space_16x"
             android:text="@string/change_password"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

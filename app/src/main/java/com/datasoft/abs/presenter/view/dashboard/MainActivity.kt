@@ -18,6 +18,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.request.RequestOptions
 import com.datasoft.abs.R
 import com.datasoft.abs.databinding.ActivityMainBinding
 import com.datasoft.abs.presenter.utils.Constant.USER_NAME
@@ -93,13 +94,13 @@ class MainActivity : AppCompatActivity() {
                 else -> getString(R.string.menu_profile)
             }
 
-//            when (destination.id) {
-//                R.id.transactionDetailsFragment, R.id.EFTNTransactionDetailsFragment -> hideToolbarItems()
-//                else -> showToolbarItems()
-//            }
+            when (destination.id) {
+                R.id.changePasswordFragment -> hideToolbarItems()
+                else -> showToolbarItems()
+            }
         }
 
-//        setDataIntoNavHeader()
+        setDataIntoNavHeader()
         setDataIntoToolbar()
     }
 
@@ -108,13 +109,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hideToolbarItems() {
-        binding.appBarMain.txtViewUserName.visibility = View.GONE
         mainMenu?.findItem(R.id.action_logout)?.isVisible = false
+        binding.appBarMain.txtViewUserName.visibility = View.GONE
+        binding.appBarMain.imgViewProfile.visibility = View.GONE
+        binding.appBarMain.view.visibility = View.GONE
+        binding.appBarMain.imgViewNotifications.visibility = View.GONE
     }
 
     private fun showToolbarItems() {
-        binding.appBarMain.txtViewUserName.visibility = View.VISIBLE
         mainMenu?.findItem(R.id.action_logout)?.isVisible = true
+        binding.appBarMain.txtViewUserName.visibility = View.VISIBLE
+        binding.appBarMain.imgViewProfile.visibility = View.VISIBLE
+        binding.appBarMain.view.visibility = View.VISIBLE
+        binding.appBarMain.imgViewNotifications.visibility = View.VISIBLE
+
+        glide.load(R.drawable.ic_user_photo).apply(RequestOptions().circleCrop())
+            .into(binding.appBarMain.imgViewProfile)
     }
 
     private fun setDataIntoNavHeader() {
@@ -122,7 +132,7 @@ class MainActivity : AppCompatActivity() {
 //        headerView.findViewById<TextView>(R.id.txt_view_name).text = "Android"
 //        headerView.findViewById<TextView>(R.id.txt_view_email).text = "android.studio@gmail.com"
 
-        glide.load("url")
+        glide.load(R.drawable.ic_user_photo).apply(RequestOptions().circleCrop())
             .into(headerView.findViewById(R.id.img_view_user_profile))
     }
 
