@@ -2,13 +2,13 @@ package com.datasoft.abs.presenter.view.dashboard.fragments.accountList
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.datasoft.abs.R
 import com.datasoft.abs.databinding.FragmentAccountMainBinding
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountList.adapter.AccountMainAdapter
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountActivity
@@ -41,10 +41,9 @@ class AccountMainFragment : Fragment() {
 
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             when (position) {
-                0 -> tab.text = "Active"
-                1 -> tab.text = "Awaiting"
-                2 -> tab.text = "Draft"
-//                3 -> tab.text = "Draft"
+                0 -> tab.text = resources.getString(R.string.active)
+                1 -> tab.text = resources.getString(R.string.awaiting)
+                2 -> tab.text = resources.getString(R.string.draft)
             }
         }.attach()
 
@@ -58,19 +57,20 @@ class AccountMainFragment : Fragment() {
             startActivity(Intent(requireContext(), AccountActivity::class.java))
         }
 
-        binding.edTxtSearch.addTextChangedListener(textWatcher)
+        binding.edTxtSearch.setOnQueryTextListener(textQuery)
     }
 
-    private val textWatcher = object : TextWatcher {
-        override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+    private val textQuery = object : SearchView.OnQueryTextListener {
 
-        override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-            viewModel.setSearchData(charSequence.toString())
+        override fun onQueryTextChange(newText: String): Boolean {
+            viewModel.setSearchData(newText)
+            return true
         }
 
-        override fun afterTextChanged(editable: Editable) {}
+        override fun onQueryTextSubmit(query: String): Boolean {
+            return false
+        }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -1,12 +1,11 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.withdrawal
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
@@ -108,17 +107,19 @@ class WithdrawalFragment : Fragment() {
             Navigation.findNavController(view).navigate(action)
         }
 
-        binding.edTxtSearch.addTextChangedListener(textWatcher)
+        binding.edTxtSearch.setOnQueryTextListener(textQuery)
     }
 
-    private val textWatcher = object : TextWatcher {
-        override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+    private val textQuery = object : SearchView.OnQueryTextListener {
 
-        override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-            viewModel.setSearchData(charSequence.toString())
+        override fun onQueryTextChange(newText: String): Boolean {
+            viewModel.setSearchData(newText)
+            return true
         }
 
-        override fun afterTextChanged(editable: Editable) {}
+        override fun onQueryTextSubmit(query: String): Boolean {
+            return false
+        }
     }
 
     override fun onDestroyView() {

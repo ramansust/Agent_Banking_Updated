@@ -28,23 +28,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
 
-    <EditText
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/ed_txt_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/space_16x"
         android:background="@drawable/input_border"
-        android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="@dimen/space_5x"
-        android:ems="10"
         android:fontFamily="@font/oxygen_regular"
-        android:hint="@string/search"
         android:imeOptions="actionDone"
-        android:inputType="number"
-        android:padding="@dimen/space_8x"
+        android:inputType="textPersonName"
         android:textSize="@dimen/font_16x"
-        app:layout_constraintEnd_toStartOf="@+id/btn_add"
-        app:layout_constraintTop_toTopOf="@+id/tab_layout" />
+        app:layout_constraintEnd_toStartOf="@id/btn_add"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_add"

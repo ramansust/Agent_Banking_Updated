@@ -5,21 +5,16 @@
     android:background="@color/dashboard_bg"
     android:orientation="vertical">
 
-    <EditText
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/ed_txt_search"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_16x"
         android:layout_marginEnd="@dimen/space_16x"
         android:background="@drawable/input_border"
-        android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="@dimen/space_5x"
-        android:ems="10"
         android:fontFamily="@font/oxygen_regular"
-        android:hint="@string/search"
         android:imeOptions="actionDone"
         android:inputType="textPersonName"
-        android:padding="@dimen/space_8x"
         android:textSize="@dimen/font_16x"
         app:layout_constraintEnd_toStartOf="@id/btn_feeder_transaction"
         app:layout_constraintTop_toTopOf="parent" />
