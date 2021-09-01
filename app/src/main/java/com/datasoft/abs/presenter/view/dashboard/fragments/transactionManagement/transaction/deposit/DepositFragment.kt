@@ -41,8 +41,6 @@ class DepositFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnCustomerFinger.visibility = View.GONE
-
         val paymentList = mutableListOf<CommonModel>()
         val currencyList = mutableListOf<CommonModel>()
 

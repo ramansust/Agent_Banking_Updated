@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.config.CommonModel
-import com.datasoft.abs.databinding.FragmentTransactionDepositBinding
+import com.datasoft.abs.databinding.FragmentTransactionWithdrawBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.transaction.TransactionViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class WithdrawFragment : Fragment() {
 
-    private var _binding: FragmentTransactionDepositBinding? = null
+    private var _binding: FragmentTransactionWithdrawBinding? = null
     private val viewModel: TransactionViewModel by activityViewModels()
     private val withdrawViewModel: WithdrawViewModel by activityViewModels()
 
@@ -34,7 +34,7 @@ class WithdrawFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentTransactionDepositBinding.inflate(inflater, container, false)
+        _binding = FragmentTransactionWithdrawBinding.inflate(inflater, container, false)
         return binding.root
     }
 
