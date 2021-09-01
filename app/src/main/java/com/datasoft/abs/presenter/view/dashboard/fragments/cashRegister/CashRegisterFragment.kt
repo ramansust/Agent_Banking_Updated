@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
@@ -29,6 +30,7 @@ class CashRegisterFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+    private val list = mutableListOf<Row>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +57,6 @@ class CashRegisterFragment : Fragment() {
                 .navigate(R.id.action_nav_cash_register_to_feederTransactionFragment)
         }
 
-        val list = mutableListOf<Row>()
         viewModel.getCashRegisterData().observe(viewLifecycleOwner, { response ->
 
             when (response) {
@@ -78,6 +79,8 @@ class CashRegisterFragment : Fragment() {
                     startShimmer()
                 }
             }
+
+            showNoContent()
         })
 
         viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
@@ -121,6 +124,11 @@ class CashRegisterFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
+    }
+
+    private fun showNoContent() {
+        binding.txtViewNoEntry.isVisible = list.size <= 0
+        binding.recycleView.isVisible = list.size > 0
     }
 
     override fun onDestroyView() {

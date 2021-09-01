@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
@@ -26,6 +27,7 @@ class FeederTransactionFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+    private val list = mutableListOf<Row>()
 
     @Inject
     lateinit var feederTranListAdapter: FeederTransactionListAdapter
@@ -49,7 +51,6 @@ class FeederTransactionFragment : Fragment() {
                 .navigate(R.id.action_feederTransactionFragment_to_feederTransactionCreateFragment)
         }
 
-        val list = mutableListOf<Row>()
         viewModel.getFeederData().observe(viewLifecycleOwner, { response ->
 
             when (response) {
@@ -72,6 +73,8 @@ class FeederTransactionFragment : Fragment() {
                     startShimmer()
                 }
             }
+
+            showNoContent()
         })
 
         viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
@@ -115,6 +118,11 @@ class FeederTransactionFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
+    }
+
+    private fun showNoContent() {
+        binding.txtViewNoEntry.isVisible = list.size <= 0
+        binding.recycleView.isVisible = list.size > 0
     }
 
     override fun onDestroyView() {
