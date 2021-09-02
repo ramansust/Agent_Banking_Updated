@@ -83,21 +83,22 @@
                 android:id="@+id/signature_pad"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="@dimen/space_16x"
                 app:layout_constraintBottom_toTopOf="@+id/btn_clear"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:penColor="@android:color/black" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_border"
                 android:enabled="false"
                 android:fontFamily="@font/oxygen_regular"
                 android:text="@string/clear"
+                android:textColor="@color/white"
                 android:textSize="@dimen/font_16x"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

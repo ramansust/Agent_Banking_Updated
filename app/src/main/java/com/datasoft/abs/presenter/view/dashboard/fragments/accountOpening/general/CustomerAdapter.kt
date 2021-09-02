@@ -7,6 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.createAccount.general.CustomerData
 import com.datasoft.abs.databinding.CustomerListRowBinding
+import com.datasoft.abs.presenter.utils.Constant
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class CustomerAdapter @Inject constructor() :
@@ -49,7 +53,16 @@ class CustomerAdapter @Inject constructor() :
         holder.binding.txtViewName.text = value.fullName
         holder.binding.txtViewFatherName.text = value.fatherName
         holder.binding.txtViewMotherName.text = value.motherName
-        holder.binding.txtViewDob.text = value.dob
+//        holder.binding.txtViewDob.text = value.dob
+
+        try {
+            holder.binding.txtViewDob.text = SimpleDateFormat(
+                Constant.DATE_FORMAT,
+                Locale.US
+            ).format(SimpleDateFormat(Constant.DATE_FORMAT_API, Locale.US).parse(value.dob))
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
 
         if(differ.currentList.size > 1) {
             holder.binding.switchSignatory.isChecked = value.isSignatory

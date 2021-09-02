@@ -46,7 +46,6 @@
                     android:fontFamily="@font/oxygen_regular"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
-                    android:selectAllOnFocus="true"
                     android:text="@string/test_username" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -76,7 +75,6 @@
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
-                    android:selectAllOnFocus="true"
                     android:text="@string/test_password" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,6 +121,7 @@
         android:layout_height="@dimen/space_48x"
         android:layout_marginEnd="@dimen/space_16x"
         android:layout_marginBottom="@dimen/space_16x"
+        android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_datasoft" />
@@ -131,6 +130,7 @@
         android:id="@+id/imageView9"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="parent"

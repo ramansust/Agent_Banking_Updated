@@ -72,10 +72,11 @@ class GeneralFragment : Fragment() {
 
             when (response) {
                 is Resource.Success -> {
-                    response.data?.let {
-                        customerAdapter.differ.submitList(it.customerData)
+                    response.data?.let { data ->
+                        customerAdapter.differ.submitList(null)
+                        customerAdapter.differ.submitList(data.customerData)
 
-                        binding.btnNext.isEnabled = it.customerData.isNotEmpty()
+                        binding.btnNext.isEnabled = data.customerData.isNotEmpty()
                     }
                 }
 
