@@ -29,8 +29,9 @@
     <style name="Theme.AgentBanking.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="NavigationDrawerStyle">
+        <item name="android:textColor">@color/customer_text</item>
         <item name="android:textSize">@dimen/font_20x</item>
-        <item name="itemIconSize">@dimen/space_48x</item>
+        <item name="android:listPreferredItemHeightSmall">@dimen/space_48x</item>
         <item name="android:fontFamily">@font/oxygen_regular</item>
     </style>
 
