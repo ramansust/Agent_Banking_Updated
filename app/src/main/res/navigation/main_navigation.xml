@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_nav_profile_to_changePasswordFragment"
-            app:destination="@id/changePasswordFragment" />
+            app:destination="@id/changePasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -52,31 +56,59 @@
         tools:layout="@layout/fragment_main_transaction">
         <action
             android:id="@+id/action_nav_transaction_to_transaction"
-            app:destination="@id/transaction" />
+            app:destination="@id/transaction"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
         <action
             android:id="@+id/action_nav_transaction_to_disbursement"
-            app:destination="@id/disbursement" />
+            app:destination="@id/disbursement"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
         <action
             android:id="@+id/action_nav_transaction_to_deposit"
-            app:destination="@id/deposit" />
+            app:destination="@id/deposit"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
         <action
             android:id="@+id/action_nav_transaction_to_withdraw"
-            app:destination="@id/withdraw" />
+            app:destination="@id/withdraw"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
         <action
             android:id="@+id/action_nav_transaction_to_balance"
-            app:destination="@id/balance" />
+            app:destination="@id/balance"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
         <action
             android:id="@+id/action_nav_transaction_to_eftn"
-            app:destination="@id/eftn" />
+            app:destination="@id/eftn"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
         <action
             android:id="@+id/action_nav_transaction_to_rtgs"
-            app:destination="@id/rtgs" />
+            app:destination="@id/rtgs"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -92,10 +124,18 @@
         tools:layout="@layout/fragment_cash_register">
         <action
             android:id="@+id/action_nav_cash_register_to_feederTransactionFragment"
-            app:destination="@id/feederTransactionFragment" />
+            app:destination="@id/feederTransactionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_cash_register_to_cashRegisterCreateFragment"
-            app:destination="@id/cashRegisterCreateFragment" />
+            app:destination="@id/cashRegisterCreateFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -117,7 +157,11 @@
         tools:layout="@layout/fragment_deposit">
         <action
             android:id="@+id/action_deposit_to_transactionDetailsFragment"
-            app:destination="@id/transactionDetailsFragment" />
+            app:destination="@id/transactionDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -127,7 +171,11 @@
         tools:layout="@layout/fragment_withdraw">
         <action
             android:id="@+id/action_withdraw_to_transactionDetailsFragment"
-            app:destination="@id/transactionDetailsFragment" />
+            app:destination="@id/transactionDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -137,7 +185,11 @@
         tools:layout="@layout/fragment_balance">
         <action
             android:id="@+id/action_balance_to_transactionDetailsFragment"
-            app:destination="@id/transactionDetailsFragment" />
+            app:destination="@id/transactionDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -147,10 +199,18 @@
         tools:layout="@layout/fragment_eftn">
         <action
             android:id="@+id/action_eftn_to_EFTNTransactionFragment"
-            app:destination="@id/EFTNTransaction" />
+            app:destination="@id/EFTNTransaction"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_eftn_to_EFTNTransactionDetailsFragment"
-            app:destination="@id/EFTNTransactionDetailsFragment" />
+            app:destination="@id/EFTNTransactionDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -160,10 +220,18 @@
         tools:layout="@layout/fragment_rtgs">
         <action
             android:id="@+id/action_rtgs_to_RTGSTransactionFragment"
-            app:destination="@id/RTGSTransaction" />
+            app:destination="@id/RTGSTransaction"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_rtgs_to_EFTNTransactionDetailsFragment"
-            app:destination="@id/EFTNTransactionDetailsFragment" />
+            app:destination="@id/EFTNTransactionDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/EFTNTransaction"
@@ -197,8 +265,8 @@
             app:argType="long" />
         <argument
             android:name="isRTGS"
-            app:argType="boolean"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
@@ -212,7 +280,11 @@
         tools:layout="@layout/fragment_feeder_transaction">
         <action
             android:id="@+id/action_feederTransactionFragment_to_feederTransactionCreateFragment"
-            app:destination="@id/feederTransactionCreateFragment" />
+            app:destination="@id/feederTransactionCreateFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/cashRegisterCreateFragment"
