@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             when (destination.id) {
-                R.id.changePasswordFragment -> hideToolbarItems()
+                R.id.transaction, R.id.disbursement, R.id.deposit, R.id.withdraw, R.id.balance, R.id.eftn, R.id.EFTNTransaction, R.id.rtgs, R.id.RTGSTransaction, R.id.transactionDetailsFragment, R.id.EFTNTransactionDetailsFragment, R.id.changePasswordFragment, R.id.cashRegisterCreateFragment, R.id.feederTransactionFragment, R.id.feederTransactionCreateFragment -> hideToolbarItems()
                 else -> showToolbarItems()
             }
         }
