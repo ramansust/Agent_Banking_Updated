@@ -90,7 +90,13 @@ class DisburseFragment : Fragment() {
                 is Resource.Success -> {
                     response.data?.let { search ->
                         rtgsAdapter.differ.submitList(list.filter {
-                            it.senderAccNumber!!.contains(search, true)
+                            it.senderAccNumber!!.contains(
+                                search,
+                                true
+                            ) || it.receiverName!!.contains(
+                                search,
+                                true
+                            ) || it.receiverAccNumber!!.contains(search, true)
                         })
                     }
                 }

@@ -85,7 +85,13 @@ class RejectFragment : Fragment() {
                 is Resource.Success -> {
                     response.data?.let { search ->
                         eftnAdapter.differ.submitList(list.filter {
-                            it.senderAccNumber!!.contains(search, true)
+                            it.senderAccNumber!!.contains(
+                                search,
+                                true
+                            ) || it.receiverName!!.contains(
+                                search,
+                                true
+                            ) || it.receiverAccNumber!!.contains(search, true)
                         })
                     }
                 }
