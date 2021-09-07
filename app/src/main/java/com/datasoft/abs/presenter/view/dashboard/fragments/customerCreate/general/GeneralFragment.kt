@@ -8,19 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.GeneralFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.personal.PersonalViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
-
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class GeneralFragment : Fragment() {
@@ -35,6 +36,9 @@ class GeneralFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
     private var isChecked = false
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +59,10 @@ class GeneralFragment : Fragment() {
 
         customerViewModel.requestVisibility(false)
         customerViewModel.requestListener(false)
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
@@ -119,8 +127,7 @@ class GeneralFragment : Fragment() {
                 is Resource.Error -> {
 //                    goneProgressBar()
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-                        Log.e("TAG", "An error occurred: $message")
+                        toastHelper.sendToast(message)
                     }
                 }
                 is Resource.Loading -> {

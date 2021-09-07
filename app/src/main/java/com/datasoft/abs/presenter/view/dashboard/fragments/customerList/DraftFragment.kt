@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -14,6 +13,8 @@ import com.datasoft.abs.data.dto.customerList.Row
 import com.datasoft.abs.databinding.FragmentCustomerBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant.PER_PAGE_ITEM
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerList.adapter.CustomerListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -26,6 +27,9 @@ class DraftFragment : Fragment() {
 
     @Inject
     lateinit var customerAdapter: CustomerListAdapter
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -48,6 +52,10 @@ class DraftFragment : Fragment() {
         setupRecyclerView()
         initScrollListener()
 
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
+
         viewModel.getDraftData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
@@ -68,7 +76,7 @@ class DraftFragment : Fragment() {
                 is Resource.Error -> {
                     stopShimmer()
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
                 is Resource.Loading -> {

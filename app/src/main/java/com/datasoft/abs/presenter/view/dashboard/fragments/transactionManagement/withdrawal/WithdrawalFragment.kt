@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -16,6 +15,8 @@ import com.datasoft.abs.data.dto.transaction.Row
 import com.datasoft.abs.databinding.FragmentWithdrawBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.deposit.DepositAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -25,6 +26,9 @@ class WithdrawalFragment : Fragment() {
 
     private val viewModel: WithdrawalViewModel by activityViewModels()
     private var _binding: FragmentWithdrawBinding? = null
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -49,6 +53,10 @@ class WithdrawalFragment : Fragment() {
 
         setupRecyclerView()
         initScrollListener()
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         viewModel.getWithdrawData().observe(viewLifecycleOwner, { response ->
 
@@ -75,7 +83,7 @@ class WithdrawalFragment : Fragment() {
                 is Resource.Error -> {
                     stopShimmer()
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
             }

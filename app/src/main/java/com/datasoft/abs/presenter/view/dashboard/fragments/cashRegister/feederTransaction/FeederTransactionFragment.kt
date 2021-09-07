@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -16,6 +15,8 @@ import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.transaction.rtgs.Row
 import com.datasoft.abs.databinding.FragmentFeederTransactionBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -24,6 +25,9 @@ class FeederTransactionFragment : Fragment() {
 
     private val viewModel: FeederTransactionViewModel by activityViewModels()
     private var _binding: FragmentFeederTransactionBinding? = null
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -46,6 +50,10 @@ class FeederTransactionFragment : Fragment() {
 
         setupRecyclerView()
 
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
+
         binding.btnAdd.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_feederTransactionFragment_to_feederTransactionCreateFragment)
@@ -65,7 +73,7 @@ class FeederTransactionFragment : Fragment() {
                 is Resource.Error -> {
                     stopShimmer()
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 

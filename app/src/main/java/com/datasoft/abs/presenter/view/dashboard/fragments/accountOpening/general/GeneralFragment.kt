@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -21,6 +20,8 @@ import com.datasoft.abs.data.dto.config.ProductConfig
 import com.datasoft.abs.databinding.GeneralAccountFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -43,6 +44,9 @@ class GeneralFragment : Fragment() {
     @Inject
     lateinit var customerAdapter: CustomerAdapter
 
+    @Inject
+    lateinit var toastHelper: ToastHelper
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,6 +63,10 @@ class GeneralFragment : Fragment() {
         accountViewModel.requestListener(false)
 
         setupRecyclerView()
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         val productCategoryList = mutableListOf<CommonModel>()
         val operatingInstructionList = mutableListOf<CommonModel>()
@@ -206,7 +214,7 @@ class GeneralFragment : Fragment() {
 
                 is Resource.Error -> {
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 

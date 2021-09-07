@@ -15,13 +15,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.RequestManager
+import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.config.DocumentConfigData
 import com.datasoft.abs.databinding.PhotoFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
@@ -30,6 +30,8 @@ import com.datasoft.abs.presenter.utils.Constant.IMAGE_COMPRESS
 import com.datasoft.abs.presenter.utils.Constant.IMAGE_RESOLUTION_HEIGHT
 import com.datasoft.abs.presenter.utils.Constant.IMAGE_RESOLUTION_WIDTH
 import com.datasoft.abs.presenter.utils.Photos
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.personal.PersonalViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -37,7 +39,6 @@ import com.pixelcarrot.base64image.Base64Image
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class PhotoFragment : Fragment() {
@@ -52,6 +53,9 @@ class PhotoFragment : Fragment() {
 
     @Inject
     lateinit var glide: RequestManager
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -285,6 +289,10 @@ class PhotoFragment : Fragment() {
         customerViewModel.requestVisibility(false)
         customerViewModel.requestListener(false)
 
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
+
         val documentList = mutableListOf<DocumentConfigData>()
 
         customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
@@ -481,14 +489,10 @@ class PhotoFragment : Fragment() {
                     }
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        requireActivity(),
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }
@@ -523,14 +527,10 @@ class PhotoFragment : Fragment() {
                     }
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        requireActivity(),
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }
@@ -565,14 +565,10 @@ class PhotoFragment : Fragment() {
                     }
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        requireActivity(),
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }
@@ -608,14 +604,10 @@ class PhotoFragment : Fragment() {
                     }
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        requireActivity(),
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }
@@ -651,14 +643,10 @@ class PhotoFragment : Fragment() {
                     }
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        requireActivity(),
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }
@@ -694,14 +682,10 @@ class PhotoFragment : Fragment() {
                     }
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        requireActivity(),
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }
@@ -736,14 +720,10 @@ class PhotoFragment : Fragment() {
                     }
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        requireActivity(),
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }
@@ -778,14 +758,10 @@ class PhotoFragment : Fragment() {
                     }
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        requireActivity(),
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(requireActivity(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }
@@ -799,10 +775,9 @@ class PhotoFragment : Fragment() {
                 photos.savePhotoToInternalStorage(UUID.randomUUID().toString(), it)
             if (isSavedSuccessfully) {
                 binding.imgViewPhoto.setImageBitmap(it)
-                Toast.makeText(requireContext(), "Photo saved successfully", Toast.LENGTH_SHORT)
-                    .show()
+                toastHelper.sendToast("Photo saved successfully")
             } else {
-                Toast.makeText(requireContext(), "Failed to save photo", Toast.LENGTH_SHORT).show()
+                toastHelper.sendToast("Failed to save photo")
             }
         }
 

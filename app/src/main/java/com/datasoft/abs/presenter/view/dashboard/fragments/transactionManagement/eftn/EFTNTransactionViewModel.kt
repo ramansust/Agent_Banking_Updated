@@ -49,7 +49,11 @@ class EFTNTransactionViewModel @Inject constructor(
     private val transactionDetails: MutableLiveData<Resource<Details>> = MutableLiveData()
     fun getTransactionDetails(): LiveData<Resource<Details>> = transactionDetails
 
-    fun requestBankList() {
+    init {
+        requestBankList()
+    }
+
+    private fun requestBankList() {
         viewModelScope.launch(Dispatchers.IO) {
 
             bankList.postValue(Resource.Loading())

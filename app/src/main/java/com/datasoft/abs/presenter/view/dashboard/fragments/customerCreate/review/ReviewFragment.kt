@@ -2,11 +2,9 @@ package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.revie
 
 import android.os.Bundle
 import android.util.Base64
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.RequestManager
@@ -15,6 +13,8 @@ import com.datasoft.abs.data.dto.createCustomer.*
 import com.datasoft.abs.databinding.FragmentReviewBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.address.AddressViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.documents.DocumentsViewModel
@@ -44,6 +44,9 @@ class ReviewFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
+    @Inject
+    lateinit var toastHelper: ToastHelper
+
     private val createCustomerRequest = CreateCustomerRequest()
     private var guardian = GuardianInfo()
     private var nomineeInfo = EmergencyContact()
@@ -69,6 +72,10 @@ class ReviewFragment : Fragment() {
 
         customerViewModel.requestVisibility(false)
         customerViewModel.requestListener(false)
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         personalViewModel.getCustomerAgeData().observe(viewLifecycleOwner, {
             if (it < Constant.ADULT_AGE) {
@@ -473,13 +480,13 @@ class ReviewFragment : Fragment() {
                 is Resource.Success -> {
                     goneProgressBar()
                     response.data?.let {
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(it.message)
                     }
                 }
                 is Resource.Error -> {
                     goneProgressBar()
                     response.message?.let { message ->
-                        Log.e("TAG", "An error occurred: $message")
+                        toastHelper.sendToast(message)
                     }
                 }
                 is Resource.Loading -> {

@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.FragmentTransactionTransferBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.transaction.TransactionViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TransferFragment : Fragment() {
@@ -18,6 +20,9 @@ class TransferFragment : Fragment() {
     private var _binding: FragmentTransactionTransferBinding? = null
     private val viewModel: TransferViewModel by activityViewModels()
     private val transactionViewModel: TransactionViewModel by activityViewModels()
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -39,6 +44,10 @@ class TransferFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
+
         transactionViewModel.getAccountDetails().observe(viewLifecycleOwner, { response ->
             when (response) {
 
@@ -52,7 +61,7 @@ class TransferFragment : Fragment() {
 
                 is Resource.Error -> {
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 
@@ -74,7 +83,7 @@ class TransferFragment : Fragment() {
 
                 is Resource.Error -> {
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 
@@ -97,7 +106,7 @@ class TransferFragment : Fragment() {
 
                 is Resource.Error -> {
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -15,6 +14,8 @@ import com.datasoft.abs.data.dto.transaction.rtgs.Row
 import com.datasoft.abs.databinding.FragmentAwaitingApprovalBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,6 +28,9 @@ class DisburseFragment : Fragment() {
 
     @Inject
     lateinit var eftnAdapter: EFTNListAdapter
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -48,6 +52,10 @@ class DisburseFragment : Fragment() {
 
         setupRecyclerView()
         initScrollListener()
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         viewModel.getDisburseData().observe(viewLifecycleOwner, { response ->
             when (response) {
@@ -72,7 +80,7 @@ class DisburseFragment : Fragment() {
                     stopShimmer()
                     response.message?.let { message ->
                         showNoContent()
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 

@@ -366,4 +366,5 @@
     <string name="active">Active</string>
     <string name="awaiting">Awaiting</string>
     <string name="draft">Draft</string>
+    <string name="task_cancelled">Task Cancelled</string>
 </resources>

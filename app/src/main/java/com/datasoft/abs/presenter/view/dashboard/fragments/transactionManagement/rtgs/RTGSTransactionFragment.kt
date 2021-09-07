@@ -7,20 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.FragmentRtgsTransactionBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RTGSTransactionFragment : Fragment() {
 
     private var _binding: FragmentRtgsTransactionBinding? = null
     private val viewModel: RTGSTransactionViewModel by activityViewModels()
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -38,7 +43,9 @@ class RTGSTransactionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.requestBankList()
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         val bankList = mutableListOf<CommonModel>()
         val branchList = mutableListOf<CommonModel>()
@@ -125,7 +132,7 @@ class RTGSTransactionFragment : Fragment() {
                 is Resource.Error -> {
                     goneProgressBar()
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 
@@ -142,7 +149,7 @@ class RTGSTransactionFragment : Fragment() {
                 is Resource.Success -> {
                     goneProgressBar()
                     response.data?.let {
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(it.message)
                         binding.btnNext.isEnabled = false
                         findNavController().navigateUp()
                     }
@@ -151,7 +158,7 @@ class RTGSTransactionFragment : Fragment() {
                 is Resource.Error -> {
                     goneProgressBar()
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 

@@ -42,7 +42,11 @@ class RTGSTransactionViewModel @Inject constructor(
     private val branchList: MutableLiveData<Resource<List<CommonModel>>> = MutableLiveData()
     fun getBranchList(): LiveData<Resource<List<CommonModel>>> = branchList
 
-    fun requestBankList() {
+    init {
+        requestBankList()
+    }
+
+    private fun requestBankList() {
         viewModelScope.launch(Dispatchers.IO) {
 
             bankList.postValue(Resource.Loading())

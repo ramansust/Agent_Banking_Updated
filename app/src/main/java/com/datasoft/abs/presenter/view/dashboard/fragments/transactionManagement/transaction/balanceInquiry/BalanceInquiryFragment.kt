@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.databinding.FragmentBalanceInquiryBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.transaction.TransactionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -28,6 +29,9 @@ class BalanceInquiryFragment : Fragment() {
     @Inject
     lateinit var balanceInquiryAdapter: BalanceInquiryAdapter
 
+    @Inject
+    lateinit var toastHelper: ToastHelper
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,6 +46,10 @@ class BalanceInquiryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         balanceInquiryViewModel.getBalanceInquiry().observe(viewLifecycleOwner, { response ->
             when (response) {
@@ -59,7 +67,7 @@ class BalanceInquiryFragment : Fragment() {
                 is Resource.Error -> {
                     stopShimmer()
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
             }

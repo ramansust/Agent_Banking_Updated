@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.AddressActivityBinding
@@ -16,11 +15,17 @@ import com.datasoft.abs.presenter.base.BaseActivity
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.AreaCode
 import com.datasoft.abs.presenter.utils.Constant.ADDRESS_INFO
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddressActivity : BaseActivity() {
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     private val customerViewModel: CustomerViewModel by viewModels()
     private val addressViewModel: AddressViewModel by viewModels()
@@ -34,6 +39,10 @@ class AddressActivity : BaseActivity() {
     private val contactList = mutableListOf<CommonModel>()
 
     override fun observeViewModel() {
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         customerViewModel.getConfigData().observe(this, { response ->
             when (response) {
@@ -83,7 +92,7 @@ class AddressActivity : BaseActivity() {
 
                 is Resource.Error -> {
                     response.message?.let { message ->
-                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 
@@ -107,7 +116,7 @@ class AddressActivity : BaseActivity() {
 
                 is Resource.Error -> {
                     response.message?.let { message ->
-                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 
@@ -128,7 +137,7 @@ class AddressActivity : BaseActivity() {
 
                 is Resource.Error -> {
                     it.message?.let { message ->
-                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 

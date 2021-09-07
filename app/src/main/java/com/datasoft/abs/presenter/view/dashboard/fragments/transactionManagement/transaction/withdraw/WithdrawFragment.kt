@@ -5,14 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.FragmentTransactionWithdrawBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.transaction.TransactionViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class WithdrawFragment : Fragment() {
@@ -20,6 +22,9 @@ class WithdrawFragment : Fragment() {
     private var _binding: FragmentTransactionWithdrawBinding? = null
     private val viewModel: TransactionViewModel by activityViewModels()
     private val withdrawViewModel: WithdrawViewModel by activityViewModels()
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -43,6 +48,10 @@ class WithdrawFragment : Fragment() {
 
         val paymentList = mutableListOf<CommonModel>()
         val currencyList = mutableListOf<CommonModel>()
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         viewModel.getAccountDetails().observe(viewLifecycleOwner, { response ->
             when (response) {
@@ -72,7 +81,7 @@ class WithdrawFragment : Fragment() {
 
                 is Resource.Error -> {
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 
@@ -95,7 +104,7 @@ class WithdrawFragment : Fragment() {
 
                 is Resource.Error -> {
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 

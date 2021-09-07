@@ -2,16 +2,16 @@ package com.datasoft.abs.presenter.view.dashboard.fragments.dashboard
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.FragmentDashboardBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -21,12 +21,16 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TransactionFragment : Fragment() {
 
     private val viewModel: TransactionViewModel by activityViewModels()
     private var _binding: FragmentDashboardBinding? = null
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -46,6 +50,10 @@ class TransactionFragment : Fragment() {
 
         setValueOnPieChart(binding.pieChart, 40, 30, 30)
         setValueOnLineChart(binding.lineChart)
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         viewModel.getDashboardData().observe(viewLifecycleOwner, { response ->
 
@@ -70,8 +78,7 @@ class TransactionFragment : Fragment() {
                 is Resource.Error -> {
                     goneProgressBar()
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-                        Log.e("TAG", "An error occurred: $message")
+                        toastHelper.sendToast(message)
                     }
                 }
                 is Resource.Loading -> {

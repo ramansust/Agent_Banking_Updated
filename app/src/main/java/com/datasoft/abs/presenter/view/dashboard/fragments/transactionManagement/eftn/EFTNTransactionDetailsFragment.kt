@@ -5,7 +5,6 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
@@ -13,9 +12,10 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.datasoft.abs.databinding.FragmentEftnTransactionDetailsBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class EFTNTransactionDetailsFragment : Fragment() {
@@ -26,6 +26,9 @@ class EFTNTransactionDetailsFragment : Fragment() {
 
     @Inject
     lateinit var glide: RequestManager
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -43,6 +46,10 @@ class EFTNTransactionDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         detailsViewModel.setDetails(0)
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         detailsViewModel.detailsData(args.transactionId.toString(), args.isRTGS)
         detailsViewModel.getTransactionDetails().observe(viewLifecycleOwner, { response ->
@@ -81,7 +88,7 @@ class EFTNTransactionDetailsFragment : Fragment() {
                     goneProgressBar()
 
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
             }

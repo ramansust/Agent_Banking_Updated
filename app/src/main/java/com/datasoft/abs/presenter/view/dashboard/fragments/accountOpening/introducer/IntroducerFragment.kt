@@ -9,14 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.IntroducerFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class IntroducerFragment : Fragment() {
@@ -24,6 +26,9 @@ class IntroducerFragment : Fragment() {
     private val accountViewModel: AccountViewModel by activityViewModels()
     private val viewModel: IntroducerViewModel by activityViewModels()
     private var _binding: IntroducerFragmentBinding? = null
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -45,6 +50,10 @@ class IntroducerFragment : Fragment() {
         accountViewModel.requestVisibility(false)
         accountViewModel.requestListener(false)
 
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
+
         viewModel.getIntroducerData().observe(viewLifecycleOwner, { response ->
             when (response) {
 
@@ -61,7 +70,7 @@ class IntroducerFragment : Fragment() {
                 is Resource.Error -> {
                     response.message?.let { message ->
                         if(isClicked)
-                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                            toastHelper.sendToast(message)
                     }
                 }
 

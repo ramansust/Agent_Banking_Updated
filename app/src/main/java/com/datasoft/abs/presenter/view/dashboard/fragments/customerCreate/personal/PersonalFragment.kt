@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -16,10 +15,13 @@ import com.datasoft.abs.databinding.PersonalFragmentBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.ADULT_AGE
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PersonalFragment : Fragment() {
@@ -27,6 +29,9 @@ class PersonalFragment : Fragment() {
     private val customerViewModel: CustomerViewModel by activityViewModels()
     private val viewModel: PersonalViewModel by activityViewModels()
     private var _binding: PersonalFragmentBinding? = null
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -57,6 +62,10 @@ class PersonalFragment : Fragment() {
 
         customerViewModel.requestVisibility(false)
         customerViewModel.requestListener(false)
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         viewModel.getCustomerAgeData().observe(viewLifecycleOwner, {
 
@@ -168,7 +177,7 @@ class PersonalFragment : Fragment() {
                 }
                 is Resource.Error -> {
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
                 is Resource.Loading -> {

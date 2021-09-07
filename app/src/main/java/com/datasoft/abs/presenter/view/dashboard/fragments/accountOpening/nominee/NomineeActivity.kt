@@ -11,11 +11,11 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.bumptech.glide.RequestManager
+import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.NomineeActivityBinding
 import com.datasoft.abs.presenter.base.BaseActivity
@@ -28,6 +28,8 @@ import com.datasoft.abs.presenter.utils.Constant.IMAGE_RESOLUTION_WIDTH
 import com.datasoft.abs.presenter.utils.Constant.MAX_SHARE
 import com.datasoft.abs.presenter.utils.Constant.NOMINEE_INFO
 import com.datasoft.abs.presenter.utils.Constant.SHARE_PERCENT_INFO
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.photo.SignatureActivity
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -58,9 +60,16 @@ class NomineeActivity : BaseActivity() {
     @Inject
     lateinit var glide: RequestManager
 
+    @Inject
+    lateinit var toastHelper: ToastHelper
+
     private var isMinor = false
 
     override fun observeViewModel() {
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         nomineeViewModel.getBackImage().observe(this, {
             if (!it) {
@@ -135,7 +144,7 @@ class NomineeActivity : BaseActivity() {
 
                 is Resource.Error -> {
                     it.message?.let { message ->
-                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 
@@ -411,14 +420,10 @@ class NomineeActivity : BaseActivity() {
                     binding.imgViewNomineeSignature.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        this,
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }
@@ -435,14 +440,10 @@ class NomineeActivity : BaseActivity() {
                     binding.imgViewNomineePhoto.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        this,
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }
@@ -459,14 +460,10 @@ class NomineeActivity : BaseActivity() {
                     binding.imgViewFrontDoc.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        this,
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }
@@ -483,14 +480,10 @@ class NomineeActivity : BaseActivity() {
                     binding.imgViewBackDoc.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(
-                        this,
-                        ImagePicker.getError(data),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }

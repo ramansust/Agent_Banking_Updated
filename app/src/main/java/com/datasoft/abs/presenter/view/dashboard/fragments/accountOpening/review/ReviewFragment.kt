@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -22,6 +21,8 @@ import com.datasoft.abs.data.dto.createAccount.review.Nominee
 import com.datasoft.abs.data.dto.createAccount.review.TransactionProfile
 import com.datasoft.abs.databinding.FragmentAccountReviewBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.general.GeneralViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.introducer.IntroducerViewModel
@@ -58,6 +59,9 @@ class ReviewFragment : Fragment() {
     @Inject
     lateinit var transactionAdapter: TransactionAdapter
 
+    @Inject
+    lateinit var toastHelper: ToastHelper
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,6 +77,10 @@ class ReviewFragment : Fragment() {
 
         accountViewModel.requestVisibility(false)
         accountViewModel.requestListener(false)
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         setupRecyclerView()
         setupRecyclerViewTransaction()
@@ -282,7 +290,7 @@ class ReviewFragment : Fragment() {
                 is Resource.Success -> {
                     goneProgressBar()
                     response.data?.let {
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(it.message)
                     }
                 }
 

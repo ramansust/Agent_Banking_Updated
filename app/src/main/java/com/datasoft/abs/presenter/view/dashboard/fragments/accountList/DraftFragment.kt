@@ -14,6 +14,8 @@ import com.datasoft.abs.data.dto.accountList.Row
 import com.datasoft.abs.databinding.FragmentAccountBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountList.adapter.AccountAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -26,6 +28,9 @@ class DraftFragment : Fragment() {
 
     @Inject
     lateinit var accountAdapter: AccountAdapter
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -48,6 +53,10 @@ class DraftFragment : Fragment() {
         setupRecyclerView()
         initScrollListener()
 
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
+
         viewModel.getDraftData().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
@@ -68,7 +77,7 @@ class DraftFragment : Fragment() {
                 is Resource.Error -> {
                     stopShimmer()
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
                 is Resource.Loading -> {

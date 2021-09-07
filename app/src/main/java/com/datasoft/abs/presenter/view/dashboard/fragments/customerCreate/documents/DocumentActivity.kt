@@ -8,10 +8,10 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.config.DocumentConfigData
 import com.datasoft.abs.databinding.DocumentsActivityBinding
 import com.datasoft.abs.presenter.base.BaseActivity
@@ -21,14 +21,20 @@ import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
 import com.datasoft.abs.presenter.utils.Constant.IMAGE_COMPRESS
 import com.datasoft.abs.presenter.utils.Constant.IMAGE_RESOLUTION_HEIGHT
 import com.datasoft.abs.presenter.utils.Constant.IMAGE_RESOLUTION_WIDTH
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DocumentActivity : BaseActivity() {
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     private val documentsViewModel: DocumentsViewModel by viewModels()
     private val customerViewModel: CustomerViewModel by viewModels()
@@ -41,6 +47,10 @@ class DocumentActivity : BaseActivity() {
     private var backImageUri: String = ""
 
     override fun observeViewModel() {
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         customerViewModel.getConfigData().observe(this, { response ->
             when (response) {
@@ -89,7 +99,7 @@ class DocumentActivity : BaseActivity() {
 
                 is Resource.Error -> {
                     it.message?.let { message ->
-                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 
@@ -256,10 +266,10 @@ class DocumentActivity : BaseActivity() {
                     binding.imgViewFront.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }
@@ -277,10 +287,10 @@ class DocumentActivity : BaseActivity() {
                     binding.imgViewBack.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {
-                    Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(ImagePicker.getError(data))
                 }
                 else -> {
-                    Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                    toastHelper.sendToast(resources.getString(R.string.task_cancelled))
                 }
             }
         }

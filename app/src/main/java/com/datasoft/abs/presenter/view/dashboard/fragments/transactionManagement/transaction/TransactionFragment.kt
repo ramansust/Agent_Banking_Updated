@@ -6,7 +6,6 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.RequestManager
@@ -15,6 +14,8 @@ import com.datasoft.abs.R
 import com.datasoft.abs.databinding.FragmentTransactionBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant.BALANCE_FORMAT
+import com.datasoft.abs.presenter.utils.ToastHelper
+import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.TransactionAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +36,9 @@ class TransactionFragment : Fragment() {
 
     @Inject
     lateinit var glide: RequestManager
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,6 +66,10 @@ class TransactionFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        toastHelper.toastMessages.startListening {
+            showToast(it)
+        }
 
         viewModel.getAccountDetails().observe(viewLifecycleOwner, { response ->
             when (response) {
@@ -96,7 +104,7 @@ class TransactionFragment : Fragment() {
                 is Resource.Error -> {
                     goneProgressBar()
                     response.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        toastHelper.sendToast(message)
                     }
                 }
 

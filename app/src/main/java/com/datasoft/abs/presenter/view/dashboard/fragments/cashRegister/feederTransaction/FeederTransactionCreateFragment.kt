@@ -9,7 +9,6 @@ import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.FragmentFeederTransactionCreateBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class FeederTransactionCreateFragment : Fragment() {
 
