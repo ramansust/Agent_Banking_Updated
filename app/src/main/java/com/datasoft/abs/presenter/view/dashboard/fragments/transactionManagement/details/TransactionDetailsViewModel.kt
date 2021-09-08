@@ -1,9 +1,6 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.details
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.datasoft.abs.data.dto.transaction.TransactionDetailsResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
@@ -22,13 +19,19 @@ class TransactionDetailsViewModel @Inject constructor(
     private val network: Network,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val transactionDetails = MutableLiveData<Resource<TransactionDetailsResponse>>()
     fun getTransactionDetails(): LiveData<Resource<TransactionDetailsResponse>> = transactionDetails
 
+    init {
+        savedStateHandle.get<String>("transaction_no")?.let { transactionNo ->
+            transactionDetails(transactionNo)
+        }
+    }
 
-    fun transactionDetails(transactionNo: String) {
+    private fun transactionDetails(transactionNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
 
             transactionDetails.postValue(Resource.Loading())
