@@ -1,6 +1,7 @@
 package com.datasoft.abs.presenter.view.dashboard
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.Menu
@@ -22,6 +23,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.datasoft.abs.R
 import com.datasoft.abs.databinding.ActivityMainBinding
 import com.datasoft.abs.presenter.utils.Constant.USER_NAME
+import com.datasoft.abs.presenter.view.login.LoginActivity
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -164,6 +166,7 @@ class MainActivity : AppCompatActivity() {
         builder.setMessage(resources.getString(R.string.confirmation_message_logout))
         builder.setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
             dialog.dismiss()
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
         builder.setNegativeButton(resources.getString(R.string.no)) { dialog, _ ->

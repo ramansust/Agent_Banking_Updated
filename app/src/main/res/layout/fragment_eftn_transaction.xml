@@ -103,7 +103,7 @@
                     android:background="@drawable/input_border"
                     android:fontFamily="@font/oxygen_regular"
                     android:hint="@string/type_here"
-                    android:inputType="textPersonName|textCapSentences"
+                    android:inputType="number"
                     android:maxLength="@integer/edit_text_input_length"
                     android:padding="@dimen/space_8x"
                     android:textSize="@dimen/font_16x" />

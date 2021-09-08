@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.FragmentRtgsTransactionBinding
@@ -22,7 +22,7 @@ import javax.inject.Inject
 class RTGSTransactionFragment : Fragment() {
 
     private var _binding: FragmentRtgsTransactionBinding? = null
-    private val viewModel: RTGSTransactionViewModel by activityViewModels()
+    private val viewModel: RTGSTransactionViewModel by viewModels()
 
     @Inject
     lateinit var toastHelper: ToastHelper
