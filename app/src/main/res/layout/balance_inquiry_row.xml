@@ -14,7 +14,7 @@
         android:paddingBottom="@dimen/space_5x"
         android:text="@string/transaction_no"
         android:textAllCaps="true"
-        android:textColor="@android:color/holo_blue_light"
+        android:textColor="@color/customer_text"
         android:textSize="@dimen/font_20x"
         app:layout_constraintEnd_toStartOf="@+id/txt_view_debit"
         app:layout_constraintHorizontal_bias="0.5"

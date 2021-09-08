@@ -31,9 +31,6 @@ class RTGSViewModel @Inject constructor(
     private var disbursePageNumber = 0
     private var rejectPageNumber = 0
 
-    private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
-    fun getSearchData(): LiveData<Resource<String>> = searchData
-
     private val awaiting = MutableLiveData<Resource<RTGSListResponse>>()
     fun getAwaitingData(): LiveData<Resource<RTGSListResponse>> = awaiting
 
@@ -47,12 +44,6 @@ class RTGSViewModel @Inject constructor(
         loadMoreAwaiting()
         loadMoreDisburse()
         loadMoreReject()
-    }
-
-    fun setSearchData(search: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            searchData.postValue(Resource.Success(search))
-        }
     }
 
     private fun requestDisburseData(accountRequest: AccountRequest) {

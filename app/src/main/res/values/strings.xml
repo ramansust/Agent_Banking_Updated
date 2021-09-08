@@ -43,10 +43,10 @@
     <string name="actions">Actions</string>
     <string name="login_icon">Login Icon</string>
     <string name="total_a_c_opened">Total A/C opened</string>
-    <string name="total_deposit">Total Deposit</string>
-    <string name="total_withdraw">Total Withdraw</string>
-    <string name="total_balance">Agent A/C balance</string>
-    <string name="balance">Balance (TK)</string>
+    <string name="total_deposit">Total Deposit (৳)</string>
+    <string name="total_withdraw">Total Withdraw (৳)</string>
+    <string name="total_balance">Agent A/C balance (৳)</string>
+    <string name="balance">Balance (৳)</string>
     <string name="balance_">Balance</string>
     <string name="action_logout">Logout</string>
     <string name="menu_profile">Profile</string>
@@ -293,7 +293,7 @@
 
     <string name="payment_mode_">Payment Mode*</string>
     <string name="amount_">Amount*</string>
-    <string name="amount">Amount</string>
+    <string name="amount">Amount (৳)</string>
     <string name="charge_vat">Charge with VAT</string>
     <string name="total">Total</string>
     <string name="in_words">In Words</string>
@@ -325,8 +325,8 @@
     <string name="branch_routing">Branch &amp; Routing No</string>
 
     <string name="transaction_no">Transaction No</string>
-    <string name="debit">Debit</string>
-    <string name="credit">Credit</string>
+    <string name="debit">Debit (৳)</string>
+    <string name="credit">Credit (৳)</string>
     <string name="date">Date</string>
     <string name="routing">Routing</string>
     <string name="date_time">Date Time</string>

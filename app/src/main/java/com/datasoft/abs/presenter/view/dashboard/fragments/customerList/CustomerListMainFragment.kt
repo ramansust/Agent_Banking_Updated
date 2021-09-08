@@ -12,6 +12,7 @@ import com.datasoft.abs.R
 import com.datasoft.abs.databinding.FragmentAccountMainBinding
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerActivity
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerList.adapter.CustomerListMainAdapter
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -46,6 +47,21 @@ class CustomerListMainFragment : Fragment() {
                 2 -> tab.text = resources.getString(R.string.draft)
             }
         }.attach()
+
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                viewModel.setSearchData("")
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                binding.edTxtSearch.setQuery("", false)
+                binding.edTxtSearch.isIconified = true
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+        })
 
         return root
     }

@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class RTGSFragment : Fragment() {
 
     private var _binding: FragmentRtgsBinding? = null
-    private val viewModel: RTGSViewModel by activityViewModels()
+    private val searchViewModel: SearchViewModel by activityViewModels()
     private val detailsViewModel: EFTNTransactionViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and onDestroyView.
@@ -70,7 +70,7 @@ class RTGSFragment : Fragment() {
     private val textQuery = object : SearchView.OnQueryTextListener {
 
         override fun onQueryTextChange(newText: String): Boolean {
-            viewModel.setSearchData(newText)
+            searchViewModel.setSearchData(newText)
             return true
         }
 

@@ -149,7 +149,6 @@ class RTGSTransactionFragment : Fragment() {
                 is Resource.Success -> {
                     goneProgressBar()
                     response.data?.let {
-                        toastHelper.sendToast(it.message)
                         binding.btnNext.isEnabled = false
                         findNavController().navigateUp()
                     }

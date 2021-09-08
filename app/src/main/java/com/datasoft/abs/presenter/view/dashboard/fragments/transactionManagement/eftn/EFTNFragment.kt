@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class EFTNFragment : Fragment() {
 
     private var _binding: FragmentEftnBinding? = null
-    private val viewModel: EFTNViewModel by activityViewModels()
+    private val searchViewModel: SearchViewModel by activityViewModels()
     private val detailsViewModel: EFTNTransactionViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and onDestroyView.
@@ -66,7 +66,7 @@ class EFTNFragment : Fragment() {
     private val textQuery = object : SearchView.OnQueryTextListener {
 
         override fun onQueryTextChange(newText: String): Boolean {
-            viewModel.setSearchData(newText)
+            searchViewModel.setSearchData(newText)
             return true
         }
 
