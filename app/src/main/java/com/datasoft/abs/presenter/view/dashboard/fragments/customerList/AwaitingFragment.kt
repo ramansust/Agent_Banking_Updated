@@ -90,7 +90,7 @@ class AwaitingFragment : Fragment() {
                 is Resource.Success -> {
                     response.data?.let { search ->
                         customerAdapter.differ.submitList(list.filter {
-                            it.fullName.contains(search, true)
+                            it.fullName.contains(search, true) || it.customerNo.contains(search, true)
                         })
                     }
                 }

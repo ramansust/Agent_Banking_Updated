@@ -94,7 +94,7 @@ class WithdrawalFragment : Fragment() {
                 is Resource.Success -> {
                     response.data?.let { search ->
                         depositAdapter.differ.submitList(list.filter {
-                            it.drAccountNumber!!.contains(search, true)
+                            it.drAccountNumber!!.contains(search, true) || it.transactionNo!!.contains(search, true)
                         })
                     }
                 }

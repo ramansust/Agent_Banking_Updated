@@ -94,7 +94,7 @@ class DepositFragment : Fragment() {
                 is Resource.Success -> {
                     response.data?.let { search ->
                         depositAdapter.differ.submitList(list.filter {
-                            it.crAccountNumber!!.contains(search, true)
+                            it.crAccountNumber!!.contains(search, true) || it.transactionNo!!.contains(search, true)
                         })
                     }
                 }

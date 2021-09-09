@@ -90,7 +90,7 @@ class ActiveFragment : Fragment() {
                 is Resource.Success -> {
                     response.data?.let { search ->
                         accountAdapter.differ.submitList(list.filter {
-                            it.accountTitle.contains(search, true)
+                            it.accountTitle.contains(search, true) || it.accountNumber.contains(search, true)
                         })
                     }
                 }
