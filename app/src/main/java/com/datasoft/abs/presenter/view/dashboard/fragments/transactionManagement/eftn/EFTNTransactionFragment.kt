@@ -1,6 +1,8 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.FragmentEftnTransactionBinding
 import com.datasoft.abs.presenter.states.Resource
@@ -30,6 +33,7 @@ class EFTNTransactionFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
     private var senderAccountNo = ""
+    private var currentBalance = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -126,6 +130,7 @@ class EFTNTransactionFragment : Fragment() {
                         binding.btnNext.isEnabled = true
                         binding.btnAgentFinger.isEnabled = true
                         binding.btnCustomerFinger.isEnabled = true
+                        currentBalance = it.balance!!
                     }
                 }
 
@@ -187,6 +192,22 @@ class EFTNTransactionFragment : Fragment() {
                 binding.edTxtSenderAccountNo.text.trim().toString(),
             )
         }
+
+        binding.edTxtAmount.addTextChangedListener(textWatcher)
+    }
+
+    private val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+
+        override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+
+            if(charSequence.toString().isNotEmpty() && charSequence.toString().toInt() > currentBalance) {
+                binding.edTxtAmount.setText(resources.getString(R.string.zero))
+                toastHelper.sendToast(resources.getString(R.string.balance_exceed))
+            }
+        }
+
+        override fun afterTextChanged(editable: Editable) {}
     }
 
     override fun onDestroyView() {

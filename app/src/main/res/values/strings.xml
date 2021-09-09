@@ -367,4 +367,5 @@
     <string name="awaiting">Awaiting</string>
     <string name="draft">Draft</string>
     <string name="task_cancelled">Task Cancelled</string>
+    <string name="balance_exceed">You don\'t have sufficient balance to complete this transaction</string>
 </resources>
