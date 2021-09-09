@@ -15,10 +15,10 @@ class CustomerListMainAdapter @Inject constructor(fragment: Fragment) : Fragment
         // Return a NEW fragment instance in createFragment(int)
 
         return when (position) {
-            0 -> ActiveFragment()
+            0 -> DraftFragment()
             1 -> AwaitingFragment()
-            2 -> DraftFragment()
-            else -> ActiveFragment()
+            2 -> ActiveFragment()
+            else -> DraftFragment()
         }
     }
 }
