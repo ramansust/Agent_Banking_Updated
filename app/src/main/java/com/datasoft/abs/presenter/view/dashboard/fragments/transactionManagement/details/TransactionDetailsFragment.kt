@@ -10,9 +10,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.databinding.FragmentTransactionDetailsBinding
 import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -54,7 +58,25 @@ class TransactionDetailsFragment : Fragment() {
             when (response) {
                 is Resource.Success -> {
                     stopShimmer()
+
                     response.data?.let { dataResponse ->
+
+                        binding.txtViewTransactionNoValue.text = dataResponse[0].transactionNo
+                        binding.txtViewTransactionTypeValue.text = dataResponse[0].transactionType
+
+                        try {
+                            binding.txtViewDateValue.text = SimpleDateFormat(
+                                Constant.DATE_FORMAT,
+                                Locale.US
+                            ).format(
+                                SimpleDateFormat(Constant.DATE_FORMAT_API, Locale.US).parse(
+                                    dataResponse[0].transactionDate
+                                )
+                            )
+                        } catch (e: ParseException) {
+                            e.printStackTrace()
+                        }
+
                         transactionDetailsAdapter.differ.submitList(dataResponse)
                     }
                 }

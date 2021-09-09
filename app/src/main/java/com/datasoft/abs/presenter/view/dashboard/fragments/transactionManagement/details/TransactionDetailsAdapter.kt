@@ -7,10 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.transaction.TransactionDetailsResponseItem
 import com.datasoft.abs.databinding.TransactionDetailsRowBinding
-import com.datasoft.abs.presenter.utils.Constant
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 class TransactionDetailsAdapter @Inject constructor() :
@@ -55,18 +51,6 @@ class TransactionDetailsAdapter @Inject constructor() :
         val account = differ.currentList[position]
 
         with(account) {
-            holder.binding.txtViewTransactionNo.text = this.transactionNo
-            holder.binding.txtViewTransactionType.text = this.transactionType
-
-            try {
-                holder.binding.txtViewDateTime.text = SimpleDateFormat(
-                    Constant.DATE_FORMAT,
-                    Locale.US
-                ).format(SimpleDateFormat(Constant.DATE_FORMAT_API, Locale.US).parse(this.transactionDate))
-            } catch (e: ParseException) {
-                e.printStackTrace()
-            }
-
             holder.binding.txtViewDescription.text = this.narration
             holder.binding.txtViewDebit.text = this.debit.toString()
             holder.binding.txtViewCredit.text = this.credit.toString()
