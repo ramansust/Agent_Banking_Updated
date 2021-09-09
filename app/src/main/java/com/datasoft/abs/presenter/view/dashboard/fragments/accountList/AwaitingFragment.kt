@@ -115,7 +115,7 @@ class AwaitingFragment : Fragment() {
 
                 if (!isLoading) {
                     if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == list.size - 1) {
-                        viewModel.loadMoreActive()
+                        viewModel.loadMoreAwaiting()
                         isLoading = true
                     }
                 }
