@@ -1,12 +1,14 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.accountList.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.accountList.Row
 import com.datasoft.abs.databinding.AccountRowBinding
+import com.datasoft.abs.presenter.utils.Status
 import javax.inject.Inject
 
 class AccountAdapter @Inject constructor() :
@@ -48,6 +50,21 @@ class AccountAdapter @Inject constructor() :
             holder.binding.txtViewAccountNumber.text = this.accountNumber
             holder.binding.txtViewSourceOfFund.text = this.natureOfBusiness
             holder.binding.txtViewUnit.text = this.branchName
+
+            when (this.accountStatus) {
+                Status.DRAFT.type -> {
+                    holder.binding.imgViewDetails.visibility = View.GONE
+                }
+
+                Status.ACTIVE.type -> {
+                    holder.binding.imgViewEdit.visibility = View.GONE
+                }
+
+                else -> {
+                    holder.binding.imgViewDetails.visibility = View.VISIBLE
+                    holder.binding.imgViewEdit.visibility = View.VISIBLE
+                }
+            }
         }
 
         holder.itemView.setOnClickListener {

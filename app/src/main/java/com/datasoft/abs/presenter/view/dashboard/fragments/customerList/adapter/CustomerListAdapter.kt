@@ -1,6 +1,7 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerList.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -9,6 +10,8 @@ import com.datasoft.abs.data.dto.customerList.Row
 import com.datasoft.abs.databinding.CustomerRowBinding
 import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
 import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT_API
+import com.datasoft.abs.presenter.utils.Status.ACTIVE
+import com.datasoft.abs.presenter.utils.Status.DRAFT
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -60,6 +63,19 @@ class CustomerListAdapter @Inject constructor() :
                 ).format(SimpleDateFormat(DATE_FORMAT_API, Locale.US).parse(this.entryDate))
             } catch (e: ParseException) {
                 e.printStackTrace()
+            }
+
+            when (this.customerStatus) {
+                DRAFT.type -> {
+                    holder.binding.imgViewDetails.visibility = View.GONE
+                }
+                ACTIVE.type -> {
+                    holder.binding.imgViewEdit.visibility = View.GONE
+                }
+                else -> {
+                    holder.binding.imgViewDetails.visibility = View.VISIBLE
+                    holder.binding.imgViewEdit.visibility = View.VISIBLE
+                }
             }
         }
 
