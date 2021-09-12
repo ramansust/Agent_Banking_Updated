@@ -1,15 +1,12 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.eftn
 
 import android.os.Bundle
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.RequestManager
-import com.bumptech.glide.request.RequestOptions
 import com.datasoft.abs.databinding.FragmentEftnTransactionDetailsBinding
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.ToastHelper
@@ -23,9 +20,6 @@ class EFTNTransactionDetailsFragment : Fragment() {
     private var _binding: FragmentEftnTransactionDetailsBinding? = null
     private val args: EFTNTransactionDetailsFragmentArgs by navArgs()
     private val detailsViewModel: EFTNTransactionViewModel by activityViewModels()
-
-    @Inject
-    lateinit var glide: RequestManager
 
     @Inject
     lateinit var toastHelper: ToastHelper
@@ -66,17 +60,6 @@ class EFTNTransactionDetailsFragment : Fragment() {
                         binding.edTxtReceiverName.setText(it.receiverName)
                         binding.edTxtReceiverBank.setText(it.bankName)
                         binding.edTxtBranchRouting.setText(it.branchName)
-
-                        glide.load(
-                            Base64.decode(
-                                it.profilePicture!!.substring(
-                                    it.profilePicture.indexOf(
-                                        ","
-                                    ) + 1
-                                ), Base64.DEFAULT
-                            )
-                        ).apply(RequestOptions().circleCrop())
-                            .into(binding.imgViewSenderPhoto)
                     }
                 }
 
