@@ -96,7 +96,18 @@ class DepositFragment : Fragment() {
             when (response) {
                 is Resource.Success -> {
                     response.data?.let {
-                        binding.edTxtChargeVat.setText(it.chargeAmt)
+                        try {
+                            binding.edTxtChargeVat.setText(
+                                ((it.chargeAmt?.toDouble() ?: 0.0) + (it.vatAmt?.toDouble()
+                                    ?: 0.0)).toString()
+                            )
+                            binding.edTxtAmount.setText(
+                                ((it.chargeAmt?.toDouble() ?: 0.0) + (it.vatAmt?.toDouble()
+                                    ?: 0.0) + (it.transactionalAmount?.toDouble() ?: 0.0)).toString()
+                            )
+                        } catch (e: NumberFormatException) {
+                            e.printStackTrace()
+                        }
                         binding.edTxtInWords.setText(it.currencyToWord)
                         binding.edTxtTotal.setText(it.transactionalAmount)
                     }
