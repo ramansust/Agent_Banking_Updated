@@ -104,6 +104,10 @@ class ActiveFragment : Fragment() {
                 }
             }
         })
+
+        accountAdapter.setOnDetailClickListener {
+            toastHelper.sendToast("Clicked on DETAIL")
+        }
     }
 
     private fun initScrollListener() {

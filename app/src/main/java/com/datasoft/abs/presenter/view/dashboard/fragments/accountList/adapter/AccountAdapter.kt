@@ -39,7 +39,8 @@ class AccountAdapter @Inject constructor() :
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((Row) -> Unit)? = null
+    private var onEditClickListener: ((Row) -> Unit)? = null
+    private var onDetailClickListener: ((Row) -> Unit)? = null
 
     override fun onBindViewHolder(holder: AccountViewHolder, position: Int) {
         val account = differ.currentList[position]
@@ -67,13 +68,21 @@ class AccountAdapter @Inject constructor() :
             }
         }
 
-        holder.itemView.setOnClickListener {
-            onItemClickListener?.let { it(account) }
+        holder.binding.imgViewDetails.setOnClickListener {
+            onDetailClickListener?.let { it(account) }
+        }
+
+        holder.binding.imgViewEdit.setOnClickListener {
+            onEditClickListener?.let { it(account) }
         }
     }
 
-    fun setOnItemClickListener(listener: (Row) -> Unit) {
-        onItemClickListener = listener
+    fun setOnEditClickListener(listener: (Row) -> Unit) {
+        onEditClickListener = listener
+    }
+
+    fun setOnDetailClickListener(listener: (Row) -> Unit) {
+        onDetailClickListener = listener
     }
 
 }

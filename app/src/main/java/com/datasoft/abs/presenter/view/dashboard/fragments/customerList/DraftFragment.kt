@@ -104,6 +104,10 @@ class DraftFragment : Fragment() {
                 }
             }
         })
+
+        customerAdapter.setOnEditClickListener {
+            toastHelper.sendToast("Clicked on EDIT")
+        }
     }
 
     private fun initScrollListener() {

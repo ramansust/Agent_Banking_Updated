@@ -45,7 +45,8 @@ class CustomerListAdapter @Inject constructor() :
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((Row) -> Unit)? = null
+    private var onEditClickListener: ((Row) -> Unit)? = null
+    private var onDetailClickListener: ((Row) -> Unit)? = null
 
     override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
         val customer = differ.currentList[position]
@@ -79,13 +80,21 @@ class CustomerListAdapter @Inject constructor() :
             }
         }
 
-        holder.itemView.setOnClickListener {
-            onItemClickListener?.let { it(customer) }
+        holder.binding.imgViewDetails.setOnClickListener {
+            onDetailClickListener?.let { it(customer) }
+        }
+
+        holder.binding.imgViewEdit.setOnClickListener {
+            onEditClickListener?.let { it(customer) }
         }
     }
 
-    fun setOnItemClickListener(listener: (Row) -> Unit) {
-        onItemClickListener = listener
+    fun setOnEditClickListener(listener: (Row) -> Unit) {
+        onEditClickListener = listener
+    }
+
+    fun setOnDetailClickListener(listener: (Row) -> Unit) {
+        onDetailClickListener = listener
     }
 
 }

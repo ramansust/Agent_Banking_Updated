@@ -104,6 +104,14 @@ class AwaitingFragment : Fragment() {
                 }
             }
         })
+
+        accountAdapter.setOnEditClickListener {
+            toastHelper.sendToast("Clicked on EDIT")
+        }
+
+        accountAdapter.setOnDetailClickListener {
+            toastHelper.sendToast("Clicked on DETAIL")
+        }
     }
 
     private fun initScrollListener() {
