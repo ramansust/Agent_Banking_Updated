@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.PersonalFragmentBinding
-import com.datasoft.abs.presenter.states.Status
+import com.datasoft.abs.presenter.states.Status.*
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.ADULT_AGE
 import com.datasoft.abs.presenter.utils.ToastHelper
@@ -83,7 +83,7 @@ class PersonalFragment : Fragment() {
         customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
             when (response.status) {
-                Status.SUCCESS -> {
+                SUCCESS -> {
                     response.data?.let {
 
                         maritalList.addAll(it.maritalStatusList)
@@ -142,12 +142,12 @@ class PersonalFragment : Fragment() {
                             )
                     }
                 }
-                Status.ERROR -> {
+                ERROR -> {
                     response.message?.let { message ->
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
-                Status.LOADING -> {
+                LOADING -> {
                 }
             }
         })
@@ -158,8 +158,26 @@ class PersonalFragment : Fragment() {
             response?.getContentIfNotHandled()?.let { result ->
 
                 when (result.status) {
-                    Status.SUCCESS -> {
+                    SUCCESS -> {
                         result.data?.let {
+                            customerViewModel.requestCurrentStep(2)
+                        }
+                    }
+                    ERROR -> {
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
+                    }
+                    LOADING -> {
+                    }
+                }
+            }
+
+            response?.peekContent()?.let { resultSave ->
+
+                when (resultSave.status) {
+                    SUCCESS -> {
+                        resultSave.data?.let {
 
                             if (maritalList.isNotEmpty()) binding.spinnerMaritalStatus.setSelection(
                                 maritalList.indexOf(
@@ -213,16 +231,11 @@ class PersonalFragment : Fragment() {
                             binding.edTxtGuardianContact.setText(it.guardianContact)
                             binding.edTxtGuardianAddress.setText(it.guardianAddress)
                             binding.edTxtGuardianDob.setText(it.guardianDob)
-
-                            customerViewModel.requestCurrentStep(2)
                         }
                     }
-                    Status.ERROR -> {
-                        result.message?.let { message ->
-                            toastHelper.sendToast(message)
-                        }
+                    ERROR -> {
                     }
-                    Status.LOADING -> {
+                    LOADING -> {
                     }
                 }
             }

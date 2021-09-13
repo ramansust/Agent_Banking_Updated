@@ -161,68 +161,73 @@ class KYCFragment : Fragment() {
             }
         })
 
-        viewModel.getKYCData().observe(viewLifecycleOwner, {
-            if (onBoardingList.isNotEmpty()) binding.spinnerOnBoarding.setSelection(
-                onBoardingList.indexOf(
-                    CommonModel(it.typeOfOnboarding)
-                )
-            )
+        viewModel.getKYCData().observe(viewLifecycleOwner, { response ->
 
-            if (residentList.isNotEmpty()) binding.spinnerResidentStatus.setSelection(
-                residentList.indexOf(
-                    CommonModel(it.residentStatus)
+            response?.peekContent()?.let {
+                if (onBoardingList.isNotEmpty()) binding.spinnerOnBoarding.setSelection(
+                    onBoardingList.indexOf(
+                        CommonModel(it.typeOfOnboarding)
+                    )
                 )
-            )
 
-            if (blackList.isNotEmpty()) binding.spinnerBlackListed.setSelection(
-                blackList.indexOf(
-                    CommonModel(it.blackListed)
+                if (residentList.isNotEmpty()) binding.spinnerResidentStatus.setSelection(
+                    residentList.indexOf(
+                        CommonModel(it.residentStatus)
+                    )
                 )
-            )
 
-            if (pepList.isNotEmpty()) binding.spinnerPoliticallyExposed.setSelection(
-                pepList.indexOf(
-                    CommonModel(it.isPep)
+                if (blackList.isNotEmpty()) binding.spinnerBlackListed.setSelection(
+                    blackList.indexOf(
+                        CommonModel(it.blackListed)
+                    )
                 )
-            )
 
-            if (closeAssociatesList.isNotEmpty()) binding.spinnerCloseAssociates.setSelection(
-                closeAssociatesList.indexOf(
-                    CommonModel(it.isPepCloser)
+                if (pepList.isNotEmpty()) binding.spinnerPoliticallyExposed.setSelection(
+                    pepList.indexOf(
+                        CommonModel(it.isPep)
+                    )
                 )
-            )
 
-            if (ipList.isNotEmpty()) binding.spinnerInterviewedPersonally.setSelection(
-                ipList.indexOf(
-                    CommonModel(it.isInterviewedPersonally)
+                if (closeAssociatesList.isNotEmpty()) binding.spinnerCloseAssociates.setSelection(
+                    closeAssociatesList.indexOf(
+                        CommonModel(it.isPepCloser)
+                    )
                 )
-            )
 
-            if (productList.isNotEmpty()) binding.spinnerTypeProduct.setSelection(
-                productList.indexOf(
-                    CommonModel(it.typeOfProduct)
+                if (ipList.isNotEmpty()) binding.spinnerInterviewedPersonally.setSelection(
+                    ipList.indexOf(
+                        CommonModel(it.isInterviewedPersonally)
+                    )
                 )
-            )
 
-            if (professionList.isNotEmpty()) binding.spinnerProfession.setSelection(
-                professionList.indexOf(
-                    CommonModel(it.profession)
+                if (productList.isNotEmpty()) binding.spinnerTypeProduct.setSelection(
+                    productList.indexOf(
+                        CommonModel(it.typeOfProduct)
+                    )
                 )
-            )
 
-            if (transactionList.isNotEmpty()) binding.spinnerYearlyTransaction.setSelection(
-                transactionList.indexOf(
-                    CommonModel(it.transactionalRisk)
+                if (professionList.isNotEmpty()) binding.spinnerProfession.setSelection(
+                    professionList.indexOf(
+                        CommonModel(it.profession)
+                    )
                 )
-            )
 
-            if (transparencyList.isNotEmpty()) binding.spinnerTransparencyRisk.setSelection(
-                transparencyList.indexOf(
-                    CommonModel(it.transparencyRisk)
+                if (transactionList.isNotEmpty()) binding.spinnerYearlyTransaction.setSelection(
+                    transactionList.indexOf(
+                        CommonModel(it.transactionalRisk)
+                    )
                 )
-            )
 
-            customerViewModel.requestCurrentStep(7)
+                if (transparencyList.isNotEmpty()) binding.spinnerTransparencyRisk.setSelection(
+                    transparencyList.indexOf(
+                        CommonModel(it.transparencyRisk)
+                    )
+                )
+            }
+
+            response?.getContentIfNotHandled()?.let {
+                customerViewModel.requestCurrentStep(7)
+            }
         })
 
         binding.btnNext.setOnClickListener {

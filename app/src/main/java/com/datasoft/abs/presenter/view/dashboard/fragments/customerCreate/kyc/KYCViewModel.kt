@@ -9,6 +9,7 @@ import com.datasoft.abs.data.dto.createCustomer.KYCInfo
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -28,8 +29,8 @@ class KYCViewModel @Inject constructor(
     private val configData = MutableLiveData<Resource<RiskGradeResponse>>()
     fun getConfigData(): LiveData<Resource<RiskGradeResponse>> = configData
 
-    private val kycData = MutableLiveData<KYCInfo>()
-    fun getKYCData(): LiveData<KYCInfo> = kycData
+    private val kycData = MutableLiveData<Event<KYCInfo>>()
+    fun getKYCData(): LiveData<Event<KYCInfo>> = kycData
 
     fun configData() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -80,7 +81,7 @@ class KYCViewModel @Inject constructor(
                 transactionalRisk,
                 transparencyRisk
             )
-            kycData.postValue(kycInfo)
+            kycData.postValue(Event(kycInfo))
         }
     }
 

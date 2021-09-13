@@ -141,8 +141,8 @@ class ReviewFragment : Fragment() {
         })
 
         generalViewModel.getSanctionData().observe(viewLifecycleOwner, {
-            createCustomerRequest.customerNo = it.customerNo
-            createCustomerRequest.branchId = it.branchId
+            createCustomerRequest.customerNo = it.customerNo!!
+            createCustomerRequest.branchId = it.branchId!!
         })
 
         generalViewModel.getSavedData().observe(viewLifecycleOwner, {
@@ -313,21 +313,23 @@ class ReviewFragment : Fragment() {
             createCustomerRequest.fingerPrint = FingerPrint("", "", "", ", ", "", "")
         })
 
-        kycViewModel.getKYCData().observe(viewLifecycleOwner, {
-            kycInfo.apply {
-                accountOpeningWayId = it.typeOfOnboarding
-                residentStatusId = it.residentStatus
-                isBlackListedId = it.blackListed
-                isPep = it.isPep
-                isPepCloserId = it.isPepCloser
-                isInterviewedPersonally = it.isInterviewedPersonally
-                typeOfProductId = it.typeOfProduct
-                professionOrNatureId = it.profession
-                transparencyRiskId = it.transparencyRisk
-                kycRiskFactorId = it.transactionalRisk
-            }
+        kycViewModel.getKYCData().observe(viewLifecycleOwner, { response ->
+            response?.peekContent()?.let {
+                kycInfo.apply {
+                    accountOpeningWayId = it.typeOfOnboarding
+                    residentStatusId = it.residentStatus
+                    isBlackListedId = it.blackListed
+                    isPep = it.isPep
+                    isPepCloserId = it.isPepCloser
+                    isInterviewedPersonally = it.isInterviewedPersonally
+                    typeOfProductId = it.typeOfProduct
+                    professionOrNatureId = it.profession
+                    transparencyRiskId = it.transparencyRisk
+                    kycRiskFactorId = it.transactionalRisk
+                }
 
-            createCustomerRequest.kycInfo = kycInfo
+                createCustomerRequest.kycInfo = kycInfo
+            }
         })
 
         customerViewModel.getDocumentList().observe(viewLifecycleOwner, {
@@ -411,7 +413,7 @@ class ReviewFragment : Fragment() {
 
         personalViewModel.getPersonalData().observe(viewLifecycleOwner, { response ->
 
-            response?.getContentIfNotHandled()?.let { result ->
+            response?.peekContent()?.let { result ->
 
                 when (result.status) {
                     Status.SUCCESS -> {
