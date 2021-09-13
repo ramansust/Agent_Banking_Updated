@@ -8,6 +8,7 @@ import com.datasoft.abs.data.dto.createCustomer.PersonalInfo
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
+import com.datasoft.abs.presenter.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,8 +28,8 @@ class PersonalViewModel @Inject constructor(
     private val customerDob = MutableLiveData<String>()
     fun getCustomerDobData(): LiveData<String> = customerDob
 
-    private val personalData = MutableLiveData<Resource<PersonalInfo>>()
-    fun getPersonalData(): LiveData<Resource<PersonalInfo>> = personalData
+    private val personalData = MutableLiveData<Event<Resource<PersonalInfo>>>()
+    fun getPersonalData(): LiveData<Event<Resource<PersonalInfo>>> = personalData
 
     fun checkData(
         isAgeAboveEighteen: Boolean,
@@ -62,19 +63,23 @@ class PersonalViewModel @Inject constructor(
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            personalData.postValue(Resource.Loading())
+            personalData.postValue(Event(Resource.loading(null)))
 
             if (sourceOfFund.isEmpty() || nomineeName.isEmpty() || nomineeMobile.isEmpty() || nomineeAddress.isEmpty()) {
                 personalData.postValue(
-                    Resource.Error(
-                        fieldEmpty, null
+                    Event(
+                        Resource.error(
+                            fieldEmpty, null
+                        )
                     )
                 )
                 return@launch
             } else if (isAgeAboveEighteen && (guardianName.isEmpty() || guardianContact.isEmpty() || guardianDob.isEmpty())) {
                 personalData.postValue(
-                    Resource.Error(
-                        fieldEmpty, null
+                    Event(
+                        Resource.error(
+                            fieldEmpty, null
+                        )
                     )
                 )
                 return@launch
@@ -110,7 +115,7 @@ class PersonalViewModel @Inject constructor(
                 guardianDob
             )
 
-            personalData.postValue(Resource.Success(personalInfo))
+            personalData.postValue(Event(Resource.success(personalInfo)))
         }
     }
 

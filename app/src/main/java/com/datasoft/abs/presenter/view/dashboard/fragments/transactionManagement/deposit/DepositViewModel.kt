@@ -1,6 +1,5 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.deposit
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,7 +24,7 @@ class DepositViewModel @Inject constructor(
     private val network: Network,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
-): ViewModel() {
+) : ViewModel() {
 
     private var pageNumber = 0
 
@@ -41,7 +40,7 @@ class DepositViewModel @Inject constructor(
 
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            searchData.postValue(Resource.Success(search))
+            searchData.postValue(Resource.success(search))
         }
     }
 
@@ -61,11 +60,12 @@ class DepositViewModel @Inject constructor(
                 depositData.value?.data?.rows?.let { addAll(it) }
             }
 
-            depositData.postValue(Resource.Loading())
+            depositData.postValue(Resource.loading(null))
 
             if (network.isConnected()) {
                 try {
-                    val response = handleResponse(repository.getDepositData(commonRequest), pageNumber)
+                    val response =
+                        handleResponse(repository.getDepositData(commonRequest), pageNumber)
 
                     list.apply {
                         addAll(response.data?.rows!!)
@@ -75,7 +75,7 @@ class DepositViewModel @Inject constructor(
                     depositData.postValue(response)
                 } catch (e: Exception) {
                     depositData.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -83,7 +83,7 @@ class DepositViewModel @Inject constructor(
                 }
             } else {
                 depositData.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -91,13 +91,16 @@ class DepositViewModel @Inject constructor(
         }
     }
 
-    private fun handleResponse(response: Response<DepositResponse>, pageNumber: Int): Resource<DepositResponse> {
+    private fun handleResponse(
+        response: Response<DepositResponse>,
+        pageNumber: Int
+    ): Resource<DepositResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 resultResponse.pageNumber = pageNumber
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 }

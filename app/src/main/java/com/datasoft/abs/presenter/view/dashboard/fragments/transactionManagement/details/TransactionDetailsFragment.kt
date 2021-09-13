@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.databinding.FragmentTransactionDetailsBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
@@ -55,40 +55,44 @@ class TransactionDetailsFragment : Fragment() {
 
         viewModel.getTransactionDetails().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
-                    stopShimmer()
+            response?.getContentIfNotHandled()?.let { result ->
 
-                    response.data?.let { dataResponse ->
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        stopShimmer()
 
-                        binding.txtViewTransactionNoValue.text = dataResponse[0].transactionNo
-                        binding.txtViewTransactionTypeValue.text = dataResponse[0].transactionType
+                        result.data?.let { dataResponse ->
 
-                        try {
-                            binding.txtViewDateValue.text = SimpleDateFormat(
-                                Constant.DATE_FORMAT,
-                                Locale.US
-                            ).format(
-                                SimpleDateFormat(Constant.DATE_FORMAT_API, Locale.US).parse(
-                                    dataResponse[0].transactionDate
+                            binding.txtViewTransactionNoValue.text = dataResponse[0].transactionNo
+                            binding.txtViewTransactionTypeValue.text =
+                                dataResponse[0].transactionType
+
+                            try {
+                                binding.txtViewDateValue.text = SimpleDateFormat(
+                                    Constant.DATE_FORMAT,
+                                    Locale.US
+                                ).format(
+                                    SimpleDateFormat(Constant.DATE_FORMAT_API, Locale.US).parse(
+                                        dataResponse[0].transactionDate
+                                    )
                                 )
-                            )
-                        } catch (e: ParseException) {
-                            e.printStackTrace()
+                            } catch (e: ParseException) {
+                                e.printStackTrace()
+                            }
+
+                            transactionDetailsAdapter.differ.submitList(dataResponse)
                         }
-
-                        transactionDetailsAdapter.differ.submitList(dataResponse)
                     }
-                }
 
-                is Resource.Loading -> {
-                    startShimmer()
-                }
+                    Status.LOADING -> {
+                        startShimmer()
+                    }
 
-                is Resource.Error -> {
-                    stopShimmer()
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
+                    Status.ERROR -> {
+                        stopShimmer()
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
                     }
                 }
             }

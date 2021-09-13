@@ -18,7 +18,7 @@ import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.config.ProductConfig
 import com.datasoft.abs.databinding.GeneralAccountFragmentBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
@@ -39,7 +39,6 @@ class GeneralFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
-    private var isClicked = false
 
     @Inject
     lateinit var customerAdapter: CustomerAdapter
@@ -78,8 +77,8 @@ class GeneralFragment : Fragment() {
 
         viewModel.getCustomerData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let { data ->
                         customerAdapter.differ.submitList(null)
                         customerAdapter.differ.submitList(data.customerData)
@@ -88,13 +87,13 @@ class GeneralFragment : Fragment() {
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
                     response.message?.let { message ->
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
                 }
             }
         })
@@ -116,8 +115,8 @@ class GeneralFragment : Fragment() {
 
         accountViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let {
 
                         productCategoryList.addAll(it.productCategoryList)
@@ -156,72 +155,74 @@ class GeneralFragment : Fragment() {
                             )
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
                     response.message?.let { message ->
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
                 }
             }
         })
 
         viewModel.getAccountInfo().observe(viewLifecycleOwner, { response ->
-            when (response) {
 
-                is Resource.Success -> {
-                    response.data?.let {
+            response?.getContentIfNotHandled()?.let { result ->
 
-                        if (productCategoryList.isNotEmpty()) binding.spinnerProductCategory.setSelection(
-                            productCategoryList.indexOf(
-                                CommonModel(it.categoryId)
+                when (result.status) {
+
+                    Status.SUCCESS -> {
+                        result.data?.let {
+
+                            if (productCategoryList.isNotEmpty()) binding.spinnerProductCategory.setSelection(
+                                productCategoryList.indexOf(
+                                    CommonModel(it.categoryId)
+                                )
                             )
-                        )
 
-                        if (accountList.isNotEmpty()) binding.spinnerTypeOfAccount.setSelection(
-                            accountList.indexOf(
-                                ProductConfig(id = it.accountId)
+                            if (accountList.isNotEmpty()) binding.spinnerTypeOfAccount.setSelection(
+                                accountList.indexOf(
+                                    ProductConfig(id = it.accountId)
+                                )
                             )
-                        )
 
-                        if (operatingInstructionList.isNotEmpty()) binding.spinnerOperatingInstruction.setSelection(
-                            operatingInstructionList.indexOf(
-                                CommonModel(it.operatingId)
+                            if (operatingInstructionList.isNotEmpty()) binding.spinnerOperatingInstruction.setSelection(
+                                operatingInstructionList.indexOf(
+                                    CommonModel(it.operatingId)
+                                )
                             )
-                        )
 
-                        if (sourceOfFundList.isNotEmpty()) binding.spinnerSourceOfFund.setSelection(
-                            sourceOfFundList.indexOf(
-                                CommonModel(it.fundId)
+                            if (sourceOfFundList.isNotEmpty()) binding.spinnerSourceOfFund.setSelection(
+                                sourceOfFundList.indexOf(
+                                    CommonModel(it.fundId)
+                                )
                             )
-                        )
 
-                        if (currencyList.isNotEmpty()) binding.spinnerCurrency.setSelection(
-                            currencyList.indexOf(
-                                CommonModel(it.currencyId)
+                            if (currencyList.isNotEmpty()) binding.spinnerCurrency.setSelection(
+                                currencyList.indexOf(
+                                    CommonModel(it.currencyId)
+                                )
                             )
-                        )
 
-                        binding.spinnerCustomerName.text = it.customerId
-                        binding.edTxtAccountTitle.setText(it.accountTitle)
-                        binding.edTxtOpeningDate.setText(it.openingDate)
-                        binding.edTxtInitialAmount.setText(it.initialAmount.toString())
+                            binding.spinnerCustomerName.text = it.customerId
+                            binding.edTxtAccountTitle.setText(it.accountTitle)
+                            binding.edTxtOpeningDate.setText(it.openingDate)
+                            binding.edTxtInitialAmount.setText(it.initialAmount.toString())
 
-                        if (isClicked)
                             accountViewModel.requestCurrentStep(1)
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
+                    }
+
+                    Status.LOADING -> {
+
                     }
                 }
-
-                is Resource.Error -> {
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
-                    }
-                }
-
-                is Resource.Loading -> {
-
-                }
-
             }
         })
 
@@ -276,8 +277,6 @@ class GeneralFragment : Fragment() {
         }
 
         binding.btnNext.setOnClickListener {
-            isClicked = true
-
             viewModel.setAccountInfo(
                 if (productCategoryList.isNotEmpty()) productCategoryList[binding.spinnerProductCategory.selectedItemPosition].id else 0,
                 if (productCategoryList.isNotEmpty()) productCategoryList[binding.spinnerProductCategory.selectedItemPosition].name else "",

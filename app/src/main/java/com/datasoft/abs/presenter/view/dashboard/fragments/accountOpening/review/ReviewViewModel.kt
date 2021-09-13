@@ -9,6 +9,7 @@ import com.datasoft.abs.data.dto.createAccount.review.CreateAccountResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,8 +26,8 @@ class ReviewViewModel @Inject constructor(
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
 ) : ViewModel() {
 
-    private val createAccountData = MutableLiveData<Resource<CreateAccountResponse>>()
-    fun getCreateAccountData(): LiveData<Resource<CreateAccountResponse>> = createAccountData
+    private val createAccountData = MutableLiveData<Event<Resource<CreateAccountResponse>>>()
+    fun getCreateAccountData(): LiveData<Event<Resource<CreateAccountResponse>>> = createAccountData
 
     private val dataPrepared = MutableLiveData<Boolean>()
     fun getDataPrepared(): LiveData<Boolean> = dataPrepared
@@ -34,7 +35,7 @@ class ReviewViewModel @Inject constructor(
     fun createAccount(createAccountRequest: CreateAccountRequest) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            createAccountData.postValue(Resource.Loading())
+            createAccountData.postValue(Event(Resource.loading(null)))
 
             if (network.isConnected()) {
                 try {
@@ -42,29 +43,33 @@ class ReviewViewModel @Inject constructor(
                     createAccountData.postValue(handleCreateAccountResponse(response))
                 } catch (e: Exception) {
                     createAccountData.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 createAccountData.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
         }
     }
 
-    private fun handleCreateAccountResponse(response: Response<CreateAccountResponse>): Resource<CreateAccountResponse> {
+    private fun handleCreateAccountResponse(response: Response<CreateAccountResponse>): Event<Resource<CreateAccountResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 
     fun setDataPrepared(value: Boolean) {

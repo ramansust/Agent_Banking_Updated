@@ -6,9 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.dashboard.DashboardResponse
 import com.datasoft.abs.domain.Repository
-import com.datasoft.abs.presenter.utils.Network
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
+import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,8 +25,8 @@ class TransactionViewModel @Inject constructor(
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
 ) : ViewModel() {
 
-    private val dashboardData = MutableLiveData<Resource<DashboardResponse>>()
-    fun getDashboardData(): LiveData<Resource<DashboardResponse>> = dashboardData
+    private val dashboardData = MutableLiveData<Event<Resource<DashboardResponse>>>()
+    fun getDashboardData(): LiveData<Event<Resource<DashboardResponse>>> = dashboardData
 
     fun requestDashboardData(dayNo: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -35,29 +36,33 @@ class TransactionViewModel @Inject constructor(
                     dashboardData.postValue(handleDashboardResponse(response))
                 } catch (e: Exception) {
                     dashboardData.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 dashboardData.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
         }
     }
 
-    private fun handleDashboardResponse(response: Response<DashboardResponse>): Resource<DashboardResponse> {
+    private fun handleDashboardResponse(response: Response<DashboardResponse>): Event<Resource<DashboardResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 
 }

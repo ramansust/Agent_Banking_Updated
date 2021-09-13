@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.transaction.rtgs.Row
 import com.datasoft.abs.databinding.FragmentAwaitingApprovalBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
@@ -60,8 +60,9 @@ class AwaitingApprovalFragment : Fragment() {
         }
 
         viewModel.getAwaitingData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     list.clear()
                     stopShimmer()
 
@@ -78,7 +79,7 @@ class AwaitingApprovalFragment : Fragment() {
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
                     stopShimmer()
                     response.message?.let { message ->
                         showNoContent()
@@ -86,7 +87,7 @@ class AwaitingApprovalFragment : Fragment() {
                     }
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
                     startShimmer()
                 }
             }
@@ -94,8 +95,8 @@ class AwaitingApprovalFragment : Fragment() {
 
         searchViewModel.getSearchData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let { search ->
                         eftnAdapter.differ.submitList(list.filter {
                             it.senderAccNumber!!.contains(
@@ -109,11 +110,11 @@ class AwaitingApprovalFragment : Fragment() {
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
 
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
 
                 }
             }

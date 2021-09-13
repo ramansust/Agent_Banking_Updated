@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.transaction.Row
 import com.datasoft.abs.databinding.FragmentWithdrawBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
@@ -60,8 +60,8 @@ class WithdrawalFragment : Fragment() {
 
         viewModel.getWithdrawData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     list.clear()
                     stopShimmer()
 
@@ -76,11 +76,11 @@ class WithdrawalFragment : Fragment() {
                     }
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
                     startShimmer()
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
                     stopShimmer()
                     response.message?.let { message ->
                         toastHelper.sendToast(message)
@@ -90,20 +90,24 @@ class WithdrawalFragment : Fragment() {
         })
 
         viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let { search ->
                         depositAdapter.differ.submitList(list.filter {
-                            it.drAccountNumber!!.contains(search, true) || it.transactionNo!!.contains(search, true)
+                            it.drAccountNumber!!.contains(
+                                search,
+                                true
+                            ) || it.transactionNo!!.contains(search, true)
                         })
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
 
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
 
                 }
             }

@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.FragmentTransactionWithdrawBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.transaction.TransactionViewModel
@@ -54,9 +54,9 @@ class WithdrawFragment : Fragment() {
         }
 
         viewModel.getAccountDetails().observe(viewLifecycleOwner, { response ->
-            when (response) {
 
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let {
                         acType = it.acType!!
                         accountNumber = it.accountNo!!
@@ -79,22 +79,22 @@ class WithdrawFragment : Fragment() {
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
                     response.message?.let { message ->
                         toastHelper.sendToast(message)
                     }
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
 
                 }
-
             }
         })
 
         withdrawViewModel.getAmountDetails().observe(viewLifecycleOwner, { response ->
-            when(response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let {
                         try {
                             binding.edTxtChargeVat.setText(
@@ -103,7 +103,8 @@ class WithdrawFragment : Fragment() {
                             )
                             binding.edTxtAmount.setText(
                                 ((it.chargeAmt?.toDouble() ?: 0.0) + (it.vatAmt?.toDouble()
-                                    ?: 0.0) + (it.transactionalAmount?.toDouble() ?: 0.0)).toString()
+                                    ?: 0.0) + (it.transactionalAmount?.toDouble()
+                                    ?: 0.0)).toString()
                             )
                         } catch (e: NumberFormatException) {
                             e.printStackTrace()
@@ -114,13 +115,13 @@ class WithdrawFragment : Fragment() {
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
                     response.message?.let { message ->
                         toastHelper.sendToast(message)
                     }
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
 
                 }
             }

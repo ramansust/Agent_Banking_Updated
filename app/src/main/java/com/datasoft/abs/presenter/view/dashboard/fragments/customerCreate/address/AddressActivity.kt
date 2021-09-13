@@ -12,7 +12,7 @@ import androidx.activity.viewModels
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.AddressActivityBinding
 import com.datasoft.abs.presenter.base.BaseActivity
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.AreaCode
 import com.datasoft.abs.presenter.utils.Constant.ADDRESS_INFO
 import com.datasoft.abs.presenter.utils.ToastHelper
@@ -45,104 +45,130 @@ class AddressActivity : BaseActivity() {
         }
 
         customerViewModel.getConfigData().observe(this, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let {
 
+            when (response.status) {
+                Status.SUCCESS -> {
+                    response.data?.let {
                         addressList.addAll(it.addessType)
                         binding.spinnerAddressType.adapter =
-                            ArrayAdapter(this, android.R.layout.simple_spinner_item, addressList)
+                            ArrayAdapter(
+                                this,
+                                android.R.layout.simple_spinner_item,
+                                addressList
+                            )
 
                         countryList.addAll(it.nationalityList)
                         binding.spinnerCountry.adapter =
-                            ArrayAdapter(this, android.R.layout.simple_spinner_item, countryList)
+                            ArrayAdapter(
+                                this,
+                                android.R.layout.simple_spinner_item,
+                                countryList
+                            )
 
                         districtList.addAll(it.districtList)
                         binding.spinnerDistrict.adapter =
-                            ArrayAdapter(this, android.R.layout.simple_spinner_item, districtList)
+                            ArrayAdapter(
+                                this,
+                                android.R.layout.simple_spinner_item,
+                                districtList
+                            )
 
                         contactList.addAll(it.contactType)
                         binding.spinnerContactType.adapter =
-                            ArrayAdapter(this, android.R.layout.simple_spinner_item, contactList)
+                            ArrayAdapter(
+                                this,
+                                android.R.layout.simple_spinner_item,
+                                contactList
+                            )
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
                     response.message?.let { message ->
                         binding.btnSave.isFocusable = false
                         binding.btnSave.isClickable = false
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
                 }
             }
         })
 
         addressViewModel.getThanaData().observe(this, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let {
 
-                        thanaList.clear()
-                        thanaList.addAll(it)
-                        binding.spinnerThana.adapter =
-                            ArrayAdapter(this, android.R.layout.simple_spinner_item, thanaList)
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        result.data?.let {
+                            thanaList.clear()
+                            thanaList.addAll(it)
+                            binding.spinnerThana.adapter =
+                                ArrayAdapter(this, android.R.layout.simple_spinner_item, thanaList)
+                        }
                     }
-                }
 
-                is Resource.Error -> {
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
+                    Status.ERROR -> {
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
                     }
-                }
 
-                is Resource.Loading -> {
+                    Status.LOADING -> {
 
+                    }
                 }
             }
         })
 
         addressViewModel.getUnionData().observe(this, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let {
 
-                        unionList.clear()
-                        unionList.addAll(it)
-                        binding.spinnerUnion.adapter =
-                            ArrayAdapter(this, android.R.layout.simple_spinner_item, unionList)
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        result.data?.let {
+                            unionList.clear()
+                            unionList.addAll(it)
+                            binding.spinnerUnion.adapter =
+                                ArrayAdapter(this, android.R.layout.simple_spinner_item, unionList)
+                        }
                     }
-                }
 
-                is Resource.Error -> {
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
+                    Status.ERROR -> {
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
                     }
-                }
 
-                is Resource.Loading -> {
+                    Status.LOADING -> {
 
+                    }
                 }
             }
         })
 
-        addressViewModel.getMessage().observe(this, {
-            when (it) {
-                is Resource.Success -> {
-                    val data = Intent()
-                    data.putExtra(ADDRESS_INFO, it.data)
-                    setResult(Activity.RESULT_OK, data)
-                    finish()
-                }
+        addressViewModel.getMessage().observe(this, { response ->
 
-                is Resource.Error -> {
-                    it.message?.let { message ->
-                        toastHelper.sendToast(message)
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        val data = Intent()
+                        data.putExtra(ADDRESS_INFO, result.data)
+                        setResult(Activity.RESULT_OK, data)
+                        finish()
                     }
-                }
 
-                is Resource.Loading -> {
+                    Status.ERROR -> {
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
+                    }
 
+                    Status.LOADING -> {
+
+                    }
                 }
             }
         })

@@ -40,7 +40,7 @@ class WithdrawalViewModel @Inject constructor(
 
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            searchData.postValue(Resource.Success(search))
+            searchData.postValue(Resource.success(search))
         }
     }
 
@@ -60,12 +60,13 @@ class WithdrawalViewModel @Inject constructor(
                 withdrawData.value?.data?.rows?.let { addAll(it) }
             }
 
-            withdrawData.postValue(Resource.Loading())
+            withdrawData.postValue(Resource.loading(null))
 
             if (network.isConnected()) {
                 try {
 
-                    val response = handleResponse(repository.getWithdrawData(commonRequest), pageNumber)
+                    val response =
+                        handleResponse(repository.getWithdrawData(commonRequest), pageNumber)
 
                     list.apply {
                         addAll(response.data?.rows!!)
@@ -75,7 +76,7 @@ class WithdrawalViewModel @Inject constructor(
                     withdrawData.postValue(response)
                 } catch (e: Exception) {
                     withdrawData.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -83,7 +84,7 @@ class WithdrawalViewModel @Inject constructor(
                 }
             } else {
                 withdrawData.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -91,13 +92,16 @@ class WithdrawalViewModel @Inject constructor(
         }
     }
 
-    private fun handleResponse(response: Response<DepositResponse>, pageNumber: Int): Resource<DepositResponse> {
+    private fun handleResponse(
+        response: Response<DepositResponse>,
+        pageNumber: Int
+    ): Resource<DepositResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 resultResponse.pageNumber = pageNumber
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 }

@@ -48,7 +48,7 @@ class CustomerViewModel @Inject constructor(
                     configData.postValue(handleConfigResponse(response))
                 } catch (e: Exception) {
                     configData.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -56,7 +56,7 @@ class CustomerViewModel @Inject constructor(
                 }
             } else {
                 configData.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -85,66 +85,74 @@ class CustomerViewModel @Inject constructor(
     private fun handleConfigResponse(response: Response<ConfigResponse>): Resource<ConfigResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 
     fun setDocumentList() {
         val documents = mutableListOf<DocumentVerificationInfo>()
 
         documents.add(
-            DocumentVerificationInfo("NID",
+            DocumentVerificationInfo(
+                "NID",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
         )
 
         documents.add(
-            DocumentVerificationInfo("Passport",
+            DocumentVerificationInfo(
+                "Passport",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
         )
 
         documents.add(
-            DocumentVerificationInfo("Birth Certificate",
+            DocumentVerificationInfo(
+                "Birth Certificate",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
         )
 
         documents.add(
-            DocumentVerificationInfo("e-Tin",
+            DocumentVerificationInfo(
+                "e-Tin",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
         )
 
         documents.add(
-            DocumentVerificationInfo("Driving License",
+            DocumentVerificationInfo(
+                "Driving License",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
         )
 
         documents.add(
-            DocumentVerificationInfo("Vat Registration",
+            DocumentVerificationInfo(
+                "Vat Registration",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
         )
 
         documents.add(
-            DocumentVerificationInfo("Organization Registration",
+            DocumentVerificationInfo(
+                "Organization Registration",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
         )
 
         documents.add(
-            DocumentVerificationInfo("Certificate of Incorporation",
+            DocumentVerificationInfo(
+                "Certificate of Incorporation",
                 isPhotocopyCollected = false,
                 isVerified = false
             )

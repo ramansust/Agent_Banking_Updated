@@ -12,6 +12,7 @@ import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -29,8 +30,8 @@ class GeneralViewModel @Inject constructor(
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
 ) : ViewModel() {
 
-    private val dedupeData = MutableLiveData<Resource<DedupeCheckResponse>>()
-    fun getDedupeData(): LiveData<Resource<DedupeCheckResponse>> = dedupeData
+    private val dedupeData = MutableLiveData<Event<Resource<DedupeCheckResponse>>>()
+    fun getDedupeData(): LiveData<Event<Resource<DedupeCheckResponse>>> = dedupeData
 
     private val savedData = MutableLiveData<SaveData>()
     fun getSavedData(): LiveData<SaveData> = savedData
@@ -54,7 +55,7 @@ class GeneralViewModel @Inject constructor(
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            dedupeData.postValue(Resource.Loading())
+            dedupeData.postValue(Event(Resource.loading(null)))
 
             val saveData = SaveData(
                 salutation,
@@ -76,8 +77,10 @@ class GeneralViewModel @Inject constructor(
                 || fatherName.isEmpty() || motherName.isEmpty() || city.isEmpty()
             ) {
                 dedupeData.postValue(
-                    Resource.Error(
-                        fieldEmpty, null
+                    Event(
+                        Resource.error(
+                            fieldEmpty, null
+                        )
                     )
                 )
                 return@launch
@@ -113,16 +116,20 @@ class GeneralViewModel @Inject constructor(
                     dedupeData.postValue(handleDedupeResponse(response, sanctionRequest))
                 } catch (e: Exception) {
                     dedupeData.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 dedupeData.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
@@ -132,7 +139,7 @@ class GeneralViewModel @Inject constructor(
     private fun handleDedupeResponse(
         response: Response<DedupeCheckResponse>,
         sanctionScreeningRequest: SanctionScreeningRequest
-    ): Resource<DedupeCheckResponse> {
+    ): Event<Resource<DedupeCheckResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return if (resultResponse.message == "No Dedupe found in ABS") {
@@ -141,15 +148,15 @@ class GeneralViewModel @Inject constructor(
                         if (response.isSuccessful) {
                             response.body()?.let {
                                 sanction.postValue(it)
-                                return@let Resource.Success(response)
+                                return@let Event(Resource.success(response))
                             }
                         }
                     }
-                    Resource.Success(resultResponse)
+                    Event(Resource.success(resultResponse))
                 } else
-                    Resource.Error(resultResponse.message)
+                    Event(Resource.error(resultResponse.message, null))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 }

@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.PersonalFragmentBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.ADULT_AGE
 import com.datasoft.abs.presenter.utils.ToastHelper
@@ -36,7 +36,6 @@ class PersonalFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
-    private var isClicked = false
     private var isAgeAboveEighteen = false
     private val myCalendar: Calendar = Calendar.getInstance()
 
@@ -83,44 +82,72 @@ class PersonalFragment : Fragment() {
 
         customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let {
 
                         maritalList.addAll(it.maritalStatusList)
                         binding.spinnerMaritalStatus.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, maritalList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                maritalList
+                            )
 
                         religionList.addAll(it.religionList)
                         binding.spinnerReligion.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, religionList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                religionList
+                            )
 
                         educationList.addAll(it.educationList)
                         binding.spinnerEducation.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, educationList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                educationList
+                            )
 
                         occupationList.addAll(it.occupationList)
                         binding.spinnerOccupation.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, occupationList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                occupationList
+                            )
 
                         nationalityList.addAll(it.nationalityList)
                         binding.spinnerNationality.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, nationalityList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                nationalityList
+                            )
 
                         relationList.addAll(it.relationList)
                         binding.spinnerNomineeRelation.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, relationList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                relationList
+                            )
 
                         binding.spinnerGuardianRelation.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, relationList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                relationList
+                            )
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
                     response.message?.let { message ->
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
                 }
             }
         })
@@ -128,62 +155,77 @@ class PersonalFragment : Fragment() {
 
         viewModel.getPersonalData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let {
+            response?.getContentIfNotHandled()?.let { result ->
 
-                        if(maritalList.isNotEmpty()) binding.spinnerMaritalStatus.setSelection(maritalList.indexOf(
-                            CommonModel(it.maritalStatus)
-                        ))
-                        binding.edTxtSpouseName.setText(it.spouseName)
-                        if(religionList.isNotEmpty()) binding.spinnerReligion.setSelection(religionList.indexOf(
-                            CommonModel(it.religion)
-                        ))
-                        binding.edTxtDependent.setText(it.numberOfDependents)
-                        if(educationList.isNotEmpty()) binding.spinnerEducation.setSelection(educationList.indexOf(
-                            CommonModel(it.education)
-                        ))
-                        if(occupationList.isNotEmpty()) binding.spinnerOccupation.setSelection(occupationList.indexOf(
-                            CommonModel(it.occupation)
-                        ))
-                        if(nationalityList.isNotEmpty()) binding.spinnerNationality.setSelection(nationalityList.indexOf(
-                            CommonModel(it.nationality)
-                        ))
-                        if(relationList.isNotEmpty()) binding.spinnerNomineeRelation.setSelection(relationList.indexOf(
-                            CommonModel(it.nomineeRelation)
-                        ))
-                        if(relationList.isNotEmpty()) binding.spinnerGuardianRelation.setSelection(relationList.indexOf(
-                            CommonModel(it.guardianRelation)
-                        ))
-                        binding.edTxtBirthCertificate.setText(it.birthCertificateNo)
-                        binding.edTxtVat.setText(it.vatRegistrationNo)
-                        binding.edTxtDrivingLicense.setText(it.drivingLicense)
-                        binding.edTxtMonthlyIncome.setText(it.monthlyIncome)
-                        binding.edTxtSourceOfFund.setText(it.sourceOfFund)
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        result.data?.let {
 
-                        binding.edTxtName.setText(it.nomineeName)
-                        binding.edTxtMobileNumber.setText(it.nomineeMobile)
-                        binding.edTxtAddress.setText(it.nomineeAddress)
-                        binding.edTxtEmail.setText(it.nomineeEmail)
+                            if (maritalList.isNotEmpty()) binding.spinnerMaritalStatus.setSelection(
+                                maritalList.indexOf(
+                                    CommonModel(it.maritalStatus)
+                                )
+                            )
+                            binding.edTxtSpouseName.setText(it.spouseName)
+                            if (religionList.isNotEmpty()) binding.spinnerReligion.setSelection(
+                                religionList.indexOf(
+                                    CommonModel(it.religion)
+                                )
+                            )
+                            binding.edTxtDependent.setText(it.numberOfDependents)
+                            if (educationList.isNotEmpty()) binding.spinnerEducation.setSelection(
+                                educationList.indexOf(
+                                    CommonModel(it.education)
+                                )
+                            )
+                            if (occupationList.isNotEmpty()) binding.spinnerOccupation.setSelection(
+                                occupationList.indexOf(
+                                    CommonModel(it.occupation)
+                                )
+                            )
+                            if (nationalityList.isNotEmpty()) binding.spinnerNationality.setSelection(
+                                nationalityList.indexOf(
+                                    CommonModel(it.nationality)
+                                )
+                            )
+                            if (relationList.isNotEmpty()) binding.spinnerNomineeRelation.setSelection(
+                                relationList.indexOf(
+                                    CommonModel(it.nomineeRelation)
+                                )
+                            )
+                            if (relationList.isNotEmpty()) binding.spinnerGuardianRelation.setSelection(
+                                relationList.indexOf(
+                                    CommonModel(it.guardianRelation)
+                                )
+                            )
+                            binding.edTxtBirthCertificate.setText(it.birthCertificateNo)
+                            binding.edTxtVat.setText(it.vatRegistrationNo)
+                            binding.edTxtDrivingLicense.setText(it.drivingLicense)
+                            binding.edTxtMonthlyIncome.setText(it.monthlyIncome)
+                            binding.edTxtSourceOfFund.setText(it.sourceOfFund)
 
-                        binding.edTxtGuardianName.setText(it.guardianName)
-                        binding.edTxtGuardianContact.setText(it.guardianContact)
-                        binding.edTxtGuardianAddress.setText(it.guardianAddress)
-                        binding.edTxtGuardianDob.setText(it.guardianDob)
+                            binding.edTxtName.setText(it.nomineeName)
+                            binding.edTxtMobileNumber.setText(it.nomineeMobile)
+                            binding.edTxtAddress.setText(it.nomineeAddress)
+                            binding.edTxtEmail.setText(it.nomineeEmail)
 
-                        if(isClicked)
+                            binding.edTxtGuardianName.setText(it.guardianName)
+                            binding.edTxtGuardianContact.setText(it.guardianContact)
+                            binding.edTxtGuardianAddress.setText(it.guardianAddress)
+                            binding.edTxtGuardianDob.setText(it.guardianDob)
+
                             customerViewModel.requestCurrentStep(2)
+                        }
                     }
-                }
-                is Resource.Error -> {
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
+                    Status.ERROR -> {
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
                     }
-                }
-                is Resource.Loading -> {
+                    Status.LOADING -> {
+                    }
                 }
             }
-
         })
 
         binding.edTxtGuardianDob.setOnClickListener {
@@ -194,27 +236,30 @@ class PersonalFragment : Fragment() {
             )
 
             val guardianCalender = Calendar.getInstance()
-            guardianCalender.set(guardianCalender[Calendar.YEAR] - ADULT_AGE, guardianCalender[Calendar.MONDAY], guardianCalender[Calendar.DAY_OF_MONTH])
+            guardianCalender.set(
+                guardianCalender[Calendar.YEAR] - ADULT_AGE,
+                guardianCalender[Calendar.MONDAY],
+                guardianCalender[Calendar.DAY_OF_MONTH]
+            )
 
             datePicker.datePicker.maxDate = guardianCalender.timeInMillis
             datePicker.show()
         }
 
         binding.btnNext.setOnClickListener {
-            isClicked = true
             viewModel.checkData(
                 isAgeAboveEighteen,
-                if(maritalList.isNotEmpty()) maritalList[binding.spinnerMaritalStatus.selectedItemPosition].id else 0,
+                if (maritalList.isNotEmpty()) maritalList[binding.spinnerMaritalStatus.selectedItemPosition].id else 0,
                 binding.edTxtSpouseName.text.trim().toString(),
-                if(religionList.isNotEmpty()) religionList[binding.spinnerReligion.selectedItemPosition].id else 0,
-                if(religionList.isNotEmpty()) religionList[binding.spinnerReligion.selectedItemPosition].name else "",
+                if (religionList.isNotEmpty()) religionList[binding.spinnerReligion.selectedItemPosition].id else 0,
+                if (religionList.isNotEmpty()) religionList[binding.spinnerReligion.selectedItemPosition].name else "",
                 binding.edTxtDependent.text.trim().toString(),
-                if(educationList.isNotEmpty()) educationList[binding.spinnerEducation.selectedItemPosition].id else 0,
-                if(educationList.isNotEmpty()) educationList[binding.spinnerEducation.selectedItemPosition].name else "",
-                if(occupationList.isNotEmpty()) occupationList[binding.spinnerOccupation.selectedItemPosition].id else 0,
-                if(occupationList.isNotEmpty()) occupationList[binding.spinnerOccupation.selectedItemPosition].name else "",
-                if(nationalityList.isNotEmpty()) nationalityList[binding.spinnerNationality.selectedItemPosition].id else 0,
-                if(nationalityList.isNotEmpty()) nationalityList[binding.spinnerNationality.selectedItemPosition].name else "",
+                if (educationList.isNotEmpty()) educationList[binding.spinnerEducation.selectedItemPosition].id else 0,
+                if (educationList.isNotEmpty()) educationList[binding.spinnerEducation.selectedItemPosition].name else "",
+                if (occupationList.isNotEmpty()) occupationList[binding.spinnerOccupation.selectedItemPosition].id else 0,
+                if (occupationList.isNotEmpty()) occupationList[binding.spinnerOccupation.selectedItemPosition].name else "",
+                if (nationalityList.isNotEmpty()) nationalityList[binding.spinnerNationality.selectedItemPosition].id else 0,
+                if (nationalityList.isNotEmpty()) nationalityList[binding.spinnerNationality.selectedItemPosition].name else "",
                 binding.edTxtBirthCertificate.text.trim().toString(),
                 binding.edTxtVat.text.trim().toString(),
                 binding.edTxtDrivingLicense.text.trim().toString(),
@@ -224,12 +269,12 @@ class PersonalFragment : Fragment() {
                 binding.edTxtName.text.trim().toString(),
                 binding.edTxtMobileNumber.text.trim().toString(),
                 binding.edTxtAddress.text.trim().toString(),
-                if(relationList.isNotEmpty()) relationList[binding.spinnerNomineeRelation.selectedItemPosition].id else 0,
+                if (relationList.isNotEmpty()) relationList[binding.spinnerNomineeRelation.selectedItemPosition].id else 0,
                 binding.edTxtEmail.text.trim().toString(),
 
                 binding.edTxtGuardianName.text.trim().toString(),
-                if(relationList.isNotEmpty()) relationList[binding.spinnerGuardianRelation.selectedItemPosition].id else 0,
-                if(relationList.isNotEmpty()) relationList[binding.spinnerGuardianRelation.selectedItemPosition].name else "",
+                if (relationList.isNotEmpty()) relationList[binding.spinnerGuardianRelation.selectedItemPosition].id else 0,
+                if (relationList.isNotEmpty()) relationList[binding.spinnerGuardianRelation.selectedItemPosition].name else "",
                 binding.edTxtGuardianContact.text.trim().toString(),
                 binding.edTxtGuardianAddress.text.trim().toString(),
                 binding.edTxtGuardianDob.text.trim().toString()

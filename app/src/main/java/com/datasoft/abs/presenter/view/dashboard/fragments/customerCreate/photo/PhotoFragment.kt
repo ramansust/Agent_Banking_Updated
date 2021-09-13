@@ -24,7 +24,7 @@ import com.bumptech.glide.RequestManager
 import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.config.DocumentConfigData
 import com.datasoft.abs.databinding.PhotoFragmentBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.IMAGE_COMPRESS
 import com.datasoft.abs.presenter.utils.Constant.IMAGE_RESOLUTION_HEIGHT
@@ -296,10 +296,10 @@ class PhotoFragment : Fragment() {
         val documentList = mutableListOf<DocumentConfigData>()
 
         customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let {
 
+            when (response.status) {
+                Status.SUCCESS -> {
+                    response.data?.let {
                         documentList.addAll(it.documentConfigData)
                         binding.spinnerGuardianDocumentType.adapter =
                             ArrayAdapter(
@@ -309,12 +309,12 @@ class PhotoFragment : Fragment() {
                             )
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
                     response.message?.let { message ->
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
                 }
             }
         })

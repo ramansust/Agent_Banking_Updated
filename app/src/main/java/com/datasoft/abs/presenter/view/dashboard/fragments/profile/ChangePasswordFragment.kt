@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.FragmentChangePasswordBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,22 +43,24 @@ class ChangePasswordFragment : Fragment() {
 
         viewModel.getChangePassword().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
+            response?.getContentIfNotHandled()?.let { result ->
+                when (result.status) {
 
-                is Resource.Success -> {
-                    response.data?.let {
-                        toastHelper.sendToast(it.message)
+                    Status.SUCCESS -> {
+                        result.data?.let {
+                            it.message.let { it1 -> toastHelper.sendToast(it1) }
+                        }
                     }
-                }
 
-                is Resource.Error -> {
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
+                    Status.ERROR -> {
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
                     }
-                }
 
-                is Resource.Loading -> {
+                    Status.LOADING -> {
 
+                    }
                 }
             }
         })

@@ -39,7 +39,7 @@ class KYCViewModel @Inject constructor(
                     configData.postValue(handleConfigResponse(response))
                 } catch (e: Exception) {
                     configData.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -47,7 +47,7 @@ class KYCViewModel @Inject constructor(
                 }
             } else {
                 configData.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -87,9 +87,9 @@ class KYCViewModel @Inject constructor(
     private fun handleConfigResponse(response: Response<RiskGradeResponse>): Resource<RiskGradeResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 }

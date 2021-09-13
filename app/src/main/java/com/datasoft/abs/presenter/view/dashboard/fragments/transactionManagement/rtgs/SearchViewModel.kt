@@ -19,7 +19,7 @@ class SearchViewModel @Inject constructor(
 
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            searchData.postValue(Resource.Success(search))
+            searchData.postValue(Resource.success(search))
         }
     }
 }

@@ -10,6 +10,7 @@ import com.datasoft.abs.data.dto.createCustomer.Contact
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -27,11 +28,11 @@ class AddressViewModel @Inject constructor(
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
 ) : ViewModel() {
 
-    private val thana = MutableLiveData<Resource<List<CommonModel>>>()
-    fun getThanaData(): LiveData<Resource<List<CommonModel>>> = thana
+    private val thana = MutableLiveData<Event<Resource<List<CommonModel>>>>()
+    fun getThanaData(): LiveData<Event<Resource<List<CommonModel>>>> = thana
 
-    private val union = MutableLiveData<Resource<List<CommonModel>>>()
-    fun getUnionData(): LiveData<Resource<List<CommonModel>>> = union
+    private val union = MutableLiveData<Event<Resource<List<CommonModel>>>>()
+    fun getUnionData(): LiveData<Event<Resource<List<CommonModel>>>> = union
 
     private val saveData = MutableLiveData<ArrayList<AddressInfo>>()
     fun getSavedData(): LiveData<ArrayList<AddressInfo>> = saveData
@@ -39,8 +40,8 @@ class AddressViewModel @Inject constructor(
     private val contactData = MutableLiveData<ArrayList<Contact>>()
     fun getContactData(): LiveData<ArrayList<Contact>> = contactData
 
-    private val sendMessage = MutableLiveData<Resource<AddressInfo>>()
-    fun getMessage(): LiveData<Resource<AddressInfo>> = sendMessage
+    private val sendMessage = MutableLiveData<Event<Resource<AddressInfo>>>()
+    fun getMessage(): LiveData<Event<Resource<AddressInfo>>> = sendMessage
 
     fun thanaData(area: Int, id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -50,16 +51,20 @@ class AddressViewModel @Inject constructor(
                     thana.postValue(handleResponse(response))
                 } catch (e: Exception) {
                     thana.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 thana.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
@@ -74,57 +79,100 @@ class AddressViewModel @Inject constructor(
                     union.postValue(handleResponse(response))
                 } catch (e: Exception) {
                     union.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 union.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
         }
     }
 
-    private fun handleResponse(response: Response<List<CommonModel>>): Resource<List<CommonModel>> {
+    private fun handleResponse(response: Response<List<CommonModel>>): Event<Resource<List<CommonModel>>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 
     fun checkData(
-        addressTypeValue: String, addressType: Int, houseNo: String, flatNo: String, village: String,
-        blockNo: String, roadNo: String, wordNo: String, zipCode: String, postCode: String,
-        state: String, country: Int, countryValue: String, city: String, district: Int, districtValue: String,
-        thana: Int, thanaValue: String, union: Int, unionValue: String, contactType: Int, contactNo: String
+        addressTypeValue: String,
+        addressType: Int,
+        houseNo: String,
+        flatNo: String,
+        village: String,
+        blockNo: String,
+        roadNo: String,
+        wordNo: String,
+        zipCode: String,
+        postCode: String,
+        state: String,
+        country: Int,
+        countryValue: String,
+        city: String,
+        district: Int,
+        districtValue: String,
+        thana: Int,
+        thanaValue: String,
+        union: Int,
+        unionValue: String,
+        contactType: Int,
+        contactNo: String
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            sendMessage.postValue(Resource.Loading())
+            sendMessage.postValue(Event(Resource.loading(null)))
 
             if (houseNo.isEmpty() || village.isEmpty() || postCode.isEmpty() || city.isEmpty() || contactNo.isEmpty()) {
                 sendMessage.postValue(
-                    Resource.Error(
-                        fieldEmpty, null
+                    Event(
+                        Resource.error(
+                            fieldEmpty, null
+                        )
                     )
                 )
                 return@launch
             }
 
             val addressInfo = AddressInfo(
-                addressTypeValue, addressType, houseNo, flatNo, village,
-                blockNo, roadNo, wordNo, zipCode, postCode, state, country, countryValue,
-                city, district, districtValue, thana, thanaValue, union, unionValue, contactType, contactNo
+                addressTypeValue,
+                addressType,
+                houseNo,
+                flatNo,
+                village,
+                blockNo,
+                roadNo,
+                wordNo,
+                zipCode,
+                postCode,
+                state,
+                country,
+                countryValue,
+                city,
+                district,
+                districtValue,
+                thana,
+                thanaValue,
+                union,
+                unionValue,
+                contactType,
+                contactNo
             )
 
-            sendMessage.postValue(Resource.Success(addressInfo))
+            sendMessage.postValue(Event(Resource.success(addressInfo)))
         }
     }
 

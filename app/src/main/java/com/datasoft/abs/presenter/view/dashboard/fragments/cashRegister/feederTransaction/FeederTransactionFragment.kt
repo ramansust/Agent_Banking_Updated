@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.transaction.rtgs.Row
 import com.datasoft.abs.databinding.FragmentFeederTransactionBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,46 +61,53 @@ class FeederTransactionFragment : Fragment() {
 
         viewModel.getFeederData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
-                    stopShimmer()
-                    response.data?.let {
-                        list.addAll(it.rows)
-                        feederTranListAdapter.differ.submitList(list)
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        stopShimmer()
+                        result.data?.let {
+                            list.addAll(it.rows)
+                            feederTranListAdapter.differ.submitList(list)
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        stopShimmer()
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
+                    }
+
+                    Status.LOADING -> {
+                        startShimmer()
                     }
                 }
 
-                is Resource.Error -> {
-                    stopShimmer()
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
-                    }
-                }
-
-                is Resource.Loading -> {
-                    startShimmer()
-                }
+                showNoContent()
             }
-
-            showNoContent()
         })
 
         viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let { search ->
-                        feederTranListAdapter.differ.submitList(list.filter {
-                            it.senderAccNumber!!.contains(search, true)
-                        })
+
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        result.data?.let { search ->
+                            feederTranListAdapter.differ.submitList(list.filter {
+                                it.senderAccNumber!!.contains(search, true)
+                            })
+                        }
                     }
-                }
 
-                is Resource.Error -> {
+                    Status.ERROR -> {
 
-                }
+                    }
 
-                is Resource.Loading -> {
+                    Status.LOADING -> {
 
+                    }
                 }
             }
         })

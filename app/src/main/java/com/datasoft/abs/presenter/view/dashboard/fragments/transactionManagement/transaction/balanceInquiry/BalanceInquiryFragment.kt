@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.databinding.FragmentBalanceInquiryBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.transactionManagement.transaction.TransactionViewModel
@@ -52,22 +52,26 @@ class BalanceInquiryFragment : Fragment() {
         }
 
         balanceInquiryViewModel.getBalanceInquiry().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    stopShimmer()
-                    response.data?.let { dataResponse ->
-                        balanceInquiryAdapter.differ.submitList(dataResponse)
+
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        stopShimmer()
+                        result.data?.let { dataResponse ->
+                            balanceInquiryAdapter.differ.submitList(dataResponse)
+                        }
                     }
-                }
 
-                is Resource.Loading -> {
-                    startShimmer()
-                }
+                    Status.LOADING -> {
+                        startShimmer()
+                    }
 
-                is Resource.Error -> {
-                    stopShimmer()
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
+                    Status.ERROR -> {
+                        stopShimmer()
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
                     }
                 }
             }

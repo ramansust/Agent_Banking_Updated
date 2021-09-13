@@ -5,6 +5,7 @@ import com.datasoft.abs.data.dto.transaction.TransactionDetailsResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -22,8 +23,9 @@ class TransactionDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val transactionDetails = MutableLiveData<Resource<TransactionDetailsResponse>>()
-    fun getTransactionDetails(): LiveData<Resource<TransactionDetailsResponse>> = transactionDetails
+    private val transactionDetails = MutableLiveData<Event<Resource<TransactionDetailsResponse>>>()
+    fun getTransactionDetails(): LiveData<Event<Resource<TransactionDetailsResponse>>> =
+        transactionDetails
 
     init {
         savedStateHandle.get<String>("transaction_no")?.let { transactionNo ->
@@ -34,7 +36,7 @@ class TransactionDetailsViewModel @Inject constructor(
     private fun transactionDetails(transactionNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            transactionDetails.postValue(Resource.Loading())
+            transactionDetails.postValue(Event(Resource.loading(null)))
 
             if (network.isConnected()) {
                 try {
@@ -42,28 +44,32 @@ class TransactionDetailsViewModel @Inject constructor(
                     transactionDetails.postValue(handleResponse(response))
                 } catch (e: Exception) {
                     transactionDetails.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 transactionDetails.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
         }
     }
 
-    private fun handleResponse(response: Response<TransactionDetailsResponse>): Resource<TransactionDetailsResponse> {
+    private fun handleResponse(response: Response<TransactionDetailsResponse>): Event<Resource<TransactionDetailsResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 }

@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import com.datasoft.abs.data.dto.login.LoginResponse
 import com.datasoft.abs.databinding.ActivityLoginBinding
 import com.datasoft.abs.presenter.base.BaseActivity
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant.USER_NAME
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
@@ -46,22 +46,26 @@ class LoginActivity : BaseActivity() {
         }
 
         loginViewModel.getLoginData().observe(this, { response ->
-            when(response) {
-                is Resource.Success -> {
-                    goneProgressBar()
-                    response.data?.let { loginResponse ->
-                        navigateToMainScreen(loginResponse)
+
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        goneProgressBar()
+                        result.data?.let { loginResponse ->
+                            navigateToMainScreen(loginResponse)
+                        }
                     }
-                }
-                is Resource.Error -> {
-                    goneProgressBar()
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
-                        Log.e("TAG", "An error occurred: $message")
+                    Status.ERROR -> {
+                        goneProgressBar()
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                            Log.e("TAG", "An error occurred: $message")
+                        }
                     }
-                }
-                is Resource.Loading -> {
-                    showProgressBar()
+                    Status.LOADING -> {
+                        showProgressBar()
+                    }
                 }
             }
         })

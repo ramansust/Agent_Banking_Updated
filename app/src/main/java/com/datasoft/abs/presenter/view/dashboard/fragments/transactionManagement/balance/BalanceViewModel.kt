@@ -40,7 +40,7 @@ class BalanceViewModel @Inject constructor(
 
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            searchData.postValue(Resource.Success(search))
+            searchData.postValue(Resource.success(search))
         }
     }
 
@@ -60,11 +60,12 @@ class BalanceViewModel @Inject constructor(
                 balanceData.value?.data?.rows?.let { addAll(it) }
             }
 
-            balanceData.postValue(Resource.Loading())
+            balanceData.postValue(Resource.loading(null))
 
             if (network.isConnected()) {
                 try {
-                    val response = handleResponse(repository.getBalanceData(commonRequest), pageNumber)
+                    val response =
+                        handleResponse(repository.getBalanceData(commonRequest), pageNumber)
 
                     list.apply {
                         addAll(response.data?.rows!!)
@@ -74,7 +75,7 @@ class BalanceViewModel @Inject constructor(
                     balanceData.postValue(response)
                 } catch (e: Exception) {
                     balanceData.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -82,7 +83,7 @@ class BalanceViewModel @Inject constructor(
                 }
             } else {
                 balanceData.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -90,13 +91,16 @@ class BalanceViewModel @Inject constructor(
         }
     }
 
-    private fun handleResponse(response: Response<DepositResponse>, pageNumber: Int): Resource<DepositResponse> {
+    private fun handleResponse(
+        response: Response<DepositResponse>,
+        pageNumber: Int
+    ): Resource<DepositResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 resultResponse.pageNumber = pageNumber
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 }

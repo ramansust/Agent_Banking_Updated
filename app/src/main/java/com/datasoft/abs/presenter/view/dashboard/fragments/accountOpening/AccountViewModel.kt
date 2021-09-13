@@ -49,7 +49,7 @@ class AccountViewModel @Inject constructor(
                     configData.postValue(handleConfigResponse(response))
                 } catch (e: Exception) {
                     configData.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -57,7 +57,7 @@ class AccountViewModel @Inject constructor(
                 }
             } else {
                 configData.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -73,16 +73,16 @@ class AccountViewModel @Inject constructor(
                     transactionProfile.postValue(handleTransactionProfileResponse(response))
                 } catch (e: Exception) {
                     transactionProfile.postValue(
-                        Resource.Error(
-                            "Something went wrong!", null
+                            Resource.error(
+                                somethingWrong, null
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 transactionProfile.postValue(
-                    Resource.Error(
-                        "No internet connection", null
+                        Resource.error(
+                            noInternet, null
                     )
                 )
             }
@@ -98,19 +98,19 @@ class AccountViewModel @Inject constructor(
     private fun handleConfigResponse(response: Response<AccountConfigResponse>): Resource<AccountConfigResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 
     private fun handleTransactionProfileResponse(response: Response<TransactionProfileConfig>): Resource<TransactionProfileConfig> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 
     fun requestListener(value: Boolean) {

@@ -11,7 +11,7 @@ import com.bumptech.glide.RequestManager
 import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.createCustomer.*
 import com.datasoft.abs.databinding.FragmentReviewBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
@@ -410,87 +410,94 @@ class ReviewFragment : Fragment() {
         })
 
         personalViewModel.getPersonalData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let {
 
-                        binding.txtViewReligionValue.text = it.religionValue
-                        binding.txtViewEducationValue.text = it.educationValue
-                        binding.txtViewOccupationValue.text = it.occupationValue
-                        binding.txtViewNationalityValue.text = it.nationalityValue
-                        binding.txtViewMonthlyIncomeValue.text = it.monthlyIncome
-                        binding.txtViewSourceOfFundValue.text = it.sourceOfFund
+            response?.getContentIfNotHandled()?.let { result ->
 
-                        guardian.contactNo = it.guardianContact
-                        guardian.dob = it.guardianDob
-                        guardian.nameOfGuardian = it.guardianName
-                        guardian.relationShipId = it.guardianRelation
-                        guardian.permanentAddress = it.guardianAddress
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        result.data?.let {
 
-                        binding.txtViewGuardianNameValue.text = it.guardianName
-                        binding.txtViewGuardianMobileNumberValue.text = it.guardianContact
-                        binding.txtViewGuardianRelationValue.text = it.guardianRelationValue
-                        binding.txtViewGuardianDobValue.text = it.guardianDob
+                            binding.txtViewReligionValue.text = it.religionValue
+                            binding.txtViewEducationValue.text = it.educationValue
+                            binding.txtViewOccupationValue.text = it.occupationValue
+                            binding.txtViewNationalityValue.text = it.nationalityValue
+                            binding.txtViewMonthlyIncomeValue.text = it.monthlyIncome
+                            binding.txtViewSourceOfFundValue.text = it.sourceOfFund
 
-                        nomineeInfo.address = it.nomineeAddress
-                        nomineeInfo.email = it.nomineeEmail
-                        nomineeInfo.mobileNo = it.nomineeMobile
-                        nomineeInfo.name = it.nomineeName
-                        nomineeInfo.relationshipId = it.nomineeRelation
+                            guardian.contactNo = it.guardianContact
+                            guardian.dob = it.guardianDob
+                            guardian.nameOfGuardian = it.guardianName
+                            guardian.relationShipId = it.guardianRelation
+                            guardian.permanentAddress = it.guardianAddress
 
-                        createCustomerRequest.apply {
-                            maritalStatus = it.maritalStatus
-                            spouseName = it.spouseName
-                            religion = it.religion
-                            noOfDependent = it.numberOfDependents.toInt()
-                            highestEducationalDegreeId = it.education
-                            occupationId = it.occupation
-                            nationalityId = it.nationality
-                            birthCertificateNo = it.birthCertificateNo
-                            vatRegistrationNo = it.vatRegistrationNo
-                            drivingLicenseNo = it.drivingLicense
-                            monthlyIncome = it.monthlyIncome.toInt()
-                            sourceOfFund = it.sourceOfFund
+                            binding.txtViewGuardianNameValue.text = it.guardianName
+                            binding.txtViewGuardianMobileNumberValue.text = it.guardianContact
+                            binding.txtViewGuardianRelationValue.text = it.guardianRelationValue
+                            binding.txtViewGuardianDobValue.text = it.guardianDob
 
-                            guardianInfo = if (isAdult)
-                                guardian
-                            else
-                                null
+                            nomineeInfo.address = it.nomineeAddress
+                            nomineeInfo.email = it.nomineeEmail
+                            nomineeInfo.mobileNo = it.nomineeMobile
+                            nomineeInfo.name = it.nomineeName
+                            nomineeInfo.relationshipId = it.nomineeRelation
 
-                            emergencyContact = nomineeInfo
+                            createCustomerRequest.apply {
+                                maritalStatus = it.maritalStatus
+                                spouseName = it.spouseName
+                                religion = it.religion
+                                noOfDependent = it.numberOfDependents.toInt()
+                                highestEducationalDegreeId = it.education
+                                occupationId = it.occupation
+                                nationalityId = it.nationality
+                                birthCertificateNo = it.birthCertificateNo
+                                vatRegistrationNo = it.vatRegistrationNo
+                                drivingLicenseNo = it.drivingLicense
+                                monthlyIncome = it.monthlyIncome.toInt()
+                                sourceOfFund = it.sourceOfFund
+
+                                guardianInfo = if (isAdult)
+                                    guardian
+                                else
+                                    null
+
+                                emergencyContact = nomineeInfo
+                            }
                         }
                     }
-                }
 
-                is Resource.Error -> {
-                    response.message?.let {
+                    Status.ERROR -> {
+                        result.message?.let {
+
+                        }
+                    }
+
+                    Status.LOADING -> {
 
                     }
                 }
-
-                is Resource.Loading -> {
-
-                }
             }
-
         })
 
         viewModel.getCreateCustomerData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    goneProgressBar()
-                    response.data?.let {
-                        toastHelper.sendToast(it.message)
+
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        goneProgressBar()
+                        result.data?.let {
+                            toastHelper.sendToast(it.message)
+                        }
                     }
-                }
-                is Resource.Error -> {
-                    goneProgressBar()
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
+                    Status.ERROR -> {
+                        goneProgressBar()
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
                     }
-                }
-                is Resource.Loading -> {
-                    showProgressBar()
+                    Status.LOADING -> {
+                        showProgressBar()
+                    }
                 }
             }
         })

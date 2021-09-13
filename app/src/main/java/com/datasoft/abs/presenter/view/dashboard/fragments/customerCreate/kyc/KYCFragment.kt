@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.KycFragmentBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -26,7 +26,6 @@ class KYCFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
-    private var isChecked = false
 
     @Inject
     lateinit var documentAdapter: VerifyListAdapter
@@ -66,8 +65,8 @@ class KYCFragment : Fragment() {
 
         viewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let {
 
                         onBoardingList.addAll(it.typeOfOnboarding)
@@ -151,13 +150,13 @@ class KYCFragment : Fragment() {
                             )
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
                     response.message?.let { message ->
                         binding.btnNext.isEnabled = false
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
                 }
             }
         })
@@ -223,12 +222,10 @@ class KYCFragment : Fragment() {
                 )
             )
 
-            if (isChecked)
-                customerViewModel.requestCurrentStep(7)
+            customerViewModel.requestCurrentStep(7)
         })
 
         binding.btnNext.setOnClickListener {
-            isChecked = true
             viewModel.saveData(
                 if (onBoardingList.isNotEmpty()) onBoardingList[binding.spinnerOnBoarding.selectedItemPosition].id else 0,
                 if (residentList.isNotEmpty()) residentList[binding.spinnerResidentStatus.selectedItemPosition].id else 0,

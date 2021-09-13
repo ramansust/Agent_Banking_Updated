@@ -8,6 +8,7 @@ import com.datasoft.abs.data.dto.createAccount.introducer.IntroducerInfo
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,8 +26,8 @@ class IntroducerViewModel @Inject constructor(
     @Named(Constant.SEARCH_EMPTY) private val searchEmpty: String,
 ) : ViewModel() {
 
-    private val introducer = MutableLiveData<Resource<IntroducerInfo>>()
-    fun getIntroducerData(): LiveData<Resource<IntroducerInfo>> =
+    private val introducer = MutableLiveData<Event<Resource<IntroducerInfo>>>()
+    fun getIntroducerData(): LiveData<Event<Resource<IntroducerInfo>>> =
         introducer
 
     private val relationId = MutableLiveData<Int>()
@@ -35,10 +36,12 @@ class IntroducerViewModel @Inject constructor(
     fun introducerData(accountNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            if(accountNo.isEmpty()) {
+            if (accountNo.isEmpty()) {
                 introducer.postValue(
-                    Resource.Error(
-                        searchEmpty, null
+                    Event(
+                        Resource.error(
+                            searchEmpty, null
+                        )
                     )
                 )
 
@@ -51,29 +54,33 @@ class IntroducerViewModel @Inject constructor(
                     introducer.postValue(handleIntroducerResponse(response))
                 } catch (e: Exception) {
                     introducer.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 introducer.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
         }
     }
 
-    private fun handleIntroducerResponse(response: Response<IntroducerInfo>): Resource<IntroducerInfo> {
+    private fun handleIntroducerResponse(response: Response<IntroducerInfo>): Event<Resource<IntroducerInfo>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 
     fun setRelationId(value: Int) {

@@ -11,6 +11,7 @@ import com.datasoft.abs.data.dto.transaction.WithdrawDepositResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -32,8 +33,8 @@ class TransactionViewModel @Inject constructor(
     private val accountDetails = MutableLiveData<Resource<AccountDetailsResponse>>()
     fun getAccountDetails(): LiveData<Resource<AccountDetailsResponse>> = accountDetails
 
-    private val withdrawDeposit = MutableLiveData<Resource<WithdrawDepositResponse>>()
-    fun getWithdrawDeposit(): LiveData<Resource<WithdrawDepositResponse>> = withdrawDeposit
+    private val withdrawDeposit = MutableLiveData<Event<Resource<WithdrawDepositResponse>>>()
+    fun getWithdrawDeposit(): LiveData<Event<Resource<WithdrawDepositResponse>>> = withdrawDeposit
 
     private val accountNumber = MutableLiveData<String>()
     fun getAccountNumber(): LiveData<String> = accountNumber
@@ -41,11 +42,11 @@ class TransactionViewModel @Inject constructor(
     fun accountDetails(accountNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            accountDetails.postValue(Resource.Loading())
+            accountDetails.postValue(Resource.loading(null))
 
             if (accountNo.isEmpty()) {
                 accountDetails.postValue(
-                    Resource.Error(
+                    Resource.error(
                         searchEmpty, null
                     )
                 )
@@ -59,7 +60,7 @@ class TransactionViewModel @Inject constructor(
                     accountDetails.postValue(handleResponse(response))
                 } catch (e: Exception) {
                     accountDetails.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -67,7 +68,7 @@ class TransactionViewModel @Inject constructor(
                 }
             } else {
                 accountDetails.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -100,12 +101,14 @@ class TransactionViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO) {
 
-            withdrawDeposit.postValue(Resource.Loading())
+            withdrawDeposit.postValue(Event(Resource.loading(null)))
 
             if (acType.isEmpty() || accountNumber.isEmpty()) {
                 withdrawDeposit.postValue(
-                    Resource.Error(
-                        fieldEmpty, null
+                    Event(
+                        Resource.error(
+                            fieldEmpty, null
+                        )
                     )
                 )
 
@@ -141,16 +144,20 @@ class TransactionViewModel @Inject constructor(
                     withdrawDeposit.postValue(handleWithdrawDepositResponse(response))
                 } catch (e: Exception) {
                     withdrawDeposit.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 withdrawDeposit.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
@@ -166,18 +173,18 @@ class TransactionViewModel @Inject constructor(
     private fun handleResponse(response: Response<AccountDetailsResponse>): Resource<AccountDetailsResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 
-    private fun handleWithdrawDepositResponse(response: Response<WithdrawDepositResponse>): Resource<WithdrawDepositResponse> {
+    private fun handleWithdrawDepositResponse(response: Response<WithdrawDepositResponse>): Event<Resource<WithdrawDepositResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 }

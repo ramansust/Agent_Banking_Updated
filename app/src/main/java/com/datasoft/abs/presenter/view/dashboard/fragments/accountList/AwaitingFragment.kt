@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.accountList.Row
 import com.datasoft.abs.databinding.FragmentAccountBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
@@ -57,8 +57,9 @@ class AwaitingFragment : Fragment() {
         }
 
         viewModel.getAwaitingData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     list.clear()
                     stopShimmer()
 
@@ -70,39 +71,46 @@ class AwaitingFragment : Fragment() {
                             it.copy()
                         })
 
-                        isLoading = list.size < customerResponse.pageNumber * Constant.PER_PAGE_ITEM
+                        isLoading =
+                            list.size < customerResponse.pageNumber * Constant.PER_PAGE_ITEM
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
                     stopShimmer()
                     response.message?.let { message ->
                         toastHelper.sendToast(message)
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
                     startShimmer()
                 }
             }
+
         })
 
         viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let { search ->
                         accountAdapter.differ.submitList(list.filter {
-                            it.accountTitle.contains(search, true) || it.accountNumber.contains(search, true)
+                            it.accountTitle.contains(search, true) || it.accountNumber.contains(
+                                search,
+                                true
+                            )
                         })
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
 
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
 
                 }
             }
+
         })
 
         accountAdapter.setOnEditClickListener {

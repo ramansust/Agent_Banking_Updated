@@ -12,6 +12,7 @@ import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -30,17 +31,17 @@ class RTGSTransactionViewModel @Inject constructor(
     @Named(Constant.SEARCH_EMPTY) private val searchEmpty: String
 ) : ViewModel() {
 
-    private val createRTGS = MutableLiveData<Resource<CreateCustomerResponse>>()
-    fun getCreationData(): LiveData<Resource<CreateCustomerResponse>> = createRTGS
+    private val createRTGS = MutableLiveData<Event<Resource<CreateCustomerResponse>>>()
+    fun getCreationData(): LiveData<Event<Resource<CreateCustomerResponse>>> = createRTGS
 
-    private val accountDetails = MutableLiveData<Resource<AccountDetailsResponse>>()
-    fun getAccountDetails(): LiveData<Resource<AccountDetailsResponse>> = accountDetails
+    private val accountDetails = MutableLiveData<Event<Resource<AccountDetailsResponse>>>()
+    fun getAccountDetails(): LiveData<Event<Resource<AccountDetailsResponse>>> = accountDetails
 
-    private val bankList: MutableLiveData<Resource<List<CommonModel>>> = MutableLiveData()
-    fun getBankList(): LiveData<Resource<List<CommonModel>>> = bankList
+    private val bankList: MutableLiveData<Event<Resource<List<CommonModel>>>> = MutableLiveData()
+    fun getBankList(): LiveData<Event<Resource<List<CommonModel>>>> = bankList
 
-    private val branchList: MutableLiveData<Resource<List<CommonModel>>> = MutableLiveData()
-    fun getBranchList(): LiveData<Resource<List<CommonModel>>> = branchList
+    private val branchList: MutableLiveData<Event<Resource<List<CommonModel>>>> = MutableLiveData()
+    fun getBranchList(): LiveData<Event<Resource<List<CommonModel>>>> = branchList
 
     init {
         requestBankList()
@@ -49,7 +50,7 @@ class RTGSTransactionViewModel @Inject constructor(
     private fun requestBankList() {
         viewModelScope.launch(Dispatchers.IO) {
 
-            bankList.postValue(Resource.Loading())
+            bankList.postValue(Event(Resource.loading(null)))
 
             if (network.isConnected()) {
                 try {
@@ -57,16 +58,20 @@ class RTGSTransactionViewModel @Inject constructor(
                     bankList.postValue(handleResponse(response))
                 } catch (e: Exception) {
                     bankList.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 bankList.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
@@ -76,7 +81,7 @@ class RTGSTransactionViewModel @Inject constructor(
     fun requestBranchList(bankId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            branchList.postValue(Resource.Loading())
+            branchList.postValue(Event(Resource.loading(null)))
 
             if (network.isConnected()) {
                 try {
@@ -84,16 +89,20 @@ class RTGSTransactionViewModel @Inject constructor(
                     branchList.postValue(handleResponse(response))
                 } catch (e: Exception) {
                     branchList.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 branchList.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
@@ -103,12 +112,14 @@ class RTGSTransactionViewModel @Inject constructor(
     fun accountDetails(accountNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            accountDetails.postValue(Resource.Loading())
+            accountDetails.postValue(Event(Resource.loading(null)))
 
             if (accountNo.isEmpty()) {
                 accountDetails.postValue(
-                    Resource.Error(
-                        searchEmpty, null
+                    Event(
+                        Resource.error(
+                            searchEmpty, null
+                        )
                     )
                 )
 
@@ -121,16 +132,20 @@ class RTGSTransactionViewModel @Inject constructor(
                     accountDetails.postValue(handleAccountResponse(response))
                 } catch (e: Exception) {
                     accountDetails.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 accountDetails.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
@@ -152,12 +167,14 @@ class RTGSTransactionViewModel @Inject constructor(
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            createRTGS.postValue(Resource.Loading())
+            createRTGS.postValue(Event(Resource.loading(null)))
 
             if (receiverAccNumber.isEmpty() || receiverName.isEmpty() || senderAccNumber.isEmpty() || amount == 0) {
                 createRTGS.postValue(
-                    Resource.Error(
-                        fieldEmpty, null
+                    Event(
+                        Resource.error(
+                            fieldEmpty, null
+                        )
                     )
                 )
 
@@ -189,46 +206,50 @@ class RTGSTransactionViewModel @Inject constructor(
                     createRTGS.postValue(handleCreationResponse(response))
                 } catch (e: Exception) {
                     createRTGS.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 createRTGS.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
         }
     }
 
-    private fun handleResponse(response: Response<List<CommonModel>>): Resource<List<CommonModel>> {
+    private fun handleResponse(response: Response<List<CommonModel>>): Event<Resource<List<CommonModel>>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 
-    private fun handleAccountResponse(response: Response<AccountDetailsResponse>): Resource<AccountDetailsResponse> {
+    private fun handleAccountResponse(response: Response<AccountDetailsResponse>): Event<Resource<AccountDetailsResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 
-    private fun handleCreationResponse(response: Response<CreateCustomerResponse>): Resource<CreateCustomerResponse> {
+    private fun handleCreationResponse(response: Response<CreateCustomerResponse>): Event<Resource<CreateCustomerResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.errorBody()!!.string())
+        return Event(Resource.error(response.errorBody()!!.string(), null))
     }
 }

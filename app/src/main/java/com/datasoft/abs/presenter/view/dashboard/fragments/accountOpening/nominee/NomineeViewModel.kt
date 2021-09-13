@@ -8,6 +8,7 @@ import com.datasoft.abs.data.dto.createAccount.review.Nominee
 import com.datasoft.abs.data.dto.createAccount.review.NomineeRemainMinor
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,8 +28,8 @@ class NomineeViewModel @Inject constructor(
     private val sharePercent = MutableLiveData<Int>().apply { postValue(0) }
     fun getSharePercent(): LiveData<Int> = sharePercent
 
-    private val nomineeData = MutableLiveData<Resource<Nominee>>()
-    fun getNomineeData(): LiveData<Resource<Nominee>> = nomineeData
+    private val nomineeData = MutableLiveData<Event<Resource<Nominee>>>()
+    fun getNomineeData(): LiveData<Event<Resource<Nominee>>> = nomineeData
 
     private val saveData = MutableLiveData<ArrayList<Nominee>>()
     fun getSavedData(): LiveData<ArrayList<Nominee>> = saveData
@@ -69,7 +70,7 @@ class NomineeViewModel @Inject constructor(
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            nomineeData.postValue(Resource.Loading())
+            nomineeData.postValue(Event(Resource.loading(null)))
 
             if (name.isEmpty() || motherName.isEmpty() || expiryDate.isEmpty() ||
                 presentAddress.isEmpty() || fatherName.isEmpty() || dob.isEmpty() ||
@@ -77,8 +78,10 @@ class NomineeViewModel @Inject constructor(
                 photo.isEmpty() || signaturePhoto.isEmpty() || nidFrontPhoto.isEmpty()
             ) {
                 nomineeData.postValue(
-                    Resource.Error(
-                        fieldEmpty, null
+                    Event(
+                        Resource.error(
+                            fieldEmpty, null
+                        )
                     )
                 )
                 return@launch
@@ -88,8 +91,10 @@ class NomineeViewModel @Inject constructor(
                     nomineeIdValue.isEmpty()
                 ) {
                     nomineeData.postValue(
-                        Resource.Error(
-                            fieldEmpty, null
+                        Event(
+                            Resource.error(
+                                fieldEmpty, null
+                            )
                         )
                     )
                     return@launch
@@ -129,7 +134,7 @@ class NomineeViewModel @Inject constructor(
                 ) else null
             )
 
-            nomineeData.postValue(Resource.Success(nomineeInfo))
+            nomineeData.postValue(Event(Resource.success(nomineeInfo)))
         }
     }
 

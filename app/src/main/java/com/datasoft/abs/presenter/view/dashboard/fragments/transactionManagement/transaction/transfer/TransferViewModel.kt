@@ -47,7 +47,7 @@ class TransferViewModel @Inject constructor(
 
             if (trnAmount == 0) {
                 amountDetails.postValue(
-                    Resource.Error(
+                    Resource.error(
                         "Transaction amount must not be empty!", null
                     )
                 )
@@ -72,7 +72,7 @@ class TransferViewModel @Inject constructor(
                     amountDetails.postValue(handleAmountResponse(response))
                 } catch (e: Exception) {
                     amountDetails.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -80,7 +80,7 @@ class TransferViewModel @Inject constructor(
                 }
             } else {
                 amountDetails.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -91,10 +91,10 @@ class TransferViewModel @Inject constructor(
     private fun handleAmountResponse(response: Response<AmountDetailsResponse>): Resource<AmountDetailsResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.errorBody()!!.string())
+        return Resource.error(response.errorBody()!!.string(), null)
     }
 
     fun receiverDetails(accountNo: String) {
@@ -102,7 +102,7 @@ class TransferViewModel @Inject constructor(
 
             if (accountNo.isEmpty()) {
                 receiverDetails.postValue(
-                    Resource.Error(
+                    Resource.error(
                         searchEmpty, null
                     )
                 )
@@ -116,7 +116,7 @@ class TransferViewModel @Inject constructor(
                     receiverDetails.postValue(handleResponse(response))
                 } catch (e: Exception) {
                     receiverDetails.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -124,7 +124,7 @@ class TransferViewModel @Inject constructor(
                 }
             } else {
                 receiverDetails.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -135,9 +135,9 @@ class TransferViewModel @Inject constructor(
     private fun handleResponse(response: Response<ReceiverDetailsResponse>): Resource<ReceiverDetailsResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 }

@@ -20,7 +20,7 @@ import com.datasoft.abs.data.dto.createAccount.review.JointCustomerInfo
 import com.datasoft.abs.data.dto.createAccount.review.Nominee
 import com.datasoft.abs.data.dto.createAccount.review.TransactionProfile
 import com.datasoft.abs.databinding.FragmentAccountReviewBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
@@ -86,33 +86,38 @@ class ReviewFragment : Fragment() {
         setupRecyclerViewTransaction()
 
         generalViewModel.getAccountInfo().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let {
-                        createAccountRequest.apply {
-                            productId = it.accountId
-                            currencyId = it.currencyId
-                            initialAmount = it.initialAmount
-                            accountTitle = it.accountTitle
-                            mandateOfAccOperationId = it.operatingId
-                            natureOfBusinessId = it.fundId
+
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        result.data?.let {
+                            createAccountRequest.apply {
+                                productId = it.accountId
+                                currencyId = it.currencyId
+                                initialAmount = it.initialAmount
+                                accountTitle = it.accountTitle
+                                mandateOfAccOperationId = it.operatingId
+                                natureOfBusinessId = it.fundId
+                            }
                         }
                     }
-                }
 
-                is Resource.Error -> {
+                    Status.ERROR -> {
 
-                }
+                    }
 
-                is Resource.Loading -> {
+                    Status.LOADING -> {
 
+                    }
                 }
             }
         })
 
         generalViewModel.getDisplayAccountInfo().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let {
                         binding.txtViewAccountValue.text = it.accountTitle
                         binding.txtViewProductValue.text = it.category
@@ -123,19 +128,20 @@ class ReviewFragment : Fragment() {
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
 
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
 
                 }
             }
         })
 
         generalViewModel.getCustomerData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let {
                         createAccountRequest.apply {
                             val list = mutableListOf<JointCustomerInfo>()
@@ -156,11 +162,11 @@ class ReviewFragment : Fragment() {
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
 
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
 
                 }
             }
@@ -205,21 +211,25 @@ class ReviewFragment : Fragment() {
         })
 
         introducerViewModel.getIntroducerData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let {
-                        createAccountRequest.introducerId = 0
-                        binding.txtViewNameValue.text = it.fullName
-                        binding.txtViewAccountNumberValue.text = it.accountNumber
+
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        result.data?.let {
+                            createAccountRequest.introducerId = 0
+                            binding.txtViewNameValue.text = it.fullName
+                            binding.txtViewAccountNumberValue.text = it.accountNumber
+                        }
                     }
-                }
 
-                is Resource.Error -> {
+                    Status.ERROR -> {
 
-                }
+                    }
 
-                is Resource.Loading -> {
+                    Status.LOADING -> {
 
+                    }
                 }
             }
         })
@@ -286,23 +296,26 @@ class ReviewFragment : Fragment() {
 
         viewModel.getCreateAccountData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
-                    goneProgressBar()
-                    response.data?.let {
-                        toastHelper.sendToast(it.message)
-                    }
-                }
+            response?.getContentIfNotHandled()?.let { result ->
 
-                is Resource.Error -> {
-                    goneProgressBar()
-                    response.message?.let { message ->
-                        Log.e("TAG", "An error occurred: $message")
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        goneProgressBar()
+                        result.data?.let {
+                            toastHelper.sendToast(it.message)
+                        }
                     }
-                }
 
-                is Resource.Loading -> {
-                    showProgressBar()
+                    Status.ERROR -> {
+                        goneProgressBar()
+                        result.message?.let { message ->
+                            Log.e("TAG", "An error occurred: $message")
+                        }
+                    }
+
+                    Status.LOADING -> {
+                        showProgressBar()
+                    }
                 }
             }
         })

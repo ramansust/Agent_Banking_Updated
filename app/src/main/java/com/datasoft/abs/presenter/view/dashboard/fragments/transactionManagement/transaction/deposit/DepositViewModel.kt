@@ -40,11 +40,11 @@ class DepositViewModel @Inject constructor(
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            amountDetails.postValue(Resource.Loading())
+            amountDetails.postValue(Resource.loading(null))
 
             if (trnAmount == 0) {
                 amountDetails.postValue(
-                    Resource.Error(
+                    Resource.error(
                         "Transaction amount must not be empty!", null
                     )
                 )
@@ -69,17 +69,20 @@ class DepositViewModel @Inject constructor(
                     amountDetails.postValue(handleAmountResponse(response))
                 } catch (e: Exception) {
                     amountDetails.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
+
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 amountDetails.postValue(
-                    Resource.Error(
+
+                    Resource.error(
                         noInternet, null
                     )
+
                 )
             }
         }
@@ -88,9 +91,9 @@ class DepositViewModel @Inject constructor(
     private fun handleAmountResponse(response: Response<AmountDetailsResponse>): Resource<AmountDetailsResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.errorBody()!!.string())
+        return Resource.error(response.errorBody()!!.string(), null)
     }
 }

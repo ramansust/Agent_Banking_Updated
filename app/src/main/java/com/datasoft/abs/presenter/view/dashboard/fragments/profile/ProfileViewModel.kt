@@ -10,6 +10,7 @@ import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.PASSWORD_REGEX
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -27,35 +28,35 @@ class ProfileViewModel @Inject constructor(
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
 ) : ViewModel() {
 
-    private val changePassword = MutableLiveData<Resource<ChangePasswordResponse>>()
-    fun getChangePassword(): LiveData<Resource<ChangePasswordResponse>> = changePassword
+    private val changePassword = MutableLiveData<Event<Resource<ChangePasswordResponse>>>()
+    fun getChangePassword(): LiveData<Event<Resource<ChangePasswordResponse>>> = changePassword
 
     fun changePassword(currentPassword: String, newPassword: String, confirmNewPassword: String) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            changePassword.postValue(Resource.Loading())
+            changePassword.postValue(Event(Resource.loading(null)))
 
             if (currentPassword.isEmpty() || newPassword.isEmpty() || confirmNewPassword.isEmpty()) {
                 changePassword.postValue(
-                    Resource.Error(
+                    Event(Resource.error(
                         fieldEmpty, null
-                    )
+                    ))
                 )
 
                 return@launch
             } else if (newPassword != confirmNewPassword) {
                 changePassword.postValue(
-                    Resource.Error(
+                    Event(Resource.error(
                         "New password and the confirm password are not same!", null
-                    )
+                    ))
                 )
 
                 return@launch
             } else if (!PASSWORD_REGEX.toRegex().matches(newPassword)) {
                 changePassword.postValue(
-                    Resource.Error(
+                    Event(Resource.error(
                         "Follow the instructions to make the valid password!", null
-                    )
+                    ))
                 )
 
                 return@launch
@@ -70,20 +71,20 @@ class ProfileViewModel @Inject constructor(
                             confirmNewPassword
                         )
                     )
-                    changePassword.postValue(handleResponse(response))
+                    changePassword.postValue(Event(handleResponse(response)))
                 } catch (e: Exception) {
                     changePassword.postValue(
-                        Resource.Error(
+                        Event(Resource.error(
                             somethingWrong, null
-                        )
+                        ))
                     )
                     e.printStackTrace()
                 }
             } else {
                 changePassword.postValue(
-                    Resource.Error(
+                    Event(Resource.error(
                         noInternet, null
-                    )
+                    ))
                 )
             }
         }
@@ -92,9 +93,9 @@ class ProfileViewModel @Inject constructor(
     private fun handleResponse(response: Response<ChangePasswordResponse>): Resource<ChangePasswordResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 }

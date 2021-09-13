@@ -9,6 +9,7 @@ import com.datasoft.abs.data.dto.createCustomer.CreateCustomerResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,13 +26,14 @@ class ReviewViewModel @Inject constructor(
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
 ) : ViewModel() {
 
-    private val createCustomerData = MutableLiveData<Resource<CreateCustomerResponse>>()
-    fun getCreateCustomerData(): LiveData<Resource<CreateCustomerResponse>> = createCustomerData
+    private val createCustomerData = MutableLiveData<Event<Resource<CreateCustomerResponse>>>()
+    fun getCreateCustomerData(): LiveData<Event<Resource<CreateCustomerResponse>>> =
+        createCustomerData
 
     fun createCustomer(createCustomerRequest: CreateCustomerRequest) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            createCustomerData.postValue(Resource.Loading())
+            createCustomerData.postValue(Event(Resource.loading(null)))
 
             if (network.isConnected()) {
                 try {
@@ -39,28 +41,32 @@ class ReviewViewModel @Inject constructor(
                     createCustomerData.postValue(handleCreateCustomerResponse(response))
                 } catch (e: Exception) {
                     createCustomerData.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 createCustomerData.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
         }
     }
 
-    private fun handleCreateCustomerResponse(response: Response<CreateCustomerResponse>): Resource<CreateCustomerResponse> {
+    private fun handleCreateCustomerResponse(response: Response<CreateCustomerResponse>): Event<Resource<CreateCustomerResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 }

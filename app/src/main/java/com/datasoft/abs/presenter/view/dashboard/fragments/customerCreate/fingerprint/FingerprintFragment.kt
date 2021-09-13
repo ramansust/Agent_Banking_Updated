@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.FingerprintFragmentBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,8 +41,9 @@ class FingerprintFragment : Fragment() {
         customerViewModel.requestListener(false)
 
         customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let {
 
                         fingerSize = it.fingerKey.size
@@ -105,12 +106,12 @@ class FingerprintFragment : Fragment() {
                         }
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
                     response.message?.let { message ->
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
                 }
             }
         })
@@ -121,7 +122,7 @@ class FingerprintFragment : Fragment() {
                     binding.btnNext.isEnabled = true
                 }
                 it.size < fingerSize / 2 -> {
-                    when(it.size) {
+                    when (it.size) {
                         1 -> binding.btnScanLeft2.isEnabled = true
                         2 -> binding.btnScanLeft3.isEnabled = true
                         3 -> binding.btnScanLeft4.isEnabled = true
@@ -129,7 +130,7 @@ class FingerprintFragment : Fragment() {
                     }
                 }
                 it.size >= fingerSize / 2 -> {
-                    when(it.size + 1 - fingerSize / 2) {
+                    when (it.size + 1 - fingerSize / 2) {
                         1 -> binding.btnScanRight1.isEnabled = true
                         2 -> binding.btnScanRight2.isEnabled = true
                         3 -> binding.btnScanRight3.isEnabled = true

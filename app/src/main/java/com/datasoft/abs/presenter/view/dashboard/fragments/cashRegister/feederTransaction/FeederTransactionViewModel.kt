@@ -11,6 +11,7 @@ import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -28,18 +29,18 @@ class FeederTransactionViewModel @Inject constructor(
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
 ) : ViewModel() {
 
-    private val createFeeder = MutableLiveData<Resource<CreateCustomerResponse>>()
-    fun getCreationData(): LiveData<Resource<CreateCustomerResponse>> = createFeeder
+    private val createFeeder = MutableLiveData<Event<Resource<CreateCustomerResponse>>>()
+    fun getCreationData(): LiveData<Event<Resource<CreateCustomerResponse>>> = createFeeder
 
-    private val feederData = MutableLiveData<Resource<RTGSListResponse>>()
-    fun getFeederData(): LiveData<Resource<RTGSListResponse>> = feederData
+    private val feederData = MutableLiveData<Event<Resource<RTGSListResponse>>>()
+    fun getFeederData(): LiveData<Event<Resource<RTGSListResponse>>> = feederData
 
-    private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
-    fun getSearchData(): LiveData<Resource<String>> = searchData
+    private val searchData: MutableLiveData<Event<Resource<String>>> = MutableLiveData()
+    fun getSearchData(): LiveData<Event<Resource<String>>> = searchData
 
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            searchData.postValue(Resource.Success(search))
+            searchData.postValue(Event(Resource.success(search)))
         }
     }
 
@@ -55,16 +56,20 @@ class FeederTransactionViewModel @Inject constructor(
                     feederData.postValue(handleCustomerResponse(response))
                 } catch (e: Exception) {
                     feederData.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 feederData.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
@@ -85,12 +90,14 @@ class FeederTransactionViewModel @Inject constructor(
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            createFeeder.postValue(Resource.Loading())
+            createFeeder.postValue(Event(Resource.loading(null)))
 
             if (receiverAccNumber.isEmpty() || receiverName.isEmpty() || senderAccNumber.isEmpty() || amount == 0) {
                 createFeeder.postValue(
-                    Resource.Error(
-                        fieldEmpty, null
+                    Event(
+                        Resource.error(
+                            fieldEmpty, null
+                        )
                     )
                 )
 
@@ -122,38 +129,42 @@ class FeederTransactionViewModel @Inject constructor(
                     createFeeder.postValue(handleCreationResponse(response))
                 } catch (e: Exception) {
                     createFeeder.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 createFeeder.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
         }
     }
 
-    private fun handleCustomerResponse(response: Response<RTGSListResponse>): Resource<RTGSListResponse> {
+    private fun handleCustomerResponse(response: Response<RTGSListResponse>): Event<Resource<RTGSListResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 
-    private fun handleCreationResponse(response: Response<CreateCustomerResponse>): Resource<CreateCustomerResponse> {
+    private fun handleCreationResponse(response: Response<CreateCustomerResponse>): Event<Resource<CreateCustomerResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 
 }

@@ -15,7 +15,7 @@ import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.config.DocumentConfigData
 import com.datasoft.abs.databinding.DocumentsActivityBinding
 import com.datasoft.abs.presenter.base.BaseActivity
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
 import com.datasoft.abs.presenter.utils.Constant.IMAGE_COMPRESS
@@ -53,23 +53,28 @@ class DocumentActivity : BaseActivity() {
         }
 
         customerViewModel.getConfigData().observe(this, { response ->
-            when (response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let {
 
                         documentList.addAll(it.documentConfigData)
                         binding.spinnerDocumentsType.adapter =
-                            ArrayAdapter(this, android.R.layout.simple_spinner_item, documentList)
+                            ArrayAdapter(
+                                this,
+                                android.R.layout.simple_spinner_item,
+                                documentList
+                            )
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
                     response.message?.let { message ->
                         binding.btnSave.isFocusable = false
                         binding.btnSave.isClickable = false
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
                 }
             }
         })
@@ -88,23 +93,27 @@ class DocumentActivity : BaseActivity() {
             }
         })
 
-        documentsViewModel.getMessage().observe(this, {
-            when (it) {
-                is Resource.Success -> {
-                    val data = Intent()
-                    data.putExtra(Constant.DOCUMENT_INFO, it.data)
-                    setResult(Activity.RESULT_OK, data)
-                    finish()
-                }
+        documentsViewModel.getMessage().observe(this, { response ->
 
-                is Resource.Error -> {
-                    it.message?.let { message ->
-                        toastHelper.sendToast(message)
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        val data = Intent()
+                        data.putExtra(Constant.DOCUMENT_INFO, result.data)
+                        setResult(Activity.RESULT_OK, data)
+                        finish()
                     }
-                }
 
-                is Resource.Loading -> {
+                    Status.ERROR -> {
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
+                    }
 
+                    Status.LOADING -> {
+
+                    }
                 }
             }
         })

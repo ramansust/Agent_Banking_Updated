@@ -11,6 +11,7 @@ import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -28,14 +29,14 @@ class CashRegisterViewModel @Inject constructor(
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
 ) : ViewModel() {
 
-    private val createCashRegister = MutableLiveData<Resource<CreateCustomerResponse>>()
-    fun getCreationData(): LiveData<Resource<CreateCustomerResponse>> = createCashRegister
+    private val createCashRegister = MutableLiveData<Event<Resource<CreateCustomerResponse>>>()
+    fun getCashRegister(): LiveData<Event<Resource<CreateCustomerResponse>>> = createCashRegister
 
-    private val cashRegisterData = MutableLiveData<Resource<RTGSListResponse>>()
-    fun getCashRegisterData(): LiveData<Resource<RTGSListResponse>> = cashRegisterData
+    private val cashRegisterData = MutableLiveData<Event<Resource<RTGSListResponse>>>()
+    fun getCastRegisterData(): LiveData<Event<Resource<RTGSListResponse>>> = cashRegisterData
 
-    private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
-    fun getSearchData(): LiveData<Resource<String>> = searchData
+    private val searchData: MutableLiveData<Event<Resource<String>>> = MutableLiveData()
+    fun getSearchData(): LiveData<Event<Resource<String>>> = searchData
 
     init {
         requestCashRegisterData(AccountRequest(1, status = "7"))
@@ -43,7 +44,7 @@ class CashRegisterViewModel @Inject constructor(
 
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            searchData.postValue(Resource.Success(search))
+            searchData.postValue(Event(Resource.success(search)))
         }
     }
 
@@ -55,16 +56,20 @@ class CashRegisterViewModel @Inject constructor(
                     cashRegisterData.postValue(handleCustomerResponse(response))
                 } catch (e: Exception) {
                     cashRegisterData.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 cashRegisterData.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
@@ -85,12 +90,14 @@ class CashRegisterViewModel @Inject constructor(
     ) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            createCashRegister.postValue(Resource.Loading())
+            createCashRegister.postValue(Event(Resource.loading(null)))
 
             if (receiverAccNumber.isEmpty() || receiverName.isEmpty() || senderAccNumber.isEmpty() || amount == 0) {
                 createCashRegister.postValue(
-                    Resource.Error(
-                        fieldEmpty, null
+                    Event(
+                        Resource.error(
+                            fieldEmpty, null
+                        )
                     )
                 )
 
@@ -122,38 +129,42 @@ class CashRegisterViewModel @Inject constructor(
                     createCashRegister.postValue(handleCreationResponse(response))
                 } catch (e: Exception) {
                     createCashRegister.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 createCashRegister.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
         }
     }
 
-    private fun handleCustomerResponse(response: Response<RTGSListResponse>): Resource<RTGSListResponse> {
+    private fun handleCustomerResponse(response: Response<RTGSListResponse>): Event<Resource<RTGSListResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 
-    private fun handleCreationResponse(response: Response<CreateCustomerResponse>): Resource<CreateCustomerResponse> {
+    private fun handleCreationResponse(response: Response<CreateCustomerResponse>): Event<Resource<CreateCustomerResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 
 }

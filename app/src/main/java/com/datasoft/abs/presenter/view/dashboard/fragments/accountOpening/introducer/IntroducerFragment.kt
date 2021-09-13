@@ -1,8 +1,6 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.introducer
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.IntroducerFragmentBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
@@ -32,8 +30,6 @@ class IntroducerFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
-
-    private var isClicked = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,29 +51,32 @@ class IntroducerFragment : Fragment() {
         }
 
         viewModel.getIntroducerData().observe(viewLifecycleOwner, { response ->
-            when (response) {
 
-                is Resource.Success -> {
-                    response.data?.let {
-                        binding.txtViewAccountTitle.text = it.accountTitle
-                        binding.txtViewName.text = it.fullName
-                        binding.txtViewAccountNumber.text = it.accountNumber
+            response?.getContentIfNotHandled()?.let { result ->
 
-                        binding.btnNext.isEnabled = true
+                when (result.status) {
+
+                    Status.SUCCESS -> {
+                        result.data?.let {
+                            binding.txtViewAccountTitle.text = it.accountTitle
+                            binding.txtViewName.text = it.fullName
+                            binding.txtViewAccountNumber.text = it.accountNumber
+
+                            binding.btnNext.isEnabled = true
+                        }
                     }
-                }
 
-                is Resource.Error -> {
-                    response.message?.let { message ->
-                        if(isClicked)
+                    Status.ERROR -> {
+                        result.message?.let { message ->
                             toastHelper.sendToast(message)
+                        }
                     }
+
+                    Status.LOADING -> {
+
+                    }
+
                 }
-
-                is Resource.Loading -> {
-
-                }
-
             }
         })
 
@@ -85,8 +84,8 @@ class IntroducerFragment : Fragment() {
 
         accountViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let {
 
                         relationList.addAll(it.relationList)
@@ -98,12 +97,12 @@ class IntroducerFragment : Fragment() {
                             )
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
                     response.message?.let { message ->
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
                 }
             }
         })
@@ -135,19 +134,8 @@ class IntroducerFragment : Fragment() {
 //        binding.edTxtIntroducer.addTextChangedListener(textWatcher) // 1001120013386
 
         binding.imgViewSearch.setOnClickListener {
-            isClicked = true
             viewModel.introducerData(binding.edTxtIntroducer.text.trim().toString())
         }
-    }
-
-    private val textWatcher = object : TextWatcher {
-        override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-
-        override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-            viewModel.introducerData(charSequence.toString())
-        }
-
-        override fun afterTextChanged(editable: Editable) {}
     }
 
     override fun onDestroyView() {

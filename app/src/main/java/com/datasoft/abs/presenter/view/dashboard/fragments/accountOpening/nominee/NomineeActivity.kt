@@ -19,7 +19,7 @@ import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.NomineeActivityBinding
 import com.datasoft.abs.presenter.base.BaseActivity
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.ADULT_AGE
 import com.datasoft.abs.presenter.utils.Constant.IMAGE_COMPRESS
@@ -98,58 +98,83 @@ class NomineeActivity : BaseActivity() {
         })
 
         accountViewModel.getConfigData().observe(this, { response ->
-            when (response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let {
 
                         relationList.addAll(it.relationList)
                         binding.spinnerRelation.adapter =
-                            ArrayAdapter(this, android.R.layout.simple_spinner_item, relationList)
+                            ArrayAdapter(
+                                this,
+                                android.R.layout.simple_spinner_item,
+                                relationList
+                            )
 
                         binding.spinnerNomineeWithRelation.adapter =
-                            ArrayAdapter(this, android.R.layout.simple_spinner_item, relationList)
+                            ArrayAdapter(
+                                this,
+                                android.R.layout.simple_spinner_item,
+                                relationList
+                            )
 
                         documentList.addAll(it.documentTypeList)
                         binding.spinnerDocumentsType.adapter =
-                            ArrayAdapter(this, android.R.layout.simple_spinner_item, documentList)
+                            ArrayAdapter(
+                                this,
+                                android.R.layout.simple_spinner_item,
+                                documentList
+                            )
 
                         binding.spinnerNomineeDocType.adapter =
-                            ArrayAdapter(this, android.R.layout.simple_spinner_item, documentList)
+                            ArrayAdapter(
+                                this,
+                                android.R.layout.simple_spinner_item,
+                                documentList
+                            )
 
                         occupationList.addAll(it.occupationList)
                         binding.spinnerOccupation.adapter =
-                            ArrayAdapter(this, android.R.layout.simple_spinner_item, occupationList)
+                            ArrayAdapter(
+                                this,
+                                android.R.layout.simple_spinner_item,
+                                occupationList
+                            )
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
                     response.message?.let { message ->
                         binding.btnSave.isFocusable = false
                         binding.btnSave.isClickable = false
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
                 }
             }
         })
 
-        nomineeViewModel.getNomineeData().observe(this, {
-            when (it) {
-                is Resource.Success -> {
-                    val data = Intent()
-                    data.putExtra(NOMINEE_INFO, it.data)
-                    setResult(Activity.RESULT_OK, data)
-                    finish()
-                }
+        nomineeViewModel.getNomineeData().observe(this, { response ->
 
-                is Resource.Error -> {
-                    it.message?.let { message ->
-                        toastHelper.sendToast(message)
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        val data = Intent()
+                        data.putExtra(NOMINEE_INFO, result.data)
+                        setResult(Activity.RESULT_OK, data)
+                        finish()
                     }
-                }
 
-                is Resource.Loading -> {
+                    Status.ERROR -> {
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
+                    }
 
+                    Status.LOADING -> {
+
+                    }
                 }
             }
         })

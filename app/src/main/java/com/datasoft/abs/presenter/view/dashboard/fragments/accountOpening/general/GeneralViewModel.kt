@@ -10,6 +10,7 @@ import com.datasoft.abs.data.dto.createAccount.general.DisplayAccountInfo
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -31,8 +32,8 @@ class GeneralViewModel @Inject constructor(
     private val customerData = MutableLiveData<Resource<CustomerDataResponse>>()
     fun getCustomerData(): LiveData<Resource<CustomerDataResponse>> = customerData
 
-    private val accountInfo = MutableLiveData<Resource<AccountInfo>>()
-    fun getAccountInfo(): LiveData<Resource<AccountInfo>> = accountInfo
+    private val accountInfo = MutableLiveData<Event<Resource<AccountInfo>>>()
+    fun getAccountInfo(): LiveData<Event<Resource<AccountInfo>>> = accountInfo
 
     private val displayAccountInfo = MutableLiveData<Resource<DisplayAccountInfo>>()
     fun getDisplayAccountInfo(): LiveData<Resource<DisplayAccountInfo>> = displayAccountInfo
@@ -43,11 +44,11 @@ class GeneralViewModel @Inject constructor(
     fun customerData(customerID: String) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            customerData.postValue(Resource.Loading())
+            customerData.postValue(Resource.loading(null))
 
             if (customerID.isEmpty()) {
                 customerData.postValue(
-                    Resource.Error(
+                    Resource.error(
                         idEmpty, null
                     )
                 )
@@ -61,7 +62,7 @@ class GeneralViewModel @Inject constructor(
                     customerData.postValue(handleCustomerResponse(response))
                 } catch (e: Exception) {
                     customerData.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -69,7 +70,7 @@ class GeneralViewModel @Inject constructor(
                 }
             } else {
                 customerData.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -95,35 +96,39 @@ class GeneralViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO) {
 
-            accountInfo.postValue(Resource.Loading())
+            accountInfo.postValue(Event(Resource.loading(null)))
 
             if (accountTitle.isEmpty() || openingDate.isEmpty() || initialAmount == 0) {
                 accountInfo.postValue(
-                    Resource.Error(
-                        fieldEmpty, null
+                    Event(
+                        Resource.error(
+                            fieldEmpty, null
+                        )
                     )
                 )
                 return@launch
             }
 
             accountInfo.postValue(
-                Resource.Success(
-                    AccountInfo(
-                        categoryId,
-                        accountId,
-                        operatingId,
-                        customerId,
-                        accountTitle,
-                        openingDate,
-                        currencyId,
-                        fundId,
-                        initialAmount
+                Event(
+                    Resource.success(
+                        AccountInfo(
+                            categoryId,
+                            accountId,
+                            operatingId,
+                            customerId,
+                            accountTitle,
+                            openingDate,
+                            currencyId,
+                            fundId,
+                            initialAmount
+                        )
                     )
                 )
             )
 
             displayAccountInfo.postValue(
-                Resource.Success(
+                Resource.success(
                     DisplayAccountInfo(
                         categoryValue,
                         accountValue,
@@ -143,10 +148,10 @@ class GeneralViewModel @Inject constructor(
     ): Resource<CustomerDataResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 
     fun setProductID(value: Int) {

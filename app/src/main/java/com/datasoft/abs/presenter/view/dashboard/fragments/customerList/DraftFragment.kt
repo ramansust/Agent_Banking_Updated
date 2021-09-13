@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.customerList.Row
 import com.datasoft.abs.databinding.FragmentCustomerBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant.PER_PAGE_ITEM
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
@@ -57,8 +57,9 @@ class DraftFragment : Fragment() {
         }
 
         viewModel.getDraftData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     list.clear()
                     stopShimmer()
 
@@ -73,33 +74,37 @@ class DraftFragment : Fragment() {
                         isLoading = list.size < customerResponse.pageNumber * PER_PAGE_ITEM
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
                     stopShimmer()
                     response.message?.let { message ->
                         toastHelper.sendToast(message)
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
                     startShimmer()
                 }
             }
         })
 
         viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let { search ->
                         customerAdapter.differ.submitList(list.filter {
-                            it.fullName.contains(search, true) || it.customerNo.contains(search, true)
+                            it.fullName.contains(search, true) || it.customerNo.contains(
+                                search,
+                                true
+                            )
                         })
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
 
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
 
                 }
             }

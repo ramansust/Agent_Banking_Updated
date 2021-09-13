@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.transaction.Row
 import com.datasoft.abs.databinding.FragmentDepositBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
@@ -59,8 +59,8 @@ class DepositFragment : Fragment() {
 
         viewModel.getDepositData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     list.clear()
                     stopShimmer()
 
@@ -76,11 +76,11 @@ class DepositFragment : Fragment() {
                     }
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
                     startShimmer()
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
                     stopShimmer()
                     response.message?.let { message ->
                         toastHelper.sendToast(message)
@@ -90,20 +90,24 @@ class DepositFragment : Fragment() {
         })
 
         viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let { search ->
                         depositAdapter.differ.submitList(list.filter {
-                            it.crAccountNumber!!.contains(search, true) || it.transactionNo!!.contains(search, true)
+                            it.crAccountNumber!!.contains(
+                                search,
+                                true
+                            ) || it.transactionNo!!.contains(search, true)
                         })
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
 
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
 
                 }
             }

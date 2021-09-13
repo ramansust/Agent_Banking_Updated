@@ -51,7 +51,7 @@ class AccountMainViewModel @Inject constructor(
 
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            searchData.postValue(Resource.Success(search))
+            searchData.postValue(Resource.success(search))
         }
     }
 
@@ -60,7 +60,10 @@ class AccountMainViewModel @Inject constructor(
             if (network.isConnected()) {
                 try {
                     val list = mutableListOf<Row>()
-                    val response = handleCustomerResponse(repository.getAccountListData(accountRequest), activePageNumber)
+                    val response = handleCustomerResponse(
+                        repository.getAccountListData(accountRequest),
+                        activePageNumber
+                    )
 
                     list.apply {
                         active.value?.data?.rows?.let { addAll(it) }
@@ -71,7 +74,7 @@ class AccountMainViewModel @Inject constructor(
                     active.postValue(response)
                 } catch (e: Exception) {
                     active.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -79,7 +82,7 @@ class AccountMainViewModel @Inject constructor(
                 }
             } else {
                 active.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -92,7 +95,10 @@ class AccountMainViewModel @Inject constructor(
             if (network.isConnected()) {
                 try {
                     val list = mutableListOf<Row>()
-                    val response = handleCustomerResponse(repository.getAccountListData(accountRequest), awaitingPageNumber)
+                    val response = handleCustomerResponse(
+                        repository.getAccountListData(accountRequest),
+                        awaitingPageNumber
+                    )
 
                     list.apply {
                         awaiting.value?.data?.rows?.let { addAll(it) }
@@ -101,10 +107,9 @@ class AccountMainViewModel @Inject constructor(
 
                     response.data!!.rows = list
                     awaiting.postValue(response)
-//                    awaiting.postValue(handleCustomerResponse(response, awaitingPageNumber))
                 } catch (e: Exception) {
                     awaiting.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -112,7 +117,7 @@ class AccountMainViewModel @Inject constructor(
                 }
             } else {
                 awaiting.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -126,7 +131,10 @@ class AccountMainViewModel @Inject constructor(
                 try {
 
                     val list = mutableListOf<Row>()
-                    val response = handleCustomerResponse(repository.getAccountListData(accountRequest), draftPageNumber)
+                    val response = handleCustomerResponse(
+                        repository.getAccountListData(accountRequest),
+                        draftPageNumber
+                    )
 
                     list.apply {
                         draft.value?.data?.rows?.let { addAll(it) }
@@ -135,10 +143,9 @@ class AccountMainViewModel @Inject constructor(
 
                     response.data!!.rows = list
                     draft.postValue(response)
-//                    draft.postValue(handleCustomerResponse(response, draftPageNumber))
                 } catch (e: Exception) {
                     draft.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -146,7 +153,7 @@ class AccountMainViewModel @Inject constructor(
                 }
             } else {
                 draft.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -161,10 +168,10 @@ class AccountMainViewModel @Inject constructor(
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 resultResponse.pageNumber = pageNumber
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 
     fun loadMoreActive() {

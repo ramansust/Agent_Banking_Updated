@@ -12,7 +12,7 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.datasoft.abs.R
 import com.datasoft.abs.databinding.FragmentTransactionBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant.BALANCE_FORMAT
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
@@ -72,9 +72,9 @@ class TransactionFragment : Fragment() {
         }
 
         viewModel.getAccountDetails().observe(viewLifecycleOwner, { response ->
-            when (response) {
 
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     goneProgressBar()
                     response.data?.let {
                         binding.txtViewAccountName.text = it.accountTitle
@@ -101,17 +101,16 @@ class TransactionFragment : Fragment() {
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
                     goneProgressBar()
                     response.message?.let { message ->
                         toastHelper.sendToast(message)
                     }
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
                     showProgressBar()
                 }
-
             }
         })
 

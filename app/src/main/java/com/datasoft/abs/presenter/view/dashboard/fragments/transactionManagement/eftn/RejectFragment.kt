@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.transaction.rtgs.Row
 import com.datasoft.abs.databinding.FragmentAwaitingApprovalBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
@@ -59,8 +59,10 @@ class RejectFragment : Fragment() {
             showToast(it)
         }
 
-        viewModel.getRejectData().observe(viewLifecycleOwner, { response ->when (response) {
-                is Resource.Success -> {
+        viewModel.getRejectData().observe(viewLifecycleOwner, { response ->
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     stopShimmer()
                     response.data?.let { dataResponse ->
                         list.addAll(dataResponse.rows)
@@ -75,7 +77,7 @@ class RejectFragment : Fragment() {
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
                     stopShimmer()
                     response.message?.let { message ->
                         showNoContent()
@@ -83,7 +85,7 @@ class RejectFragment : Fragment() {
                     }
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
                     startShimmer()
                 }
             }
@@ -91,8 +93,8 @@ class RejectFragment : Fragment() {
 
         searchViewModel.getSearchData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let { search ->
                         eftnAdapter.differ.submitList(list.filter {
                             it.senderAccNumber!!.contains(
@@ -106,11 +108,11 @@ class RejectFragment : Fragment() {
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
 
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
 
                 }
             }

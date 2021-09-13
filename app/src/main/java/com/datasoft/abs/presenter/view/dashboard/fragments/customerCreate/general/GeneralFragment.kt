@@ -12,10 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.GeneralFragmentBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
+import com.datasoft.abs.presenter.utils.snack
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.personal.PersonalViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,72 +67,108 @@ class GeneralFragment : Fragment() {
 
         customerViewModel.getConfigData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let {
 
                         salutationList.addAll(it.salutationList)
                         binding.spinnerSalutation.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, salutationList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                salutationList
+                            )
 
                         genderList.addAll(it.genderList)
                         binding.spinnerGender.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, genderList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                genderList
+                            )
 
                         customerList.addAll(it.customerTypeList)
                         binding.spinnerCustomerType.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, customerList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                customerList
+                            )
 
                         countryList.addAll(it.nationalityList)
                         binding.spinnerCountry.adapter =
-                            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, countryList)
+                            ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_spinner_item,
+                                countryList
+                            )
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
                     response.message?.let { message ->
                         binding.btnNext.isEnabled = false
                         Log.e("TAG", "An error occurred: $message")
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
                 }
             }
         })
 
 
         viewModel.getSavedData().observe(viewLifecycleOwner, { response ->
-            if(salutationList.isNotEmpty()) binding.spinnerSalutation.setSelection(salutationList.indexOf(CommonModel(response.salutation)))
+            if (salutationList.isNotEmpty()) binding.spinnerSalutation.setSelection(
+                salutationList.indexOf(
+                    CommonModel(response.salutation)
+                )
+            )
             binding.edTxtFirstName.setText(response.firstName)
             binding.edTxtLastName.setText(response.lastName)
             binding.edTxtDob.setText(response.birthDate)
             binding.edTxtNid.setText(response.nationalID)
             binding.edTxtMobileNumber.setText(response.mobileNumber)
             binding.edTxtFatherName.setText(response.fatherName)
-            if(customerList.isNotEmpty()) binding.spinnerCustomerType.setSelection(customerList.indexOf(CommonModel(response.customerType)))
-            if(countryList.isNotEmpty()) binding.spinnerCountry.setSelection(countryList.indexOf(CommonModel(response.nationalityId)))
-            if(genderList.isNotEmpty()) binding.spinnerGender.setSelection(genderList.indexOf(CommonModel(response.gender)))
+            if (customerList.isNotEmpty()) binding.spinnerCustomerType.setSelection(
+                customerList.indexOf(
+                    CommonModel(response.customerType)
+                )
+            )
+            if (countryList.isNotEmpty()) binding.spinnerCountry.setSelection(
+                countryList.indexOf(
+                    CommonModel(response.nationalityId)
+                )
+            )
+            if (genderList.isNotEmpty()) binding.spinnerGender.setSelection(
+                genderList.indexOf(
+                    CommonModel(response.gender)
+                )
+            )
             binding.edTxtMotherName.setText(response.motherName)
             binding.edTxtCity.setText(response.city)
         })
 
         viewModel.getDedupeData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
 //                    goneProgressBar()
-                    response.data?.let {
-                        if(isChecked)
-                            customerViewModel.requestCurrentStep(1)
+                        result.data?.let {
+                            if (isChecked)
+                                customerViewModel.requestCurrentStep(1)
+                        }
                     }
-                }
-                is Resource.Error -> {
+                    Status.ERROR -> {
 //                    goneProgressBar()
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
+                        result.message?.let { message ->
+                            view.snack(message)
+//                        toastHelper.sendToast(message)
+                        }
                     }
-                }
-                is Resource.Loading -> {
+                    Status.LOADING -> {
 //                    showProgressBar()
+                    }
                 }
             }
         })
@@ -149,16 +186,16 @@ class GeneralFragment : Fragment() {
         binding.btnNext.setOnClickListener {
             isChecked = true
             viewModel.requestData(
-                if(salutationList.isNotEmpty()) salutationList[binding.spinnerSalutation.selectedItemPosition].id else 0,
+                if (salutationList.isNotEmpty()) salutationList[binding.spinnerSalutation.selectedItemPosition].id else 0,
                 binding.edTxtFirstName.text.trim().toString(),
                 binding.edTxtLastName.text.trim().toString(),
                 binding.edTxtDob.text.trim().toString(),
                 binding.edTxtNid.text.trim().toString(),
-                if(genderList.isNotEmpty()) salutationList[binding.spinnerGender.selectedItemPosition].id else 0,
+                if (genderList.isNotEmpty()) salutationList[binding.spinnerGender.selectedItemPosition].id else 0,
                 binding.edTxtMobileNumber.text.trim().toString(),
                 binding.edTxtFatherName.text.trim().toString(),
-                if(customerList.isNotEmpty()) customerList[binding.spinnerCustomerType.selectedItemPosition].id else 0,
-                if(countryList.isNotEmpty()) countryList[binding.spinnerCountry.selectedItemPosition].id else 0,
+                if (customerList.isNotEmpty()) customerList[binding.spinnerCustomerType.selectedItemPosition].id else 0,
+                if (countryList.isNotEmpty()) countryList[binding.spinnerCountry.selectedItemPosition].id else 0,
                 binding.edTxtMotherName.text.trim().toString(),
                 binding.edTxtCity.text.trim().toString()
             )

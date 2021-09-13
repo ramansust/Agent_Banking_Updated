@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.datasoft.abs.databinding.FragmentEftnTransactionDetailsBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,31 +47,35 @@ class EFTNTransactionDetailsFragment : Fragment() {
 
         detailsViewModel.detailsData(args.transactionId.toString(), args.isRTGS)
         detailsViewModel.getTransactionDetails().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let {
+
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        result.data?.let {
+                            goneProgressBar()
+
+                            binding.edTxtAccountNumber.setText(it.sendeAccNo)
+                            binding.edTxtAccountTitle.setText(it.senderAccTitle)
+                            binding.edTxtAccountType.setText(it.productName)
+                            binding.edTxtAmount.setText(it.amount!!.toString())
+                            binding.edTxtReceiverAccountNo.setText(it.receiverAccNo)
+                            binding.edTxtReceiverName.setText(it.receiverName)
+                            binding.edTxtReceiverBank.setText(it.bankName)
+                            binding.edTxtBranchRouting.setText(it.branchName)
+                        }
+                    }
+
+                    Status.LOADING -> {
+                        showProgressBar()
+                    }
+
+                    Status.ERROR -> {
                         goneProgressBar()
 
-                        binding.edTxtAccountNumber.setText(it.sendeAccNo)
-                        binding.edTxtAccountTitle.setText(it.senderAccTitle)
-                        binding.edTxtAccountType.setText(it.productName)
-                        binding.edTxtAmount.setText(it.amount!!.toString())
-                        binding.edTxtReceiverAccountNo.setText(it.receiverAccNo)
-                        binding.edTxtReceiverName.setText(it.receiverName)
-                        binding.edTxtReceiverBank.setText(it.bankName)
-                        binding.edTxtBranchRouting.setText(it.branchName)
-                    }
-                }
-
-                is Resource.Loading -> {
-                    showProgressBar()
-                }
-
-                is Resource.Error -> {
-                    goneProgressBar()
-
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
                     }
                 }
             }

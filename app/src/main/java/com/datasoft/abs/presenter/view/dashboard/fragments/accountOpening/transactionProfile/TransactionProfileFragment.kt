@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.config.TpDetail
 import com.datasoft.abs.databinding.TransactionProfileFragmentBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -61,8 +61,9 @@ class TransactionProfileFragment : Fragment() {
         val list = mutableListOf<TpDetail>()
 
         accountViewModel.getTransactionProfileData().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
+
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let {
 
                         for (details in it.tpDetails) {
@@ -70,9 +71,10 @@ class TransactionProfileFragment : Fragment() {
                                 it.transactionProfileList[it.transactionProfileList.indexOf(
                                     CommonModel(details.transactionProfileName)
                                 )].name
-                            details.codeName = it.transactionCodeList[it.transactionCodeList.indexOf(
-                                CommonModel(details.code)
-                            )].name
+                            details.codeName =
+                                it.transactionCodeList[it.transactionCodeList.indexOf(
+                                    CommonModel(details.code)
+                                )].name
                             list.add(details)
                         }
 
@@ -86,18 +88,18 @@ class TransactionProfileFragment : Fragment() {
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
 
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
 
                 }
             }
         })
 
         transactionAdapter.setOnTextChangeListener { i, i2, i3 ->
-            when(i3) {
+            when (i3) {
                 0 -> {
                     list[i].limitNoOfDailyTrn = i2
                 }

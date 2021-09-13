@@ -51,7 +51,7 @@ class CustomerListMainViewModel @Inject constructor(
 
     fun setSearchData(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            searchData.postValue(Resource.Success(search))
+            searchData.postValue(Resource.success(search))
         }
     }
 
@@ -71,7 +71,7 @@ class CustomerListMainViewModel @Inject constructor(
                     active.postValue(response)
                 } catch (e: Exception) {
                     active.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -79,7 +79,7 @@ class CustomerListMainViewModel @Inject constructor(
                 }
             } else {
                 active.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -104,7 +104,7 @@ class CustomerListMainViewModel @Inject constructor(
 //                    awaiting.postValue(handleCustomerResponse(response, awaitingPageNumber))
                 } catch (e: Exception) {
                     awaiting.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -112,7 +112,7 @@ class CustomerListMainViewModel @Inject constructor(
                 }
             } else {
                 awaiting.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -137,7 +137,7 @@ class CustomerListMainViewModel @Inject constructor(
 //                    draft.postValue(handleCustomerResponse(response, draftPageNumber))
                 } catch (e: Exception) {
                     draft.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -145,7 +145,7 @@ class CustomerListMainViewModel @Inject constructor(
                 }
             } else {
                 draft.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -157,10 +157,10 @@ class CustomerListMainViewModel @Inject constructor(
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 resultResponse.pageNumber = pageNumber
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 
     fun loadMoreActive() {

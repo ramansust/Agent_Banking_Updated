@@ -66,7 +66,7 @@ class EFTNViewModel @Inject constructor(
                     disburse.postValue(response)
                 } catch (e: Exception) {
                     disburse.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -74,7 +74,7 @@ class EFTNViewModel @Inject constructor(
                 }
             } else {
                 disburse.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -101,7 +101,7 @@ class EFTNViewModel @Inject constructor(
                     awaiting.postValue(response)
                 } catch (e: Exception) {
                     awaiting.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -109,7 +109,7 @@ class EFTNViewModel @Inject constructor(
                 }
             } else {
                 awaiting.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -137,7 +137,7 @@ class EFTNViewModel @Inject constructor(
                     reject.postValue(response)
                 } catch (e: Exception) {
                     reject.postValue(
-                        Resource.Error(
+                        Resource.error(
                             somethingWrong, null
                         )
                     )
@@ -145,7 +145,7 @@ class EFTNViewModel @Inject constructor(
                 }
             } else {
                 reject.postValue(
-                    Resource.Error(
+                    Resource.error(
                         noInternet, null
                     )
                 )
@@ -160,10 +160,10 @@ class EFTNViewModel @Inject constructor(
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 resultResponse.pageNumber = pageNumber
-                return Resource.Success(resultResponse)
+                return Resource.success(resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(), null)
     }
 
     fun loadMoreDisburse() {

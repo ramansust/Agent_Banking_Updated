@@ -8,6 +8,7 @@ import com.datasoft.abs.data.dto.transaction.BalanceInquiryResponse
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
+import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,18 +26,20 @@ class BalanceInquiryViewModel @Inject constructor(
     @Named(Constant.SEARCH_EMPTY) private val searchEmpty: String
 ) : ViewModel() {
 
-    private val balanceInquiry = MutableLiveData<Resource<BalanceInquiryResponse>>()
-    fun getBalanceInquiry(): LiveData<Resource<BalanceInquiryResponse>> = balanceInquiry
+    private val balanceInquiry = MutableLiveData<Event<Resource<BalanceInquiryResponse>>>()
+    fun getBalanceInquiry(): LiveData<Event<Resource<BalanceInquiryResponse>>> = balanceInquiry
 
     fun balanceInquiry(accountNo: String) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            balanceInquiry.postValue(Resource.Loading())
+            balanceInquiry.postValue(Event(Resource.loading(null)))
 
             if (accountNo.isEmpty()) {
                 balanceInquiry.postValue(
-                    Resource.Error(
-                        searchEmpty, null
+                    Event(
+                        Resource.error(
+                            searchEmpty, null
+                        )
                     )
                 )
 
@@ -49,28 +52,32 @@ class BalanceInquiryViewModel @Inject constructor(
                     balanceInquiry.postValue(handleResponse(response))
                 } catch (e: Exception) {
                     balanceInquiry.postValue(
-                        Resource.Error(
-                            somethingWrong, null
+                        Event(
+                            Resource.error(
+                                somethingWrong, null
+                            )
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 balanceInquiry.postValue(
-                    Resource.Error(
-                        noInternet, null
+                    Event(
+                        Resource.error(
+                            noInternet, null
+                        )
                     )
                 )
             }
         }
     }
 
-    private fun handleResponse(response: Response<BalanceInquiryResponse>): Resource<BalanceInquiryResponse> {
+    private fun handleResponse(response: Response<BalanceInquiryResponse>): Event<Resource<BalanceInquiryResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
+                return Event(Resource.success(resultResponse))
             }
         }
-        return Resource.Error(response.message())
+        return Event(Resource.error(response.message(), null))
     }
 }

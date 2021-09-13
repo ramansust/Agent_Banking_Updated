@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.databinding.FragmentRtgsTransactionBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,25 +55,29 @@ class RTGSTransactionFragment : Fragment() {
         val branchList = mutableListOf<CommonModel>()
 
         viewModel.getBankList().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let {
 
-                        bankList.addAll(it)
-                        binding.spinnerBank.adapter =
-                            ArrayAdapter(
-                                requireContext(),
-                                android.R.layout.simple_spinner_item,
-                                bankList
-                            )
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        result.data?.let {
+
+                            bankList.addAll(it)
+                            binding.spinnerBank.adapter =
+                                ArrayAdapter(
+                                    requireContext(),
+                                    android.R.layout.simple_spinner_item,
+                                    bankList
+                                )
+                        }
                     }
-                }
-                is Resource.Error -> {
-                    response.message?.let { message ->
-                        Log.e("TAG", "An error occurred: $message")
+                    Status.ERROR -> {
+                        result.message?.let { message ->
+                            Log.e("TAG", "An error occurred: $message")
+                        }
                     }
-                }
-                is Resource.Loading -> {
+                    Status.LOADING -> {
+                    }
                 }
             }
         })
@@ -81,25 +85,28 @@ class RTGSTransactionFragment : Fragment() {
         viewModel.getBranchList().observe(viewLifecycleOwner, { response ->
             branchList.clear()
 
-            when (response) {
-                is Resource.Success -> {
-                    response.data?.let {
+            response?.getContentIfNotHandled()?.let { result ->
 
-                        branchList.addAll(it)
-                        binding.spinnerBranch.adapter =
-                            ArrayAdapter(
-                                requireContext(),
-                                android.R.layout.simple_spinner_item,
-                                branchList
-                            )
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        result.data?.let {
+
+                            branchList.addAll(it)
+                            binding.spinnerBranch.adapter =
+                                ArrayAdapter(
+                                    requireContext(),
+                                    android.R.layout.simple_spinner_item,
+                                    branchList
+                                )
+                        }
                     }
-                }
-                is Resource.Error -> {
-                    response.message?.let { message ->
-                        Log.e("TAG", "An error occurred: $message")
+                    Status.ERROR -> {
+                        result.message?.let { message ->
+                            Log.e("TAG", "An error occurred: $message")
+                        }
                     }
-                }
-                is Resource.Loading -> {
+                    Status.LOADING -> {
+                    }
                 }
             }
         })
@@ -121,53 +128,58 @@ class RTGSTransactionFragment : Fragment() {
             }
 
         viewModel.getAccountDetails().observe(viewLifecycleOwner, { response ->
-            when (response) {
 
-                is Resource.Success -> {
-                    goneProgressBar()
-                    response.data?.let {
-                        senderAccountNo = it.accountNo!!
-                        binding.btnNext.isEnabled = true
-                        binding.btnAgentFinger.isEnabled = true
-                        binding.btnCustomerFinger.isEnabled = true
-                        currentBalance = it.balance!!
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        goneProgressBar()
+                        result.data?.let {
+                            senderAccountNo = it.accountNo!!
+                            binding.btnNext.isEnabled = true
+                            binding.btnAgentFinger.isEnabled = true
+                            binding.btnCustomerFinger.isEnabled = true
+                            currentBalance = it.balance!!
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        goneProgressBar()
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
+                    }
+
+                    Status.LOADING -> {
+                        showProgressBar()
                     }
                 }
-
-                is Resource.Error -> {
-                    goneProgressBar()
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
-                    }
-                }
-
-                is Resource.Loading -> {
-                    showProgressBar()
-                }
-
             }
         })
 
         viewModel.getCreationData().observe(viewLifecycleOwner, { response ->
-            when (response) {
 
-                is Resource.Success -> {
-                    goneProgressBar()
-                    response.data?.let {
-                        binding.btnNext.isEnabled = false
-                        findNavController().navigateUp()
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        goneProgressBar()
+                        result.data?.let {
+                            binding.btnNext.isEnabled = false
+                            findNavController().navigateUp()
+                        }
                     }
-                }
 
-                is Resource.Error -> {
-                    goneProgressBar()
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
+                    Status.ERROR -> {
+                        goneProgressBar()
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
                     }
-                }
 
-                is Resource.Loading -> {
-                    showProgressBar()
+                    Status.LOADING -> {
+                        showProgressBar()
+                    }
                 }
             }
         })
@@ -208,7 +220,9 @@ class RTGSTransactionFragment : Fragment() {
 
         override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
 
-            if(charSequence.toString().isNotEmpty() && charSequence.toString().toInt() > currentBalance) {
+            if (charSequence.toString().isNotEmpty() && charSequence.toString()
+                    .toInt() > currentBalance
+            ) {
                 binding.edTxtAmount.setText(resources.getString(R.string.zero))
                 toastHelper.sendToast(resources.getString(R.string.balance_exceed))
             }

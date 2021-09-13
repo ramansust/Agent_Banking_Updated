@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.transaction.rtgs.Row
 import com.datasoft.abs.databinding.FragmentAwaitingApprovalBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
@@ -62,8 +62,8 @@ class DisburseFragment : Fragment() {
 
         viewModel.getDisburseData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     list.clear()
                     stopShimmer()
 
@@ -80,7 +80,7 @@ class DisburseFragment : Fragment() {
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
                     stopShimmer()
                     response.message?.let { message ->
                         showNoContent()
@@ -88,7 +88,7 @@ class DisburseFragment : Fragment() {
                     }
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
                     startShimmer()
                 }
             }
@@ -96,8 +96,8 @@ class DisburseFragment : Fragment() {
 
         searchViewModel.getSearchData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
+            when (response.status) {
+                Status.SUCCESS -> {
                     response.data?.let { search ->
                         rtgsAdapter.differ.submitList(list.filter {
                             it.senderAccNumber!!.contains(
@@ -111,11 +111,11 @@ class DisburseFragment : Fragment() {
                     }
                 }
 
-                is Resource.Error -> {
+                Status.ERROR -> {
 
                 }
 
-                is Resource.Loading -> {
+                Status.LOADING -> {
 
                 }
             }
@@ -148,7 +148,7 @@ class DisburseFragment : Fragment() {
 
                 if (!isLoading) {
                     if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == list.size - 1) {
-                        viewModel.loadMoreAwaiting()
+                        viewModel.loadMoreDisburse()
                         isLoading = true
                     }
                 }

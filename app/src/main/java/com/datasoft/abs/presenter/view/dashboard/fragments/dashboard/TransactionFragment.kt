@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.datasoft.abs.databinding.FragmentDashboardBinding
-import com.datasoft.abs.presenter.states.Resource
+import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
@@ -57,32 +57,35 @@ class TransactionFragment : Fragment() {
 
         viewModel.getDashboardData().observe(viewLifecycleOwner, { response ->
 
-            when (response) {
-                is Resource.Success -> {
-                    goneProgressBar()
-                    response.data?.let { dashBoardResponse ->
-                        binding.txtViewOpen.text =
-                            DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.total_Customer)
-                                .toString()
-                        binding.txtViewDeposit.text =
-                            DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.deposit)
-                                .toString()
-                        binding.txtViewWithdraw.text =
-                            DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.withdraw)
-                                .toString()
-                        binding.txtViewBalance.text =
-                            DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.current_Balance)
-                                .toString()
+            response?.getContentIfNotHandled()?.let { result ->
+
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        goneProgressBar()
+                        result.data?.let { dashBoardResponse ->
+                            binding.txtViewOpen.text =
+                                DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.total_Customer)
+                                    .toString()
+                            binding.txtViewDeposit.text =
+                                DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.deposit)
+                                    .toString()
+                            binding.txtViewWithdraw.text =
+                                DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.withdraw)
+                                    .toString()
+                            binding.txtViewBalance.text =
+                                DecimalFormat(Constant.BALANCE_FORMAT).format(dashBoardResponse.vmAgentInfos.current_Balance)
+                                    .toString()
+                        }
                     }
-                }
-                is Resource.Error -> {
-                    goneProgressBar()
-                    response.message?.let { message ->
-                        toastHelper.sendToast(message)
+                    Status.ERROR -> {
+                        goneProgressBar()
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
                     }
-                }
-                is Resource.Loading -> {
-                    showProgressBar()
+                    Status.LOADING -> {
+                        showProgressBar()
+                    }
                 }
             }
         })
