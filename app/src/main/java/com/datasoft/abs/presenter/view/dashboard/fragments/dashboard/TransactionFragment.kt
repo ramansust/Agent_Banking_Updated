@@ -51,13 +51,15 @@ class TransactionFragment : Fragment() {
         setValueOnPieChart(binding.pieChart, 40, 30, 30)
         setValueOnLineChart(binding.lineChart)
 
-        toastHelper.toastMessages.startListening {
-            showToast(it)
+        toastHelper.toastMessages.startListening { response ->
+            response.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
         }
 
         viewModel.getDashboardData().observe(viewLifecycleOwner, { response ->
 
-            response?.getContentIfNotHandled()?.let { result ->
+            response?.peekContent()?.let { result ->
 
                 when (result.status) {
                     Status.SUCCESS -> {

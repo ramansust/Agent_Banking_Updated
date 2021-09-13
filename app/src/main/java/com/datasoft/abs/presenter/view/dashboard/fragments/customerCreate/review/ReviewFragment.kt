@@ -73,8 +73,10 @@ class ReviewFragment : Fragment() {
         customerViewModel.requestVisibility(false)
         customerViewModel.requestListener(false)
 
-        toastHelper.toastMessages.startListening {
-            showToast(it)
+        toastHelper.toastMessages.startListening { response ->
+            response.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
         }
 
         personalViewModel.getCustomerAgeData().observe(viewLifecycleOwner, {

@@ -54,8 +54,10 @@ class WithdrawalFragment : Fragment() {
         setupRecyclerView()
         initScrollListener()
 
-        toastHelper.toastMessages.startListening {
-            showToast(it)
+        toastHelper.toastMessages.startListening { response ->
+            response.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
         }
 
         viewModel.getWithdrawData().observe(viewLifecycleOwner, { response ->

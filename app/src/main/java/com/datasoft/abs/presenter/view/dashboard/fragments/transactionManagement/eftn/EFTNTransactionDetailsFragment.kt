@@ -41,8 +41,10 @@ class EFTNTransactionDetailsFragment : Fragment() {
 
         detailsViewModel.setDetails(0)
 
-        toastHelper.toastMessages.startListening {
-            showToast(it)
+        toastHelper.toastMessages.startListening { response ->
+            response.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
         }
 
         detailsViewModel.detailsData(args.transactionId.toString(), args.isRTGS)

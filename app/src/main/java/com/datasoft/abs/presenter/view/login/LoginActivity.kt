@@ -41,8 +41,10 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun observeViewModel() {
-        toastHelper.toastMessages.startListening {
-            showToast(it)
+        toastHelper.toastMessages.startListening { response ->
+            response.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
         }
 
         loginViewModel.getLoginData().observe(this, { response ->

@@ -52,8 +52,10 @@ class ActiveFragment : Fragment() {
         setupRecyclerView()
         initScrollListener()
 
-        toastHelper.toastMessages.startListening {
-            showToast(it)
+        toastHelper.toastMessages.startListening { response ->
+            response.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
         }
 
         viewModel.getActiveData().observe(viewLifecycleOwner, { response ->

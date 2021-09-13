@@ -51,8 +51,10 @@ class CashRegisterFragment : Fragment() {
 
         setupRecyclerView()
 
-        toastHelper.toastMessages.startListening {
-            showToast(it)
+        toastHelper.toastMessages.startListening { response ->
+            response.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
         }
 
         binding.btnAdd.setOnClickListener {

@@ -50,8 +50,10 @@ class EFTNTransactionFragment : Fragment() {
         val bankList = mutableListOf<CommonModel>()
         val branchList = mutableListOf<CommonModel>()
 
-        toastHelper.toastMessages.startListening {
-            showToast(it)
+        toastHelper.toastMessages.startListening { response ->
+            response.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
         }
 
         viewModel.getBankList().observe(viewLifecycleOwner, { response ->

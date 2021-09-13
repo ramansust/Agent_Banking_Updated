@@ -63,8 +63,10 @@ class GeneralFragment : Fragment() {
 
         setupRecyclerView()
 
-        toastHelper.toastMessages.startListening {
-            showToast(it)
+        toastHelper.toastMessages.startListening { response ->
+            response.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
         }
 
         val productCategoryList = mutableListOf<CommonModel>()

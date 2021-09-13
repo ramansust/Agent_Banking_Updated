@@ -49,8 +49,10 @@ class WithdrawFragment : Fragment() {
         val paymentList = mutableListOf<CommonModel>()
         val currencyList = mutableListOf<CommonModel>()
 
-        toastHelper.toastMessages.startListening {
-            showToast(it)
+        toastHelper.toastMessages.startListening { response ->
+            response.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
         }
 
         viewModel.getAccountDetails().observe(viewLifecycleOwner, { response ->
@@ -118,6 +120,7 @@ class WithdrawFragment : Fragment() {
                 Status.ERROR -> {
                     response.message?.let { message ->
                         toastHelper.sendToast(message)
+                        binding.edTxtAmount.setText("0")
                     }
                 }
 

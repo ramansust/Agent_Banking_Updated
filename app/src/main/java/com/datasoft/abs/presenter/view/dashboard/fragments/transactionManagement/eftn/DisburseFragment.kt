@@ -55,8 +55,10 @@ class DisburseFragment : Fragment() {
         setupRecyclerView()
         initScrollListener()
 
-        toastHelper.toastMessages.startListening {
-            showToast(it)
+        toastHelper.toastMessages.startListening { response ->
+            response.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
         }
 
         viewModel.getDisburseData().observe(viewLifecycleOwner, { response ->

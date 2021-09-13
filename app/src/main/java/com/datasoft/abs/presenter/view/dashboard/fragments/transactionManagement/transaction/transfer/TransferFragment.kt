@@ -44,8 +44,10 @@ class TransferFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        toastHelper.toastMessages.startListening {
-            showToast(it)
+        toastHelper.toastMessages.startListening { response ->
+            response.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
         }
 
         transactionViewModel.getAccountDetails().observe(viewLifecycleOwner, { response ->
@@ -119,6 +121,7 @@ class TransferFragment : Fragment() {
                 Status.ERROR -> {
                     response.message?.let { message ->
                         toastHelper.sendToast(message)
+                        binding.edTxtAmount.setText("0")
                     }
                 }
 

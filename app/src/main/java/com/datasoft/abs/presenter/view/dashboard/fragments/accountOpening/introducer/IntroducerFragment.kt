@@ -46,8 +46,10 @@ class IntroducerFragment : Fragment() {
         accountViewModel.requestVisibility(false)
         accountViewModel.requestListener(false)
 
-        toastHelper.toastMessages.startListening {
-            showToast(it)
+        toastHelper.toastMessages.startListening { response ->
+            response.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
         }
 
         viewModel.getIntroducerData().observe(viewLifecycleOwner, { response ->
