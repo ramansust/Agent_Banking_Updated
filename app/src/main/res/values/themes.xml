@@ -36,7 +36,7 @@
     </style>
 
     <style name="MyCustomTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">
-        <item name="android:textSize">@dimen/font_20x</item>
+        <item name="android:textSize">@dimen/font_14x</item>
         <item name="android:textAllCaps">true</item>
         <item name="fontFamily">@font/oxygen_regular</item>
         <item name="android:fontFamily">@font/oxygen_regular</item>
@@ -45,10 +45,10 @@
     <style name="SpinnerTheme">
         <item name="android:textColor">@color/customer_text</item>
         <item name="android:fontFamily">@font/oxygen_regular</item>
-        <item name="android:textSize">@dimen/font_16x</item>
+        <item name="android:textSize">@dimen/font_12x</item>
         <item name="android:paddingLeft">@dimen/space_16x</item>
-        <item name="android:paddingTop">@dimen/space_5x</item>
-        <item name="android:paddingBottom">@dimen/space_5x</item>
+        <item name="android:paddingTop">@dimen/space_8x</item>
+        <item name="android:paddingBottom">@dimen/space_8x</item>
         <item name="android:paddingRight">@dimen/space_16x</item>
     </style>
 

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presenter.view.dashboard.fragments.customerCreate.address.AddressActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.AgentBanking.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/btn_cross"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_cross"
+                    android:contentDescription="@string/todo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/add_document"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_24x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_save"
+                    android:contentDescription="@string/todo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/space_16x"
+        android:elevation="@dimen/space_5x"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/space_16x">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginEnd="@dimen/space_8x"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/txt_view_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/name_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:ems="10"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_mobile_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/mobile_number"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_mobile_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:ems="10"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="phone"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/address_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:ems="10"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/space_8x"
+                    android:layout_marginEnd="@dimen/space_16x"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline_middle"
+                    app:layout_constraintTop_toTopOf="@+id/linearLayout">
+
+
+                    <TextView
+                        android:id="@+id/txt_view_relation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/relation"
+                        android:textSize="@dimen/font_16x" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_nominee_relation"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/spinner_background" />
+
+                    <TextView
+                        android:id="@+id/txt_view_emal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/email_address"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:ems="10"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textEmailAddress"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_middle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_info"
+                    app:layout_constraintGuide_percent="0.5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt_view_guardian_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:gravity="center"
+                    android:text="@string/guardian_information"
+                    android:textSize="@dimen/font_16x"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

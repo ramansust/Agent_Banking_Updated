@@ -28,6 +28,9 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.loaderView.visibility = View.VISIBLE
+        doLogin()
+
         binding.login.setOnClickListener {
             binding.loaderView.visibility = View.VISIBLE
             doLogin()

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="@dimen/space_5x"
+    tools:context=".presenter.view.dashboard.fragments.customerCreate.general.GeneralFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txt_view_no_entry"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/space_8x"
+            android:fontFamily="@font/oxygen_light"
+            android:gravity="center"
+            android:text="@string/no_content_available"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_24x"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/btn_next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/space_16x"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/btn_next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:orientation="horizontal"
+                    android:weightSum="6">
+
+
+                    <TextView
+                        android:id="@+id/txt_view_name"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/space_8x"
+                        android:layout_marginEnd="@dimen/space_5x"
+                        android:layout_weight="1"
+                        android:background="@color/shimmer_background_color"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/space_5x"
+                        android:paddingEnd="@dimen/space_5x"
+                        android:text="@string/transaction_type"
+                        android:textColor="@color/customer_text"
+                        android:textSize="@dimen/font_16x" />
+
+
+                    <TextView
+                        android:id="@+id/ed_txt_daily_transaction"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/space_5x"
+                        android:layout_weight="1"
+                        android:background="@color/shimmer_background_color"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/space_5x"
+                        android:paddingEnd="@dimen/space_5x"
+                        android:text="@string/daily_transaction"
+                        android:textColor="@color/customer_text"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/ed_txt_daily_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/space_5x"
+                        android:layout_weight="1"
+                        android:background="@color/shimmer_background_color"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/space_5x"
+                        android:paddingEnd="@dimen/space_5x"
+                        android:text="@string/daily_amount"
+                        android:textColor="@color/customer_text"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/ed_txt_monthly_transaction"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/space_5x"
+                        android:layout_weight="1"
+                        android:background="@color/shimmer_background_color"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/space_5x"
+                        android:paddingEnd="@dimen/space_5x"
+                        android:text="@string/monthly_transaction"
+                        android:textColor="@color/customer_text"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/ed_txt_monthly_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/space_5x"
+                        android:layout_weight="1"
+                        android:background="@color/shimmer_background_color"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/space_5x"
+                        android:paddingEnd="@dimen/space_5x"
+                        android:text="@string/monthly_amount"
+                        android:textColor="@color/customer_text"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/ed_txt_transaction_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/space_8x"
+                        android:layout_weight="1"
+                        android:background="@color/shimmer_background_color"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/space_5x"
+                        android:paddingEnd="@dimen/space_5x"
+                        android:text="@string/transaction_amount"
+                        android:textColor="@color/customer_text"
+                        android:textSize="@dimen/font_16x" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:layout_marginBottom="@dimen/space_8x">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_16x"
+            android:layout_marginBottom="@dimen/space_16x"
+            android:background="@drawable/button_border"
+            android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:enabled="false"
+            android:paddingStart="@dimen/space_16x"
+            android:paddingEnd="@dimen/space_8x"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_16x"
+            android:background="@drawable/button_border"
+            android:drawableStart="@drawable/ic_baseline_arrow_back_ios_24"
+            android:paddingStart="@dimen/space_16x"
+            android:paddingEnd="@dimen/space_16x"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_next"
+            app:layout_constraintEnd_toStartOf="@id/btn_next"
+            app:layout_constraintTop_toTopOf="@+id/btn_next" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

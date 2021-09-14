@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presenter.view.dashboard.fragments.accountOpening.nominee.NomineeActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.AgentBanking.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/btn_cross"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_cross"
+                    android:contentDescription="@string/todo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/oxygen_bold"
+                    android:text="@string/add_nominee"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_24x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_save"
+                    android:contentDescription="@string/todo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/space_16x"
+        android:elevation="@dimen/space_5x"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_16x">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_8x"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/txt_view_full_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/full_name_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_full_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_mother_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/mother_name"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_mother_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_spouse_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/spouse_name"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_spouse_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_relation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/relation"
+                        android:textSize="@dimen/font_16x" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_relation"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/spinner_background" />
+
+                    <TextView
+                        android:id="@+id/txt_view_document_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/document_type_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_documents_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/spinner_background" />
+
+                    <TextView
+                        android:id="@+id/txt_view_expiry_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/expiry_date"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_expiry_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:inputType="date"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x"
+                        app:drawableEndCompat="@drawable/ic_dob" />
+
+                    <TextView
+                        android:id="@+id/txt_view_present_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/present_address_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_present_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_8x"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline_middle"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <TextView
+                        android:id="@+id/txt_view_father_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/father_name"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_father_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/date_of_birth"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:inputType="date"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x"
+                        app:drawableEndCompat="@drawable/ic_dob" />
+
+                    <TextView
+                        android:id="@+id/txt_view_percent_share"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/percent_share_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_percent_share"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_occupation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/occupation"
+                        android:textSize="@dimen/font_16x" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_occupation"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/spinner_background" />
+
+                    <TextView
+                        android:id="@+id/txt_view_id_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/id_value_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_id_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="number"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_permanent_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/permanent_address_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_permanent_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_applicant"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/applicant_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_applicant"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/spinner_background" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:background="@drawable/input_border"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/space_16x">
+
+                        <TextView
+                            android:id="@+id/txt_view_nominee_photo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/nominee_photo_"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintEnd_toStartOf="@+id/txt_view_nominee_signature"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="spread"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_view_nominee_signature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/nominee_signature_"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintEnd_toStartOf="@+id/txt_view_front_doc"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/txt_view_nominee_photo"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_view_front_doc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/front_image"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintEnd_toStartOf="@+id/txt_view_back_doc"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/txt_view_nominee_signature"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_view_back_doc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/back_image"
+                            android:textSize="@dimen/font_16x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/txt_view_front_doc"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/img_view_nominee_photo"
+                            android:layout_width="@dimen/space_110x"
+                            android:layout_height="@dimen/space_110x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_photo_preview"
+                            app:layout_constraintEnd_toEndOf="@+id/txt_view_nominee_photo"
+                            app:layout_constraintStart_toStartOf="@+id/txt_view_nominee_photo"
+                            app:layout_constraintTop_toBottomOf="@id/txt_view_nominee_photo" />
+
+                        <ImageView
+                            android:id="@+id/img_view_nominee_signature"
+                            android:layout_width="@dimen/space_110x"
+                            android:layout_height="@dimen/space_110x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_photo_preview"
+                            app:layout_constraintEnd_toEndOf="@+id/txt_view_nominee_signature"
+                            app:layout_constraintStart_toStartOf="@+id/txt_view_nominee_signature"
+                            app:layout_constraintTop_toBottomOf="@id/txt_view_nominee_signature" />
+
+                        <ImageView
+                            android:id="@+id/img_view_front_doc"
+                            android:layout_width="@dimen/space_110x"
+                            android:layout_height="@dimen/space_110x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_photo_preview"
+                            app:layout_constraintEnd_toEndOf="@+id/txt_view_front_doc"
+                            app:layout_constraintStart_toStartOf="@+id/txt_view_front_doc"
+                            app:layout_constraintTop_toBottomOf="@id/txt_view_front_doc" />
+
+                        <ImageView
+                            android:id="@+id/img_view_back_doc"
+                            android:layout_width="@dimen/space_110x"
+                            android:layout_height="@dimen/space_110x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_photo_preview"
+                            app:layout_constraintEnd_toEndOf="@id/txt_view_back_doc"
+                            app:layout_constraintStart_toStartOf="@+id/txt_view_back_doc"
+                            app:layout_constraintTop_toBottomOf="@id/txt_view_back_doc" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_take_nominee_photo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:layout_marginEnd="@dimen/space_5x"
+                            android:background="@drawable/button_border"
+                            android:text="@string/attach"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_browse_nominee_photo"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_nominee_photo"
+                            app:layout_constraintTop_toBottomOf="@+id/img_view_nominee_photo" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_browse_nominee_photo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_5x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@drawable/button_border"
+                            android:text="@string/browse"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintEnd_toEndOf="@id/txt_view_nominee_photo"
+                            app:layout_constraintStart_toEndOf="@+id/btn_take_nominee_photo"
+                            app:layout_constraintTop_toBottomOf="@+id/img_view_nominee_photo" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_take_nominee_signature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:layout_marginEnd="@dimen/space_5x"
+                            android:background="@drawable/button_border"
+                            android:text="@string/attach"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_browse_nominee_signature"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_nominee_signature"
+                            app:layout_constraintTop_toBottomOf="@+id/img_view_nominee_signature" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_browse_nominee_signature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_5x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@drawable/button_border"
+                            android:text="@string/browse"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintEnd_toEndOf="@id/txt_view_nominee_signature"
+                            app:layout_constraintStart_toEndOf="@+id/btn_take_nominee_signature"
+                            app:layout_constraintTop_toBottomOf="@+id/img_view_nominee_signature" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_take_front_doc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:layout_marginEnd="@dimen/space_5x"
+                            android:background="@drawable/button_border"
+                            android:text="@string/attach"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_browse_front_doc"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_front_doc"
+                            app:layout_constraintTop_toBottomOf="@+id/img_view_front_doc" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_browse_front_doc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_5x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@drawable/button_border"
+                            android:text="@string/browse"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintEnd_toEndOf="@id/txt_view_front_doc"
+                            app:layout_constraintStart_toEndOf="@+id/btn_take_front_doc"
+                            app:layout_constraintTop_toBottomOf="@+id/img_view_front_doc" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_take_back_doc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:layout_marginEnd="@dimen/space_5x"
+                            android:background="@drawable/button_border"
+                            android:text="@string/attach"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_browse_back_doc"
+                            app:layout_constraintStart_toStartOf="@id/txt_view_back_doc"
+                            app:layout_constraintTop_toBottomOf="@+id/img_view_back_doc" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_browse_back_doc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_5x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:background="@drawable/button_border"
+                            android:text="@string/browse"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintEnd_toEndOf="@id/txt_view_back_doc"
+                            app:layout_constraintStart_toEndOf="@+id/btn_take_back_doc"
+                            app:layout_constraintTop_toBottomOf="@+id/img_view_back_doc" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_nominee_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginEnd="@dimen/space_8x"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_photo">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/nominee_remain_minor"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:textSize="@dimen/font_20x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_nominee_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/name_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_nominee_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_nominee_dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/date_of_birth"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_nominee_dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:inputType="date"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x"
+                        app:drawableEndCompat="@drawable/ic_dob" />
+
+                    <TextView
+                        android:id="@+id/txt_view_nominee_permanent_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/permanent_address_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_nominee_permanent_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_nominee_doc_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/document_type_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_nominee_doc_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/spinner_background" />
+
+                    <TextView
+                        android:id="@+id/txt_view_nominee_expiry_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/expiry_date"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_nominee_expiry_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:inputType="date"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x"
+                        app:drawableEndCompat="@drawable/ic_dob" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_nominee_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_8x"
+                    android:layout_marginTop="@dimen/space_16x"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline_middle"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_photo">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/nominee_remain_minor"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:textSize="@dimen/font_20x"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:id="@+id/txt_view_nominee_father_spouse_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/father_spouse_name"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_nominee_father_spouse_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_nominee_present_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/present_address_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_nominee_present_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_nominee_relation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/relation_with_nominee_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_nominee_with_relation"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/spinner_background" />
+
+                    <TextView
+                        android:id="@+id/txt_view_nominee_id_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/id_value_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_nominee_id_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="number"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_middle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintGuide_percent="0.5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

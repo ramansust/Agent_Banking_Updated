@@ -20,7 +20,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:padding="@dimen/space_8x">
 
                 <TextView
                     android:id="@+id/txt_view_title"
@@ -29,8 +30,9 @@
                     android:fontFamily="@font/oxygen_regular"
                     android:text="@string/menu_profile"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_16x"
+                    android:textSize="@dimen/font_24x"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/img_view_notifications"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,19 +40,18 @@
                     android:id="@+id/txt_view_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/space_8x"
                     android:fontFamily="@font/oxygen_regular"
                     android:text="@string/test_username"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_16x"
+                    android:textSize="@dimen/font_20x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/img_view_profile"
-                    android:layout_width="@dimen/space_24x"
-                    android:layout_height="@dimen/space_24x"
+                    android:layout_width="@dimen/space_32x"
+                    android:layout_height="@dimen/space_32x"
                     android:layout_marginTop="@dimen/space_8x"
                     android:layout_marginEnd="@dimen/space_16x"
                     android:layout_marginBottom="@dimen/space_8x"
@@ -76,7 +77,7 @@
                 <ImageView
                     android:id="@+id/img_view_notifications"
                     android:layout_width="@dimen/space_24x"
-                    android:layout_height="@dimen/space_24x"
+                    android:layout_height="@dimen/space_48x"
                     android:layout_marginEnd="@dimen/space_16x"
                     android:contentDescription="@string/todo"
                     app:layout_constraintBottom_toBottomOf="parent"

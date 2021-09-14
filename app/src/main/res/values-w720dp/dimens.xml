@@ -10,6 +10,7 @@
     <dimen name="space_2x">2dp</dimen>
     <dimen name="space_5x">3dp</dimen>
     <dimen name="space_8x">5dp</dimen>
+    <dimen name="space_10x">10dp</dimen>
     <dimen name="space_16x">12dp</dimen>
     <dimen name="space_24x">20dp</dimen>
     <dimen name="font_12x">10sp</dimen>

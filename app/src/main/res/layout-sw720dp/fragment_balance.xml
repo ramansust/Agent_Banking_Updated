@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/space_16x"
+    tools:context=".presenter.view.dashboard.fragments.customerCreate.general.GeneralFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/ed_txt_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_border"
+            android:fontFamily="@font/oxygen_regular"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_txt_search">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+                <include layout="@layout/common_shimmer_row" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <TextView
+            android:id="@+id/txt_view_sl_no"
+            android:layout_width="@dimen/space_100x"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_8x"
+            android:layout_marginTop="@dimen/space_8x"
+            android:layout_marginEnd="@dimen/space_8x"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/sl_no"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_view_account_number"
+            app:layout_constraintEnd_toStartOf="@+id/txt_view_transaction_no"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_txt_search" />
+
+        <TextView
+            android:id="@+id/txt_view_transaction_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8x"
+            android:layout_marginEnd="@dimen/space_5x"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/transaction_no"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_view_account_number"
+            app:layout_constraintEnd_toStartOf="@+id/txt_view_account_number"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/txt_view_sl_no"
+            app:layout_constraintTop_toBottomOf="@+id/ed_txt_search" />
+
+        <TextView
+            android:id="@+id/txt_view_account_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8x"
+            android:layout_marginEnd="@dimen/space_5x"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/account_number"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintEnd_toStartOf="@+id/txt_view_date_time"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/txt_view_transaction_no"
+            app:layout_constraintTop_toBottomOf="@+id/ed_txt_search" />
+
+        <TextView
+            android:id="@+id/txt_view_date_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8x"
+            android:layout_marginEnd="@dimen/space_5x"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/date_time"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_view_account_number"
+            app:layout_constraintEnd_toStartOf="@+id/txt_view_description"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/txt_view_account_number"
+            app:layout_constraintTop_toBottomOf="@+id/ed_txt_search" />
+
+        <TextView
+            android:id="@+id/txt_view_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8x"
+            android:layout_marginEnd="@dimen/space_5x"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/description"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_view_account_number"
+            app:layout_constraintEnd_toStartOf="@+id/txt_view_amount"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/txt_view_date_time"
+            app:layout_constraintTop_toBottomOf="@+id/ed_txt_search" />
+
+        <TextView
+            android:id="@+id/txt_view_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8x"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/amount"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_view_account_number"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/txt_view_description"
+            app:layout_constraintTop_toBottomOf="@+id/ed_txt_search" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_percent="0.95"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8x"
+            android:fontFamily="@font/oxygen_bold"
+            android:text="@string/view"
+            android:textColor="@color/customer_text"
+            android:textSize="@dimen/font_20x"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_view_account_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/ed_txt_search" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_1x"
+            android:layout_marginTop="@dimen/space_8x"
+            android:background="@color/shimmer_background_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_view_account_number" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/space_8x"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
