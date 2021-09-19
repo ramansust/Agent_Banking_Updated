@@ -175,6 +175,28 @@ class GeneralFragment : Fragment() {
 
                     Status.SUCCESS -> {
                         result.data?.let {
+                            accountViewModel.requestCurrentStep(1)
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
+                    }
+
+                    Status.LOADING -> {
+
+                    }
+                }
+            }
+
+            response?.peekContent()?.let { result ->
+
+                when (result.status) {
+
+                    Status.SUCCESS -> {
+                        result.data?.let {
 
                             if (productCategoryList.isNotEmpty()) binding.spinnerProductCategory.setSelection(
                                 productCategoryList.indexOf(
@@ -210,15 +232,11 @@ class GeneralFragment : Fragment() {
                             binding.edTxtAccountTitle.setText(it.accountTitle)
                             binding.edTxtOpeningDate.setText(it.openingDate)
                             binding.edTxtInitialAmount.setText(it.initialAmount.toString())
-
-                            accountViewModel.requestCurrentStep(1)
                         }
                     }
 
                     Status.ERROR -> {
-                        result.message?.let { message ->
-                            toastHelper.sendToast(message)
-                        }
+
                     }
 
                     Status.LOADING -> {

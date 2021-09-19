@@ -311,7 +311,7 @@ class ReviewFragment : Fragment() {
                     Status.ERROR -> {
                         goneProgressBar()
                         result.message?.let { message ->
-                            Log.e("TAG", "An error occurred: $message")
+                            toastHelper.sendToast(message)
                         }
                     }
 

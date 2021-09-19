@@ -69,7 +69,7 @@ class ReviewViewModel @Inject constructor(
                 return Event(Resource.success(resultResponse))
             }
         }
-        return Event(Resource.error(response.message(), null))
+        return Event(Resource.error(response.errorBody()!!.string(), null))
     }
 
     fun setDataPrepared(value: Boolean) {
