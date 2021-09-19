@@ -21,6 +21,7 @@
             android:paddingEnd="@dimen/space_16x"
             android:text="@string/change_password"
             android:textColor="@color/white"
+            android:textSize="@dimen/font_14x"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

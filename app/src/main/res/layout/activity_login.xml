@@ -9,14 +9,15 @@
     tools:context="com.datasoft.abs.presenter.view.login.LoginActivity">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
+        android:id="@+id/cardView_signIn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_16x"
         android:layout_marginEnd="@dimen/space_16x"
         android:elevation="@dimen/space_5x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,7 +47,8 @@
                     android:fontFamily="@font/oxygen_regular"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
-                    android:text="@string/test_username" />
+                    android:text="@string/test_username"
+                    android:textSize="@dimen/font_14x" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,7 +77,8 @@
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
-                    android:text="@string/test_password" />
+                    android:text="@string/test_password"
+                    android:textSize="@dimen/font_14x" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -86,64 +89,23 @@
                 android:layout_marginTop="@dimen/space_32x"
                 android:text="@string/action_sign_in"
                 android:textAllCaps="true"
+                android:textSize="@dimen/font_14x"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/input_password"
                 app:layout_constraintVertical_chainStyle="packed" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="@dimen/space_324x"
-        android:layout_height="@dimen/space_262x"
-        android:contentDescription="@string/login_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_splash_logo" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="@dimen/space_170x"
-        android:layout_height="@dimen/space_48x"
-        android:layout_marginEnd="@dimen/space_16x"
-        android:layout_marginBottom="@dimen/space_16x"
-        android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_datasoft" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guideline2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_bg" />
-
     <LinearLayout
         android:id="@+id/loader_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/space_16x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:clickable="true"
+        android:elevation="2dp"
         android:focusable="true"
         android:gravity="center"
         android:visibility="gone"
@@ -157,6 +119,28 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgViewTop"
+        android:layout_width="@dimen/space_262x"
+        android:layout_height="@dimen/space_170x"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="TODO"
+        android:src="@drawable/ic_splash_logo"
+        app:layout_constraintBottom_toTopOf="@+id/cardView_signIn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgViewSplashIcon2"
+        android:layout_width="@dimen/space_170x"
+        android:layout_height="@dimen/space_48x"
+        android:layout_marginBottom="@dimen/space_16x"
+        android:src="@drawable/ic_datasoft"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
