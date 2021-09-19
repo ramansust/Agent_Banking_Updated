@@ -89,7 +89,7 @@ class ReviewFragment : Fragment() {
 
         generalViewModel.getAccountInfo().observe(viewLifecycleOwner, { response ->
 
-            response?.getContentIfNotHandled()?.let { result ->
+            response?.peekContent()?.let { result ->
 
                 when (result.status) {
                     Status.SUCCESS -> {
@@ -214,7 +214,7 @@ class ReviewFragment : Fragment() {
 
         introducerViewModel.getIntroducerData().observe(viewLifecycleOwner, { response ->
 
-            response?.getContentIfNotHandled()?.let { result ->
+            response?.peekContent()?.let { result ->
 
                 when (result.status) {
                     Status.SUCCESS -> {

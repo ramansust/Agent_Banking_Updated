@@ -60,6 +60,29 @@ class IntroducerFragment : Fragment() {
 
                     Status.SUCCESS -> {
                         result.data?.let {
+                            binding.btnNext.isEnabled = true
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        result.message?.let { message ->
+                            toastHelper.sendToast(message)
+                        }
+                    }
+
+                    Status.LOADING -> {
+
+                    }
+
+                }
+            }
+
+            response?.peekContent()?.let { result ->
+
+                when (result.status) {
+
+                    Status.SUCCESS -> {
+                        result.data?.let {
                             binding.txtViewAccountTitle.text = it.accountTitle
                             binding.txtViewName.text = it.fullName
                             binding.txtViewAccountNumber.text = it.accountNumber
@@ -69,9 +92,7 @@ class IntroducerFragment : Fragment() {
                     }
 
                     Status.ERROR -> {
-                        result.message?.let { message ->
-                            toastHelper.sendToast(message)
-                        }
+
                     }
 
                     Status.LOADING -> {
