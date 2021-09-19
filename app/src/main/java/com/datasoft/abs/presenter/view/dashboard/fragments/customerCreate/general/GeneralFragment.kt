@@ -16,7 +16,6 @@ import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
-import com.datasoft.abs.presenter.utils.snack
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.personal.PersonalViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -155,21 +154,21 @@ class GeneralFragment : Fragment() {
 
                 when (result.status) {
                     Status.SUCCESS -> {
-//                    goneProgressBar()
+                        goneProgressBar()
                         result.data?.let {
                             if (isChecked)
                                 customerViewModel.requestCurrentStep(1)
                         }
                     }
                     Status.ERROR -> {
-//                    goneProgressBar()
+                        goneProgressBar()
                         result.message?.let { message ->
-                            view.snack(message)
-//                        toastHelper.sendToast(message)
+//                            view.snack(message)
+                            toastHelper.sendToast(message)
                         }
                     }
                     Status.LOADING -> {
-//                    showProgressBar()
+                        showProgressBar()
                     }
                 }
             }
@@ -220,5 +219,13 @@ class GeneralFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun goneProgressBar() {
+        binding.loaderView.visibility = View.GONE
+    }
+
+    private fun showProgressBar() {
+        binding.loaderView.visibility = View.VISIBLE
     }
 }

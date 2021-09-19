@@ -13,7 +13,8 @@ object Constant {
     const val DOCUMENT_INFO = "DOCUMENT_INFO"
     const val SIGNATURE_INFO = "SIGNATURE_INFO"
     const val ADULT_AGE = 18
-    const val DATE_FORMAT = "dd-MM-yyyy"
+//    const val DATE_FORMAT = "dd-MM-yyyy"
+    const val DATE_FORMAT = "yyyy-MM-dd"
     const val DATE_FORMAT_API = "yyyy-MM-dd'T'HH:mm:ss"
     const val BALANCE_FORMAT = "##,##,##,###.###"
 

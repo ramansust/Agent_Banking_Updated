@@ -47,9 +47,9 @@ class DepositAdapter @Inject constructor() :
         val deposit = differ.currentList[position]
 
         with(deposit) {
-            holder.binding.txtViewSlNo.text = (position  + 1).toString()
+            holder.binding.txtViewSlNo.text = (position + 1).toString()
             holder.binding.txtViewTransactionNo.text = this.transactionNo
-            if(this.crAccountNumber?.isNotEmpty() == true)
+            if (this.crAccountNumber?.isNotEmpty() == true)
                 holder.binding.txtViewAccountNumber.text = this.crAccountNumber
             else
                 holder.binding.txtViewAccountNumber.text = this.drAccountNumber
@@ -58,13 +58,21 @@ class DepositAdapter @Inject constructor() :
                 holder.binding.txtViewDateTime.text = SimpleDateFormat(
                     Constant.DATE_FORMAT,
                     Locale.US
-                ).format(SimpleDateFormat(Constant.DATE_FORMAT_API, Locale.US).parse(this.transactionDate))
+                ).format(
+                    SimpleDateFormat(
+                        Constant.DATE_FORMAT_API,
+                        Locale.US
+                    ).parse(this.transactionDate)
+                )
             } catch (e: ParseException) {
                 e.printStackTrace()
             }
 
             holder.binding.txtViewDescription.text = this.narration
-            holder.binding.txtViewAmount.text = this.balance.toString()
+            if (this.credit == 0.0)
+                holder.binding.txtViewAmount.text = this.debit.toString()
+            else
+                holder.binding.txtViewAmount.text = this.credit.toString()
         }
 
         holder.binding.imgViewEdit.setOnClickListener {

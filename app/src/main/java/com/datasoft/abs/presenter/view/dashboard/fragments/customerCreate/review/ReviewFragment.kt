@@ -460,9 +460,9 @@ class ReviewFragment : Fragment() {
                                 sourceOfFund = it.sourceOfFund
 
                                 guardianInfo = if (isAdult)
-                                    guardian
-                                else
                                     null
+                                else
+                                    guardian
 
                                 emergencyContact = nomineeInfo
                             }
