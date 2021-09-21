@@ -90,7 +90,8 @@ class DocumentsFragment : Fragment() {
     private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val relatedDoc = result.data?.getSerializableExtra(Constant.DOCUMENT_INFO) as RelatedDoc
+                val relatedDoc =
+                    result.data?.getSerializableExtra(Constant.DOCUMENT_INFO) as RelatedDoc
                 fileUriToString(relatedDoc)
             }
         }
@@ -111,7 +112,10 @@ class DocumentsFragment : Fragment() {
 
     private fun fileUriToString(relatedDoc: RelatedDoc) {
 
-        val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        var front = false
+        var back = false
+
+        val bitmapFront = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             ImageDecoder.decodeBitmap(
                 ImageDecoder.createSource(
                     requireActivity().contentResolver,
@@ -125,10 +129,41 @@ class DocumentsFragment : Fragment() {
             )
         }
 
-        Base64Image.encode(bitmap) { base64 ->
+        if (relatedDoc.backSideImage.isNotEmpty()) {
+            val bitmapBack = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                ImageDecoder.decodeBitmap(
+                    ImageDecoder.createSource(
+                        requireActivity().contentResolver,
+                        Uri.parse(relatedDoc.backSideImage)
+                    )
+                )
+            } else {
+                MediaStore.Images.Media.getBitmap(
+                    requireActivity().contentResolver,
+                    Uri.parse(relatedDoc.backSideImage)
+                )
+            }
+
+            Base64Image.encode(bitmapBack) { base64 ->
+                base64?.let {
+                    relatedDoc.backSideImage = it
+                    back = true
+
+                    if (front && back)
+                        viewModel.notifyData(relatedDoc)
+                }
+            }
+        } else {
+            back = true
+        }
+
+        Base64Image.encode(bitmapFront) { base64 ->
             base64?.let {
                 relatedDoc.frontSideImage = it
-                viewModel.notifyData(relatedDoc)
+                front = true
+
+                if (front && back)
+                    viewModel.notifyData(relatedDoc)
             }
         }
     }
