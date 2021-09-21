@@ -21,21 +21,178 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layout_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:layout_marginEnd="@dimen/space_16x"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:weightSum="6">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="@dimen/space_24x"
+                            android:layout_height="@dimen/space_24x"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/button_border" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/space_5x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:gravity="center"
+                            android:textColor="@color/dashboard_text"
+                            android:textSize="@dimen/font_8x" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="@dimen/space_24x"
+                            android:layout_height="@dimen/space_24x"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/button_border"
+                            android:backgroundTint="@color/black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/space_5x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:gravity="center"
+                            android:text="@string/performation"
+                            android:textColor="@color/dashboard_text"
+                            android:textSize="@dimen/font_8x" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="@dimen/space_24x"
+                            android:layout_height="@dimen/space_24x"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/button_border" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/space_5x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:gravity="center"
+                            android:textColor="@color/dashboard_bg"
+                            android:textSize="@dimen/font_8x" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="@dimen/space_24x"
+                            android:layout_height="@dimen/space_24x"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/button_border" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/space_5x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:gravity="center"
+                            android:textColor="@color/dashboard_bg"
+                            android:textSize="@dimen/font_8x" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="@dimen/space_24x"
+                            android:layout_height="@dimen/space_24x"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/button_border" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/space_5x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:gravity="center"
+                            android:textColor="@color/dashboard_bg"
+                            android:textSize="@dimen/font_8x" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="@dimen/space_24x"
+                            android:layout_height="@dimen/space_24x"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/button_border" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/space_5x"
+                            android:fontFamily="@font/oxygen_bold"
+                            android:gravity="center"
+                            android:textColor="@color/dashboard_bg"
+                            android:textSize="@dimen/font_8x" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_16x"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:layout_marginEnd="@dimen/space_8x"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:layout_marginEnd="@dimen/space_16x"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/txt_view_marital_status"
@@ -43,7 +200,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/marital_status"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_marital_status"
@@ -59,7 +216,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/religion"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_religion"
@@ -75,7 +232,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/education"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_education"
@@ -91,7 +248,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/nationality"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_nationality"
@@ -107,7 +264,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/vat_registration_no"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_vat"
@@ -120,7 +277,7 @@
                         android:inputType="number"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <TextView
                         android:id="@+id/txt_view_monthly_income"
@@ -129,7 +286,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/monthly_income"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_monthly_income"
@@ -142,20 +299,17 @@
                         android:inputType="number"
                         android:maxLength="@integer/int_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_8x"
-                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_8x"
                     android:layout_marginEnd="@dimen/space_16x"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/guideline_middle"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/txt_view_spouse_name"
@@ -163,7 +317,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/spouse_name"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_spouse_name"
@@ -176,7 +330,7 @@
                         android:inputType="textPersonName|textCapSentences"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <TextView
                         android:id="@+id/txt_view_dependent"
@@ -185,7 +339,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/number_of_dependents"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_dependent"
@@ -198,7 +352,7 @@
                         android:inputType="number"
                         android:maxLength="@integer/int_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <TextView
                         android:id="@+id/txt_view_occupation"
@@ -207,7 +361,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/occupation"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_occupation"
@@ -223,7 +377,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/birth_certificate_no"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_birth_certificate"
@@ -236,7 +390,7 @@
                         android:inputType="number"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <TextView
                         android:id="@+id/txt_view_driving_license"
@@ -245,7 +399,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/driving_license"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_driving_license"
@@ -258,7 +412,7 @@
                         android:inputType="textPersonName"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <TextView
                         android:id="@+id/txt_view_source_of_fund"
@@ -267,7 +421,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/source_of_fund_"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_source_of_fund"
@@ -280,7 +434,7 @@
                         android:inputType="textPersonName|textCapSentences"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                 </LinearLayout>
 
@@ -299,15 +453,12 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayout_nominee"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_16x"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:layout_marginEnd="@dimen/space_8x"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txt_view_nominee">
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:layout_marginEnd="@dimen/space_16x"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/txt_view_name"
@@ -315,7 +466,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/name_"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_name"
@@ -328,7 +479,7 @@
                         android:inputType="textPersonName|textCapSentences"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <TextView
                         android:id="@+id/txt_view_mobile_no"
@@ -337,7 +488,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/mobile_number"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_mobile_number"
@@ -350,7 +501,7 @@
                         android:inputType="phone"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <TextView
                         android:id="@+id/txt_view_address"
@@ -359,7 +510,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/address_"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_address"
@@ -372,20 +523,19 @@
                         android:inputType="textPersonName|textCapSentences"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linearLayout_nominee_2"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_8x"
+                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_8x"
                     android:layout_marginEnd="@dimen/space_16x"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/guideline_middle"
-                    app:layout_constraintTop_toTopOf="@+id/linearLayout_nominee">
+                    android:layout_marginBottom="@dimen/space_8x"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/txt_view_relation"
@@ -393,7 +543,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/relation"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_nominee_relation"
@@ -409,7 +559,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/email_address"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_email"
@@ -422,7 +572,7 @@
                         android:inputType="textEmailAddress"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                 </LinearLayout>
 
@@ -442,16 +592,13 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayout_guardian"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_16x"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:layout_marginEnd="@dimen/space_8x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:layout_marginEnd="@dimen/space_16x"
                     android:orientation="vertical"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txt_view_guardian">
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/txt_view_guardian_name"
@@ -459,7 +606,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/guardian_name"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_guardian_name"
@@ -472,7 +619,7 @@
                         android:inputType="textPersonName|textCapSentences"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <TextView
                         android:id="@+id/txt_view_guardian_relation"
@@ -481,7 +628,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/relation"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_guardian_relation"
@@ -497,7 +644,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/contact_number"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_guardian_contact"
@@ -510,21 +657,20 @@
                         android:inputType="phone"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linearLayout_guardian_2"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_8x"
+                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_8x"
                     android:layout_marginEnd="@dimen/space_16x"
+                    android:layout_marginBottom="@dimen/space_8x"
                     android:orientation="vertical"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/guideline_middle"
-                    app:layout_constraintTop_toTopOf="@+id/linearLayout_guardian">
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/txt_view_guardian_address"
@@ -532,7 +678,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/address"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_guardian_address"
@@ -545,7 +691,7 @@
                         android:inputType="textPersonName|textCapSentences"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
 
                     <TextView
@@ -555,7 +701,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/minor_attains_date"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_minor_attains_date"
@@ -570,7 +716,7 @@
                         android:fontFamily="@font/oxygen_regular"
                         android:inputType="date"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <TextView
                         android:id="@+id/txt_view_guardian_dob"
@@ -579,7 +725,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/date_of_birth"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_guardian_dob"
@@ -594,19 +740,12 @@
                         android:fontFamily="@font/oxygen_regular"
                         android:inputType="date"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
+                        android:textSize="@dimen/font_14x"
                         app:drawableEndCompat="@drawable/ic_dob" />
 
                 </LinearLayout>
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline_middle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.5" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
@@ -622,6 +761,7 @@
             android:paddingEnd="@dimen/space_8x"
             android:text="@string/next"
             android:textColor="@color/white"
+            android:textSize="@dimen/font_14x"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -636,6 +776,7 @@
             android:paddingEnd="@dimen/space_16x"
             android:text="@string/back"
             android:textColor="@color/white"
+            android:textSize="@dimen/font_14x"
             app:layout_constraintBottom_toBottomOf="@+id/btn_next"
             app:layout_constraintEnd_toStartOf="@id/btn_next"
             app:layout_constraintTop_toTopOf="@+id/btn_next" />

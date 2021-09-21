@@ -368,4 +368,11 @@
     <string name="draft">Draft</string>
     <string name="task_cancelled">Task Cancelled</string>
     <string name="balance_exceed">You don\'t have sufficient balance to complete this transaction</string>
+
+    <string name="performation">Personal\nInformation</string>
+    <string name="gen_information">General\nInformation</string>
+    <string name="finalformation">Final\nReview</string>
+    <string name="nomformation">Nominee\nInformation</string>
+    <string name="photoformation">Photograph\n&amp; NID</string>
+    <string name="addformation">Address\n&amp; Contact</string>
 </resources>

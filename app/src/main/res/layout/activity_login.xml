@@ -15,10 +15,10 @@
         android:layout_marginStart="@dimen/space_16x"
         android:layout_marginEnd="@dimen/space_16x"
         android:elevation="@dimen/space_5x"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toTopOf="@+id/imgViewSplashIcon2"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewTop">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

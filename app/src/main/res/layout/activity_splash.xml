@@ -18,7 +18,7 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="@dimen/space_500x"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,5 +35,6 @@
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_datasoft" />
 </androidx.constraintlayout.widget.ConstraintLayout>

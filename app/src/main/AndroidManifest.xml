@@ -43,7 +43,7 @@
         <activity
             android:name=".presenter.view.dashboard.fragments.customerCreate.CustomerActivity"
             android:label="@string/activity_customer"
-            android:screenOrientation="sensorLandscape"
+            android:screenOrientation="fullSensor"
             android:theme="@style/Theme.AgentBanking.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
 
