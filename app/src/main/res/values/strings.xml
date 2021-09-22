@@ -336,7 +336,7 @@
     <string name="current_password_">Current Password*</string>
     <string name="new_password_">New Password*</string>
     <string name="confirm_new_password_">Confirm New Password*</string>
-    <string name="update_password">Update Password</string>
+    <string name="update_password">Update</string>
     <string name="password_rules">* Must be minimum 8 and maximum 50 characters\n* Must have at least 1 upper case character\n* Must have at least 1 lower case character\n* Must have at least 1 numeric character\n* Must have at least 1 special character ! @ # $ % ^ &amp; * ( )\n* Must be different from last 3 passwords</string>
     <string name="change_password">Change Password</string>
     <string name="entry_by">Entry By</string>

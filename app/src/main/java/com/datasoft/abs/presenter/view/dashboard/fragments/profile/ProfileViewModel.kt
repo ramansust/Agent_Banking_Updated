@@ -96,6 +96,6 @@ class ProfileViewModel @Inject constructor(
                 return Resource.success(resultResponse)
             }
         }
-        return Resource.error(response.message(), null)
+        return Resource.error(response.errorBody()!!.string(), null)
     }
 }

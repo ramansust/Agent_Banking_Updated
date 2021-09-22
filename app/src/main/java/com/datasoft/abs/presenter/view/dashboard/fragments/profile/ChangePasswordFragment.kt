@@ -1,5 +1,6 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import com.datasoft.abs.databinding.FragmentChangePasswordBinding
 import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.ToastHelper
 import com.datasoft.abs.presenter.utils.showToast
+import com.datasoft.abs.presenter.view.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -49,19 +51,24 @@ class ChangePasswordFragment : Fragment() {
                 when (result.status) {
 
                     Status.SUCCESS -> {
+                        goneProgressBar()
                         result.data?.let {
                             it.message.let { it1 -> toastHelper.sendToast(it1) }
+
+                            startActivity(Intent(requireContext(), LoginActivity::class.java))
+                            requireActivity().finish()
                         }
                     }
 
                     Status.ERROR -> {
+                        goneProgressBar()
                         result.message?.let { message ->
                             toastHelper.sendToast(message)
                         }
                     }
 
                     Status.LOADING -> {
-
+                        showProgressBar()
                     }
                 }
             }
@@ -79,5 +86,13 @@ class ChangePasswordFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun goneProgressBar() {
+        binding.loaderView.visibility = View.GONE
+    }
+
+    private fun showProgressBar() {
+        binding.loaderView.visibility = View.VISIBLE
     }
 }
