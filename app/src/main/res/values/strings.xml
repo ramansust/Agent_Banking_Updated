@@ -16,7 +16,7 @@
     <string name="menu_cash_register">Cash Register</string>
     <string name="menu_business_close">Business: Close</string>
 
-    <string name="test_password">Pass@word4</string>
+    <string name="test_password">Abc@12345</string>
     <string name="test_username">emroz</string>
 
     <string name="prompt_email">User name</string>

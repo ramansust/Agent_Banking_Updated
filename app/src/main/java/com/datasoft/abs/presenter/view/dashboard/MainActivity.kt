@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Base64
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -23,6 +25,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.datasoft.abs.R
 import com.datasoft.abs.databinding.ActivityMainBinding
 import com.datasoft.abs.presenter.utils.Constant.USER_NAME
+import com.datasoft.abs.presenter.utils.Constant.USER_PHOTO
 import com.datasoft.abs.presenter.view.login.LoginActivity
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -108,6 +111,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setDataIntoToolbar() {
         binding.appBarMain.txtViewUserName.text = intent.extras?.get(USER_NAME).toString()
+        loadProfilePhoto(binding.appBarMain.imgViewProfile)
     }
 
     private fun hideToolbarItems() {
@@ -125,8 +129,8 @@ class MainActivity : AppCompatActivity() {
         binding.appBarMain.view.visibility = View.VISIBLE
         binding.appBarMain.imgViewNotifications.visibility = View.VISIBLE
 
-        glide.load(R.drawable.ic_user_photo).apply(RequestOptions().circleCrop())
-            .into(binding.appBarMain.imgViewProfile)
+//        glide.load(R.drawable.ic_user_photo).apply(RequestOptions().circleCrop())
+//            .into(binding.appBarMain.imgViewProfile)
     }
 
     private fun setDataIntoNavHeader() {
@@ -134,8 +138,25 @@ class MainActivity : AppCompatActivity() {
 //        headerView.findViewById<TextView>(R.id.txt_view_name).text = "Android"
 //        headerView.findViewById<TextView>(R.id.txt_view_email).text = "android.studio@gmail.com"
 
-        glide.load(R.drawable.ic_user_photo).apply(RequestOptions().circleCrop())
-            .into(headerView.findViewById(R.id.img_view_user_profile))
+//        glide.load(R.drawable.ic_user_photo).apply(RequestOptions().circleCrop())
+//            .into(headerView.findViewById(R.id.img_view_user_profile))
+
+        loadProfilePhoto(headerView.findViewById(R.id.img_view_user_profile))
+    }
+
+    private fun loadProfilePhoto(imageView: ImageView) {
+        val userPhoto = intent.extras?.get(USER_PHOTO).toString()
+
+        glide.load(
+            Base64.decode(
+                userPhoto.substring(
+                    userPhoto.indexOf(
+                        ","
+                    ) + 1
+                ), Base64.DEFAULT
+            )
+        ).apply(RequestOptions().circleCrop())
+            .into(imageView)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
