@@ -26,7 +26,9 @@ import com.datasoft.abs.data.dto.transaction.eftn.CreateEFTNRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.Details
 import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
-import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
+import com.datasoft.abs.data.source.local.db.entity.account.Account
+import com.datasoft.abs.data.source.local.db.entity.customer.*
+import com.datasoft.abs.data.source.local.db.entity.customer.relation.*
 import retrofit2.Response
 
 interface Repository {
@@ -76,6 +78,29 @@ interface Repository {
     suspend fun getRTGSDetails(transactionID: String): Response<Details>
     suspend fun getEFTNSDetails(transactionID: String): Response<Details>
 
-    suspend fun insert(generalInfo: GeneralInfo)
-    fun getAll(): LiveData<List<GeneralInfo>>
+    suspend fun insertGeneral(general: General)
+    suspend fun insertPersonal(personal: Personal)
+    suspend fun insertNominee(nominee: Nominee)
+    suspend fun insertGuardian(guardian: Guardian)
+    suspend fun insertAddress(address: Address)
+    suspend fun insertPhoto(photo: Photo)
+    suspend fun insertFingerprint(fingerprint: Fingerprint)
+    suspend fun insertDocument(document: Document)
+    suspend fun insertKYC(kyc: KYC)
+
+    fun getAll(): LiveData<List<General>>
+    fun getGeneral(generalId: Int): General
+    fun getGeneralAndPersonal(generalId: Int): GeneralAndPersonal
+    fun getPersonalAndNominee(personalId: Int): PersonalAndNominee
+    fun getPersonalAndGuardian(personalId: Int): PersonalAndGuardian
+    fun getGeneralWithAddresses(generalId: Int): List<GeneralWithAddresses>
+    fun getGeneralAndPhoto(generalId: Int): GeneralAndPhoto
+    fun getGeneralAndFingerprint(generalId: Int): GeneralAndFingerprint
+    fun getGeneralWithDocuments(generalId: Int): List<GeneralWithDocuments>
+    fun getGeneralAndKYC(generalId: Int): GeneralAndKYC
+
+    fun delete(generalId: Int)
+
+    suspend fun insert(account: Account)
+    fun getAccounts(): LiveData<List<Account>>
 }

@@ -4,7 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.datasoft.abs.data.source.local.DataManager
 import com.datasoft.abs.data.source.local.db.AppDatabase
-import com.datasoft.abs.data.source.local.db.dao.GeneralInfoDao
+import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
+import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
 import com.datasoft.abs.data.source.remote.JwtInterceptor
 import com.datasoft.abs.data.source.remote.RestRemoteDataSource
 import com.datasoft.abs.presenter.utils.Constant
@@ -40,5 +41,9 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun providesGeneralInfoDao(appDatabase: AppDatabase): GeneralInfoDao = appDatabase.generalDao()
+    fun providesCustomerDao(appDatabase: AppDatabase): CustomerDao = appDatabase.generalDao()
+
+    @Singleton
+    @Provides
+    fun providesAccountDao(appDatabase: AppDatabase): AccountDao = appDatabase.accountDao()
 }

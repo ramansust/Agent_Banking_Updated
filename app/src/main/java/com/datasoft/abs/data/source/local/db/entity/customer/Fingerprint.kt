@@ -1,10 +1,10 @@
-package com.datasoft.abs.data.source.local.db.entity
+package com.datasoft.abs.data.source.local.db.entity.customer
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "fingerprint_info")
+@Entity(tableName = "customer_fingerprint_info")
 class Fingerprint(
     @ColumnInfo(name = "left_1") val leftOne: String?,
     @ColumnInfo(name = "left_2") val leftTwo: String?,
@@ -19,4 +19,5 @@ class Fingerprint(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+    var generalId: Int = 0
 }

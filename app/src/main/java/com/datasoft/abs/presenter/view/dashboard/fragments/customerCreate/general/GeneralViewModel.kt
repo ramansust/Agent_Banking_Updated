@@ -9,6 +9,7 @@ import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckResponse
 import com.datasoft.abs.data.dto.dedupecheck.SaveData
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
+import com.datasoft.abs.data.source.local.db.entity.customer.General
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -83,6 +84,7 @@ class GeneralViewModel @Inject constructor(
                         )
                     )
                 )
+                repository.delete(1)
                 return@launch
             }
 
@@ -111,9 +113,24 @@ class GeneralViewModel @Inject constructor(
                     nationalityId
                 )
 
+                val general = General(
+                    salutation,
+                    firstName,
+                    lastName,
+                    dob,
+                    nid,
+                    gender,
+                    customerType,
+                    mobileNumber,
+                    motherName,
+                    fatherName,
+                    city,
+                    nationalityId
+                )
+
                 try {
                     val response = repository.getDedupeCheckData(dedupeRequest)
-                    dedupeData.postValue(handleDedupeResponse(response, sanctionRequest))
+                    dedupeData.postValue(handleDedupeResponse(response, sanctionRequest, general))
                 } catch (e: Exception) {
                     dedupeData.postValue(
                         Event(
@@ -138,7 +155,8 @@ class GeneralViewModel @Inject constructor(
 
     private fun handleDedupeResponse(
         response: Response<DedupeCheckResponse>,
-        sanctionScreeningRequest: SanctionScreeningRequest
+        sanctionScreeningRequest: SanctionScreeningRequest,
+        general: General
     ): Event<Resource<DedupeCheckResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
@@ -148,6 +166,7 @@ class GeneralViewModel @Inject constructor(
                         if (response.isSuccessful) {
                             response.body()?.let {
                                 sanction.postValue(it)
+                                repository.insertGeneral(general)
                                 return@let Event(Resource.success(response))
                             }
                         }

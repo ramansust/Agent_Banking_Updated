@@ -5,6 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createCustomer.PersonalInfo
+import com.datasoft.abs.data.source.local.db.entity.customer.Guardian
+import com.datasoft.abs.data.source.local.db.entity.customer.Nominee
+import com.datasoft.abs.data.source.local.db.entity.customer.Personal
+import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
@@ -19,6 +23,7 @@ import javax.inject.Named
 
 @HiltViewModel
 class PersonalViewModel @Inject constructor(
+    private val repository: Repository,
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
 ) : ViewModel() {
 
@@ -114,6 +119,47 @@ class PersonalViewModel @Inject constructor(
                 guardianAddress,
                 guardianDob
             )
+
+            val personal = Personal(
+                maritalStatus,
+                spouseName,
+                religion,
+                numberOfDependents.toInt(),
+                education,
+                occupation,
+                nationality,
+                birthCertificateNo,
+                vatRegistrationNo,
+                drivingLicense,
+                monthlyIncome,
+                sourceOfFund
+            )
+
+            personal.generalId = 1
+            repository.insertPersonal(personal)
+
+            val nominee = Nominee(
+                nomineeName,
+                nomineeRelation,
+                nomineeMobile,
+                nomineeEmail,
+                nomineeAddress
+            )
+
+            nominee.personalId = 1
+            repository.insertNominee(nominee)
+
+            val guardian = Guardian(
+                guardianName,
+                guardianAddress,
+                guardianRelation,
+                minorDate = "23.02.2021",
+                guardianContact,
+                guardianDob
+            )
+
+            guardian.personalId = 1
+            repository.insertGuardian(guardian)
 
             personalData.postValue(Event(Resource.success(personalInfo)))
         }

@@ -7,11 +7,11 @@ enum class DayCount(val value: String) {
     TOMORROW("2"),
     LAST_WEEK("7"),
     LAST_MONTH("30"),
-    QUARTER_MONTH("90"),
+    QUARTER("90"),
 }
 
 fun getAllDays(): List<DayCount> {
-    return listOf(TODAY, TOMORROW, LAST_WEEK, LAST_MONTH, QUARTER_MONTH)
+    return listOf(TODAY, TOMORROW, LAST_WEEK, LAST_MONTH, QUARTER)
 }
 
 fun getDay(value: String): DayCount? {

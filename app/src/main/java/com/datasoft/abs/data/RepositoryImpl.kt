@@ -28,8 +28,11 @@ import com.datasoft.abs.data.dto.transaction.eftn.CreateEFTNRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.Details
 import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
-import com.datasoft.abs.data.source.local.db.dao.GeneralInfoDao
-import com.datasoft.abs.data.source.local.db.entity.GeneralInfo
+import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
+import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
+import com.datasoft.abs.data.source.local.db.entity.account.Account
+import com.datasoft.abs.data.source.local.db.entity.customer.*
+import com.datasoft.abs.data.source.local.db.entity.customer.relation.*
 import com.datasoft.abs.data.source.remote.JwtHelper
 import com.datasoft.abs.data.source.remote.RestRemoteDataSource
 import com.datasoft.abs.domain.Repository
@@ -41,7 +44,8 @@ import javax.inject.Singleton
 class RepositoryImpl @Inject constructor(
     remoteDataSource: RestRemoteDataSource,
     private val jwtHelper: JwtHelper,
-    private val generalInfoDao: GeneralInfoDao
+    private val customerDao: CustomerDao,
+    private val accountDao: AccountDao
 ) : Repository {
     private val restApiService by lazy { remoteDataSource.restApiService }
 
@@ -197,11 +201,91 @@ class RepositoryImpl @Inject constructor(
         return restApiService.getEFTNSDetails(transactionID)
     }
 
-    override suspend fun insert(generalInfo: GeneralInfo) {
-        generalInfoDao.insert(generalInfo)
+    override suspend fun insertGeneral(general: General) {
+        customerDao.insertGeneral(general)
     }
 
-    override fun getAll(): LiveData<List<GeneralInfo>> {
-        return generalInfoDao.getAll()
+    override suspend fun insertPersonal(personal: Personal) {
+        customerDao.insertPersonal(personal)
+    }
+
+    override suspend fun insertNominee(nominee: Nominee) {
+        customerDao.insertNominee(nominee)
+    }
+
+    override suspend fun insertGuardian(guardian: Guardian) {
+        customerDao.insertGuardian(guardian)
+    }
+
+    override suspend fun insertAddress(address: Address) {
+        customerDao.insertAddress(address)
+    }
+
+    override suspend fun insertPhoto(photo: Photo) {
+        customerDao.insertPhoto(photo)
+    }
+
+    override suspend fun insertFingerprint(fingerprint: Fingerprint) {
+        customerDao.insertFingerprint(fingerprint)
+    }
+
+    override suspend fun insertDocument(document: Document) {
+        customerDao.insertDocument(document)
+    }
+
+    override suspend fun insertKYC(kyc: KYC) {
+        customerDao.insertKYC(kyc)
+    }
+
+    override fun getAll(): LiveData<List<General>> {
+        return customerDao.getAll()
+    }
+
+    override fun getGeneral(generalId: Int): General {
+        return customerDao.getGeneral(generalId)
+    }
+
+    override fun getGeneralAndPersonal(generalId: Int): GeneralAndPersonal {
+        return customerDao.getGeneralAndPersonal(generalId)
+    }
+
+    override fun getPersonalAndNominee(personalId: Int): PersonalAndNominee {
+        return customerDao.getPersonalAndNominee(personalId)
+    }
+
+    override fun getPersonalAndGuardian(personalId: Int): PersonalAndGuardian {
+        return customerDao.getPersonalAndGuardian(personalId)
+    }
+
+    override fun getGeneralWithAddresses(generalId: Int): List<GeneralWithAddresses> {
+        return customerDao.getGeneralWithAddresses(generalId)
+    }
+
+    override fun getGeneralAndPhoto(generalId: Int): GeneralAndPhoto {
+        return customerDao.getGeneralAndPhoto(generalId)
+    }
+
+    override fun getGeneralAndFingerprint(generalId: Int): GeneralAndFingerprint {
+        return customerDao.getGeneralAndFingerprint(generalId)
+    }
+
+    override fun getGeneralWithDocuments(generalId: Int): List<GeneralWithDocuments> {
+        return customerDao.getGeneralWithDocuments(generalId)
+    }
+
+    override fun getGeneralAndKYC(generalId: Int): GeneralAndKYC {
+        return customerDao.getGeneralAndKYC(generalId)
+    }
+
+    override fun delete(generalId: Int) {
+        customerDao.delete(generalId)
+    }
+
+    override suspend fun insert(account: Account) {
+        accountDao.insert(account)
+    }
+
+    override fun getAccounts(): LiveData<List<Account>> {
+        return accountDao.getAll()
     }
 }
