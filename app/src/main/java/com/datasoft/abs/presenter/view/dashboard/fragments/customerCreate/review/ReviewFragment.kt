@@ -142,31 +142,28 @@ class ReviewFragment : Fragment() {
             }
         })
 
-        generalViewModel.getSanctionData().observe(viewLifecycleOwner, {
-            createCustomerRequest.customerNo = it.customerNo!!
-            createCustomerRequest.branchId = it.branchId!!
-        })
-
-        generalViewModel.getSavedData().observe(viewLifecycleOwner, {
+        generalViewModel.getGeneral().observe(viewLifecycleOwner, {
             val fullName = it.firstName + " " + it.lastName
             binding.txtViewFullNameValue.text = fullName
-            binding.txtViewDobValue.text = it.birthDate
-            binding.txtViewNidValue.text = it.nationalID
+            binding.txtViewDobValue.text = it.dateBirth
+            binding.txtViewNidValue.text = it.nid
             binding.txtViewMobileNoValue.text = it.mobileNumber
             binding.txtViewFatherNameValue.text = it.fatherName
             binding.txtViewMotherNameValue.text = it.motherName
 
             createCustomerRequest.apply {
-                salutation = it.salutation
-                firstName = it.firstName
-                lastName = it.lastName
-                dob = it.birthDate
-                nid = it.nationalID
-                gender = it.gender
-                customerType = it.customerType
-                mobile = it.mobileNumber
-                motherName = it.motherName
-                fatherName = it.fatherName
+                salutation = it.salutation!!
+                firstName = it.firstName!!
+                lastName = it.lastName!!
+                dob = it.dateBirth!!
+                nid = it.nid!!
+                gender = it.gender!!
+                customerType = it.customerType!!
+                mobile = it.mobileNumber!!
+                motherName = it.motherName!!
+                fatherName = it.fatherName!!
+                customerNo = it.customerNo!!
+                branchId = it.branchId!!
             }
         })
 

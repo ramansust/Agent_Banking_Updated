@@ -3,6 +3,8 @@ package com.datasoft.abs.data.source.local.db.entity.customer
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.datasoft.abs.data.dto.createCustomer.Addresses
+import com.datasoft.abs.data.dto.createCustomer.Contact
 
 @Entity(tableName = "customer_address_info")
 class Address(
@@ -27,4 +29,23 @@ class Address(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
     var generalId: Int = 0
+}
+
+fun Address.toAddress(): Addresses {
+    return Addresses(
+        "$houseNo, $village",
+        addressType!!,
+        country!!,
+        district!!,
+        postCode!!,
+        thana!!,
+    )
+}
+
+fun Address.toContact(): Contact {
+    return Contact(
+        contactNo!!,
+        contactType!!,
+        true
+    )
 }

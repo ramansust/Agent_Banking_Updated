@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckRequest
 import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckResponse
-import com.datasoft.abs.data.dto.dedupecheck.SaveData
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
 import com.datasoft.abs.data.source.local.db.entity.customer.General
@@ -34,11 +33,10 @@ class GeneralViewModel @Inject constructor(
     private val dedupeData = MutableLiveData<Event<Resource<DedupeCheckResponse>>>()
     fun getDedupeData(): LiveData<Event<Resource<DedupeCheckResponse>>> = dedupeData
 
-    private val savedData = MutableLiveData<SaveData>()
-    fun getSavedData(): LiveData<SaveData> = savedData
+    private val general = MutableLiveData<General>()
+    fun getGeneral(): LiveData<General> = general
 
     private val sanction = MutableLiveData<SanctionScreeningResponse>()
-    fun getSanctionData(): LiveData<SanctionScreeningResponse> = sanction
 
     fun requestData(
         salutation: Int,
@@ -58,22 +56,6 @@ class GeneralViewModel @Inject constructor(
 
             dedupeData.postValue(Event(Resource.loading(null)))
 
-            val saveData = SaveData(
-                salutation,
-                customerType,
-                fatherName,
-                firstName,
-                lastName,
-                dob,
-                mobileNumber,
-                nid,
-                nationalityId,
-                gender,
-                motherName,
-                city
-            )
-            savedData.postValue(saveData)
-
             if (firstName.isEmpty() || lastName.isEmpty() || dob.isEmpty() || nid.isEmpty() || mobileNumber.isEmpty()
                 || fatherName.isEmpty() || motherName.isEmpty() || city.isEmpty()
             ) {
@@ -84,7 +66,6 @@ class GeneralViewModel @Inject constructor(
                         )
                     )
                 )
-                repository.delete(1)
                 return@launch
             }
 
@@ -113,24 +94,25 @@ class GeneralViewModel @Inject constructor(
                     nationalityId
                 )
 
-                val general = General(
-                    salutation,
-                    firstName,
-                    lastName,
-                    dob,
-                    nid,
-                    gender,
-                    customerType,
-                    mobileNumber,
-                    motherName,
-                    fatherName,
-                    city,
-                    nationalityId
-                )
-
                 try {
-                    val response = repository.getDedupeCheckData(dedupeRequest)
-                    dedupeData.postValue(handleDedupeResponse(response, sanctionRequest, general))
+                    dedupeData.postValue(
+                        handleDedupeResponse(
+                            repository.getDedupeCheckData(dedupeRequest),
+                            sanctionRequest,
+                            salutation,
+                            firstName,
+                            lastName,
+                            dob,
+                            nid,
+                            gender,
+                            customerType,
+                            mobileNumber,
+                            motherName,
+                            fatherName,
+                            city,
+                            nationalityId
+                        )
+                    )
                 } catch (e: Exception) {
                     dedupeData.postValue(
                         Event(
@@ -156,7 +138,18 @@ class GeneralViewModel @Inject constructor(
     private fun handleDedupeResponse(
         response: Response<DedupeCheckResponse>,
         sanctionScreeningRequest: SanctionScreeningRequest,
-        general: General
+        salutation: Int?,
+        firstName: String?,
+        lastName: String?,
+        dateBirth: String?,
+        nid: String?,
+        gender: Int?,
+        customerType: Int?,
+        mobileNumber: String?,
+        motherName: String?,
+        fatherName: String?,
+        city: String?,
+        country: Int?
     ): Event<Resource<DedupeCheckResponse>> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
@@ -166,6 +159,24 @@ class GeneralViewModel @Inject constructor(
                         if (response.isSuccessful) {
                             response.body()?.let {
                                 sanction.postValue(it)
+
+                                val general = General(
+                                    salutation,
+                                    firstName,
+                                    lastName,
+                                    dateBirth,
+                                    nid,
+                                    gender,
+                                    customerType,
+                                    mobileNumber,
+                                    motherName,
+                                    fatherName,
+                                    city,
+                                    country,
+                                    sanction.value!!.branchId,
+                                    sanction.value!!.customerNo
+                                )
+
                                 repository.insertGeneral(general)
                                 return@let Event(Resource.success(response))
                             }

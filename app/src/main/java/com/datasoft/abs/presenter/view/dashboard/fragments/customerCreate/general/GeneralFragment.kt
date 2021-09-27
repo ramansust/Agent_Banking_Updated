@@ -117,31 +117,31 @@ class GeneralFragment : Fragment() {
         })
 
 
-        viewModel.getSavedData().observe(viewLifecycleOwner, { response ->
+        viewModel.getGeneral().observe(viewLifecycleOwner, { response ->
             if (salutationList.isNotEmpty()) binding.spinnerSalutation.setSelection(
                 salutationList.indexOf(
-                    CommonModel(response.salutation)
+                    CommonModel(response.salutation!!)
                 )
             )
             binding.edTxtFirstName.setText(response.firstName)
             binding.edTxtLastName.setText(response.lastName)
-            binding.edTxtDob.setText(response.birthDate)
-            binding.edTxtNid.setText(response.nationalID)
+            binding.edTxtDob.setText(response.dateBirth)
+            binding.edTxtNid.setText(response.nid)
             binding.edTxtMobileNumber.setText(response.mobileNumber)
             binding.edTxtFatherName.setText(response.fatherName)
             if (customerList.isNotEmpty()) binding.spinnerCustomerType.setSelection(
                 customerList.indexOf(
-                    CommonModel(response.customerType)
+                    CommonModel(response.customerType!!)
                 )
             )
             if (countryList.isNotEmpty()) binding.spinnerCountry.setSelection(
                 countryList.indexOf(
-                    CommonModel(response.nationalityId)
+                    CommonModel(response.country!!)
                 )
             )
             if (genderList.isNotEmpty()) binding.spinnerGender.setSelection(
                 genderList.indexOf(
-                    CommonModel(response.gender)
+                    CommonModel(response.gender!!)
                 )
             )
             binding.edTxtMotherName.setText(response.motherName)

@@ -17,7 +17,9 @@ data class General(
     @ColumnInfo(name = "mother_name") val motherName: String?,
     @ColumnInfo(name = "father_name") val fatherName: String?,
     val city: String?,
-    val country: Int?
+    val country: Int?,
+    @ColumnInfo(name = "branch_id") val branchId: Int?,
+    @ColumnInfo(name = "customer_no") val customerNo: String?
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
