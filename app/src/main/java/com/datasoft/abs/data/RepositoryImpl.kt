@@ -294,6 +294,10 @@ class RepositoryImpl @Inject constructor(
         customerDao.delete(generalId)
     }
 
+    override fun deleteDocument(documentId: Int) {
+        customerDao.deleteDocument(documentId)
+    }
+
     override fun insertAccount(account: Account): Long {
         return accountDao.insertAccount(account)
     }

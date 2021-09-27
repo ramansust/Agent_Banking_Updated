@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.RequestManager
 import com.datasoft.abs.R
 import com.datasoft.abs.data.dto.createCustomer.*
+import com.datasoft.abs.data.source.local.db.entity.customer.toRelatedDoc
 import com.datasoft.abs.databinding.FragmentReviewBinding
 import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
@@ -268,8 +269,10 @@ class ReviewFragment : Fragment() {
             createCustomerRequest.guardianInfo = guardian
         })
 
-        documentsViewModel.getSavedData().observe(viewLifecycleOwner, {
-            createCustomerRequest.relatedDocs = it
+        documentsViewModel.getDocuments().observe(viewLifecycleOwner, {
+            createCustomerRequest.relatedDocs = it.map { document ->
+                document.toRelatedDoc()
+            }
 
             when {
                 it.size > 1 -> {
@@ -279,18 +282,18 @@ class ReviewFragment : Fragment() {
                     binding.txtViewDocument2.visibility = View.VISIBLE
                     binding.txtViewDocument2Value.visibility = View.VISIBLE
 
-                    binding.txtViewDocument1.text = it[0].docTypeName
+                    binding.txtViewDocument1.text = it[0].documentId
                     val document1 =
-                        resources.getString(R.string.tracing_id) + ": " + it[0].tracingId + ", " + resources.getString(
+                        resources.getString(R.string.tracing_id) + ": " + it[0].documentId + ", " + resources.getString(
                             R.string.expiry_date_
-                        ) + ": " + it[0].expiredDate
+                        ) + ": " + it[0].expiryDate
                     binding.txtViewDocument1Value.text = document1
 
-                    binding.txtViewDocument2.text = it[1].docTypeName
+                    binding.txtViewDocument2.text = it[1].documentId
                     val document2 =
-                        resources.getString(R.string.tracing_id) + ": " + it[1].tracingId + ", " + resources.getString(
+                        resources.getString(R.string.tracing_id) + ": " + it[1].documentId + ", " + resources.getString(
                             R.string.expiry_date_
-                        ) + ": " + it[1].expiredDate
+                        ) + ": " + it[1].expiryDate
                     binding.txtViewDocument2Value.text = document2
                 }
 
@@ -298,11 +301,11 @@ class ReviewFragment : Fragment() {
                     binding.txtViewDocument1.visibility = View.VISIBLE
                     binding.txtViewDocument1Value.visibility = View.VISIBLE
 
-                    binding.txtViewDocument1.text = it[0].docTypeName
+                    binding.txtViewDocument1.text = it[0].documentId
                     val document1 =
-                        resources.getString(R.string.tracing_id) + ": " + it[0].tracingId + ", " + resources.getString(
+                        resources.getString(R.string.tracing_id) + ": " + it[0].documentId + ", " + resources.getString(
                             R.string.expiry_date_
-                        ) + ": " + it[0].expiredDate
+                        ) + ": " + it[0].expiryDate
                     binding.txtViewDocument1Value.text = document1
                 }
             }

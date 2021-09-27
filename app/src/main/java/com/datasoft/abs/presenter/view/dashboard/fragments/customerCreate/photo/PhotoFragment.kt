@@ -352,50 +352,43 @@ class PhotoFragment : Fragment() {
 
         viewModel.getUserPhoto().observe(viewLifecycleOwner, {
             glide.load(decode(it, DEFAULT)).into(binding.imgViewPhoto)
-            attachNumber++
-            nextButtonEnable(attachNumber)
+            nextButtonEnable(++attachNumber)
         })
 
         viewModel.getDocumentFront().observe(viewLifecycleOwner, {
             glide.load(decode(it, DEFAULT)).into(binding.imgViewNidFront)
-            attachNumber++
-            nextButtonEnable(attachNumber)
+            nextButtonEnable(++attachNumber)
         })
 
         viewModel.getDocumentBack().observe(viewLifecycleOwner, {
             glide.load(decode(it, DEFAULT)).into(binding.imgViewNidBack)
-            attachNumber++
-            nextButtonEnable(attachNumber)
+            nextButtonEnable(++attachNumber)
         })
 
         viewModel.getSignature().observe(viewLifecycleOwner, {
             glide.load(decode(it, DEFAULT)).into(binding.imgViewSignature)
-            attachNumber++
-            nextButtonEnable(attachNumber)
+            nextButtonEnable(++attachNumber)
         })
 
         viewModel.getGuardianPhoto().observe(viewLifecycleOwner, {
             glide.load(decode(it, DEFAULT)).into(binding.imgViewGuardianPhoto)
-            attachNumber++
-            nextButtonEnable(attachNumber)
+            nextButtonEnable(++attachNumber)
         })
 
         viewModel.getGuardianDocumentFront().observe(viewLifecycleOwner, {
             glide.load(decode(it, DEFAULT)).into(binding.imgViewGuardianNidFront)
-            attachNumber++
-            nextButtonEnable(attachNumber)
+            nextButtonEnable(++attachNumber)
         })
 
         viewModel.getGuardianDocumentBack().observe(viewLifecycleOwner, {
             glide.load(decode(it, DEFAULT)).into(binding.imgViewGuardianNidBack)
-            attachNumber++
-            nextButtonEnable(attachNumber)
+            nextButtonEnable(++attachNumber)
         })
 
         viewModel.getGuardianSignature().observe(viewLifecycleOwner, {
             glide.load(decode(it, DEFAULT)).into(binding.imgViewGuardianSignature)
             attachNumber++
-            nextButtonEnable(attachNumber)
+            nextButtonEnable(++attachNumber)
         })
 
         viewModel.getGuardianDocumentType().observe(viewLifecycleOwner, {

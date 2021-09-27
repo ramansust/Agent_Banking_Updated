@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createCustomer.RelatedDoc
 import com.datasoft.abs.data.dto.createCustomer.toDocument
 import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
+import com.datasoft.abs.data.source.local.db.entity.customer.Document
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Event
@@ -22,20 +23,14 @@ class DocumentsViewModel @Inject constructor(
     private val customerDao: CustomerDao
 ) : ViewModel() {
 
-    private val saveData = MutableLiveData<ArrayList<RelatedDoc>>()
-    fun getSavedData(): LiveData<ArrayList<RelatedDoc>> = saveData
+    private val document = MutableLiveData<ArrayList<Document>>()
+    fun getDocuments(): LiveData<ArrayList<Document>> = document
 
     private val backImage = MutableLiveData<Boolean>()
     fun getBackImage(): LiveData<Boolean> = backImage
 
     private val sendMessage = MutableLiveData<Event<Resource<RelatedDoc>>>()
     fun getMessage(): LiveData<Event<Resource<RelatedDoc>>> = sendMessage
-
-    private val documentFrontImage = MutableLiveData<String>()
-    fun getDocumentFrontImage(): LiveData<String> = documentFrontImage
-
-    private val documentBackImage = MutableLiveData<String>()
-    fun getDocumentBackImage(): LiveData<String> = documentBackImage
 
     fun setBackImage(isRequired: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -87,37 +82,15 @@ class DocumentsViewModel @Inject constructor(
         }
     }
 
-    fun notifyData(documentInfo: RelatedDoc) {
+    fun notifyData(generalId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list: ArrayList<RelatedDoc> = ArrayList()
-            list.add(documentInfo)
-            saveData.value?.let {
-                list.addAll(list.size - 1, it)
-            }
-            saveData.postValue(list)
+            document.postValue(customerDao.getGeneralWithDocuments(generalId).documents as ArrayList<Document>?)
         }
     }
 
-    fun removeData(documentInfo: RelatedDoc) {
+    fun removeData(documentID: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list: ArrayList<RelatedDoc> = ArrayList()
-            saveData.value?.let {
-                list.addAll(it)
-            }
-            list.remove(documentInfo)
-            saveData.postValue(list)
-        }
-    }
-
-    fun setDocumentFrontImage(value: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            documentFrontImage.postValue(value)
-        }
-    }
-
-    fun setDocumentBackImage(value: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            documentBackImage.postValue(value)
+            customerDao.deleteDocument(documentID)
         }
     }
 }

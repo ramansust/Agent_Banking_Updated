@@ -2,11 +2,7 @@ package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.docum
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.ImageDecoder
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.datasoft.abs.data.dto.createCustomer.RelatedDoc
+import com.datasoft.abs.data.source.local.db.entity.customer.toRelatedDoc
 import com.datasoft.abs.databinding.FragmentDocumentsBinding
-import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
-import com.pixelcarrot.base64image.Base64Image
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -65,8 +59,10 @@ class DocumentsFragment : Fragment() {
 
         customerViewModel.requestVisibility(true)
 
-        viewModel.getSavedData().observe(viewLifecycleOwner, {
-            documentAdapter.differ.submitList(it)
+        viewModel.getDocuments().observe(viewLifecycleOwner, {
+            documentAdapter.differ.submitList(it.map {
+                it.toRelatedDoc()
+            })
 
             binding.txtViewNoEntry.isVisible = it.size <= 0
             binding.recyclerView.isVisible = it.size > 0
@@ -83,16 +79,14 @@ class DocumentsFragment : Fragment() {
         })
 
         documentAdapter.setOnItemClickListener {
-            viewModel.removeData(it)
+            viewModel.removeData(1)
         }
     }
 
     private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val relatedDoc =
-                    result.data?.getSerializableExtra(Constant.DOCUMENT_INFO) as RelatedDoc
-                fileUriToString(relatedDoc)
+                viewModel.notifyData(1)
             }
         }
 
@@ -110,7 +104,7 @@ class DocumentsFragment : Fragment() {
         _binding = null
     }
 
-    private fun fileUriToString(relatedDoc: RelatedDoc) {
+    /*private fun fileUriToString(relatedDoc: RelatedDoc) {
 
         var front = false
         var back = false
@@ -166,5 +160,5 @@ class DocumentsFragment : Fragment() {
                     viewModel.notifyData(relatedDoc)
             }
         }
-    }
+    }*/
 }

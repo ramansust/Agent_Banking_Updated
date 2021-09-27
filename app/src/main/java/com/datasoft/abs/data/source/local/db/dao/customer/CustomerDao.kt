@@ -82,4 +82,7 @@ interface CustomerDao {
 
     @Query("DELETE FROM customer_general_info WHERE id = :generalId")
     fun delete(generalId: Int)
+
+    @Query("DELETE FROM customer_document_info WHERE id = :documentId")
+    fun deleteDocument(documentId: Int)
 }

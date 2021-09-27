@@ -103,6 +103,7 @@ interface Repository {
     fun getGeneralAndDocumentIdentification(generalId: Int): GeneralAndDocumentIdentification
 
     fun delete(generalId: Int)
+    fun deleteDocument(documentId: Int)
 
     fun insertAccount(account: Account): Long
     fun insertCustomers(vararg customer: Customer)
