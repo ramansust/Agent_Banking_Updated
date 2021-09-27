@@ -30,7 +30,8 @@ import com.datasoft.abs.data.dto.transaction.rtgs.Details
 import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
 import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
 import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
-import com.datasoft.abs.data.source.local.db.entity.account.Account
+import com.datasoft.abs.data.source.local.db.entity.account.*
+import com.datasoft.abs.data.source.local.db.entity.account.relation.*
 import com.datasoft.abs.data.source.local.db.entity.customer.*
 import com.datasoft.abs.data.source.local.db.entity.customer.relation.*
 import com.datasoft.abs.data.source.remote.JwtHelper
@@ -201,16 +202,20 @@ class RepositoryImpl @Inject constructor(
         return restApiService.getEFTNSDetails(transactionID)
     }
 
-    override suspend fun insertGeneral(general: General) {
-        customerDao.insertGeneral(general)
+    override suspend fun insertGeneral(general: General): Long {
+        return customerDao.insertGeneral(general)
     }
 
-    override suspend fun insertPersonal(personal: Personal) {
-        customerDao.insertPersonal(personal)
+    override suspend fun insertPersonal(personal: Personal): Long {
+        return customerDao.insertPersonal(personal)
     }
 
     override suspend fun insertNominee(nominee: Nominee) {
         customerDao.insertNominee(nominee)
+    }
+
+    override fun insertNominee(accountNominee: AccountNominee): Long {
+        return accountDao.insertNominee(accountNominee)
     }
 
     override suspend fun insertGuardian(guardian: Guardian) {
@@ -257,7 +262,7 @@ class RepositoryImpl @Inject constructor(
         return customerDao.getPersonalAndGuardian(personalId)
     }
 
-    override fun getGeneralWithAddresses(generalId: Int): List<GeneralWithAddresses> {
+    override fun getGeneralWithAddresses(generalId: Int): GeneralWithAddresses {
         return customerDao.getGeneralWithAddresses(generalId)
     }
 
@@ -269,7 +274,7 @@ class RepositoryImpl @Inject constructor(
         return customerDao.getGeneralAndFingerprint(generalId)
     }
 
-    override fun getGeneralWithDocuments(generalId: Int): List<GeneralWithDocuments> {
+    override fun getGeneralWithDocuments(generalId: Int): GeneralWithDocuments {
         return customerDao.getGeneralWithDocuments(generalId)
     }
 
@@ -281,11 +286,59 @@ class RepositoryImpl @Inject constructor(
         customerDao.delete(generalId)
     }
 
-    override suspend fun insert(account: Account) {
-        accountDao.insert(account)
+    override fun insertAccount(account: Account): Long {
+        return accountDao.insertAccount(account)
     }
 
-    override fun getAccounts(): LiveData<List<Account>> {
+    override fun insertCustomers(vararg customer: Customer) {
+        accountDao.insertCustomers(*customer)
+    }
+
+    override fun insertOthersFacilities(vararg otherFacilities: OtherFacilities) {
+        accountDao.insertOthersFacilities(*otherFacilities)
+    }
+
+    override fun insertNomineeGuardian(nomineeGuardian: NomineeGuardian) {
+        accountDao.insertNomineeGuardian(nomineeGuardian)
+    }
+
+    override fun insertIntroducer(introducer: Introducer) {
+        accountDao.insertIntroducer(introducer)
+    }
+
+    override fun insertTransactionProfiles(vararg transactionProfile: TransactionProfile) {
+        accountDao.insertTransactionProfiles(*transactionProfile)
+    }
+
+    override fun getAllAccount(): LiveData<List<Account>> {
         return accountDao.getAll()
+    }
+
+    override fun getAccountWithCustomers(accountId: Int): AccountWithCustomers {
+        return accountDao.getAccountWithCustomers(accountId)
+    }
+
+    override fun getAccountWithOthersFacilities(accountId: Int): AccountWithOtherFacilities {
+        return accountDao.getAccountWithOthersFacilities(accountId)
+    }
+
+    override fun getAccountWithNominees(accountId: Int): AccountWithNominees {
+        return accountDao.getAccountWithNominees(accountId)
+    }
+
+    override fun getNomineeAndGuardian(nomineeId: Int): AccountNomineeAndNomineeGuardian {
+        return accountDao.getNomineeAndGuardian(nomineeId)
+    }
+
+    override fun getAccountAndIntroducer(accountId: Int): AccountAndIntroducer {
+        return accountDao.getAccountAndIntroducer(accountId)
+    }
+
+    override fun getAccountWithTransactionProfiles(accountId: Int): AccountWithTransactionProfiles {
+        return accountDao.getAccountWithTransactionProfiles(accountId)
+    }
+
+    override fun deleteAccount(accountId: Int) {
+        accountDao.delete(accountId)
     }
 }

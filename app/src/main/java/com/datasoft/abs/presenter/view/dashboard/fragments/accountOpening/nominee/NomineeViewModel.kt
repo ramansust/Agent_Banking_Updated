@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createAccount.review.Nominee
 import com.datasoft.abs.data.dto.createAccount.review.NomineeRemainMinor
+import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
+import com.datasoft.abs.data.source.local.db.entity.account.AccountNominee
+import com.datasoft.abs.data.source.local.db.entity.account.NomineeGuardian
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Event
@@ -19,7 +22,8 @@ import javax.inject.Named
 
 @HiltViewModel
 class NomineeViewModel @Inject constructor(
-    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
+    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
+    private val accountDao: AccountDao
 ) : ViewModel() {
 
     private val nomineeAge = MutableLiveData<Int>()
@@ -133,6 +137,43 @@ class NomineeViewModel @Inject constructor(
                     nomineeExpiryDate
                 ) else null
             )
+
+            val accountNominee = AccountNominee(
+                name,
+                fatherName,
+                motherName,
+                dob,
+                spouseName,
+                shareOfPercentage,
+                relationship,
+                occupationId,
+                docTypeId,
+                nomineeIdValue,
+                expiryDate,
+                permanentAddress,
+                presentAddress,
+                applicant,
+                photo,
+                signaturePhoto,
+                nidFrontPhoto
+            )
+            accountNominee.accountId = 1
+            val nomineeId = accountDao.insertNominee(accountNominee)
+
+            val nomineeGuardian = NomineeGuardian(
+                nomineeName,
+                nomineeFatherSpouseName,
+                nomineeBirthDate,
+                nomineePresentAddress,
+                nomineePermanentAddress,
+                nomineeWithRelation,
+                nomineeDocId,
+                nomineeIdValue,
+                nomineeExpiryDate
+            )
+
+            nomineeGuardian.nomineeId = nomineeId.toInt()
+            accountDao.insertNomineeGuardian(nomineeGuardian)
 
             nomineeData.postValue(Event(Resource.success(nomineeInfo)))
         }

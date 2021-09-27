@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
+import com.datasoft.abs.data.source.local.db.entity.account.OtherFacilities
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,8 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OthersViewModel @Inject constructor(
-
-): ViewModel() {
+    private val accountDao: AccountDao
+) : ViewModel() {
 
     private val notify = MutableLiveData<Boolean>()
     fun getNotifyData(): LiveData<Boolean> = notify
@@ -35,30 +37,35 @@ class OthersViewModel @Inject constructor(
     fun setChequeBook(value: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             chequeBook.postValue(value)
+            insert("Cheque Book", value)
         }
     }
 
     fun setSMSBanking(value: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             smsBanking.postValue(value)
+            insert("SMS Banking", value)
         }
     }
 
     fun setDebitCard(value: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             debitCard.postValue(value)
+            insert("Debit Card", value)
         }
     }
 
     fun setEStatement(value: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             eStatement.postValue(value)
+            insert("eStatement", value)
         }
     }
 
     fun setInternetBanking(value: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             internetBanking.postValue(value)
+            insert("Internet Banking", value)
         }
     }
 
@@ -68,4 +75,12 @@ class OthersViewModel @Inject constructor(
         }
     }
 
+    private fun insert(title: String, value: Boolean) {
+        val otherFacilities = OtherFacilities(
+            title,
+            value
+        )
+        otherFacilities.accountId = 1
+        accountDao.insertOthersFacilities(otherFacilities)
+    }
 }

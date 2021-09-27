@@ -26,7 +26,8 @@ import com.datasoft.abs.data.dto.transaction.eftn.CreateEFTNRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.Details
 import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
-import com.datasoft.abs.data.source.local.db.entity.account.Account
+import com.datasoft.abs.data.source.local.db.entity.account.*
+import com.datasoft.abs.data.source.local.db.entity.account.relation.*
 import com.datasoft.abs.data.source.local.db.entity.customer.*
 import com.datasoft.abs.data.source.local.db.entity.customer.relation.*
 import retrofit2.Response
@@ -78,8 +79,8 @@ interface Repository {
     suspend fun getRTGSDetails(transactionID: String): Response<Details>
     suspend fun getEFTNSDetails(transactionID: String): Response<Details>
 
-    suspend fun insertGeneral(general: General)
-    suspend fun insertPersonal(personal: Personal)
+    suspend fun insertGeneral(general: General): Long
+    suspend fun insertPersonal(personal: Personal): Long
     suspend fun insertNominee(nominee: Nominee)
     suspend fun insertGuardian(guardian: Guardian)
     suspend fun insertAddress(address: Address)
@@ -93,14 +94,29 @@ interface Repository {
     fun getGeneralAndPersonal(generalId: Int): GeneralAndPersonal
     fun getPersonalAndNominee(personalId: Int): PersonalAndNominee
     fun getPersonalAndGuardian(personalId: Int): PersonalAndGuardian
-    fun getGeneralWithAddresses(generalId: Int): List<GeneralWithAddresses>
+    fun getGeneralWithAddresses(generalId: Int): GeneralWithAddresses
     fun getGeneralAndPhoto(generalId: Int): GeneralAndPhoto
     fun getGeneralAndFingerprint(generalId: Int): GeneralAndFingerprint
-    fun getGeneralWithDocuments(generalId: Int): List<GeneralWithDocuments>
+    fun getGeneralWithDocuments(generalId: Int): GeneralWithDocuments
     fun getGeneralAndKYC(generalId: Int): GeneralAndKYC
 
     fun delete(generalId: Int)
 
-    suspend fun insert(account: Account)
-    fun getAccounts(): LiveData<List<Account>>
+    fun insertAccount(account: Account): Long
+    fun insertCustomers(vararg customer: Customer)
+    fun insertOthersFacilities(vararg otherFacilities: OtherFacilities)
+    fun insertNominee(accountNominee: AccountNominee): Long
+    fun insertNomineeGuardian(nomineeGuardian: NomineeGuardian)
+    fun insertIntroducer(introducer: Introducer)
+    fun insertTransactionProfiles(vararg transactionProfile: TransactionProfile)
+
+    fun getAllAccount(): LiveData<List<Account>>
+    fun getAccountWithCustomers(accountId: Int): AccountWithCustomers
+    fun getAccountWithOthersFacilities(accountId: Int): AccountWithOtherFacilities
+    fun getAccountWithNominees(accountId: Int): AccountWithNominees
+    fun getNomineeAndGuardian(nomineeId: Int): AccountNomineeAndNomineeGuardian
+    fun getAccountAndIntroducer(accountId: Int): AccountAndIntroducer
+    fun getAccountWithTransactionProfiles(accountId: Int): AccountWithTransactionProfiles
+
+    fun deleteAccount(accountId: Int)
 }

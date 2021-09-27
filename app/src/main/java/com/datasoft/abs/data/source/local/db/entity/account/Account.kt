@@ -13,7 +13,7 @@ data class Account(
     @ColumnInfo(name = "account_title") val accountTitle: String?,
     @ColumnInfo(name = "opening_date") val openingDate: String?,
     val currency: Int?,
-    @ColumnInfo(name = "source_fund") val sourceFund: String?,
+    @ColumnInfo(name = "source_fund") val sourceFund: Int?,
     @ColumnInfo(name = "initial_amount") val initialAmount: Int?
 ) {
     @PrimaryKey(autoGenerate = true)

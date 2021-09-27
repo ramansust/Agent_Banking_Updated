@@ -46,31 +46,31 @@ interface CustomerDao {
     fun getGeneralAndPersonal(generalId: Int): GeneralAndPersonal
 
     @Transaction
-    @Query("SELECT * FROM customer_nominee_info WHERE id = :personalId")
+    @Query("SELECT * FROM customer_personal_info WHERE id = :personalId")
     fun getPersonalAndNominee(personalId: Int): PersonalAndNominee
 
     @Transaction
-    @Query("SELECT * FROM customer_guardian_info WHERE id = :personalId")
+    @Query("SELECT * FROM customer_personal_info WHERE id = :personalId")
     fun getPersonalAndGuardian(personalId: Int): PersonalAndGuardian
 
     @Transaction
-    @Query("SELECT * FROM customer_address_info WHERE id = :generalId")
-    fun getGeneralWithAddresses(generalId: Int): List<GeneralWithAddresses>
+    @Query("SELECT * FROM customer_general_info WHERE id = :generalId")
+    fun getGeneralWithAddresses(generalId: Int): GeneralWithAddresses
 
     @Transaction
-    @Query("SELECT * FROM customer_photo_info WHERE id = :generalId")
+    @Query("SELECT * FROM customer_general_info WHERE id = :generalId")
     fun getGeneralAndPhoto(generalId: Int): GeneralAndPhoto
 
     @Transaction
-    @Query("SELECT * FROM customer_fingerprint_info WHERE id = :generalId")
+    @Query("SELECT * FROM customer_general_info WHERE id = :generalId")
     fun getGeneralAndFingerprint(generalId: Int): GeneralAndFingerprint
 
     @Transaction
-    @Query("SELECT * FROM customer_document_info WHERE id = :generalId")
-    fun getGeneralWithDocuments(generalId: Int): List<GeneralWithDocuments>
+    @Query("SELECT * FROM customer_general_info WHERE id = :generalId")
+    fun getGeneralWithDocuments(generalId: Int): GeneralWithDocuments
 
     @Transaction
-    @Query("SELECT * FROM customer_kyc_info WHERE id = :generalId")
+    @Query("SELECT * FROM customer_general_info WHERE id = :generalId")
     fun getGeneralAndKYC(generalId: Int): GeneralAndKYC
 
     @Query("DELETE FROM customer_general_info WHERE id = :generalId")

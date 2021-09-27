@@ -136,7 +136,7 @@ class PersonalViewModel @Inject constructor(
             )
 
             personal.generalId = 1
-            repository.insertPersonal(personal)
+            val id = repository.insertPersonal(personal)
 
             val nominee = Nominee(
                 nomineeName,
@@ -146,7 +146,7 @@ class PersonalViewModel @Inject constructor(
                 nomineeAddress
             )
 
-            nominee.personalId = 1
+            nominee.personalId = id.toInt()
             repository.insertNominee(nominee)
 
             val guardian = Guardian(
@@ -158,7 +158,7 @@ class PersonalViewModel @Inject constructor(
                 guardianDob
             )
 
-            guardian.personalId = 1
+            guardian.personalId = id.toInt()
             repository.insertGuardian(guardian)
 
             personalData.postValue(Event(Resource.success(personalInfo)))

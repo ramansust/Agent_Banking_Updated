@@ -15,4 +15,5 @@ class TransactionProfile(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+    var accountId: Int = 0
 }

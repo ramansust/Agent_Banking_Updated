@@ -7,6 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createAccount.general.AccountInfo
 import com.datasoft.abs.data.dto.createAccount.general.CustomerDataResponse
 import com.datasoft.abs.data.dto.createAccount.general.DisplayAccountInfo
+import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
+import com.datasoft.abs.data.source.local.db.entity.account.Account
+import com.datasoft.abs.data.source.local.db.entity.account.Customer
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -23,6 +26,7 @@ import javax.inject.Named
 class GeneralViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network,
+    private val accountDao: AccountDao,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
@@ -107,6 +111,35 @@ class GeneralViewModel @Inject constructor(
                     )
                 )
                 return@launch
+            }
+
+            val account = Account(
+                categoryId,
+                accountId,
+                operatingId,
+                customerId,
+                accountTitle,
+                openingDate,
+                currencyId,
+                fundId,
+                initialAmount
+            )
+
+            val id = accountDao.insertAccount(account)
+
+            customerData.value!!.data.let {
+                it!!.customerData.forEach { value ->
+                    val customer = Customer(
+                        value.fullName,
+                        value.fatherName,
+                        value.motherName,
+                        value.dob,
+                        value.isSignatory,
+                        value.isRequired
+                    )
+                    customer.accountId = id.toInt()
+                    accountDao.insertCustomers(customer)
+                }
             }
 
             accountInfo.postValue(

@@ -15,15 +15,16 @@ data class AccountNominee(
     val relation: Int?,
     val occupation: Int?,
     @ColumnInfo(name = "document_type") val documentType: Int?,
-    @ColumnInfo(name = "id_value") val idValue: Int?,
-    @ColumnInfo(name = "expiry_date") val expiryDate: Int?,
-    @ColumnInfo(name = "permanent_address") val permanentAddress: Int?,
-    @ColumnInfo(name = "present_address") val presentAddress: Int?,
-    val applicant: Int?,
+    @ColumnInfo(name = "id_value") val idValue: String?,
+    @ColumnInfo(name = "expiry_date") val expiryDate: String?,
+    @ColumnInfo(name = "permanent_address") val permanentAddress: String?,
+    @ColumnInfo(name = "present_address") val presentAddress: String?,
+    val applicant: String?,
     val photo: String?,
     val signature: String?,
     @ColumnInfo(name = "front_side") val frontSide: String?
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+    var accountId: Int = 0
 }

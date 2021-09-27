@@ -23,8 +23,4 @@ data class Nominee(
     var nidFrontPhoto: String,
     var nidBackPhoto: String,
     val nomineeMinorInfo: NomineeRemainMinor?
-) : Serializable {
-    override fun toString(): String {
-        return "Nominee(name='$name', fatherName='$fatherName', motherName='$motherName', dob='$dob', spouseName='$spouseName', shareOfPercentage=$shareOfPercentage, relationship=$relationship, occupationId=$occupationId, docTypeId=$docTypeId, nidNo='$nidNo', expireDate='$expireDate', permanentAddress='$permanentAddress', presentAddress='$presentAddress', applicant='$applicant', nomineeMinorInfo=$nomineeMinorInfo)"
-    }
-}
+) : Serializable

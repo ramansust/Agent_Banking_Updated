@@ -1,6 +1,5 @@
 package com.datasoft.abs.data.source.local.db.entity.account
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -11,4 +10,5 @@ data class OtherFacilities(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+    var accountId: Int = 0
 }

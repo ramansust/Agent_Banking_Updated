@@ -12,10 +12,11 @@ class NomineeGuardian(
     @ColumnInfo(name = "present_address") val presentAddress: String?,
     @ColumnInfo(name = "permanent_address") val permanentAddress: String?,
     val relation: Int?,
-    @ColumnInfo(name = "document_type") val documentType: String?,
+    @ColumnInfo(name = "document_type") val documentType: Int?,
     @ColumnInfo(name = "id_value") val idValue: String?,
     @ColumnInfo(name = "expiry_date") val expiryDate: String?
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+    var nomineeId: Int = 0
 }
