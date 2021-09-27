@@ -1,5 +1,6 @@
 package com.datasoft.abs.data.dto.createCustomer
 
+import com.datasoft.abs.data.source.local.db.entity.customer.Address
 import java.io.Serializable
 
 data class AddressInfo(
@@ -25,4 +26,26 @@ data class AddressInfo(
     val unionValue: String,
     val contactType: Int,
     val contactNo: String
-): Serializable
+) : Serializable
+
+fun AddressInfo.toAddress(): Address {
+    return Address(
+        addressType,
+        houseNo,
+        flatNo,
+        village,
+        blockNo,
+        roadNo,
+        wordNo,
+        zipCode,
+        postCode,
+        state,
+        country,
+        city,
+        district,
+        thana,
+        union,
+        contactType,
+        contactNo
+    )
+}

@@ -13,7 +13,8 @@ class Photo(
     @ColumnInfo(name = "guardian_profile") val guardianProfile: String?,
     @ColumnInfo(name = "guardian_signature") val guardianSignature: String?,
     @ColumnInfo(name = "guardian_nid_front") val guardianNidFront: String?,
-    @ColumnInfo(name = "guardian_nid_back") val guardianNidBack: String?
+    @ColumnInfo(name = "guardian_nid_back") val guardianNidBack: String?,
+    @ColumnInfo(name = "document_type") val documentType: Int?
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

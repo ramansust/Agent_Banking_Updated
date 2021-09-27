@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.accountList.Row
+import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -23,6 +24,7 @@ import javax.inject.Named
 class AccountMainViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network,
+    private val accountDao: AccountDao,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
 ) : ViewModel() {

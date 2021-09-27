@@ -1,5 +1,9 @@
 package com.datasoft.abs.data.dto.createCustomer
 
+import com.datasoft.abs.data.source.local.db.entity.customer.Guardian
+import com.datasoft.abs.data.source.local.db.entity.customer.Nominee
+import com.datasoft.abs.data.source.local.db.entity.customer.Personal
+
 data class PersonalInfo(
     val maritalStatus: Int,
     val spouseName: String,
@@ -29,3 +33,41 @@ data class PersonalInfo(
     val guardianAddress: String,
     val guardianDob: String
 )
+
+fun PersonalInfo.toPersonal(): Personal {
+    return Personal(
+        maritalStatus,
+        spouseName,
+        religion,
+        numberOfDependents.toInt(),
+        education,
+        occupation,
+        nationality,
+        birthCertificateNo,
+        vatRegistrationNo,
+        drivingLicense,
+        monthlyIncome,
+        sourceOfFund
+    )
+}
+
+fun PersonalInfo.toNominee(): Nominee {
+    return Nominee(
+        nomineeName,
+        nomineeRelation,
+        nomineeMobile,
+        nomineeEmail,
+        nomineeAddress
+    )
+}
+
+fun PersonalInfo.toGuardian(): Guardian {
+    return Guardian(
+        guardianName,
+        guardianAddress,
+        guardianRelation,
+        minorDate = "23.02.2021",
+        guardianContact,
+        guardianDob
+    )
+}

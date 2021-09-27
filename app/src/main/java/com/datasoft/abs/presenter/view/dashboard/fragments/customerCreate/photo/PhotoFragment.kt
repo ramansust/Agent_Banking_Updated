@@ -238,6 +238,7 @@ class PhotoFragment : Fragment() {
         }
 
         binding.btnNext.setOnClickListener {
+            viewModel.insertData()
             customerViewModel.requestCurrentStep(4)
         }
 

@@ -8,7 +8,7 @@ import com.datasoft.abs.data.source.local.db.entity.account.*
 import com.datasoft.abs.data.source.local.db.entity.customer.*
 
 @Database(
-    entities = [General::class, Personal::class, Nominee::class, Guardian::class, Address::class, Photo::class, Fingerprint::class, Document::class, KYC::class,
+    entities = [General::class, Personal::class, Nominee::class, Guardian::class, Address::class, Photo::class, Fingerprint::class, Document::class, RiskGrading::class, DocumentIdentification::class,
         Account::class, Customer::class, OtherFacilities::class, AccountNominee::class, NomineeGuardian::class, Introducer::class, TransactionProfile::class],
     version = 1,
     exportSchema = false

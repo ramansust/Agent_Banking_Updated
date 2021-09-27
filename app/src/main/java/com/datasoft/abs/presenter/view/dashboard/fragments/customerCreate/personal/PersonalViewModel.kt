@@ -5,9 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createCustomer.PersonalInfo
-import com.datasoft.abs.data.source.local.db.entity.customer.Guardian
-import com.datasoft.abs.data.source.local.db.entity.customer.Nominee
-import com.datasoft.abs.data.source.local.db.entity.customer.Personal
+import com.datasoft.abs.data.dto.createCustomer.toGuardian
+import com.datasoft.abs.data.dto.createCustomer.toNominee
+import com.datasoft.abs.data.dto.createCustomer.toPersonal
+import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -24,6 +25,7 @@ import javax.inject.Named
 @HiltViewModel
 class PersonalViewModel @Inject constructor(
     private val repository: Repository,
+    private val customerDao: CustomerDao,
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
 ) : ViewModel() {
 
@@ -120,44 +122,15 @@ class PersonalViewModel @Inject constructor(
                 guardianDob
             )
 
-            val personal = Personal(
-                maritalStatus,
-                spouseName,
-                religion,
-                numberOfDependents.toInt(),
-                education,
-                occupation,
-                nationality,
-                birthCertificateNo,
-                vatRegistrationNo,
-                drivingLicense,
-                monthlyIncome,
-                sourceOfFund
-            )
-
+            val personal = personalInfo.toPersonal()
             personal.generalId = 1
             val id = repository.insertPersonal(personal)
 
-            val nominee = Nominee(
-                nomineeName,
-                nomineeRelation,
-                nomineeMobile,
-                nomineeEmail,
-                nomineeAddress
-            )
-
+            val nominee = personalInfo.toNominee()
             nominee.personalId = id.toInt()
             repository.insertNominee(nominee)
 
-            val guardian = Guardian(
-                guardianName,
-                guardianAddress,
-                guardianRelation,
-                minorDate = "23.02.2021",
-                guardianContact,
-                guardianDob
-            )
-
+            val guardian = personalInfo.toGuardian()
             guardian.personalId = id.toInt()
             repository.insertGuardian(guardian)
 

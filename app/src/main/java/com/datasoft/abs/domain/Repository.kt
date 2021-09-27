@@ -5,7 +5,7 @@ import com.datasoft.abs.data.dto.CommonRequest
 import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.config.*
-import com.datasoft.abs.data.dto.createAccount.general.CustomerDataResponse
+import com.datasoft.abs.data.dto.createAccount.general.CustomerData
 import com.datasoft.abs.data.dto.createAccount.introducer.IntroducerInfo
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountResponse
@@ -52,7 +52,7 @@ interface Repository {
 
     suspend fun getAccountConfigData(): Response<AccountConfigResponse>
     suspend fun getTransactionProfileConfigData(productID: Int): Response<TransactionProfileConfig>
-    suspend fun getCustomerData(customerID: String): Response<CustomerDataResponse>
+    suspend fun getCustomerData(customerID: String): Response<List<CustomerData>>
     suspend fun getIntroducerData(accountNo: String): Response<IntroducerInfo>
     suspend fun createAccountData(createAccountRequest: CreateAccountRequest): Response<CreateAccountResponse>
 
@@ -87,7 +87,8 @@ interface Repository {
     suspend fun insertPhoto(photo: Photo)
     suspend fun insertFingerprint(fingerprint: Fingerprint)
     suspend fun insertDocument(document: Document)
-    suspend fun insertKYC(kyc: KYC)
+    suspend fun insertRiskGrading(riskGrading: RiskGrading)
+    suspend fun insertDocumentIdentification(documentIdentification: DocumentIdentification)
 
     fun getAll(): LiveData<List<General>>
     fun getGeneral(generalId: Int): General
@@ -98,7 +99,8 @@ interface Repository {
     fun getGeneralAndPhoto(generalId: Int): GeneralAndPhoto
     fun getGeneralAndFingerprint(generalId: Int): GeneralAndFingerprint
     fun getGeneralWithDocuments(generalId: Int): GeneralWithDocuments
-    fun getGeneralAndKYC(generalId: Int): GeneralAndKYC
+    fun getGeneralAndRiskGrading(generalId: Int): GeneralAndRiskGrading
+    fun getGeneralAndDocumentIdentification(generalId: Int): GeneralAndDocumentIdentification
 
     fun delete(generalId: Int)
 

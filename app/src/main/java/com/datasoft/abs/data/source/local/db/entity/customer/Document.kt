@@ -10,7 +10,7 @@ class Document(
     @ColumnInfo(name = "issue_date") val issueDate: String?,
     @ColumnInfo(name = "expiry_date") val expiryDate: String?,
     @ColumnInfo(name = "document_id") val documentId: String?,
-    val description: Int?,
+    val description: String?,
     @ColumnInfo(name = "front_side") val frontSide: String?,
     @ColumnInfo(name = "back_side") val backSide: String?
 ) {

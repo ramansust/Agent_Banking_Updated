@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
+import com.datasoft.abs.data.source.local.db.entity.customer.Photo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,8 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PhotoViewModel @Inject constructor(
-
-): ViewModel() {
+    private val customerDao: CustomerDao
+) : ViewModel() {
 
     private val backImage = MutableLiveData<Boolean>()
     fun getBackImage(): LiveData<Boolean> = backImage
@@ -96,6 +98,24 @@ class PhotoViewModel @Inject constructor(
     fun setGuardianSignature(value: String) {
         viewModelScope.launch(Dispatchers.IO) {
             guardianSignature.postValue(value)
+        }
+    }
+
+    fun insertData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val photo = Photo(
+                userPhoto.value,
+                signature.value,
+                documentFront.value,
+                documentBack.value,
+                guardianPhoto.value,
+                guardianSignature.value,
+                guardianDocumentFront.value,
+                guardianDocumentBack.value,
+                guardianDocumentType.value
+            )
+            photo.generalId = 1
+            customerDao.insertPhoto(photo)
         }
     }
 }

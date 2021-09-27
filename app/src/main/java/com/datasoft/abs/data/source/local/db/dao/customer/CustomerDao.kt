@@ -33,7 +33,10 @@ interface CustomerDao {
     fun insertDocument(document: Document)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertKYC(kyc: KYC)
+    fun insertRiskGrading(riskGrading: RiskGrading)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertDocumentIdentification(documentIdentification: DocumentIdentification)
 
     @Query("SELECT * FROM customer_general_info")
     fun getAll(): LiveData<List<General>>
@@ -71,7 +74,11 @@ interface CustomerDao {
 
     @Transaction
     @Query("SELECT * FROM customer_general_info WHERE id = :generalId")
-    fun getGeneralAndKYC(generalId: Int): GeneralAndKYC
+    fun getGeneralAndRiskGrading(generalId: Int): GeneralAndRiskGrading
+
+    @Transaction
+    @Query("SELECT * FROM customer_general_info WHERE id = :generalId")
+    fun getGeneralAndDocumentIdentification(generalId: Int): GeneralAndDocumentIdentification
 
     @Query("DELETE FROM customer_general_info WHERE id = :generalId")
     fun delete(generalId: Int)

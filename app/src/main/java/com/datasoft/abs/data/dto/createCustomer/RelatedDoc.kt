@@ -1,5 +1,6 @@
 package com.datasoft.abs.data.dto.createCustomer
 
+import com.datasoft.abs.data.source.local.db.entity.customer.Document
 import java.io.Serializable
 
 data class RelatedDoc(
@@ -12,3 +13,15 @@ data class RelatedDoc(
     val issueDate: String,
     val tracingId: String
 ): Serializable
+
+fun RelatedDoc.toDocument(): Document {
+    return Document(
+        documentTypeId,
+        issueDate,
+        expiredDate,
+        tracingId,
+        descriptions,
+        frontSideImage,
+        backSideImage
+    )
+}

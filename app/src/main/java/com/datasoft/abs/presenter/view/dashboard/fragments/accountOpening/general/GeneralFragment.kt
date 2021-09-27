@@ -83,9 +83,9 @@ class GeneralFragment : Fragment() {
                 Status.SUCCESS -> {
                     response.data?.let { data ->
                         customerAdapter.differ.submitList(null)
-                        customerAdapter.differ.submitList(data.customerData)
+                        customerAdapter.differ.submitList(data)
 
-                        binding.btnNext.isEnabled = data.customerData.isNotEmpty()
+                        binding.btnNext.isEnabled = data.isNotEmpty()
                     }
                 }
 
@@ -155,6 +155,8 @@ class GeneralFragment : Fragment() {
                                 android.R.layout.simple_spinner_item,
                                 sourceOfFundList
                             )
+
+//                        viewModel.showData()
                     }
                 }
                 Status.ERROR -> {

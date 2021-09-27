@@ -3,6 +3,7 @@ package com.datasoft.abs.data.source.local.db.entity.account
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.datasoft.abs.data.dto.createAccount.general.AccountInfo
 
 @Entity(tableName = "account_account_info")
 data class Account(
@@ -18,4 +19,18 @@ data class Account(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+}
+
+fun Account.toAccountInfo(): AccountInfo {
+    return AccountInfo(
+        productCategory!!,
+        accountType!!,
+        operatingInstruction!!,
+        customerName!!,
+        accountTitle!!,
+        openingDate!!,
+        currency!!,
+        sourceFund!!,
+        initialAmount!!
+    )
 }

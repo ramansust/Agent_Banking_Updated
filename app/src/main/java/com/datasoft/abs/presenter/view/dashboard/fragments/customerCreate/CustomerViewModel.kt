@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.config.ConfigResponse
 import com.datasoft.abs.data.dto.createCustomer.DocumentVerificationInfo
+import com.datasoft.abs.data.dto.createCustomer.toDocumentIdentification
+import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -21,6 +23,7 @@ import javax.inject.Named
 class CustomerViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network,
+    private val customerDao: CustomerDao,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
 ) : ViewModel() {
@@ -157,6 +160,14 @@ class CustomerViewModel @Inject constructor(
                 isVerified = false
             )
         )
+
+        documents.forEach {
+            val documentIdentification = it.toDocumentIdentification()
+            documentIdentification.generalId = 1
+            viewModelScope.launch(Dispatchers.IO) {
+                customerDao.insertDocumentIdentification(documentIdentification)
+            }
+        }
 
         documentList.postValue(documents)
     }

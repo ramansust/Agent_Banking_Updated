@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.createCustomer.AddressInfo
 import com.datasoft.abs.data.dto.createCustomer.Contact
+import com.datasoft.abs.data.dto.createCustomer.toAddress
+import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -23,6 +25,7 @@ import javax.inject.Named
 class AddressViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network,
+    private val customerDao: CustomerDao,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
@@ -171,6 +174,10 @@ class AddressViewModel @Inject constructor(
                 contactType,
                 contactNo
             )
+
+            val address = addressInfo.toAddress()
+            address.generalId = 1
+            customerDao.insertAddress(address)
 
             sendMessage.postValue(Event(Resource.success(addressInfo)))
         }

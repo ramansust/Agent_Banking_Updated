@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createCustomer.RelatedDoc
+import com.datasoft.abs.data.dto.createCustomer.toDocument
+import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Event
@@ -16,7 +18,8 @@ import javax.inject.Named
 
 @HiltViewModel
 class DocumentsViewModel @Inject constructor(
-    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
+    @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
+    private val customerDao: CustomerDao
 ) : ViewModel() {
 
     private val saveData = MutableLiveData<ArrayList<RelatedDoc>>()
@@ -75,6 +78,10 @@ class DocumentsViewModel @Inject constructor(
                 issueDate,
                 documentID
             )
+
+            val document = documentInfo.toDocument()
+            document.generalId = 1
+            customerDao.insertDocument(document)
 
             sendMessage.postValue(Event(Resource.success(documentInfo)))
         }

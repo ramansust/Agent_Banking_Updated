@@ -5,7 +5,7 @@ import com.datasoft.abs.data.dto.CommonRequest
 import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.config.*
-import com.datasoft.abs.data.dto.createAccount.general.CustomerDataResponse
+import com.datasoft.abs.data.dto.createAccount.general.CustomerData
 import com.datasoft.abs.data.dto.createAccount.introducer.IntroducerInfo
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountResponse
@@ -114,7 +114,7 @@ class RepositoryImpl @Inject constructor(
         return restApiService.getTransactionProfileConfig(productID)
     }
 
-    override suspend fun getCustomerData(customerID: String): Response<CustomerDataResponse> {
+    override suspend fun getCustomerData(customerID: String): Response<List<CustomerData>> {
         return restApiService.getCustomerData(customerID)
     }
 
@@ -238,8 +238,12 @@ class RepositoryImpl @Inject constructor(
         customerDao.insertDocument(document)
     }
 
-    override suspend fun insertKYC(kyc: KYC) {
-        customerDao.insertKYC(kyc)
+    override suspend fun insertRiskGrading(riskGrading: RiskGrading) {
+        customerDao.insertRiskGrading(riskGrading)
+    }
+
+    override suspend fun insertDocumentIdentification(documentIdentification: DocumentIdentification) {
+        customerDao.insertDocumentIdentification(documentIdentification)
     }
 
     override fun getAll(): LiveData<List<General>> {
@@ -278,8 +282,12 @@ class RepositoryImpl @Inject constructor(
         return customerDao.getGeneralWithDocuments(generalId)
     }
 
-    override fun getGeneralAndKYC(generalId: Int): GeneralAndKYC {
-        return customerDao.getGeneralAndKYC(generalId)
+    override fun getGeneralAndRiskGrading(generalId: Int): GeneralAndRiskGrading {
+        return customerDao.getGeneralAndRiskGrading(generalId)
+    }
+
+    override fun getGeneralAndDocumentIdentification(generalId: Int): GeneralAndDocumentIdentification {
+        return customerDao.getGeneralAndDocumentIdentification(generalId)
     }
 
     override fun delete(generalId: Int) {

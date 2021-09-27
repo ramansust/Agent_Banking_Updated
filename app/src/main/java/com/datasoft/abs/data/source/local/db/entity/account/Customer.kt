@@ -3,6 +3,7 @@ package com.datasoft.abs.data.source.local.db.entity.account
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.datasoft.abs.data.dto.createAccount.general.CustomerData
 
 @Entity(tableName = "account_customer_info")
 data class Customer(
@@ -16,4 +17,18 @@ data class Customer(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
     var accountId: Int = 0
+}
+
+fun Customer.toCustomerData(): CustomerData {
+    return CustomerData(
+        customerId = 1,
+        customerNo = "1",
+        dob = birthDate!!,
+        fatherName = fatherName!!,
+        fullName = name!!,
+        gender = "1",
+        isRequired = mandatory!!,
+        isSignatory = signature!!,
+        motherName = motherName!!
+    )
 }
