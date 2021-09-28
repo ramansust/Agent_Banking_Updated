@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createAccount.general.*
 import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
 import com.datasoft.abs.data.source.local.db.entity.account.Account
+import com.datasoft.abs.data.source.local.db.entity.account.Customer
 import com.datasoft.abs.data.source.local.db.entity.account.toAccountInfo
 import com.datasoft.abs.data.source.local.db.entity.account.toCustomerData
 import com.datasoft.abs.domain.Repository
@@ -124,17 +125,7 @@ class GeneralViewModel @Inject constructor(
                 initialAmount
             )
 
-            val id = accountDao.insertAccount(account)
-
-            customerData.value!!.data.let {
-                it!!.customerData.map { customerData ->
-                    val customer = customerData.toCustomer()
-                    customer.accountId = id.toInt()
-                    accountDao.insertCustomers(customer)
-                }
-            }
-
-            repository.setAccountId(id.toInt())
+            repository.setAccountId(accountDao.insertAccount(account).toInt())
 
             accountInfo.postValue(
                 Event(
@@ -205,6 +196,27 @@ class GeneralViewModel @Inject constructor(
             }
 
 //            customerData.postValue(Resource.success(list))
+        }
+    }
+
+    fun deleteAccount() {
+        viewModelScope.launch(Dispatchers.IO) {
+            accountDao.delete(1)
+        }
+    }
+
+    fun insertCustomer() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val list = mutableListOf<Customer>()
+            customerData.value!!.data.let {
+                it!!.customerData.map { customerData ->
+                    val customer = customerData.toCustomer()
+                    customer.accountId = 10
+                    list.add(customer)
+                }
+            }
+
+            accountDao.insertCustomers(list)
         }
     }
 }

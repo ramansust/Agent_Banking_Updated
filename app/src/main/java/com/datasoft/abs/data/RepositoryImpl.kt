@@ -314,8 +314,8 @@ class RepositoryImpl @Inject constructor(
         return accountDao.insertAccount(account)
     }
 
-    override fun insertCustomers(vararg customer: Customer) {
-        accountDao.insertCustomers(*customer)
+    override fun insertCustomers(customer: List<Customer>) {
+        accountDao.insertCustomers(customer)
     }
 
     override fun insertOthersFacilities(vararg otherFacilities: OtherFacilities) {

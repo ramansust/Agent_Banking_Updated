@@ -5,7 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.datasoft.abs.data.dto.createAccount.general.AccountInfo
 
-@Entity(tableName = "account_account_info")
+@Entity(
+    tableName = "account_account_info"
+)
 data class Account(
     @ColumnInfo(name = "product_category") val productCategory: Int?,
     @ColumnInfo(name = "account_type") val accountType: Int?,

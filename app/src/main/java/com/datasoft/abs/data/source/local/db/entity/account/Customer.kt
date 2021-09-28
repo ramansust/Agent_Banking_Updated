@@ -2,10 +2,19 @@ package com.datasoft.abs.data.source.local.db.entity.account
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.datasoft.abs.data.dto.createAccount.general.CustomerData
 
-@Entity(tableName = "account_customer_info")
+@Entity(
+    tableName = "account_customer_info",
+    foreignKeys = [ForeignKey(
+        entity = Account::class, parentColumns = arrayOf("id"),
+        childColumns = arrayOf("id"),
+        onUpdate = ForeignKey.CASCADE,
+        onDelete = ForeignKey.CASCADE
+    )]
+)
 data class Customer(
     val name: String?,
     @ColumnInfo(name = "father_name") val fatherName: String?,

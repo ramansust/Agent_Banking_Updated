@@ -11,7 +11,8 @@ interface AccountDao {
     fun insertAccount(account: Account): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCustomers(vararg customer: Customer)
+    @JvmSuppressWildcards
+    fun insertCustomers(customer: List<Customer>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertOthersFacilities(vararg otherFacilities: OtherFacilities)

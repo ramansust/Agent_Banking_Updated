@@ -108,7 +108,7 @@ interface Repository {
 
     fun setAccountId(id: Int)
     fun insertAccount(account: Account): Long
-    fun insertCustomers(vararg customer: Customer)
+    fun insertCustomers(customer: List<Customer>)
     fun insertOthersFacilities(vararg otherFacilities: OtherFacilities)
     fun insertNominee(accountNominee: AccountNominee): Long
     fun insertNomineeGuardian(nomineeGuardian: NomineeGuardian)

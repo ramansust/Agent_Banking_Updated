@@ -156,7 +156,7 @@ class GeneralFragment : Fragment() {
                                 sourceOfFundList
                             )
 
-//                        viewModel.showData()
+//                        viewModel.deleteAccount()
                     }
                 }
                 Status.ERROR -> {
@@ -177,6 +177,7 @@ class GeneralFragment : Fragment() {
 
                     Status.SUCCESS -> {
                         result.data?.let {
+//                            viewModel.insertCustomer()
                             accountViewModel.requestCurrentStep(1)
                         }
                     }
