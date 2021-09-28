@@ -148,7 +148,7 @@ class ReviewFragment : Fragment() {
                         createAccountRequest.apply {
                             val list = mutableListOf<JointCustomerInfo>()
 
-                            for (value in it) {
+                            for (value in it.customerData) {
                                 list.add(
                                     JointCustomerInfo(
                                         1,

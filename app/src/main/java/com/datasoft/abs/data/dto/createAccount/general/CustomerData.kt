@@ -1,5 +1,7 @@
 package com.datasoft.abs.data.dto.createAccount.general
 
+import com.datasoft.abs.data.source.local.db.entity.account.Customer
+
 data class CustomerData(
     val customerId: Int,
     val customerNo: String,
@@ -11,3 +13,14 @@ data class CustomerData(
     val isSignatory: Boolean,
     val motherName: String
 )
+
+fun CustomerData.toCustomer(): Customer {
+    return Customer(
+        fullName,
+        fatherName,
+        motherName,
+        dob,
+        isSignatory,
+        isRequired
+    )
+}

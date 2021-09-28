@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createAccount.introducer.IntroducerInfo
+import com.datasoft.abs.data.source.local.db.AccountInfo
 import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
 import com.datasoft.abs.data.source.local.db.entity.account.Introducer
 import com.datasoft.abs.domain.Repository
@@ -24,6 +25,7 @@ class IntroducerViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network,
     private val accountDao: AccountDao,
+    private val accountInfo: AccountInfo,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
     @Named(Constant.SEARCH_EMPTY) private val searchEmpty: String,
@@ -86,7 +88,7 @@ class IntroducerViewModel @Inject constructor(
                     resultResponse.accountNumber,
                     resultResponse.fullName
                 )
-                introducer.accountId = 1
+                introducer.accountId = accountInfo.accountId
                 accountDao.insertIntroducer(introducer)
 
                 return Event(Resource.success(resultResponse))

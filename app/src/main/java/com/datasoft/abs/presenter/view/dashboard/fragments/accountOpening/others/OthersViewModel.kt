@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.datasoft.abs.data.source.local.db.AccountInfo
 import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
 import com.datasoft.abs.data.source.local.db.entity.account.OtherFacilities
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OthersViewModel @Inject constructor(
-    private val accountDao: AccountDao
+    private val accountDao: AccountDao,
+    private val accountInfo: AccountInfo
 ) : ViewModel() {
 
     private val notify = MutableLiveData<Boolean>()
@@ -80,7 +82,7 @@ class OthersViewModel @Inject constructor(
             title,
             value
         )
-        otherFacilities.accountId = 1
+        otherFacilities.accountId = accountInfo.accountId
         accountDao.insertOthersFacilities(otherFacilities)
     }
 }

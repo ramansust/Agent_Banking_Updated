@@ -5,7 +5,7 @@ import com.datasoft.abs.data.dto.CommonRequest
 import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.config.*
-import com.datasoft.abs.data.dto.createAccount.general.CustomerData
+import com.datasoft.abs.data.dto.createAccount.general.CustomerDataResponse
 import com.datasoft.abs.data.dto.createAccount.introducer.IntroducerInfo
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountResponse
@@ -52,7 +52,7 @@ interface Repository {
 
     suspend fun getAccountConfigData(): Response<AccountConfigResponse>
     suspend fun getTransactionProfileConfigData(productID: Int): Response<TransactionProfileConfig>
-    suspend fun getCustomerData(customerID: String): Response<List<CustomerData>>
+    suspend fun getCustomerData(customerID: String): Response<CustomerDataResponse>
     suspend fun getIntroducerData(accountNo: String): Response<IntroducerInfo>
     suspend fun createAccountData(createAccountRequest: CreateAccountRequest): Response<CreateAccountResponse>
 
@@ -79,6 +79,7 @@ interface Repository {
     suspend fun getRTGSDetails(transactionID: String): Response<Details>
     suspend fun getEFTNSDetails(transactionID: String): Response<Details>
 
+    fun setCustomerId(id: Int)
     suspend fun insertGeneral(general: General): Long
     suspend fun insertPersonal(personal: Personal): Long
     suspend fun insertNominee(nominee: Nominee)
@@ -105,6 +106,7 @@ interface Repository {
     fun delete(generalId: Int)
     fun deleteDocument(documentId: Int)
 
+    fun setAccountId(id: Int)
     fun insertAccount(account: Account): Long
     fun insertCustomers(vararg customer: Customer)
     fun insertOthersFacilities(vararg otherFacilities: OtherFacilities)

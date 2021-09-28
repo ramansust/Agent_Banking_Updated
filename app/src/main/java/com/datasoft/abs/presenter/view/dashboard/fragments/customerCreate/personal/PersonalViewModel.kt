@@ -8,6 +8,7 @@ import com.datasoft.abs.data.dto.createCustomer.PersonalInfo
 import com.datasoft.abs.data.dto.createCustomer.toGuardian
 import com.datasoft.abs.data.dto.createCustomer.toNominee
 import com.datasoft.abs.data.dto.createCustomer.toPersonal
+import com.datasoft.abs.data.source.local.db.CustomerInfo
 import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
@@ -26,6 +27,7 @@ import javax.inject.Named
 class PersonalViewModel @Inject constructor(
     private val repository: Repository,
     private val customerDao: CustomerDao,
+    private val customerInfo: CustomerInfo,
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
 ) : ViewModel() {
 
@@ -123,7 +125,7 @@ class PersonalViewModel @Inject constructor(
             )
 
             val personal = personalInfo.toPersonal()
-            personal.generalId = 1
+            personal.generalId = customerInfo.customerId
             val id = repository.insertPersonal(personal)
 
             val nominee = personalInfo.toNominee()

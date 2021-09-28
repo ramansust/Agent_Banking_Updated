@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createCustomer.RelatedDoc
 import com.datasoft.abs.data.dto.createCustomer.toDocument
+import com.datasoft.abs.data.source.local.db.CustomerInfo
 import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
 import com.datasoft.abs.data.source.local.db.entity.customer.Document
 import com.datasoft.abs.presenter.states.Resource
@@ -20,7 +21,8 @@ import javax.inject.Named
 @HiltViewModel
 class DocumentsViewModel @Inject constructor(
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
-    private val customerDao: CustomerDao
+    private val customerDao: CustomerDao,
+    private val customerInfo: CustomerInfo
 ) : ViewModel() {
 
     private val document = MutableLiveData<ArrayList<Document>>()
@@ -75,7 +77,7 @@ class DocumentsViewModel @Inject constructor(
             )
 
             val document = documentInfo.toDocument()
-            document.generalId = 1
+            document.generalId = customerInfo.customerId
             customerDao.insertDocument(document)
 
             sendMessage.postValue(Event(Resource.success(documentInfo)))

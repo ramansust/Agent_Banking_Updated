@@ -32,4 +32,7 @@ object Constant {
     const val FIELD_EMPTY = "FIELD_EMPTY"
     const val SEARCH_EMPTY = "SEARCH_EMPTY"
     const val ID_EMPTY = "ID_EMPTY"
+
+    const val CUSTOMER_ID = "ID_EMPTY"
+    const val ACCOUNT_ID = "ID_EMPTY"
 }

@@ -177,7 +177,8 @@ class GeneralViewModel @Inject constructor(
                                     sanction.value!!.customerNo
                                 )
 
-                                repository.insertGeneral(general)
+                                val id = repository.insertGeneral(general)
+                                repository.setCustomerId(id.toInt())
                                 return@let Event(Resource.success(response))
                             }
                         }

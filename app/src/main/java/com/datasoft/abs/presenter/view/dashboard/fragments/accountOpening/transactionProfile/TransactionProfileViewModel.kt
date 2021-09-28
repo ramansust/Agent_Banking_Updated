@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.config.TpDetail
+import com.datasoft.abs.data.source.local.db.AccountInfo
 import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
 import com.datasoft.abs.data.source.local.db.entity.account.TransactionProfile
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TransactionProfileViewModel @Inject constructor(
-    private val accountDao: AccountDao
+    private val accountDao: AccountDao,
+    private val accountInfo: AccountInfo
 ) : ViewModel() {
 
     private val transactionProfile = MutableLiveData<List<TpDetail>>()
@@ -33,7 +35,7 @@ class TransactionProfileViewModel @Inject constructor(
                     it.limitMaxTrnAmt
                 )
 
-                transactionProfile.accountId = 1
+                transactionProfile.accountId = accountInfo.accountId
 
                 accountDao.insertTransactionProfiles(transactionProfile)
             }

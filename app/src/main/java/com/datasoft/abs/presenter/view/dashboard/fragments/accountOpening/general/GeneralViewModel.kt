@@ -4,12 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.datasoft.abs.data.dto.createAccount.general.AccountInfo
-import com.datasoft.abs.data.dto.createAccount.general.CustomerData
-import com.datasoft.abs.data.dto.createAccount.general.DisplayAccountInfo
+import com.datasoft.abs.data.dto.createAccount.general.*
 import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
 import com.datasoft.abs.data.source.local.db.entity.account.Account
-import com.datasoft.abs.data.source.local.db.entity.account.Customer
 import com.datasoft.abs.data.source.local.db.entity.account.toAccountInfo
 import com.datasoft.abs.data.source.local.db.entity.account.toCustomerData
 import com.datasoft.abs.domain.Repository
@@ -35,8 +32,8 @@ class GeneralViewModel @Inject constructor(
     @Named(Constant.ID_EMPTY) private val idEmpty: String,
 ) : ViewModel() {
 
-    private val customerData = MutableLiveData<Resource<List<CustomerData>>>()
-    fun getCustomerData(): LiveData<Resource<List<CustomerData>>> = customerData
+    private val customerData = MutableLiveData<Resource<CustomerDataResponse>>()
+    fun getCustomerData(): LiveData<Resource<CustomerDataResponse>> = customerData
 
     private val accountInfo = MutableLiveData<Event<Resource<AccountInfo>>>()
     fun getAccountInfo(): LiveData<Event<Resource<AccountInfo>>> = accountInfo
@@ -130,19 +127,14 @@ class GeneralViewModel @Inject constructor(
             val id = accountDao.insertAccount(account)
 
             customerData.value!!.data.let {
-                it!!.forEach { value ->
-                    val customer = Customer(
-                        value.fullName,
-                        value.fatherName,
-                        value.motherName,
-                        value.dob,
-                        value.isSignatory,
-                        value.isRequired
-                    )
+                it!!.customerData.map { customerData ->
+                    val customer = customerData.toCustomer()
                     customer.accountId = id.toInt()
                     accountDao.insertCustomers(customer)
                 }
             }
+
+            repository.setAccountId(id.toInt())
 
             accountInfo.postValue(
                 Event(
@@ -179,8 +171,8 @@ class GeneralViewModel @Inject constructor(
     }
 
     private fun handleCustomerResponse(
-        response: Response<List<CustomerData>>
-    ): Resource<List<CustomerData>> {
+        response: Response<CustomerDataResponse>
+    ): Resource<CustomerDataResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 return Resource.success(resultResponse)
@@ -212,7 +204,7 @@ class GeneralViewModel @Inject constructor(
                 list.add(it.toCustomerData())
             }
 
-            customerData.postValue(Resource.success(list))
+//            customerData.postValue(Resource.success(list))
         }
     }
 }

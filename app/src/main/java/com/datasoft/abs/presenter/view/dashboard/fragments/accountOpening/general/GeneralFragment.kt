@@ -83,9 +83,9 @@ class GeneralFragment : Fragment() {
                 Status.SUCCESS -> {
                     response.data?.let { data ->
                         customerAdapter.differ.submitList(null)
-                        customerAdapter.differ.submitList(data)
+                        customerAdapter.differ.submitList(data.customerData)
 
-                        binding.btnNext.isEnabled = data.isNotEmpty()
+                        binding.btnNext.isEnabled = data.customerData.isNotEmpty()
                     }
                 }
 

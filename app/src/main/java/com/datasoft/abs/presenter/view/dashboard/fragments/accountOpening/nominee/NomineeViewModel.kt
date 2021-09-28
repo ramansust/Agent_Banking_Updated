@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createAccount.review.Nominee
 import com.datasoft.abs.data.dto.createAccount.review.NomineeRemainMinor
+import com.datasoft.abs.data.source.local.db.AccountInfo
 import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
 import com.datasoft.abs.data.source.local.db.entity.account.AccountNominee
 import com.datasoft.abs.data.source.local.db.entity.account.NomineeGuardian
@@ -23,7 +24,8 @@ import javax.inject.Named
 @HiltViewModel
 class NomineeViewModel @Inject constructor(
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
-    private val accountDao: AccountDao
+    private val accountDao: AccountDao,
+    private val accountInfo: AccountInfo
 ) : ViewModel() {
 
     private val nomineeAge = MutableLiveData<Int>()
@@ -157,7 +159,7 @@ class NomineeViewModel @Inject constructor(
                 signaturePhoto,
                 nidFrontPhoto
             )
-            accountNominee.accountId = 1
+            accountNominee.accountId = accountInfo.accountId
             val nomineeId = accountDao.insertNominee(accountNominee)
 
             val nomineeGuardian = NomineeGuardian(

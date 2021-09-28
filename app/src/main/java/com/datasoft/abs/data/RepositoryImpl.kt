@@ -5,7 +5,7 @@ import com.datasoft.abs.data.dto.CommonRequest
 import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.config.*
-import com.datasoft.abs.data.dto.createAccount.general.CustomerData
+import com.datasoft.abs.data.dto.createAccount.general.CustomerDataResponse
 import com.datasoft.abs.data.dto.createAccount.introducer.IntroducerInfo
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountRequest
 import com.datasoft.abs.data.dto.createAccount.review.CreateAccountResponse
@@ -28,6 +28,8 @@ import com.datasoft.abs.data.dto.transaction.eftn.CreateEFTNRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.CreateRequest
 import com.datasoft.abs.data.dto.transaction.rtgs.Details
 import com.datasoft.abs.data.dto.transaction.rtgs.RTGSListResponse
+import com.datasoft.abs.data.source.local.db.AccountInfo
+import com.datasoft.abs.data.source.local.db.CustomerInfo
 import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
 import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
 import com.datasoft.abs.data.source.local.db.entity.account.*
@@ -45,6 +47,8 @@ import javax.inject.Singleton
 class RepositoryImpl @Inject constructor(
     remoteDataSource: RestRemoteDataSource,
     private val jwtHelper: JwtHelper,
+    private val accountInfo: AccountInfo,
+    private val customerInfo: CustomerInfo,
     private val customerDao: CustomerDao,
     private val accountDao: AccountDao
 ) : Repository {
@@ -114,7 +118,7 @@ class RepositoryImpl @Inject constructor(
         return restApiService.getTransactionProfileConfig(productID)
     }
 
-    override suspend fun getCustomerData(customerID: String): Response<List<CustomerData>> {
+    override suspend fun getCustomerData(customerID: String): Response<CustomerDataResponse> {
         return restApiService.getCustomerData(customerID)
     }
 
@@ -200,6 +204,14 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getEFTNSDetails(transactionID: String): Response<Details> {
         return restApiService.getEFTNSDetails(transactionID)
+    }
+
+    override fun setCustomerId(id: Int) {
+        customerInfo.customerId = id
+    }
+
+    override fun setAccountId(id: Int) {
+        accountInfo.accountId = id
     }
 
     override suspend fun insertGeneral(general: General): Long {

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.config.RiskGradeResponse
 import com.datasoft.abs.data.dto.createCustomer.KYCInfo
 import com.datasoft.abs.data.dto.createCustomer.toRiskGrading
+import com.datasoft.abs.data.source.local.db.CustomerInfo
 import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
@@ -25,6 +26,7 @@ class KYCViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network,
     private val customerDao: CustomerDao,
+    private val customerInfo: CustomerInfo,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
 ) : ViewModel() {
@@ -86,7 +88,7 @@ class KYCViewModel @Inject constructor(
             )
 
             val riskGrading = kycInfo.toRiskGrading()
-            riskGrading.generalId = 1
+            riskGrading.generalId = customerInfo.customerId
             customerDao.insertRiskGrading(riskGrading)
 
             kycData.postValue(Event(kycInfo))
