@@ -4,6 +4,7 @@ import com.datasoft.abs.data.source.local.db.entity.customer.Document
 import java.io.Serializable
 
 data class RelatedDoc(
+    var id: Int,
     var backSideImage: String = "",
     val descriptions: String,
     val docTypeName: String,

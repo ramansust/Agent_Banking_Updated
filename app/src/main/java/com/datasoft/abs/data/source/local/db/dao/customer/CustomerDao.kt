@@ -71,6 +71,10 @@ interface CustomerDao {
     fun getGeneralAndPhoto(generalId: Int): GeneralAndPhoto
 
     @Transaction
+    @Query("SELECT * FROM customer_photo_info WHERE id = :generalId")
+    fun getPhoto(generalId: Int): LiveData<Photo>
+
+    @Transaction
     @Query("SELECT * FROM customer_general_info WHERE id = :generalId")
     fun getGeneralAndFingerprint(generalId: Int): GeneralAndFingerprint
 

@@ -294,6 +294,10 @@ class RepositoryImpl @Inject constructor(
         return customerDao.getGeneralAndPhoto(generalId)
     }
 
+    override fun getPhoto(generalId: Int): LiveData<Photo> {
+        return customerDao.getPhoto(generalId)
+    }
+
     override fun getGeneralAndFingerprint(generalId: Int): GeneralAndFingerprint {
         return customerDao.getGeneralAndFingerprint(generalId)
     }

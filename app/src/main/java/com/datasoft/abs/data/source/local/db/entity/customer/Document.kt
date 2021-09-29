@@ -32,6 +32,7 @@ class Document(
 
 fun Document.toRelatedDoc(): RelatedDoc {
     return RelatedDoc(
+        id,
         backSide!!,
         description!!,
         "",

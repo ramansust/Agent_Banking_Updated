@@ -79,7 +79,7 @@ class DocumentsFragment : Fragment() {
         })
 
         documentAdapter.setOnItemClickListener {
-            viewModel.removeData(1)
+            viewModel.removeData(it.id)
         }
     }
 

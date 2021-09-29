@@ -18,6 +18,9 @@ class PhotoViewModel @Inject constructor(
     private val customerInfo: CustomerInfo,
 ) : ViewModel() {
 
+    private val photo: LiveData<Photo> = repository.getPhoto(customerInfo.customerId)
+    fun getPhoto(): LiveData<Photo> = photo
+
     private val backImage = MutableLiveData<Boolean>()
     fun getBackImage(): LiveData<Boolean> = backImage
 

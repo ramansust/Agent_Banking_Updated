@@ -101,6 +101,7 @@ interface Repository {
     fun getPersonalAndGuardian(personalId: Int): PersonalAndGuardian
     fun getGeneralWithAddresses(generalId: Int): GeneralWithAddresses
     fun getGeneralAndPhoto(generalId: Int): GeneralAndPhoto
+    fun getPhoto(generalId: Int): LiveData<Photo>
     fun getGeneralAndFingerprint(generalId: Int): GeneralAndFingerprint
     fun getGeneralWithDocuments(generalId: Int): GeneralWithDocuments
     fun getGeneralAndRiskGrading(generalId: Int): GeneralAndRiskGrading

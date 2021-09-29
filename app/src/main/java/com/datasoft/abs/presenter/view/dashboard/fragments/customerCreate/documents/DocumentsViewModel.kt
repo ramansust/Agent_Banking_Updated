@@ -25,7 +25,9 @@ class DocumentsViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    private var document: LiveData<List<Document>> = repository.getDocuments(customerInfo.customerId)
+    private var document: LiveData<List<Document>> =
+        repository.getDocuments(customerInfo.customerId)
+
     fun getDocuments(): LiveData<List<Document>> = document
 
     private val backImage = MutableLiveData<Boolean>()
@@ -66,6 +68,7 @@ class DocumentsViewModel @Inject constructor(
             }
 
             val documentInfo = RelatedDoc(
+                0,
                 backImage,
                 description,
                 name,

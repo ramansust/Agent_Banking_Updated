@@ -1,6 +1,6 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.documents
 
-import android.util.Base64
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -49,8 +49,8 @@ class DocumentListAdapter @Inject constructor(val glide: RequestManager) :
         holder.binding.txtViewIssueDate.text = value.issueDate
         holder.binding.txtViewExpiryDate.text = value.expiredDate
 
-        glide.load(Base64.decode(value.frontSideImage, Base64.DEFAULT)).into(holder.binding.imgViewPhoto)
-//        holder.binding.imgViewPhoto.setImageURI(Uri.parse(value.frontSideImage))
+//        glide.load(Base64.decode(value.frontSideImage, Base64.DEFAULT)).into(holder.binding.imgViewPhoto)
+        holder.binding.imgViewPhoto.setImageURI(Uri.parse(value.frontSideImage))
 
         holder.binding.imgViewDelete.setOnClickListener {
             onItemClickListener?.let { it(value) }
