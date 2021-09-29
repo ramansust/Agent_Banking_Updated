@@ -89,7 +89,7 @@ interface Repository {
     suspend fun insertFingerprint(fingerprint: Fingerprint)
     suspend fun insertDocument(document: Document)
     suspend fun insertRiskGrading(riskGrading: RiskGrading)
-    suspend fun insertDocumentIdentification(documentIdentification: DocumentIdentification)
+    suspend fun insertDocumentIdentification(documentIdentification: List<DocumentIdentification>)
 
     fun getAll(): LiveData<List<General>>
     fun getGeneral(generalId: Int): General
@@ -109,11 +109,11 @@ interface Repository {
     fun setAccountId(id: Int)
     fun insertAccount(account: Account): Long
     fun insertCustomers(customer: List<Customer>)
-    fun insertOthersFacilities(vararg otherFacilities: OtherFacilities)
+    fun insertOthersFacilities(otherFacilities: List<OtherFacilities>)
     fun insertNominee(accountNominee: AccountNominee): Long
     fun insertNomineeGuardian(nomineeGuardian: NomineeGuardian)
     fun insertIntroducer(introducer: Introducer)
-    fun insertTransactionProfiles(vararg transactionProfile: TransactionProfile)
+    fun insertTransactionProfiles(transactionProfile: List<TransactionProfile>)
 
     fun getAllAccount(): LiveData<List<Account>>
     fun getAccountWithCustomers(accountId: Int): AccountWithCustomers

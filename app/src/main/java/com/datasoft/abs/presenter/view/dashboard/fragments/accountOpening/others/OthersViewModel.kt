@@ -36,38 +36,37 @@ class OthersViewModel @Inject constructor(
     private val internetBanking = MutableLiveData<Boolean>()
     fun getInternetBanking(): LiveData<Boolean> = internetBanking
 
+    init {
+        insertAll()
+    }
+
     fun setChequeBook(value: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             chequeBook.postValue(value)
-            insert("Cheque Book", value)
         }
     }
 
     fun setSMSBanking(value: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             smsBanking.postValue(value)
-            insert("SMS Banking", value)
         }
     }
 
     fun setDebitCard(value: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             debitCard.postValue(value)
-            insert("Debit Card", value)
         }
     }
 
     fun setEStatement(value: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             eStatement.postValue(value)
-            insert("eStatement", value)
         }
     }
 
     fun setInternetBanking(value: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             internetBanking.postValue(value)
-            insert("Internet Banking", value)
         }
     }
 
@@ -77,12 +76,33 @@ class OthersViewModel @Inject constructor(
         }
     }
 
-    private fun insert(title: String, value: Boolean) {
-        val otherFacilities = OtherFacilities(
-            title,
-            value
-        )
-        otherFacilities.accountId = accountInfo.accountId
-        accountDao.insertOthersFacilities(otherFacilities)
+    private fun insertAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val list = mutableListOf<OtherFacilities>()
+
+            val checkBook = OtherFacilities("Cheque Book", false)
+            checkBook.accountId = accountInfo.accountId
+
+            val debitCard = OtherFacilities("Debit Card", false)
+            debitCard.accountId = accountInfo.accountId
+
+            val smsBanking = OtherFacilities("SMS Banking", false)
+            smsBanking.accountId = accountInfo.accountId
+
+            val eStatement = OtherFacilities("e-Statement", false)
+            eStatement.accountId = accountInfo.accountId
+
+            val internetBanking = OtherFacilities("Internet Banking", false)
+            internetBanking.accountId = accountInfo.accountId
+
+
+            list.add(checkBook)
+            list.add(debitCard)
+            list.add(smsBanking)
+            list.add(eStatement)
+            list.add(internetBanking)
+
+            accountDao.insertOthersFacilities(list)
+        }
     }
 }

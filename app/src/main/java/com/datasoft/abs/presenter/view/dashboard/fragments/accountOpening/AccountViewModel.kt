@@ -73,16 +73,16 @@ class AccountViewModel @Inject constructor(
                     transactionProfile.postValue(handleTransactionProfileResponse(response))
                 } catch (e: Exception) {
                     transactionProfile.postValue(
-                            Resource.error(
-                                somethingWrong, null
+                        Resource.error(
+                            somethingWrong, null
                         )
                     )
                     e.printStackTrace()
                 }
             } else {
                 transactionProfile.postValue(
-                        Resource.error(
-                            noInternet, null
+                    Resource.error(
+                        noInternet, null
                     )
                 )
             }

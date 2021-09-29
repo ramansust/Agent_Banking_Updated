@@ -2,9 +2,19 @@ package com.datasoft.abs.data.source.local.db.entity.customer
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "customer_photo_info")
+@Entity(
+    tableName = "customer_photo_info",
+    foreignKeys = [ForeignKey(
+        entity = General::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("generalId"),
+        onUpdate = ForeignKey.CASCADE,
+        onDelete = ForeignKey.CASCADE
+    )]
+)
 class Photo(
     @ColumnInfo(name = "user_profile") val userProfile: String?,
     @ColumnInfo(name = "user_signature") val userSignature: String?,

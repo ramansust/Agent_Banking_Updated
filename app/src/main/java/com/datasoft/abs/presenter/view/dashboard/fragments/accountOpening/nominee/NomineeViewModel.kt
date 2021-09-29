@@ -15,6 +15,7 @@ import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -161,6 +162,8 @@ class NomineeViewModel @Inject constructor(
             )
             accountNominee.accountId = accountInfo.accountId
             val nomineeId = accountDao.insertNominee(accountNominee)
+
+            delay(1000)
 
             val nomineeGuardian = NomineeGuardian(
                 nomineeName,

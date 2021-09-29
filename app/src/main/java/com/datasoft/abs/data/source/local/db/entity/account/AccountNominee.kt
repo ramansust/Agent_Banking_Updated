@@ -2,11 +2,21 @@ package com.datasoft.abs.data.source.local.db.entity.account
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "account_nominee_info")
+@Entity(
+    tableName = "account_nominee_info",
+    foreignKeys = [ForeignKey(
+        entity = Account::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("accountId"),
+        onUpdate = ForeignKey.CASCADE,
+        onDelete = ForeignKey.CASCADE
+    )]
+)
 data class AccountNominee(
-    @ColumnInfo(name = "full_name")val fullName: String?,
+    @ColumnInfo(name = "full_name") val fullName: String?,
     @ColumnInfo(name = "father_name") val fatherName: String?,
     @ColumnInfo(name = "mother_name") val motherName: String?,
     @ColumnInfo(name = "birth_date") val birthDate: String?,

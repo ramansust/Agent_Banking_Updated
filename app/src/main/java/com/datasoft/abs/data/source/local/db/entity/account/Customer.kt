@@ -9,8 +9,9 @@ import com.datasoft.abs.data.dto.createAccount.general.CustomerData
 @Entity(
     tableName = "account_customer_info",
     foreignKeys = [ForeignKey(
-        entity = Account::class, parentColumns = arrayOf("id"),
-        childColumns = arrayOf("id"),
+        entity = Account::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("accountId"),
         onUpdate = ForeignKey.CASCADE,
         onDelete = ForeignKey.CASCADE
     )]

@@ -85,6 +85,8 @@ class TransactionProfileFragment : Fragment() {
                         binding.scrollView.isVisible = it.tpDetails.isNotEmpty()
 
                         binding.btnNext.isEnabled = it.tpDetails.isNotEmpty()
+
+                        viewModel.insertTransactionProfile(it.tpDetails)
                     }
                 }
 

@@ -9,6 +9,7 @@ import com.datasoft.abs.data.dto.createCustomer.DocumentVerificationInfo
 import com.datasoft.abs.data.dto.createCustomer.toDocumentIdentification
 import com.datasoft.abs.data.source.local.db.CustomerInfo
 import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
+import com.datasoft.abs.data.source.local.db.entity.customer.DocumentIdentification
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -163,12 +164,16 @@ class CustomerViewModel @Inject constructor(
             )
         )
 
+        val list = mutableListOf<DocumentIdentification>()
+
         documents.forEach {
             val documentIdentification = it.toDocumentIdentification()
             documentIdentification.generalId = customerInfo.customerId
-            viewModelScope.launch(Dispatchers.IO) {
-                customerDao.insertDocumentIdentification(documentIdentification)
-            }
+            list.add(documentIdentification)
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            customerDao.insertDocumentIdentification(list)
         }
 
         documentList.postValue(documents)
@@ -187,5 +192,4 @@ class CustomerViewModel @Inject constructor(
             documentList.postValue(documentList.value)
         }
     }
-
 }

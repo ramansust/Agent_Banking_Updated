@@ -17,6 +17,7 @@ import com.datasoft.abs.presenter.utils.Event
 import com.datasoft.abs.presenter.utils.Network
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
@@ -125,7 +126,21 @@ class GeneralViewModel @Inject constructor(
                 initialAmount
             )
 
-            repository.setAccountId(accountDao.insertAccount(account).toInt())
+            val id = accountDao.insertAccount(account)
+            repository.setAccountId(id.toInt())
+
+            delay(1000)
+
+            val list = mutableListOf<Customer>()
+            customerData.value!!.data.let {
+                it!!.customerData.map { customerData ->
+                    val customer = customerData.toCustomer()
+                    customer.accountId = id.toInt()
+                    list.add(customer)
+                }
+            }
+
+            accountDao.insertCustomers(list)
 
             accountInfo.postValue(
                 Event(

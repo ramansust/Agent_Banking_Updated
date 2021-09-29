@@ -254,7 +254,7 @@ class RepositoryImpl @Inject constructor(
         customerDao.insertRiskGrading(riskGrading)
     }
 
-    override suspend fun insertDocumentIdentification(documentIdentification: DocumentIdentification) {
+    override suspend fun insertDocumentIdentification(documentIdentification: List<DocumentIdentification>) {
         customerDao.insertDocumentIdentification(documentIdentification)
     }
 
@@ -318,8 +318,8 @@ class RepositoryImpl @Inject constructor(
         accountDao.insertCustomers(customer)
     }
 
-    override fun insertOthersFacilities(vararg otherFacilities: OtherFacilities) {
-        accountDao.insertOthersFacilities(*otherFacilities)
+    override fun insertOthersFacilities(otherFacilities: List<OtherFacilities>) {
+        accountDao.insertOthersFacilities(otherFacilities)
     }
 
     override fun insertNomineeGuardian(nomineeGuardian: NomineeGuardian) {
@@ -330,8 +330,8 @@ class RepositoryImpl @Inject constructor(
         accountDao.insertIntroducer(introducer)
     }
 
-    override fun insertTransactionProfiles(vararg transactionProfile: TransactionProfile) {
-        accountDao.insertTransactionProfiles(*transactionProfile)
+    override fun insertTransactionProfiles(transactionProfile: List<TransactionProfile>) {
+        accountDao.insertTransactionProfiles(transactionProfile)
     }
 
     override fun getAllAccount(): LiveData<List<Account>> {

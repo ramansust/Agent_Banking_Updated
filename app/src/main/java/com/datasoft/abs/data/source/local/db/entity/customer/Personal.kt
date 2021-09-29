@@ -2,9 +2,19 @@ package com.datasoft.abs.data.source.local.db.entity.customer
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "customer_personal_info")
+@Entity(
+    tableName = "customer_personal_info",
+    foreignKeys = [ForeignKey(
+        entity = General::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("generalId"),
+        onUpdate = ForeignKey.CASCADE,
+        onDelete = ForeignKey.CASCADE
+    )]
+)
 class Personal(
     @ColumnInfo(name = "marital_status") val maritalStatus: Int?,
     @ColumnInfo(name = "spouse_name") val spouseName: String?,

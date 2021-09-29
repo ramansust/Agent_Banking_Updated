@@ -15,7 +15,7 @@ interface AccountDao {
     fun insertCustomers(customer: List<Customer>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertOthersFacilities(vararg otherFacilities: OtherFacilities)
+    fun insertOthersFacilities(otherFacilities: List<OtherFacilities>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertNominee(accountNominee: AccountNominee): Long
@@ -27,7 +27,7 @@ interface AccountDao {
     fun insertIntroducer(introducer: Introducer)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTransactionProfiles(vararg transactionProfile: TransactionProfile)
+    fun insertTransactionProfiles(transactionProfile: List<TransactionProfile>)
 
     @Query("SELECT * FROM account_account_info")
     fun getAll(): LiveData<List<Account>>

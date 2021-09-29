@@ -1,5 +1,7 @@
 package com.datasoft.abs.data.dto.config
 
+import com.datasoft.abs.data.source.local.db.entity.account.TransactionProfile
+
 data class TpDetail(
     val code: Int,
     var limitDailyTrnAmt: Int,
@@ -12,3 +14,14 @@ data class TpDetail(
     var profileName: String,
     var codeName: String
 )
+
+fun TpDetail.toTransactionProfile(): TransactionProfile {
+    return TransactionProfile(
+        profileName,
+        limitNoOfDailyTrn,
+        limitDailyTrnAmt,
+        limitNoOfMonthlyTrn,
+        limitMonthlyTrnAmt,
+        limitMaxTrnAmt
+    )
+}

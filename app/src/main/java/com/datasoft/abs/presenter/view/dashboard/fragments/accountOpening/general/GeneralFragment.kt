@@ -155,8 +155,6 @@ class GeneralFragment : Fragment() {
                                 android.R.layout.simple_spinner_item,
                                 sourceOfFundList
                             )
-
-//                        viewModel.deleteAccount()
                     }
                 }
                 Status.ERROR -> {
@@ -300,6 +298,7 @@ class GeneralFragment : Fragment() {
         }
 
         binding.btnNext.setOnClickListener {
+//            viewModel.deleteAccount()
             viewModel.setAccountInfo(
                 if (productCategoryList.isNotEmpty()) productCategoryList[binding.spinnerProductCategory.selectedItemPosition].id else 0,
                 if (productCategoryList.isNotEmpty()) productCategoryList[binding.spinnerProductCategory.selectedItemPosition].name else "",

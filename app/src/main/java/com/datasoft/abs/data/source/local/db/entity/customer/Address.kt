@@ -2,11 +2,21 @@ package com.datasoft.abs.data.source.local.db.entity.customer
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.datasoft.abs.data.dto.createCustomer.Addresses
 import com.datasoft.abs.data.dto.createCustomer.Contact
 
-@Entity(tableName = "customer_address_info")
+@Entity(
+    tableName = "customer_address_info",
+    foreignKeys = [ForeignKey(
+        entity = General::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("generalId"),
+        onUpdate = ForeignKey.CASCADE,
+        onDelete = ForeignKey.CASCADE
+    )]
+)
 class Address(
     @ColumnInfo(name = "address_type") val addressType: Int?,
     @ColumnInfo(name = "house_no") val houseNo: String?,

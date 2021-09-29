@@ -2,9 +2,19 @@ package com.datasoft.abs.data.source.local.db.entity.customer
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "customer_fingerprint_info")
+@Entity(
+    tableName = "customer_fingerprint_info",
+    foreignKeys = [ForeignKey(
+        entity = General::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("generalId"),
+        onUpdate = ForeignKey.CASCADE,
+        onDelete = ForeignKey.CASCADE
+    )]
+)
 class Fingerprint(
     @ColumnInfo(name = "left_1") val leftOne: String?,
     @ColumnInfo(name = "left_2") val leftTwo: String?,

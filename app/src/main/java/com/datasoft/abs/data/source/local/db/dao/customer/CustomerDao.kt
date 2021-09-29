@@ -36,7 +36,7 @@ interface CustomerDao {
     fun insertRiskGrading(riskGrading: RiskGrading)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDocumentIdentification(documentIdentification: DocumentIdentification)
+    fun insertDocumentIdentification(documentIdentification: List<DocumentIdentification>)
 
     @Query("SELECT * FROM customer_general_info")
     fun getAll(): LiveData<List<General>>

@@ -2,10 +2,20 @@ package com.datasoft.abs.data.source.local.db.entity.customer
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.datasoft.abs.data.dto.createCustomer.RelatedDoc
 
-@Entity(tableName = "customer_document_info")
+@Entity(
+    tableName = "customer_document_info",
+    foreignKeys = [ForeignKey(
+        entity = General::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("generalId"),
+        onUpdate = ForeignKey.CASCADE,
+        onDelete = ForeignKey.CASCADE
+    )]
+)
 class Document(
     @ColumnInfo(name = "document_type") val documentType: Int?,
     @ColumnInfo(name = "issue_date") val issueDate: String?,

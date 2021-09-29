@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.config.TpDetail
+import com.datasoft.abs.data.dto.config.toTransactionProfile
 import com.datasoft.abs.data.source.local.db.AccountInfo
 import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
 import com.datasoft.abs.data.source.local.db.entity.account.TransactionProfile
@@ -24,23 +25,20 @@ class TransactionProfileViewModel @Inject constructor(
 
     fun setTransactionProfile(list: List<TpDetail>) {
         viewModelScope.launch(Dispatchers.IO) {
-
-            list.forEach {
-                val transactionProfile = TransactionProfile(
-                    it.profileName,
-                    it.limitNoOfDailyTrn,
-                    it.limitDailyTrnAmt,
-                    it.limitNoOfMonthlyTrn,
-                    it.limitMonthlyTrnAmt,
-                    it.limitMaxTrnAmt
-                )
-
-                transactionProfile.accountId = accountInfo.accountId
-
-                accountDao.insertTransactionProfiles(transactionProfile)
-            }
-
             transactionProfile.postValue(list)
+        }
+    }
+
+    fun insertTransactionProfile(transactionList: List<TpDetail>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            transactionList.map {
+                val list = mutableListOf<TransactionProfile>()
+                val profile = it.toTransactionProfile()
+                profile.accountId = accountInfo.accountId
+                list.add(profile)
+
+                accountDao.insertTransactionProfiles(list)
+            }
         }
     }
 }
