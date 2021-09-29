@@ -115,9 +115,13 @@ interface Repository {
     fun insertIntroducer(introducer: Introducer)
     fun insertTransactionProfiles(transactionProfile: List<TransactionProfile>)
 
+    fun updateOtherFacility(value: Boolean, id: Int)
+    fun updateTransactionProfile(transactionProfile: TransactionProfile)
+
     fun getAllAccount(): LiveData<List<Account>>
     fun getAccountWithCustomers(accountId: Int): AccountWithCustomers
     fun getAccountWithOthersFacilities(accountId: Int): AccountWithOtherFacilities
+    fun getOtherFacilities(accountId: Int): LiveData<List<OtherFacilities>>
     fun getAccountWithNominees(accountId: Int): AccountWithNominees
     fun getNomineeAndGuardian(nomineeId: Int): AccountNomineeAndNomineeGuardian
     fun getAccountAndIntroducer(accountId: Int): AccountAndIntroducer

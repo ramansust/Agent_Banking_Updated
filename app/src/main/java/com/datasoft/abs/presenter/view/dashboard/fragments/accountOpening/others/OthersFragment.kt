@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.databinding.OthersFragmentBinding
 import com.datasoft.abs.presenter.view.dashboard.fragments.accountOpening.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class OthersFragment : Fragment() {
@@ -20,6 +23,9 @@ class OthersFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
     private var isClicked = false
+
+    @Inject
+    lateinit var otherFacilityAdapter: OtherFacilityAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,49 +54,29 @@ class OthersFragment : Fragment() {
         accountViewModel.requestVisibility(false)
         accountViewModel.requestListener(false)
 
+        setupRecyclerView()
+
+        viewModel.getOtherFacilities().observe(viewLifecycleOwner, {
+            otherFacilityAdapter.differ.submitList(it)
+
+            binding.btnNext.isEnabled = it.isNotEmpty()
+        })
+
         viewModel.getNotifyData().observe(viewLifecycleOwner, {
-            if(isClicked)
+            if (isClicked)
                 accountViewModel.requestCurrentStep(2)
         })
 
-        viewModel.getChequeBook().observe(viewLifecycleOwner, {
-            binding.switchChequeBook.isChecked = it
-        })
-
-        viewModel.getSMSBanking().observe(viewLifecycleOwner, {
-            binding.switchSmsBanking.isChecked = it
-        })
-
-        viewModel.getDebitCard().observe(viewLifecycleOwner, {
-            binding.switchDebitCard.isChecked = it
-        })
-
-        viewModel.getEStatement().observe(viewLifecycleOwner, {
-            binding.switchEStatement.isChecked = it
-        })
-
-        viewModel.getInternetBanking().observe(viewLifecycleOwner, {
-            binding.switchInternetBanking.isChecked = it
-        })
-
-        binding.switchChequeBook.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.setChequeBook(isChecked)
+        otherFacilityAdapter.setOnItemClickListener { id, isChecked ->
+            viewModel.updateOtherFacility(id, isChecked)
         }
+    }
 
-        binding.switchSmsBanking.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.setSMSBanking(isChecked)
-        }
-
-        binding.switchDebitCard.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.setDebitCard(isChecked)
-        }
-
-        binding.switchEStatement.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.setEStatement(isChecked)
-        }
-
-        binding.switchInternetBanking.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.setInternetBanking(isChecked)
+    private fun setupRecyclerView() {
+        binding.recyclerView.apply {
+            adapter = otherFacilityAdapter
+            layoutManager = LinearLayoutManager(activity)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
     }
 

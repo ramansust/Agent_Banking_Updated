@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.source.local.db.CustomerInfo
-import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
 import com.datasoft.abs.data.source.local.db.entity.customer.Photo
+import com.datasoft.abs.domain.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PhotoViewModel @Inject constructor(
-    private val customerDao: CustomerDao,
+    private val repository: Repository,
     private val customerInfo: CustomerInfo,
 ) : ViewModel() {
 
@@ -117,7 +117,7 @@ class PhotoViewModel @Inject constructor(
                 guardianDocumentType.value
             )
             photo.generalId = customerInfo.customerId
-            customerDao.insertPhoto(photo)
+            repository.insertPhoto(photo)
         }
     }
 }

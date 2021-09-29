@@ -8,7 +8,6 @@ import com.datasoft.abs.data.dto.config.ConfigResponse
 import com.datasoft.abs.data.dto.createCustomer.DocumentVerificationInfo
 import com.datasoft.abs.data.dto.createCustomer.toDocumentIdentification
 import com.datasoft.abs.data.source.local.db.CustomerInfo
-import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
 import com.datasoft.abs.data.source.local.db.entity.customer.DocumentIdentification
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
@@ -25,7 +24,6 @@ import javax.inject.Named
 class CustomerViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network,
-    private val customerDao: CustomerDao,
     private val customerInfo: CustomerInfo,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
@@ -173,7 +171,7 @@ class CustomerViewModel @Inject constructor(
         }
 
         viewModelScope.launch(Dispatchers.IO) {
-            customerDao.insertDocumentIdentification(list)
+            repository.insertDocumentIdentification(list)
         }
 
         documentList.postValue(documents)

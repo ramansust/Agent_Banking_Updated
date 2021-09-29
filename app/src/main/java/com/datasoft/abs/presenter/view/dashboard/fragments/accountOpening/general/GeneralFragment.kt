@@ -176,7 +176,7 @@ class GeneralFragment : Fragment() {
                     Status.SUCCESS -> {
                         result.data?.let {
 //                            viewModel.insertCustomer()
-                            accountViewModel.requestCurrentStep(1)
+//                            accountViewModel.requestCurrentStep(1)
                         }
                     }
 

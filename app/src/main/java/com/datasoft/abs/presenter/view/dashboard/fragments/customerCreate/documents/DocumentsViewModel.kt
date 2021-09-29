@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createCustomer.RelatedDoc
 import com.datasoft.abs.data.dto.createCustomer.toDocument
 import com.datasoft.abs.data.source.local.db.CustomerInfo
-import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
 import com.datasoft.abs.data.source.local.db.entity.customer.Document
+import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Event
@@ -21,8 +21,8 @@ import javax.inject.Named
 @HiltViewModel
 class DocumentsViewModel @Inject constructor(
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
-    private val customerDao: CustomerDao,
-    private val customerInfo: CustomerInfo
+    private val customerInfo: CustomerInfo,
+    private val repository: Repository
 ) : ViewModel() {
 
     private val document = MutableLiveData<ArrayList<Document>>()
@@ -78,7 +78,7 @@ class DocumentsViewModel @Inject constructor(
 
             val document = documentInfo.toDocument()
             document.generalId = customerInfo.customerId
-            customerDao.insertDocument(document)
+            repository.insertDocument(document)
 
             sendMessage.postValue(Event(Resource.success(documentInfo)))
         }
@@ -86,13 +86,13 @@ class DocumentsViewModel @Inject constructor(
 
     fun notifyData(generalId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            document.postValue(customerDao.getGeneralWithDocuments(generalId).documents as ArrayList<Document>?)
+            document.postValue(repository.getGeneralWithDocuments(generalId).documents as ArrayList<Document>?)
         }
     }
 
     fun removeData(documentID: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            customerDao.deleteDocument(documentID)
+            repository.deleteDocument(documentID)
         }
     }
 }

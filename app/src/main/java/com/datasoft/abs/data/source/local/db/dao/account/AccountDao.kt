@@ -29,6 +29,12 @@ interface AccountDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTransactionProfiles(transactionProfile: List<TransactionProfile>)
 
+    @Query("UPDATE account_other_facilities SET isChecked = :value WHERE id = :id")
+    fun updateOtherFacility(value: Boolean, id: Int)
+
+    @Update
+    fun updateTransactionProfile(transactionProfile: TransactionProfile)
+
     @Query("SELECT * FROM account_account_info")
     fun getAll(): LiveData<List<Account>>
 
@@ -39,6 +45,9 @@ interface AccountDao {
     @Transaction
     @Query("SELECT * FROM account_account_info WHERE id = :accountId")
     fun getAccountWithOthersFacilities(accountId: Int): AccountWithOtherFacilities
+
+    @Query("SELECT * FROM account_other_facilities WHERE accountId =:accountId")
+    fun getOtherFacilities(accountId: Int): LiveData<List<OtherFacilities>>
 
     @Transaction
     @Query("SELECT * FROM account_account_info WHERE id = :accountId")

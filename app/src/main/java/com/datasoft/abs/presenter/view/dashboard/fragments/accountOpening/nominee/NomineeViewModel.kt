@@ -7,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createAccount.review.Nominee
 import com.datasoft.abs.data.dto.createAccount.review.NomineeRemainMinor
 import com.datasoft.abs.data.source.local.db.AccountInfo
-import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
 import com.datasoft.abs.data.source.local.db.entity.account.AccountNominee
 import com.datasoft.abs.data.source.local.db.entity.account.NomineeGuardian
+import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
 import com.datasoft.abs.presenter.utils.Event
@@ -25,7 +25,7 @@ import javax.inject.Named
 @HiltViewModel
 class NomineeViewModel @Inject constructor(
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
-    private val accountDao: AccountDao,
+    private val repository: Repository,
     private val accountInfo: AccountInfo
 ) : ViewModel() {
 
@@ -161,7 +161,7 @@ class NomineeViewModel @Inject constructor(
                 nidFrontPhoto
             )
             accountNominee.accountId = accountInfo.accountId
-            val nomineeId = accountDao.insertNominee(accountNominee)
+            val nomineeId = repository.insertNominee(accountNominee)
 
             delay(1000)
 
@@ -178,7 +178,7 @@ class NomineeViewModel @Inject constructor(
             )
 
             nomineeGuardian.nomineeId = nomineeId.toInt()
-            accountDao.insertNomineeGuardian(nomineeGuardian)
+            repository.insertNomineeGuardian(nomineeGuardian)
 
             nomineeData.postValue(Event(Resource.success(nomineeInfo)))
         }

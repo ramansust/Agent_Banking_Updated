@@ -26,7 +26,6 @@ import javax.inject.Named
 @HiltViewModel
 class PersonalViewModel @Inject constructor(
     private val repository: Repository,
-    private val customerDao: CustomerDao,
     private val customerInfo: CustomerInfo,
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
 ) : ViewModel() {

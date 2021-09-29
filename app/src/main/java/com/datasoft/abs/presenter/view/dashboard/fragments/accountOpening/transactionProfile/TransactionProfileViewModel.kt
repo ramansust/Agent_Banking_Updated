@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.config.TpDetail
 import com.datasoft.abs.data.dto.config.toTransactionProfile
 import com.datasoft.abs.data.source.local.db.AccountInfo
-import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
 import com.datasoft.abs.data.source.local.db.entity.account.TransactionProfile
+import com.datasoft.abs.domain.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TransactionProfileViewModel @Inject constructor(
-    private val accountDao: AccountDao,
+    private val repository: Repository,
     private val accountInfo: AccountInfo
 ) : ViewModel() {
 
@@ -37,8 +37,14 @@ class TransactionProfileViewModel @Inject constructor(
                 profile.accountId = accountInfo.accountId
                 list.add(profile)
 
-                accountDao.insertTransactionProfiles(list)
+                repository.insertTransactionProfiles(list)
             }
+        }
+    }
+
+    fun updateTransactionProfile(transactionProfile: TransactionProfile) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateTransactionProfile(transactionProfile)
         }
     }
 }

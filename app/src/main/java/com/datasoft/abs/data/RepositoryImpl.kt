@@ -334,6 +334,14 @@ class RepositoryImpl @Inject constructor(
         accountDao.insertTransactionProfiles(transactionProfile)
     }
 
+    override fun updateOtherFacility(value: Boolean, id: Int) {
+        accountDao.updateOtherFacility(value, id)
+    }
+
+    override fun updateTransactionProfile(transactionProfile: TransactionProfile) {
+        accountDao.updateTransactionProfile(transactionProfile)
+    }
+
     override fun getAllAccount(): LiveData<List<Account>> {
         return accountDao.getAll()
     }
@@ -344,6 +352,10 @@ class RepositoryImpl @Inject constructor(
 
     override fun getAccountWithOthersFacilities(accountId: Int): AccountWithOtherFacilities {
         return accountDao.getAccountWithOthersFacilities(accountId)
+    }
+
+    override fun getOtherFacilities(accountId: Int): LiveData<List<OtherFacilities>> {
+        return accountDao.getOtherFacilities(accountId)
     }
 
     override fun getAccountWithNominees(accountId: Int): AccountWithNominees {

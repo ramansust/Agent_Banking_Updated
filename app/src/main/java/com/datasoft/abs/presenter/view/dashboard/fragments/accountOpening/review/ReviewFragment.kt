@@ -174,7 +174,7 @@ class ReviewFragment : Fragment() {
             }
         })
 
-        othersViewModel.getChequeBook().observe(viewLifecycleOwner, {
+        /*othersViewModel.getChequeBook().observe(viewLifecycleOwner, {
             createAccountRequest.isChequeBookEnable = it
             if (it) othersList.add(0)
         })
@@ -197,7 +197,7 @@ class ReviewFragment : Fragment() {
         othersViewModel.getInternetBanking().observe(viewLifecycleOwner, {
             createAccountRequest.isInternetBankingEnable = it
             if (it) othersList.add(4)
-        })
+        })*/
 
         othersViewModel.getNotifyData().observe(viewLifecycleOwner, {
             otherFacilities()

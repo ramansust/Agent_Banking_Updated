@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createAccount.general.*
-import com.datasoft.abs.data.source.local.db.dao.account.AccountDao
 import com.datasoft.abs.data.source.local.db.entity.account.Account
 import com.datasoft.abs.data.source.local.db.entity.account.Customer
 import com.datasoft.abs.data.source.local.db.entity.account.toAccountInfo
@@ -27,7 +26,6 @@ import javax.inject.Named
 class GeneralViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network,
-    private val accountDao: AccountDao,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
@@ -126,7 +124,7 @@ class GeneralViewModel @Inject constructor(
                 initialAmount
             )
 
-            val id = accountDao.insertAccount(account)
+            val id = repository.insertAccount(account)
             repository.setAccountId(id.toInt())
 
             delay(1000)
@@ -140,7 +138,7 @@ class GeneralViewModel @Inject constructor(
                 }
             }
 
-            accountDao.insertCustomers(list)
+            repository.insertCustomers(list)
 
             accountInfo.postValue(
                 Event(
@@ -198,14 +196,14 @@ class GeneralViewModel @Inject constructor(
             accountInfo.postValue(
                 Event(
                     Resource.success(
-                        accountDao.getAccountWithCustomers(1).account.toAccountInfo()
+                        repository.getAccountWithCustomers(1).account.toAccountInfo()
                     )
                 )
             )
 
             val list = mutableListOf<CustomerData>()
 
-            val customers = accountDao.getAccountWithCustomers(1).customers
+            val customers = repository.getAccountWithCustomers(1).customers
             customers.forEach {
                 list.add(it.toCustomerData())
             }
@@ -216,7 +214,7 @@ class GeneralViewModel @Inject constructor(
 
     fun deleteAccount() {
         viewModelScope.launch(Dispatchers.IO) {
-            accountDao.delete(1)
+            repository.delete(1)
         }
     }
 
@@ -231,7 +229,7 @@ class GeneralViewModel @Inject constructor(
                 }
             }
 
-            accountDao.insertCustomers(list)
+            repository.insertCustomers(list)
         }
     }
 }
