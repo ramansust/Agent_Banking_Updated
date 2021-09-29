@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.datasoft.abs.data.dto.createCustomer.AddressInfo
 import com.datasoft.abs.data.dto.createCustomer.Addresses
 import com.datasoft.abs.data.dto.createCustomer.Contact
 
@@ -19,6 +20,7 @@ import com.datasoft.abs.data.dto.createCustomer.Contact
 )
 class Address(
     @ColumnInfo(name = "address_type") val addressType: Int?,
+    @ColumnInfo(name = "address_value") val addressValue: String?,
     @ColumnInfo(name = "house_no") val houseNo: String?,
     @ColumnInfo(name = "flat_no") val flatNo: String?,
     val village: String?,
@@ -29,10 +31,14 @@ class Address(
     @ColumnInfo(name = "post_code") val postCode: String?,
     val state: String?,
     val country: Int?,
+    @ColumnInfo(name = "country_value") val countryValue: String?,
     val city: String?,
     val district: Int?,
+    @ColumnInfo(name = "district_value") val districtValue: String?,
     val thana: Int?,
+    @ColumnInfo(name = "thana_value") val thanaValue: String?,
     val union: Int?,
+    @ColumnInfo(name = "union_value") val unionValue: String?,
     @ColumnInfo(name = "contact_type") val contactType: Int?,
     @ColumnInfo(name = "contact_no") val contactNo: String?
 ) {
@@ -57,5 +63,33 @@ fun Address.toContact(): Contact {
         contactNo!!,
         contactType!!,
         true
+    )
+}
+
+fun Address.toAddressInfo(): AddressInfo {
+    return AddressInfo(
+        id,
+        addressValue!!,
+        addressType!!,
+        houseNo!!,
+        flatNo!!,
+        village!!,
+        blockNo!!,
+        roadNo!!,
+        wordNo!!,
+        zipCode!!,
+        postCode!!,
+        state!!,
+        country!!,
+        countryValue!!,
+        city!!,
+        district!!,
+        districtValue!!,
+        thana!!,
+        thanaValue!!,
+        union!!,
+        unionValue!!,
+        contactType!!,
+        contactNo!!
     )
 }

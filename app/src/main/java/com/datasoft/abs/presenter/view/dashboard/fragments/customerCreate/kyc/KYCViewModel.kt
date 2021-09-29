@@ -5,9 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.config.RiskGradeResponse
+import com.datasoft.abs.data.dto.createCustomer.DocumentVerificationInfo
 import com.datasoft.abs.data.dto.createCustomer.KYCInfo
+import com.datasoft.abs.data.dto.createCustomer.toDocumentIdentification
 import com.datasoft.abs.data.dto.createCustomer.toRiskGrading
 import com.datasoft.abs.data.source.local.db.CustomerInfo
+import com.datasoft.abs.data.source.local.db.entity.customer.DocumentIdentification
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -34,6 +37,12 @@ class KYCViewModel @Inject constructor(
 
     private val kycData = MutableLiveData<Event<KYCInfo>>()
     fun getKYCData(): LiveData<Event<KYCInfo>> = kycData
+
+    private var documentIdentifications: LiveData<List<DocumentIdentification>> =
+        repository.getDocumentIdentifications(customerInfo.customerId)
+
+    fun getDocumentIdentifications(): LiveData<List<DocumentIdentification>> =
+        documentIdentifications
 
     fun configData() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -100,5 +109,33 @@ class KYCViewModel @Inject constructor(
             }
         }
         return Resource.error(response.message(), null)
+    }
+
+    fun insertIdentification(documents: List<DocumentVerificationInfo>) {
+        if (customerInfo.customerId > 0) {
+            val list = mutableListOf<DocumentIdentification>()
+
+            documents.forEach {
+                val documentIdentification = it.toDocumentIdentification()
+                documentIdentification.generalId = customerInfo.customerId
+                list.add(documentIdentification)
+            }
+
+            viewModelScope.launch(Dispatchers.IO) {
+                repository.insertDocumentIdentification(list)
+            }
+        }
+    }
+
+    fun updateIsCollected(id: Int, isCollected: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateDocumentIsCollected(isCollected, id)
+        }
+    }
+
+    fun updateIsVerified(id: Int, isVerified: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateDocumentIsVerified(isVerified, id)
+        }
     }
 }

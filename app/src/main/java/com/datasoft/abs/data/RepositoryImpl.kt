@@ -258,6 +258,14 @@ class RepositoryImpl @Inject constructor(
         customerDao.insertDocumentIdentification(documentIdentification)
     }
 
+    override fun updateDocumentIsCollected(isCollected: Boolean, id: Int) {
+        customerDao.updateDocumentIsCollected(isCollected, id)
+    }
+
+    override fun updateDocumentIsVerified(isVerified: Boolean, id: Int) {
+        customerDao.updateDocumentIsVerified(isVerified, id)
+    }
+
     override fun getAll(): LiveData<List<General>> {
         return customerDao.getAll()
     }
@@ -302,8 +310,24 @@ class RepositoryImpl @Inject constructor(
         return customerDao.getGeneralAndDocumentIdentification(generalId)
     }
 
-    override fun delete(generalId: Int) {
+    override fun getAddress(generalId: Int): LiveData<List<Address>> {
+        return customerDao.getAddress(generalId)
+    }
+
+    override fun getDocuments(generalId: Int): LiveData<List<Document>> {
+        return customerDao.getDocuments(generalId)
+    }
+
+    override fun getDocumentIdentifications(documentIdentificationID: Int): LiveData<List<DocumentIdentification>> {
+        return customerDao.getDocumentIdentifications(documentIdentificationID)
+    }
+
+    override fun deleteCustomer(generalId: Int) {
         customerDao.delete(generalId)
+    }
+
+    override fun deleteAddress(addressId: Int) {
+        customerDao.deleteAddress(addressId)
     }
 
     override fun deleteDocument(documentId: Int) {
@@ -375,6 +399,10 @@ class RepositoryImpl @Inject constructor(
     }
 
     override fun deleteAccount(accountId: Int) {
-        accountDao.delete(accountId)
+        accountDao.deleteAccount(accountId)
+    }
+
+    override fun deleteNominee(nomineeId: Int) {
+        accountDao.deleteNominee(nomineeId)
     }
 }

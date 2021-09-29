@@ -64,10 +64,10 @@ class DocumentsFragment : Fragment() {
                 it.toRelatedDoc()
             })
 
-            binding.txtViewNoEntry.isVisible = it.size <= 0
-            binding.recyclerView.isVisible = it.size > 0
+            binding.txtViewNoEntry.isVisible = it.isEmpty()
+            binding.recyclerView.isVisible = it.isNotEmpty()
 
-            binding.btnNext.isEnabled = it.size > 0
+            binding.btnNext.isEnabled = it.isNotEmpty()
         })
 
         customerViewModel.getAddListener().observe(viewLifecycleOwner, {
@@ -86,7 +86,7 @@ class DocumentsFragment : Fragment() {
     private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                viewModel.notifyData(1)
+//                viewModel.notifyData(1)
             }
         }
 

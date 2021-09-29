@@ -214,7 +214,7 @@ class GeneralViewModel @Inject constructor(
 
     fun deleteAccount() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.delete(1)
+            repository.deleteCustomer(1)
         }
     }
 

@@ -66,5 +66,8 @@ interface AccountDao {
     fun getAccountWithTransactionProfiles(accountId: Int): AccountWithTransactionProfiles
 
     @Query("DELETE FROM account_account_info WHERE id = :accountId")
-    fun delete(accountId: Int)
+    fun deleteAccount(accountId: Int)
+
+    @Query("DELETE FROM account_nominee_info WHERE id = :nomineeId")
+    fun deleteNominee(nomineeId: Int)
 }

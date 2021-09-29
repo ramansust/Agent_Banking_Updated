@@ -1,14 +1,12 @@
 package com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.address
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.datasoft.abs.data.dto.config.CommonModel
 import com.datasoft.abs.data.dto.createCustomer.AddressInfo
 import com.datasoft.abs.data.dto.createCustomer.Contact
 import com.datasoft.abs.data.dto.createCustomer.toAddress
 import com.datasoft.abs.data.source.local.db.CustomerInfo
+import com.datasoft.abs.data.source.local.db.entity.customer.toAddressInfo
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -37,8 +35,14 @@ class AddressViewModel @Inject constructor(
     private val union = MutableLiveData<Event<Resource<List<CommonModel>>>>()
     fun getUnionData(): LiveData<Event<Resource<List<CommonModel>>>> = union
 
-    private val saveData = MutableLiveData<ArrayList<AddressInfo>>()
-    fun getSavedData(): LiveData<ArrayList<AddressInfo>> = saveData
+    private var addresses: LiveData<List<AddressInfo>> =
+        repository.getAddress(customerInfo.customerId).map {
+            it.map { address ->
+                address.toAddressInfo()
+            }
+        }
+
+    fun getAddresses(): LiveData<List<AddressInfo>> = addresses
 
     private val contactData = MutableLiveData<ArrayList<Contact>>()
     fun getContactData(): LiveData<ArrayList<Contact>> = contactData
@@ -151,6 +155,7 @@ class AddressViewModel @Inject constructor(
             }
 
             val addressInfo = AddressInfo(
+                0,
                 addressTypeValue,
                 addressType,
                 houseNo,
@@ -183,40 +188,9 @@ class AddressViewModel @Inject constructor(
         }
     }
 
-    fun notifyData(addressInfo: AddressInfo) {
+    fun removeAddress(addressId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list: ArrayList<AddressInfo> = ArrayList()
-            list.add(addressInfo)
-            saveData.value?.let {
-                list.addAll(list.size - 1, it)
-            }
-            saveData.postValue(list)
-
-            val contactList: ArrayList<Contact> = ArrayList()
-            contactList.add(Contact(addressInfo.contactNo, addressInfo.contactType))
-            contactData.value?.let {
-                contactList.addAll(contactList.size - 1, it)
-            }
-            contactData.postValue(contactList)
+            repository.deleteAddress(addressId)
         }
     }
-
-    fun removeData(addressInfo: AddressInfo) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val list: ArrayList<AddressInfo> = ArrayList()
-            saveData.value?.let {
-                list.addAll(it)
-            }
-            list.remove(addressInfo)
-            saveData.postValue(list)
-
-            val contactList: ArrayList<Contact> = ArrayList()
-            contactData.value?.let {
-                contactList.addAll(it)
-            }
-            contactList.remove(Contact(addressInfo.contactNo, addressInfo.contactType))
-            contactData.postValue(contactList)
-        }
-    }
-
 }

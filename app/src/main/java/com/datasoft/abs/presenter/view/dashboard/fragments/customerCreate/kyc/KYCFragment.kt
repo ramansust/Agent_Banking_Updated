@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.datasoft.abs.data.dto.config.CommonModel
+import com.datasoft.abs.data.source.local.db.entity.customer.toDocumentVerification
 import com.datasoft.abs.databinding.KycFragmentBinding
 import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
@@ -46,7 +47,13 @@ class KYCFragment : Fragment() {
         setupRecyclerView()
 
         customerViewModel.getDocumentList().observe(viewLifecycleOwner, {
-            documentAdapter.differ.submitList(it)
+            viewModel.insertIdentification(it)
+        })
+
+        viewModel.getDocumentIdentifications().observe(viewLifecycleOwner, {
+            documentAdapter.differ.submitList(it.map { document ->
+                document.toDocumentVerification()
+            })
         })
 
         customerViewModel.requestVisibility(false)
@@ -250,11 +257,11 @@ class KYCFragment : Fragment() {
         }
 
         documentAdapter.setOnPhotocopyClickListener { index, isChecked ->
-            customerViewModel.collectedDocument(index, isChecked)
+            viewModel.updateIsCollected(index, isChecked)
         }
 
         documentAdapter.setOnVerifiedClickListener { index, isChecked ->
-            customerViewModel.verifiedDocument(index, isChecked)
+            viewModel.updateIsVerified(index, isChecked)
         }
     }
 

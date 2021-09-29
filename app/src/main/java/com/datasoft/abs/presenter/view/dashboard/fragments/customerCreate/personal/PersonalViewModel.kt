@@ -9,7 +9,6 @@ import com.datasoft.abs.data.dto.createCustomer.toGuardian
 import com.datasoft.abs.data.dto.createCustomer.toNominee
 import com.datasoft.abs.data.dto.createCustomer.toPersonal
 import com.datasoft.abs.data.source.local.db.CustomerInfo
-import com.datasoft.abs.data.source.local.db.dao.customer.CustomerDao
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -17,6 +16,7 @@ import com.datasoft.abs.presenter.utils.Constant.DATE_FORMAT
 import com.datasoft.abs.presenter.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -126,6 +126,8 @@ class PersonalViewModel @Inject constructor(
             val personal = personalInfo.toPersonal()
             personal.generalId = customerInfo.customerId
             val id = repository.insertPersonal(personal)
+
+            delay(1000)
 
             val nominee = personalInfo.toNominee()
             nominee.personalId = id.toInt()

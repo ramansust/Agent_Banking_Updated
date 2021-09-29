@@ -91,6 +91,9 @@ interface Repository {
     suspend fun insertRiskGrading(riskGrading: RiskGrading)
     suspend fun insertDocumentIdentification(documentIdentification: List<DocumentIdentification>)
 
+    fun updateDocumentIsCollected(isCollected: Boolean, id: Int)
+    fun updateDocumentIsVerified(isVerified: Boolean, id: Int)
+
     fun getAll(): LiveData<List<General>>
     fun getGeneral(generalId: Int): General
     fun getGeneralAndPersonal(generalId: Int): GeneralAndPersonal
@@ -102,8 +105,12 @@ interface Repository {
     fun getGeneralWithDocuments(generalId: Int): GeneralWithDocuments
     fun getGeneralAndRiskGrading(generalId: Int): GeneralAndRiskGrading
     fun getGeneralAndDocumentIdentification(generalId: Int): GeneralAndDocumentIdentification
+    fun getAddress(generalId: Int): LiveData<List<Address>>
+    fun getDocuments(generalId: Int): LiveData<List<Document>>
+    fun getDocumentIdentifications(documentIdentificationID: Int): LiveData<List<DocumentIdentification>>
 
-    fun delete(generalId: Int)
+    fun deleteCustomer(generalId: Int)
+    fun deleteAddress(addressId: Int)
     fun deleteDocument(documentId: Int)
 
     fun setAccountId(id: Int)
@@ -128,4 +135,5 @@ interface Repository {
     fun getAccountWithTransactionProfiles(accountId: Int): AccountWithTransactionProfiles
 
     fun deleteAccount(accountId: Int)
+    fun deleteNominee(nomineeId: Int)
 }

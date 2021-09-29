@@ -6,9 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.config.ConfigResponse
 import com.datasoft.abs.data.dto.createCustomer.DocumentVerificationInfo
-import com.datasoft.abs.data.dto.createCustomer.toDocumentIdentification
-import com.datasoft.abs.data.source.local.db.CustomerInfo
-import com.datasoft.abs.data.source.local.db.entity.customer.DocumentIdentification
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -24,7 +21,6 @@ import javax.inject.Named
 class CustomerViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network,
-    private val customerInfo: CustomerInfo,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
 ) : ViewModel() {
@@ -100,7 +96,7 @@ class CustomerViewModel @Inject constructor(
 
         documents.add(
             DocumentVerificationInfo(
-                "NID",
+                name = "NID",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
@@ -108,7 +104,7 @@ class CustomerViewModel @Inject constructor(
 
         documents.add(
             DocumentVerificationInfo(
-                "Passport",
+                name = "Passport",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
@@ -116,7 +112,7 @@ class CustomerViewModel @Inject constructor(
 
         documents.add(
             DocumentVerificationInfo(
-                "Birth Certificate",
+                name = "Birth Certificate",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
@@ -124,7 +120,7 @@ class CustomerViewModel @Inject constructor(
 
         documents.add(
             DocumentVerificationInfo(
-                "e-Tin",
+                name = "e-Tin",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
@@ -132,7 +128,7 @@ class CustomerViewModel @Inject constructor(
 
         documents.add(
             DocumentVerificationInfo(
-                "Driving License",
+                name = "Driving License",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
@@ -140,7 +136,7 @@ class CustomerViewModel @Inject constructor(
 
         documents.add(
             DocumentVerificationInfo(
-                "Vat Registration",
+                name = "Vat Registration",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
@@ -148,7 +144,7 @@ class CustomerViewModel @Inject constructor(
 
         documents.add(
             DocumentVerificationInfo(
-                "Organization Registration",
+                name = "Organization Registration",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
@@ -156,38 +152,11 @@ class CustomerViewModel @Inject constructor(
 
         documents.add(
             DocumentVerificationInfo(
-                "Certificate of Incorporation",
+                name = "Certificate of Incorporation",
                 isPhotocopyCollected = false,
                 isVerified = false
             )
         )
-
-        val list = mutableListOf<DocumentIdentification>()
-
-        documents.forEach {
-            val documentIdentification = it.toDocumentIdentification()
-            documentIdentification.generalId = customerInfo.customerId
-            list.add(documentIdentification)
-        }
-
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.insertDocumentIdentification(list)
-        }
-
         documentList.postValue(documents)
-    }
-
-    fun collectedDocument(index: Int, isChecked: Boolean) {
-        viewModelScope.launch(Dispatchers.IO) {
-            documentList.value?.get(index)?.isPhotocopyCollected = isChecked
-            documentList.postValue(documentList.value)
-        }
-    }
-
-    fun verifiedDocument(index: Int, isChecked: Boolean) {
-        viewModelScope.launch(Dispatchers.IO) {
-            documentList.value?.get(index)?.isVerified = isChecked
-            documentList.postValue(documentList.value)
-        }
     }
 }

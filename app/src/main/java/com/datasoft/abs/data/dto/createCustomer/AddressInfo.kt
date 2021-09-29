@@ -4,6 +4,7 @@ import com.datasoft.abs.data.source.local.db.entity.customer.Address
 import java.io.Serializable
 
 data class AddressInfo(
+    val id: Int = 0,
     val addressTypeValue: String,
     val addressType: Int,
     val houseNo: String,
@@ -31,6 +32,7 @@ data class AddressInfo(
 fun AddressInfo.toAddress(): Address {
     return Address(
         addressType,
+        addressTypeValue,
         houseNo,
         flatNo,
         village,
@@ -41,10 +43,14 @@ fun AddressInfo.toAddress(): Address {
         postCode,
         state,
         country,
+        countryValue,
         city,
         district,
+        districtValue,
         thana,
+        thanaValue,
         union,
+        unionValue,
         contactType,
         contactNo
     )

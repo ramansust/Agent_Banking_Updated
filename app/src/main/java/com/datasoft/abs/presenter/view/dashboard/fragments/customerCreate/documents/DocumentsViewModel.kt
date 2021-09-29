@@ -25,8 +25,8 @@ class DocumentsViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    private val document = MutableLiveData<ArrayList<Document>>()
-    fun getDocuments(): LiveData<ArrayList<Document>> = document
+    private var document: LiveData<List<Document>> = repository.getDocuments(customerInfo.customerId)
+    fun getDocuments(): LiveData<List<Document>> = document
 
     private val backImage = MutableLiveData<Boolean>()
     fun getBackImage(): LiveData<Boolean> = backImage
@@ -81,12 +81,6 @@ class DocumentsViewModel @Inject constructor(
             repository.insertDocument(document)
 
             sendMessage.postValue(Event(Resource.success(documentInfo)))
-        }
-    }
-
-    fun notifyData(generalId: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            document.postValue(repository.getGeneralWithDocuments(generalId).documents as ArrayList<Document>?)
         }
     }
 

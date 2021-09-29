@@ -50,17 +50,17 @@ class VerifyListAdapter @Inject constructor() :
         val value = differ.currentList[position]
 
         with(value) {
-            holder.binding.txtViewDocumentName.text = value.name
-            holder.binding.switchCollected.isChecked = value.isPhotocopyCollected
-            holder.binding.switchVerified.isChecked = value.isVerified
+            holder.binding.txtViewDocumentName.text = this.name
+            holder.binding.switchCollected.isChecked = this.isPhotocopyCollected
+            holder.binding.switchVerified.isChecked = this.isVerified
         }
 
         holder.binding.switchCollected.setOnCheckedChangeListener { _, isChecked ->
-            onPhotocopyClickListener?.let { it(position, isChecked) }
+            onPhotocopyClickListener?.let { it(value.id, isChecked) }
         }
 
         holder.binding.switchVerified.setOnCheckedChangeListener { _, isChecked ->
-            onVerifiedClickListener?.let { it(position, isChecked) }
+            onVerifiedClickListener?.let { it(value.id, isChecked) }
         }
     }
 

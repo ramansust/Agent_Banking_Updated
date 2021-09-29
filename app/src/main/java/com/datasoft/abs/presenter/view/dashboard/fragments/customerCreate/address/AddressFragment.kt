@@ -12,9 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.datasoft.abs.data.dto.createCustomer.AddressInfo
 import com.datasoft.abs.databinding.AddressFragmentBinding
-import com.datasoft.abs.presenter.utils.Constant.ADDRESS_INFO
 import com.datasoft.abs.presenter.view.dashboard.fragments.customerCreate.CustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -50,13 +48,13 @@ class AddressFragment : Fragment() {
 
         setupRecyclerView()
 
-        addressViewModel.getSavedData().observe(viewLifecycleOwner, {
+        addressViewModel.getAddresses().observe(viewLifecycleOwner, {
             addressAdapter.differ.submitList(it)
 
-            binding.txtViewNoEntry.isVisible = it.size <= 0
-            binding.recyclerView.isVisible = it.size > 0
+            binding.txtViewNoEntry.isVisible = it.isEmpty()
+            binding.recyclerView.isVisible = it.isNotEmpty()
 
-            binding.btnNext.isEnabled = it.size > 0
+            binding.btnNext.isEnabled = it.isNotEmpty()
         })
 
         customerViewModel.getAddListener().observe(viewLifecycleOwner, {
@@ -76,13 +74,13 @@ class AddressFragment : Fragment() {
         }
 
         addressAdapter.setOnItemClickListener {
-            addressViewModel.removeData(it)
+            addressViewModel.removeAddress(it.id)
         }
     }
 
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            addressViewModel.notifyData(result.data?.getSerializableExtra(ADDRESS_INFO) as AddressInfo)
+//            addressViewModel.notifyData(result.data?.getSerializableExtra(ADDRESS_INFO) as AddressInfo)
         }
     }
 

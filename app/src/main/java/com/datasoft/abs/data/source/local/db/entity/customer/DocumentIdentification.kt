@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.datasoft.abs.data.dto.createCustomer.DocumentVerificationInfo
 
 @Entity(
     tableName = "customer_document_identification",
@@ -23,4 +24,13 @@ class DocumentIdentification(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
     var generalId: Int = 0
+}
+
+fun DocumentIdentification.toDocumentVerification(): DocumentVerificationInfo {
+    return DocumentVerificationInfo(
+        id,
+        name!!,
+        isPhotocopyCollected!!,
+        isVerified!!
+    )
 }

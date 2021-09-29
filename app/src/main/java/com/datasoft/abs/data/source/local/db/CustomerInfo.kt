@@ -5,5 +5,5 @@ import javax.inject.Singleton
 
 @Singleton
 class CustomerInfo @Inject constructor() {
-    var customerId: Int = 0
+    var customerId: Int = 1
 }

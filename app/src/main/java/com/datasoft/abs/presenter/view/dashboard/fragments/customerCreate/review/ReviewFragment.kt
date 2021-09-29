@@ -168,7 +168,7 @@ class ReviewFragment : Fragment() {
             }
         })
 
-        addressViewModel.getSavedData().observe(viewLifecycleOwner, {
+        addressViewModel.getAddresses().observe(viewLifecycleOwner, {
             val list = mutableListOf<Addresses>()
             for (addressInfo in it) {
                 list.add(
