@@ -48,7 +48,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/general_information"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,6 +59,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/edit"
                             android:textColor="@color/white"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,7 +71,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/full_name"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_nid"
                             app:layout_constraintStart_toStartOf="@id/txt_view_general"
                             app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
@@ -82,7 +83,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/nid_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_father_name"
                             app:layout_constraintStart_toStartOf="@id/txt_view_general"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_full_name" />
@@ -94,7 +95,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/father_name_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/view_middle"
                             app:layout_constraintStart_toStartOf="@id/txt_view_general"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_nid" />
@@ -119,7 +120,7 @@
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/guardian_information"
                             android:textColor="@android:color/holo_blue_light"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="gone"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_name"
                             app:layout_constraintStart_toStartOf="@id/txt_view_general"
@@ -132,7 +133,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/name"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="gone"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_mobile_number"
                             app:layout_constraintStart_toStartOf="@id/txt_view_general"
@@ -145,7 +146,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/mobile_number_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@id/txt_view_general"
@@ -157,7 +158,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_nid_value"
                             app:layout_constraintStart_toStartOf="@+id/guideline_left"
                             app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
@@ -168,7 +169,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_father_name_value"
                             app:layout_constraintStart_toStartOf="@+id/guideline_left"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_full_name_value" />
@@ -179,7 +180,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/view_middle"
                             app:layout_constraintStart_toStartOf="@+id/guideline_left"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_nid_value" />
@@ -191,7 +192,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="gone"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_mobile_number_value"
                             app:layout_constraintStart_toStartOf="@+id/guideline_left"
@@ -203,7 +204,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/guideline_left"
@@ -216,7 +217,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/date_of_birth_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_mobile_no"
                             app:layout_constraintStart_toStartOf="@+id/guideline_middle"
                             app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
@@ -228,7 +229,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/mobile_number_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_mother_name"
                             app:layout_constraintStart_toStartOf="@+id/guideline_middle"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_dob" />
@@ -240,7 +241,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/mother_name_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/view_middle"
                             app:layout_constraintStart_toStartOf="@+id/guideline_middle"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_mobile_no" />
@@ -253,7 +254,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/relation_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="gone"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_dob"
                             app:layout_constraintStart_toStartOf="@+id/guideline_middle"
@@ -266,7 +267,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/date_of_birth_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/guideline_middle"
@@ -278,7 +279,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_mobile_no_value"
                             app:layout_constraintStart_toStartOf="@+id/guideline_right"
                             app:layout_constraintTop_toBottomOf="@+id/btn_general_edit" />
@@ -289,7 +290,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_mother_name_value"
                             app:layout_constraintStart_toStartOf="@+id/guideline_right"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_dob_value" />
@@ -300,7 +301,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/view_middle"
                             app:layout_constraintStart_toStartOf="@+id/guideline_right"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_mobile_no_value" />
@@ -311,7 +312,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="gone"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_guardian_dob_value"
                             app:layout_constraintStart_toStartOf="@+id/guideline_right"
@@ -323,7 +324,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/guideline_right"
@@ -381,7 +382,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/personal_information"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -392,6 +393,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/edit"
                             android:textColor="@color/white"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -402,7 +404,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/religion_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_occupation"
                             app:layout_constraintStart_toStartOf="@+id/txt_view_personal"
                             app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
@@ -414,7 +416,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/occupation_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_monthly_income"
                             app:layout_constraintStart_toStartOf="@+id/txt_view_personal"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_religion" />
@@ -426,7 +428,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/monthly_income_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/txt_view_personal"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_occupation" />
@@ -437,7 +439,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_occupation_value"
                             app:layout_constraintStart_toStartOf="@+id/guideline_left_1"
                             app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
@@ -448,7 +450,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_monthly_income_value"
                             app:layout_constraintStart_toStartOf="@+id/guideline_left_1"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_religion_value" />
@@ -459,7 +461,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/guideline_left_1"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_occupation_value" />
@@ -471,7 +473,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/education_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_nationality"
                             app:layout_constraintStart_toStartOf="@+id/guideline_middle_1"
                             app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
@@ -483,7 +485,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/nationality_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_source_of_fund"
                             app:layout_constraintStart_toStartOf="@+id/guideline_middle_1"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_education" />
@@ -495,7 +497,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/source_of_fund__"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/guideline_middle_1"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_nationality" />
@@ -506,7 +508,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_nationality_value"
                             app:layout_constraintStart_toStartOf="@+id/guideline_right_1"
                             app:layout_constraintTop_toBottomOf="@+id/btn_personal_edit" />
@@ -517,7 +519,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_source_of_fund_value"
                             app:layout_constraintStart_toStartOf="@+id/guideline_right_1"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_education_value" />
@@ -528,7 +530,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/guideline_right_1"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_nationality_value" />
@@ -585,7 +587,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/address"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -594,7 +596,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_regular"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_address_2"
                             app:layout_constraintStart_toStartOf="@id/txt_view_address"
@@ -607,7 +609,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@id/txt_view_address"
@@ -618,7 +620,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_address_2_value"
                             app:layout_constraintStart_toStartOf="@+id/guideline_middle_2"
@@ -631,7 +633,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/guideline_middle_2"
@@ -644,6 +646,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/edit"
                             android:textColor="@color/white"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -684,7 +687,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/photo_nid"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -695,6 +698,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/edit"
                             android:textColor="@color/white"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -704,7 +708,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/user_photo"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="@+id/img_view_photo"
                             app:layout_constraintStart_toStartOf="@+id/img_view_photo"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_photo" />
@@ -715,7 +719,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/user_signature"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="@+id/img_view_signature"
                             app:layout_constraintStart_toStartOf="@+id/img_view_signature"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_signature" />
@@ -726,7 +730,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/guardian_photo"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintEnd_toEndOf="@+id/img_view_guardian_photo"
                             app:layout_constraintStart_toStartOf="@+id/img_view_guardian_photo"
@@ -738,15 +742,15 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/guardian_signature"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintEnd_toEndOf="@+id/img_view_guardian_signature"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_guardian_signature" />
 
                         <ImageView
                             android:id="@+id/img_view_photo"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/space_64x"
+                            android:layout_height="@dimen/space_64x"
                             android:layout_marginTop="@dimen/space_8x"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
@@ -758,8 +762,8 @@
 
                         <ImageView
                             android:id="@+id/img_view_signature"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/space_64x"
+                            android:layout_height="@dimen/space_64x"
                             android:layout_marginTop="@dimen/space_8x"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
@@ -770,8 +774,8 @@
 
                         <ImageView
                             android:id="@+id/img_view_guardian_photo"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/space_64x"
+                            android:layout_height="@dimen/space_64x"
                             android:layout_marginTop="@dimen/space_8x"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
@@ -783,8 +787,8 @@
 
                         <ImageView
                             android:id="@+id/img_view_guardian_signature"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/space_64x"
+                            android:layout_height="@dimen/space_64x"
                             android:layout_marginTop="@dimen/space_8x"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
@@ -825,7 +829,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/fingerprint"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -836,6 +840,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/edit"
                             android:textColor="@color/white"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -870,7 +875,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/documents"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -879,7 +884,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_regular"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_document_2"
                             app:layout_constraintStart_toStartOf="@id/txt_view_document"
@@ -892,7 +897,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@id/txt_view_document"
@@ -903,7 +908,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_document_2_value"
                             app:layout_constraintStart_toStartOf="@+id/guideline_middle_6"
@@ -916,7 +921,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/guideline_middle_6"
@@ -936,6 +941,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/edit"
                             android:textColor="@color/white"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -967,7 +973,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/kyc"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -977,7 +983,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/photocopy_collected"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="@+id/txt_view_photocopy_value_not"
                             app:layout_constraintEnd_toStartOf="@+id/guideline_middle_7"
                             app:layout_constraintStart_toStartOf="@id/txt_view_kyc"
@@ -989,7 +995,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/verified"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="@+id/txt_view_verified_value_not"
                             app:layout_constraintEnd_toStartOf="@+id/guideline_middle_7"
                             app:layout_constraintStart_toStartOf="@id/txt_view_kyc"
@@ -1004,7 +1010,7 @@
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/address"
                             android:textColor="@color/add_customer"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="gone"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_photocopy_value_not"
                             app:layout_constraintEnd_toEndOf="@id/btn_kyc_edit"
@@ -1020,7 +1026,7 @@
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/address"
                             android:textColor="@android:color/holo_red_dark"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="gone"
                             app:layout_constraintBottom_toTopOf="@+id/view"
                             app:layout_constraintEnd_toEndOf="@id/btn_kyc_edit"
@@ -1049,7 +1055,7 @@
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/address"
                             android:textColor="@color/add_customer"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="gone"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_verified_value_not"
                             app:layout_constraintEnd_toEndOf="@id/btn_kyc_edit"
@@ -1065,7 +1071,7 @@
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/address"
                             android:textColor="@android:color/holo_red_dark"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/btn_kyc_edit"
@@ -1087,6 +1093,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/edit"
                             android:textColor="@color/white"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1106,6 +1113,7 @@
                     android:paddingEnd="@dimen/space_8x"
                     android:text="@string/submit"
                     android:textColor="@color/white"
+                    android:textSize="@dimen/font_14x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -1121,6 +1129,7 @@
                     android:paddingEnd="@dimen/space_16x"
                     android:text="@string/back"
                     android:textColor="@color/white"
+                    android:textSize="@dimen/font_14x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/btn_next" />
             </androidx.constraintlayout.widget.ConstraintLayout>

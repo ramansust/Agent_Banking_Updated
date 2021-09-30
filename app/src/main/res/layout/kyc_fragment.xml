@@ -17,7 +17,7 @@
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/scroll_view"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="@dimen/space_8x"
                 app:layout_constraintBottom_toTopOf="@+id/btn_back"
@@ -25,9 +25,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/txt_view_risk_grading"
@@ -37,21 +38,16 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/risk_grading"
-                        android:textSize="@dimen/font_24x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:textSize="@dimen/font_16x" />
 
                     <LinearLayout
                         android:id="@+id/linearLayout"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/space_16x"
                         android:layout_marginTop="@dimen/space_16x"
-                        android:layout_marginEnd="@dimen/space_8x"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_view_risk_grading">
+                        android:layout_marginEnd="@dimen/space_16x"
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/txt_view_on_boarding"
@@ -59,7 +55,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/type_of_boarding"
-                            android:textSize="@dimen/font_16x" />
+                            android:textSize="@dimen/font_14x" />
 
                         <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/spinner_on_boarding"
@@ -75,7 +71,7 @@
                             android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/black_listed"
-                            android:textSize="@dimen/font_16x" />
+                            android:textSize="@dimen/font_14x" />
 
                         <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/spinner_black_listed"
@@ -91,7 +87,7 @@
                             android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/close_associates_related_pep"
-                            android:textSize="@dimen/font_16x" />
+                            android:textSize="@dimen/font_14x" />
 
                         <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/spinner_close_associates"
@@ -107,7 +103,7 @@
                             android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/type_of_product"
-                            android:textSize="@dimen/font_16x" />
+                            android:textSize="@dimen/font_14x" />
 
                         <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/spinner_type_product"
@@ -123,7 +119,7 @@
                             android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/yearly_transaction_worth"
-                            android:textSize="@dimen/font_16x" />
+                            android:textSize="@dimen/font_14x" />
 
                         <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/spinner_yearly_transaction"
@@ -135,14 +131,12 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/space_8x"
+                        android:layout_marginStart="@dimen/space_16x"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:layout_marginEnd="@dimen/space_16x"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/guideline_middle"
-                        app:layout_constraintTop_toTopOf="@+id/linearLayout">
+                        android:orientation="vertical">
 
 
                         <TextView
@@ -151,7 +145,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/resident_statue"
-                            android:textSize="@dimen/font_16x" />
+                            android:textSize="@dimen/font_14x" />
 
                         <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/spinner_resident_status"
@@ -167,7 +161,7 @@
                             android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/politically_exposed_person"
-                            android:textSize="@dimen/font_16x" />
+                            android:textSize="@dimen/font_14x" />
 
                         <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/spinner_politically_exposed"
@@ -183,7 +177,7 @@
                             android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/interviewed_personally"
-                            android:textSize="@dimen/font_16x" />
+                            android:textSize="@dimen/font_14x" />
 
                         <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/spinner_interviewed_personally"
@@ -199,7 +193,7 @@
                             android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/profession"
-                            android:textSize="@dimen/font_16x" />
+                            android:textSize="@dimen/font_14x" />
 
                         <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/spinner_profession"
@@ -215,7 +209,7 @@
                             android:layout_marginTop="@dimen/space_16x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/transparency_risk"
-                            android:textSize="@dimen/font_16x" />
+                            android:textSize="@dimen/font_14x" />
 
                         <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/spinner_transparency_risk"
@@ -226,13 +220,6 @@
 
                     </LinearLayout>
 
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_middle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.5" />
-
                     <TextView
                         android:id="@+id/txt_view_documents_of_identifications"
                         android:layout_width="match_parent"
@@ -241,7 +228,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/documents_identification"
-                        android:textSize="@dimen/font_24x"
+                        android:textSize="@dimen/font_16x"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/linearLayout" />
 
@@ -249,9 +236,9 @@
                         android:id="@+id/linearLayout_header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/space_8x"
+                        android:layout_marginStart="@dimen/space_16x"
                         android:layout_marginTop="@dimen/space_16x"
-                        android:layout_marginEnd="@dimen/space_8x"
+                        android:layout_marginEnd="@dimen/space_16x"
                         android:background="@color/dashboard_bg"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
@@ -271,7 +258,7 @@
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/document_type"
                             android:textColor="@color/customer_text"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                             app:layout_constraintStart_toStartOf="parent"
@@ -284,7 +271,7 @@
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/photocopy_collected"
                             android:textColor="@color/customer_text"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                             app:layout_constraintStart_toStartOf="parent"
@@ -297,7 +284,7 @@
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/verified"
                             android:textColor="@color/customer_text"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                             app:layout_constraintStart_toStartOf="parent"
@@ -309,14 +296,14 @@
                         android:id="@+id/recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/space_8x"
-                        android:layout_marginEnd="@dimen/space_8x"
+                        android:layout_marginStart="@dimen/space_16x"
+                        android:layout_marginEnd="@dimen/space_16x"
                         android:layout_marginBottom="@dimen/space_8x"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/linearLayout_header" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
             </androidx.core.widget.NestedScrollView>
 
@@ -332,6 +319,7 @@
                 android:paddingEnd="@dimen/space_8x"
                 android:text="@string/next"
                 android:textColor="@color/white"
+                android:textSize="@dimen/font_14x"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -347,6 +335,7 @@
                 android:paddingEnd="@dimen/space_16x"
                 android:text="@string/back"
                 android:textColor="@color/white"
+                android:textSize="@dimen/font_14x"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btn_next" />
 

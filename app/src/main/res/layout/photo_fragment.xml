@@ -11,8 +11,9 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/space_8x"
+            app:layout_constraintBottom_toTopOf="@+id/btn_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -45,12 +46,7 @@
                     android:layout_marginEnd="@dimen/space_16x"
                     android:layout_marginBottom="@dimen/space_8x"
                     android:background="@color/photo_card_bg"
-                    android:elevation="@dimen/space_5x"
-                    app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_middle"
-                    app:layout_constraintEnd_toStartOf="@id/card_view_signature"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_minor_attain"
-                    app:layout_constraintVertical_bias="0.5">
+                    android:elevation="@dimen/space_5x">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -64,7 +60,7 @@
                             android:fontFamily="@font/oxygen_bold"
                             android:maxLines="1"
                             android:text="@string/please_attach_your_photograph"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -77,7 +73,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:gravity="center"
                             android:text="@string/nid_front"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintEnd_toEndOf="@+id/txt_view_photo"
                             app:layout_constraintStart_toStartOf="@+id/txt_view_photo"
@@ -85,8 +81,8 @@
 
                         <ImageView
                             android:id="@+id/img_view_photo"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/image_view_width_150"
+                            android:layout_height="@dimen/image_view_width_150"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
                             app:layout_constraintBottom_toTopOf="@+id/btn_take_photo"
@@ -102,7 +98,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/attach"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_photo"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -117,7 +113,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -136,12 +132,7 @@
                     android:layout_marginEnd="@dimen/space_16x"
                     android:layout_marginBottom="@dimen/space_8x"
                     android:background="@color/photo_card_bg"
-                    android:elevation="@dimen/space_5x"
-                    app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_middle"
-                    app:layout_constraintEnd_toStartOf="@id/guideline_vertical_middle"
-                    app:layout_constraintStart_toEndOf="@id/card_view_photo"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_minor_attain"
-                    app:layout_constraintVertical_bias="0.5">
+                    android:elevation="@dimen/space_5x">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -155,7 +146,7 @@
                             android:fontFamily="@font/oxygen_bold"
                             android:maxLines="1"
                             android:text="@string/please_attach_your_signature"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -168,7 +159,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:gravity="center"
                             android:text="@string/front_image"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintEnd_toEndOf="@+id/txt_view_signature"
                             app:layout_constraintStart_toStartOf="@+id/txt_view_signature"
@@ -176,8 +167,8 @@
 
                         <ImageView
                             android:id="@+id/img_view_signature"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/image_view_width_150"
+                            android:layout_height="@dimen/image_view_width_150"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
                             app:layout_constraintBottom_toTopOf="@+id/btn_browse_signature"
@@ -193,7 +184,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/attach"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_signature"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -208,7 +199,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -224,11 +215,7 @@
                     android:layout_marginTop="@dimen/space_8x"
                     android:layout_marginEnd="@dimen/space_16x"
                     android:layout_marginBottom="@dimen/space_8x"
-                    android:elevation="@dimen/space_5x"
-                    app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_middle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/guideline_vertical_middle"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_minor_attain">
+                    android:elevation="@dimen/space_5x">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -242,7 +229,7 @@
                             android:fontFamily="@font/oxygen_bold"
                             android:maxLines="1"
                             android:text="@string/please_attach_your_nid"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -255,15 +242,15 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:gravity="center"
                             android:text="@string/front_image"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/txt_view_nid" />
 
                         <ImageView
                             android:id="@+id/img_view_nid_front"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/image_view_width_150"
+                            android:layout_height="@dimen/image_view_width_150"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
                             app:layout_constraintBottom_toTopOf="@+id/btn_browse_nid_front"
@@ -279,7 +266,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/attach"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_nid_front"
                             app:layout_constraintHorizontal_chainStyle="packed"
@@ -293,7 +280,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_nid_front" />
@@ -309,11 +296,7 @@
                     android:layout_marginTop="@dimen/space_8x"
                     android:layout_marginEnd="@dimen/space_16x"
                     android:layout_marginBottom="@dimen/space_8x"
-                    android:elevation="@dimen/space_5x"
-                    app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_middle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/guideline_vertical_middle"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_minor_attain">
+                    android:elevation="@dimen/space_5x">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -327,15 +310,15 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:gravity="center"
                             android:text="@string/back_image"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/img_view_nid_back"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/image_view_width_150"
+                            android:layout_height="@dimen/image_view_width_150"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
                             app:layout_constraintBottom_toTopOf="@+id/btn_take_nid_back"
@@ -352,7 +335,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/attach"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_nid_back"
                             app:layout_constraintHorizontal_chainStyle="packed"
@@ -366,7 +349,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_nid_back" />
@@ -384,11 +367,7 @@
                     android:text="@string/guardian_information"
                     android:textColor="@android:color/holo_blue_light"
                     android:textSize="@dimen/font_14x"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/spinner_guardian_document_type"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_middle"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/guideline_horizontal_middle" />
+                    android:visibility="gone" />
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/spinner_guardian_document_type"
@@ -397,10 +376,7 @@
                     android:layout_marginStart="@dimen/space_16x"
                     android:layout_marginEnd="@dimen/space_16x"
                     android:background="@drawable/spinner_background"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline_vertical_middle"
-                    app:layout_constraintTop_toBottomOf="@+id/guideline_horizontal_middle" />
+                    android:visibility="gone" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_view_guardian_photo"
@@ -412,12 +388,7 @@
                     android:layout_marginBottom="@dimen/space_8x"
                     android:background="@color/photo_card_bg"
                     android:elevation="@dimen/space_5x"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toTopOf="@id/btn_next"
-                    app:layout_constraintEnd_toStartOf="@id/card_view_guardian_signature"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info"
-                    app:layout_constraintVertical_bias="0.5">
+                    android:visibility="gone">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -431,7 +402,7 @@
                             android:fontFamily="@font/oxygen_bold"
                             android:maxLines="1"
                             android:text="@string/please_attach_your_photograph"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -444,7 +415,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:gravity="center"
                             android:text="@string/nid_front"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintEnd_toEndOf="@+id/txt_view_guardian_photo"
                             app:layout_constraintStart_toStartOf="@+id/txt_view_guardian_photo"
@@ -470,7 +441,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/attach"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_photo"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -485,7 +456,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -504,12 +475,7 @@
                     android:layout_marginBottom="@dimen/space_8x"
                     android:background="@color/photo_card_bg"
                     android:elevation="@dimen/space_5x"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toTopOf="@id/btn_next"
-                    app:layout_constraintEnd_toStartOf="@id/guideline_vertical_middle"
-                    app:layout_constraintStart_toEndOf="@id/card_view_guardian_photo"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info"
-                    app:layout_constraintVertical_bias="0.5">
+                    android:visibility="gone">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -523,7 +489,7 @@
                             android:fontFamily="@font/oxygen_bold"
                             android:maxLines="1"
                             android:text="@string/please_attach_your_signature"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -536,7 +502,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:gravity="center"
                             android:text="@string/nid_front"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             android:visibility="invisible"
                             app:layout_constraintEnd_toEndOf="@+id/txt_view_guardian_signature"
                             app:layout_constraintStart_toStartOf="@+id/txt_view_guardian_signature"
@@ -561,7 +527,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/attach"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_signature"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -576,7 +542,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -594,11 +560,7 @@
                     android:layout_marginEnd="@dimen/space_16x"
                     android:layout_marginBottom="@dimen/space_8x"
                     android:elevation="@dimen/space_5x"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toTopOf="@id/btn_next"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/guideline_vertical_middle"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_guardian_info">
+                    android:visibility="gone">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -611,7 +573,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/please_attach_your_nid"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -625,7 +587,7 @@
                             android:gravity="center"
                             android:maxLines="1"
                             android:text="@string/front_image"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toStartOf="@+id/guideline_middle_guardian"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
@@ -650,7 +612,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/attach"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_nid_front"
                             app:layout_constraintHorizontal_chainStyle="packed"
@@ -664,7 +626,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/guideline_middle_guardian"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_guardian_nid_front" />
@@ -678,7 +640,7 @@
                             android:gravity="center"
                             android:maxLines="1"
                             android:text="@string/back_image"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/guideline_middle_guardian"
@@ -703,7 +665,7 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/attach"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_nid_back"
                             app:layout_constraintHorizontal_chainStyle="packed"
@@ -717,7 +679,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_12x"
+                            android:textSize="@dimen/font_14x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_guardian_nid_back" />
@@ -734,47 +696,40 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/space_16x"
-                    android:layout_marginTop="@dimen/space_8x"
-                    android:layout_marginEnd="@dimen/space_16x"
-                    android:layout_marginBottom="@dimen/space_16x">
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_back"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/space_16x"
-                        android:layout_marginBottom="@dimen/space_16x"
-                        android:layout_toStartOf="@+id/btn_next"
-                        android:background="@drawable/button_border"
-                        android:drawableStart="@drawable/ic_baseline_arrow_back_ios_24"
-                        android:text="@string/back"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/font_14x" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_next"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/button_border"
-                        android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
-                        android:enabled="false"
-                        android:text="@string/next"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/font_14x" />
-
-                </RelativeLayout>
-
             </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_16x"
+            android:layout_marginBottom="@dimen/space_16x"
+            android:background="@drawable/button_border"
+            android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+            android:paddingStart="@dimen/space_16x"
+            android:paddingEnd="@dimen/space_8x"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_14x"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_16x"
+            android:background="@drawable/button_border"
+            android:drawableStart="@drawable/ic_baseline_arrow_back_ios_24"
+            android:paddingStart="@dimen/space_16x"
+            android:paddingEnd="@dimen/space_16x"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_14x"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_next"
+            app:layout_constraintEnd_toStartOf="@id/btn_next"
+            app:layout_constraintTop_toTopOf="@+id/btn_next" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

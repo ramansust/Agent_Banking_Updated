@@ -14,7 +14,7 @@
         android:fontFamily="@font/oxygen_regular"
         android:text="@string/sl_no"
         android:textColor="@color/customer_text"
-        android:textSize="@dimen/font_20x"
+        android:textSize="@dimen/font_14x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
         app:layout_constraintStart_toStartOf="parent"
