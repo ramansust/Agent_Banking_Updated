@@ -4,11 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64.DEFAULT
-import android.util.Base64.decode
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -59,6 +59,8 @@ class PhotoFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+
+    private var attachNumber = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -348,9 +350,7 @@ class PhotoFragment : Fragment() {
             }
         })
 
-        var attachNumber = 0
-
-        viewModel.getUserPhoto().observe(viewLifecycleOwner, {
+        /*viewModel.getUserPhoto().observe(viewLifecycleOwner, {
             glide.load(decode(it, DEFAULT)).into(binding.imgViewPhoto)
             nextButtonEnable(++attachNumber)
         })
@@ -389,6 +389,39 @@ class PhotoFragment : Fragment() {
             glide.load(decode(it, DEFAULT)).into(binding.imgViewGuardianSignature)
             attachNumber++
             nextButtonEnable(++attachNumber)
+        })*/
+
+        viewModel.getPhoto().observe(viewLifecycleOwner, {
+            if (it.userProfile != null)
+                glide.load(Base64.decode(it.userProfile, Base64.DEFAULT)).into(binding.imgViewPhoto)
+
+            if (it.userSignature != null)
+                glide.load(Base64.decode(it.userSignature, Base64.DEFAULT))
+                    .into(binding.imgViewSignature)
+
+            if (it.userNidFront != null)
+                glide.load(Base64.decode(it.userNidFront, Base64.DEFAULT))
+                    .into(binding.imgViewNidFront)
+
+            if (it.userNidBack != null)
+                glide.load(Base64.decode(it.userNidBack, Base64.DEFAULT))
+                    .into(binding.imgViewNidBack)
+
+            if (it.guardianProfile != null)
+                glide.load(Base64.decode(it.guardianProfile, Base64.DEFAULT))
+                    .into(binding.imgViewGuardianPhoto)
+
+            if (it.guardianSignature != null)
+                glide.load(Base64.decode(it.guardianSignature, Base64.DEFAULT))
+                    .into(binding.imgViewGuardianSignature)
+
+            if (it.guardianNidFront != null)
+                glide.load(Base64.decode(it.guardianNidFront, Base64.DEFAULT))
+                    .into(binding.imgViewGuardianNidFront)
+
+            if (it.guardianNidBack != null)
+                glide.load(Base64.decode(it.guardianNidBack, Base64.DEFAULT))
+                    .into(binding.imgViewGuardianNidBack)
         })
 
         viewModel.getGuardianDocumentType().observe(viewLifecycleOwner, {
@@ -463,6 +496,7 @@ class PhotoFragment : Fragment() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
+                    binding.imgViewPhoto.setImageURI(Uri.parse(fileUri.toString()))
 
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         ImageDecoder.decodeBitmap(
@@ -481,6 +515,7 @@ class PhotoFragment : Fragment() {
                     Base64Image.encode(bitmap) { base64 ->
                         base64?.let {
                             viewModel.setUserPhoto(it)
+                            nextButtonEnable(++attachNumber)
                         }
                     }
                 }
@@ -501,6 +536,7 @@ class PhotoFragment : Fragment() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
+                    binding.imgViewNidFront.setImageURI(Uri.parse(fileUri.toString()))
 
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         ImageDecoder.decodeBitmap(
@@ -519,6 +555,7 @@ class PhotoFragment : Fragment() {
                     Base64Image.encode(bitmap) { base64 ->
                         base64?.let {
                             viewModel.setUserDocumentFront(it)
+                            nextButtonEnable(++attachNumber)
                         }
                     }
                 }
@@ -539,6 +576,7 @@ class PhotoFragment : Fragment() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
+                    binding.imgViewNidBack.setImageURI(Uri.parse(fileUri.toString()))
 
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         ImageDecoder.decodeBitmap(
@@ -557,6 +595,7 @@ class PhotoFragment : Fragment() {
                     Base64Image.encode(bitmap) { base64 ->
                         base64?.let {
                             viewModel.setUserDocumentBack(it)
+                            nextButtonEnable(++attachNumber)
                         }
                     }
                 }
@@ -578,6 +617,7 @@ class PhotoFragment : Fragment() {
                 Activity.RESULT_OK -> {
                     //Image Uri will not be null for RESULT_OK
                     val fileUri = data?.data!!
+                    binding.imgViewGuardianPhoto.setImageURI(Uri.parse(fileUri.toString()))
 
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         ImageDecoder.decodeBitmap(
@@ -596,6 +636,7 @@ class PhotoFragment : Fragment() {
                     Base64Image.encode(bitmap) { base64 ->
                         base64?.let {
                             viewModel.setGuardianPhoto(it)
+                            nextButtonEnable(++attachNumber)
                         }
                     }
                 }
@@ -617,6 +658,7 @@ class PhotoFragment : Fragment() {
                 Activity.RESULT_OK -> {
                     //Image Uri will not be null for RESULT_OK
                     val fileUri = data?.data!!
+                    binding.imgViewGuardianNidFront.setImageURI(Uri.parse(fileUri.toString()))
 
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         ImageDecoder.decodeBitmap(
@@ -635,6 +677,7 @@ class PhotoFragment : Fragment() {
                     Base64Image.encode(bitmap) { base64 ->
                         base64?.let {
                             viewModel.setGuardianDocumentFront(it)
+                            nextButtonEnable(++attachNumber)
                         }
                     }
                 }
@@ -656,6 +699,7 @@ class PhotoFragment : Fragment() {
                 Activity.RESULT_OK -> {
                     //Image Uri will not be null for RESULT_OK
                     val fileUri = data?.data!!
+                    binding.imgViewGuardianNidBack.setImageURI(Uri.parse(fileUri.toString()))
 
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         ImageDecoder.decodeBitmap(
@@ -674,6 +718,7 @@ class PhotoFragment : Fragment() {
                     Base64Image.encode(bitmap) { base64 ->
                         base64?.let {
                             viewModel.setGuardianDocumentBack(it)
+                            nextButtonEnable(++attachNumber)
                         }
                     }
                 }
@@ -694,6 +739,7 @@ class PhotoFragment : Fragment() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
+                    binding.imgViewSignature.setImageURI(Uri.parse(fileUri.toString()))
 
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         ImageDecoder.decodeBitmap(
@@ -712,6 +758,7 @@ class PhotoFragment : Fragment() {
                     Base64Image.encode(bitmap) { base64 ->
                         base64?.let {
                             viewModel.setUserSignature(it)
+                            nextButtonEnable(++attachNumber)
                         }
                     }
                 }
@@ -732,6 +779,7 @@ class PhotoFragment : Fragment() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
+                    binding.imgViewGuardianSignature.setImageURI(Uri.parse(fileUri.toString()))
 
                     val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         ImageDecoder.decodeBitmap(
@@ -750,6 +798,7 @@ class PhotoFragment : Fragment() {
                     Base64Image.encode(bitmap) { base64 ->
                         base64?.let {
                             viewModel.setGuardianSignature(it)
+                            nextButtonEnable(++attachNumber)
                         }
                     }
                 }

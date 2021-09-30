@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.datasoft.abs.data.dto.createCustomer.PhotoInfo
+import com.datasoft.abs.data.dto.createCustomer.toPhoto
 import com.datasoft.abs.data.source.local.db.CustomerInfo
 import com.datasoft.abs.data.source.local.db.entity.customer.Photo
 import com.datasoft.abs.domain.Repository
@@ -25,28 +27,28 @@ class PhotoViewModel @Inject constructor(
     fun getBackImage(): LiveData<Boolean> = backImage
 
     private val userPhoto = MutableLiveData<String>()
-    fun getUserPhoto(): LiveData<String> = userPhoto
+//    fun getUserPhoto(): LiveData<String> = userPhoto
 
     private val documentFront = MutableLiveData<String>()
-    fun getDocumentFront(): LiveData<String> = documentFront
+//    fun getDocumentFront(): LiveData<String> = documentFront
 
     private val documentBack = MutableLiveData<String>()
-    fun getDocumentBack(): LiveData<String> = documentBack
+//    fun getDocumentBack(): LiveData<String> = documentBack
 
     private val signature = MutableLiveData<String>()
-    fun getSignature(): LiveData<String> = signature
+//    fun getSignature(): LiveData<String> = signature
 
     private val guardianPhoto = MutableLiveData<String>()
-    fun getGuardianPhoto(): LiveData<String> = guardianPhoto
+//    fun getGuardianPhoto(): LiveData<String> = guardianPhoto
 
     private val guardianDocumentFront = MutableLiveData<String>()
-    fun getGuardianDocumentFront(): LiveData<String> = guardianDocumentFront
+//    fun getGuardianDocumentFront(): LiveData<String> = guardianDocumentFront
 
     private val guardianDocumentBack = MutableLiveData<String>()
-    fun getGuardianDocumentBack(): LiveData<String> = guardianDocumentBack
+//    fun getGuardianDocumentBack(): LiveData<String> = guardianDocumentBack
 
     private val guardianSignature = MutableLiveData<String>()
-    fun getGuardianSignature(): LiveData<String> = guardianSignature
+//    fun getGuardianSignature(): LiveData<String> = guardianSignature
 
     private val guardianDocumentType = MutableLiveData<Int>()
     fun getGuardianDocumentType(): LiveData<Int> = guardianDocumentType
@@ -108,7 +110,8 @@ class PhotoViewModel @Inject constructor(
 
     fun insertData() {
         viewModelScope.launch(Dispatchers.IO) {
-            val photo = Photo(
+            val photo = PhotoInfo(
+                0,
                 userPhoto.value,
                 signature.value,
                 documentFront.value,
@@ -118,7 +121,7 @@ class PhotoViewModel @Inject constructor(
                 guardianDocumentFront.value,
                 guardianDocumentBack.value,
                 guardianDocumentType.value
-            )
+            ).toPhoto()
             photo.generalId = customerInfo.customerId
             repository.insertPhoto(photo)
         }

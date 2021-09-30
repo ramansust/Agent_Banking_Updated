@@ -220,7 +220,32 @@ class ReviewFragment : Fragment() {
             createCustomerRequest.contacts = it
         })
 
-        photoNIDViewModel.getUserPhoto().observe(viewLifecycleOwner, {
+        photoNIDViewModel.getPhoto().observe(viewLifecycleOwner, {
+            createCustomerRequest.profilePhoto = it.userProfile.toString()
+            createCustomerRequest.signaturePhoto = it.userSignature.toString()
+            createCustomerRequest.nidFrontSide = it.userNidFront.toString()
+            createCustomerRequest.nidBackSide = it.userNidBack.toString()
+
+            guardian.profilePhoto = it.guardianProfile.toString()
+            guardian.signaturePhoto = it.guardianSignature.toString()
+            guardian.docFrontSide = it.guardianNidFront.toString()
+            guardian.docBackSide = it.guardianNidBack.toString()
+
+            glide.load(Base64.decode(it.userProfile, Base64.DEFAULT)).into(binding.imgViewPhoto)
+
+            glide.load(Base64.decode(it.userSignature, Base64.DEFAULT))
+                .into(binding.imgViewSignature)
+
+            if (it.guardianProfile != null)
+                glide.load(Base64.decode(it.guardianProfile, Base64.DEFAULT))
+                    .into(binding.imgViewGuardianPhoto)
+
+            if (it.guardianSignature != null)
+                glide.load(Base64.decode(it.guardianSignature, Base64.DEFAULT))
+                    .into(binding.imgViewGuardianSignature)
+        })
+
+        /*photoNIDViewModel.getUserPhoto().observe(viewLifecycleOwner, {
             createCustomerRequest.profilePhoto = it
 
             glide.load(Base64.decode(it, Base64.DEFAULT)).into(binding.imgViewPhoto)
@@ -262,7 +287,7 @@ class ReviewFragment : Fragment() {
         photoNIDViewModel.getGuardianDocumentBack().observe(viewLifecycleOwner, {
             guardian.docBackSide = it
             createCustomerRequest.guardianInfo = guardian
-        })
+        })*/
 
         photoNIDViewModel.getGuardianDocumentType().observe(viewLifecycleOwner, {
             guardian.documentTypeId = it

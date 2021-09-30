@@ -1,5 +1,7 @@
 package com.datasoft.abs.data.dto.createCustomer
 
+import com.datasoft.abs.data.source.local.db.entity.customer.Photo
+
 data class PhotoInfo(
     val id: Int,
     val userProfile: String?,
@@ -12,3 +14,17 @@ data class PhotoInfo(
     val guardianNidBack: String?,
     val documentType: Int?
 )
+
+fun PhotoInfo.toPhoto(): Photo {
+    return Photo(
+        userProfile,
+        userSignature,
+        userNidFront,
+        userNidBack,
+        guardianProfile,
+        guardianSignature,
+        guardianNidFront,
+        guardianNidBack,
+        documentType
+    )
+}
