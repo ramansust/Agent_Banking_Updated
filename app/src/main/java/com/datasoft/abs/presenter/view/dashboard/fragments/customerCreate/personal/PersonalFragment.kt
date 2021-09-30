@@ -154,6 +154,65 @@ class PersonalFragment : Fragment() {
             }
         })
 
+        viewModel.getPersonalAndNominee().let {
+            if (maritalList.isNotEmpty()) binding.spinnerMaritalStatus.setSelection(
+                maritalList.indexOf(
+                    CommonModel(it.personal.maritalStatus!!)
+                )
+            )
+
+            binding.edTxtSpouseName.setText(it.personal.spouseName)
+            if (religionList.isNotEmpty()) binding.spinnerReligion.setSelection(
+                religionList.indexOf(
+                    CommonModel(it.personal.religion!!)
+                )
+            )
+            binding.edTxtDependent.setText(it.personal.noOfDependencies!!.toString())
+            if (educationList.isNotEmpty()) binding.spinnerEducation.setSelection(
+                educationList.indexOf(
+                    CommonModel(it.personal.education!!)
+                )
+            )
+            if (occupationList.isNotEmpty()) binding.spinnerOccupation.setSelection(
+                occupationList.indexOf(
+                    CommonModel(it.personal.occupation!!)
+                )
+            )
+            if (nationalityList.isNotEmpty()) binding.spinnerNationality.setSelection(
+                nationalityList.indexOf(
+                    CommonModel(it.personal.nationality!!)
+                )
+            )
+            if (relationList.isNotEmpty()) binding.spinnerNomineeRelation.setSelection(
+                relationList.indexOf(
+                    CommonModel(it.nominee.relation!!)
+                )
+            )
+
+            binding.edTxtBirthCertificate.setText(it.personal.birthCertificateNo)
+            binding.edTxtVat.setText(it.personal.vatRegistration)
+            binding.edTxtDrivingLicense.setText(it.personal.drivingLicense)
+            binding.edTxtMonthlyIncome.setText(it.personal.monthIncome)
+            binding.edTxtSourceOfFund.setText(it.personal.sourceFund)
+
+            binding.edTxtName.setText(it.nominee.name)
+            binding.edTxtMobileNumber.setText(it.nominee.mobileNumber)
+            binding.edTxtAddress.setText(it.nominee.address)
+            binding.edTxtEmail.setText(it.nominee.emailAddress)
+        }
+
+        viewModel.getPersonalAndGuardian().let {
+            if (relationList.isNotEmpty()) binding.spinnerGuardianRelation.setSelection(
+                relationList.indexOf(
+                    CommonModel(it.guardian.relation!!)
+                )
+            )
+
+            binding.edTxtGuardianName.setText(it.guardian.name)
+            binding.edTxtGuardianContact.setText(it.guardian.contactNumber)
+            binding.edTxtGuardianAddress.setText(it.guardian.address)
+            binding.edTxtGuardianDob.setText(it.guardian.birthDate)
+        }
 
         viewModel.getPersonalData().observe(viewLifecycleOwner, { response ->
 

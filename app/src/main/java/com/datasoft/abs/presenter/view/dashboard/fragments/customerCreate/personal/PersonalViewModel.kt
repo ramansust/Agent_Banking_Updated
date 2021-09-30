@@ -9,6 +9,9 @@ import com.datasoft.abs.data.dto.createCustomer.toGuardian
 import com.datasoft.abs.data.dto.createCustomer.toNominee
 import com.datasoft.abs.data.dto.createCustomer.toPersonal
 import com.datasoft.abs.data.source.local.db.CustomerInfo
+import com.datasoft.abs.data.source.local.db.entity.customer.Document
+import com.datasoft.abs.data.source.local.db.entity.customer.relation.PersonalAndGuardian
+import com.datasoft.abs.data.source.local.db.entity.customer.relation.PersonalAndNominee
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -29,6 +32,16 @@ class PersonalViewModel @Inject constructor(
     private val customerInfo: CustomerInfo,
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
 ) : ViewModel() {
+
+    private var personalAndNominee: PersonalAndNominee =
+        repository.getPersonalAndNominee(customerInfo.personalId)
+
+    fun getPersonalAndNominee(): PersonalAndNominee = personalAndNominee
+
+    private var personalAndGuardian: PersonalAndGuardian =
+        repository.getPersonalAndGuardian(customerInfo.personalId)
+
+    fun getPersonalAndGuardian(): PersonalAndGuardian = personalAndGuardian
 
     private val customerAge = MutableLiveData<Int>()
     fun getCustomerAgeData(): LiveData<Int> = customerAge

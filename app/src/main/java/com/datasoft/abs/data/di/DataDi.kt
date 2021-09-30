@@ -33,7 +33,7 @@ object DataModule {
     @Singleton
     @Provides
     fun providesAppDatabase(@ApplicationContext context: Context): AppDatabase =
-        Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME).build()
+        Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME).allowMainThreadQueries().build()
 
     @Singleton
     @Provides
@@ -41,7 +41,7 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun providesCustomerDao(appDatabase: AppDatabase): CustomerDao = appDatabase.generalDao()
+    fun providesCustomerDao(appDatabase: AppDatabase): CustomerDao = appDatabase.customerDao()
 
     @Singleton
     @Provides

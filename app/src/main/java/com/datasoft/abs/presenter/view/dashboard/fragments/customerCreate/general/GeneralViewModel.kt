@@ -8,6 +8,7 @@ import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckRequest
 import com.datasoft.abs.data.dto.dedupecheck.DedupeCheckResponse
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningRequest
 import com.datasoft.abs.data.dto.sanctionscreening.SanctionScreeningResponse
+import com.datasoft.abs.data.source.local.db.CustomerInfo
 import com.datasoft.abs.data.source.local.db.entity.customer.General
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
@@ -25,6 +26,7 @@ import javax.inject.Named
 class GeneralViewModel @Inject constructor(
     private val repository: Repository,
     private val network: Network,
+    private val customerInfo: CustomerInfo,
     @Named(Constant.NO_INTERNET) private val noInternet: String,
     @Named(Constant.SOMETHING_WRONG) private val somethingWrong: String,
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String
@@ -33,8 +35,8 @@ class GeneralViewModel @Inject constructor(
     private val dedupeData = MutableLiveData<Event<Resource<DedupeCheckResponse>>>()
     fun getDedupeData(): LiveData<Event<Resource<DedupeCheckResponse>>> = dedupeData
 
-    private val general = MutableLiveData<General>()
-    fun getGeneral(): LiveData<General> = general
+    private val general: General = repository.getGeneral(customerInfo.customerId)
+    fun getGeneral(): General = general
 
     private val sanction = MutableLiveData<SanctionScreeningResponse>()
 

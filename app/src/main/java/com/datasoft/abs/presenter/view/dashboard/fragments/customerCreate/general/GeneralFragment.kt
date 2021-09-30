@@ -117,7 +117,7 @@ class GeneralFragment : Fragment() {
         })
 
 
-        viewModel.getGeneral().observe(viewLifecycleOwner, { response ->
+        viewModel.getGeneral().let { response ->
             if (salutationList.isNotEmpty()) binding.spinnerSalutation.setSelection(
                 salutationList.indexOf(
                     CommonModel(response.salutation!!)
@@ -146,7 +146,7 @@ class GeneralFragment : Fragment() {
             )
             binding.edTxtMotherName.setText(response.motherName)
             binding.edTxtCity.setText(response.city)
-        })
+        }
 
         viewModel.getDedupeData().observe(viewLifecycleOwner, { response ->
 

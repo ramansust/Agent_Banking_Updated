@@ -143,7 +143,7 @@ class ReviewFragment : Fragment() {
             }
         })
 
-        generalViewModel.getGeneral().observe(viewLifecycleOwner, {
+        /*generalViewModel.getGeneral().observe(viewLifecycleOwner, {
             val fullName = it.firstName + " " + it.lastName
             binding.txtViewFullNameValue.text = fullName
             binding.txtViewDobValue.text = it.dateBirth
@@ -166,7 +166,7 @@ class ReviewFragment : Fragment() {
                 customerNo = it.customerNo!!
                 branchId = it.branchId!!
             }
-        })
+        })*/
 
         addressViewModel.getAddresses().observe(viewLifecycleOwner, {
             val list = mutableListOf<Addresses>()
