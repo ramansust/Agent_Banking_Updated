@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.customerList.CustomerRequest
 import com.datasoft.abs.data.dto.customerList.CustomerResponse
 import com.datasoft.abs.data.dto.customerList.Row
+import com.datasoft.abs.data.source.local.db.entity.customer.General
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -37,8 +38,8 @@ class CustomerListMainViewModel @Inject constructor(
     private val awaiting = MutableLiveData<Resource<CustomerResponse>>()
     fun getAwaitingData(): LiveData<Resource<CustomerResponse>> = awaiting
 
-    private val draft = MutableLiveData<Resource<CustomerResponse>>()
-    fun getDraftData(): LiveData<Resource<CustomerResponse>> = draft
+    private val draft: LiveData<List<General>> = repository.getAllCustomer()
+    fun getDraftData(): LiveData<List<General>> = draft
 
     private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
     fun getSearchData(): LiveData<Resource<String>> = searchData
@@ -46,7 +47,7 @@ class CustomerListMainViewModel @Inject constructor(
     init {
         loadMoreActive()
         loadMoreAwaiting()
-        loadMoreDraft()
+//        loadMoreDraft()
     }
 
     fun setSearchData(search: String) {
@@ -120,7 +121,7 @@ class CustomerListMainViewModel @Inject constructor(
         }
     }
 
-    private fun requestDraftData(customerRequest: CustomerRequest) {
+    /*private fun requestDraftData(customerRequest: CustomerRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
                 try {
@@ -151,7 +152,7 @@ class CustomerListMainViewModel @Inject constructor(
                 )
             }
         }
-    }
+    }*/
 
     private fun handleCustomerResponse(response: Response<CustomerResponse>, pageNumber: Int): Resource<CustomerResponse> {
         if (response.isSuccessful) {
@@ -181,13 +182,13 @@ class CustomerListMainViewModel @Inject constructor(
         )
     }
 
-    fun loadMoreDraft() {
+    /*fun loadMoreDraft() {
         requestDraftData(
             CustomerRequest(
                 ++draftPageNumber,
                 status = "${Status.DRAFT.type}"
             )
         )
-    }
+    }*/
 
 }

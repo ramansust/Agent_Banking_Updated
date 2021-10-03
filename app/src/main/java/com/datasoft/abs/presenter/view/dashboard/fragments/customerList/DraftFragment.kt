@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.customerList.Row
+import com.datasoft.abs.data.source.local.db.entity.customer.toRow
 import com.datasoft.abs.databinding.FragmentCustomerBinding
 import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant.PER_PAGE_ITEM
@@ -58,7 +59,15 @@ class DraftFragment : Fragment() {
             }
         }
 
-        viewModel.getDraftData().observe(viewLifecycleOwner, { response ->
+        viewModel.getDraftData().observe(viewLifecycleOwner, {
+            list.addAll(it.map { customer ->
+                customer.toRow()
+            })
+
+            stopShimmer()
+        })
+
+        /*viewModel.getDraftData().observe(viewLifecycleOwner, { response ->
 
             when (response.status) {
                 Status.SUCCESS -> {
@@ -86,7 +95,7 @@ class DraftFragment : Fragment() {
                     startShimmer()
                 }
             }
-        })
+        })*/
 
         viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
 
@@ -125,7 +134,7 @@ class DraftFragment : Fragment() {
                 val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
                 if (!isLoading) {
                     if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == list.size - 1) {
-                        viewModel.loadMoreDraft()
+//                        viewModel.loadMoreDraft()
                         isLoading = true
                     }
                 }

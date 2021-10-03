@@ -38,6 +38,27 @@ interface CustomerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDocumentIdentification(documentIdentification: List<DocumentIdentification>)
 
+    @Update
+    fun updateGeneral(general: General)
+
+    @Update
+    fun updatePersonal(personal: Personal)
+
+    @Update
+    fun updateNominee(nominee: Nominee)
+
+    @Update
+    fun updateGuardian(guardian: Guardian)
+
+    @Update
+    fun updatePhoto(photo: Photo)
+
+    @Update
+    fun updateFingerprint(fingerprint: Fingerprint)
+
+    @Update
+    fun updateRiskGrading(riskGrading: RiskGrading)
+
     @Query("UPDATE customer_document_identification SET is_collected = :isCollected WHERE id = :id")
     fun updateDocumentIsCollected(isCollected: Boolean, id: Int)
 

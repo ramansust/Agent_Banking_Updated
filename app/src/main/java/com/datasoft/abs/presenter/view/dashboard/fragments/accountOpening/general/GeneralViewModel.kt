@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.createAccount.general.*
 import com.datasoft.abs.data.source.local.db.entity.account.Account
 import com.datasoft.abs.data.source.local.db.entity.account.Customer
+import com.datasoft.abs.data.source.local.db.entity.account.relation.AccountWithCustomers
 import com.datasoft.abs.data.source.local.db.entity.account.toAccountInfo
 import com.datasoft.abs.data.source.local.db.entity.account.toCustomerData
 import com.datasoft.abs.domain.Repository
@@ -31,6 +32,9 @@ class GeneralViewModel @Inject constructor(
     @Named(Constant.FIELD_EMPTY) private val fieldEmpty: String,
     @Named(Constant.ID_EMPTY) private val idEmpty: String,
 ) : ViewModel() {
+
+    private val accountWithCustomers: AccountWithCustomers = repository.getAccountWithCustomers(1)
+    fun getAccountWithCustomers(): AccountWithCustomers = accountWithCustomers
 
     private val customerData = MutableLiveData<Resource<CustomerDataResponse>>()
     fun getCustomerData(): LiveData<Resource<CustomerDataResponse>> = customerData

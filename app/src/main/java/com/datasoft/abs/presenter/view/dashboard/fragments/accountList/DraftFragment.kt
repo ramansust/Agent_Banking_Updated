@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.datasoft.abs.data.dto.accountList.Row
+import com.datasoft.abs.data.source.local.db.entity.account.toRow
 import com.datasoft.abs.databinding.FragmentAccountBinding
 import com.datasoft.abs.presenter.states.Status
 import com.datasoft.abs.presenter.utils.Constant
@@ -58,7 +59,14 @@ class DraftFragment : Fragment() {
             }
         }
 
-        viewModel.getDraftData().observe(viewLifecycleOwner, { response ->
+        viewModel.getDraftData().observe(viewLifecycleOwner, {
+            list.addAll(it.map { account ->
+                account.toRow()
+            })
+            stopShimmer()
+        })
+
+        /*viewModel.getDraftData().observe(viewLifecycleOwner, { response ->
 
             when (response.status) {
                 Status.SUCCESS -> {
@@ -88,7 +96,7 @@ class DraftFragment : Fragment() {
                 }
             }
 
-        })
+        })*/
 
         viewModel.getSearchData().observe(viewLifecycleOwner, { response ->
 
@@ -128,7 +136,7 @@ class DraftFragment : Fragment() {
 
                 if (!isLoading) {
                     if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == list.size - 1) {
-                        viewModel.loadMoreDraft()
+//                        viewModel.loadMoreDraft()
                         isLoading = true
                     }
                 }

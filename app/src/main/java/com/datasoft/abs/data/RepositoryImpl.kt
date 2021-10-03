@@ -258,6 +258,34 @@ class RepositoryImpl @Inject constructor(
         customerDao.insertDocumentIdentification(documentIdentification)
     }
 
+    override fun updateGeneral(general: General) {
+        customerDao.updateGeneral(general)
+    }
+
+    override fun updatePersonal(personal: Personal) {
+        customerDao.updatePersonal(personal)
+    }
+
+    override fun updateNominee(nominee: Nominee) {
+        customerDao.updateNominee(nominee)
+    }
+
+    override fun updateGuardian(guardian: Guardian) {
+        customerDao.updateGuardian(guardian)
+    }
+
+    override fun updatePhoto(photo: Photo) {
+        customerDao.updatePhoto(photo)
+    }
+
+    override fun updateFingerprint(fingerprint: Fingerprint) {
+        customerDao.updateFingerprint(fingerprint)
+    }
+
+    override fun updateRiskGrading(riskGrading: RiskGrading) {
+        customerDao.updateRiskGrading(riskGrading)
+    }
+
     override fun updateDocumentIsCollected(isCollected: Boolean, id: Int) {
         customerDao.updateDocumentIsCollected(isCollected, id)
     }
@@ -266,7 +294,7 @@ class RepositoryImpl @Inject constructor(
         customerDao.updateDocumentIsVerified(isVerified, id)
     }
 
-    override fun getAll(): LiveData<List<General>> {
+    override fun getAllCustomer(): LiveData<List<General>> {
         return customerDao.getAll()
     }
 
@@ -342,8 +370,8 @@ class RepositoryImpl @Inject constructor(
         return accountDao.insertAccount(account)
     }
 
-    override fun insertCustomers(customer: List<Customer>) {
-        accountDao.insertCustomers(customer)
+    override fun insertCustomers(customers: List<Customer>) {
+        accountDao.insertCustomers(customers)
     }
 
     override fun insertOthersFacilities(otherFacilities: List<OtherFacilities>) {
@@ -362,8 +390,16 @@ class RepositoryImpl @Inject constructor(
         accountDao.insertTransactionProfiles(transactionProfile)
     }
 
+    override fun updateAccount(account: Account) {
+        accountDao.updateAccount(account)
+    }
+
     override fun updateOtherFacility(value: Boolean, id: Int) {
         accountDao.updateOtherFacility(value, id)
+    }
+
+    override fun updateIntroducer(introducer: Introducer) {
+        accountDao.updateIntroducer(introducer)
     }
 
     override fun updateTransactionProfile(transactionProfile: TransactionProfile) {
@@ -404,6 +440,10 @@ class RepositoryImpl @Inject constructor(
 
     override fun deleteAccount(accountId: Int) {
         accountDao.deleteAccount(accountId)
+    }
+
+    override fun deleteCustomers(customers: List<Customer>) {
+        accountDao.deleteCustomers(customers)
     }
 
     override fun deleteNominee(nomineeId: Int) {

@@ -156,6 +156,53 @@ class GeneralFragment : Fragment() {
                                 sourceOfFundList
                             )
                     }
+
+                    /*viewModel.getAccountWithCustomers().let {
+                        if(!it.customers.isNullOrEmpty()) {
+                            if (productCategoryList.isNotEmpty()) binding.spinnerProductCategory.setSelection(
+                                productCategoryList.indexOf(
+                                    CommonModel(it.account.productCategory!!)
+                                )
+                            )
+
+                            if (accountList.isNotEmpty()) binding.spinnerTypeOfAccount.setSelection(
+                                accountList.indexOf(
+                                    ProductConfig(id = it.account.accountType!!)
+                                )
+                            )
+
+                            if (operatingInstructionList.isNotEmpty()) binding.spinnerOperatingInstruction.setSelection(
+                                operatingInstructionList.indexOf(
+                                    CommonModel(it.account.operatingInstruction!!)
+                                )
+                            )
+
+                            if (sourceOfFundList.isNotEmpty()) binding.spinnerSourceOfFund.setSelection(
+                                sourceOfFundList.indexOf(
+                                    CommonModel(it.account.sourceFund!!)
+                                )
+                            )
+
+                            if (currencyList.isNotEmpty()) binding.spinnerCurrency.setSelection(
+                                currencyList.indexOf(
+                                    CommonModel(it.account.currency!!)
+                                )
+                            )
+
+                            binding.spinnerCustomerName.text = it.account.customerName
+                            binding.edTxtAccountTitle.setText(it.account.accountTitle)
+                            binding.edTxtOpeningDate.setText(it.account.openingDate)
+                            binding.edTxtInitialAmount.setText(it.account.initialAmount.toString())
+
+
+                            customerAdapter.differ.submitList(null)
+                            customerAdapter.differ.submitList(it.customers.map { customer ->
+                                customer.toCustomerData()
+                            })
+
+                            binding.btnNext.isEnabled = it.customers.isNotEmpty()
+                        }
+                    }*/
                 }
                 Status.ERROR -> {
                     response.message?.let { message ->
@@ -176,7 +223,7 @@ class GeneralFragment : Fragment() {
                     Status.SUCCESS -> {
                         result.data?.let {
 //                            viewModel.insertCustomer()
-//                            accountViewModel.requestCurrentStep(1)
+                            accountViewModel.requestCurrentStep(1)
                         }
                     }
 

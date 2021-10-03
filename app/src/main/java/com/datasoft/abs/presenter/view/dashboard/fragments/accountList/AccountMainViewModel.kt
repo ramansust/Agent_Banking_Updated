@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.datasoft.abs.data.dto.accountList.AccountRequest
 import com.datasoft.abs.data.dto.accountList.AccountResponse
 import com.datasoft.abs.data.dto.accountList.Row
+import com.datasoft.abs.data.source.local.db.entity.account.Account
 import com.datasoft.abs.domain.Repository
 import com.datasoft.abs.presenter.states.Resource
 import com.datasoft.abs.presenter.utils.Constant
@@ -37,8 +38,8 @@ class AccountMainViewModel @Inject constructor(
     private val awaiting = MutableLiveData<Resource<AccountResponse>>()
     fun getAwaitingData(): LiveData<Resource<AccountResponse>> = awaiting
 
-    private val draft = MutableLiveData<Resource<AccountResponse>>()
-    fun getDraftData(): LiveData<Resource<AccountResponse>> = draft
+    private val draft: LiveData<List<Account>> = repository.getAllAccount()
+    fun getDraftData(): LiveData<List<Account>> = draft
 
     private val searchData: MutableLiveData<Resource<String>> = MutableLiveData()
     fun getSearchData(): LiveData<Resource<String>> = searchData
@@ -46,7 +47,7 @@ class AccountMainViewModel @Inject constructor(
     init {
         loadMoreActive()
         loadMoreAwaiting()
-        loadMoreDraft()
+//        loadMoreDraft()
     }
 
     fun setSearchData(search: String) {
@@ -125,7 +126,7 @@ class AccountMainViewModel @Inject constructor(
         }
     }
 
-    private fun requestDraftData(accountRequest: AccountRequest) {
+    /*private fun requestDraftData(accountRequest: AccountRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             if (network.isConnected()) {
                 try {
@@ -159,7 +160,7 @@ class AccountMainViewModel @Inject constructor(
                 )
             }
         }
-    }
+    }*/
 
     private fun handleCustomerResponse(
         response: Response<AccountResponse>,
@@ -192,13 +193,13 @@ class AccountMainViewModel @Inject constructor(
         )
     }
 
-    fun loadMoreDraft() {
+    /*fun loadMoreDraft() {
         requestDraftData(
             AccountRequest(
                 ++draftPageNumber,
                 status = "${Status.DRAFT.type}"
             )
         )
-    }
+    }*/
 
 }

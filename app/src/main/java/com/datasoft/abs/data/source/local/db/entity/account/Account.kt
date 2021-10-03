@@ -3,6 +3,7 @@ package com.datasoft.abs.data.source.local.db.entity.account
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.datasoft.abs.data.dto.accountList.Row
 import com.datasoft.abs.data.dto.createAccount.general.AccountInfo
 
 @Entity(
@@ -34,5 +35,22 @@ fun Account.toAccountInfo(): AccountInfo {
         currency!!,
         sourceFund!!,
         initialAmount!!
+    )
+}
+
+fun Account.toRow(): Row {
+    return Row(
+        id,
+        "Account number",
+        1234567,
+        accountTitle!!,
+        "Branch Name",
+        "Entry Name",
+        "",
+        1,
+        1,
+        1,
+        100f,
+        null
     )
 }

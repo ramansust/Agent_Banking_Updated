@@ -10,5 +10,5 @@ data class Row(
     val fullName: String,
     val gender: String,
     val id: Int,
-    val lazyLoader: LazyLoader
+    val lazyLoader: LazyLoader?
 )

@@ -12,7 +12,7 @@ interface AccountDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     @JvmSuppressWildcards
-    fun insertCustomers(customer: List<Customer>)
+    fun insertCustomers(customers: List<Customer>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertOthersFacilities(otherFacilities: List<OtherFacilities>)
@@ -34,6 +34,12 @@ interface AccountDao {
 
     @Update
     fun updateTransactionProfile(transactionProfile: TransactionProfile)
+
+    @Update
+    fun updateAccount(account: Account)
+
+    @Update
+    fun updateIntroducer(introducer: Introducer)
 
     @Query("SELECT * FROM account_account_info")
     fun getAll(): LiveData<List<Account>>
@@ -70,4 +76,7 @@ interface AccountDao {
 
     @Query("DELETE FROM account_nominee_info WHERE id = :nomineeId")
     fun deleteNominee(nomineeId: Int)
+
+    @Delete
+    fun deleteCustomers(customers: List<Customer>)
 }

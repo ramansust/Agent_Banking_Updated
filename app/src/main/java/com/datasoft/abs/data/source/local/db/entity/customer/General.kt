@@ -3,6 +3,7 @@ package com.datasoft.abs.data.source.local.db.entity.customer
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.datasoft.abs.data.dto.customerList.Row
 
 @Entity(tableName = "customer_general_info")
 data class General(
@@ -23,4 +24,19 @@ data class General(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+}
+
+fun General.toRow(): Row {
+    return Row(
+        branchId!!,
+        "Branch Name",
+        customerNo!!,
+        1,
+        "customerType",
+        "",
+        "$firstName $lastName",
+        "gender",
+        id,
+        null
+    )
 }

@@ -91,10 +91,17 @@ interface Repository {
     suspend fun insertRiskGrading(riskGrading: RiskGrading)
     suspend fun insertDocumentIdentification(documentIdentification: List<DocumentIdentification>)
 
+    fun updateGeneral(general: General)
+    fun updatePersonal(personal: Personal)
+    fun updateNominee(nominee: Nominee)
+    fun updateGuardian(guardian: Guardian)
+    fun updatePhoto(photo: Photo)
+    fun updateFingerprint(fingerprint: Fingerprint)
+    fun updateRiskGrading(riskGrading: RiskGrading)
     fun updateDocumentIsCollected(isCollected: Boolean, id: Int)
     fun updateDocumentIsVerified(isVerified: Boolean, id: Int)
 
-    fun getAll(): LiveData<List<General>>
+    fun getAllCustomer(): LiveData<List<General>>
     fun getGeneral(generalId: Int): General
     fun getGeneralAndPersonal(generalId: Int): GeneralAndPersonal
     fun getPersonalAndNominee(personalId: Int): PersonalAndNominee
@@ -116,14 +123,16 @@ interface Repository {
 
     fun setAccountId(id: Int)
     fun insertAccount(account: Account): Long
-    fun insertCustomers(customer: List<Customer>)
+    fun insertCustomers(customers: List<Customer>)
     fun insertOthersFacilities(otherFacilities: List<OtherFacilities>)
     fun insertNominee(accountNominee: AccountNominee): Long
     fun insertNomineeGuardian(nomineeGuardian: NomineeGuardian)
     fun insertIntroducer(introducer: Introducer)
     fun insertTransactionProfiles(transactionProfile: List<TransactionProfile>)
 
+    fun updateAccount(account: Account)
     fun updateOtherFacility(value: Boolean, id: Int)
+    fun updateIntroducer(introducer: Introducer)
     fun updateTransactionProfile(transactionProfile: TransactionProfile)
 
     fun getAllAccount(): LiveData<List<Account>>
@@ -136,5 +145,6 @@ interface Repository {
     fun getAccountWithTransactionProfiles(accountId: Int): AccountWithTransactionProfiles
 
     fun deleteAccount(accountId: Int)
+    fun deleteCustomers(customers: List<Customer>)
     fun deleteNominee(nomineeId: Int)
 }
