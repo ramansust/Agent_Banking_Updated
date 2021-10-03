@@ -38,7 +38,7 @@
         android:fontFamily="@font/oxygen_regular"
         android:imeOptions="actionDone"
         android:inputType="textPersonName"
-        android:textSize="@dimen/font_16x"
+        android:textSize="@dimen/font_12x"
         app:layout_constraintEnd_toStartOf="@id/btn_add"
         app:layout_constraintTop_toTopOf="parent" />
 
