@@ -39,23 +39,19 @@
         android:imeOptions="actionDone"
         android:inputType="textPersonName"
         android:textSize="@dimen/font_12x"
-        app:layout_constraintEnd_toStartOf="@id/btn_add"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_add"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/space_16x"
-        android:layout_marginEnd="@dimen/space_16x"
-        android:background="@drawable/add_customer_button"
-        android:paddingStart="@dimen/space_16x"
-        android:paddingEnd="@dimen/space_16x"
-        android:text="@string/add_new"
-        android:textSize="@dimen/font_12x"
-        app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/ed_txt_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_16x"
+        app:srcCompat="@drawable/ic_plus"
+        android:backgroundTint="@color/add_customer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/todo"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

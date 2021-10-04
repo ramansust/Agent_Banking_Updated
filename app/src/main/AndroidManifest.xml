@@ -20,7 +20,7 @@
             android:name=".presenter.view.splash.SplashActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AgentBanking.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,34 +30,34 @@
         <activity
             android:name=".presenter.view.login.LoginActivity"
             android:label="@string/activity_login"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AgentBanking.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".presenter.view.dashboard.MainActivity"
             android:label="@string/activity_main"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AgentBanking.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name=".presenter.view.dashboard.fragments.customerCreate.CustomerActivity"
             android:label="@string/activity_customer"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AgentBanking.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name=".presenter.view.dashboard.fragments.customerCreate.address.AddressActivity"
             android:label="@string/address"
-            android:screenOrientation="sensorLandscape"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AgentBanking.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name=".presenter.view.dashboard.fragments.customerCreate.documents.DocumentActivity"
             android:label="@string/documents"
-            android:screenOrientation="sensorLandscape"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AgentBanking.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
 
@@ -84,7 +84,7 @@
 
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="sensorLandscape"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:replace="android:screenOrientation" />
     </application>
