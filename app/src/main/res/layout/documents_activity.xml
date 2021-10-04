@@ -27,8 +27,8 @@
 
                 <ImageButton
                     android:id="@+id/btn_cross"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/space_24x"
+                    android:layout_height="@dimen/space_24x"
                     android:background="@drawable/ic_cross"
                     android:contentDescription="@string/todo"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +41,7 @@
                     android:fontFamily="@font/oxygen_bold"
                     android:text="@string/add_document"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_24x"
+                    android:textSize="@dimen/space_16x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -75,8 +75,7 @@
         <ScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="@dimen/space_16x">
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -84,13 +83,12 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginStart="@dimen/space_8x"
                     android:layout_marginTop="@dimen/space_16x"
                     android:layout_marginEnd="@dimen/space_8x"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -100,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/document_type_"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/spinner_documents_type"
@@ -116,7 +114,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/document_id"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_document_id"
@@ -129,7 +127,7 @@
                         android:inputType="number"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <TextView
                         android:id="@+id/txt_view_description"
@@ -138,7 +136,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/description"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_description"
@@ -151,21 +149,7 @@
                         android:inputType="textPersonName|textCapSentences"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_8x"
-                    android:layout_marginEnd="@dimen/space_16x"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/guideline_middle"
-                    app:layout_constraintTop_toTopOf="@+id/linearLayout">
-
+                        android:textSize="@dimen/font_14x" />
 
                     <TextView
                         android:id="@+id/txt_view_issue_date"
@@ -173,7 +157,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/issue_date"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_issue_date"
@@ -189,7 +173,7 @@
                         android:hint="@string/type_here"
                         android:inputType="date"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
+                        android:textSize="@dimen/font_14x"
                         app:drawableEndCompat="@drawable/ic_dob" />
 
                     <TextView
@@ -199,7 +183,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/expiry_date"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                     <EditText
                         android:id="@+id/ed_txt_expiry_date"
@@ -215,129 +199,113 @@
                         android:hint="@string/type_here"
                         android:inputType="date"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
+                        android:textSize="@dimen/font_14x"
                         app:drawableEndCompat="@drawable/ic_dob" />
 
+                    <TextView
+                        android:id="@+id/txt_view_front"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:gravity="center"
+                        android:text="@string/front_image"
+                        android:textSize="@dimen/font_14x"
+                        app:layout_constraintEnd_toStartOf="@+id/txt_view_back"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/linearLayout" />
+
+                    <ImageView
+                        android:id="@+id/img_view_front"
+                        android:layout_width="@dimen/space_150x"
+                        android:layout_height="@dimen/space_150x"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_photo_preview" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_take_front"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/space_5x"
+                            android:background="@drawable/button_border"
+                            android:text="@string/attach"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_14x" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_browse_front"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_5x"
+                            android:background="@drawable/button_border"
+                            android:text="@string/browse"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_14x" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txt_view_back"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:gravity="center"
+                        android:text="@string/back_image"
+                        android:textSize="@dimen/font_14x"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/txt_view_front"
+                        app:layout_constraintTop_toBottomOf="@id/linearLayout" />
+
+                    <ImageView
+                        android:id="@+id/img_view_back"
+                        android:layout_width="@dimen/space_150x"
+                        android:layout_height="@dimen/space_150x"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_photo_preview" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/space_16x"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_take_back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/space_5x"
+                            android:background="@drawable/button_border"
+                            android:text="@string/attach"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_14x" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_browse_back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_5x"
+                            android:background="@drawable/button_border"
+                            android:text="@string/browse"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_14x" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline_middle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toTopOf="@+id/txt_view_front"
-                    app:layout_constraintGuide_percent="0.5"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/txt_view_front"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_16x"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:gravity="center"
-                    android:text="@string/front_image"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_view_back"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout" />
-
-                <TextView
-                    android:id="@+id/txt_view_back"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:layout_marginEnd="@dimen/space_16x"
-                    android:fontFamily="@font/oxygen_bold"
-                    android:gravity="center"
-                    android:text="@string/back_image"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/txt_view_front"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout" />
-
-                <ImageView
-                    android:id="@+id/img_view_front"
-                    android:layout_width="@dimen/space_150x"
-                    android:layout_height="@dimen/space_150x"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_photo_preview"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_front"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_front"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_front" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_take_front"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:layout_marginEnd="@dimen/space_5x"
-                    android:background="@drawable/button_border"
-                    android:text="@string/attach"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_browse_front"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/img_view_front" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_browse_front"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_5x"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:background="@drawable/button_border"
-                    android:text="@string/browse"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
-                    app:layout_constraintStart_toEndOf="@+id/btn_take_front"
-                    app:layout_constraintTop_toBottomOf="@+id/img_view_front" />
-
-                <ImageView
-                    android:id="@+id/img_view_back"
-                    android:layout_width="@dimen/space_150x"
-                    android:layout_height="@dimen/space_150x"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_photo_preview"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_view_back"
-                    app:layout_constraintStart_toStartOf="@+id/txt_view_back"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_view_back" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_take_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:layout_marginEnd="@dimen/space_5x"
-                    android:background="@drawable/button_border"
-                    android:text="@string/attach"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_browse_back"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toEndOf="@+id/guideline_middle"
-                    app:layout_constraintTop_toBottomOf="@+id/img_view_back" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_browse_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_5x"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:background="@drawable/button_border"
-                    android:text="@string/browse"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_16x"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/btn_take_back"
-                    app:layout_constraintTop_toBottomOf="@+id/img_view_back" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
