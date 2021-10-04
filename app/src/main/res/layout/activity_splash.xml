@@ -10,6 +10,8 @@
         android:layout_width="@dimen/space_320x"
         android:layout_height="@dimen/space_200x"
         android:contentDescription="@string/todo"
+        android:scaleX=".7"
+        android:scaleY=".7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,6 +25,7 @@
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_bg" />
 

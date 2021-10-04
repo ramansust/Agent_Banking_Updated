@@ -247,7 +247,7 @@ class CustomerActivity : BaseActivity() {
         if (isActive == null) {
             val img: ImageView = cardView.findViewById(R.id.img_view_completed)
             img.visibility = View.INVISIBLE
-            cardView.setBackgroundColor(getColor(R.color.purple_500))
+            cardView.setBackgroundColor(getColor(R.color.white))
         } else if (isActive) {
             val img: ImageView = cardView.findViewById(R.id.img_view_completed)
             img.visibility = View.VISIBLE

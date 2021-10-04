@@ -1,17 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_constraintBottom_toTopOf="@+id/card_view_personal_info"
     app:layout_constraintEnd_toStartOf="@id/guideline4"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toTopOf="parent"
+    card_view:cardElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_2x">
+
+        <Button
+            android:id="@+id/btn_info"
+            android:layout_width="@dimen/space_24x"
+            android:layout_height="@dimen/space_24x"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_5x"
+            android:background="@drawable/button_border"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_5x"
+            android:fontFamily="@font/oxygen_bold"
+            android:gravity="center"
+            android:text="@string/ten"
+            android:textColor="@color/dashboard_text"
+            android:textSize="@dimen/font_8x"
+            app:layout_constraintEnd_toEndOf="@+id/btn_info"
+            app:layout_constraintStart_toStartOf="@+id/btn_info"
+            app:layout_constraintTop_toBottomOf="@+id/btn_info" />
 
         <ImageView
             android:id="@+id/img_view_completed"
@@ -20,9 +49,9 @@
             android:layout_marginTop="@dimen/space_8x"
             android:layout_marginEnd="@dimen/space_8x"
             android:contentDescription="@string/todo"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_completed" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txt_view_sl"
@@ -33,24 +62,9 @@
             android:text="@string/one"
             android:textColor="@color/white"
             android:textSize="@dimen/font_20x"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_view_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_8x"
-            android:layout_marginEnd="@dimen/space_8x"
-            android:fontFamily="@font/oxygen_regular"
-            android:gravity="center"
-            android:text="@string/general_information"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_20x"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/img_view_completed"
-            app:layout_constraintStart_toEndOf="@id/txt_view_sl"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
