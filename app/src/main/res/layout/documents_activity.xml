@@ -65,7 +65,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/space_16x"
+        android:layout_margin="@dimen/space_8x"
         android:elevation="@dimen/space_5x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_8x"
-                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_8x"
                     android:layout_marginEnd="@dimen/space_8x"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
@@ -280,7 +280,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/space_16x"
+                        android:layout_marginBottom="@dimen/space_8x"
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatButton
