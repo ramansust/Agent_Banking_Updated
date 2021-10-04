@@ -33,7 +33,6 @@
         android:id="@+id/imageView7"
         android:layout_width="@dimen/space_170x"
         android:layout_height="@dimen/space_48x"
-        android:layout_marginEnd="@dimen/space_16x"
         android:layout_marginBottom="@dimen/space_16x"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
