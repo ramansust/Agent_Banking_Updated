@@ -23,7 +23,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/space_16x">
 
                 <ImageButton
                     android:id="@+id/btn_cross"
@@ -65,7 +66,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/space_16x"
+        android:layout_margin="@dimen/space_8x"
         android:elevation="@dimen/space_5x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -437,7 +438,7 @@
                         android:inputType="textPersonName"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
+                        android:textSize="@dimen/font_14x"
                         android:visibility="gone" />
 
                     <TextView
@@ -446,7 +447,7 @@
                         android:layout_marginTop="@dimen/space_16x"
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/contact"
-                        android:textSize="@dimen/font_20x"
+                        android:textSize="@dimen/font_16x"
                         android:visibility="gone" />
 
                     <TextView
@@ -463,14 +464,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="@dimen/space_8x"
-                        android:layout_marginBottom="@dimen/space_16x"
+                        android:layout_marginBottom="@dimen/space_8x"
                         android:background="@drawable/input_border"
                         android:fontFamily="@font/oxygen_regular"
                         android:hint="@string/type_here"
                         android:inputType="text"
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_14x" />
 
                 </LinearLayout>
 
