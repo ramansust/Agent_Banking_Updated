@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/space_16x"
+    android:layout_margin="@dimen/space_8x"
     tools:context=".presenter.view.dashboard.fragments.customerCreate.general.GeneralFragment">
 
 
@@ -14,12 +14,11 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_search"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/tab_layout"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_left"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tab_layout">
 
@@ -35,7 +34,7 @@
                 android:maxLength="@integer/edit_text_input_length"
                 android:padding="@dimen/space_8x"
                 android:text="1001120013386"
-                android:textSize="@dimen/font_16x"
+                android:textSize="@dimen/font_12x"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/img_view_search"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,13 +55,11 @@
 
         <ImageView
             android:id="@+id/img_view_photo"
-            android:layout_width="@dimen/space_110x"
-            android:layout_height="@dimen/space_110x"
-            android:layout_marginTop="@dimen/space_16x"
-            android:layout_marginEnd="@dimen/space_16x"
+            android:layout_width="@dimen/space_70x"
+            android:layout_height="@dimen/space_70x"
+            android:layout_marginTop="@dimen/space_8x"
             android:contentDescription="@string/todo"
             android:src="@drawable/ic_photo_preview"
-            app:layout_constraintEnd_toStartOf="@id/guideline_left"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraint_search" />
 
@@ -70,81 +67,78 @@
             android:id="@+id/txt_view_account_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_16x"
-            android:layout_marginEnd="@dimen/space_16x"
+            android:layout_marginStart="@dimen/space_8x"
+            android:layout_marginTop="@dimen/space_8x"
             android:fontFamily="@font/oxygen_bold"
-            android:gravity="center"
-            android:textSize="@dimen/font_24x"
-            app:layout_constraintEnd_toStartOf="@id/guideline_left"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_view_photo" />
+            android:gravity="start"
+            android:textSize="@dimen/font_16x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_view_photo"
+            app:layout_constraintTop_toBottomOf="@+id/constraint_search" />
 
         <TextView
             android:id="@+id/txt_view_account_type"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_8x"
             android:layout_marginTop="@dimen/space_8x"
-            android:layout_marginEnd="@dimen/space_16x"
             android:fontFamily="@font/oxygen_bold"
-            android:gravity="center"
-            android:textSize="@dimen/font_16x"
-            app:layout_constraintEnd_toStartOf="@id/guideline_left"
-            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="start"
+            android:textSize="@dimen/font_12x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_view_photo"
             app:layout_constraintTop_toBottomOf="@+id/txt_view_account_name" />
 
         <TextView
             android:id="@+id/txt_view_account_number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_8x"
             android:layout_marginTop="@dimen/space_8x"
-            android:layout_marginEnd="@dimen/space_16x"
             android:fontFamily="@font/oxygen_bold"
-            android:gravity="center"
+            android:gravity="start"
             android:textSize="@dimen/font_16x"
-            app:layout_constraintEnd_toStartOf="@id/guideline_left"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_view_photo"
             app:layout_constraintTop_toBottomOf="@+id/txt_view_account_type" />
 
         <TextView
             android:id="@+id/txt_view_balance_title"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_16x"
-            android:layout_marginEnd="@dimen/space_16x"
+            android:layout_height="0dp"
             android:background="@color/purple_500"
             android:fontFamily="@font/oxygen_regular"
             android:gravity="center"
-            android:paddingTop="@dimen/space_16x"
             android:text="@string/balance"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_16x"
-            app:layout_constraintEnd_toStartOf="@id/guideline_left"
-            app:layout_constraintStart_toStartOf="@+id/txt_view_balance"
-            app:layout_constraintTop_toBottomOf="@+id/txt_view_account_number" />
+            android:textSize="@dimen/font_12x"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_view_balance"
+            app:layout_constraintEnd_toStartOf="@+id/txt_view_balance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txt_view_balance" />
 
         <TextView
             android:id="@+id/txt_view_balance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/space_16x"
+            android:layout_marginTop="@dimen/space_8x"
             android:background="@color/purple_500"
             android:fontFamily="@font/oxygen_bold"
             android:gravity="center"
-            android:paddingBottom="@dimen/space_16x"
+            android:padding="@dimen/space_8x"
             android:text="@string/zero"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_32x"
-            app:layout_constraintEnd_toStartOf="@id/guideline_left"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_view_balance_title" />
+            android:textSize="@dimen/font_24x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txt_view_balance_title"
+            app:layout_constraintTop_toBottomOf="@+id/img_view_photo" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/guideline_left"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_view_balance"
             app:tabBackground="@color/dashboard_bg"
             app:tabGravity="fill"
             app:tabMaxWidth="0dp"
@@ -153,21 +147,13 @@
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/pager"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/space_8x"
             android:saveEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.25" />
 
         <LinearLayout
             android:id="@+id/loader_view"
