@@ -25,281 +25,262 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/space_8x"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_16x"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/linearLayout"
+                    <TextView
+                        android:id="@+id/txt_view_salutation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/space_8x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/salutation"
+                        android:textSize="@dimen/font_14x" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_salutation"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="@dimen/space_8x"
-                        android:layout_marginEnd="@dimen/space_8x"
-                        android:orientation="vertical">
+                        android:background="@drawable/spinner_background" />
 
-                        <TextView
-                            android:id="@+id/txt_view_salutation"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:text="@string/salutation"
-                            android:textSize="@dimen/font_14x" />
-
-                        <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/spinner_salutation"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:background="@drawable/spinner_background" />
-
-                        <TextView
-                            android:id="@+id/txt_view_last_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_16x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:text="@string/last_name"
-                            android:textSize="@dimen/font_14x" />
-
-                        <EditText
-                            android:id="@+id/ed_txt_last_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:autofillHints="yes"
-                            android:background="@drawable/input_border"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:hint="@string/type_here"
-                            android:inputType="textPersonName|textCapSentences"
-                            android:maxLength="@integer/edit_text_input_length"
-                            android:padding="@dimen/space_8x"
-                            android:textSize="@dimen/font_14x" />
-
-                        <TextView
-                            android:id="@+id/txt_view_nid"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_16x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:text="@string/nid"
-                            android:textSize="@dimen/font_14x" />
-
-                        <EditText
-                            android:id="@+id/ed_txt_nid"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:autofillHints="yes"
-                            android:background="@drawable/input_border"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:hint="@string/type_here"
-                            android:inputType="number"
-                            android:maxLength="@integer/edit_text_input_length"
-                            android:padding="@dimen/space_8x"
-                            android:textSize="@dimen/font_14x" />
-
-                        <TextView
-                            android:id="@+id/txt_view_customer_type"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_16x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:text="@string/customer_type"
-                            android:textSize="@dimen/font_14x" />
-
-                        <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/spinner_customer_type"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:background="@drawable/spinner_background" />
-
-                        <TextView
-                            android:id="@+id/txt_view_mother_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_16x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:text="@string/mother_name"
-                            android:textSize="@dimen/font_14x" />
-
-                        <EditText
-                            android:id="@+id/ed_txt_mother_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:autofillHints="yes"
-                            android:background="@drawable/input_border"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:hint="@string/type_here"
-                            android:inputType="textPersonName|textCapSentences"
-                            android:maxLength="@integer/edit_text_input_length"
-                            android:padding="@dimen/space_8x"
-                            android:textSize="@dimen/font_14x" />
-
-                        <TextView
-                            android:id="@+id/txt_view_city"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_16x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:text="@string/city"
-                            android:textSize="@dimen/font_14x" />
-
-                        <EditText
-                            android:id="@+id/ed_txt_city"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:autofillHints="yes"
-                            android:background="@drawable/input_border"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:hint="@string/type_here"
-                            android:inputType="textPersonName|textCapSentences"
-                            android:maxLength="@integer/edit_text_input_length"
-                            android:padding="@dimen/space_8x"
-                            android:textSize="@dimen/font_14x" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/txt_view_first_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/space_8x"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/first_name"
+                        android:textSize="@dimen/font_14x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_first_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="@dimen/space_8x"
-                        android:layout_marginEnd="@dimen/space_8x"
+                        android:autofillHints="yes"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_14x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_last_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/last_name"
+                        android:textSize="@dimen/font_14x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_last_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:autofillHints="yes"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_14x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_nid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/nid"
+                        android:textSize="@dimen/font_14x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_nid"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:autofillHints="yes"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="number"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_14x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_customer_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/customer_type"
+                        android:textSize="@dimen/font_14x" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_customer_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/spinner_background" />
+
+                    <TextView
+                        android:id="@+id/txt_view_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/city"
+                        android:textSize="@dimen/font_14x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:autofillHints="yes"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_14x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/date_of_birth"
+                        android:textSize="@dimen/font_14x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:autofillHints="yes"
+                        android:background="@drawable/input_border"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:inputType="date"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_14x"
+                        app:drawableEndCompat="@drawable/ic_dob" />
+
+                    <TextView
+                        android:id="@+id/txt_view_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/gender"
+                        android:textSize="@dimen/font_14x" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/spinner_background" />
+
+                    <TextView
+                        android:id="@+id/txt_view_mobile_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/mobile_number"
+                        android:textSize="@dimen/font_14x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_mobile_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:autofillHints="yes"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="phone"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_14x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_father_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/father_name"
+                        android:textSize="@dimen/font_14x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_father_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:autofillHints="yes"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_14x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_mother_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/mother_name"
+                        android:textSize="@dimen/font_14x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_mother_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:autofillHints="yes"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_14x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/country"
+                        android:textSize="@dimen/font_14x" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
                         android:layout_marginBottom="@dimen/space_8x"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txt_view_first_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:text="@string/first_name"
-                            android:textSize="@dimen/font_14x" />
-
-                        <EditText
-                            android:id="@+id/ed_txt_first_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:autofillHints="yes"
-                            android:background="@drawable/input_border"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:hint="@string/type_here"
-                            android:inputType="textPersonName|textCapSentences"
-                            android:maxLength="@integer/edit_text_input_length"
-                            android:padding="@dimen/space_8x"
-                            android:textSize="@dimen/font_14x" />
-
-                        <TextView
-                            android:id="@+id/txt_view_dob"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_16x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:text="@string/date_of_birth"
-                            android:textSize="@dimen/font_14x" />
-
-                        <EditText
-                            android:id="@+id/ed_txt_dob"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:autofillHints="yes"
-                            android:background="@drawable/input_border"
-                            android:clickable="false"
-                            android:cursorVisible="false"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:inputType="date"
-                            android:padding="@dimen/space_8x"
-                            android:textSize="@dimen/font_14x"
-                            app:drawableEndCompat="@drawable/ic_dob" />
-
-                        <TextView
-                            android:id="@+id/txt_view_gender"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_16x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:text="@string/gender"
-                            android:textSize="@dimen/font_14x" />
-
-                        <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/spinner_gender"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:background="@drawable/spinner_background" />
-
-                        <TextView
-                            android:id="@+id/txt_view_mobile_no"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_16x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:text="@string/mobile_number"
-                            android:textSize="@dimen/font_14x" />
-
-                        <EditText
-                            android:id="@+id/ed_txt_mobile_number"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:autofillHints="yes"
-                            android:background="@drawable/input_border"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:hint="@string/type_here"
-                            android:inputType="phone"
-                            android:maxLength="@integer/edit_text_input_length"
-                            android:padding="@dimen/space_8x"
-                            android:textSize="@dimen/font_14x" />
-
-                        <TextView
-                            android:id="@+id/txt_view_father_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_16x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:text="@string/father_name"
-                            android:textSize="@dimen/font_14x" />
-
-                        <EditText
-                            android:id="@+id/ed_txt_father_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:autofillHints="yes"
-                            android:background="@drawable/input_border"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:hint="@string/type_here"
-                            android:inputType="textPersonName|textCapSentences"
-                            android:maxLength="@integer/edit_text_input_length"
-                            android:padding="@dimen/space_8x"
-                            android:textSize="@dimen/font_14x" />
-
-                        <TextView
-                            android:id="@+id/txt_view_country"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_16x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:text="@string/country"
-                            android:textSize="@dimen/font_14x" />
-
-                        <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/spinner_country"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/space_48x"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:background="@drawable/spinner_background" />
-
-                    </LinearLayout>
+                        android:background="@drawable/spinner_background" />
 
                 </LinearLayout>
 

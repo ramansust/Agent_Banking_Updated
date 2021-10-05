@@ -369,15 +369,6 @@
                     android:textSize="@dimen/font_14x"
                     android:visibility="gone" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_guardian_document_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/space_48x"
-                    android:layout_marginStart="@dimen/space_16x"
-                    android:layout_marginEnd="@dimen/space_16x"
-                    android:background="@drawable/spinner_background"
-                    android:visibility="gone" />
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_view_guardian_photo"
                     android:layout_width="match_parent"
@@ -423,8 +414,8 @@
 
                         <ImageView
                             android:id="@+id/img_view_guardian_photo"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/space_150x"
+                            android:layout_height="@dimen/space_150x"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
                             app:layout_constraintBottom_toTopOf="@+id/btn_take_guardian_photo"
@@ -510,8 +501,8 @@
 
                         <ImageView
                             android:id="@+id/img_view_guardian_signature"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/space_150x"
+                            android:layout_height="@dimen/space_150x"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
                             app:layout_constraintBottom_toTopOf="@+id/btn_take_guardian_signature"
@@ -550,6 +541,16 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_guardian_document_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_48x"
+                    android:layout_marginStart="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:layout_marginEnd="@dimen/space_16x"
+                    android:background="@drawable/spinner_background"
+                    android:visibility="gone" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_view_guardian_documents"
@@ -595,8 +596,8 @@
 
                         <ImageView
                             android:id="@+id/img_view_guardian_nid_front"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/space_96x"
+                            android:layout_height="@dimen/space_96x"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
                             app:layout_constraintBottom_toTopOf="@+id/btn_take_guardian_nid_front"
@@ -608,11 +609,10 @@
                             android:id="@+id/btn_take_guardian_nid_front"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/space_5x"
                             android:background="@drawable/button_border"
                             android:text="@string/attach"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_14x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_nid_front"
                             app:layout_constraintHorizontal_chainStyle="packed"
@@ -626,7 +626,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_14x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/guideline_middle_guardian"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_guardian_nid_front" />
@@ -648,8 +648,8 @@
 
                         <ImageView
                             android:id="@+id/img_view_guardian_nid_back"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/space_96x"
+                            android:layout_height="@dimen/space_96x"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
                             app:layout_constraintBottom_toTopOf="@+id/btn_take_guardian_nid_back"
@@ -661,11 +661,12 @@
                             android:id="@+id/btn_take_guardian_nid_back"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_5x"
                             android:background="@drawable/button_border"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/attach"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_14x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_guardian_nid_back"
                             app:layout_constraintHorizontal_chainStyle="packed"
@@ -679,7 +680,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/font_14x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_guardian_nid_back" />
