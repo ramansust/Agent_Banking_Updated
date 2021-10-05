@@ -35,6 +35,8 @@
         android:layout_height="@dimen/space_48x"
         android:layout_marginBottom="@dimen/space_16x"
         android:contentDescription="@string/todo"
+        android:scaleX=".7"
+        android:scaleY=".7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

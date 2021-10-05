@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/space_16x"
+    android:layout_margin="@dimen/space_8x"
     tools:context=".presenter.view.dashboard.fragments.customerCreate.general.GeneralFragment">
 
 
@@ -32,25 +32,23 @@
         android:id="@+id/ed_txt_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/space_16x"
         android:background="@drawable/input_border"
         android:fontFamily="@font/oxygen_regular"
         android:imeOptions="actionDone"
         android:inputType="textPersonName"
-        android:textSize="@dimen/font_16x"
-        app:layout_constraintEnd_toStartOf="@id/btn_add"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_add"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:background="@drawable/add_customer_button"
-        android:text="@string/add_new"
         android:textSize="@dimen/font_12x"
-        app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/ed_txt_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_8x"
+        android:backgroundTint="@color/add_customer"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_plus" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

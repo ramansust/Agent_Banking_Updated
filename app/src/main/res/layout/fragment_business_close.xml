@@ -18,11 +18,9 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/space_8x"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -71,20 +69,10 @@
                     android:textColor="@color/customer_text"
                     android:textSize="@dimen/font_16x" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_8x"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guideline_middle"
-                app:layout_constraintTop_toTopOf="parent">
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16x"
                     android:fontFamily="@font/oxygen_bold"
                     android:text="@string/name"
                     android:textSize="@dimen/font_16x" />
@@ -105,13 +93,6 @@
                     android:textSize="@dimen/font_16x" />
 
             </LinearLayout>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_middle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_sign_off"
