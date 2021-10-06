@@ -20,7 +20,7 @@
             android:gravity="center"
             android:text="@string/no_content_available"
             android:textColor="@color/customer_text"
-            android:textSize="@dimen/font_24x"
+            android:textSize="@dimen/font_16x"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/btn_next"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
             android:id="@+id/scroll_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/space_16x"
+            android:layout_marginBottom="@dimen/space_8x"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/btn_next"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +66,7 @@
                         android:paddingEnd="@dimen/space_5x"
                         android:text="@string/transaction_type"
                         android:textColor="@color/customer_text"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_12x" />
 
 
                     <TextView
@@ -82,7 +82,7 @@
                         android:paddingEnd="@dimen/space_5x"
                         android:text="@string/daily_transaction"
                         android:textColor="@color/customer_text"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_12x" />
 
                     <TextView
                         android:id="@+id/ed_txt_daily_amount"
@@ -97,7 +97,7 @@
                         android:paddingEnd="@dimen/space_5x"
                         android:text="@string/daily_amount"
                         android:textColor="@color/customer_text"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_12x" />
 
                     <TextView
                         android:id="@+id/ed_txt_monthly_transaction"
@@ -112,7 +112,7 @@
                         android:paddingEnd="@dimen/space_5x"
                         android:text="@string/monthly_transaction"
                         android:textColor="@color/customer_text"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_12x" />
 
                     <TextView
                         android:id="@+id/ed_txt_monthly_amount"
@@ -127,7 +127,7 @@
                         android:paddingEnd="@dimen/space_5x"
                         android:text="@string/monthly_amount"
                         android:textColor="@color/customer_text"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_12x" />
 
                     <TextView
                         android:id="@+id/ed_txt_transaction_amount"
@@ -142,7 +142,7 @@
                         android:paddingEnd="@dimen/space_5x"
                         android:text="@string/transaction_amount"
                         android:textColor="@color/customer_text"
-                        android:textSize="@dimen/font_16x" />
+                        android:textSize="@dimen/font_12x" />
 
                 </LinearLayout>
 

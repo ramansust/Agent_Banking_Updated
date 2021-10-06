@@ -27,8 +27,8 @@
 
                 <ImageButton
                     android:id="@+id/btn_cross"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/space_24x"
+                    android:layout_height="@dimen/font_24x"
                     android:background="@drawable/ic_cross"
                     android:contentDescription="@string/todo"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +41,7 @@
                     android:fontFamily="@font/oxygen_bold"
                     android:text="@string/add_nominee"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_24x"
+                    android:textSize="@dimen/font_16x"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/space_16x"
+        android:layout_margin="@dimen/space_8x"
         android:elevation="@dimen/space_5x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,15 +80,14 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/space_16x">
+                android:padding="@dimen/space_8x">
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/space_8x"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -102,6 +101,28 @@
 
                     <EditText
                         android:id="@+id/ed_txt_full_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_father_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/father_name"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_father_name"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="@dimen/space_8x"
@@ -134,6 +155,31 @@
                         android:maxLength="@integer/edit_text_input_length"
                         android:padding="@dimen/space_8x"
                         android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/date_of_birth"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:inputType="date"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x"
+                        app:drawableEndCompat="@drawable/ic_dob" />
 
                     <TextView
                         android:id="@+id/txt_view_spouse_name"
@@ -190,6 +236,28 @@
                         android:background="@drawable/spinner_background" />
 
                     <TextView
+                        android:id="@+id/txt_view_percent_share"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/percent_share_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_percent_share"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
                         android:id="@+id/txt_view_expiry_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -213,108 +281,6 @@
                         android:padding="@dimen/space_8x"
                         android:textSize="@dimen/font_16x"
                         app:drawableEndCompat="@drawable/ic_dob" />
-
-                    <TextView
-                        android:id="@+id/txt_view_present_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_16x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/present_address_"
-                        android:textSize="@dimen/font_16x" />
-
-                    <EditText
-                        android:id="@+id/ed_txt_present_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:background="@drawable/input_border"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:hint="@string/type_here"
-                        android:inputType="textPersonName|textCapSentences"
-                        android:maxLength="@integer/edit_text_input_length"
-                        android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_8x"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/guideline_middle"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <TextView
-                        android:id="@+id/txt_view_father_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/father_name"
-                        android:textSize="@dimen/font_16x" />
-
-                    <EditText
-                        android:id="@+id/ed_txt_father_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:background="@drawable/input_border"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:hint="@string/type_here"
-                        android:inputType="textPersonName|textCapSentences"
-                        android:maxLength="@integer/edit_text_input_length"
-                        android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
-
-                    <TextView
-                        android:id="@+id/txt_view_dob"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_16x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/date_of_birth"
-                        android:textSize="@dimen/font_16x" />
-
-                    <EditText
-                        android:id="@+id/ed_txt_dob"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:background="@drawable/input_border"
-                        android:clickable="false"
-                        android:cursorVisible="false"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:inputType="date"
-                        android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x"
-                        app:drawableEndCompat="@drawable/ic_dob" />
-
-                    <TextView
-                        android:id="@+id/txt_view_percent_share"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_16x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/percent_share_"
-                        android:textSize="@dimen/font_16x" />
-
-                    <EditText
-                        android:id="@+id/ed_txt_percent_share"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:background="@drawable/input_border"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:hint="@string/type_here"
-                        android:inputType="number"
-                        android:maxLength="3"
-                        android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
 
                     <TextView
                         android:id="@+id/txt_view_occupation"
@@ -392,13 +358,35 @@
                         android:layout_marginTop="@dimen/space_8x"
                         android:background="@drawable/spinner_background" />
 
+                    <TextView
+                        android:id="@+id/txt_view_present_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/present_address_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_present_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linear_layout_photo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_16x"
+                    android:layout_marginTop="@dimen/space_8x"
                     android:background="@drawable/input_border"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -408,7 +396,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/space_16x">
+                        android:layout_margin="@dimen/space_8x">
 
                         <TextView
                             android:id="@+id/txt_view_nominee_photo"
@@ -416,7 +404,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/nominee_photo_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toStartOf="@+id/txt_view_nominee_signature"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintHorizontal_chainStyle="spread"
@@ -429,40 +417,16 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/nominee_signature_"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_view_front_doc"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/txt_view_nominee_photo"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/txt_view_front_doc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:text="@string/front_image"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_view_back_doc"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/txt_view_nominee_signature"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/txt_view_back_doc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:text="@string/back_image"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/txt_view_front_doc"
-                            app:layout_constraintTop_toTopOf="parent" />
-
                         <ImageView
                             android:id="@+id/img_view_nominee_photo"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/space_70x"
+                            android:layout_height="@dimen/space_70x"
                             android:layout_marginTop="@dimen/space_8x"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
@@ -472,8 +436,8 @@
 
                         <ImageView
                             android:id="@+id/img_view_nominee_signature"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/space_70x"
+                            android:layout_height="@dimen/space_70x"
                             android:layout_marginTop="@dimen/space_8x"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
@@ -483,8 +447,8 @@
 
                         <ImageView
                             android:id="@+id/img_view_front_doc"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/space_70x"
+                            android:layout_height="@dimen/space_70x"
                             android:layout_marginTop="@dimen/space_8x"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
@@ -494,8 +458,8 @@
 
                         <ImageView
                             android:id="@+id/img_view_back_doc"
-                            android:layout_width="@dimen/space_110x"
-                            android:layout_height="@dimen/space_110x"
+                            android:layout_width="@dimen/space_70x"
+                            android:layout_height="@dimen/space_70x"
                             android:layout_marginTop="@dimen/space_8x"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_photo_preview"
@@ -505,7 +469,7 @@
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_take_nominee_photo"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:layout_marginEnd="@dimen/space_5x"
@@ -514,27 +478,28 @@
                             android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_nominee_photo"
-                            app:layout_constraintStart_toStartOf="@id/txt_view_nominee_photo"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_nominee_photo" />
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_browse_nominee_photo"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/space_5x"
                             android:layout_marginTop="@dimen/space_8x"
+                            android:layout_marginEnd="@dimen/space_5x"
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
-                            app:layout_constraintEnd_toEndOf="@id/txt_view_nominee_photo"
+                            app:layout_constraintEnd_toStartOf="@id/guideline_middle"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_nominee_photo"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_nominee_photo" />
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_take_nominee_signature"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_5x"
                             android:layout_marginTop="@dimen/space_8x"
                             android:layout_marginEnd="@dimen/space_5x"
                             android:background="@drawable/button_border"
@@ -542,26 +507,51 @@
                             android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_nominee_signature"
-                            app:layout_constraintStart_toStartOf="@id/txt_view_nominee_signature"
+                            app:layout_constraintStart_toEndOf="@id/guideline_middle"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_nominee_signature" />
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_browse_nominee_signature"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/space_5x"
                             android:layout_marginTop="@dimen/space_8x"
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
-                            app:layout_constraintEnd_toEndOf="@id/txt_view_nominee_signature"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_nominee_signature"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_nominee_signature" />
 
+                        <TextView
+                            android:id="@+id/txt_view_front_doc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/front_image"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintEnd_toStartOf="@+id/txt_view_back_doc"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/btn_take_nominee_photo" />
+
+                        <TextView
+                            android:id="@+id/txt_view_back_doc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:fontFamily="@font/oxygen_regular"
+                            android:text="@string/back_image"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/txt_view_front_doc"
+                            app:layout_constraintTop_toBottomOf="@id/btn_take_nominee_photo" />
+
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_take_front_doc"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:layout_marginEnd="@dimen/space_5x"
@@ -570,27 +560,28 @@
                             android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_front_doc"
-                            app:layout_constraintStart_toStartOf="@id/txt_view_front_doc"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_front_doc" />
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_browse_front_doc"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/space_5x"
                             android:layout_marginTop="@dimen/space_8x"
+                            android:layout_marginEnd="@dimen/space_5x"
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
-                            app:layout_constraintEnd_toEndOf="@id/txt_view_front_doc"
+                            app:layout_constraintEnd_toStartOf="@id/guideline_middle"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_front_doc"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_front_doc" />
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_take_back_doc"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_5x"
                             android:layout_marginTop="@dimen/space_8x"
                             android:layout_marginEnd="@dimen/space_5x"
                             android:background="@drawable/button_border"
@@ -598,22 +589,28 @@
                             android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toStartOf="@+id/btn_browse_back_doc"
-                            app:layout_constraintStart_toStartOf="@id/txt_view_back_doc"
+                            app:layout_constraintStart_toEndOf="@id/guideline_middle"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_back_doc" />
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_browse_back_doc"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/space_5x"
                             android:layout_marginTop="@dimen/space_8x"
                             android:background="@drawable/button_border"
                             android:text="@string/browse"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font_12x"
-                            app:layout_constraintEnd_toEndOf="@id/txt_view_back_doc"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/btn_take_back_doc"
                             app:layout_constraintTop_toBottomOf="@+id/img_view_back_doc" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_middle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".5" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -623,11 +620,10 @@
                     android:id="@+id/linearLayout_nominee_1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:layout_marginEnd="@dimen/space_8x"
+                    android:layout_marginTop="@dimen/space_8x"
                     android:orientation="vertical"
                     android:visibility="gone"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linear_layout_photo">
 
@@ -637,7 +633,7 @@
                         android:fontFamily="@font/oxygen_bold"
                         android:text="@string/nominee_remain_minor"
                         android:textColor="@android:color/holo_blue_light"
-                        android:textSize="@dimen/font_20x" />
+                        android:textSize="@dimen/font_16x" />
 
                     <TextView
                         android:id="@+id/txt_view_nominee_name"
@@ -650,6 +646,28 @@
 
                     <EditText
                         android:id="@+id/ed_txt_nominee_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_nominee_father_spouse_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/father_spouse_name"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_nominee_father_spouse_name"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="@dimen/space_8x"
@@ -685,28 +703,6 @@
                         android:padding="@dimen/space_8x"
                         android:textSize="@dimen/font_16x"
                         app:drawableEndCompat="@drawable/ic_dob" />
-
-                    <TextView
-                        android:id="@+id/txt_view_nominee_permanent_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_16x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/permanent_address_"
-                        android:textSize="@dimen/font_16x" />
-
-                    <EditText
-                        android:id="@+id/ed_txt_nominee_permanent_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/input_border"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:hint="@string/type_here"
-                        android:inputType="textPersonName|textCapSentences"
-                        android:maxLength="@integer/edit_text_input_length"
-                        android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
 
                     <TextView
                         android:id="@+id/txt_view_nominee_doc_type"
@@ -749,51 +745,6 @@
                         android:textSize="@dimen/font_16x"
                         app:drawableEndCompat="@drawable/ic_dob" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout_nominee_2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_8x"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/guideline_middle"
-                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_photo">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/nominee_remain_minor"
-                        android:textColor="@android:color/holo_blue_light"
-                        android:textSize="@dimen/font_20x"
-                        android:visibility="invisible" />
-
-                    <TextView
-                        android:id="@+id/txt_view_nominee_father_spouse_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_16x"
-                        android:fontFamily="@font/oxygen_bold"
-                        android:text="@string/father_spouse_name"
-                        android:textSize="@dimen/font_16x" />
-
-                    <EditText
-                        android:id="@+id/ed_txt_nominee_father_spouse_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/space_48x"
-                        android:layout_marginTop="@dimen/space_8x"
-                        android:background="@drawable/input_border"
-                        android:fontFamily="@font/oxygen_regular"
-                        android:hint="@string/type_here"
-                        android:inputType="textPersonName|textCapSentences"
-                        android:maxLength="@integer/edit_text_input_length"
-                        android:padding="@dimen/space_8x"
-                        android:textSize="@dimen/font_16x" />
-
                     <TextView
                         android:id="@+id/txt_view_nominee_present_address"
                         android:layout_width="match_parent"
@@ -808,6 +759,28 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_48x"
                         android:layout_marginTop="@dimen/space_8x"
+                        android:background="@drawable/input_border"
+                        android:fontFamily="@font/oxygen_regular"
+                        android:hint="@string/type_here"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:maxLength="@integer/edit_text_input_length"
+                        android:padding="@dimen/space_8x"
+                        android:textSize="@dimen/font_16x" />
+
+                    <TextView
+                        android:id="@+id/txt_view_nominee_permanent_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_16x"
+                        android:fontFamily="@font/oxygen_bold"
+                        android:text="@string/permanent_address_"
+                        android:textSize="@dimen/font_16x" />
+
+                    <EditText
+                        android:id="@+id/ed_txt_nominee_permanent_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/space_48x"
+                        android:layout_marginTop="8dp"
                         android:background="@drawable/input_border"
                         android:fontFamily="@font/oxygen_regular"
                         android:hint="@string/type_here"
@@ -854,16 +827,15 @@
                         android:padding="@dimen/space_8x"
                         android:textSize="@dimen/font_16x" />
 
-                </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearLayout_nominee_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline_middle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintGuide_percent="0.5"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
