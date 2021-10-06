@@ -405,10 +405,10 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/nominee_photo_"
                             android:textSize="@dimen/font_12x"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_view_nominee_signature"
+                            app:layout_constraintEnd_toEndOf="@+id/btn_browse_nominee_photo"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintHorizontal_chainStyle="spread"
-                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/btn_take_nominee_photo"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
@@ -418,9 +418,9 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/nominee_signature_"
                             android:textSize="@dimen/font_12x"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/btn_browse_nominee_signature"
                             app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/txt_view_nominee_photo"
+                            app:layout_constraintStart_toStartOf="@+id/btn_take_nominee_signature"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
@@ -531,9 +531,9 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/front_image"
                             android:textSize="@dimen/font_12x"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_view_back_doc"
+                            app:layout_constraintEnd_toEndOf="@+id/btn_browse_front_doc"
                             app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/btn_take_front_doc"
                             app:layout_constraintTop_toBottomOf="@id/btn_take_nominee_photo" />
 
                         <TextView
@@ -544,9 +544,9 @@
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/back_image"
                             android:textSize="@dimen/font_12x"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/btn_browse_back_doc"
                             app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/txt_view_front_doc"
+                            app:layout_constraintStart_toStartOf="@+id/btn_take_back_doc"
                             app:layout_constraintTop_toBottomOf="@id/btn_take_nominee_photo" />
 
                         <androidx.appcompat.widget.AppCompatButton

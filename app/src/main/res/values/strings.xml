@@ -104,9 +104,9 @@
     <string name="gender">Gender*</string>
     <string name="country">Country*</string>
     <string name="city">City*</string>
-    <string name="attach">ATTACH</string>
+    <string name="attach">Camera</string>
     <string name="clear">CLEAR</string>
-    <string name="browse">BROWSE</string>
+    <string name="browse">Gallery</string>
     <string name="first_name">First Name*</string>
     <string name="last_name">Last Name*</string>
     <string name="type_here">Type here</string>

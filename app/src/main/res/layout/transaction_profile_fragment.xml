@@ -59,14 +59,13 @@
                         android:layout_marginStart="@dimen/space_8x"
                         android:layout_marginEnd="@dimen/space_5x"
                         android:layout_weight="1"
-                        android:background="@color/shimmer_background_color"
                         android:fontFamily="@font/oxygen_bold"
-                        android:gravity="center_vertical"
+                        android:gravity="center"
                         android:paddingStart="@dimen/space_5x"
                         android:paddingEnd="@dimen/space_5x"
                         android:text="@string/transaction_type"
                         android:textColor="@color/customer_text"
-                        android:textSize="@dimen/font_12x" />
+                        android:textSize="@dimen/font_10x" />
 
 
                     <TextView
@@ -75,14 +74,13 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/space_5x"
                         android:layout_weight="1"
-                        android:background="@color/shimmer_background_color"
                         android:fontFamily="@font/oxygen_bold"
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/space_5x"
                         android:paddingEnd="@dimen/space_5x"
                         android:text="@string/daily_transaction"
                         android:textColor="@color/customer_text"
-                        android:textSize="@dimen/font_12x" />
+                        android:textSize="@dimen/font_10x" />
 
                     <TextView
                         android:id="@+id/ed_txt_daily_amount"
@@ -90,14 +88,13 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/space_5x"
                         android:layout_weight="1"
-                        android:background="@color/shimmer_background_color"
                         android:fontFamily="@font/oxygen_bold"
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/space_5x"
                         android:paddingEnd="@dimen/space_5x"
                         android:text="@string/daily_amount"
                         android:textColor="@color/customer_text"
-                        android:textSize="@dimen/font_12x" />
+                        android:textSize="@dimen/font_10x" />
 
                     <TextView
                         android:id="@+id/ed_txt_monthly_transaction"
@@ -105,14 +102,13 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/space_5x"
                         android:layout_weight="1"
-                        android:background="@color/shimmer_background_color"
                         android:fontFamily="@font/oxygen_bold"
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/space_5x"
                         android:paddingEnd="@dimen/space_5x"
                         android:text="@string/monthly_transaction"
                         android:textColor="@color/customer_text"
-                        android:textSize="@dimen/font_12x" />
+                        android:textSize="@dimen/font_10x" />
 
                     <TextView
                         android:id="@+id/ed_txt_monthly_amount"
@@ -120,14 +116,13 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/space_5x"
                         android:layout_weight="1"
-                        android:background="@color/shimmer_background_color"
                         android:fontFamily="@font/oxygen_bold"
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/space_5x"
                         android:paddingEnd="@dimen/space_5x"
                         android:text="@string/monthly_amount"
                         android:textColor="@color/customer_text"
-                        android:textSize="@dimen/font_12x" />
+                        android:textSize="@dimen/font_10x" />
 
                     <TextView
                         android:id="@+id/ed_txt_transaction_amount"
@@ -135,14 +130,13 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/space_8x"
                         android:layout_weight="1"
-                        android:background="@color/shimmer_background_color"
                         android:fontFamily="@font/oxygen_bold"
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/space_5x"
                         android:paddingEnd="@dimen/space_5x"
                         android:text="@string/transaction_amount"
                         android:textColor="@color/customer_text"
-                        android:textSize="@dimen/font_12x" />
+                        android:textSize="@dimen/font_10x" />
 
                 </LinearLayout>
 
@@ -164,12 +158,12 @@
             android:id="@+id/btn_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/space_16x"
-            android:layout_marginBottom="@dimen/space_16x"
+            android:layout_marginEnd="@dimen/space_8x"
+            android:layout_marginBottom="@dimen/space_8x"
             android:background="@drawable/button_border"
             android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
             android:enabled="false"
-            android:paddingStart="@dimen/space_16x"
+            android:paddingStart="@dimen/space_8x"
             android:paddingEnd="@dimen/space_8x"
             android:text="@string/next"
             android:textColor="@color/white"
@@ -180,11 +174,11 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/space_16x"
+            android:layout_marginEnd="@dimen/space_8x"
             android:background="@drawable/button_border"
             android:drawableStart="@drawable/ic_baseline_arrow_back_ios_24"
-            android:paddingStart="@dimen/space_16x"
-            android:paddingEnd="@dimen/space_16x"
+            android:paddingStart="@dimen/space_8x"
+            android:paddingEnd="@dimen/space_8x"
             android:text="@string/back"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/btn_next"
