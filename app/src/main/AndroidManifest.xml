@@ -71,14 +71,14 @@
         <activity
             android:name=".presenter.view.dashboard.fragments.accountOpening.AccountActivity"
             android:label="@string/activity_account"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AgentBanking.NoActionBar"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
             android:name=".presenter.view.dashboard.fragments.accountOpening.nominee.NomineeActivity"
             android:label="@string/nominee"
-            android:screenOrientation="sensorLandscape"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AgentBanking.NoActionBar"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 

@@ -39,7 +39,7 @@
             android:gravity="center"
             android:maxLines="2"
             android:minLines="2"
-            android:text="@string/ten"
+            android:text="@string/account_information"
             android:textColor="@color/dashboard_text"
             android:textSize="@dimen/font_8x"
             app:layout_constraintEnd_toEndOf="@+id/btn_info"
