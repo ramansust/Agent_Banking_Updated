@@ -26,8 +26,8 @@
                 <LinearLayout
                     android:id="@+id/linear_layout_1"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/space_200x"
-                    android:layout_margin="@dimen/space_16x"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_8x"
                     android:background="@drawable/input_border"
                     app:layout_constraintBottom_toTopOf="@+id/linear_layout_2"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/space_16x">
+                        android:layout_margin="@dimen/space_8x">
 
                         <TextView
                             android:id="@+id/txt_view_account_info"
@@ -47,7 +47,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/account_information"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_16x"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,174 +58,157 @@
                             android:background="@drawable/button_border"
                             android:text="@string/edit"
                             android:textColor="@color/white"
+                            android:textSize="@dimen/font_16x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/txt_view_account"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:text="@string/account_title"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintBottom_toTopOf="@+id/txt_view_product"
-                            app:layout_constraintStart_toStartOf="@+id/txt_view_account_info"
-                            app:layout_constraintTop_toBottomOf="@+id/btn_account_edit" />
 
-                        <TextView
-                            android:id="@+id/txt_view_product"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:text="@string/product_category"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintBottom_toTopOf="@+id/txt_view_account_type"
-                            app:layout_constraintStart_toStartOf="@+id/txt_view_account_info"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_view_account" />
-
-                        <TextView
-                            android:id="@+id/txt_view_account_type"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:text="@string/type_of_account"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="@+id/txt_view_account_info"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_view_product" />
-
-                        <TextView
-                            android:id="@+id/txt_view_account_value"
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:layout_marginEnd="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintBottom_toTopOf="@+id/txt_view_product_value"
-                            app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
-                            app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                            app:layout_constraintTop_toBottomOf="@+id/btn_account_edit" />
-
-                        <TextView
-                            android:id="@+id/txt_view_product_value"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:layout_marginEnd="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintBottom_toTopOf="@+id/txt_view_account_type_value"
-                            app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
-                            app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_view_account_value" />
-
-                        <TextView
-                            android:id="@+id/txt_view_account_type_value"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:layout_marginEnd="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
-                            app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_view_product_value" />
-
-                        <TextView
-                            android:id="@+id/txt_view_operating"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:text="@string/operating_instruction"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintBottom_toTopOf="@+id/txt_view_opening"
-                            app:layout_constraintStart_toStartOf="@+id/guideline_middle"
-                            app:layout_constraintTop_toBottomOf="@+id/btn_account_edit" />
-
-                        <TextView
-                            android:id="@+id/txt_view_opening"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:text="@string/opening_date"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintBottom_toTopOf="@+id/txt_view_currency"
-                            app:layout_constraintStart_toStartOf="@+id/guideline_middle"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_view_operating" />
-
-                        <TextView
-                            android:id="@+id/txt_view_currency"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_regular"
-                            android:text="@string/currency"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="@+id/guideline_middle"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_view_opening" />
-
-                        <TextView
-                            android:id="@+id/txt_view_operating_value"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintBottom_toTopOf="@+id/txt_view_opening_value"
-                            app:layout_constraintStart_toStartOf="@+id/guideline_right"
-                            app:layout_constraintTop_toBottomOf="@+id/btn_account_edit" />
-
-                        <TextView
-                            android:id="@+id/txt_view_opening_value"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintBottom_toTopOf="@+id/txt_view_currency_value"
-                            app:layout_constraintStart_toStartOf="@+id/guideline_right"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_view_operating_value" />
-
-                        <TextView
-                            android:id="@+id/txt_view_currency_value"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_8x"
-                            android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="@+id/guideline_right"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_view_opening_value" />
-
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guideline_left"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            app:layout_constraintGuide_percent="0.25" />
+                            app:layout_constraintEnd_toStartOf="@id/guideline_middle"
+                            app:layout_constraintStart_toStartOf="@+id/txt_view_account_info"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_account_edit">
+
+                            <TextView
+                                android:id="@+id/txt_view_account"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/oxygen_regular"
+                                android:text="@string/account_title"
+                                android:textSize="@dimen/font_12x" />
+
+                            <TextView
+                                android:id="@+id/txt_view_product"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_8x"
+                                android:fontFamily="@font/oxygen_regular"
+                                android:text="@string/product_category"
+                                android:textSize="@dimen/font_12x" />
+
+                            <TextView
+                                android:id="@+id/txt_view_account_type"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_8x"
+                                android:fontFamily="@font/oxygen_regular"
+                                android:text="@string/type_of_account"
+                                android:textSize="@dimen/font_12x" />
+
+                            <TextView
+                                android:id="@+id/txt_view_operating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_8x"
+                                android:fontFamily="@font/oxygen_regular"
+                                android:text="@string/operating_instruction"
+                                android:textSize="@dimen/font_12x" />
+
+                            <TextView
+                                android:id="@+id/txt_view_opening"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_8x"
+                                android:fontFamily="@font/oxygen_regular"
+                                android:text="@string/opening_date"
+                                android:textSize="@dimen/font_12x" />
+
+                            <TextView
+                                android:id="@+id/txt_view_currency"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_8x"
+                                android:layout_marginBottom="@dimen/space_8x"
+                                android:fontFamily="@font/oxygen_regular"
+                                android:text="@string/currency"
+                                android:textSize="@dimen/font_12x"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/guideline_middle"
+                                app:layout_constraintTop_toBottomOf="@+id/txt_view_opening" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_8x"
+                            android:layout_marginTop="@dimen/space_8x"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="@id/btn_account_edit"
+                            app:layout_constraintStart_toEndOf="@+id/guideline_middle"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_account_edit">
+
+                            <TextView
+                                android:id="@+id/txt_view_account_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/space_8x"
+                                android:fontFamily="@font/oxygen_bold"
+                                android:maxLines="1"
+                                android:textSize="@dimen/font_12x" />
+
+                            <TextView
+                                android:id="@+id/txt_view_product_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_8x"
+                                android:layout_marginEnd="@dimen/space_8x"
+                                android:fontFamily="@font/oxygen_bold"
+                                android:maxLines="1"
+                                android:textSize="@dimen/font_12x" />
+
+                            <TextView
+                                android:id="@+id/txt_view_account_type_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_8x"
+                                android:layout_marginEnd="@dimen/space_8x"
+                                android:fontFamily="@font/oxygen_bold"
+                                android:maxLines="1"
+                                android:textSize="@dimen/font_12x" />
+
+                            <TextView
+                                android:id="@+id/txt_view_operating_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_8x"
+                                android:fontFamily="@font/oxygen_bold"
+                                android:maxLines="1"
+                                android:textSize="@dimen/font_12x" />
+
+                            <TextView
+                                android:id="@+id/txt_view_opening_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_8x"
+                                android:fontFamily="@font/oxygen_bold"
+                                android:maxLines="1"
+                                android:textSize="@dimen/font_12x" />
+
+                            <TextView
+                                android:id="@+id/txt_view_currency_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_8x"
+                                android:layout_marginBottom="@dimen/space_8x"
+                                android:fontFamily="@font/oxygen_bold"
+                                android:maxLines="1"
+                                android:textSize="@dimen/font_12x" />
+
+                        </LinearLayout>
+
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guideline_middle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            app:layout_constraintGuide_percent="0.5" />
+                            app:layout_constraintGuide_percent="0.35" />
 
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guideline_right"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent="0.75" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -235,8 +218,8 @@
                     android:id="@+id/linear_layout_2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space_200x"
-                    android:layout_marginStart="@dimen/space_16x"
-                    android:layout_marginEnd="@dimen/space_16x"
+                    android:layout_marginStart="@dimen/space_8x"
+                    android:layout_marginEnd="@dimen/space_8x"
                     android:background="@drawable/input_border"
                     app:layout_constraintBottom_toTopOf="@+id/linear_layout_3"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -248,7 +231,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/space_16x">
+                        android:layout_margin="@dimen/space_8x">
 
                         <TextView
                             android:id="@+id/txt_view_others"
@@ -256,7 +239,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/others_customer"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_16x"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -266,7 +249,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/interested_service"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintBottom_toBottomOf="@+id/txt_view_interested_service_value"
                             app:layout_constraintEnd_toStartOf="@+id/guideline_left_1"
                             app:layout_constraintStart_toStartOf="@id/txt_view_others"
@@ -278,7 +261,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/not_interested"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintBottom_toBottomOf="@+id/txt_view_not_interested_value"
                             app:layout_constraintEnd_toStartOf="@+id/guideline_left_1"
                             app:layout_constraintStart_toStartOf="@id/txt_view_others"
@@ -288,9 +271,10 @@
                             android:id="@+id/txt_view_interested_service_value"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:textColor="@color/add_customer"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintBottom_toTopOf="@+id/view"
                             app:layout_constraintEnd_toEndOf="@id/btn_others_edit"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -317,7 +301,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:textColor="@android:color/holo_red_dark"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toEndOf="@id/btn_others_edit"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/guideline_left_1"
@@ -331,6 +315,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/edit"
                             android:textColor="@color/white"
+                            android:textSize="@dimen/font_16x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -365,9 +350,9 @@
                     android:id="@+id/linear_layout_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_16x"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:layout_marginEnd="@dimen/space_16x"
+                    android:layout_marginStart="@dimen/space_8x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:layout_marginEnd="@dimen/space_8x"
                     android:background="@drawable/input_border"
                     app:layout_constraintBottom_toTopOf="@+id/linear_layout_4"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -379,7 +364,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/space_16x">
+                        android:layout_margin="@dimen/space_8x">
 
                         <TextView
                             android:id="@+id/txt_view_nominee"
@@ -387,7 +372,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/nominee"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_16x"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -398,6 +383,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/edit"
                             android:textColor="@color/white"
+                            android:textSize="@dimen/font_16x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -408,7 +394,8 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/name"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintBottom_toBottomOf="@+id/txt_view_nominee_share"
                             app:layout_constraintEnd_toStartOf="@+id/txt_view_nominee_relation"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
@@ -423,7 +410,8 @@
                             android:layout_marginEnd="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/relation_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintBottom_toBottomOf="@+id/txt_view_nominee_share"
                             app:layout_constraintEnd_toStartOf="@+id/txt_view_nominee_share"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/txt_view_nominee_name"
@@ -437,7 +425,7 @@
                             android:layout_marginEnd="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/percent_share"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toStartOf="@+id/txt_view_nominee_guardian"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/txt_view_nominee_relation"
@@ -450,7 +438,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/guardian_name_"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/txt_view_nominee_share"
@@ -464,7 +452,7 @@
                             android:background="@color/shimmer_background_color"
                             app:layout_constraintEnd_toEndOf="@+id/btn_nominee_edit"
                             app:layout_constraintStart_toStartOf="@+id/txt_view_nominee"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_view_nominee_name" />
+                            app:layout_constraintTop_toBottomOf="@+id/txt_view_nominee_guardian" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recycler_view"
@@ -483,9 +471,9 @@
                     android:id="@+id/linear_layout_4"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/space_200x"
-                    android:layout_marginStart="@dimen/space_16x"
-                    android:layout_marginTop="@dimen/space_16x"
-                    android:layout_marginEnd="@dimen/space_16x"
+                    android:layout_marginStart="@dimen/space_8x"
+                    android:layout_marginTop="@dimen/space_8x"
+                    android:layout_marginEnd="@dimen/space_8x"
                     android:background="@drawable/input_border"
                     app:layout_constraintBottom_toTopOf="@+id/linear_layout_5"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -497,7 +485,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/space_16x">
+                        android:layout_margin="@dimen/space_8x">
 
                         <TextView
                             android:id="@+id/txt_view_introducer"
@@ -505,7 +493,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/introducer"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_16x"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -516,6 +504,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/edit"
                             android:textColor="@color/white"
+                            android:textSize="@dimen/font_16x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -526,7 +515,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/name"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_account_number"
                             app:layout_constraintStart_toStartOf="@+id/txt_view_introducer"
                             app:layout_constraintTop_toBottomOf="@+id/btn_introducer_edit"
@@ -539,7 +528,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_regular"
                             android:text="@string/account_number"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/txt_view_introducer"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_name" />
@@ -550,7 +539,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintBottom_toTopOf="@+id/txt_view_account_number_value"
                             app:layout_constraintStart_toEndOf="@+id/guideline_left_4"
                             app:layout_constraintTop_toBottomOf="@+id/btn_introducer_edit"
@@ -562,7 +551,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/guideline_left_4"
                             app:layout_constraintTop_toBottomOf="@+id/txt_view_name_value" />
@@ -584,7 +573,7 @@
                     android:id="@+id/linear_layout_5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/space_16x"
+                    android:layout_margin="@dimen/space_8x"
                     android:background="@drawable/input_border"
                     app:layout_constraintBottom_toTopOf="@+id/btn_next"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -596,14 +585,14 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/space_16x">
+                        android:layout_margin="@dimen/space_8x">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/transaction_profile"
-                            android:textSize="@dimen/font_20x"
+                            android:textSize="@dimen/font_16x"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -614,6 +603,7 @@
                             android:background="@drawable/button_border"
                             android:text="@string/edit"
                             android:textColor="@color/white"
+                            android:textSize="@dimen/font_16x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -621,14 +611,14 @@
                             android:id="@+id/txt_view_transaction_type"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/transaction_type"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
+                            app:layout_constraintBottom_toBottomOf="@+id/txt_view_monthly_transaction"
                             app:layout_constraintEnd_toStartOf="@+id/txt_view_monthly_transaction"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/btn_transaction_profile_edit" />
+                            app:layout_constraintTop_toTopOf="@+id/txt_view_monthly_transaction" />
 
                         <TextView
                             android:id="@+id/txt_view_monthly_transaction"
@@ -639,7 +629,7 @@
                             android:layout_marginEnd="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/monthly_transaction"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toStartOf="@+id/txt_view_max_transaction_amount"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/txt_view_transaction_type"
@@ -652,7 +642,7 @@
                             android:layout_marginTop="@dimen/space_8x"
                             android:fontFamily="@font/oxygen_bold"
                             android:text="@string/transaction_amount"
-                            android:textSize="@dimen/font_16x"
+                            android:textSize="@dimen/font_12x"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/txt_view_monthly_transaction"
